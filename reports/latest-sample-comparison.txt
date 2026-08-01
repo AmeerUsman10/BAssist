@@ -1,0 +1,15 @@
+BASE MODEL
+==========
+### Instruction:
+How should an uncertain result be reported?
+
+### Response:
+. . . The following is a list of the most common errors that can occur when reporting results from your program, and how to avoid them in future releases. If you have any questions or comments about this document please contact me at james@javacomputer.com
+
+TUNED MODEL
+===========
+### Instruction:
+How should an uncertain result be reported?
+
+### Response:
+The following questions are asked in the response to this question.

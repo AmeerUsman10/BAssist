@@ -1,0 +1,55 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 27404.07it/s]
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+{"optimizer_step": 1, "loss": 4.24713, "device": "cpu"}
+{"optimizer_step": 2, "loss": 4.941536, "device": "cpu"}
+{"optimizer_step": 3, "loss": 3.734315, "device": "cpu"}
+{"optimizer_step": 4, "loss": 4.059061, "device": "cpu"}
+{"optimizer_step": 5, "loss": 4.848975, "device": "cpu"}
+{"optimizer_step": 6, "loss": 5.204717, "device": "cpu"}
+{"optimizer_step": 7, "loss": 3.463784, "device": "cpu"}
+{"optimizer_step": 8, "loss": 4.477272, "device": "cpu"}
+{"optimizer_step": 9, "loss": 4.74981, "device": "cpu"}
+{"optimizer_step": 10, "loss": 5.476907, "device": "cpu"}
+{"optimizer_step": 11, "loss": 5.411125, "device": "cpu"}
+{"optimizer_step": 12, "loss": 4.90134, "device": "cpu"}
+
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
+Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  8.11it/s]
+Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  8.10it/s]
+{
+  "status": "completed",
+  "device": "cpu",
+  "base_model": "openai-community/gpt2",
+  "config": {
+    "model_name": "openai-community/gpt2",
+    "data_path": "data/train.jsonl",
+    "output_dir": "outputs/gpt2-tuned",
+    "seed": 42,
+    "block_size": 128,
+    "batch_size": 2,
+    "gradient_accumulation_steps": 2,
+    "learning_rate": 5e-05,
+    "weight_decay": 0.01,
+    "max_optimizer_steps": 12,
+    "repeat_training_records": 8,
+    "validation_records": 2,
+    "freeze_first_n_blocks": 10
+  },
+  "source_records": 16,
+  "training_examples_after_repeat": 112,
+  "validation_examples": 2,
+  "optimizer_steps": 12,
+  "trainable_parameters": 14177280,
+  "total_parameters": 124439808,
+  "initial_validation_loss": 5.109582901000977,
+  "final_validation_loss": 4.587136745452881,
+  "initial_perplexity": 165.6012683435069,
+  "final_perplexity": 98.212818891687,
+  "mean_training_loss": 4.714447180430095,
+  "elapsed_seconds": 15.090763092041016,
+  "base_sample": "### Instruction:\nHow should an uncertain result be reported?\n\n### Response:\n. . . The following is a list of the most common errors that can occur when reporting results from your program, and how to avoid them in future releases. If you have any questions or comments about this document please contact me at james@javacomputer.com",
+  "tuned_sample": "### Instruction:\nHow should an uncertain result be reported?\n\n### Response:\nThe following questions are asked in the response to this question."
+}
