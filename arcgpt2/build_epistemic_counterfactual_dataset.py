@@ -18,11 +18,9 @@ import itertools
 import json
 from pathlib import Path
 import random
-from typing import Iterable, Sequence
+from typing import Sequence
 
 from .build_epistemic_dataset import (
-    ACTION_ORDER,
-    DIRECTION_ORDER,
     _DIRECTION_WORD,
     _factorial,
     _sha256,
