@@ -1,0 +1,113 @@
+name: ARC-GPT2 Meta Soft-Memory Smoke
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [arc-gpt2-programs]
+    paths:
+      - "arcgpt2/meta_soft_binding.py"
+      - "arcgpt2/soft_belief.py"
+      - "arcgpt2/belief_math.py"
+      - ".github/workflows/arc-gpt2-meta-soft-smoke.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arc-gpt2-meta-soft-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install "transformers>=4.48,<6" "safetensors>=0.4"
+
+      - name: Run one-step real GPT-2 meta-learning smoke
+        id: smoke
+        continue-on-error: true
+        env:
+          TOKENIZERS_PARALLELISM: "false"
+          HF_HUB_DISABLE_TELEMETRY: "1"
+        run: |
+          set -o pipefail
+          python -m arcgpt2.meta_soft_binding \
+            --initialization pretrained \
+            --output-dir outputs/meta_soft_binding/smoke \
+            --train-groups 2 \
+            --train-mapping-variants 2 \
+            --validation-groups 1 \
+            --validation-mapping-variants 2 \
+            --max-length 320 \
+            --prefix-length 8 \
+            --inner-learning-rate 0.05 \
+            --outer-learning-rate 0.00005 \
+            --episodes-per-outer-step 1 \
+            --max-outer-steps 1 \
+            --warmup-steps 1 \
+            --freeze-first-n-blocks 11 \
+            --no-query-after-every-probe \
+            --evaluation-groups 1 \
+            --no-save-model 2>&1 | tee meta-soft-smoke.log
+
+      - name: Publish durable smoke evidence
+        if: always()
+        env:
+          SMOKE_OUTCOME: ${{ steps.smoke.outcome }}
+        run: |
+          mkdir -p reports/arcgpt2
+          python - <<'PY'
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          output = Path("outputs/meta_soft_binding/smoke/summary.json")
+          receipt = {
+              "status": os.environ.get("SMOKE_OUTCOME", "unknown"),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "scope": (
+                  "One-outer-step CPU runtime smoke for soft-prefix meta-learning; "
+                  "not a capability result and not ARC-AGI-3 evaluation"
+              ),
+              "summary_present": output.exists(),
+          }
+          Path("reports/arcgpt2/latest-meta-soft-smoke-status.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          if output.exists():
+              shutil.copy2(output, "reports/arcgpt2/latest-meta-soft-smoke-summary.json")
+          log = Path("meta-soft-smoke.log")
+          if log.exists():
+              lines = log.read_text(encoding="utf-8", errors="replace").splitlines()
+              Path("reports/arcgpt2/latest-meta-soft-smoke-log-tail.txt").write_text(
+                  "\n".join(lines[-1000:]) + "\n", encoding="utf-8"
+              )
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/arcgpt2/
+          git commit -m "Record GPT-2 meta-soft smoke ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Propagate failure
+        if: steps.smoke.outcome != 'success'
+        run: exit 1
