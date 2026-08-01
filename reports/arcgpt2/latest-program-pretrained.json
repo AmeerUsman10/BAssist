@@ -25,19 +25,19 @@
   "train_examples": 16,
   "validation_examples": 4,
   "test_examples": 4,
-  "trainable_parameters": 54086400,
-  "total_parameters": 124965120,
-  "initial_validation_loss": 2.3520187735557556,
-  "final_validation_loss": 2.0245099663734436,
-  "mean_training_loss": 2.5196617990732193,
+  "trainable_parameters": 54089472,
+  "total_parameters": 124968192,
+  "initial_validation_loss": 9.04318904876709,
+  "final_validation_loss": 7.370556831359863,
+  "mean_training_loss": 7.548586130142212,
   "initial_full_selection": {
     "mode": "full",
     "games": 1,
     "exact_programs": 0,
     "exact_program_accuracy": 0.0,
-    "mean_action_mapping_accuracy": 0.5,
-    "mean_truth_rank": 2.0,
-    "mean_truth_probability": 0.04322398081421852,
+    "mean_action_mapping_accuracy": 0.0,
+    "mean_truth_rank": 13.0,
+    "mean_truth_probability": 0.041666679084300995,
     "downstream_games_won": 0,
     "downstream_game_win_rate": 0.0,
     "downstream_levels_completed": 0,
@@ -45,21 +45,21 @@
     "traces": [
       {
         "game_seed": 31357,
-        "selected_program_sha256": "6867cfb91559456aa3fbbac9769d578f74b71e7b8ae2c8c7130e4825e6b3d9f6",
+        "selected_program_sha256": "4606264540288e0381e0cfa79f97e95e0bff02451a335d9728e7341d2b42a5c8",
         "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
         "exact": false,
-        "mapping_accuracy": 0.5,
-        "truth_rank": 2,
-        "truth_probability": 0.04322398081421852,
+        "mapping_accuracy": 0.0,
+        "truth_rank": 13,
+        "truth_probability": 0.041666679084300995,
         "downstream": {
           "game_won": false,
           "levels_completed": 0,
           "actions_taken_including_probes": 7,
           "plans": [
             [
-              "A3",
-              "A4",
-              "A4"
+              "A1",
+              "A1",
+              "A3"
             ]
           ]
         }
@@ -73,8 +73,8 @@
       "exact_programs": 0,
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.5,
-      "mean_truth_rank": 2.0,
-      "mean_truth_probability": 0.0433049239218235,
+      "mean_truth_rank": 9.0,
+      "mean_truth_probability": 0.041667599231004715,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -82,20 +82,20 @@
       "traces": [
         {
           "game_seed": 31357,
-          "selected_program_sha256": "6867cfb91559456aa3fbbac9769d578f74b71e7b8ae2c8c7130e4825e6b3d9f6",
+          "selected_program_sha256": "aaa920abf338f2e6bc36d5ddab8cae6c52ff9c3334fa9c5f30a618fca0f387d6",
           "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
           "exact": false,
           "mapping_accuracy": 0.5,
-          "truth_rank": 2,
-          "truth_probability": 0.0433049239218235,
+          "truth_rank": 9,
+          "truth_probability": 0.041667599231004715,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
             "actions_taken_including_probes": 7,
             "plans": [
               [
-                "A3",
-                "A4",
+                "A1",
+                "A1",
                 "A4"
               ]
             ]
@@ -109,8 +109,8 @@
       "exact_programs": 0,
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.5,
-      "mean_truth_rank": 2.0,
-      "mean_truth_probability": 0.043105509132146835,
+      "mean_truth_rank": 4.0,
+      "mean_truth_probability": 0.04166733846068382,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -118,21 +118,21 @@
       "traces": [
         {
           "game_seed": 31357,
-          "selected_program_sha256": "6867cfb91559456aa3fbbac9769d578f74b71e7b8ae2c8c7130e4825e6b3d9f6",
+          "selected_program_sha256": "d2006b89ad134ea7213a11d6d31e7043e161e528dd96264f50e25041dc1a6a96",
           "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
           "exact": false,
           "mapping_accuracy": 0.5,
-          "truth_rank": 2,
-          "truth_probability": 0.043105509132146835,
+          "truth_rank": 4,
+          "truth_probability": 0.04166733846068382,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
             "actions_taken_including_probes": 7,
             "plans": [
               [
+                "A1",
                 "A3",
-                "A4",
-                "A4"
+                "A3"
               ]
             ]
           }
@@ -145,8 +145,8 @@
       "exact_programs": 0,
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.5,
-      "mean_truth_rank": 2.0,
-      "mean_truth_probability": 0.04330490157008171,
+      "mean_truth_rank": 9.0,
+      "mean_truth_probability": 0.041667621582746506,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -154,20 +154,20 @@
       "traces": [
         {
           "game_seed": 31357,
-          "selected_program_sha256": "6867cfb91559456aa3fbbac9769d578f74b71e7b8ae2c8c7130e4825e6b3d9f6",
+          "selected_program_sha256": "aaa920abf338f2e6bc36d5ddab8cae6c52ff9c3334fa9c5f30a618fca0f387d6",
           "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
           "exact": false,
           "mapping_accuracy": 0.5,
-          "truth_rank": 2,
-          "truth_probability": 0.04330490157008171,
+          "truth_rank": 9,
+          "truth_probability": 0.041667621582746506,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
             "actions_taken_including_probes": 7,
             "plans": [
               [
-                "A3",
-                "A4",
+                "A1",
+                "A1",
                 "A4"
               ]
             ]
@@ -176,5 +176,5 @@
       ]
     }
   },
-  "elapsed_seconds": 90.3504147529602
+  "elapsed_seconds": 35.36032009124756
 }

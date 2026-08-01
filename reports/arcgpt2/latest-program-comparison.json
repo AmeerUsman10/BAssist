@@ -21,9 +21,9 @@
       "games": 1,
       "exact_programs": 0,
       "exact_program_accuracy": 0.0,
-      "mean_action_mapping_accuracy": 0.5,
-      "mean_truth_rank": 2.0,
-      "mean_truth_probability": 0.04322398081421852,
+      "mean_action_mapping_accuracy": 0.0,
+      "mean_truth_rank": 13.0,
+      "mean_truth_probability": 0.041666679084300995,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -31,21 +31,21 @@
       "traces": [
         {
           "game_seed": 31357,
-          "selected_program_sha256": "6867cfb91559456aa3fbbac9769d578f74b71e7b8ae2c8c7130e4825e6b3d9f6",
+          "selected_program_sha256": "4606264540288e0381e0cfa79f97e95e0bff02451a335d9728e7341d2b42a5c8",
           "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
           "exact": false,
-          "mapping_accuracy": 0.5,
-          "truth_rank": 2,
-          "truth_probability": 0.04322398081421852,
+          "mapping_accuracy": 0.0,
+          "truth_rank": 13,
+          "truth_probability": 0.041666679084300995,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
             "actions_taken_including_probes": 7,
             "plans": [
               [
-                "A3",
-                "A4",
-                "A4"
+                "A1",
+                "A1",
+                "A3"
               ]
             ]
           }
@@ -58,8 +58,8 @@
       "exact_programs": 0,
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.5,
-      "mean_truth_rank": 2.0,
-      "mean_truth_probability": 0.0433049239218235,
+      "mean_truth_rank": 9.0,
+      "mean_truth_probability": 0.041667599231004715,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -67,20 +67,20 @@
       "traces": [
         {
           "game_seed": 31357,
-          "selected_program_sha256": "6867cfb91559456aa3fbbac9769d578f74b71e7b8ae2c8c7130e4825e6b3d9f6",
+          "selected_program_sha256": "aaa920abf338f2e6bc36d5ddab8cae6c52ff9c3334fa9c5f30a618fca0f387d6",
           "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
           "exact": false,
           "mapping_accuracy": 0.5,
-          "truth_rank": 2,
-          "truth_probability": 0.0433049239218235,
+          "truth_rank": 9,
+          "truth_probability": 0.041667599231004715,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
             "actions_taken_including_probes": 7,
             "plans": [
               [
-                "A3",
-                "A4",
+                "A1",
+                "A1",
                 "A4"
               ]
             ]
@@ -94,8 +94,8 @@
       "exact_programs": 0,
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.5,
-      "mean_truth_rank": 2.0,
-      "mean_truth_probability": 0.043105509132146835,
+      "mean_truth_rank": 4.0,
+      "mean_truth_probability": 0.04166733846068382,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -103,21 +103,21 @@
       "traces": [
         {
           "game_seed": 31357,
-          "selected_program_sha256": "6867cfb91559456aa3fbbac9769d578f74b71e7b8ae2c8c7130e4825e6b3d9f6",
+          "selected_program_sha256": "d2006b89ad134ea7213a11d6d31e7043e161e528dd96264f50e25041dc1a6a96",
           "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
           "exact": false,
           "mapping_accuracy": 0.5,
-          "truth_rank": 2,
-          "truth_probability": 0.043105509132146835,
+          "truth_rank": 4,
+          "truth_probability": 0.04166733846068382,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
             "actions_taken_including_probes": 7,
             "plans": [
               [
+                "A1",
                 "A3",
-                "A4",
-                "A4"
+                "A3"
               ]
             ]
           }
@@ -130,8 +130,8 @@
       "exact_programs": 0,
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.5,
-      "mean_truth_rank": 2.0,
-      "mean_truth_probability": 0.04330490157008171,
+      "mean_truth_rank": 9.0,
+      "mean_truth_probability": 0.041667621582746506,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -139,20 +139,20 @@
       "traces": [
         {
           "game_seed": 31357,
-          "selected_program_sha256": "6867cfb91559456aa3fbbac9769d578f74b71e7b8ae2c8c7130e4825e6b3d9f6",
+          "selected_program_sha256": "aaa920abf338f2e6bc36d5ddab8cae6c52ff9c3334fa9c5f30a618fca0f387d6",
           "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
           "exact": false,
           "mapping_accuracy": 0.5,
-          "truth_rank": 2,
-          "truth_probability": 0.04330490157008171,
+          "truth_rank": 9,
+          "truth_probability": 0.041667621582746506,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
             "actions_taken_including_probes": 7,
             "plans": [
               [
-                "A3",
-                "A4",
+                "A1",
+                "A1",
                 "A4"
               ]
             ]
@@ -161,8 +161,8 @@
       ]
     },
     "validation_loss": {
-      "initial": 2.3520187735557556,
-      "final": 2.0245099663734436
+      "initial": 9.04318904876709,
+      "final": 7.370556831359863
     }
   },
   "random_initialization": {
@@ -171,9 +171,9 @@
       "games": 1,
       "exact_programs": 0,
       "exact_program_accuracy": 0.0,
-      "mean_action_mapping_accuracy": 0.25,
-      "mean_truth_rank": 18.0,
-      "mean_truth_probability": 0.04159705340862274,
+      "mean_action_mapping_accuracy": 0.5,
+      "mean_truth_rank": 3.0,
+      "mean_truth_probability": 0.041669268161058426,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -181,12 +181,12 @@
       "traces": [
         {
           "game_seed": 31357,
-          "selected_program_sha256": "9d0be62ff6f13e336bb0e6be96bab31a38833acd919f06749b4a026dcb4c62f5",
+          "selected_program_sha256": "aaa920abf338f2e6bc36d5ddab8cae6c52ff9c3334fa9c5f30a618fca0f387d6",
           "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
           "exact": false,
-          "mapping_accuracy": 0.25,
-          "truth_rank": 18,
-          "truth_probability": 0.04159705340862274,
+          "mapping_accuracy": 0.5,
+          "truth_rank": 3,
+          "truth_probability": 0.041669268161058426,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
@@ -203,8 +203,8 @@
       ]
     },
     "validation_loss": {
-      "initial": 10.89085340499878,
-      "final": 9.005423545837402
+      "initial": 11.103660106658936,
+      "final": 7.15389084815979
     }
   }
 }
