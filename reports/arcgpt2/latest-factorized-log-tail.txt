@@ -1,0 +1,40 @@
+{
+  "representation": "Exact natural-language grids and cell deltas using only the original GPT-2 vocabulary; no learned visual encoder or semantic parser.",
+  "schema": "arcgpt2.factorized_action_semantics.v1",
+  "scope": "Natural-language four-way action semantics with an exact permutation constraint; controlled Phase-0 gate, not ARC-AGI-3 evaluation.",
+  "seed_base": 112358,
+  "splits": {
+    "test": {
+      "examples": 128,
+      "examples_per_game": 4,
+      "file": "test.jsonl",
+      "games": 32,
+      "seed_start": 112574,
+      "seed_stop_exclusive": 112606,
+      "sha256": "4b138cdcd75f9cd4e52c1dca5a56ec8f9980330c522fc353a2e80e48a0550552"
+    },
+    "train": {
+      "examples": 768,
+      "examples_per_game": 4,
+      "file": "train.jsonl",
+      "games": 192,
+      "seed_start": 112358,
+      "seed_stop_exclusive": 112550,
+      "sha256": "bad45b4a0d01f36e513435d943ffed9525001362501a18ac13e8c46dfcc421ad"
+    },
+    "validation": {
+      "examples": 96,
+      "examples_per_game": 4,
+      "file": "validation.jsonl",
+      "games": 24,
+      "seed_start": 112550,
+      "seed_stop_exclusive": 112574,
+      "sha256": "d9d582631babd13c2813b555c5fd88a47e6f73ccac7a9edca45676651c852f15"
+    }
+  }
+}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 26631.64it/s]
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
