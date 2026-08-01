@@ -64,21 +64,7 @@ jobs:
             kaggle kernels list --mine --page-size 1 >/tmp/kaggle-output.txt 2>/tmp/kaggle-error.txt
             result=$?
             set -e
-            RESULT="${result}" python - <<'PY'
-            import json
-            import os
-            from pathlib import Path
-
-            path = Path("reports/kaggle/latest-access.json")
-            report = json.loads(path.read_text(encoding="utf-8"))
-            report["authentication_tested"] = True
-            report["authentication_succeeded"] = os.environ["RESULT"] == "0"
-            report["cli_exit_code"] = int(os.environ["RESULT"])
-            report["failure_class"] = (
-                None if report["authentication_succeeded"] else "credential_or_cli_failure"
-            )
-            path.write_text(json.dumps(report, indent=2), encoding="utf-8")
-            PY
+            RESULT="${result}" python -c 'import json, os; from pathlib import Path; path=Path("reports/kaggle/latest-access.json"); report=json.loads(path.read_text(encoding="utf-8")); report.update({"authentication_tested": True, "authentication_succeeded": os.environ["RESULT"] == "0", "cli_exit_code": int(os.environ["RESULT"]), "failure_class": None if os.environ["RESULT"] == "0" else "credential_or_cli_failure"}); path.write_text(json.dumps(report, indent=2), encoding="utf-8")'
           fi
 
           cat reports/kaggle/latest-access.json
