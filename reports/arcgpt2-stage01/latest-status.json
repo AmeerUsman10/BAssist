@@ -1,11 +1,11 @@
 {
-  "execution_status": "cancelled",
+  "execution_status": "failure",
   "capability_gate": "not_evaluated",
   "repository": "AmeerUsman10/BAssist",
   "branch": "main",
-  "commit_sha": "a5c58bf620e8f21c8fc4589e96e41e9dfb0df344",
-  "run_id": "30722601561",
+  "commit_sha": "3664c47784b68c72ff98389949d167cbe0c04375",
+  "run_id": "30723150296",
   "run_attempt": "1",
-  "recorded_at_utc": "2026-08-01T23:18:21.420851+00:00",
+  "recorded_at_utc": "2026-08-01T23:21:31.821713+00:00",
   "scope": "Stage-0.1 eight-game synthetic overfit sanity; not ARC-AGI-3 evaluation"
 }
