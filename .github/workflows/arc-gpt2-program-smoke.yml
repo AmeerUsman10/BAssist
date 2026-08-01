@@ -1,0 +1,163 @@
+name: ARC-GPT2 Program Induction Smoke
+
+on:
+  push:
+    branches: [arc-gpt2-programs]
+    paths:
+      - "arcgpt2/build_program_dataset.py"
+      - "arcgpt2/dsl.py"
+      - "arcgpt2/train_program_induction.py"
+      - "arcgpt2/compare_program_induction.py"
+      - "arcgpt2/tests/**"
+      - ".github/workflows/arc-gpt2-program-smoke.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arc-gpt2-program-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install "transformers>=4.48,<6" "safetensors>=0.4" pytest
+
+      - name: Run executable-program smoke experiment
+        id: experiment
+        continue-on-error: true
+        env:
+          TOKENIZERS_PARALLELISM: "false"
+          HF_HUB_DISABLE_TELEMETRY: "1"
+        run: |
+          set -o pipefail
+          {
+            python -m pytest -q arcgpt2/tests
+            python -m arcgpt2.build_program_dataset \
+              --output-dir outputs/program_induction/data \
+              --train-games 16 \
+              --validation-games 4 \
+              --test-games 4 \
+              --seed-base 31337
+            python -m arcgpt2.train_program_induction \
+              --initialization pretrained \
+              --data-dir outputs/program_induction/data \
+              --output-dir outputs/program_induction/pretrained \
+              --max-length 512 \
+              --prefix-keep 128 \
+              --batch-size 1 \
+              --gradient-accumulation-steps 2 \
+              --max-optimizer-steps 8 \
+              --warmup-steps 1 \
+              --freeze-first-n-blocks 10 \
+              --evaluation-games 1 \
+              --candidate-batch-size 4 \
+              --max-plan-depth 32 \
+              --no-save-model
+            python -m arcgpt2.train_program_induction \
+              --initialization random \
+              --data-dir outputs/program_induction/data \
+              --output-dir outputs/program_induction/random \
+              --max-length 512 \
+              --prefix-keep 128 \
+              --batch-size 1 \
+              --gradient-accumulation-steps 2 \
+              --max-optimizer-steps 8 \
+              --warmup-steps 1 \
+              --freeze-first-n-blocks 10 \
+              --evaluation-games 1 \
+              --candidate-batch-size 4 \
+              --max-plan-depth 32 \
+              --no-save-model
+            python -m arcgpt2.compare_program_induction \
+              --pretrained outputs/program_induction/pretrained/summary.json \
+              --random outputs/program_induction/random/summary.json \
+              --output outputs/program_induction/comparison.json
+          } 2>&1 | tee program-smoke.log
+
+      - name: Write evidence receipt
+        if: always()
+        env:
+          EXPERIMENT_OUTCOME: ${{ steps.experiment.outcome }}
+        run: |
+          mkdir -p reports/arcgpt2
+          python - <<'PY'
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          reports = Path("reports/arcgpt2")
+          outputs = Path("outputs/program_induction")
+          receipt = {
+              "status": os.environ.get("EXPERIMENT_OUTCOME", "unknown"),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "scope": "CPU smoke-scale 24-program induction gate; not ARC-AGI-3 evaluation",
+          }
+          (reports / "latest-program-smoke-status.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          copies = {
+              outputs / "data" / "manifest.json": reports / "latest-program-data-manifest.json",
+              outputs / "pretrained" / "summary.json": reports / "latest-program-pretrained.json",
+              outputs / "random" / "summary.json": reports / "latest-program-random.json",
+              outputs / "comparison.json": reports / "latest-program-comparison.json",
+          }
+          for source, target in copies.items():
+              if source.exists():
+                  shutil.copy2(source, target)
+          log_path = Path("program-smoke.log")
+          if log_path.exists():
+              lines = log_path.read_text(encoding="utf-8", errors="replace").splitlines()
+              (reports / "latest-program-smoke-log-tail.txt").write_text(
+                  "\n".join(lines[-500:]) + "\n", encoding="utf-8"
+              )
+          PY
+
+      - name: Publish evidence receipt
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/arcgpt2/
+          git commit -m "Record ARC-GPT2 program smoke ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arc-gpt2-program-smoke-evidence
+          path: |
+            reports/arcgpt2/
+            outputs/program_induction/data/manifest.json
+            outputs/program_induction/pretrained/summary.json
+            outputs/program_induction/random/summary.json
+            outputs/program_induction/comparison.json
+            program-smoke.log
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Propagate failure
+        if: steps.experiment.outcome != 'success'
+        run: exit 1
