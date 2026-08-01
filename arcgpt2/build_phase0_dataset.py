@@ -3,13 +3,20 @@
 from __future__ import annotations
 
 import argparse
+from dataclasses import replace
 import hashlib
 import json
 from pathlib import Path
 from typing import Iterable
 
 from .codec import token_inventory
-from .phase0_hidden_action import build_decision_examples, game_summary, generate_game, phase0_special_tokens
+from .phase0_hidden_action import (
+    Action,
+    build_decision_examples,
+    game_summary,
+    generate_game,
+    phase0_special_tokens,
+)
 
 
 def _write_jsonl(path: Path, rows: Iterable[dict[str, object]]) -> int:
@@ -29,12 +36,25 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _canonical_source_spec(seed: int):
+    """Remove arbitrary teacher tie-breaking from the supervision target.
+
+    The hidden action-to-direction mapping, palette, layouts, starts, and goals
+    remain randomized per game. Only the order used to try still-unknown action
+    labels is fixed. Without this canonicalization, equally valid exploratory
+    actions receive contradictory labels at identical information states, which
+    turns the first four decisions into avoidable supervised-label noise.
+    """
+
+    return replace(generate_game(seed), probe_order=tuple(Action))
+
+
 def _build_split(output_dir: Path, name: str, seeds: range) -> dict[str, object]:
     summaries: list[dict[str, object]] = []
 
     def rows():
         for seed in seeds:
-            spec = generate_game(seed)
+            spec = _canonical_source_spec(seed)
             summaries.append(game_summary(spec))
             for example in build_decision_examples(spec):
                 yield {
@@ -84,8 +104,12 @@ def build_dataset(
     token_path.write_text(json.dumps(special_tokens, indent=2), encoding="utf-8")
 
     manifest: dict[str, object] = {
-        "schema": "arcgpt2.phase0.v1",
+        "schema": "arcgpt2.phase0.v2",
         "seed_base": seed_base,
+        "source_policy": {
+            "unknown_action_tie_break": [action.value for action in Action],
+            "note": "Only teacher tie-breaking is canonical; game mechanics and observations remain randomized.",
+        },
         "special_tokens_file": token_path.name,
         "special_tokens_sha256": _sha256(token_path),
         "splits": {
