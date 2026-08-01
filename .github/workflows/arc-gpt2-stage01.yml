@@ -6,9 +6,11 @@ on:
     paths:
       - "arcgpt2/stage01_hidden_action.py"
       - "arcgpt2/build_stage01_dataset.py"
+      - "arcgpt2/sample_stage01_eval.py"
       - "arcgpt2/train_stage01.py"
       - "arcgpt2/train_stage01_balanced.py"
       - "arcgpt2/tests/test_stage01.py"
+      - "arcgpt2/tests/test_stage01_sampling.py"
       - ".github/workflows/arc-gpt2-stage01.yml"
   workflow_dispatch:
 
@@ -48,74 +50,39 @@ jobs:
           HF_HUB_DISABLE_TELEMETRY: "1"
           PYTHONHASHSEED: "42"
         run: |
-          set -o pipefail
-          {
-            python -m pytest -q arcgpt2/tests
-            python -m arcgpt2.build_stage01_dataset \
-              --output-dir outputs/stage01/data \
-              --train-games 8 \
-              --validation-games 1 \
-              --test-games 1 \
-              --seed-base 1729
-            python - <<'PY'
-            import json
-            import random
-            from collections import defaultdict, deque
-            from pathlib import Path
-
-            source = Path("outputs/stage01/data/train.jsonl")
-            target = Path("outputs/stage01/data/overfit_eval_sample.jsonl")
-            rows = [json.loads(line) for line in source.read_text().splitlines() if line.strip()]
-            groups = defaultdict(list)
-            for row in rows:
-                key = (
-                    row["decision_phase"],
-                    row["target"],
-                    len(row["valid_targets"]),
-                    row["level_index"],
-                )
-                groups[key].append(row)
-            rng = random.Random(42)
-            queues = []
-            for key in sorted(groups, key=str):
-                values = groups[key]
-                rng.shuffle(values)
-                queues.append(deque(values))
-            selected = []
-            while queues and len(selected) < 768:
-                next_queues = []
-                for queue in queues:
-                    if queue and len(selected) < 768:
-                        selected.append(queue.popleft())
-                    if queue:
-                        next_queues.append(queue)
-                queues = next_queues
-            target.write_text(
-                "".join(json.dumps(row, sort_keys=True) + "\n" for row in selected),
-                encoding="utf-8",
-            )
-            print(json.dumps({"source_rows": len(rows), "evaluation_rows": len(selected)}))
-            PY
-            python -m arcgpt2.train_stage01_balanced \
-              --initialization pretrained \
-              --data-dir outputs/stage01/data \
-              --train-file outputs/stage01/data/train.jsonl \
-              --evaluation-file outputs/stage01/data/overfit_eval_sample.jsonl \
-              --output-dir outputs/stage01/overfit-pretrained \
-              --max-length 384 \
-              --prefix-keep 128 \
-              --train-batch-size 2 \
-              --eval-batch-size 8 \
-              --gradient-accumulation-steps 2 \
-              --learning-rate 1e-4 \
-              --max-optimizer-steps 120 \
-              --warmup-steps 8 \
-              --freeze-first-n-blocks 10 \
-              --evaluation-games 8 \
-              --evaluation-seed-start 1729 \
-              --max-actions-per-game 48 \
-              --history-modes intact
-          } 2>&1 | tee stage01.log
+          set -o errexit -o nounset -o pipefail
+          exec > >(tee stage01.log) 2>&1
+          python -m pytest -q arcgpt2/tests
+          python -m arcgpt2.build_stage01_dataset \
+            --output-dir outputs/stage01/data \
+            --train-games 8 \
+            --validation-games 1 \
+            --test-games 1 \
+            --seed-base 1729
+          python -m arcgpt2.sample_stage01_eval \
+            --input outputs/stage01/data/train.jsonl \
+            --output outputs/stage01/data/overfit_eval_sample.jsonl \
+            --limit 768 \
+            --seed 42
+          python -m arcgpt2.train_stage01_balanced \
+            --initialization pretrained \
+            --data-dir outputs/stage01/data \
+            --train-file outputs/stage01/data/train.jsonl \
+            --evaluation-file outputs/stage01/data/overfit_eval_sample.jsonl \
+            --output-dir outputs/stage01/overfit-pretrained \
+            --max-length 384 \
+            --prefix-keep 128 \
+            --train-batch-size 2 \
+            --eval-batch-size 8 \
+            --gradient-accumulation-steps 2 \
+            --learning-rate 1e-4 \
+            --max-optimizer-steps 120 \
+            --warmup-steps 8 \
+            --freeze-first-n-blocks 10 \
+            --evaluation-games 8 \
+            --evaluation-seed-start 1729 \
+            --max-actions-per-game 48 \
+            --history-modes intact
 
       - name: Verify evidence output
         if: steps.experiment.outcome == 'success'
