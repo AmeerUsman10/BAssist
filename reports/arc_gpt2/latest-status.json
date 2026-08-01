@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "research_constraint": "one GPT2LMHeadModel; no other learned model",
+  "repository": "AmeerUsman10/BAssist",
+  "commit_sha": "adc807973d6f87d7162174e35be914dad93296ab",
+  "run_id": "30720890533",
+  "run_attempt": "1",
+  "workflow": "Pure GPT-2 ARC Stage 0",
+  "recorded_at_utc": "2026-08-01T22:24:36.564943+00:00",
+  "model_artifact": "pure-gpt2-arc-stage0-model",
+  "evidence_artifact": "pure-gpt2-arc-stage0-evidence"
+}

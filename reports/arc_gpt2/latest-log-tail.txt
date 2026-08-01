@@ -1,0 +1,500 @@
+          "moved": true,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 1,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X0><Y5><A2><MOVE><X1><Y4><A3><MOVE><X2><Y3><A4><MOVE><X3><Y4><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 2,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 3,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 4,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 5,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 6,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 7,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 8,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 9,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 10,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 11,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 12,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 13,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 14,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 15,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 16,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 17,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 18,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 19,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X7><Y0><A2><MOVE><X7><Y1><A3><MOVE><X7><Y2><A4><MOVE><X7><Y1><A4><MOVE><X7><Y2><A4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        }
+      ]
+    },
+    {
+      "seed": 201731,
+      "won": false,
+      "actions": 20,
+      "valid_memory_rate": 1.0,
+      "parsed_action_rate": 1.0,
+      "trace": [
+        {
+          "step": 0,
+          "action": 1,
+          "moved": true,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X2><Y1><A2><MOVE><X3><Y2><A3><MOVE><X4><Y3><A4><MOVE><X5><Y6><A5><MOVE><X6><Y7><A6><NOOP><X7></NOOP></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 1,
+          "action": 1,
+          "moved": true,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y5><A2><MOVE><X2><Y6><A3><MOVE><X3><Y6><A4><MOVE><X4><Y7><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 2,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y6><A2><MOVE><X2><Y6><A3><MOVE><X3><Y6><A4><MOVE><X4><Y6><A5><MOVE><X5><Y6></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 3,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X2><Y1><A2><MOVE><X3><Y2><A3><MOVE><X4><Y3><A4><MOVE><X5><Y6><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 4,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X2><Y1><A2><MOVE><X3><Y2><A3><MOVE><X4><Y3><A4><MOVE><X5><Y6><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 5,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X2><Y1><A2><MOVE><X3><Y2><A3><MOVE><X4><Y3><A4><MOVE><X5><Y6><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 6,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X2><Y1><A2><MOVE><X3><Y2><A3><MOVE><X4><Y3><A4><MOVE><X5><Y6><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 7,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X2><Y1><A2><MOVE><X3><Y2><A3><MOVE><X4><Y3><A4><MOVE><X5><Y6><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 8,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X2><Y1><A2><MOVE><X3><Y2><A3><MOVE><X4><Y3><A4><MOVE><X5><Y6><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 9,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X2><Y1><A2><MOVE><X3><Y2><A3><MOVE><X4><Y3><A4><MOVE><X5><Y6><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 10,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X2><Y1><A2><MOVE><X3><Y2><A3><MOVE><X4><Y3><A4><MOVE><X5><Y6><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 11,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X2><Y1><A2><MOVE><X3><Y2><A3><MOVE><X4><Y3><A4><MOVE><X5><Y6><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 12,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X2><Y1><A2><MOVE><X3><Y2><A3><MOVE><X4><Y3><A4><MOVE><X5><Y6><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 13,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X2><Y1><A2><MOVE><X3><Y2><A3><MOVE><X4><Y3><A4><MOVE><X5><Y6><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 14,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X2><Y1><A2><MOVE><X3><Y2><A3><MOVE><X4><Y3><A4><MOVE><X5><Y6><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 15,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X2><Y1><A2><MOVE><X3><Y2><A3><MOVE><X4><Y3><A4><MOVE><X5><Y6><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 16,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X2><Y1><A2><MOVE><X3><Y2><A3><MOVE><X4><Y3><A4><MOVE><X5><Y6><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 17,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X2><Y1><A2><MOVE><X3><Y2><A3><MOVE><X4><Y3><A4><MOVE><X5><Y6><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 18,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X2><Y1><A2><MOVE><X3><Y2><A3><MOVE><X4><Y3><A4><MOVE><X5><Y6><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 19,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X2><Y1><A2><MOVE><X3><Y2><A3><MOVE><X4><Y3><A4><MOVE><X5><Y6><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        }
+      ]
+    },
+    {
+      "seed": 201732,
+      "won": false,
+      "actions": 20,
+      "valid_memory_rate": 1.0,
+      "parsed_action_rate": 1.0,
+      "trace": [
+        {
+          "step": 0,
+          "action": 1,
+          "moved": true,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X3><Y2><A4><MOVE><X4><Y3><A5><NOOP><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X3><Y2><A4><MOVE><X4><Y3><A5></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 1,
+          "action": 1,
+          "moved": true,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X3><Y0><A4><MOVE><X4><Y1></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 2,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y0><A3><MOVE><X3><Y0><A4><MOVE><X4><Y1><A5><MOVE><X2><Y1><A6><MOVE><X3><Y2><A7><MOVE><X4><Y3><A8><MOVE><X5><Y4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 3,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X2><Y2><A4><MOVE><X3><Y4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 4,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X2><Y2><A4><MOVE><X3><Y4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 5,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X2><Y2><A4><MOVE><X3><Y4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 6,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X2><Y2><A4><MOVE><X3><Y4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 7,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X2><Y2><A4><MOVE><X3><Y4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 8,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X2><Y2><A4><MOVE><X3><Y4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 9,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X2><Y2><A4><MOVE><X3><Y4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 10,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X2><Y2><A4><MOVE><X3><Y4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 11,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X2><Y2><A4><MOVE><X3><Y4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 12,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X2><Y2><A4><MOVE><X3><Y4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 13,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X2><Y2><A4><MOVE><X3><Y4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 14,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X2><Y2><A4><MOVE><X3><Y4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 15,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X2><Y2><A4><MOVE><X3><Y4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 16,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X2><Y2><A4><MOVE><X3><Y4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 17,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X2><Y2><A4><MOVE><X3><Y4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 18,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X2><Y2><A4><MOVE><X3><Y4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        },
+        {
+          "step": 19,
+          "action": 1,
+          "moved": false,
+          "won": false,
+          "completion": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM><CF><A1><MOVE><X1><Y0><A2><MOVE><X2><Y1><A3><MOVE><X2><Y2><A4><MOVE><X3><Y4></CF><ACT><A1></ACT><",
+          "memory": "<MEM><MAP><A1><UNK><A2><UNK><A3><UNK><A4><UNK></MEM>"
+        }
+      ]
+    }
+  ],
+  "elapsed_seconds": 223.06298804283142
+}
