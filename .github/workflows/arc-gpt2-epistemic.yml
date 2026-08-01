@@ -1,0 +1,166 @@
+name: ARC-GPT2 Epistemic Binding
+
+on:
+  push:
+    branches: [arc-gpt2-programs]
+    paths:
+      - "arcgpt2/build_epistemic_dataset.py"
+      - "arcgpt2/train_epistemic_binding.py"
+      - "arcgpt2/compare_epistemic_binding.py"
+      - "arcgpt2/tests/test_epistemic_dataset.py"
+      - ".github/workflows/arc-gpt2-epistemic.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arc-gpt2-epistemic-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install "transformers>=4.48,<6" "safetensors>=0.4" pytest
+
+      - name: Run matched version-space experiment
+        id: experiment
+        continue-on-error: true
+        env:
+          TOKENIZERS_PARALLELISM: "false"
+          HF_HUB_DISABLE_TELEMETRY: "1"
+        run: |
+          set -o pipefail
+          {
+            python -m pytest -q arcgpt2/tests
+            python -m arcgpt2.build_epistemic_dataset \
+              --output-dir outputs/epistemic/data \
+              --train-games 64 \
+              --validation-games 12 \
+              --test-games 8 \
+              --seed-base 271828
+            python -m arcgpt2.train_epistemic_binding \
+              --initialization pretrained \
+              --data-dir outputs/epistemic/data \
+              --output-dir outputs/epistemic/pretrained \
+              --max-length 448 \
+              --prefix-keep 96 \
+              --batch-size 2 \
+              --gradient-accumulation-steps 2 \
+              --learning-rate 0.00008 \
+              --max-optimizer-steps 30 \
+              --warmup-steps 4 \
+              --freeze-first-n-blocks 8 \
+              --evaluation-games 4 \
+              --score-batch-size 16 \
+              --no-save-model
+            python -m arcgpt2.train_epistemic_binding \
+              --initialization random \
+              --data-dir outputs/epistemic/data \
+              --output-dir outputs/epistemic/random \
+              --max-length 448 \
+              --prefix-keep 96 \
+              --batch-size 2 \
+              --gradient-accumulation-steps 2 \
+              --learning-rate 0.00008 \
+              --max-optimizer-steps 30 \
+              --warmup-steps 4 \
+              --freeze-first-n-blocks 8 \
+              --evaluation-games 4 \
+              --score-batch-size 16 \
+              --no-save-model
+            python -m arcgpt2.compare_epistemic_binding \
+              --pretrained outputs/epistemic/pretrained/summary.json \
+              --random outputs/epistemic/random/summary.json \
+              --output outputs/epistemic/comparison.json
+          } 2>&1 | tee epistemic.log
+
+      - name: Write durable evidence
+        if: always()
+        env:
+          EXPERIMENT_OUTCOME: ${{ steps.experiment.outcome }}
+        run: |
+          mkdir -p reports/arcgpt2
+          python - <<'PY'
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          reports = Path("reports/arcgpt2")
+          outputs = Path("outputs/epistemic")
+          receipt = {
+              "status": os.environ.get("EXPERIMENT_OUTCOME", "unknown"),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "scope": (
+                  "CPU smoke-scale set-valued action-binding posterior with one "
+                  "GPT-2 checkpoint per matched run; not ARC-AGI-3 evaluation"
+              ),
+          }
+          (reports / "latest-epistemic-status.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          copies = {
+              outputs / "data" / "manifest.json": reports / "latest-epistemic-data-manifest.json",
+              outputs / "pretrained" / "summary.json": reports / "latest-epistemic-pretrained.json",
+              outputs / "random" / "summary.json": reports / "latest-epistemic-random.json",
+              outputs / "comparison.json": reports / "latest-epistemic-comparison.json",
+          }
+          for source, target in copies.items():
+              if source.exists():
+                  shutil.copy2(source, target)
+          log = Path("epistemic.log")
+          if log.exists():
+              lines = log.read_text(encoding="utf-8", errors="replace").splitlines()
+              (reports / "latest-epistemic-log-tail.txt").write_text(
+                  "\n".join(lines[-800:]) + "\n", encoding="utf-8"
+              )
+          PY
+
+      - name: Publish evidence
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/arcgpt2/
+          git commit -m "Record ARC-GPT2 epistemic run ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload evidence artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arc-gpt2-epistemic-evidence
+          path: |
+            reports/arcgpt2/
+            outputs/epistemic/data/manifest.json
+            outputs/epistemic/pretrained/summary.json
+            outputs/epistemic/random/summary.json
+            outputs/epistemic/comparison.json
+            epistemic.log
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Propagate failure
+        if: steps.experiment.outcome != 'success'
+        run: exit 1
