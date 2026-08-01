@@ -80,8 +80,14 @@ def format_mapping(mapping: Mapping[str, str], unknown: str = "?") -> str:
 
 
 def parse_mapping(text: str) -> dict[str, str]:
-    """Extract the most recent valid mapping assignment for each action."""
-    mapping: dict[str, str] = {}
+    """Extract the most recent valid assignment for every simple action.
+
+    Missing fields are represented explicitly as ``?``. Returning a complete,
+    fixed-order mapping prevents the recurrent state from silently deleting an
+    unknown action and makes parse/format round-trips lossless.
+    """
+
+    mapping: dict[str, str] = {action: "?" for action in ACTION_ORDER}
     for match in MAPPING_ITEM_PATTERN.finditer(text):
         mapping[f"A{match.group(1)}"] = match.group(2).upper()
     return mapping
