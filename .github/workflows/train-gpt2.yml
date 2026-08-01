@@ -11,11 +11,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: gpt2-training
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   train:
@@ -51,12 +51,17 @@ jobs:
           PY
 
       - name: Fine-tune and evaluate GPT-2
+        id: train
+        continue-on-error: true
         env:
           TOKENIZERS_PARALLELISM: "false"
           HF_HUB_DISABLE_TELEMETRY: "1"
-        run: python train_gpt2.py
+        run: |
+          set -o pipefail
+          python train_gpt2.py 2>&1 | tee training.log
 
       - name: Verify output package
+        if: steps.train.outcome == 'success'
         run: |
           test -f outputs/gpt2-tuned/model.safetensors
           test -f outputs/gpt2-tuned/training_summary.json
@@ -65,6 +70,7 @@ jobs:
           cat outputs/gpt2-tuned/training_summary.json
 
       - name: Upload tuned model
+        if: steps.train.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           name: gpt2-tuned-model
@@ -72,3 +78,57 @@ jobs:
           if-no-files-found: error
           retention-days: 7
           compression-level: 0
+
+      - name: Write execution receipt
+        if: always()
+        env:
+          TRAIN_OUTCOME: ${{ steps.train.outcome }}
+        run: |
+          mkdir -p reports
+          python - <<'PY'
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          reports = Path("reports")
+          output = Path("outputs/gpt2-tuned")
+          outcome = os.environ.get("TRAIN_OUTCOME", "unknown")
+          receipt = {
+              "status": outcome,
+              "repository": os.environ.get("GITHUB_REPOSITORY"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+              "workflow": os.environ.get("GITHUB_WORKFLOW"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "model_artifact": "gpt2-tuned-model" if outcome == "success" else None,
+          }
+          (reports / "latest-status.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          if (output / "training_summary.json").exists():
+              shutil.copy2(output / "training_summary.json", reports / "latest-training-summary.json")
+          if (output / "sample_comparison.txt").exists():
+              shutil.copy2(output / "sample_comparison.txt", reports / "latest-sample-comparison.txt")
+          log_path = Path("training.log")
+          if log_path.exists():
+              lines = log_path.read_text(encoding="utf-8", errors="replace").splitlines()
+              (reports / "latest-training-log-tail.txt").write_text(
+                  "\n".join(lines[-300:]) + "\n", encoding="utf-8"
+              )
+          PY
+
+      - name: Publish execution receipt
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/
+          git commit -m "Record GPT-2 training run ${GITHUB_RUN_ID}" || true
+          git push
+
+      - name: Propagate training failure
+        if: steps.train.outcome != 'success'
+        run: exit 1
