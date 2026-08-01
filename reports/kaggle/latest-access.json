@@ -1,0 +1,7 @@
+{
+  "token_secret_present": false,
+  "legacy_secrets_present": false,
+  "credentials_present": false,
+  "authentication_tested": false,
+  "authentication_succeeded": false
+}
