@@ -1,0 +1,197 @@
+{
+  "objective": {
+    "first_probe_supervision": "all four actions valid; therefore zero action-selection gradient",
+    "navigation_loss": "single shortest-path action",
+    "probe_loss": "negative log probability mass assigned to all still-untried actions",
+    "probe_orders": "all 24 permutations per base game"
+  },
+  "schema": "arcgpt2.stage01.set-valued.v1",
+  "seed_base": 1729,
+  "special_tokens_file": "special_tokens.json",
+  "special_tokens_sha256": "c1402045d1653ae85319ceeb680e073ef7965ef0afbda80ed62f5963961cadd1",
+  "splits": {
+    "test": {
+      "base_games": 1,
+      "canonical_target_counts": {
+        "<A1>": 120,
+        "<A2>": 72,
+        "<A3>": 144,
+        "<A4>": 72
+      },
+      "data_file": "test.jsonl",
+      "data_sha256": "304a6f782bb2b7f5f85233454829eab995edbcb27f55928ff7bb163b21059d5d",
+      "decision_phase_counts": {
+        "navigate": 312,
+        "probe": 96
+      },
+      "examples": 408,
+      "game_manifest_file": "test_games.json",
+      "game_manifest_sha256": "80c0b00bbdde4d93f089a2f2d742f20833e020e978dabc7015899b48ae560bfd",
+      "mapping_known_count_distribution": {
+        "0": 24,
+        "1": 24,
+        "2": 24,
+        "3": 24,
+        "4": 312
+      },
+      "navigation_target_counts": {
+        "<A1>": 96,
+        "<A2>": 48,
+        "<A3>": 120,
+        "<A4>": 48
+      },
+      "probe_canonical_target_counts": {
+        "<A1>": 24,
+        "<A2>": 24,
+        "<A3>": 24,
+        "<A4>": 24
+      },
+      "probe_canonical_targets_balanced": true,
+      "probe_order_variants_per_game": 24,
+      "probe_valid_support_balanced": true,
+      "probe_valid_target_support_counts": {
+        "<A1>": 60,
+        "<A2>": 60,
+        "<A3>": 60,
+        "<A4>": 60
+      },
+      "seed_start": 1738,
+      "seed_stop_exclusive": 1739,
+      "trajectory_variants": 24,
+      "valid_set_cardinality_distribution": {
+        "1": 336,
+        "2": 24,
+        "3": 24,
+        "4": 24
+      },
+      "valid_target_support_counts": {
+        "<A1>": 156,
+        "<A2>": 108,
+        "<A3>": 180,
+        "<A4>": 108
+      }
+    },
+    "train": {
+      "base_games": 8,
+      "canonical_target_counts": {
+        "<A1>": 744,
+        "<A2>": 1032,
+        "<A3>": 744,
+        "<A4>": 1008
+      },
+      "data_file": "train.jsonl",
+      "data_sha256": "aa76ab2607bcae7c6ad9430379ea9a0d626e7fdc8817c3587990575a154305f1",
+      "decision_phase_counts": {
+        "navigate": 2760,
+        "probe": 768
+      },
+      "examples": 3528,
+      "game_manifest_file": "train_games.json",
+      "game_manifest_sha256": "675deedfa17c777bf3618b9369a5cfe02e9b25418037d4b8bb93d227b3ba5c61",
+      "mapping_known_count_distribution": {
+        "0": 192,
+        "1": 192,
+        "2": 192,
+        "3": 192,
+        "4": 2760
+      },
+      "navigation_target_counts": {
+        "<A1>": 552,
+        "<A2>": 840,
+        "<A3>": 552,
+        "<A4>": 816
+      },
+      "probe_canonical_target_counts": {
+        "<A1>": 192,
+        "<A2>": 192,
+        "<A3>": 192,
+        "<A4>": 192
+      },
+      "probe_canonical_targets_balanced": true,
+      "probe_order_variants_per_game": 24,
+      "probe_valid_support_balanced": true,
+      "probe_valid_target_support_counts": {
+        "<A1>": 480,
+        "<A2>": 480,
+        "<A3>": 480,
+        "<A4>": 480
+      },
+      "seed_start": 1729,
+      "seed_stop_exclusive": 1737,
+      "trajectory_variants": 192,
+      "valid_set_cardinality_distribution": {
+        "1": 2952,
+        "2": 192,
+        "3": 192,
+        "4": 192
+      },
+      "valid_target_support_counts": {
+        "<A1>": 1032,
+        "<A2>": 1320,
+        "<A3>": 1032,
+        "<A4>": 1296
+      }
+    },
+    "validation": {
+      "base_games": 1,
+      "canonical_target_counts": {
+        "<A1>": 168,
+        "<A2>": 72,
+        "<A3>": 96,
+        "<A4>": 48
+      },
+      "data_file": "validation.jsonl",
+      "data_sha256": "549c8ad2e6194c0cf7c848a06a14a972593a1b4594ab3fe60845b71f4f16e846",
+      "decision_phase_counts": {
+        "navigate": 288,
+        "probe": 96
+      },
+      "examples": 384,
+      "game_manifest_file": "validation_games.json",
+      "game_manifest_sha256": "ab7159b887ebd83894784f9f22eae5073bebf5ccc3cd17ff8af57d0739db59a6",
+      "mapping_known_count_distribution": {
+        "0": 24,
+        "1": 24,
+        "2": 24,
+        "3": 24,
+        "4": 288
+      },
+      "navigation_target_counts": {
+        "<A1>": 144,
+        "<A2>": 48,
+        "<A3>": 72,
+        "<A4>": 24
+      },
+      "probe_canonical_target_counts": {
+        "<A1>": 24,
+        "<A2>": 24,
+        "<A3>": 24,
+        "<A4>": 24
+      },
+      "probe_canonical_targets_balanced": true,
+      "probe_order_variants_per_game": 24,
+      "probe_valid_support_balanced": true,
+      "probe_valid_target_support_counts": {
+        "<A1>": 60,
+        "<A2>": 60,
+        "<A3>": 60,
+        "<A4>": 60
+      },
+      "seed_start": 1737,
+      "seed_stop_exclusive": 1738,
+      "trajectory_variants": 24,
+      "valid_set_cardinality_distribution": {
+        "1": 312,
+        "2": 24,
+        "3": 24,
+        "4": 24
+      },
+      "valid_target_support_counts": {
+        "<A1>": 204,
+        "<A2>": 108,
+        "<A3>": 132,
+        "<A4>": 84
+      }
+    }
+  }
+}
