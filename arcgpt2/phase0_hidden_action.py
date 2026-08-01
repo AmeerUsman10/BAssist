@@ -12,7 +12,7 @@ from collections import deque
 from dataclasses import dataclass
 from enum import Enum
 import random
-from typing import Iterable, Iterator, Mapping, Sequence
+from typing import Iterator, Mapping
 
 from .codec import Grid, TransitionEncoding, encode_frame, encode_transition, normalize_grid, tokens_to_text
 
@@ -144,20 +144,33 @@ def _generate_level(rng: random.Random, *, level_index: int) -> LevelSpec:
     width = size
     center = (height // 2, width // 2)
 
+    # The first level is a controlled identification arena. Starting from the
+    # center, any permutation of the four unique directions remains in bounds
+    # and returns to the center. A distant goal prevents a probe from ending the
+    # level before all action meanings are observable.
+    if level_index == 0:
+        candidates = [
+            (y, x)
+            for y in range(height)
+            for x in range(width)
+            if abs(y - center[0]) + abs(x - center[1]) >= 3
+        ]
+        return LevelSpec(
+            height=height,
+            width=width,
+            walls=frozenset(),
+            start=center,
+            goal=rng.choice(candidates),
+        )
+
     for _ in range(1_000):
-        start = center if level_index == 0 else (rng.randrange(height), rng.randrange(width))
+        start = (rng.randrange(height), rng.randrange(width))
         goal = (rng.randrange(height), rng.randrange(width))
         if goal == start:
             continue
 
         protected = {start, goal}
-        if level_index == 0:
-            for _, neighbor in _neighbors(start):
-                y, x = neighbor
-                if 0 <= y < height and 0 <= x < width:
-                    protected.add(neighbor)
-
-        density = 0.06 + 0.05 * level_index
+        density = 0.08 + 0.05 * level_index
         walls = {
             (y, x)
             for y in range(height)
@@ -271,8 +284,6 @@ class SourceLearner:
     def __init__(self, spec: GameSpec):
         self.spec = spec
         self.direction_to_action: dict[Direction, Action] = {}
-        self.pending_probe: Action | None = None
-        self.probe_cursor = 0
 
     def observe(self, record: StepRecord) -> None:
         if not record.moved:
@@ -304,13 +315,7 @@ class SourceLearner:
             return self.spec.probe_order[0]
         action = self.direction_to_action.get(path[0])
         if action is None:
-            # A movement may have been blocked during probing. Choose an action
-            # not yet associated with another direction and continue learning.
-            used = set(self.direction_to_action.values())
-            for candidate in self.spec.probe_order:
-                if candidate not in used:
-                    return candidate
-            raise RuntimeError("incomplete action mapping with no remaining candidate")
+            raise RuntimeError("source learner did not identify the full action mapping")
         return action
 
     def _find_agent(self, frame: Grid) -> tuple[int, int]:
@@ -344,8 +349,6 @@ def phase0_special_tokens() -> list[str]:
     tokens = [
         "<GAME_START>",
         "<GAME_END>",
-        "<LEVEL>",
-        "<STEP>",
         "<FRAME>",
         "</FRAME>",
         "<ACTION>",
