@@ -17,7 +17,7 @@ permissions:
 
 concurrency:
   group: arc-gpt2-factorized-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   experiment:
