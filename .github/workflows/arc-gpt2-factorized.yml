@@ -7,6 +7,7 @@ on:
       - "arcgpt2/natural_protocol.py"
       - "arcgpt2/build_factorized_dataset.py"
       - "arcgpt2/train_factorized.py"
+      - "arcgpt2/train_factorized_frozen.py"
       - "arcgpt2/compare_factorized.py"
       - ".github/workflows/arc-gpt2-factorized.yml"
   workflow_dispatch:
@@ -52,7 +53,7 @@ jobs:
               --validation-games 24 \
               --test-games 32 \
               --seed-base 112358
-            python -m arcgpt2.train_factorized \
+            python -m arcgpt2.train_factorized_frozen \
               --initialization pretrained \
               --data-dir outputs/factorized/data \
               --output-dir outputs/factorized/pretrained \
@@ -68,7 +69,7 @@ jobs:
               --score-batch-size 16 \
               --max-plan-depth 64 \
               --no-save-model
-            python -m arcgpt2.train_factorized \
+            python -m arcgpt2.train_factorized_frozen \
               --initialization random \
               --data-dir outputs/factorized/data \
               --output-dir outputs/factorized/random \
@@ -113,8 +114,8 @@ jobs:
               "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
               "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
               "scope": (
-                  "Natural-language factorized hidden-action semantics with one "
-                  "GPT-2 model per matched run; not ARC-AGI-3 evaluation"
+                  "Natural-language factorized hidden-action semantics with frozen "
+                  "GPT-2 embeddings and one model per matched run; not ARC-AGI-3 evaluation"
               ),
           }
           (reports / "latest-factorized-status.json").write_text(
