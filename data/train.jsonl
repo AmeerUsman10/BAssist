@@ -1,0 +1,16 @@
+{"prompt":"What is evidence?","response":"Evidence is information that supports or challenges a claim."}
+{"prompt":"What is an interpretation?","response":"An interpretation is an explanation of what observed information may mean."}
+{"prompt":"What is fine-tuning?","response":"Fine-tuning updates a pretrained model using a smaller task-specific dataset."}
+{"prompt":"What is prompting?","response":"Prompting changes the input without changing the model weights."}
+{"prompt":"Why use validation data?","response":"Validation data helps measure performance on examples not used for training updates."}
+{"prompt":"What is reproducibility?","response":"Reproducibility means recording enough code, data, settings, and outputs for a run to be repeated."}
+{"prompt":"What is a baseline?","response":"A baseline is a reference result used to judge whether a new method improves performance."}
+{"prompt":"What is overfitting?","response":"Overfitting occurs when a model learns training examples too narrowly and performs poorly on new examples."}
+{"prompt":"How should uncertainty be reported?","response":"State what is known, what is inferred, and what remains unresolved."}
+{"prompt":"How should a result be summarized?","response":"Report the setup, measurement, limitation, and next test."}
+{"prompt":"What is a model checkpoint?","response":"A model checkpoint is a saved set of model parameters and related configuration files."}
+{"prompt":"What is a tokenizer?","response":"A tokenizer converts text into token identifiers that a language model can process."}
+{"prompt":"What is a training step?","response":"A training step computes a loss, calculates gradients, and updates selected model parameters."}
+{"prompt":"What is learning rate?","response":"Learning rate controls the size of parameter updates during training."}
+{"prompt":"Why keep a held-out test?","response":"A held-out test provides a cleaner estimate of behavior on unseen examples."}
+{"prompt":"What follows a demonstration run?","response":"Use a larger versioned dataset and compare the tuned model with the original model."}
