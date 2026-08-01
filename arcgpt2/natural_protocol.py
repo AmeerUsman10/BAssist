@@ -89,6 +89,7 @@ def mapping_prompt(
 
     sections = [
         "You are studying an unfamiliar deterministic grid game.",
+        "Rows are numbered from north to south: decreasing the row number means north and increasing it means south. Columns are numbered from west to east: decreasing the column number means west and increasing it means east.",
         "Actions A1, A2, A3, and A4 are a hidden permutation of north, south, west, and east.",
         "Use only the exact observations below. Do not guess from the action number.",
         "INITIAL GRID\n" + grid_text(initial_grid),
