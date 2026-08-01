@@ -1,8 +1,8 @@
 {
-  "status": "success",
+  "status": "cancelled",
   "branch": "arc-gpt2-programs",
-  "commit_sha": "0c8cf8d97be884463f5051788e44c9edd66a5d0f",
-  "run_id": "30723135753",
-  "recorded_at_utc": "2026-08-01T23:23:54.764415+00:00",
+  "commit_sha": "d94aa74bcb3bb3bcd9b949955bfd3a458210035b",
+  "run_id": "30723265179",
+  "recorded_at_utc": "2026-08-01T23:28:02.539144+00:00",
   "scope": "CPU smoke-scale compact-mapping 24-program induction gate; not ARC-AGI-3 evaluation"
 }
