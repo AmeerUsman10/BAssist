@@ -1,0 +1,11 @@
+{
+  "status": "failure",
+  "repository": "AmeerUsman10/BAssist",
+  "commit_sha": "830dc5fe9efaae723122722e67619b7dee84f79a",
+  "run_id": "30722280223",
+  "run_attempt": "1",
+  "workflow": "Pure GPT-2 ARC v0",
+  "recorded_at_utc": "2026-08-01T22:56:02.138276+00:00",
+  "artifact": null,
+  "claim_scope": "synthetic hidden-action v0; not an ARC-AGI-3 public score"
+}

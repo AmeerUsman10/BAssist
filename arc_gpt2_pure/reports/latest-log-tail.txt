@@ -1,0 +1,43 @@
+............F...                                                         [100%]
+=================================== FAILURES ===================================
+________________________ test_mapping_format_and_parse _________________________
+
+    def test_mapping_format_and_parse() -> None:
+        text = format_mapping({"A1": "N", "A2": "E", "A4": "W"})
+        assert text == "A1=N;A2=E;A3=?;A4=W"
+>       assert parse_mapping(text) == {
+            "A1": "N",
+            "A2": "E",
+            "A3": "?",
+            "A4": "W",
+        }
+E       AssertionError: assert {'A1': 'N', '...E', 'A4': 'W'} == {'A1': 'N', '...?', 'A4': 'W'}
+E         
+E         Omitting 3 identical items, use -vv to show
+E         Right contains 1 more item:
+E         {'A3': '?'}
+E         
+E         Full diff:
+E           {
+E               'A1': 'N',
+E               'A2': 'E',
+E         -     'A3': '?',
+E               'A4': 'W',
+E           }
+
+tests/test_protocol.py:15: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_protocol.py::test_mapping_format_and_parse - AssertionError: assert {'A1': 'N', '...E', 'A4': 'W'} == {'A1': 'N', '...?', 'A4': 'W'}
+  
+  Omitting 3 identical items, use -vv to show
+  Right contains 1 more item:
+  {'A3': '?'}
+  
+  Full diff:
+    {
+        'A1': 'N',
+        'A2': 'E',
+  -     'A3': '?',
+        'A4': 'W',
+    }
+1 failed, 15 passed in 0.06s
