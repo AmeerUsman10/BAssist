@@ -18,7 +18,7 @@ concurrency:
 jobs:
   phase0:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 90
 
     steps:
       - name: Check out branch
@@ -48,36 +48,36 @@ jobs:
             python -m pytest -q arcgpt2/tests
             python -m arcgpt2.build_phase0_dataset \
               --output-dir outputs/phase0/data \
-              --train-games 64 \
-              --validation-games 12 \
-              --test-games 24 \
+              --train-games 32 \
+              --validation-games 8 \
+              --test-games 12 \
               --seed-base 1729
             python -m arcgpt2.train_phase0 \
               --initialization pretrained \
               --data-dir outputs/phase0/data \
               --output-dir outputs/phase0/pretrained \
-              --max-length 640 \
-              --prefix-keep 192 \
+              --max-length 512 \
+              --prefix-keep 160 \
               --batch-size 2 \
               --gradient-accumulation-steps 2 \
-              --max-optimizer-steps 40 \
-              --warmup-steps 4 \
-              --evaluation-games 12 \
+              --max-optimizer-steps 20 \
+              --warmup-steps 2 \
+              --evaluation-games 4 \
               --evaluation-seed-start 900000 \
-              --max-actions-per-game 64
+              --max-actions-per-game 32
             python -m arcgpt2.train_phase0 \
               --initialization random \
               --data-dir outputs/phase0/data \
               --output-dir outputs/phase0/random \
-              --max-length 640 \
-              --prefix-keep 192 \
+              --max-length 512 \
+              --prefix-keep 160 \
               --batch-size 2 \
               --gradient-accumulation-steps 2 \
-              --max-optimizer-steps 40 \
-              --warmup-steps 4 \
-              --evaluation-games 12 \
+              --max-optimizer-steps 20 \
+              --warmup-steps 2 \
+              --evaluation-games 4 \
               --evaluation-seed-start 900000 \
-              --max-actions-per-game 64
+              --max-actions-per-game 32
             python -m arcgpt2.compare_phase0 \
               --pretrained outputs/phase0/pretrained/summary.json \
               --random outputs/phase0/random/summary.json \
@@ -113,7 +113,7 @@ jobs:
               "run_id": os.environ.get("GITHUB_RUN_ID"),
               "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
               "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
-              "scope": "smoke-scale Phase-0 hidden-action experiment; not ARC-AGI-3 evaluation",
+              "scope": "CPU smoke-scale Phase-0 hidden-action experiment; not ARC-AGI-3 evaluation",
           }
           (reports / "latest-phase0-status.json").write_text(
               json.dumps(receipt, indent=2), encoding="utf-8"
@@ -142,7 +142,8 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add reports/arcgpt2/
           git commit -m "Record ARC-GPT2 Phase-0 run ${GITHUB_RUN_ID}" || true
-          git push
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
 
       - name: Upload Phase-0 evidence
         if: always()
