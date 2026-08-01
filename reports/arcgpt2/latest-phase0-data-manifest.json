@@ -1,0 +1,47 @@
+{
+  "schema": "arcgpt2.phase0.v2",
+  "seed_base": 1729,
+  "source_policy": {
+    "note": "Only teacher tie-breaking is canonical; game mechanics and observations remain randomized.",
+    "unknown_action_tie_break": [
+      "A1",
+      "A2",
+      "A3",
+      "A4"
+    ]
+  },
+  "special_tokens_file": "special_tokens.json",
+  "special_tokens_sha256": "c1402045d1653ae85319ceeb680e073ef7965ef0afbda80ed62f5963961cadd1",
+  "splits": {
+    "test": {
+      "data_file": "test.jsonl",
+      "data_sha256": "aacdec3006b4e2461c932af92c8e03ed57179e1a9f1a4e40686506ca61318266",
+      "examples": 211,
+      "game_manifest_file": "test_games.json",
+      "game_manifest_sha256": "842770fb43b4ee85793012562e60b7eb8ee3865ef07547be197e1756c14d9970",
+      "games": 12,
+      "seed_start": 1769,
+      "seed_stop_exclusive": 1781
+    },
+    "train": {
+      "data_file": "train.jsonl",
+      "data_sha256": "a1cf2cfcd9854c377dad7c75ac677b3cfb37a495356d58e549ee2bb560c37ab7",
+      "examples": 559,
+      "game_manifest_file": "train_games.json",
+      "game_manifest_sha256": "8c88c10f99463332c1b624d3b141728d4176a3eb4ab71b3be197954344de1f04",
+      "games": 32,
+      "seed_start": 1729,
+      "seed_stop_exclusive": 1761
+    },
+    "validation": {
+      "data_file": "validation.jsonl",
+      "data_sha256": "cec19396be95cfcb43c21e5d68fffcf54d63b77e0998247c8e11d38c335c7d06",
+      "examples": 139,
+      "game_manifest_file": "validation_games.json",
+      "game_manifest_sha256": "bce00910b60939df8bf97504ce6163a50f29839a1c0b36c4e913055310864ecf",
+      "games": 8,
+      "seed_start": 1761,
+      "seed_stop_exclusive": 1769
+    }
+  }
+}
