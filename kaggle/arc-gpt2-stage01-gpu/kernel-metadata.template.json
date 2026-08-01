@@ -1,0 +1,14 @@
+{
+  "id": "YOUR_KAGGLE_USERNAME/arc-gpt2-stage01-gpu",
+  "title": "ARC GPT2 Stage 0.1 GPU",
+  "code_file": "runner.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}
