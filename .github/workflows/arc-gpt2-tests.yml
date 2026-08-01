@@ -1,0 +1,76 @@
+name: ARC-GPT2 Unit Tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "arcgpt2/**"
+      - ".github/workflows/arc-gpt2-tests.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arc-gpt2-unit-tests
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install test dependency
+        run: python -m pip install -q pytest
+
+      - name: Run tests
+        id: tests
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python -m pytest -q arcgpt2/tests 2>&1 | tee arcgpt2-tests.log
+
+      - name: Record test receipt
+        if: always()
+        env:
+          TEST_OUTCOME: ${{ steps.tests.outcome }}
+        run: |
+          mkdir -p reports/arcgpt2
+          python - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          log = Path("arcgpt2-tests.log")
+          receipt = {
+              "status": os.environ.get("TEST_OUTCOME", "unknown"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "log": log.read_text(encoding="utf-8", errors="replace") if log.exists() else "",
+          }
+          Path("reports/arcgpt2/latest-unit-tests.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          PY
+
+      - name: Publish test receipt
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/arcgpt2/latest-unit-tests.json
+          git commit -m "Record ARC-GPT2 unit tests ${GITHUB_RUN_ID}" || true
+          git push
+
+      - name: Propagate failure
+        if: steps.tests.outcome != 'success'
+        run: exit 1
