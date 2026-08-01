@@ -1,7 +1,7 @@
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 
 Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
-Loading weights: 100%|██████████| 148/148 [00:00<00:00, 27404.07it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 26678.57it/s]
 [transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
 {"optimizer_step": 1, "loss": 4.24713, "device": "cpu"}
 {"optimizer_step": 2, "loss": 4.941536, "device": "cpu"}
@@ -17,8 +17,8 @@ Loading weights: 100%|██████████| 148/148 [00:00<00:00, 2740
 {"optimizer_step": 12, "loss": 4.90134, "device": "cpu"}
 
 Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]
-Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  8.11it/s]
-Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  8.10it/s]
+Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  8.09it/s]
+Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  8.08it/s]
 {
   "status": "completed",
   "device": "cpu",
@@ -49,7 +49,7 @@ Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  8.
   "initial_perplexity": 165.6012683435069,
   "final_perplexity": 98.212818891687,
   "mean_training_loss": 4.714447180430095,
-  "elapsed_seconds": 15.090763092041016,
+  "elapsed_seconds": 14.097499132156372,
   "base_sample": "### Instruction:\nHow should an uncertain result be reported?\n\n### Response:\n. . . The following is a list of the most common errors that can occur when reporting results from your program, and how to avoid them in future releases. If you have any questions or comments about this document please contact me at james@javacomputer.com",
   "tuned_sample": "### Instruction:\nHow should an uncertain result be reported?\n\n### Response:\nThe following questions are asked in the response to this question."
 }

@@ -28,7 +28,7 @@
   "initial_perplexity": 165.6012683435069,
   "final_perplexity": 98.212818891687,
   "mean_training_loss": 4.714447180430095,
-  "elapsed_seconds": 15.090763092041016,
+  "elapsed_seconds": 14.097499132156372,
   "base_sample": "### Instruction:\nHow should an uncertain result be reported?\n\n### Response:\n. . . The following is a list of the most common errors that can occur when reporting results from your program, and how to avoid them in future releases. If you have any questions or comments about this document please contact me at james@javacomputer.com",
   "tuned_sample": "### Instruction:\nHow should an uncertain result be reported?\n\n### Response:\nThe following questions are asked in the response to this question."
 }
