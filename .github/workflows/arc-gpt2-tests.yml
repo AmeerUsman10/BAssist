@@ -2,7 +2,7 @@ name: ARC-GPT2 Unit Tests
 
 on:
   push:
-    branches: [main]
+    branches: [main, arc-gpt2-programs]
     paths:
       - "arcgpt2/**"
       - ".github/workflows/arc-gpt2-tests.yml"
@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: arc-gpt2-unit-tests
+  group: arc-gpt2-unit-tests-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -52,6 +52,7 @@ jobs:
           log = Path("arcgpt2-tests.log")
           receipt = {
               "status": os.environ.get("TEST_OUTCOME", "unknown"),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
               "commit_sha": os.environ.get("GITHUB_SHA"),
               "run_id": os.environ.get("GITHUB_RUN_ID"),
               "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
