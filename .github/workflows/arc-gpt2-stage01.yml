@@ -1,0 +1,171 @@
+name: ARC-GPT2 Stage 0.1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "arcgpt2/stage01_hidden_action.py"
+      - "arcgpt2/build_stage01_dataset.py"
+      - "arcgpt2/train_stage01.py"
+      - "arcgpt2/tests/test_stage01.py"
+      - ".github/workflows/arc-gpt2-stage01.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arc-gpt2-stage01
+  cancel-in-progress: true
+
+jobs:
+  overfit-sanity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install "transformers>=4.48,<6" "safetensors>=0.4" pytest
+
+      - name: Run Stage-0.1 tests and overfit sanity gate
+        id: experiment
+        continue-on-error: true
+        env:
+          TOKENIZERS_PARALLELISM: "false"
+          HF_HUB_DISABLE_TELEMETRY: "1"
+          PYTHONHASHSEED: "42"
+        run: |
+          set -o pipefail
+          {
+            python -m pytest -q arcgpt2/tests
+            python -m arcgpt2.build_stage01_dataset \
+              --output-dir outputs/stage01/data \
+              --train-games 8 \
+              --validation-games 1 \
+              --test-games 1 \
+              --seed-base 1729
+            python -m arcgpt2.train_stage01 \
+              --initialization pretrained \
+              --data-dir outputs/stage01/data \
+              --train-file outputs/stage01/data/train.jsonl \
+              --evaluation-file outputs/stage01/data/train.jsonl \
+              --output-dir outputs/stage01/overfit-pretrained \
+              --max-length 384 \
+              --prefix-keep 128 \
+              --train-batch-size 2 \
+              --eval-batch-size 8 \
+              --gradient-accumulation-steps 2 \
+              --learning-rate 1e-4 \
+              --max-optimizer-steps 120 \
+              --warmup-steps 8 \
+              --freeze-first-n-blocks 10 \
+              --evaluation-games 8 \
+              --evaluation-seed-start 1729 \
+              --max-actions-per-game 64 \
+              --history-modes intact
+          } 2>&1 | tee stage01.log
+
+      - name: Verify evidence output
+        if: steps.experiment.outcome == 'success'
+        run: |
+          test -f outputs/stage01/data/manifest.json
+          test -f outputs/stage01/overfit-pretrained/summary.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          summary = json.loads(Path("outputs/stage01/overfit-pretrained/summary.json").read_text())
+          print(json.dumps(summary["gates"], indent=2))
+          PY
+
+      - name: Write durable Stage-0.1 receipt
+        if: always()
+        env:
+          EXPERIMENT_OUTCOME: ${{ steps.experiment.outcome }}
+        run: |
+          mkdir -p reports/arcgpt2-stage01
+          python - <<'PY'
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          reports = Path("reports/arcgpt2-stage01")
+          outputs = Path("outputs/stage01")
+          outcome = os.environ.get("EXPERIMENT_OUTCOME", "unknown")
+          summary_path = outputs / "overfit-pretrained" / "summary.json"
+          capability = "not_evaluated"
+          if summary_path.exists():
+              summary = json.loads(summary_path.read_text(encoding="utf-8"))
+              capability = (
+                  "passed"
+                  if summary.get("gates", {}).get("overfit_sanity_passed")
+                  else "not_yet_passed"
+              )
+          receipt = {
+              "execution_status": outcome,
+              "capability_gate": capability,
+              "repository": os.environ.get("GITHUB_REPOSITORY"),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "scope": "Stage-0.1 eight-game synthetic overfit sanity; not ARC-AGI-3 evaluation",
+          }
+          (reports / "latest-status.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          copies = {
+              outputs / "data" / "manifest.json": reports / "latest-data-manifest.json",
+              summary_path: reports / "latest-overfit-summary.json",
+          }
+          for source, target in copies.items():
+              if source.exists():
+                  shutil.copy2(source, target)
+          log_path = Path("stage01.log")
+          if log_path.exists():
+              lines = log_path.read_text(encoding="utf-8", errors="replace").splitlines()
+              (reports / "latest-log-tail.txt").write_text(
+                  "\n".join(lines[-700:]) + "\n", encoding="utf-8"
+              )
+          PY
+
+      - name: Publish Stage-0.1 receipt
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/arcgpt2-stage01/
+          git commit -m "Record ARC-GPT2 Stage-0.1 run ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload Stage-0.1 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arc-gpt2-stage01-evidence
+          path: |
+            reports/arcgpt2-stage01/
+            outputs/stage01/data/manifest.json
+            outputs/stage01/overfit-pretrained/summary.json
+            stage01.log
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Propagate execution failure
+        if: steps.experiment.outcome != 'success'
+        run: exit 1
