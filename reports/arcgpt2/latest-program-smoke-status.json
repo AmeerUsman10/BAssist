@@ -1,8 +1,8 @@
 {
-  "status": "failure",
+  "status": "skipped",
   "branch": "arc-gpt2-programs",
-  "commit_sha": "9d80ef01c28b60655fdaf0ad8f6a6ee754151707",
-  "run_id": "30720939053",
-  "recorded_at_utc": "2026-08-01T22:18:04.497938+00:00",
-  "scope": "CPU smoke-scale 24-program induction gate; not ARC-AGI-3 evaluation"
+  "commit_sha": "9a0d1112c55fde25b7ae68cb1c20171119f1b5e1",
+  "run_id": "30720978607",
+  "recorded_at_utc": "2026-08-01T22:19:06.676583+00:00",
+  "scope": "CPU smoke-scale compact-mapping 24-program induction gate; not ARC-AGI-3 evaluation"
 }
