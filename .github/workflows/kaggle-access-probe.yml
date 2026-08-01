@@ -1,0 +1,93 @@
+name: Kaggle Access Probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/kaggle-access-probe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kaggle-access-probe
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+      KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+      KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Test existing Kaggle credentials without exposing them
+        run: |
+          set -o errexit -o nounset -o pipefail
+          mkdir -p reports/kaggle
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          token_present = bool(os.environ.get("KAGGLE_API_TOKEN"))
+          legacy_present = bool(
+              os.environ.get("KAGGLE_USERNAME") and os.environ.get("KAGGLE_KEY")
+          )
+          Path("reports/kaggle/latest-access.json").write_text(
+              json.dumps(
+                  {
+                      "token_secret_present": token_present,
+                      "legacy_secrets_present": legacy_present,
+                      "credentials_present": token_present or legacy_present,
+                      "authentication_tested": False,
+                      "authentication_succeeded": False,
+                  },
+                  indent=2,
+              ),
+              encoding="utf-8",
+          )
+          PY
+
+          if [[ -n "${KAGGLE_API_TOKEN}" || ( -n "${KAGGLE_USERNAME}" && -n "${KAGGLE_KEY}" ) ]]; then
+            python -m pip install --quiet --upgrade kaggle
+            set +e
+            kaggle kernels list --mine --page-size 1 >/tmp/kaggle-output.txt 2>/tmp/kaggle-error.txt
+            result=$?
+            set -e
+            RESULT="${result}" python - <<'PY'
+            import json
+            import os
+            from pathlib import Path
+
+            path = Path("reports/kaggle/latest-access.json")
+            report = json.loads(path.read_text(encoding="utf-8"))
+            report["authentication_tested"] = True
+            report["authentication_succeeded"] = os.environ["RESULT"] == "0"
+            report["cli_exit_code"] = int(os.environ["RESULT"])
+            report["failure_class"] = (
+                None if report["authentication_succeeded"] else "credential_or_cli_failure"
+            )
+            path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+            PY
+          fi
+
+          cat reports/kaggle/latest-access.json
+
+      - name: Publish access receipt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/kaggle/latest-access.json
+          git commit -m "Record Kaggle access probe ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
