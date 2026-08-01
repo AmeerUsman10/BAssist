@@ -8,25 +8,28 @@ from arcgpt2.build_program_dataset import (
     build_example,
 )
 from arcgpt2.dsl import parse_program, program_from_phase0_spec
+from arcgpt2.mapping_target import (
+    compact_mapping,
+    expand_mapping,
+    parse_compact_mapping,
+)
 from arcgpt2.phase0_hidden_action import generate_game
 
 
-def _extract_program(target: str) -> str:
-    suffix = "\n</PROGRAM>"
-    assert target.endswith(suffix)
-    return target[: -len(suffix)]
-
-
-def test_example_contains_an_exact_parseable_ground_truth_program() -> None:
+def test_example_contains_an_exact_compact_mapping_and_full_program() -> None:
     for seed in range(100):
-        example = build_example(80_000 + seed)
-        parsed = parse_program(_extract_program(str(example["target"])))
-        expected = program_from_phase0_spec(generate_game(80_000 + seed))
-        assert parsed == expected
+        game_seed = 80_000 + seed
+        example = build_example(game_seed)
+        expected = program_from_phase0_spec(generate_game(game_seed))
+        mapping = parse_compact_mapping(str(example["target"]))
+        full_program = parse_program(str(example["full_program"]))
+        assert compact_mapping(expected) == example["target"]
+        assert full_program == expected
+        assert expand_mapping(mapping, expected) == expected
         assert example["probe_records"] == 4
         assert example["post_probe_level"] == 0
         assert example["post_probe_step"] == 4
-        assert str(example["context"]).endswith("<PROGRAM>")
+        assert str(example["context"]).endswith("<INDUCE_MAPPING>")
 
 
 def test_controls_are_distinct_and_preserve_the_query() -> None:
@@ -37,9 +40,9 @@ def test_controls_are_distinct_and_preserve_the_query() -> None:
     assert full != amnesic
     assert full != shuffled
     assert amnesic != shuffled
-    assert full.endswith("<INDUCE_PROGRAM> <PROGRAM>")
-    assert amnesic.endswith("<INDUCE_PROGRAM> <PROGRAM>")
-    assert shuffled.endswith("<INDUCE_PROGRAM> <PROGRAM>")
+    assert full.endswith("<INDUCE_MAPPING>")
+    assert amnesic.endswith("<INDUCE_MAPPING>")
+    assert shuffled.endswith("<INDUCE_MAPPING>")
     assert full.count("<OUTCOME>") == 4
     assert amnesic.count("<OUTCOME>") == 0
     assert shuffled.count("<OUTCOME>") == 4
@@ -63,6 +66,7 @@ def test_dataset_splits_and_hashes_are_reproducible(tmp_path) -> None:
         seed_base=1234,
     )
     assert first == second
+    assert first["schema"] == "arcgpt2.program_induction.phase0.v2"
     for split in ("train", "validation", "test"):
         assert first["splits"][split]["sha256"] == second["splits"][split]["sha256"]
 
