@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import math
+from types import SimpleNamespace
 
 import torch
 
@@ -12,7 +13,8 @@ from arcgpt2.stage01_hidden_action import (
     probe_support_counts,
     valid_actions,
 )
-from arcgpt2.train_stage01 import set_valued_action_loss
+from arcgpt2.train_stage01 import PHASE_INDEX, set_valued_action_loss
+from arcgpt2.train_stage01_balanced import balanced_sampling_weights
 
 
 def test_all_probe_orders_are_present_once() -> None:
@@ -89,3 +91,30 @@ def test_set_valued_loss_rewards_probability_mass_on_any_valid_action() -> None:
     bad = torch.tensor([[-3.0, -3.0, 5.0, 4.0]])
     mask = torch.tensor([[True, True, False, False]])
     assert set_valued_action_loss(good, mask) < set_valued_action_loss(bad, mask)
+
+
+def test_balanced_sampler_equalizes_phase_and_navigation_actions() -> None:
+    items = []
+    # Deliberately imbalanced raw data: 2 probes and navigation counts 1,2,3,4.
+    for _ in range(2):
+        items.append(
+            {
+                "phase_id": PHASE_INDEX["probe"],
+                "canonical_target_index": 0,
+            }
+        )
+    for action_index, count in enumerate((1, 2, 3, 4)):
+        for _ in range(count):
+            items.append(
+                {
+                    "phase_id": PHASE_INDEX["navigate"],
+                    "canonical_target_index": action_index,
+                }
+            )
+
+    weights, summary = balanced_sampling_weights(SimpleNamespace(items=items))
+    assert len(weights) == len(items)
+    assert math.isclose(summary["expected_probe_sampling_mass"], 0.5)
+    for mass in summary["expected_navigation_sampling_mass_by_action"].values():
+        assert math.isclose(mass, 0.125)
+    assert math.isclose(summary["total_sampling_mass"], 1.0)
