@@ -1,0 +1,19 @@
+{
+  "model_name": "openai-community/gpt2",
+  "data_dir": "arc_gpt2/data/stage0",
+  "output_dir": "outputs/arc-gpt2-stage0",
+  "seed": 42,
+  "max_length": 768,
+  "batch_size": 2,
+  "gradient_accumulation_steps": 2,
+  "learning_rate": 0.00008,
+  "weight_decay": 0.01,
+  "max_optimizer_steps": 96,
+  "warmup_steps": 8,
+  "freeze_first_n_blocks": 8,
+  "freeze_embeddings": true,
+  "add_protocol_tokens": false,
+  "max_train_records": 640,
+  "max_validation_records": 96,
+  "gradient_clip": 1.0
+}
