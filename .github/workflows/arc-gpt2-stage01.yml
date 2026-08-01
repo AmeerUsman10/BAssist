@@ -7,6 +7,7 @@ on:
       - "arcgpt2/stage01_hidden_action.py"
       - "arcgpt2/build_stage01_dataset.py"
       - "arcgpt2/train_stage01.py"
+      - "arcgpt2/train_stage01_balanced.py"
       - "arcgpt2/tests/test_stage01.py"
       - ".github/workflows/arc-gpt2-stage01.yml"
   workflow_dispatch:
@@ -39,7 +40,7 @@ jobs:
           python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
           python -m pip install "transformers>=4.48,<6" "safetensors>=0.4" pytest
 
-      - name: Run Stage-0.1 tests and overfit sanity gate
+      - name: Run Stage-0.1 tests and balanced overfit sanity gate
         id: experiment
         continue-on-error: true
         env:
@@ -95,7 +96,7 @@ jobs:
             )
             print(json.dumps({"source_rows": len(rows), "evaluation_rows": len(selected)}))
             PY
-            python -m arcgpt2.train_stage01 \
+            python -m arcgpt2.train_stage01_balanced \
               --initialization pretrained \
               --data-dir outputs/stage01/data \
               --train-file outputs/stage01/data/train.jsonl \
@@ -126,6 +127,8 @@ jobs:
           from pathlib import Path
           summary = json.loads(Path("outputs/stage01/overfit-pretrained/summary.json").read_text())
           print(json.dumps(summary["gates"], indent=2))
+          print(json.dumps(summary["sampling_design"], indent=2))
+          print(json.dumps(summary["realized_sample_counts"], indent=2))
           PY
 
       - name: Write durable Stage-0.1 receipt
@@ -162,7 +165,7 @@ jobs:
               "run_id": os.environ.get("GITHUB_RUN_ID"),
               "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
               "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
-              "scope": "Stage-0.1 eight-game synthetic overfit sanity; not ARC-AGI-3 evaluation",
+              "scope": "Stage-0.1 eight-game synthetic balanced overfit sanity; not ARC-AGI-3 evaluation",
           }
           (reports / "latest-status.json").write_text(
               json.dumps(receipt, indent=2), encoding="utf-8"
