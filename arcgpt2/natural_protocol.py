@@ -8,13 +8,23 @@ pretraining distribution. It adds no object, goal, or movement labels.
 
 from __future__ import annotations
 
-from typing import Iterable, Sequence
+from typing import Sequence
 
-from .codec import Grid, normalize_grid
+from .codec import normalize_grid
 from .phase0_hidden_action import Action, StepRecord
 
 
 _DIRECTION_WORDS = ("north", "south", "west", "east")
+_DIRECTION_ALIASES = {
+    "north": "north",
+    "south": "south",
+    "west": "west",
+    "east": "east",
+    "up": "north",
+    "down": "south",
+    "left": "west",
+    "right": "east",
+}
 
 
 def grid_text(grid: Sequence[Sequence[int]]) -> str:
@@ -114,12 +124,17 @@ def rotate_action_labels(records: Sequence[StepRecord]) -> tuple[Action, ...]:
     return tuple(rotation[record.action] for record in records)
 
 
-def answer_text(direction: str) -> str:
+def canonical_direction_word(direction: str) -> str:
     normalized = direction.strip().lower()
-    if normalized not in _DIRECTION_WORDS:
-        raise ValueError(f"invalid cardinal direction: {direction!r}")
+    try:
+        return _DIRECTION_ALIASES[normalized]
+    except KeyError as exc:
+        raise ValueError(f"invalid cardinal direction: {direction!r}") from exc
+
+
+def answer_text(direction: str) -> str:
     # Leading whitespace gives GPT-2 its ordinary word-boundary tokenization.
-    return " " + normalized
+    return " " + canonical_direction_word(direction)
 
 
 def direction_words() -> tuple[str, ...]:
