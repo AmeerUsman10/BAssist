@@ -6,7 +6,9 @@ on:
     paths:
       - "arcgpt2/build_program_dataset.py"
       - "arcgpt2/dsl.py"
+      - "arcgpt2/mapping_target.py"
       - "arcgpt2/train_program_induction.py"
+      - "arcgpt2/train_mapping_induction.py"
       - "arcgpt2/compare_program_induction.py"
       - "arcgpt2/tests/**"
       - ".github/workflows/arc-gpt2-program-smoke.yml"
@@ -38,7 +40,7 @@ jobs:
           python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
           python -m pip install "transformers>=4.48,<6" "safetensors>=0.4" pytest
 
-      - name: Run executable-program smoke experiment
+      - name: Run compact-mapping executable-program smoke experiment
         id: experiment
         continue-on-error: true
         env:
@@ -54,7 +56,7 @@ jobs:
               --validation-games 4 \
               --test-games 4 \
               --seed-base 31337
-            python -m arcgpt2.train_program_induction \
+            python -m arcgpt2.train_mapping_induction \
               --initialization pretrained \
               --data-dir outputs/program_induction/data \
               --output-dir outputs/program_induction/pretrained \
@@ -69,7 +71,7 @@ jobs:
               --candidate-batch-size 4 \
               --max-plan-depth 32 \
               --no-save-model
-            python -m arcgpt2.train_program_induction \
+            python -m arcgpt2.train_mapping_induction \
               --initialization random \
               --data-dir outputs/program_induction/data \
               --output-dir outputs/program_induction/random \
@@ -111,7 +113,7 @@ jobs:
               "commit_sha": os.environ.get("GITHUB_SHA"),
               "run_id": os.environ.get("GITHUB_RUN_ID"),
               "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
-              "scope": "CPU smoke-scale 24-program induction gate; not ARC-AGI-3 evaluation",
+              "scope": "CPU smoke-scale compact-mapping 24-program induction gate; not ARC-AGI-3 evaluation",
           }
           (reports / "latest-program-smoke-status.json").write_text(
               json.dumps(receipt, indent=2), encoding="utf-8"
