@@ -2,7 +2,7 @@ name: ARC-GPT2 Phase 0
 
 on:
   push:
-    branches: [arc-gpt2-only]
+    branches: [main, arc-gpt2-only]
     paths:
       - "arcgpt2/**"
       - ".github/workflows/arc-gpt2-phase0.yml"
