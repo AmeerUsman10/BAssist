@@ -1,0 +1,58 @@
+{
+  "unit_tests": {
+    "present": true,
+    "success_inferred": false,
+    "raw": {
+      "status": "failure",
+      "branch": "arc-gpt2-programs",
+      "commit_sha": "fc328456dfc11fa0debea43ab6dd9832fde08786",
+      "run_id": "30723497554",
+      "recorded_at_utc": "2026-08-01T23:31:43.551254+00:00",
+      "log": "\n==================================== ERRORS ====================================\n___ ERROR collecting arcgpt2/tests/test_epistemic_counterfactual_dataset.py ____\nImportError while importing test module '/home/runner/work/BAssist/BAssist/arcgpt2/tests/test_epistemic_counterfactual_dataset.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\narcgpt2/tests/test_epistemic_counterfactual_dataset.py:5: in <module>\n    from arcgpt2.build_epistemic_counterfactual_dataset import (\narcgpt2/build_epistemic_counterfactual_dataset.py:23: in <module>\n    from .build_epistemic_dataset import (\nE   ImportError: cannot import name 'ACTION_ORDER' from 'arcgpt2.build_epistemic_dataset' (/home/runner/work/BAssist/BAssist/arcgpt2/build_epistemic_dataset.py)\n=========================== short test summary info ============================\nERROR arcgpt2/tests/test_epistemic_counterfactual_dataset.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.36s\n"
+    }
+  },
+  "kaggle": {
+    "authenticated": false,
+    "new_token_probe": {
+      "workflow_outcome": "success",
+      "branch": "arc-gpt2-programs",
+      "commit_sha": "97ad25583a0a1a167a39ffe136343722fd59c98a",
+      "run_id": "30723012923",
+      "recorded_at_utc": "2026-08-01T23:16:44.261963+00:00",
+      "secret_present": false,
+      "authenticated": false,
+      "error_type": "MissingSecret",
+      "error_message": "GitHub secret KAGGLE_API_TOKEN is not configured."
+    },
+    "all_formats_probe": {
+      "workflow_outcome": "success",
+      "branch": "arc-gpt2-programs",
+      "commit_sha": "654df77e567bac7044121dcdf2afbb965cea4fd2",
+      "run_id": "30723424987",
+      "recorded_at_utc": "2026-08-01T23:29:32.519351+00:00",
+      "credential_presence": {
+        "KAGGLE_API_TOKEN": false,
+        "KAGGLE_USERNAME": false,
+        "KAGGLE_KEY": false,
+        "KAGGLE_TOKEN": false,
+        "KAGGLE_JSON_B64": false
+      },
+      "selected_format": null,
+      "authenticated": false,
+      "error_type": "RuntimeError",
+      "error_message": "No supported Kaggle credential secret is configured."
+    }
+  },
+  "epistemic": {
+    "workflow_outcome": "missing",
+    "comparison_status": "missing",
+    "status_present": false,
+    "comparison_present": false
+  },
+  "counterfactual_epistemic": {
+    "workflow_outcome": "failure",
+    "comparison_status": "missing",
+    "status_present": true,
+    "comparison_present": false
+  }
+}
