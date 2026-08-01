@@ -1,0 +1,9 @@
+{
+  "status": "failure",
+  "branch": "arc-gpt2-programs",
+  "commit_sha": "fccde03290c3aef5c76eeb9cddf765776e72b53e",
+  "run_id": "30723399504",
+  "run_attempt": "1",
+  "recorded_at_utc": "2026-08-01T23:29:22.302704+00:00",
+  "scope": "CPU smoke-scale counterfactual-twin set-valued action binding; not ARC-AGI-3 evaluation"
+}
