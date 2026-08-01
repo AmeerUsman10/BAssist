@@ -1,8 +1,8 @@
 {
-  "status": "failure",
+  "status": "success",
   "branch": "arc-gpt2-programs",
-  "commit_sha": "209d4908531e471bf43c9e0681364d13a730dcc2",
-  "run_id": "30723630886",
-  "recorded_at_utc": "2026-08-01T23:35:46.111709+00:00",
-  "log": "\n==================================== ERRORS ====================================\n___ ERROR collecting arcgpt2/tests/test_epistemic_counterfactual_dataset.py ____\nImportError while importing test module '/home/runner/work/BAssist/BAssist/arcgpt2/tests/test_epistemic_counterfactual_dataset.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\narcgpt2/tests/test_epistemic_counterfactual_dataset.py:5: in <module>\n    from arcgpt2.build_epistemic_counterfactual_dataset import (\narcgpt2/build_epistemic_counterfactual_dataset.py:23: in <module>\n    from .build_epistemic_dataset import (\nE   ImportError: cannot import name 'ACTION_ORDER' from 'arcgpt2.build_epistemic_dataset' (/home/runner/work/BAssist/BAssist/arcgpt2/build_epistemic_dataset.py)\n=========================== short test summary info ============================\nERROR arcgpt2/tests/test_epistemic_counterfactual_dataset.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.36s\n"
+  "commit_sha": "7b58ac31a830e50a781738ce8f5b9e66b0f96778",
+  "run_id": "30724101406",
+  "recorded_at_utc": "2026-08-01T23:50:43.002996+00:00",
+  "log": "........................................................................ [ 97%]\n..                                                                       [100%]\n74 passed in 5.29s\n"
 }
