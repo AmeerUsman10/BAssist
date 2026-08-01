@@ -1,0 +1,164 @@
+name: ARC-GPT2 Phase 0
+
+on:
+  push:
+    branches: [main, arc-gpt2-only]
+    paths:
+      - "arcgpt2/**"
+      - ".github/workflows/arc-gpt2-phase0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arc-gpt2-phase0
+  cancel-in-progress: true
+
+jobs:
+  phase0:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install "transformers>=4.48,<6" "safetensors>=0.4" pytest
+
+      - name: Run Phase-0 smoke experiment
+        id: experiment
+        continue-on-error: true
+        env:
+          TOKENIZERS_PARALLELISM: "false"
+          HF_HUB_DISABLE_TELEMETRY: "1"
+        run: |
+          set -o pipefail
+          {
+            python -m pytest -q arcgpt2/tests
+            python -m arcgpt2.build_phase0_dataset \
+              --output-dir outputs/phase0/data \
+              --train-games 64 \
+              --validation-games 12 \
+              --test-games 24 \
+              --seed-base 1729
+            python -m arcgpt2.train_phase0 \
+              --initialization pretrained \
+              --data-dir outputs/phase0/data \
+              --output-dir outputs/phase0/pretrained \
+              --max-length 640 \
+              --prefix-keep 192 \
+              --batch-size 2 \
+              --gradient-accumulation-steps 2 \
+              --max-optimizer-steps 40 \
+              --warmup-steps 4 \
+              --evaluation-games 12 \
+              --evaluation-seed-start 900000 \
+              --max-actions-per-game 64
+            python -m arcgpt2.train_phase0 \
+              --initialization random \
+              --data-dir outputs/phase0/data \
+              --output-dir outputs/phase0/random \
+              --max-length 640 \
+              --prefix-keep 192 \
+              --batch-size 2 \
+              --gradient-accumulation-steps 2 \
+              --max-optimizer-steps 40 \
+              --warmup-steps 4 \
+              --evaluation-games 12 \
+              --evaluation-seed-start 900000 \
+              --max-actions-per-game 64
+            python -m arcgpt2.compare_phase0 \
+              --pretrained outputs/phase0/pretrained/summary.json \
+              --random outputs/phase0/random/summary.json \
+              --output outputs/phase0/comparison.json
+          } 2>&1 | tee phase0.log
+
+      - name: Remove large model copies from smoke run
+        if: always()
+        run: |
+          rm -rf outputs/phase0/pretrained/model outputs/phase0/random/model
+
+      - name: Write execution receipt
+        if: always()
+        env:
+          EXPERIMENT_OUTCOME: ${{ steps.experiment.outcome }}
+        run: |
+          mkdir -p reports/arcgpt2
+          python - <<'PY'
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          reports = Path("reports/arcgpt2")
+          outputs = Path("outputs/phase0")
+          outcome = os.environ.get("EXPERIMENT_OUTCOME", "unknown")
+          receipt = {
+              "status": outcome,
+              "repository": os.environ.get("GITHUB_REPOSITORY"),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "scope": "smoke-scale Phase-0 hidden-action experiment; not ARC-AGI-3 evaluation",
+          }
+          (reports / "latest-phase0-status.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          copies = {
+              outputs / "data" / "manifest.json": reports / "latest-phase0-data-manifest.json",
+              outputs / "pretrained" / "summary.json": reports / "latest-phase0-pretrained.json",
+              outputs / "random" / "summary.json": reports / "latest-phase0-random.json",
+              outputs / "comparison.json": reports / "latest-phase0-comparison.json",
+          }
+          for source, target in copies.items():
+              if source.exists():
+                  shutil.copy2(source, target)
+          log_path = Path("phase0.log")
+          if log_path.exists():
+              lines = log_path.read_text(encoding="utf-8", errors="replace").splitlines()
+              (reports / "latest-phase0-log-tail.txt").write_text(
+                  "\n".join(lines[-500:]) + "\n", encoding="utf-8"
+              )
+          PY
+
+      - name: Publish execution receipt
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/arcgpt2/
+          git commit -m "Record ARC-GPT2 Phase-0 run ${GITHUB_RUN_ID}" || true
+          git push
+
+      - name: Upload Phase-0 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arc-gpt2-phase0-evidence
+          path: |
+            reports/arcgpt2/
+            outputs/phase0/data/manifest.json
+            outputs/phase0/pretrained/summary.json
+            outputs/phase0/random/summary.json
+            outputs/phase0/comparison.json
+            phase0.log
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Propagate experiment failure
+        if: steps.experiment.outcome != 'success'
+        run: exit 1
