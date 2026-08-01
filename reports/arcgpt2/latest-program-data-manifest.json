@@ -1,0 +1,30 @@
+{
+  "schema": "arcgpt2.program_induction.phase0.v1",
+  "scope": "Four-probe exact induction over the 24 hidden movement mappings; controlled gate, not an ARC-AGI-3 score.",
+  "seed_base": 31337,
+  "special_tokens_file": "special_tokens.json",
+  "special_tokens_sha256": "9a9afa598af2ca7a031bc2601926e7534cefe02c75d2ede0eb277b7c02530129",
+  "splits": {
+    "test": {
+      "file": "test.jsonl",
+      "games": 4,
+      "seed_start": 31357,
+      "seed_stop_exclusive": 31361,
+      "sha256": "6d0d5fc5bd5ee54dd9b2441f64348897f51c310315b3c55f41f22174b2c36b17"
+    },
+    "train": {
+      "file": "train.jsonl",
+      "games": 16,
+      "seed_start": 31337,
+      "seed_stop_exclusive": 31353,
+      "sha256": "fd66d78956e0031fb5e35f3aef8d689fdc141e86ac1e96cc7613897c15e83f16"
+    },
+    "validation": {
+      "file": "validation.jsonl",
+      "games": 4,
+      "seed_start": 31353,
+      "seed_stop_exclusive": 31357,
+      "sha256": "66b17a527d9a44a8e46c620e26141b97811cab721eca4487462f3d977c0aa6b8"
+    }
+  }
+}

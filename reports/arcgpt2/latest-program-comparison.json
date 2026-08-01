@@ -1,0 +1,210 @@
+{
+  "status": "not_yet_passed",
+  "scope": "Finite 24-program Phase-0 gate. Passing is evidence for executable program induction, not an ARC-AGI-3 score.",
+  "gates": {
+    "full_exact_program_accuracy_at_least_0_70": false,
+    "history_exact_accuracy_gain_at_least_0_40": false,
+    "shuffled_history_drop_at_least_0_30": false,
+    "pretrained_beats_random_exact_accuracy": false,
+    "full_downstream_level_completion_at_least_0_70": false,
+    "history_improves_downstream_completion": false
+  },
+  "deltas": {
+    "full_minus_amnesic_exact_program_accuracy": 0.0,
+    "full_minus_shuffled_exact_program_accuracy": 0.0,
+    "pretrained_minus_random_full_exact_program_accuracy": 0.0,
+    "full_minus_amnesic_downstream_level_completion": 0.0
+  },
+  "pretrained": {
+    "initial_full": {
+      "mode": "full",
+      "games": 1,
+      "exact_programs": 0,
+      "exact_program_accuracy": 0.0,
+      "mean_action_mapping_accuracy": 0.5,
+      "mean_truth_rank": 2.0,
+      "mean_truth_probability": 0.04322398081421852,
+      "downstream_games_won": 0,
+      "downstream_game_win_rate": 0.0,
+      "downstream_levels_completed": 0,
+      "downstream_level_completion_rate": 0.0,
+      "traces": [
+        {
+          "game_seed": 31357,
+          "selected_program_sha256": "6867cfb91559456aa3fbbac9769d578f74b71e7b8ae2c8c7130e4825e6b3d9f6",
+          "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
+          "exact": false,
+          "mapping_accuracy": 0.5,
+          "truth_rank": 2,
+          "truth_probability": 0.04322398081421852,
+          "downstream": {
+            "game_won": false,
+            "levels_completed": 0,
+            "actions_taken_including_probes": 7,
+            "plans": [
+              [
+                "A3",
+                "A4",
+                "A4"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "full": {
+      "mode": "full",
+      "games": 1,
+      "exact_programs": 0,
+      "exact_program_accuracy": 0.0,
+      "mean_action_mapping_accuracy": 0.5,
+      "mean_truth_rank": 2.0,
+      "mean_truth_probability": 0.0433049239218235,
+      "downstream_games_won": 0,
+      "downstream_game_win_rate": 0.0,
+      "downstream_levels_completed": 0,
+      "downstream_level_completion_rate": 0.0,
+      "traces": [
+        {
+          "game_seed": 31357,
+          "selected_program_sha256": "6867cfb91559456aa3fbbac9769d578f74b71e7b8ae2c8c7130e4825e6b3d9f6",
+          "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
+          "exact": false,
+          "mapping_accuracy": 0.5,
+          "truth_rank": 2,
+          "truth_probability": 0.0433049239218235,
+          "downstream": {
+            "game_won": false,
+            "levels_completed": 0,
+            "actions_taken_including_probes": 7,
+            "plans": [
+              [
+                "A3",
+                "A4",
+                "A4"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "amnesic": {
+      "mode": "amnesic",
+      "games": 1,
+      "exact_programs": 0,
+      "exact_program_accuracy": 0.0,
+      "mean_action_mapping_accuracy": 0.5,
+      "mean_truth_rank": 2.0,
+      "mean_truth_probability": 0.043105509132146835,
+      "downstream_games_won": 0,
+      "downstream_game_win_rate": 0.0,
+      "downstream_levels_completed": 0,
+      "downstream_level_completion_rate": 0.0,
+      "traces": [
+        {
+          "game_seed": 31357,
+          "selected_program_sha256": "6867cfb91559456aa3fbbac9769d578f74b71e7b8ae2c8c7130e4825e6b3d9f6",
+          "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
+          "exact": false,
+          "mapping_accuracy": 0.5,
+          "truth_rank": 2,
+          "truth_probability": 0.043105509132146835,
+          "downstream": {
+            "game_won": false,
+            "levels_completed": 0,
+            "actions_taken_including_probes": 7,
+            "plans": [
+              [
+                "A3",
+                "A4",
+                "A4"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "shuffled": {
+      "mode": "shuffled",
+      "games": 1,
+      "exact_programs": 0,
+      "exact_program_accuracy": 0.0,
+      "mean_action_mapping_accuracy": 0.5,
+      "mean_truth_rank": 2.0,
+      "mean_truth_probability": 0.04330490157008171,
+      "downstream_games_won": 0,
+      "downstream_game_win_rate": 0.0,
+      "downstream_levels_completed": 0,
+      "downstream_level_completion_rate": 0.0,
+      "traces": [
+        {
+          "game_seed": 31357,
+          "selected_program_sha256": "6867cfb91559456aa3fbbac9769d578f74b71e7b8ae2c8c7130e4825e6b3d9f6",
+          "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
+          "exact": false,
+          "mapping_accuracy": 0.5,
+          "truth_rank": 2,
+          "truth_probability": 0.04330490157008171,
+          "downstream": {
+            "game_won": false,
+            "levels_completed": 0,
+            "actions_taken_including_probes": 7,
+            "plans": [
+              [
+                "A3",
+                "A4",
+                "A4"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "validation_loss": {
+      "initial": 2.3520187735557556,
+      "final": 2.0245099663734436
+    }
+  },
+  "random_initialization": {
+    "full": {
+      "mode": "full",
+      "games": 1,
+      "exact_programs": 0,
+      "exact_program_accuracy": 0.0,
+      "mean_action_mapping_accuracy": 0.25,
+      "mean_truth_rank": 18.0,
+      "mean_truth_probability": 0.04159705340862274,
+      "downstream_games_won": 0,
+      "downstream_game_win_rate": 0.0,
+      "downstream_levels_completed": 0,
+      "downstream_level_completion_rate": 0.0,
+      "traces": [
+        {
+          "game_seed": 31357,
+          "selected_program_sha256": "9d0be62ff6f13e336bb0e6be96bab31a38833acd919f06749b4a026dcb4c62f5",
+          "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
+          "exact": false,
+          "mapping_accuracy": 0.25,
+          "truth_rank": 18,
+          "truth_probability": 0.04159705340862274,
+          "downstream": {
+            "game_won": false,
+            "levels_completed": 0,
+            "actions_taken_including_probes": 7,
+            "plans": [
+              [
+                "A1",
+                "A1",
+                "A4"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "validation_loss": {
+      "initial": 10.89085340499878,
+      "final": 9.005423545837402
+    }
+  }
+}
