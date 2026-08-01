@@ -1,7 +1,7 @@
 {
-  "status": "failure",
-  "commit_sha": "29ca067dc768c68c200326b8718ece4a9f22d0eb",
-  "run_id": "30722583799",
-  "recorded_at_utc": "2026-08-01T23:04:06.468230+00:00",
-  "log": "\n==================================== ERRORS ====================================\n________________ ERROR collecting arcgpt2/tests/test_stage01.py ________________\nImportError while importing test module '/home/runner/work/BAssist/BAssist/arcgpt2/tests/test_stage01.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\narcgpt2/tests/test_stage01.py:5: in <module>\n    import torch\nE   ModuleNotFoundError: No module named 'torch'\n=========================== short test summary info ============================\nERROR arcgpt2/tests/test_stage01.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.15s\n"
+  "status": "success",
+  "commit_sha": "0492e79fb848f0ca632599c548a59d4b3cfb1392",
+  "run_id": "30722653454",
+  "recorded_at_utc": "2026-08-01T23:06:48.211381+00:00",
+  "log": "....................                                                     [100%]\n20 passed in 3.99s\n"
 }
