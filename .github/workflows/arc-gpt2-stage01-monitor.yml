@@ -24,7 +24,7 @@ jobs:
         run: |
           mkdir -p reports/arcgpt2-stage01
           gh api \
-            "repos/${GITHUB_REPOSITORY}/actions/workflows/arc-gpt2-stage01.yml/runs?per_page=3" \
+            "repos/${GITHUB_REPOSITORY}/actions/workflows/arc-gpt2-stage01.yml/runs?per_page=5" \
             --jq '{queried_at: now | todate, runs: [.workflow_runs[] | {id, run_number, run_attempt, event, status, conclusion, head_sha, created_at, updated_at, html_url}]}' \
             > reports/arcgpt2-stage01/latest-monitor.json
           cat reports/arcgpt2-stage01/latest-monitor.json
