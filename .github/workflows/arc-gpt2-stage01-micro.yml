@@ -1,0 +1,143 @@
+name: ARC-GPT2 Stage 0.1 Micro Overfit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/arc-gpt2-stage01-micro.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arc-gpt2-stage01-micro
+  cancel-in-progress: true
+
+jobs:
+  micro-overfit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install "transformers>=4.48,<6" "safetensors>=0.4" pytest
+
+      - name: Run one-game overfit diagnostic
+        id: experiment
+        continue-on-error: true
+        env:
+          TOKENIZERS_PARALLELISM: "false"
+          HF_HUB_DISABLE_TELEMETRY: "1"
+          PYTHONHASHSEED: "42"
+        run: |
+          set -o errexit -o nounset -o pipefail
+          exec > >(tee stage01-micro.log) 2>&1
+          python -m pytest -q arcgpt2/tests/test_stage01.py arcgpt2/tests/test_stage01_sampling.py
+          python -m arcgpt2.build_stage01_dataset \
+            --output-dir outputs/stage01-micro/data \
+            --train-games 1 \
+            --validation-games 1 \
+            --test-games 1 \
+            --seed-base 1729
+          python -m arcgpt2.sample_stage01_eval \
+            --input outputs/stage01-micro/data/train.jsonl \
+            --output outputs/stage01-micro/data/eval.jsonl \
+            --limit 384 \
+            --seed 42
+          python -m arcgpt2.train_stage01_balanced \
+            --initialization pretrained \
+            --data-dir outputs/stage01-micro/data \
+            --train-file outputs/stage01-micro/data/train.jsonl \
+            --evaluation-file outputs/stage01-micro/data/eval.jsonl \
+            --output-dir outputs/stage01-micro/pretrained \
+            --max-length 384 \
+            --prefix-keep 128 \
+            --train-batch-size 2 \
+            --eval-batch-size 8 \
+            --gradient-accumulation-steps 2 \
+            --learning-rate 2e-4 \
+            --max-optimizer-steps 60 \
+            --warmup-steps 4 \
+            --freeze-first-n-blocks 10 \
+            --evaluation-games 1 \
+            --evaluation-seed-start 1729 \
+            --max-actions-per-game 48 \
+            --history-modes intact amnesic shuffled
+
+      - name: Write durable micro receipt
+        if: always()
+        env:
+          EXPERIMENT_OUTCOME: ${{ steps.experiment.outcome }}
+        run: |
+          mkdir -p reports/arcgpt2-stage01-micro
+          python - <<'PY'
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          reports = Path("reports/arcgpt2-stage01-micro")
+          summary_path = Path("outputs/stage01-micro/pretrained/summary.json")
+          summary = None
+          if summary_path.exists():
+              summary = json.loads(summary_path.read_text(encoding="utf-8"))
+              shutil.copy2(summary_path, reports / "latest-summary.json")
+          receipt = {
+              "execution_status": os.environ.get("EXPERIMENT_OUTCOME", "unknown"),
+              "capability_gate": (
+                  "passed"
+                  if summary and summary.get("gates", {}).get("overfit_sanity_passed")
+                  else "not_yet_passed" if summary else "not_evaluated"
+              ),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "scope": "one-game Stage-0.1 micro overfit diagnostic; not an ARC score",
+          }
+          (reports / "latest-status.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          log = Path("stage01-micro.log")
+          if log.exists():
+              lines = log.read_text(encoding="utf-8", errors="replace").splitlines()
+              (reports / "latest-log-tail.txt").write_text(
+                  "\n".join(lines[-500:]) + "\n", encoding="utf-8"
+              )
+          PY
+
+      - name: Publish micro receipt
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/arcgpt2-stage01-micro/
+          git commit -m "Record ARC-GPT2 Stage-0.1 micro run ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload micro evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arc-gpt2-stage01-micro-evidence
+          path: |
+            reports/arcgpt2-stage01-micro/
+            stage01-micro.log
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Propagate execution failure
+        if: steps.experiment.outcome != 'success'
+        run: exit 1
