@@ -1,0 +1,164 @@
+name: Pure GPT-2 ARC Stage 0
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "arc_gpt2/__init__.py"
+      - "arc_gpt2/protocol.py"
+      - "arc_gpt2/world.py"
+      - "arc_gpt2/generate_data.py"
+      - "arc_gpt2/train.py"
+      - "arc_gpt2/evaluate.py"
+      - "arc_gpt2/requirements.txt"
+      - "arc_gpt2/configs/stage0.json"
+      - "arc_gpt2/tests/test_core.py"
+      - ".github/workflows/arc-gpt2-stage0.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pure-gpt2-arc-stage0
+  cancel-in-progress: true
+
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: arc_gpt2/requirements.txt
+
+      - name: Install CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install -r arc_gpt2/requirements.txt
+
+      - name: Run the complete Stage-0 experiment
+        id: stage0
+        continue-on-error: true
+        env:
+          TOKENIZERS_PARALLELISM: "false"
+          HF_HUB_DISABLE_TELEMETRY: "1"
+        run: |
+          set -o pipefail
+          {
+            python -m pytest arc_gpt2/tests -q
+            rm -rf arc_gpt2/data/stage0 outputs/arc-gpt2-stage0
+            python arc_gpt2/generate_data.py \
+              --output-dir arc_gpt2/data/stage0 \
+              --train-episodes 64 \
+              --val-episodes 12 \
+              --test-episodes 12 \
+              --seed 1729 \
+              --max-steps 32
+            python arc_gpt2/train.py --config arc_gpt2/configs/stage0.json
+            python arc_gpt2/evaluate.py \
+              --model-dir outputs/arc-gpt2-stage0 \
+              --data-dir arc_gpt2/data/stage0 \
+              --output reports/arc_gpt2/stage0-evaluation.json \
+              --teacher-forced-records 48 \
+              --closed-loop-episodes 4 \
+              --max-steps 20 \
+              --max-new-tokens 192
+          } 2>&1 | tee arc-gpt2-stage0.log
+
+      - name: Verify successful outputs
+        if: steps.stage0.outcome == 'success'
+        run: |
+          test -f outputs/arc-gpt2-stage0/model.safetensors
+          test -f outputs/arc-gpt2-stage0/training_summary.json
+          test -f reports/arc_gpt2/stage0-evaluation.json
+          du -sh outputs/arc-gpt2-stage0
+          cat outputs/arc-gpt2-stage0/training_summary.json
+          cat reports/arc_gpt2/stage0-evaluation.json
+
+      - name: Upload full Stage-0 checkpoint
+        if: steps.stage0.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: pure-gpt2-arc-stage0-model
+          path: outputs/arc-gpt2-stage0/
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
+
+      - name: Upload dataset and execution log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pure-gpt2-arc-stage0-evidence
+          path: |
+            arc_gpt2/data/stage0/
+            arc-gpt2-stage0.log
+            reports/arc_gpt2/
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Write durable execution receipt
+        if: always()
+        env:
+          STAGE0_OUTCOME: ${{ steps.stage0.outcome }}
+        run: |
+          mkdir -p reports/arc_gpt2
+          python - <<'PY'
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          report_dir = Path("reports/arc_gpt2")
+          outcome = os.environ.get("STAGE0_OUTCOME", "unknown")
+          receipt = {
+              "status": outcome,
+              "research_constraint": "one GPT2LMHeadModel; no other learned model",
+              "repository": os.environ.get("GITHUB_REPOSITORY"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+              "workflow": os.environ.get("GITHUB_WORKFLOW"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "model_artifact": (
+                  "pure-gpt2-arc-stage0-model" if outcome == "success" else None
+              ),
+              "evidence_artifact": "pure-gpt2-arc-stage0-evidence",
+          }
+          (report_dir / "latest-status.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          summary = Path("outputs/arc-gpt2-stage0/training_summary.json")
+          if summary.exists():
+              shutil.copy2(summary, report_dir / "latest-training-summary.json")
+          log_path = Path("arc-gpt2-stage0.log")
+          if log_path.exists():
+              lines = log_path.read_text(encoding="utf-8", errors="replace").splitlines()
+              (report_dir / "latest-log-tail.txt").write_text(
+                  "\n".join(lines[-500:]) + "\n", encoding="utf-8"
+              )
+          PY
+
+      - name: Publish compact evidence to the repository
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/arc_gpt2/
+          git commit -m "Record pure GPT-2 ARC Stage-0 run ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Propagate experiment failure
+        if: steps.stage0.outcome != 'success'
+        run: exit 1
