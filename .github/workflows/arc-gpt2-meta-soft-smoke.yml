@@ -8,6 +8,8 @@ on:
       - "arcgpt2/meta_soft_binding.py"
       - "arcgpt2/soft_belief.py"
       - "arcgpt2/belief_math.py"
+      - "arcgpt2/build_epistemic_counterfactual_dataset.py"
+      - "arcgpt2/build_epistemic_dataset.py"
       - ".github/workflows/arc-gpt2-meta-soft-smoke.yml"
 
 permissions:
