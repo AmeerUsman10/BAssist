@@ -1,0 +1,147 @@
+name: Pure GPT-2 ARC v0
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "arc_gpt2_pure/**"
+      - "!arc_gpt2_pure/reports/**"
+      - ".github/workflows/arc-gpt2-pure.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pure-gpt2-arc-v0
+  cancel-in-progress: true
+
+jobs:
+  verify-train-evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: arc_gpt2_pure/pyproject.toml
+
+      - name: Install CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install "numpy>=1.26,<3" "transformers>=4.48,<6" "safetensors>=0.4" "pytest>=8.2,<9"
+          python -m pip install -e arc_gpt2_pure --no-deps
+
+      - name: Test, generate curriculum, train, and evaluate
+        id: experiment
+        continue-on-error: true
+        env:
+          HF_HUB_DISABLE_TELEMETRY: "1"
+          TOKENIZERS_PARALLELISM: "false"
+          PYTHONHASHSEED: "42"
+        run: |
+          set -o pipefail
+          {
+            cd arc_gpt2_pure
+            python -m pytest
+            python -m arc_gpt2.curriculum \
+              --train-out data/train.jsonl \
+              --eval-out data/eval.jsonl \
+              --train-episodes 256 \
+              --eval-episodes 64 \
+              --train-seed 100000 \
+              --eval-seed 900000
+            python -m arc_gpt2.train \
+              --model openai-community/gpt2 \
+              --train-file data/train.jsonl \
+              --eval-file data/eval.jsonl \
+              --output-dir outputs/gpt2-arc-v0 \
+              --max-length 512 \
+              --batch-size 2 \
+              --gradient-accumulation-steps 4 \
+              --max-steps 24 \
+              --learning-rate 5e-5 \
+              --freeze-first-n-blocks 10 \
+              --eval-episodes 16 \
+              --seed 42
+          } 2>&1 | tee arc_gpt2_pure/experiment.log
+
+      - name: Verify model package
+        if: steps.experiment.outcome == 'success'
+        run: |
+          test -f arc_gpt2_pure/outputs/gpt2-arc-v0/model.safetensors
+          test -f arc_gpt2_pure/outputs/gpt2-arc-v0/experiment_summary.json
+          du -sh arc_gpt2_pure/outputs/gpt2-arc-v0
+          cat arc_gpt2_pure/outputs/gpt2-arc-v0/experiment_summary.json
+
+      - name: Upload trained GPT-2 checkpoint
+        if: steps.experiment.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: pure-gpt2-arc-v0
+          path: arc_gpt2_pure/outputs/gpt2-arc-v0/
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
+
+      - name: Write durable execution receipt
+        if: always()
+        env:
+          EXPERIMENT_OUTCOME: ${{ steps.experiment.outcome }}
+        run: |
+          mkdir -p arc_gpt2_pure/reports
+          python - <<'PY'
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          root = Path("arc_gpt2_pure")
+          reports = root / "reports"
+          output = root / "outputs" / "gpt2-arc-v0"
+          outcome = os.environ.get("EXPERIMENT_OUTCOME", "unknown")
+          receipt = {
+              "status": outcome,
+              "repository": os.environ.get("GITHUB_REPOSITORY"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+              "workflow": os.environ.get("GITHUB_WORKFLOW"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "artifact": "pure-gpt2-arc-v0" if outcome == "success" else None,
+              "claim_scope": "synthetic hidden-action v0; not an ARC-AGI-3 public score",
+          }
+          (reports / "latest-status.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          summary = output / "experiment_summary.json"
+          if summary.exists():
+              shutil.copy2(summary, reports / "latest-experiment-summary.json")
+          log = root / "experiment.log"
+          if log.exists():
+              lines = log.read_text(encoding="utf-8", errors="replace").splitlines()
+              (reports / "latest-log-tail.txt").write_text(
+                  "\n".join(lines[-500:]) + "\n", encoding="utf-8"
+              )
+          PY
+
+      - name: Publish execution receipt
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add arc_gpt2_pure/reports/
+          git commit -m "Record pure GPT-2 ARC run ${GITHUB_RUN_ID}" || true
+          git push
+
+      - name: Propagate experiment failure
+        if: steps.experiment.outcome != 'success'
+        run: exit 1
