@@ -1,0 +1,74 @@
+name: Train GPT-2
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "train_gpt2.py"
+      - "requirements.txt"
+      - "data/train.jsonl"
+      - ".github/workflows/train-gpt2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gpt2-training
+  cancel-in-progress: false
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Record runner resources
+        run: |
+          python --version
+          python - <<'PY'
+          import os
+          import platform
+          import torch
+          print("platform:", platform.platform())
+          print("cpu_count:", os.cpu_count())
+          print("torch:", torch.__version__)
+          print("cuda_available:", torch.cuda.is_available())
+          PY
+
+      - name: Fine-tune and evaluate GPT-2
+        env:
+          TOKENIZERS_PARALLELISM: "false"
+          HF_HUB_DISABLE_TELEMETRY: "1"
+        run: python train_gpt2.py
+
+      - name: Verify output package
+        run: |
+          test -f outputs/gpt2-tuned/model.safetensors
+          test -f outputs/gpt2-tuned/training_summary.json
+          test -f outputs/gpt2-tuned/sample_comparison.txt
+          du -sh outputs/gpt2-tuned
+          cat outputs/gpt2-tuned/training_summary.json
+
+      - name: Upload tuned model
+        uses: actions/upload-artifact@v4
+        with:
+          name: gpt2-tuned-model
+          path: outputs/gpt2-tuned/
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 0
