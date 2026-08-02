@@ -28,13 +28,14 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          # arc-agi 0.9.9 explicitly requires Python >=3.12.
+          python-version: "3.12"
           cache: pip
 
       - name: Install official toolkit
         run: |
           python -m pip install --upgrade pip
-          python -m pip install "arc-agi>=0.9.9,<1"
+          python -m pip install --only-binary=:all: "arc-agi>=0.9.9,<1"
 
       - name: Probe two public environments with anonymous development access
         id: probe
