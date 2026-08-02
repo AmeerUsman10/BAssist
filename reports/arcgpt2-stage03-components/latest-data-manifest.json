@@ -1,0 +1,100 @@
+{
+  "purity": "offline labels only; at inference the same GPT-2 must perceive raw transitions, read goal direction, and compose actions",
+  "schema": "arcgpt2.stage03.components.v1",
+  "scope": "synthetic component diagnostics for one GPT-2; fixed palette, no walls, explicit component questions; not an ARC-AGI-3 score",
+  "splits": {
+    "test": {
+      "file": "test.jsonl",
+      "games": 8,
+      "rows": 448,
+      "sha256": "c56533cd47dbe4ca2fcfc70cca6340b36a3de7edfd7b0db1b1aed3e00ac19210",
+      "task_counts": {
+        "compose": 64,
+        "direct": 64,
+        "mapping": 256,
+        "need": 64
+      },
+      "task_target_counts": {
+        "compose:1": 21,
+        "compose:2": 14,
+        "compose:3": 14,
+        "compose:4": 15,
+        "direct:1": 21,
+        "direct:2": 14,
+        "direct:3": 14,
+        "direct:4": 15,
+        "mapping:E": 64,
+        "mapping:N": 64,
+        "mapping:S": 64,
+        "mapping:W": 64,
+        "need:E": 10,
+        "need:N": 22,
+        "need:S": 21,
+        "need:W": 11
+      },
+      "variants_per_game": 8
+    },
+    "train": {
+      "file": "train.jsonl",
+      "games": 24,
+      "rows": 1344,
+      "sha256": "cb7e3d24c0194b7fb3ef8b7d7d887af6ae6f69bb2636e40ffc8469635b51b725",
+      "task_counts": {
+        "compose": 192,
+        "direct": 192,
+        "mapping": 768,
+        "need": 192
+      },
+      "task_target_counts": {
+        "compose:1": 46,
+        "compose:2": 50,
+        "compose:3": 49,
+        "compose:4": 47,
+        "direct:1": 46,
+        "direct:2": 50,
+        "direct:3": 49,
+        "direct:4": 47,
+        "mapping:E": 192,
+        "mapping:N": 192,
+        "mapping:S": 192,
+        "mapping:W": 192,
+        "need:E": 32,
+        "need:N": 64,
+        "need:S": 64,
+        "need:W": 32
+      },
+      "variants_per_game": 8
+    },
+    "validation": {
+      "file": "validation.jsonl",
+      "games": 8,
+      "rows": 448,
+      "sha256": "d7b3b13641ad70291c4075def038e7f63f6cc9a9345f06bca811c9e3d6d0d4b8",
+      "task_counts": {
+        "compose": 64,
+        "direct": 64,
+        "mapping": 256,
+        "need": 64
+      },
+      "task_target_counts": {
+        "compose:1": 20,
+        "compose:2": 16,
+        "compose:3": 15,
+        "compose:4": 13,
+        "direct:1": 20,
+        "direct:2": 16,
+        "direct:3": 15,
+        "direct:4": 13,
+        "mapping:E": 64,
+        "mapping:N": 64,
+        "mapping:S": 64,
+        "mapping:W": 64,
+        "need:E": 11,
+        "need:N": 21,
+        "need:S": 21,
+        "need:W": 11
+      },
+      "variants_per_game": 8
+    }
+  }
+}

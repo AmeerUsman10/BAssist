@@ -1,0 +1,98 @@
+{
+  "status": "completed",
+  "scope": "Stage-0.3 synthetic isolated GPT-2 components; not a closed-loop agent and not an ARC-AGI-3 score",
+  "components": {
+    "mapping": {
+      "train_examples": 768,
+      "validation_examples": 256,
+      "initial_loss": 1.656533122062683,
+      "final_loss": 1.3898581266403198,
+      "initial_accuracy": 0.25,
+      "final_accuracy": 0.25,
+      "predicted_counts": {
+        "N": 256
+      },
+      "target_counts": {
+        "E": 64,
+        "N": 64,
+        "S": 64,
+        "W": 64
+      },
+      "dominant_prediction_share": 1.0,
+      "prediction_distribution_entropy": 0.0,
+      "elapsed_seconds": 1197.5602152347565
+    },
+    "need": {
+      "train_examples": 192,
+      "validation_examples": 64,
+      "initial_loss": 1.3666308522224426,
+      "final_loss": 1.3733700513839722,
+      "initial_accuracy": 0.328125,
+      "final_accuracy": 0.34375,
+      "predicted_counts": {
+        "E": 32,
+        "W": 32
+      },
+      "target_counts": {
+        "E": 11,
+        "N": 21,
+        "S": 21,
+        "W": 11
+      },
+      "dominant_prediction_share": 0.5,
+      "prediction_distribution_entropy": 0.43067655807339306,
+      "elapsed_seconds": 524.3649587631226
+    },
+    "compose": {
+      "train_examples": 192,
+      "validation_examples": 64,
+      "initial_loss": 1.501390278339386,
+      "final_loss": 1.4007660746574402,
+      "initial_accuracy": 0.3125,
+      "final_accuracy": 0.25,
+      "predicted_counts": {
+        "2": 64
+      },
+      "target_counts": {
+        "1": 20,
+        "2": 16,
+        "3": 15,
+        "4": 13
+      },
+      "dominant_prediction_share": 1.0,
+      "prediction_distribution_entropy": 0.0,
+      "elapsed_seconds": 155.77832174301147
+    },
+    "direct": {
+      "train_examples": 192,
+      "validation_examples": 64,
+      "initial_loss": 1.4365798234939575,
+      "final_loss": 1.3845239281654358,
+      "initial_accuracy": 0.3125,
+      "final_accuracy": 0.25,
+      "predicted_counts": {
+        "2": 64
+      },
+      "target_counts": {
+        "1": 20,
+        "2": 16,
+        "3": 15,
+        "4": 13
+      },
+      "dominant_prediction_share": 1.0,
+      "prediction_distribution_entropy": 0.0,
+      "elapsed_seconds": 946.194634437561
+    }
+  },
+  "gates": {
+    "mapping_accuracy_at_least_0.90": false,
+    "mapping_not_collapsed": false,
+    "need_accuracy_at_least_0.90": false,
+    "need_not_collapsed": true,
+    "compose_accuracy_at_least_0.98": false,
+    "compose_not_collapsed": false,
+    "direct_accuracy_at_least_0.90": false,
+    "direct_not_collapsed": false,
+    "stage03_component_gate_passed": false
+  }
+}
