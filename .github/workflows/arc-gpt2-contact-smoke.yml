@@ -1,0 +1,168 @@
+name: ARC-GPT2 Contact Mechanics Smoke
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [arc-gpt2-programs]
+    paths:
+      - "arcgpt2/mechanics_v2.py"
+      - "arcgpt2/primitive_contact_game.py"
+      - "arcgpt2/contact_protocol.py"
+      - "arcgpt2/build_contact_version_dataset.py"
+      - "arcgpt2/train_contact_version.py"
+      - "arcgpt2/compare_contact_version.py"
+      - "arcgpt2/tests/test_mechanics_v2.py"
+      - "arcgpt2/tests/test_primitive_contact_game.py"
+      - "arcgpt2/tests/test_contact_version_dataset.py"
+      - ".github/workflows/arc-gpt2-contact-smoke.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arc-gpt2-contact-smoke-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      TOKENIZERS_PARALLELISM: "false"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install "transformers>=4.48,<6" "safetensors>=0.4" pytest
+
+      - name: Run matched hidden-contact smoke
+        id: experiment
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          {
+            python -m pytest -q arcgpt2/tests
+            python -m arcgpt2.build_contact_version_dataset \
+              --output-dir outputs/contact_smoke/data \
+              --train-groups 2 \
+              --validation-groups 1 \
+              --test-groups 1 \
+              --seed-base 2718281
+            python -m arcgpt2.train_contact_version \
+              --initialization pretrained \
+              --data-dir outputs/contact_smoke/data \
+              --output-dir outputs/contact_smoke/pretrained \
+              --max-length 512 \
+              --prefix-keep 96 \
+              --gradient-accumulation-steps 1 \
+              --learning-rate 0.0001 \
+              --max-optimizer-steps 2 \
+              --warmup-steps 1 \
+              --freeze-first-n-blocks 11 \
+              --candidate-batch-size 5 \
+              --evaluation-groups 1 \
+              --no-save-model
+            python -m arcgpt2.train_contact_version \
+              --initialization random \
+              --data-dir outputs/contact_smoke/data \
+              --output-dir outputs/contact_smoke/random \
+              --max-length 512 \
+              --prefix-keep 96 \
+              --gradient-accumulation-steps 1 \
+              --learning-rate 0.0001 \
+              --max-optimizer-steps 2 \
+              --warmup-steps 1 \
+              --freeze-first-n-blocks 11 \
+              --candidate-batch-size 5 \
+              --evaluation-groups 1 \
+              --no-save-model
+            python -m arcgpt2.compare_contact_version \
+              --pretrained outputs/contact_smoke/pretrained/summary.json \
+              --random outputs/contact_smoke/random/summary.json \
+              --output outputs/contact_smoke/comparison.json
+          } 2>&1 | tee contact-smoke.log
+
+      - name: Write durable evidence
+        if: always()
+        env:
+          EXPERIMENT_OUTCOME: ${{ steps.experiment.outcome }}
+        run: |
+          mkdir -p reports/arcgpt2
+          python - <<'PY'
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          reports = Path("reports/arcgpt2")
+          outputs = Path("outputs/contact_smoke")
+          receipt = {
+              "status": os.environ.get("EXPERIMENT_OUTCOME", "unknown"),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "scope": (
+                  "CPU smoke for set-valued hidden contact mechanics; "
+                  "controlled Gate C, not ARC-AGI-3 evaluation"
+              ),
+          }
+          (reports / "latest-contact-smoke-status.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          copies = {
+              outputs / "data" / "manifest.json": reports / "latest-contact-smoke-data.json",
+              outputs / "pretrained" / "summary.json": reports / "latest-contact-smoke-pretrained.json",
+              outputs / "random" / "summary.json": reports / "latest-contact-smoke-random.json",
+              outputs / "comparison.json": reports / "latest-contact-smoke-comparison.json",
+          }
+          for source, target in copies.items():
+              if source.exists():
+                  shutil.copy2(source, target)
+          log = Path("contact-smoke.log")
+          if log.exists():
+              lines = log.read_text(encoding="utf-8", errors="replace").splitlines()
+              (reports / "latest-contact-smoke-log-tail.txt").write_text(
+                  "\n".join(lines[-1600:]) + "\n", encoding="utf-8"
+              )
+          PY
+
+      - name: Publish evidence
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/arcgpt2/
+          git commit -m "Record GPT-2 contact-mechanics smoke ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload evidence artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arc-gpt2-contact-smoke-evidence
+          path: |
+            reports/arcgpt2/
+            outputs/contact_smoke/data/manifest.json
+            outputs/contact_smoke/pretrained/summary.json
+            outputs/contact_smoke/random/summary.json
+            outputs/contact_smoke/comparison.json
+            contact-smoke.log
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Propagate failure
+        if: steps.experiment.outcome != 'success'
+        run: exit 1
