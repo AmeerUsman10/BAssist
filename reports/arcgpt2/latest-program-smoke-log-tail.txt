@@ -1,36 +1,41 @@
-.................................................................FF..... [ 75%]
-........................                                                 [100%]
-=================================== FAILURES ===================================
-______ test_probe_counterfactuals_cover_all_four_distinct_cardinal_moves _______
+........................................................................ [ 69%]
+...............................                                          [100%]
+103 passed in 9.80s
+{
+  "schema": "arcgpt2.program_induction.phase0.v2",
+  "scope": "Four-probe induction over 24 hidden movement mappings with compact atomic targets and exact DSL expansion; controlled gate, not an ARC-AGI-3 score.",
+  "seed_base": 31337,
+  "special_tokens_file": "special_tokens.json",
+  "special_tokens_sha256": "4dff94a235babda0a4c31fd70a88c889e66b7b3bcfe02a75b06f36a2d8de444b",
+  "splits": {
+    "test": {
+      "file": "test.jsonl",
+      "games": 4,
+      "seed_start": 31357,
+      "seed_stop_exclusive": 31361,
+      "sha256": "58b5a520fdd35b17cdd47704b9c7459feab140aa956f4ff92654e856ab299388"
+    },
+    "train": {
+      "file": "train.jsonl",
+      "games": 16,
+      "seed_start": 31337,
+      "seed_stop_exclusive": 31353,
+      "sha256": "611e30c53331e86d7d65cce705890e3a04e0923599410a584a50396094b6fb5c"
+    },
+    "validation": {
+      "file": "validation.jsonl",
+      "games": 4,
+      "seed_start": 31353,
+      "seed_stop_exclusive": 31357,
+      "sha256": "dcff53fe27fbf98a56062108e7905d133ad0d78702395b0ad54a0bdfe41077d2"
+    }
+  },
+  "target": "<MAP> <A1> <DIRECTION> ... <A4> <DIRECTION> </MAP>"
+}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 
-    def test_probe_counterfactuals_cover_all_four_distinct_cardinal_moves() -> None:
-        spec, record = _first_probe(130_001)
-        moving, background, source = infer_probe_colors(record)
->       assert moving == spec.palette.agent
-E       AssertionError: assert 3 == 0
-E        +  where 0 = Palette(background=3, wall=11, agent=0, goal=1).agent
-E        +    where Palette(background=3, wall=11, agent=0, goal=1) = GameSpec(game_seed=130001, action_to_direction={<Action.A1: 'A1'>: <Direction.RIGHT: 'RIGHT'>, <Action.A2: 'A2'>: <Dir... start=(2, 3), goal=(6, 6))), probe_order=(<Action.A3: 'A3'>, <Action.A1: 'A1'>, <Action.A2: 'A2'>, <Action.A4: 'A4'>)).palette
-
-arcgpt2/tests/test_meta_soft_contrastive.py:20: AssertionError
-______________ test_exact_observation_selects_one_counterfactual _______________
-
-    def test_exact_observation_selects_one_counterfactual() -> None:
-        _, record = _first_probe(130_002)
-        candidates = counterfactual_probe_records(record)
-        matching = [candidate for candidate in candidates if candidate.after == record.after]
-        assert len(matching) == 1
-        texts = [outcome_only_target(candidate) for candidate in candidates]
->       assert len(set(texts)) == 4
-E       AssertionError: assert 2 == 4
-E        +  where 2 = len({'\nExactly 2 grid cells changed:\n- Row 2, column 1 changed from color 3 to color 7.\n- Row 2, column 2 changed from ...ronment reported a terminal success: no.', '\nNo grid cell changed.\nThe environment reported a terminal success: no.'})
-E        +    where {'\nExactly 2 grid cells changed:\n- Row 2, column 1 changed from color 3 to color 7.\n- Row 2, column 2 changed from ...ronment reported a terminal success: no.', '\nNo grid cell changed.\nThe environment reported a terminal success: no.'} = set(['\nNo grid cell changed.\nThe environment reported a terminal success: no.', '\nNo grid cell changed.\nThe environmen...r 3 to color 7.\n- Row 2, column 2 changed from color 7 to color 3.\nThe environment reported a terminal success: no.'])
-
-arcgpt2/tests/test_meta_soft_contrastive.py:38: AssertionError
-=========================== short test summary info ============================
-FAILED arcgpt2/tests/test_meta_soft_contrastive.py::test_probe_counterfactuals_cover_all_four_distinct_cardinal_moves - AssertionError: assert 3 == 0
- +  where 0 = Palette(background=3, wall=11, agent=0, goal=1).agent
- +    where Palette(background=3, wall=11, agent=0, goal=1) = GameSpec(game_seed=130001, action_to_direction={<Action.A1: 'A1'>: <Direction.RIGHT: 'RIGHT'>, <Action.A2: 'A2'>: <Dir... start=(2, 3), goal=(6, 6))), probe_order=(<Action.A3: 'A3'>, <Action.A1: 'A1'>, <Action.A2: 'A2'>, <Action.A4: 'A4'>)).palette
-FAILED arcgpt2/tests/test_meta_soft_contrastive.py::test_exact_observation_selects_one_counterfactual - AssertionError: assert 2 == 4
- +  where 2 = len({'\nExactly 2 grid cells changed:\n- Row 2, column 1 changed from color 3 to color 7.\n- Row 2, column 2 changed from ...ronment reported a terminal success: no.', '\nNo grid cell changed.\nThe environment reported a terminal success: no.'})
- +    where {'\nExactly 2 grid cells changed:\n- Row 2, column 1 changed from color 3 to color 7.\n- Row 2, column 2 changed from ...ronment reported a terminal success: no.', '\nNo grid cell changed.\nThe environment reported a terminal success: no.'} = set(['\nNo grid cell changed.\nThe environment reported a terminal success: no.', '\nNo grid cell changed.\nThe environmen...r 3 to color 7.\n- Row 2, column 2 changed from color 7 to color 3.\nThe environment reported a terminal success: no.'])
-2 failed, 94 passed in 7.73s
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 28157.35it/s]
+[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+{"step": 1, "max_steps": 8, "loss": 8.495745658874512, "learning_rate": 5e-05, "device": "cpu", "elapsed_seconds": 3.566880464553833}
