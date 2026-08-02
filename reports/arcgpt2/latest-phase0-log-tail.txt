@@ -1,5 +1,5 @@
-.......................                                                  [100%]
-23 passed in 3.94s
+................................                                         [100%]
+32 passed in 5.61s
 {
   "schema": "arcgpt2.phase0.v2",
   "seed_base": 1729,
@@ -50,7 +50,10 @@
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 
 Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
-Loading weights: 100%|██████████| 148/148 [00:00<00:00, 27662.97it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 27119.13it/s]
 [transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
 [transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (1055 > 1024). Running this sequence through the model will result in indexing errors
 [transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+{"step": 1, "max_steps": 20, "loss": 17.738722, "learning_rate": 5e-05, "elapsed_seconds": 9.54, "device": "cpu"}
+{"step": 10, "max_steps": 20, "loss": 13.157746, "learning_rate": 2.777777777777778e-05, "elapsed_seconds": 100.65, "device": "cpu"}
+{"step": 20, "max_steps": 20, "loss": 12.143152, "learning_rate": 2.5e-06, "elapsed_seconds": 208.66, "device": "cpu"}
