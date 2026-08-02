@@ -1,0 +1,105 @@
+{
+  "status": "not_yet_passed",
+  "scope": "Atomic latent-goal information-use gate under known mechanics. A pass is not ARC-AGI-3 completion.",
+  "informative_terminal_count": 1,
+  "gates": {
+    "full_consistent_mass_at_least_0_50": false,
+    "full_map_is_consistent_at_least_0_60": false,
+    "history_gain_at_least_0_20": false,
+    "terminal_report_gain_at_least_0_20": false,
+    "shuffled_status_drop_at_least_0_15": false,
+    "pretrained_beats_random_consistent_mass": false,
+    "held_out_terminal_accuracy_at_least_0_80": true,
+    "validation_set_cross_entropy_improves": true
+  },
+  "deltas": {
+    "full_minus_amnesic_consistent_mass": -0.0038338080048561096,
+    "full_minus_statusless_consistent_mass": 0.0017372965812683105,
+    "full_minus_shuffled_status_consistent_mass": 0.00013283640146255493,
+    "pretrained_minus_random_consistent_mass": -0.03955603390932083
+  },
+  "pretrained": {
+    "initial_validation": {
+      "set_cross_entropy": 2.247190819846259,
+      "mean_brier": 0.2606188865999381,
+      "examples": 9.0
+    },
+    "final_validation": {
+      "set_cross_entropy": 2.212858941819933,
+      "mean_brier": 0.2532370450596015,
+      "examples": 9.0
+    },
+    "full": {
+      "rows": 2.0,
+      "consistent_mass": 0.23778324574232101,
+      "map_consistent": 0.0,
+      "truth_probability": 0.07838699221611023,
+      "truth_rank": 7.0,
+      "entropy_bits": 2.9166502952575684,
+      "set_cross_entropy": 2.192107677459717,
+      "brier": 0.4014071077108383,
+      "held_out_rows": 2.0,
+      "held_out_terminal_accuracy": 0.8541666666666667
+    },
+    "amnesic": {
+      "rows": 2.0,
+      "consistent_mass": 0.24161705374717712,
+      "map_consistent": 0.0,
+      "truth_probability": 0.07884132862091064,
+      "truth_rank": 7.0,
+      "entropy_bits": 2.908524513244629,
+      "set_cross_entropy": 2.1778500080108643,
+      "brier": 0.398904412984848,
+      "held_out_rows": 2.0,
+      "held_out_terminal_accuracy": 0.8541666666666667
+    },
+    "statusless": {
+      "rows": 2.0,
+      "consistent_mass": 0.2360459491610527,
+      "map_consistent": 0.0,
+      "truth_probability": 0.07914866879582405,
+      "truth_rank": 7.0,
+      "entropy_bits": 2.919044017791748,
+      "set_cross_entropy": 2.1963343620300293,
+      "brier": 0.4027642458677292,
+      "held_out_rows": 2.0,
+      "held_out_terminal_accuracy": 0.8541666666666667
+    },
+    "shuffled_status": {
+      "rows": 2.0,
+      "consistent_mass": 0.23765040934085846,
+      "map_consistent": 0.0,
+      "truth_probability": 0.07822302356362343,
+      "truth_rank": 7.0,
+      "entropy_bits": 2.916143774986267,
+      "set_cross_entropy": 2.193002462387085,
+      "brier": 0.40162405371665955,
+      "held_out_rows": 2.0,
+      "held_out_terminal_accuracy": 0.8541666666666667
+    }
+  },
+  "random_initialization": {
+    "initial_validation": {
+      "set_cross_entropy": 2.067135360505846,
+      "mean_brier": 0.2192654203988948,
+      "examples": 9.0
+    },
+    "final_validation": {
+      "set_cross_entropy": 2.058051109313965,
+      "mean_brier": 0.21697497773372257,
+      "examples": 9.0
+    },
+    "full": {
+      "rows": 2.0,
+      "consistent_mass": 0.27733927965164185,
+      "map_consistent": 1.0,
+      "truth_probability": 0.14446109533309937,
+      "truth_rank": 1.0,
+      "entropy_bits": 2.9961167573928833,
+      "set_cross_entropy": 1.9765547513961792,
+      "brier": 0.348347470164299,
+      "held_out_rows": 2.0,
+      "held_out_terminal_accuracy": 1.0
+    }
+  }
+}
