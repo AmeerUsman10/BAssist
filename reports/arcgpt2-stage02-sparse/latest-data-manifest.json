@@ -1,0 +1,136 @@
+{
+  "claim_scope": "synthetic fixed-palette no-wall hidden-action curriculum; not an ARC-AGI-3 public or private score",
+  "contexts_per_game": 129,
+  "labels": [
+    "N",
+    "E",
+    "S",
+    "W",
+    "?",
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "purity": "one standard GPT-2 is queried for mapping, need, composition, and direct action; deterministic code only serializes, masks labels, copies answers, executes actions, and scores offline truth",
+  "schema": "arcgpt2.stage02.decomposed-natural.v1",
+  "splits": {
+    "test": {
+      "contexts": 258,
+      "direct_decision_phase_counts": {
+        "navigate": 96,
+        "probe": 162
+      },
+      "file": "test.jsonl",
+      "games": 2,
+      "rows": 1806,
+      "seed_start": 20,
+      "seed_stop_exclusive": 22,
+      "sha256": "715412d59b5f8ee4db5e0b3cc2049ecbf23c269bd37cf2cb0c28e0e64a7fc192",
+      "task_counts": {
+        "compose": 258,
+        "direct": 258,
+        "mapping": 1032,
+        "need": 258
+      },
+      "task_target_counts": {
+        "compose:1": 86,
+        "compose:2": 68,
+        "compose:3": 56,
+        "compose:4": 48,
+        "direct:1": 86,
+        "direct:2": 68,
+        "direct:3": 56,
+        "direct:4": 48,
+        "mapping:?": 248,
+        "mapping:E": 196,
+        "mapping:N": 196,
+        "mapping:S": 196,
+        "mapping:W": 196,
+        "need:?": 162,
+        "need:E": 24,
+        "need:N": 24,
+        "need:S": 24,
+        "need:W": 24
+      }
+    },
+    "train": {
+      "contexts": 516,
+      "direct_decision_phase_counts": {
+        "navigate": 192,
+        "probe": 324
+      },
+      "file": "train.jsonl",
+      "games": 4,
+      "rows": 3612,
+      "seed_start": 0,
+      "seed_stop_exclusive": 4,
+      "sha256": "cd6fbf5ce20227532befd3b31bf11838f3e06a97c310418d0116f31ce1621ac1",
+      "task_counts": {
+        "compose": 516,
+        "direct": 516,
+        "mapping": 2064,
+        "need": 516
+      },
+      "task_target_counts": {
+        "compose:1": 172,
+        "compose:2": 136,
+        "compose:3": 112,
+        "compose:4": 96,
+        "direct:1": 172,
+        "direct:2": 136,
+        "direct:3": 112,
+        "direct:4": 96,
+        "mapping:?": 496,
+        "mapping:E": 392,
+        "mapping:N": 392,
+        "mapping:S": 392,
+        "mapping:W": 392,
+        "need:?": 324,
+        "need:E": 48,
+        "need:N": 48,
+        "need:S": 48,
+        "need:W": 48
+      }
+    },
+    "validation": {
+      "contexts": 129,
+      "direct_decision_phase_counts": {
+        "navigate": 48,
+        "probe": 81
+      },
+      "file": "validation.jsonl",
+      "games": 1,
+      "rows": 903,
+      "seed_start": 8,
+      "seed_stop_exclusive": 9,
+      "sha256": "236f5addcae7b6bf7fb321591dc309c2eaf738ec3f3eb955135bfbe6399dfdb6",
+      "task_counts": {
+        "compose": 129,
+        "direct": 129,
+        "mapping": 516,
+        "need": 129
+      },
+      "task_target_counts": {
+        "compose:1": 43,
+        "compose:2": 34,
+        "compose:3": 28,
+        "compose:4": 24,
+        "direct:1": 43,
+        "direct:2": 34,
+        "direct:3": 28,
+        "direct:4": 24,
+        "mapping:?": 124,
+        "mapping:E": 98,
+        "mapping:N": 98,
+        "mapping:S": 98,
+        "mapping:W": 98,
+        "need:?": 81,
+        "need:E": 12,
+        "need:N": 12,
+        "need:S": 12,
+        "need:W": 12
+      }
+    }
+  }
+}
