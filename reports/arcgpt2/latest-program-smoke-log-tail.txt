@@ -1,500 +1,81 @@
-      "exact_program_accuracy": 0.0,
-      "mean_action_mapping_accuracy": 0.5,
-      "mean_truth_rank": 9.0,
-      "mean_truth_probability": 0.041667502373456955,
-      "downstream_games_won": 0,
-      "downstream_game_win_rate": 0.0,
-      "downstream_levels_completed": 0,
-      "downstream_level_completion_rate": 0.0,
-      "traces": [
-        {
-          "game_seed": 31357,
-          "selected_program_sha256": "aaa920abf338f2e6bc36d5ddab8cae6c52ff9c3334fa9c5f30a618fca0f387d6",
-          "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
-          "exact": false,
-          "mapping_accuracy": 0.5,
-          "truth_rank": 9,
-          "truth_probability": 0.041667502373456955,
-          "downstream": {
-            "game_won": false,
-            "levels_completed": 0,
-            "actions_taken_including_probes": 7,
-            "plans": [
-              [
-                "A1",
-                "A1",
-                "A4"
-              ]
-            ]
-          }
-        }
-      ]
-    },
-    "amnesic": {
-      "mode": "amnesic",
-      "games": 1,
-      "exact_programs": 0,
-      "exact_program_accuracy": 0.0,
-      "mean_action_mapping_accuracy": 0.5,
-      "mean_truth_rank": 4.0,
-      "mean_truth_probability": 0.04166726395487785,
-      "downstream_games_won": 0,
-      "downstream_game_win_rate": 0.0,
-      "downstream_levels_completed": 0,
-      "downstream_level_completion_rate": 0.0,
-      "traces": [
-        {
-          "game_seed": 31357,
-          "selected_program_sha256": "d2006b89ad134ea7213a11d6d31e7043e161e528dd96264f50e25041dc1a6a96",
-          "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
-          "exact": false,
-          "mapping_accuracy": 0.5,
-          "truth_rank": 4,
-          "truth_probability": 0.04166726395487785,
-          "downstream": {
-            "game_won": false,
-            "levels_completed": 0,
-            "actions_taken_including_probes": 7,
-            "plans": [
-              [
-                "A1",
-                "A3",
-                "A3"
-              ]
-            ]
-          }
-        }
-      ]
-    },
-    "shuffled": {
-      "mode": "shuffled",
-      "games": 1,
-      "exact_programs": 0,
-      "exact_program_accuracy": 0.0,
-      "mean_action_mapping_accuracy": 0.5,
-      "mean_truth_rank": 8.0,
-      "mean_truth_probability": 0.04166761413216591,
-      "downstream_games_won": 0,
-      "downstream_game_win_rate": 0.0,
-      "downstream_levels_completed": 0,
-      "downstream_level_completion_rate": 0.0,
-      "traces": [
-        {
-          "game_seed": 31357,
-          "selected_program_sha256": "aaa920abf338f2e6bc36d5ddab8cae6c52ff9c3334fa9c5f30a618fca0f387d6",
-          "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
-          "exact": false,
-          "mapping_accuracy": 0.5,
-          "truth_rank": 8,
-          "truth_probability": 0.04166761413216591,
-          "downstream": {
-            "game_won": false,
-            "levels_completed": 0,
-            "actions_taken_including_probes": 7,
-            "plans": [
-              [
-                "A1",
-                "A1",
-                "A4"
-              ]
-            ]
-          }
-        }
-      ]
-    }
-  },
-  "elapsed_seconds": 59.38154649734497
-}
-[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
-[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
-{"step": 1, "max_steps": 8, "loss": 11.105966091156006, "learning_rate": 5e-05, "device": "cpu", "elapsed_seconds": 3.369694948196411}
-{
-  "status": "completed",
-  "scope": "Finite-family Phase-0 ARC-DSL induction; not ARC-AGI-3 evaluation.",
-  "config": {
-    "model_name": "openai-community/gpt2",
-    "initialization": "random",
-    "data_dir": "outputs/program_induction/data",
-    "output_dir": "outputs/program_induction/random",
-    "seed": 42,
-    "max_length": 512,
-    "prefix_keep": 128,
-    "batch_size": 1,
-    "gradient_accumulation_steps": 2,
-    "learning_rate": 5e-05,
-    "weight_decay": 0.01,
-    "max_optimizer_steps": 8,
-    "warmup_steps": 1,
-    "freeze_first_n_blocks": 10,
-    "evaluation_games": 1,
-    "candidate_batch_size": 4,
-    "max_plan_depth": 32,
-    "save_model": false
-  },
-  "device": "cpu",
-  "train_examples": 16,
-  "validation_examples": 4,
-  "test_examples": 4,
-  "trainable_parameters": 54089472,
-  "total_parameters": 124968192,
-  "initial_validation_loss": 11.103660821914673,
-  "final_validation_loss": 7.153891324996948,
-  "mean_training_loss": 8.969570249319077,
-  "initial_full_selection": {
-    "mode": "full",
-    "games": 1,
-    "exact_programs": 0,
-    "exact_program_accuracy": 0.0,
-    "mean_action_mapping_accuracy": 0.0,
-    "mean_truth_rank": 19.0,
-    "mean_truth_probability": 0.04166664928197861,
-    "downstream_games_won": 0,
-    "downstream_game_win_rate": 0.0,
-    "downstream_levels_completed": 0,
-    "downstream_level_completion_rate": 0.0,
-    "traces": [
-      {
-        "game_seed": 31357,
-        "selected_program_sha256": "00cc5f66fcd3f625c87d8a4050b84ecc846385ef9568ee389430f2acbb37eb9d",
-        "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
-        "exact": false,
-        "mapping_accuracy": 0.0,
-        "truth_rank": 19,
-        "truth_probability": 0.04166664928197861,
-        "downstream": {
-          "game_won": false,
-          "levels_completed": 0,
-          "actions_taken_including_probes": 7,
-          "plans": [
-            [
-              "A1",
-              "A1",
-              "A2"
-            ]
-          ]
-        }
-      }
-    ]
-  },
-  "controls": {
-    "full": {
-      "mode": "full",
-      "games": 1,
-      "exact_programs": 0,
-      "exact_program_accuracy": 0.0,
-      "mean_action_mapping_accuracy": 0.5,
-      "mean_truth_rank": 3.0,
-      "mean_truth_probability": 0.04166926443576813,
-      "downstream_games_won": 0,
-      "downstream_game_win_rate": 0.0,
-      "downstream_levels_completed": 0,
-      "downstream_level_completion_rate": 0.0,
-      "traces": [
-        {
-          "game_seed": 31357,
-          "selected_program_sha256": "aaa920abf338f2e6bc36d5ddab8cae6c52ff9c3334fa9c5f30a618fca0f387d6",
-          "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
-          "exact": false,
-          "mapping_accuracy": 0.5,
-          "truth_rank": 3,
-          "truth_probability": 0.04166926443576813,
-          "downstream": {
-            "game_won": false,
-            "levels_completed": 0,
-            "actions_taken_including_probes": 7,
-            "plans": [
-              [
-                "A1",
-                "A1",
-                "A4"
-              ]
-            ]
-          }
-        }
-      ]
-    },
-    "amnesic": {
-      "mode": "amnesic",
-      "games": 1,
-      "exact_programs": 0,
-      "exact_program_accuracy": 0.0,
-      "mean_action_mapping_accuracy": 0.25,
-      "mean_truth_rank": 14.0,
-      "mean_truth_probability": 0.04166656732559204,
-      "downstream_games_won": 0,
-      "downstream_game_win_rate": 0.0,
-      "downstream_levels_completed": 0,
-      "downstream_level_completion_rate": 0.0,
-      "traces": [
-        {
-          "game_seed": 31357,
-          "selected_program_sha256": "5af7fbdc655c047e18fcc3310758186b161fb4aa4cae79ba1b3a0c21682f896a",
-          "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
-          "exact": false,
-          "mapping_accuracy": 0.25,
-          "truth_rank": 14,
-          "truth_probability": 0.04166656732559204,
-          "downstream": {
-            "game_won": false,
-            "levels_completed": 0,
-            "actions_taken_including_probes": 7,
-            "plans": [
-              [
-                "A1",
-                "A4",
-                "A4"
-              ]
-            ]
-          }
-        }
-      ]
-    },
-    "shuffled": {
-      "mode": "shuffled",
-      "games": 1,
-      "exact_programs": 0,
-      "exact_program_accuracy": 0.0,
-      "mean_action_mapping_accuracy": 0.5,
-      "mean_truth_rank": 3.0,
-      "mean_truth_probability": 0.04166926443576813,
-      "downstream_games_won": 0,
-      "downstream_game_win_rate": 0.0,
-      "downstream_levels_completed": 0,
-      "downstream_level_completion_rate": 0.0,
-      "traces": [
-        {
-          "game_seed": 31357,
-          "selected_program_sha256": "aaa920abf338f2e6bc36d5ddab8cae6c52ff9c3334fa9c5f30a618fca0f387d6",
-          "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
-          "exact": false,
-          "mapping_accuracy": 0.5,
-          "truth_rank": 3,
-          "truth_probability": 0.04166926443576813,
-          "downstream": {
-            "game_won": false,
-            "levels_completed": 0,
-            "actions_taken_including_probes": 7,
-            "plans": [
-              [
-                "A1",
-                "A1",
-                "A4"
-              ]
-            ]
-          }
-        }
-      ]
-    }
-  },
-  "elapsed_seconds": 58.67000150680542
-}
-{
-  "status": "not_yet_passed",
-  "scope": "Finite 24-program Phase-0 gate. Passing is evidence for executable program induction, not an ARC-AGI-3 score.",
-  "gates": {
-    "full_exact_program_accuracy_at_least_0_70": false,
-    "history_exact_accuracy_gain_at_least_0_40": false,
-    "shuffled_history_drop_at_least_0_30": false,
-    "pretrained_beats_random_exact_accuracy": false,
-    "full_downstream_level_completion_at_least_0_70": false,
-    "history_improves_downstream_completion": false
-  },
-  "deltas": {
-    "full_minus_amnesic_exact_program_accuracy": 0.0,
-    "full_minus_shuffled_exact_program_accuracy": 0.0,
-    "pretrained_minus_random_full_exact_program_accuracy": 0.0,
-    "full_minus_amnesic_downstream_level_completion": 0.0
-  },
-  "pretrained": {
-    "initial_full": {
-      "mode": "full",
-      "games": 1,
-      "exact_programs": 0,
-      "exact_program_accuracy": 0.0,
-      "mean_action_mapping_accuracy": 0.0,
-      "mean_truth_rank": 13.0,
-      "mean_truth_probability": 0.04166664928197861,
-      "downstream_games_won": 0,
-      "downstream_game_win_rate": 0.0,
-      "downstream_levels_completed": 0,
-      "downstream_level_completion_rate": 0.0,
-      "traces": [
-        {
-          "game_seed": 31357,
-          "selected_program_sha256": "4606264540288e0381e0cfa79f97e95e0bff02451a335d9728e7341d2b42a5c8",
-          "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
-          "exact": false,
-          "mapping_accuracy": 0.0,
-          "truth_rank": 13,
-          "truth_probability": 0.04166664928197861,
-          "downstream": {
-            "game_won": false,
-            "levels_completed": 0,
-            "actions_taken_including_probes": 7,
-            "plans": [
-              [
-                "A1",
-                "A1",
-                "A3"
-              ]
-            ]
-          }
-        }
-      ]
-    },
-    "full": {
-      "mode": "full",
-      "games": 1,
-      "exact_programs": 0,
-      "exact_program_accuracy": 0.0,
-      "mean_action_mapping_accuracy": 0.5,
-      "mean_truth_rank": 9.0,
-      "mean_truth_probability": 0.041667502373456955,
-      "downstream_games_won": 0,
-      "downstream_game_win_rate": 0.0,
-      "downstream_levels_completed": 0,
-      "downstream_level_completion_rate": 0.0,
-      "traces": [
-        {
-          "game_seed": 31357,
-          "selected_program_sha256": "aaa920abf338f2e6bc36d5ddab8cae6c52ff9c3334fa9c5f30a618fca0f387d6",
-          "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
-          "exact": false,
-          "mapping_accuracy": 0.5,
-          "truth_rank": 9,
-          "truth_probability": 0.041667502373456955,
-          "downstream": {
-            "game_won": false,
-            "levels_completed": 0,
-            "actions_taken_including_probes": 7,
-            "plans": [
-              [
-                "A1",
-                "A1",
-                "A4"
-              ]
-            ]
-          }
-        }
-      ]
-    },
-    "amnesic": {
-      "mode": "amnesic",
-      "games": 1,
-      "exact_programs": 0,
-      "exact_program_accuracy": 0.0,
-      "mean_action_mapping_accuracy": 0.5,
-      "mean_truth_rank": 4.0,
-      "mean_truth_probability": 0.04166726395487785,
-      "downstream_games_won": 0,
-      "downstream_game_win_rate": 0.0,
-      "downstream_levels_completed": 0,
-      "downstream_level_completion_rate": 0.0,
-      "traces": [
-        {
-          "game_seed": 31357,
-          "selected_program_sha256": "d2006b89ad134ea7213a11d6d31e7043e161e528dd96264f50e25041dc1a6a96",
-          "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
-          "exact": false,
-          "mapping_accuracy": 0.5,
-          "truth_rank": 4,
-          "truth_probability": 0.04166726395487785,
-          "downstream": {
-            "game_won": false,
-            "levels_completed": 0,
-            "actions_taken_including_probes": 7,
-            "plans": [
-              [
-                "A1",
-                "A3",
-                "A3"
-              ]
-            ]
-          }
-        }
-      ]
-    },
-    "shuffled": {
-      "mode": "shuffled",
-      "games": 1,
-      "exact_programs": 0,
-      "exact_program_accuracy": 0.0,
-      "mean_action_mapping_accuracy": 0.5,
-      "mean_truth_rank": 8.0,
-      "mean_truth_probability": 0.04166761413216591,
-      "downstream_games_won": 0,
-      "downstream_game_win_rate": 0.0,
-      "downstream_levels_completed": 0,
-      "downstream_level_completion_rate": 0.0,
-      "traces": [
-        {
-          "game_seed": 31357,
-          "selected_program_sha256": "aaa920abf338f2e6bc36d5ddab8cae6c52ff9c3334fa9c5f30a618fca0f387d6",
-          "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
-          "exact": false,
-          "mapping_accuracy": 0.5,
-          "truth_rank": 8,
-          "truth_probability": 0.04166761413216591,
-          "downstream": {
-            "game_won": false,
-            "levels_completed": 0,
-            "actions_taken_including_probes": 7,
-            "plans": [
-              [
-                "A1",
-                "A1",
-                "A4"
-              ]
-            ]
-          }
-        }
-      ]
-    },
-    "validation_loss": {
-      "initial": 9.043181896209717,
-      "final": 7.370583653450012
-    }
-  },
-  "random_initialization": {
-    "full": {
-      "mode": "full",
-      "games": 1,
-      "exact_programs": 0,
-      "exact_program_accuracy": 0.0,
-      "mean_action_mapping_accuracy": 0.5,
-      "mean_truth_rank": 3.0,
-      "mean_truth_probability": 0.04166926443576813,
-      "downstream_games_won": 0,
-      "downstream_game_win_rate": 0.0,
-      "downstream_levels_completed": 0,
-      "downstream_level_completion_rate": 0.0,
-      "traces": [
-        {
-          "game_seed": 31357,
-          "selected_program_sha256": "aaa920abf338f2e6bc36d5ddab8cae6c52ff9c3334fa9c5f30a618fca0f387d6",
-          "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
-          "exact": false,
-          "mapping_accuracy": 0.5,
-          "truth_rank": 3,
-          "truth_probability": 0.04166926443576813,
-          "downstream": {
-            "game_won": false,
-            "levels_completed": 0,
-            "actions_taken_including_probes": 7,
-            "plans": [
-              [
-                "A1",
-                "A1",
-                "A4"
-              ]
-            ]
-          }
-        }
-      ]
-    },
-    "validation_loss": {
-      "initial": 11.103660821914673,
-      "final": 7.153891324996948
-    }
-  }
-}
+.............................FFFF....................................... [ 60%]
+...............................................                          [100%]
+=================================== FAILURES ===================================
+___________ test_contact_world_posterior_starts_with_all_120_worlds ____________
+
+    def test_contact_world_posterior_starts_with_all_120_worlds() -> None:
+        spec = generate_contact_game(400_001)
+        entries = build_contact_worlds(spec, (), None, UniformContactScores())
+        assert len(entries) == 24 * len(ContactMode)
+>       assert sum(entry.probability for entry in entries) == 1.0
+E       assert 0.9999999999999989 == 1.0
+E        +  where 0.9999999999999989 = sum(<generator object test_contact_world_posterior_starts_with_all_120_worlds.<locals>.<genexpr> at 0x7f6d39132f60>)
+
+arcgpt2/tests/test_contact_world_agent.py:42: AssertionError
+_______________ test_uniform_contact_agent_solves_held_out_games _______________
+
+    def test_uniform_contact_agent_solves_held_out_games() -> None:
+        for seed in range(20):
+            spec = generate_contact_game(400_100 + seed)
+            result = run_contact_agent(
+                spec,
+                UniformContactScores(),
+                max_actions=192,
+                planner_depth=2,
+            )
+>           assert result.won
+E           AssertionError: assert False
+E            +  where False = ContactAgentResult(won=False, levels_completed=0, actions=192, steps=(ContactAgentStep(action_number=1, level_index=0,...'fracture', posterior_worlds=5, posterior_entropy_bits=2.321928094887362, information_gain_bits=0.0, status='ACTIVE'))).won
+
+arcgpt2/tests/test_contact_world_agent.py:54: AssertionError
+_____________ test_exact_replay_overcomes_a_confident_wrong_prior ______________
+
+    def test_exact_replay_overcomes_a_confident_wrong_prior() -> None:
+        for seed in range(8):
+            spec = generate_contact_game(400_200 + seed)
+            result = run_contact_agent(
+                spec,
+                WrongConfidentContactScores(),
+                max_actions=192,
+                planner_depth=2,
+            )
+>           assert result.won
+E           AssertionError: assert False
+E            +  where False = ContactAgentResult(won=False, levels_completed=0, actions=192, steps=(ContactAgentStep(action_number=1, level_index=0,...worlds=5, posterior_entropy_bits=0.017400878581551017, information_gain_bits=-6.349087922075114e-16, status='ACTIVE'))).won
+
+arcgpt2/tests/test_contact_world_agent.py:70: AssertionError
+________ test_agent_uses_multistep_fracture_to_reach_contact_experiment ________
+
+    def test_agent_uses_multistep_fracture_to_reach_contact_experiment() -> None:
+        spec = generate_contact_game(400_300)
+        result = run_contact_agent(
+            spec,
+            UniformContactScores(),
+            max_actions=192,
+            planner_depth=2,
+        )
+        assert result.won
+        # At least one exploratory action should have zero immediate information
+        # but positive future value: moving adjacent to the special cell is useful
+        # only because the following contact fractures the five remaining modes.
+        exploratory = [
+            step
+            for step in result.steps
+            if step.decision_mode == "fracture"
+        ]
+        assert exploratory
+>       assert any(step.information_gain_bits == 0.0 for step in exploratory)
+E       assert False
+E        +  where False = any(<generator object test_agent_uses_multistep_fracture_to_reach_contact_experiment.<locals>.<genexpr> at 0x7f6d3b03c930>)
+
+arcgpt2/tests/test_contact_world_agent.py:93: AssertionError
+=========================== short test summary info ============================
+FAILED arcgpt2/tests/test_contact_world_agent.py::test_contact_world_posterior_starts_with_all_120_worlds - assert 0.9999999999999989 == 1.0
+ +  where 0.9999999999999989 = sum(<generator object test_contact_world_posterior_starts_with_all_120_worlds.<locals>.<genexpr> at 0x7f6d39132f60>)
+FAILED arcgpt2/tests/test_contact_world_agent.py::test_uniform_contact_agent_solves_held_out_games - AssertionError: assert False
+ +  where False = ContactAgentResult(won=False, levels_completed=0, actions=192, steps=(ContactAgentStep(action_number=1, level_index=0,...'fracture', posterior_worlds=5, posterior_entropy_bits=2.321928094887362, information_gain_bits=0.0, status='ACTIVE'))).won
+FAILED arcgpt2/tests/test_contact_world_agent.py::test_exact_replay_overcomes_a_confident_wrong_prior - AssertionError: assert False
+ +  where False = ContactAgentResult(won=False, levels_completed=0, actions=192, steps=(ContactAgentStep(action_number=1, level_index=0,...worlds=5, posterior_entropy_bits=0.017400878581551017, information_gain_bits=-6.349087922075114e-16, status='ACTIVE'))).won
+FAILED arcgpt2/tests/test_contact_world_agent.py::test_agent_uses_multistep_fracture_to_reach_contact_experiment - assert False
+ +  where False = any(<generator object test_agent_uses_multistep_fracture_to_reach_contact_experiment.<locals>.<genexpr> at 0x7f6d3b03c930>)
+4 failed, 115 passed in 22.63s
