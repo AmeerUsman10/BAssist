@@ -15,8 +15,9 @@ Gate-A curriculum component, not a general private-game simulator.
 
 from __future__ import annotations
 
+from collections import Counter
 from dataclasses import replace
-from typing import Any, Sequence
+from typing import Any
 
 import torch
 from torch.nn import functional as F
@@ -33,7 +34,12 @@ class ContrastiveSupportError(ValueError):
 
 
 def infer_probe_colors(record: StepRecord) -> tuple[int, int, tuple[int, int]]:
-    """Infer moving color, background color, and source from an exact move."""
+    """Infer moving color, background color, and source from an exact move.
+
+    The two changed cells are symmetric under a simple color swap. The moving
+    cell is distinguished by cardinality: in the controlled arena the agent
+    color occurs once, while the background occurs many times.
+    """
 
     changes = [
         (row, column, record.before[row][column], record.after[row][column])
@@ -45,15 +51,20 @@ def infer_probe_colors(record: StepRecord) -> tuple[int, int, tuple[int, int]]:
         raise ContrastiveSupportError(
             "contrastive action binding requires one active one-cell movement"
         )
+    counts = Counter(value for row in record.before for value in row)
     for source in changes:
         sy, sx, source_old, source_new = source
         for destination in changes:
             if destination is source:
                 continue
             _, _, destination_old, destination_new = destination
-            if source_old == destination_new and source_new == destination_old:
+            if (
+                source_old == destination_new
+                and source_new == destination_old
+                and counts[source_old] < counts[source_new]
+            ):
                 return source_old, source_new, (sy, sx)
-    raise ContrastiveSupportError("could not infer a translated color cell")
+    raise ContrastiveSupportError("could not infer a translated singleton color cell")
 
 
 def counterfactual_probe_records(record: StepRecord) -> tuple[StepRecord, ...]:
