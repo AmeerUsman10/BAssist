@@ -8,8 +8,9 @@ The initial trainer had two execution defects that did not affect dataset tests:
    ``batch * sequence * vocabulary``.
 
 This wrapper patches those runtime functions explicitly, then delegates the
-training/evaluation protocol to the canonical module. The learned model and
-objective are unchanged.
+training/evaluation protocol to the canonical module. Candidate programs are
+scored by mean token log probability rather than raw sequence probability, so a
+shorter English rendering does not win merely because it has fewer tokens.
 """
 
 from __future__ import annotations
@@ -18,9 +19,9 @@ import os
 from typing import Any, Mapping, Sequence
 
 import torch
-from torch.nn import functional as F
 
 from . import train_goal_version as base
+from .completion_scorer import score_candidate_completions
 from .dsl import program_from_phase0_spec
 from .goal_dsl import evaluate_goal, parse_goal
 from .phase0_hidden_action import Action, generate_game
@@ -50,39 +51,6 @@ def held_out_terminal_accuracy(
     return correct / len(held_out)
 
 
-def _candidate_scores_chunk(
-    model: Any,
-    prompt: Sequence[int],
-    candidates: Sequence[Sequence[int]],
-    *,
-    pad_token_id: int,
-    device: torch.device,
-) -> list[torch.Tensor]:
-    lengths = [len(prompt) + len(candidate) for candidate in candidates]
-    longest = max(lengths)
-    input_rows: list[list[int]] = []
-    mask_rows: list[list[int]] = []
-    for candidate, length in zip(candidates, lengths, strict=True):
-        missing = longest - length
-        input_rows.append([*prompt, *candidate, *([pad_token_id] * missing)])
-        mask_rows.append([1] * length + [0] * missing)
-
-    input_ids = torch.tensor(input_rows, dtype=torch.long, device=device)
-    attention_mask = torch.tensor(mask_rows, dtype=torch.long, device=device)
-    logits = model(input_ids=input_ids, attention_mask=attention_mask).logits
-
-    scores: list[torch.Tensor] = []
-    for row_index, candidate in enumerate(candidates):
-        start = len(prompt) - 1
-        target_logits = logits[row_index, start : start + len(candidate)]
-        targets = torch.tensor(candidate, dtype=torch.long, device=device)
-        score = F.log_softmax(target_logits, dim=-1).gather(
-            1, targets.unsqueeze(1)
-        )[:, 0].sum()
-        scores.append(score)
-    return scores
-
-
 def score_items(
     model: Any,
     items: Sequence[base.EncodedGoalItem],
@@ -90,13 +58,7 @@ def score_items(
     pad_token_id: int,
     device: torch.device,
 ) -> tuple[list[torch.Tensor], list[torch.Tensor]]:
-    """Score Goal-DSL candidates in bounded micro-batches.
-
-    ``ARC_GPT2_GOAL_CANDIDATE_BATCH`` can tune the memory/runtime trade-off.
-    The default of two keeps peak logits memory bounded on GitHub CPU runners.
-    Autograd remains intact because every candidate score is concatenated from
-    ordinary differentiable forwards before the set-valued loss is formed.
-    """
+    """Score Goal-DSL candidates in bounded differentiable micro-batches."""
 
     if not items:
         raise ValueError("at least one goal item is required")
@@ -107,19 +69,15 @@ def score_items(
     grouped_scores: list[torch.Tensor] = []
     target_tensors: list[torch.Tensor] = []
     for item in items:
-        scores: list[torch.Tensor] = []
-        candidates = list(item.candidate_ids)
-        for start in range(0, len(candidates), candidate_batch_size):
-            scores.extend(
-                _candidate_scores_chunk(
-                    model,
-                    item.prompt_ids,
-                    candidates[start : start + candidate_batch_size],
-                    pad_token_id=pad_token_id,
-                    device=device,
-                )
-            )
-        score_tensor = torch.stack(scores)
+        score_tensor = score_candidate_completions(
+            model,
+            item.prompt_ids,
+            item.candidate_ids,
+            pad_token_id=pad_token_id,
+            device=device,
+            candidate_batch_size=candidate_batch_size,
+            reduction="mean",
+        )
         grouped_scores.append(score_tensor)
         target_tensors.append(
             torch.tensor(
@@ -132,7 +90,7 @@ def score_items(
 
 
 def install_runtime_fixes() -> None:
-    """Patch only the two corrected runtime functions."""
+    """Patch only the corrected runtime functions."""
 
     base.held_out_terminal_accuracy = held_out_terminal_accuracy
     base.score_items = score_items
