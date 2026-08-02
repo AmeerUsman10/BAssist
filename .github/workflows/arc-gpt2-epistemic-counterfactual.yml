@@ -49,20 +49,22 @@ jobs:
             python -m pytest -q arcgpt2/tests
             python -m arcgpt2.build_epistemic_counterfactual_dataset \
               --output-dir outputs/epistemic_counterfactual/data \
-              --train-groups 8 \
-              --validation-groups 2 \
-              --test-groups 2 \
+              --train-groups 4 \
+              --validation-groups 1 \
+              --test-groups 1 \
               --mapping-variants-per-group 4 \
               --seed-base 314159
-            # Existing evaluation groups by game_seed. Give every mapping variant
-            # a unique evaluation id while retaining counterfactual_group_seed.
             python - <<'PY'
           import json
           from pathlib import Path
+
           root = Path("outputs/epistemic_counterfactual/data")
           for split in ("train", "validation", "test"):
               path = root / f"{split}.jsonl"
-              rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+              rows = [
+                  json.loads(line)
+                  for line in path.read_text(encoding="utf-8").splitlines()
+              ]
               for row in rows:
                   row["game_seed"] = (
                       int(row["counterfactual_group_seed"]) * 100
@@ -80,12 +82,12 @@ jobs:
               --max-length 448 \
               --prefix-keep 96 \
               --batch-size 2 \
-              --gradient-accumulation-steps 2 \
-              --learning-rate 0.00008 \
-              --max-optimizer-steps 12 \
-              --warmup-steps 2 \
-              --freeze-first-n-blocks 8 \
-              --evaluation-games 4 \
+              --gradient-accumulation-steps 1 \
+              --learning-rate 0.0001 \
+              --max-optimizer-steps 2 \
+              --warmup-steps 1 \
+              --freeze-first-n-blocks 11 \
+              --evaluation-games 2 \
               --no-save-model
             python -m arcgpt2.train_epistemic_binding \
               --initialization random \
@@ -94,12 +96,12 @@ jobs:
               --max-length 448 \
               --prefix-keep 96 \
               --batch-size 2 \
-              --gradient-accumulation-steps 2 \
-              --learning-rate 0.00008 \
-              --max-optimizer-steps 12 \
-              --warmup-steps 2 \
-              --freeze-first-n-blocks 8 \
-              --evaluation-games 4 \
+              --gradient-accumulation-steps 1 \
+              --learning-rate 0.0001 \
+              --max-optimizer-steps 2 \
+              --warmup-steps 1 \
+              --freeze-first-n-blocks 11 \
+              --evaluation-games 2 \
               --no-save-model
             python -m arcgpt2.compare_epistemic_binding \
               --pretrained outputs/epistemic_counterfactual/pretrained/summary.json \
