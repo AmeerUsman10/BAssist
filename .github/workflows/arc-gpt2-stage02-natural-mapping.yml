@@ -76,12 +76,12 @@ jobs:
               --output-dir outputs/stage02-natural/pretrained \
               --max-length 384 \
               --prefix-keep 192 \
-              --train-batch-size 4 \
+              --train-batch-size 16 \
               --eval-batch-size 16 \
               --gradient-accumulation-steps 1 \
-              --learning-rate 1e-4 \
-              --max-optimizer-steps 60 \
-              --warmup-steps 4 \
+              --learning-rate 2e-4 \
+              --max-optimizer-steps 128 \
+              --warmup-steps 8 \
               --freeze-first-n-blocks 10 \
               --train-eval-seed-start 0 \
               --train-eval-games 1 \
