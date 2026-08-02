@@ -1,0 +1,36 @@
+{
+  "representation": "Ordinary GPT-2 vocabulary, exact grids, exact changed cells, and no learned encoder or semantic action label supplied by the wrapper.",
+  "schema": "arcgpt2.epistemic_binding.v1",
+  "scope": "Set-valued natural-language action binding with exact permutation version spaces; controlled meta-learning gate, not ARC-AGI-3 evaluation.",
+  "seed_base": 271828,
+  "splits": {
+    "test": {
+      "examples": 160,
+      "examples_per_game": 20,
+      "file": "test.jsonl",
+      "games": 8,
+      "seed_start": 271904,
+      "seed_stop_exclusive": 271912,
+      "sha256": "36bea24172d1ea67fd66a8b6e865684711c900b09f9a502d066aeff62c62dc5d"
+    },
+    "train": {
+      "examples": 1280,
+      "examples_per_game": 20,
+      "file": "train.jsonl",
+      "games": 64,
+      "seed_start": 271828,
+      "seed_stop_exclusive": 271892,
+      "sha256": "4058dc6aaa5fc577975e48061f81e22d982d4f7f11fcaae5bd6b3d7552952a2f"
+    },
+    "validation": {
+      "examples": 240,
+      "examples_per_game": 20,
+      "file": "validation.jsonl",
+      "games": 12,
+      "seed_start": 271892,
+      "seed_stop_exclusive": 271904,
+      "sha256": "05ec1fee5153513307475e1f9850206248fd16724eb8b2325fefb3c0120f9b40"
+    }
+  },
+  "target": "Uniform probability over every cardinal direction consistent with the observed partial action mapping."
+}
