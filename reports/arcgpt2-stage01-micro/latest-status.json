@@ -1,0 +1,8 @@
+{
+  "execution_status": "success",
+  "capability_gate": "not_yet_passed",
+  "commit_sha": "6b5f338bfc8c63aee0d035ca129a71dbc4760d11",
+  "run_id": "30724013304",
+  "recorded_at_utc": "2026-08-02T00:06:09.280998+00:00",
+  "scope": "one-game Stage-0.1 micro overfit diagnostic; not an ARC score"
+}

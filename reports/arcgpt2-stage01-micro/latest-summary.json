@@ -1,0 +1,4013 @@
+{
+  "status": "completed",
+  "claim_scope": "Stage-0.1 synthetic hidden-action overfit gate; not an ARC-AGI-3 public or private score",
+  "objective": "set-valued action probability mass with phase/action-balanced offline sampling",
+  "config": {
+    "model_name": "openai-community/gpt2",
+    "initialization": "pretrained",
+    "data_dir": "outputs/stage01-micro/data",
+    "train_file": "outputs/stage01-micro/data/train.jsonl",
+    "evaluation_file": "outputs/stage01-micro/data/eval.jsonl",
+    "output_dir": "outputs/stage01-micro/pretrained",
+    "seed": 42,
+    "max_length": 384,
+    "prefix_keep": 128,
+    "train_batch_size": 2,
+    "eval_batch_size": 8,
+    "gradient_accumulation_steps": 2,
+    "learning_rate": 0.0002,
+    "weight_decay": 0.01,
+    "max_optimizer_steps": 60,
+    "warmup_steps": 4,
+    "freeze_first_n_blocks": 10,
+    "evaluation_games": 1,
+    "evaluation_seed_start": 1729,
+    "max_actions_per_game": 48,
+    "history_modes": [
+      "intact",
+      "amnesic",
+      "shuffled"
+    ],
+    "save_model": false
+  },
+  "device": "cpu",
+  "train_examples": 336,
+  "evaluation_examples": 336,
+  "sampling_design": {
+    "probe_examples": 96,
+    "navigation_examples_by_action": {
+      "A1": 48,
+      "A2": 72,
+      "A3": 48,
+      "A4": 72
+    },
+    "expected_probe_sampling_mass": 0.4999999999999993,
+    "expected_navigation_sampling_mass_by_action": {
+      "A1": 0.12500000000000008,
+      "A2": 0.12499999999999979,
+      "A3": 0.12500000000000008,
+      "A4": 0.12499999999999979
+    },
+    "total_sampling_mass": 1.000000000000003
+  },
+  "realized_sample_counts": {
+    "probe": 141,
+    "navigate": 99,
+    "navigation_by_action": {
+      "A1": 20,
+      "A2": 25,
+      "A3": 32,
+      "A4": 22
+    },
+    "total": 240
+  },
+  "trainable_parameters": 54081792,
+  "total_parameters": 124960512,
+  "mean_training_loss": 0.9493386124571165,
+  "initial_classification": {
+    "set_mass_loss": 1.1592737379528226,
+    "set_accuracy": 0.39285714285714285,
+    "canonical_accuracy": 0.2857142857142857,
+    "examples": 336,
+    "predicted_action_counts": {
+      "A1": 24,
+      "A2": 312,
+      "A3": 0,
+      "A4": 0
+    },
+    "canonical_target_counts": {
+      "A1": 72,
+      "A2": 96,
+      "A3": 72,
+      "A4": 96
+    },
+    "valid_target_support_counts": {
+      "A1": 108,
+      "A2": 132,
+      "A3": 108,
+      "A4": 132
+    },
+    "prediction_distribution_entropy": 0.18561616332043784,
+    "mean_probability_entropy": 0.9999999856310231,
+    "dominant_action_share": 0.9285714285714286,
+    "confusion_matrix_rows_target_columns_prediction": {
+      "A1": {
+        "A1": 6,
+        "A2": 66,
+        "A3": 0,
+        "A4": 0
+      },
+      "A2": {
+        "A1": 6,
+        "A2": 90,
+        "A3": 0,
+        "A4": 0
+      },
+      "A3": {
+        "A1": 6,
+        "A2": 66,
+        "A3": 0,
+        "A4": 0
+      },
+      "A4": {
+        "A1": 6,
+        "A2": 90,
+        "A3": 0,
+        "A4": 0
+      }
+    },
+    "navigation_confusion_matrix": {
+      "A1": {
+        "A1": 0,
+        "A2": 48,
+        "A3": 0,
+        "A4": 0
+      },
+      "A2": {
+        "A1": 0,
+        "A2": 72,
+        "A3": 0,
+        "A4": 0
+      },
+      "A3": {
+        "A1": 0,
+        "A2": 48,
+        "A3": 0,
+        "A4": 0
+      },
+      "A4": {
+        "A1": 0,
+        "A2": 72,
+        "A3": 0,
+        "A4": 0
+      }
+    },
+    "by_phase": {
+      "probe": {
+        "count": 96,
+        "set_accuracy": 0.625,
+        "canonical_accuracy": 0.25,
+        "predicted_action_counts": {
+          "A1": 24,
+          "A2": 72,
+          "A3": 0,
+          "A4": 0
+        },
+        "prediction_entropy": 0.4056390622295664,
+        "mean_valid_set_size": 2.5
+      },
+      "navigate": {
+        "count": 240,
+        "set_accuracy": 0.3,
+        "canonical_accuracy": 0.3,
+        "predicted_action_counts": {
+          "A1": 0,
+          "A2": 240,
+          "A3": 0,
+          "A4": 0
+        },
+        "prediction_entropy": 0.0,
+        "mean_valid_set_size": 1.0
+      }
+    },
+    "by_level": {
+      "0": {
+        "correct": 60,
+        "count": 192,
+        "set_accuracy": 0.3125
+      },
+      "1": {
+        "correct": 24,
+        "count": 72,
+        "set_accuracy": 0.3333333333333333
+      },
+      "2": {
+        "correct": 48,
+        "count": 72,
+        "set_accuracy": 0.6666666666666666
+      }
+    }
+  },
+  "final_classification": {
+    "set_mass_loss": 1.1589762483324324,
+    "set_accuracy": 0.39285714285714285,
+    "canonical_accuracy": 0.2857142857142857,
+    "examples": 336,
+    "predicted_action_counts": {
+      "A1": 0,
+      "A2": 0,
+      "A3": 0,
+      "A4": 336
+    },
+    "canonical_target_counts": {
+      "A1": 72,
+      "A2": 96,
+      "A3": 72,
+      "A4": 96
+    },
+    "valid_target_support_counts": {
+      "A1": 108,
+      "A2": 132,
+      "A3": 108,
+      "A4": 132
+    },
+    "prediction_distribution_entropy": 0.0,
+    "mean_probability_entropy": 0.9968561916833832,
+    "dominant_action_share": 1.0,
+    "confusion_matrix_rows_target_columns_prediction": {
+      "A1": {
+        "A1": 0,
+        "A2": 0,
+        "A3": 0,
+        "A4": 72
+      },
+      "A2": {
+        "A1": 0,
+        "A2": 0,
+        "A3": 0,
+        "A4": 96
+      },
+      "A3": {
+        "A1": 0,
+        "A2": 0,
+        "A3": 0,
+        "A4": 72
+      },
+      "A4": {
+        "A1": 0,
+        "A2": 0,
+        "A3": 0,
+        "A4": 96
+      }
+    },
+    "navigation_confusion_matrix": {
+      "A1": {
+        "A1": 0,
+        "A2": 0,
+        "A3": 0,
+        "A4": 48
+      },
+      "A2": {
+        "A1": 0,
+        "A2": 0,
+        "A3": 0,
+        "A4": 72
+      },
+      "A3": {
+        "A1": 0,
+        "A2": 0,
+        "A3": 0,
+        "A4": 48
+      },
+      "A4": {
+        "A1": 0,
+        "A2": 0,
+        "A3": 0,
+        "A4": 72
+      }
+    },
+    "by_phase": {
+      "probe": {
+        "count": 96,
+        "set_accuracy": 0.625,
+        "canonical_accuracy": 0.25,
+        "predicted_action_counts": {
+          "A1": 0,
+          "A2": 0,
+          "A3": 0,
+          "A4": 96
+        },
+        "prediction_entropy": 0.0,
+        "mean_valid_set_size": 2.5
+      },
+      "navigate": {
+        "count": 240,
+        "set_accuracy": 0.3,
+        "canonical_accuracy": 0.3,
+        "predicted_action_counts": {
+          "A1": 0,
+          "A2": 0,
+          "A3": 0,
+          "A4": 240
+        },
+        "prediction_entropy": 0.0,
+        "mean_valid_set_size": 1.0
+      }
+    },
+    "by_level": {
+      "0": {
+        "correct": 60,
+        "count": 192,
+        "set_accuracy": 0.3125
+      },
+      "1": {
+        "correct": 48,
+        "count": 72,
+        "set_accuracy": 0.6666666666666666
+      },
+      "2": {
+        "correct": 24,
+        "count": 72,
+        "set_accuracy": 0.3333333333333333
+      }
+    }
+  },
+  "closed_loop": {
+    "intact": {
+      "history_mode": "intact",
+      "games": 1,
+      "games_won": 0,
+      "game_win_rate": 0.0,
+      "levels_completed": 0,
+      "level_completion_rate": 0.0,
+      "total_actions": 48,
+      "mean_actions_per_game": 48.0,
+      "mapping_completed_games": 0,
+      "mapping_completion_rate": 0.0,
+      "mean_actions_to_mapping": null,
+      "probe_valid_action_accuracy": 0.020833333333333332,
+      "navigation_oracle_action_accuracy": 0.0,
+      "phase_counts": {
+        "probe": {
+          "correct": 1,
+          "count": 48,
+          "accuracy": 0.020833333333333332
+        },
+        "navigate": {
+          "correct": 0,
+          "count": 0,
+          "accuracy": 0.0
+        }
+      },
+      "predicted_action_counts": {
+        "A1": 0,
+        "A2": 0,
+        "A3": 0,
+        "A4": 48
+      },
+      "prediction_distribution_entropy": 0.0,
+      "dominant_action_share": 1.0,
+      "repeated_action_transition_rate": 1.0,
+      "longest_repeated_action_run": 48,
+      "mean_actions_by_completed_level": {},
+      "traces": [
+        {
+          "game_seed": 1729,
+          "won": false,
+          "levels_completed": 0,
+          "actions": 48,
+          "mapping_completed_at_action": null,
+          "action_trace": [
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4"
+          ],
+          "decisions": [
+            {
+              "action_number": 1,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3",
+                "A4"
+              ],
+              "selection_was_valid": true,
+              "moved": true,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2625555396080017,
+                "A2": 0.22210918366909027,
+                "A3": 0.22871603071689606,
+                "A4": 0.28661930561065674
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 2,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": true,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2633667588233948,
+                "A2": 0.22276145219802856,
+                "A3": 0.23042874038219452,
+                "A4": 0.28344300389289856
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 3,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2650914788246155,
+                "A2": 0.22234299778938293,
+                "A3": 0.22759921848773956,
+                "A4": 0.2849663496017456
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 4,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26484739780426025,
+                "A2": 0.2228495329618454,
+                "A3": 0.22802986204624176,
+                "A4": 0.2842731475830078
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 5,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26490673422813416,
+                "A2": 0.2231036275625229,
+                "A3": 0.22908195853233337,
+                "A4": 0.2829076051712036
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 6,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2652348279953003,
+                "A2": 0.22471749782562256,
+                "A3": 0.2296537309885025,
+                "A4": 0.2803939878940582
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 7,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2664431035518646,
+                "A2": 0.2248731255531311,
+                "A3": 0.23039385676383972,
+                "A4": 0.27828994393348694
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 8,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26598650217056274,
+                "A2": 0.22612331807613373,
+                "A3": 0.23230750858783722,
+                "A4": 0.2755827307701111
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 9,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2648814916610718,
+                "A2": 0.22648997604846954,
+                "A3": 0.23324047029018402,
+                "A4": 0.2753880023956299
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 10,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.265423059463501,
+                "A2": 0.22622007131576538,
+                "A3": 0.23210564255714417,
+                "A4": 0.2762512266635895
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 11,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2650867700576782,
+                "A2": 0.22590674459934235,
+                "A3": 0.23089461028575897,
+                "A4": 0.2781118154525757
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 12,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2642197608947754,
+                "A2": 0.22573719918727875,
+                "A3": 0.23046095669269562,
+                "A4": 0.27958208322525024
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 13,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362547278404236,
+                "A2": 0.22633017599582672,
+                "A3": 0.23022785782814026,
+                "A4": 0.27981650829315186
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 14,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26363226771354675,
+                "A2": 0.22633084654808044,
+                "A3": 0.23023028671741486,
+                "A4": 0.27980664372444153
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 15,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26363593339920044,
+                "A2": 0.226331427693367,
+                "A3": 0.23023174703121185,
+                "A4": 0.2798009514808655
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 16,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636302411556244,
+                "A2": 0.22633083164691925,
+                "A3": 0.23022589087486267,
+                "A4": 0.2798130512237549
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 17,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636280953884125,
+                "A2": 0.2263307124376297,
+                "A3": 0.23022399842739105,
+                "A4": 0.2798171639442444
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 18,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362699270248413,
+                "A2": 0.22633148729801178,
+                "A3": 0.2302265614271164,
+                "A4": 0.2798149287700653
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 19,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362913846969604,
+                "A2": 0.22633160650730133,
+                "A3": 0.230223149061203,
+                "A4": 0.2798161208629608
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 20,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362913846969604,
+                "A2": 0.22633160650730133,
+                "A3": 0.230223149061203,
+                "A4": 0.2798161208629608
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 21,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362884044647217,
+                "A2": 0.22633136808872223,
+                "A3": 0.2302229106426239,
+                "A4": 0.2798168957233429
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 22,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636283338069916,
+                "A2": 0.22633090615272522,
+                "A3": 0.23022332787513733,
+                "A4": 0.2798174023628235
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 23,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362913846969604,
+                "A2": 0.22633160650730133,
+                "A3": 0.230223149061203,
+                "A4": 0.2798161208629608
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 24,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362815499305725,
+                "A2": 0.22633162140846252,
+                "A3": 0.23022405803203583,
+                "A4": 0.2798161506652832
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 25,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362907886505127,
+                "A2": 0.2263306826353073,
+                "A3": 0.23022310435771942,
+                "A4": 0.279817134141922
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 26,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362884044647217,
+                "A2": 0.2263304889202118,
+                "A3": 0.23022377490997314,
+                "A4": 0.2798168957233429
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 27,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362934708595276,
+                "A2": 0.22633180022239685,
+                "A3": 0.23022246360778809,
+                "A4": 0.2798163592815399
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 28,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362860202789307,
+                "A2": 0.22633200883865356,
+                "A3": 0.230222687125206,
+                "A4": 0.2798166275024414
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 29,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362860202789307,
+                "A2": 0.22633028030395508,
+                "A3": 0.23022444546222687,
+                "A4": 0.2798166275024414
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 30,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362958550453186,
+                "A2": 0.2263302505016327,
+                "A3": 0.23022353649139404,
+                "A4": 0.279816597700119
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 31,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362916827201843,
+                "A2": 0.22633163630962372,
+                "A3": 0.23022407293319702,
+                "A4": 0.27981510758399963
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 32,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26363009214401245,
+                "A2": 0.2263307124376297,
+                "A3": 0.23022311925888062,
+                "A4": 0.2798160910606384
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 33,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362791657447815,
+                "A2": 0.22633227705955505,
+                "A3": 0.2302238494157791,
+                "A4": 0.2798159122467041
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 34,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362836360931396,
+                "A2": 0.22633181512355804,
+                "A3": 0.23022335767745972,
+                "A4": 0.2798163890838623
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 35,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362860202789307,
+                "A2": 0.22633200883865356,
+                "A3": 0.230222687125206,
+                "A4": 0.2798166275024414
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 36,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362818479537964,
+                "A2": 0.22633250057697296,
+                "A3": 0.23022319376468658,
+                "A4": 0.2798161804676056
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 37,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362836360931396,
+                "A2": 0.2263309508562088,
+                "A3": 0.23022425174713135,
+                "A4": 0.2798163890838623
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 38,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362860202789307,
+                "A2": 0.22633114457130432,
+                "A3": 0.23022356629371643,
+                "A4": 0.2798166275024414
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 39,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636297941207886,
+                "A2": 0.2263304442167282,
+                "A3": 0.23022286593914032,
+                "A4": 0.2798168361186981
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 40,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362961530685425,
+                "A2": 0.2263311743736267,
+                "A3": 0.23022358119487762,
+                "A4": 0.27981558442115784
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 41,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26363012194633484,
+                "A2": 0.22632986307144165,
+                "A3": 0.23022489249706268,
+                "A4": 0.27981504797935486
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 42,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362940669059753,
+                "A2": 0.22633010149002075,
+                "A3": 0.23022514581680298,
+                "A4": 0.27981534600257874
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 43,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362884044647217,
+                "A2": 0.2263304889202118,
+                "A3": 0.23022377490997314,
+                "A4": 0.2798168957233429
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 44,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362866163253784,
+                "A2": 0.22633206844329834,
+                "A3": 0.2302236407995224,
+                "A4": 0.2798156440258026
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 45,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362988352775574,
+                "A2": 0.22633138298988342,
+                "A3": 0.2302229255437851,
+                "A4": 0.2798158526420593
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 46,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362791657447815,
+                "A2": 0.22633227705955505,
+                "A3": 0.2302238494157791,
+                "A4": 0.2798159122467041
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 47,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26363033056259155,
+                "A2": 0.22633004188537598,
+                "A3": 0.23022331297397614,
+                "A4": 0.27981632947921753
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 48,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26362860202789307,
+                "A2": 0.22633114457130432,
+                "A3": 0.23022356629371643,
+                "A4": 0.2798166275024414
+              },
+              "mapping_known": 1
+            }
+          ]
+        }
+      ]
+    },
+    "amnesic": {
+      "history_mode": "amnesic",
+      "games": 1,
+      "games_won": 0,
+      "game_win_rate": 0.0,
+      "levels_completed": 0,
+      "level_completion_rate": 0.0,
+      "total_actions": 48,
+      "mean_actions_per_game": 48.0,
+      "mapping_completed_games": 0,
+      "mapping_completion_rate": 0.0,
+      "mean_actions_to_mapping": null,
+      "probe_valid_action_accuracy": 0.020833333333333332,
+      "navigation_oracle_action_accuracy": 0.0,
+      "phase_counts": {
+        "probe": {
+          "correct": 1,
+          "count": 48,
+          "accuracy": 0.020833333333333332
+        },
+        "navigate": {
+          "correct": 0,
+          "count": 0,
+          "accuracy": 0.0
+        }
+      },
+      "predicted_action_counts": {
+        "A1": 0,
+        "A2": 0,
+        "A3": 0,
+        "A4": 48
+      },
+      "prediction_distribution_entropy": 0.0,
+      "dominant_action_share": 1.0,
+      "repeated_action_transition_rate": 1.0,
+      "longest_repeated_action_run": 48,
+      "mean_actions_by_completed_level": {},
+      "traces": [
+        {
+          "game_seed": 1729,
+          "won": false,
+          "levels_completed": 0,
+          "actions": 48,
+          "mapping_completed_at_action": null,
+          "action_trace": [
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4"
+          ],
+          "decisions": [
+            {
+              "action_number": 1,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3",
+                "A4"
+              ],
+              "selection_was_valid": true,
+              "moved": true,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2625555396080017,
+                "A2": 0.22210918366909027,
+                "A3": 0.22871603071689606,
+                "A4": 0.28661930561065674
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 2,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": true,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26293089985847473,
+                "A2": 0.22197918593883514,
+                "A3": 0.22881858050823212,
+                "A4": 0.2862713038921356
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 3,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 4,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 5,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 6,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 7,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 8,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 9,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 10,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 11,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 12,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 13,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 14,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 15,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 16,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 17,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 18,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 19,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 20,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 21,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 22,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 23,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 24,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 25,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 26,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 27,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 28,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 29,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 30,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 31,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 32,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 33,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 34,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 35,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 36,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 37,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 38,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 39,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 40,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 41,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 42,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 43,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 44,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 45,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 46,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 47,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 48,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.262928307056427,
+                "A2": 0.2219761461019516,
+                "A3": 0.22881720960140228,
+                "A4": 0.28627830743789673
+              },
+              "mapping_known": 1
+            }
+          ]
+        }
+      ]
+    },
+    "shuffled": {
+      "history_mode": "shuffled",
+      "games": 1,
+      "games_won": 0,
+      "game_win_rate": 0.0,
+      "levels_completed": 0,
+      "level_completion_rate": 0.0,
+      "total_actions": 48,
+      "mean_actions_per_game": 48.0,
+      "mapping_completed_games": 0,
+      "mapping_completion_rate": 0.0,
+      "mean_actions_to_mapping": null,
+      "probe_valid_action_accuracy": 0.020833333333333332,
+      "navigation_oracle_action_accuracy": 0.0,
+      "phase_counts": {
+        "probe": {
+          "correct": 1,
+          "count": 48,
+          "accuracy": 0.020833333333333332
+        },
+        "navigate": {
+          "correct": 0,
+          "count": 0,
+          "accuracy": 0.0
+        }
+      },
+      "predicted_action_counts": {
+        "A1": 0,
+        "A2": 0,
+        "A3": 0,
+        "A4": 48
+      },
+      "prediction_distribution_entropy": 0.0,
+      "dominant_action_share": 1.0,
+      "repeated_action_transition_rate": 1.0,
+      "longest_repeated_action_run": 48,
+      "mean_actions_by_completed_level": {},
+      "traces": [
+        {
+          "game_seed": 1729,
+          "won": false,
+          "levels_completed": 0,
+          "actions": 48,
+          "mapping_completed_at_action": null,
+          "action_trace": [
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4",
+            "A4"
+          ],
+          "decisions": [
+            {
+              "action_number": 1,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3",
+                "A4"
+              ],
+              "selection_was_valid": true,
+              "moved": true,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2625555396080017,
+                "A2": 0.22210918366909027,
+                "A3": 0.22871603071689606,
+                "A4": 0.28661930561065674
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 2,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": true,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2633679509162903,
+                "A2": 0.22276243567466736,
+                "A3": 0.2304253727197647,
+                "A4": 0.28344425559043884
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 3,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26509398221969604,
+                "A2": 0.22233660519123077,
+                "A3": 0.22760048508644104,
+                "A4": 0.2849690318107605
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 4,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2648468017578125,
+                "A2": 0.2228490263223648,
+                "A3": 0.22802846133708954,
+                "A4": 0.28427574038505554
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 5,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26490703225135803,
+                "A2": 0.22310811281204224,
+                "A3": 0.22908133268356323,
+                "A4": 0.2829035818576813
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 6,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26524192094802856,
+                "A2": 0.22471408545970917,
+                "A3": 0.22965635359287262,
+                "A4": 0.2803875803947449
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 7,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26644739508628845,
+                "A2": 0.2248750478029251,
+                "A3": 0.23039580881595612,
+                "A4": 0.27828168869018555
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 8,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26598700881004333,
+                "A2": 0.22612634301185608,
+                "A3": 0.2323097139596939,
+                "A4": 0.27557694911956787
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 9,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26488378643989563,
+                "A2": 0.22648932039737701,
+                "A3": 0.23324604332447052,
+                "A4": 0.2753809094429016
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 10,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2654258608818054,
+                "A2": 0.2262224555015564,
+                "A3": 0.23210808634757996,
+                "A4": 0.2762435972690582
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 11,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2650924026966095,
+                "A2": 0.22590722143650055,
+                "A3": 0.2308986335992813,
+                "A4": 0.2781018018722534
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 12,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2642255425453186,
+                "A2": 0.2257361114025116,
+                "A3": 0.2304651141166687,
+                "A4": 0.2795732617378235
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 13,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26363521814346313,
+                "A2": 0.22633248567581177,
+                "A3": 0.2302258163690567,
+                "A4": 0.27980655431747437
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 14,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26364409923553467,
+                "A2": 0.22633236646652222,
+                "A3": 0.23022568225860596,
+                "A4": 0.27979785203933716
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 15,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636406123638153,
+                "A2": 0.2263345569372177,
+                "A3": 0.23023495078086853,
+                "A4": 0.27978989481925964
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 16,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26363784074783325,
+                "A2": 0.22633302211761475,
+                "A3": 0.23022723197937012,
+                "A4": 0.2798018753528595
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 17,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636357545852661,
+                "A2": 0.22633123397827148,
+                "A3": 0.23022805154323578,
+                "A4": 0.2798050045967102
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 18,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636367976665497,
+                "A2": 0.2263321429491043,
+                "A3": 0.23022809624671936,
+                "A4": 0.27980291843414307
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 19,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636384963989258,
+                "A2": 0.2263292819261551,
+                "A3": 0.23022958636283875,
+                "A4": 0.2798025906085968
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 20,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.263637512922287,
+                "A2": 0.22632929682731628,
+                "A3": 0.23022958636283875,
+                "A4": 0.27980366349220276
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 21,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636377811431885,
+                "A2": 0.22632867097854614,
+                "A3": 0.23023070394992828,
+                "A4": 0.2798028886318207
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 22,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636372447013855,
+                "A2": 0.22632907330989838,
+                "A3": 0.23023025691509247,
+                "A4": 0.27980339527130127
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 23,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636372447013855,
+                "A2": 0.22632907330989838,
+                "A3": 0.23023025691509247,
+                "A4": 0.27980339527130127
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 24,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636379599571228,
+                "A2": 0.22632881999015808,
+                "A3": 0.23022909462451935,
+                "A4": 0.27980414032936096
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 25,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636382281780243,
+                "A2": 0.22632905840873718,
+                "A3": 0.23022934794425964,
+                "A4": 0.2798033654689789
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 26,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636367380619049,
+                "A2": 0.2263295203447342,
+                "A3": 0.23022980988025665,
+                "A4": 0.27980393171310425
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 27,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636359930038452,
+                "A2": 0.2263297289609909,
+                "A3": 0.23023003339767456,
+                "A4": 0.27980419993400574
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 28,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26363685727119446,
+                "A2": 0.22632959485054016,
+                "A3": 0.2302316576242447,
+                "A4": 0.2798019051551819
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 29,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636356055736542,
+                "A2": 0.2263302505016327,
+                "A3": 0.23023143410682678,
+                "A4": 0.27980270981788635
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 30,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636370360851288,
+                "A2": 0.2263297438621521,
+                "A3": 0.23023004829883575,
+                "A4": 0.27980315685272217
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 31,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636370360851288,
+                "A2": 0.2263297438621521,
+                "A3": 0.23023004829883575,
+                "A4": 0.27980315685272217
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 32,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636379599571228,
+                "A2": 0.22632883489131927,
+                "A3": 0.23023000359535217,
+                "A4": 0.2798030972480774
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 33,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636375427246094,
+                "A2": 0.22632932662963867,
+                "A3": 0.23023051023483276,
+                "A4": 0.2798026502132416
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 34,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636382281780243,
+                "A2": 0.22632819414138794,
+                "A3": 0.23023022711277008,
+                "A4": 0.2798033654689789
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 35,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636384963989258,
+                "A2": 0.2263292819261551,
+                "A3": 0.23022958636283875,
+                "A4": 0.2798025906085968
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 36,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636372447013855,
+                "A2": 0.22632993757724762,
+                "A3": 0.23022936284542084,
+                "A4": 0.27980339527130127
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 37,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636372447013855,
+                "A2": 0.22632993757724762,
+                "A3": 0.23022936284542084,
+                "A4": 0.27980339527130127
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 38,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636362910270691,
+                "A2": 0.2263299822807312,
+                "A3": 0.23023030161857605,
+                "A4": 0.27980345487594604
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 39,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636375427246094,
+                "A2": 0.22633019089698792,
+                "A3": 0.23022963106632233,
+                "A4": 0.2798026502132416
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 40,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.263637512922287,
+                "A2": 0.22632929682731628,
+                "A3": 0.23022958636283875,
+                "A4": 0.27980366349220276
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 41,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636367976665497,
+                "A2": 0.22632955014705658,
+                "A3": 0.23023071885108948,
+                "A4": 0.27980291843414307
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 42,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.26363804936408997,
+                "A2": 0.2263297587633133,
+                "A3": 0.23023006319999695,
+                "A4": 0.2798021137714386
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 43,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636370360851288,
+                "A2": 0.2263297438621521,
+                "A3": 0.23023004829883575,
+                "A4": 0.27980315685272217
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 44,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636376917362213,
+                "A2": 0.22632858157157898,
+                "A3": 0.23022887110710144,
+                "A4": 0.27980491518974304
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 45,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636370360851288,
+                "A2": 0.22632889449596405,
+                "A3": 0.2302309274673462,
+                "A4": 0.27980315685272217
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 46,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636374831199646,
+                "A2": 0.22632840275764465,
+                "A3": 0.230230450630188,
+                "A4": 0.27980363368988037
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 47,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636365592479706,
+                "A2": 0.2263302206993103,
+                "A3": 0.23023052513599396,
+                "A4": 0.27980268001556396
+              },
+              "mapping_known": 1
+            },
+            {
+              "action_number": 48,
+              "level_index": 0,
+              "phase": "probe",
+              "selected": "A4",
+              "valid": [
+                "A1",
+                "A2",
+                "A3"
+              ],
+              "selection_was_valid": false,
+              "moved": false,
+              "status": "ACTIVE",
+              "probabilities": {
+                "A1": 0.2636360824108124,
+                "A2": 0.22632978856563568,
+                "A3": 0.23023097217082977,
+                "A4": 0.27980321645736694
+              },
+              "mapping_known": 1
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "gates": {
+    "teacher_set_accuracy_at_least_0_98": false,
+    "teacher_navigation_accuracy_at_least_0_95": false,
+    "intact_game_win_rate_at_least_0_90": false,
+    "intact_mapping_completion_at_least_0_90": false,
+    "intact_probe_accuracy_at_least_0_95": false,
+    "no_single_action_collapse": false,
+    "overfit_sanity_passed": false
+  },
+  "step_history": [
+    {
+      "optimizer_step": 1,
+      "loss": 1.2131075859069824,
+      "learning_rate": 0.0001,
+      "elapsed_seconds": 7.867112636566162
+    },
+    {
+      "optimizer_step": 2,
+      "loss": 1.223271369934082,
+      "learning_rate": 0.00015000000000000001,
+      "elapsed_seconds": 16.855005741119385
+    },
+    {
+      "optimizer_step": 3,
+      "loss": 0.43022966384887695,
+      "learning_rate": 0.0002,
+      "elapsed_seconds": 22.850149869918823
+    },
+    {
+      "optimizer_step": 4,
+      "loss": 0.7715047597885132,
+      "learning_rate": 0.0002,
+      "elapsed_seconds": 32.15611529350281
+    },
+    {
+      "optimizer_step": 5,
+      "loss": 1.0432536602020264,
+      "learning_rate": 0.00019642857142857144,
+      "elapsed_seconds": 41.45687770843506
+    },
+    {
+      "optimizer_step": 6,
+      "loss": 1.400071382522583,
+      "learning_rate": 0.00019285714285714286,
+      "elapsed_seconds": 48.629767656326294
+    },
+    {
+      "optimizer_step": 7,
+      "loss": 1.211378574371338,
+      "learning_rate": 0.0001892857142857143,
+      "elapsed_seconds": 57.6079740524292
+    },
+    {
+      "optimizer_step": 8,
+      "loss": 0.5898714065551758,
+      "learning_rate": 0.00018571428571428572,
+      "elapsed_seconds": 63.19498896598816
+    },
+    {
+      "optimizer_step": 9,
+      "loss": 1.2306547164916992,
+      "learning_rate": 0.00018214285714285714,
+      "elapsed_seconds": 71.54782104492188
+    },
+    {
+      "optimizer_step": 10,
+      "loss": 1.3658031821250916,
+      "learning_rate": 0.0001785714285714286,
+      "elapsed_seconds": 78.77870059013367
+    },
+    {
+      "optimizer_step": 11,
+      "loss": 1.20973539352417,
+      "learning_rate": 0.000175,
+      "elapsed_seconds": 88.04615592956543
+    },
+    {
+      "optimizer_step": 12,
+      "loss": 0.9210662543773651,
+      "learning_rate": 0.00017142857142857143,
+      "elapsed_seconds": 93.61897683143616
+    },
+    {
+      "optimizer_step": 13,
+      "loss": 0.8561680316925049,
+      "learning_rate": 0.00016785714285714288,
+      "elapsed_seconds": 100.19230389595032
+    },
+    {
+      "optimizer_step": 14,
+      "loss": 1.222375750541687,
+      "learning_rate": 0.00016428571428571428,
+      "elapsed_seconds": 107.91051936149597
+    },
+    {
+      "optimizer_step": 15,
+      "loss": 1.0429151058197021,
+      "learning_rate": 0.00016071428571428573,
+      "elapsed_seconds": 116.85955882072449
+    },
+    {
+      "optimizer_step": 16,
+      "loss": 0.4290657043457031,
+      "learning_rate": 0.00015714285714285716,
+      "elapsed_seconds": 120.0778260231018
+    },
+    {
+      "optimizer_step": 17,
+      "loss": 1.3595739006996155,
+      "learning_rate": 0.0001535714285714286,
+      "elapsed_seconds": 128.4682743549347
+    },
+    {
+      "optimizer_step": 18,
+      "loss": 1.0880218744277954,
+      "learning_rate": 0.00015000000000000001,
+      "elapsed_seconds": 133.4339621067047
+    },
+    {
+      "optimizer_step": 19,
+      "loss": 1.0782644748687744,
+      "learning_rate": 0.00014642857142857141,
+      "elapsed_seconds": 138.9718782901764
+    },
+    {
+      "optimizer_step": 20,
+      "loss": 0.9635933637619019,
+      "learning_rate": 0.00014285714285714287,
+      "elapsed_seconds": 143.34260940551758
+    },
+    {
+      "optimizer_step": 21,
+      "loss": 0.5517346858978271,
+      "learning_rate": 0.0001392857142857143,
+      "elapsed_seconds": 147.15965342521667
+    },
+    {
+      "optimizer_step": 22,
+      "loss": 1.1555297374725342,
+      "learning_rate": 0.00013571428571428572,
+      "elapsed_seconds": 153.3923590183258
+    },
+    {
+      "optimizer_step": 23,
+      "loss": 0.8766278028488159,
+      "learning_rate": 0.00013214285714285715,
+      "elapsed_seconds": 157.77909898757935
+    },
+    {
+      "optimizer_step": 24,
+      "loss": 0.7238785624504089,
+      "learning_rate": 0.00012857142857142858,
+      "elapsed_seconds": 166.16416692733765
+    },
+    {
+      "optimizer_step": 25,
+      "loss": 0.8351507186889648,
+      "learning_rate": 0.000125,
+      "elapsed_seconds": 171.12541508674622
+    },
+    {
+      "optimizer_step": 26,
+      "loss": 0.9375648498535156,
+      "learning_rate": 0.00012142857142857143,
+      "elapsed_seconds": 177.6839246749878
+    },
+    {
+      "optimizer_step": 27,
+      "loss": 0.8595307469367981,
+      "learning_rate": 0.00011785714285714287,
+      "elapsed_seconds": 186.96850776672363
+    },
+    {
+      "optimizer_step": 28,
+      "loss": 1.2176513671875,
+      "learning_rate": 0.00011428571428571428,
+      "elapsed_seconds": 196.2786900997162
+    },
+    {
+      "optimizer_step": 29,
+      "loss": 0.6971826553344727,
+      "learning_rate": 0.00011071428571428572,
+      "elapsed_seconds": 201.7205810546875
+    },
+    {
+      "optimizer_step": 30,
+      "loss": 0.5257058143615723,
+      "learning_rate": 0.00010714285714285715,
+      "elapsed_seconds": 208.247163772583
+    },
+    {
+      "optimizer_step": 31,
+      "loss": 1.0480914115905762,
+      "learning_rate": 0.00010357142857142859,
+      "elapsed_seconds": 215.64680218696594
+    },
+    {
+      "optimizer_step": 32,
+      "loss": 0.7884249687194824,
+      "learning_rate": 0.0001,
+      "elapsed_seconds": 222.45500707626343
+    },
+    {
+      "optimizer_step": 33,
+      "loss": 0.8765039443969727,
+      "learning_rate": 9.642857142857143e-05,
+      "elapsed_seconds": 230.80512738227844
+    },
+    {
+      "optimizer_step": 34,
+      "loss": 1.0382776260375977,
+      "learning_rate": 9.285714285714286e-05,
+      "elapsed_seconds": 239.14064645767212
+    },
+    {
+      "optimizer_step": 35,
+      "loss": 0.6889443397521973,
+      "learning_rate": 8.92857142857143e-05,
+      "elapsed_seconds": 244.62890815734863
+    },
+    {
+      "optimizer_step": 36,
+      "loss": 1.0819129943847656,
+      "learning_rate": 8.571428571428571e-05,
+      "elapsed_seconds": 252.97891449928284
+    },
+    {
+      "optimizer_step": 37,
+      "loss": 0.8049807548522949,
+      "learning_rate": 8.214285714285714e-05,
+      "elapsed_seconds": 259.7974863052368
+    },
+    {
+      "optimizer_step": 38,
+      "loss": 0.5377817153930664,
+      "learning_rate": 7.857142857142858e-05,
+      "elapsed_seconds": 266.32945132255554
+    },
+    {
+      "optimizer_step": 39,
+      "loss": 1.3945856094360352,
+      "learning_rate": 7.500000000000001e-05,
+      "elapsed_seconds": 275.61167192459106
+    },
+    {
+      "optimizer_step": 40,
+      "loss": 0.7353954315185547,
+      "learning_rate": 7.142857142857143e-05,
+      "elapsed_seconds": 282.1410598754883
+    },
+    {
+      "optimizer_step": 41,
+      "loss": 0.6589245796203613,
+      "learning_rate": 6.785714285714286e-05,
+      "elapsed_seconds": 286.5336775779724
+    },
+    {
+      "optimizer_step": 42,
+      "loss": 1.3633232116699219,
+      "learning_rate": 6.428571428571429e-05,
+      "elapsed_seconds": 295.8435118198395
+    },
+    {
+      "optimizer_step": 43,
+      "loss": 0.9522991180419922,
+      "learning_rate": 6.0714285714285715e-05,
+      "elapsed_seconds": 303.8559877872467
+    },
+    {
+      "optimizer_step": 44,
+      "loss": 1.4236078262329102,
+      "learning_rate": 5.714285714285714e-05,
+      "elapsed_seconds": 311.5755467414856
+    },
+    {
+      "optimizer_step": 45,
+      "loss": 1.0652284622192383,
+      "learning_rate": 5.3571428571428575e-05,
+      "elapsed_seconds": 318.6872239112854
+    },
+    {
+      "optimizer_step": 46,
+      "loss": 1.0701074600219727,
+      "learning_rate": 5e-05,
+      "elapsed_seconds": 325.7984004020691
+    },
+    {
+      "optimizer_step": 47,
+      "loss": 0.6246485710144043,
+      "learning_rate": 4.642857142857143e-05,
+      "elapsed_seconds": 330.2163932323456
+    },
+    {
+      "optimizer_step": 48,
+      "loss": 1.1400461196899414,
+      "learning_rate": 4.2857142857142856e-05,
+      "elapsed_seconds": 337.9665615558624
+    },
+    {
+      "optimizer_step": 49,
+      "loss": 0.8078322410583496,
+      "learning_rate": 3.928571428571429e-05,
+      "elapsed_seconds": 344.51044034957886
+    },
+    {
+      "optimizer_step": 50,
+      "loss": 0.7906508445739746,
+      "learning_rate": 3.571428571428572e-05,
+      "elapsed_seconds": 351.62999510765076
+    },
+    {
+      "optimizer_step": 51,
+      "loss": 0.9237165451049805,
+      "learning_rate": 3.2142857142857144e-05,
+      "elapsed_seconds": 360.60602378845215
+    },
+    {
+      "optimizer_step": 52,
+      "loss": 0.7703533172607422,
+      "learning_rate": 2.857142857142857e-05,
+      "elapsed_seconds": 365.0256941318512
+    },
+    {
+      "optimizer_step": 53,
+      "loss": 0.5250749588012695,
+      "learning_rate": 2.5e-05,
+      "elapsed_seconds": 371.5548324584961
+    },
+    {
+      "optimizer_step": 54,
+      "loss": 0.42524051666259766,
+      "learning_rate": 2.1428571428571428e-05,
+      "elapsed_seconds": 375.36413979530334
+    },
+    {
+      "optimizer_step": 55,
+      "loss": 0.6812238693237305,
+      "learning_rate": 1.785714285714286e-05,
+      "elapsed_seconds": 383.0921850204468
+    },
+    {
+      "optimizer_step": 56,
+      "loss": 1.2708687782287598,
+      "learning_rate": 1.4285714285714285e-05,
+      "elapsed_seconds": 392.49624490737915
+    },
+    {
+      "optimizer_step": 57,
+      "loss": 1.119168758392334,
+      "learning_rate": 1.0714285714285714e-05,
+      "elapsed_seconds": 399.24982929229736
+    },
+    {
+      "optimizer_step": 58,
+      "loss": 1.4117188453674316,
+      "learning_rate": 1e-05,
+      "elapsed_seconds": 407.62773299217224
+    },
+    {
+      "optimizer_step": 59,
+      "loss": 1.1431331634521484,
+      "learning_rate": 1e-05,
+      "elapsed_seconds": 417.0068311691284
+    },
+    {
+      "optimizer_step": 60,
+      "loss": 0.7677676677703857,
+      "learning_rate": 1e-05,
+      "elapsed_seconds": 421.98403453826904
+    }
+  ],
+  "elapsed_seconds": 779.6044294834137
+}
