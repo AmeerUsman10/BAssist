@@ -1,0 +1,119 @@
+name: ARC-GPT2 Official Public Probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [arc-gpt2-programs]
+    paths:
+      - "arcgpt2/official_public_probe.py"
+      - ".github/workflows/arc-gpt2-official-public-probe.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arc-gpt2-official-public-probe-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ARC_API_KEY: ""
+      PYTHONUNBUFFERED: "1"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install official toolkit
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "arc-agi>=0.9.9,<1"
+
+      - name: Probe two public environments with anonymous development access
+        id: probe
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python -m arcgpt2.official_public_probe \
+            --game ls20 \
+            --game ft09 \
+            --actions-per-game 2 \
+            --seed 0 \
+            --output outputs/official_public_probe/result.json \
+            2>&1 | tee official-public-probe.log
+
+      - name: Write durable evidence
+        if: always()
+        env:
+          PROBE_OUTCOME: ${{ steps.probe.outcome }}
+        run: |
+          mkdir -p reports/arcgpt2
+          python - <<'PY'
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          output = Path("outputs/official_public_probe/result.json")
+          receipt = {
+              "status": os.environ.get("PROBE_OUTCOME", "unknown"),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "scope": (
+                  "Bounded official public ARC-AGI-3 interface probe under "
+                  "anonymous development access; no competition submission"
+              ),
+              "result_present": output.exists(),
+          }
+          Path("reports/arcgpt2/latest-official-public-probe-status.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          if output.exists():
+              shutil.copy2(
+                  output,
+                  "reports/arcgpt2/latest-official-public-probe.json",
+              )
+          log = Path("official-public-probe.log")
+          if log.exists():
+              lines = log.read_text(encoding="utf-8", errors="replace").splitlines()
+              Path("reports/arcgpt2/latest-official-public-probe-log-tail.txt").write_text(
+                  "\n".join(lines[-1200:]) + "\n",
+                  encoding="utf-8",
+              )
+          PY
+
+      - name: Publish evidence
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/arcgpt2/
+          git commit -m "Record official public ARC probe ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload probe artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arc-gpt2-official-public-probe
+          path: |
+            reports/arcgpt2/
+            outputs/official_public_probe/result.json
+            official-public-probe.log
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Propagate failure
+        if: steps.probe.outcome != 'success'
+        run: exit 1
