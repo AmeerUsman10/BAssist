@@ -1,11 +1,8 @@
 name: ARC-GPT2 Phase 0
 
+# Historical baseline only. New ARC-GPT2 development uses explicitly scoped
+# Stage workflows, so this expensive pretrained-vs-random smoke run is manual.
 on:
-  push:
-    branches: [main, arc-gpt2-only]
-    paths:
-      - "arcgpt2/**"
-      - ".github/workflows/arc-gpt2-phase0.yml"
   workflow_dispatch:
 
 permissions:
