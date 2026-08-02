@@ -1,7 +1,7 @@
 {
-  "status": "success",
-  "commit_sha": "f81d56eb11dac89e8eedf38b20d3a8cc874bbf29",
-  "run_id": "30725290407",
-  "recorded_at_utc": "2026-08-02T00:30:00.428007+00:00",
-  "log": "................................                                         [100%]\n32 passed in 4.92s\n"
+  "status": "skipped",
+  "commit_sha": "b068d4055cc3aa65f784a93c50fcc96d7f3d5878",
+  "run_id": "30725422212",
+  "recorded_at_utc": "2026-08-02T00:33:24.359057+00:00",
+  "log": ""
 }
