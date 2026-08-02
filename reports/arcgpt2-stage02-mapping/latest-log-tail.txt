@@ -1,0 +1,800 @@
+      "file": "test.jsonl",
+      "games": 1,
+      "rows": 903,
+      "seed_start": 20,
+      "seed_stop_exclusive": 21,
+      "sha256": "c154d9cea2083152181ce0fea3f8d53957f62718b541965f922f5cf55696eb5a",
+      "task_counts": {
+        "compose": 129,
+        "direct": 129,
+        "mapping": 516,
+        "need": 129
+      },
+      "task_target_counts": {
+        "compose:1": 43,
+        "compose:2": 34,
+        "compose:3": 28,
+        "compose:4": 24,
+        "direct:1": 43,
+        "direct:2": 34,
+        "direct:3": 28,
+        "direct:4": 24,
+        "mapping:?": 124,
+        "mapping:E": 98,
+        "mapping:N": 98,
+        "mapping:S": 98,
+        "mapping:W": 98,
+        "need:?": 81,
+        "need:E": 12,
+        "need:N": 12,
+        "need:S": 12,
+        "need:W": 12
+      }
+    },
+    "train": {
+      "contexts": 129,
+      "direct_decision_phase_counts": {
+        "navigate": 48,
+        "probe": 81
+      },
+      "file": "train.jsonl",
+      "games": 1,
+      "rows": 903,
+      "seed_start": 0,
+      "seed_stop_exclusive": 1,
+      "sha256": "24959bb5276ac60979ca6235a8101936e5ce72c71bef8dc036f2dc9bc0f7cec9",
+      "task_counts": {
+        "compose": 129,
+        "direct": 129,
+        "mapping": 516,
+        "need": 129
+      },
+      "task_target_counts": {
+        "compose:1": 43,
+        "compose:2": 34,
+        "compose:3": 28,
+        "compose:4": 24,
+        "direct:1": 43,
+        "direct:2": 34,
+        "direct:3": 28,
+        "direct:4": 24,
+        "mapping:?": 124,
+        "mapping:E": 98,
+        "mapping:N": 98,
+        "mapping:S": 98,
+        "mapping:W": 98,
+        "need:?": 81,
+        "need:E": 12,
+        "need:N": 12,
+        "need:S": 12,
+        "need:W": 12
+      }
+    },
+    "validation": {
+      "contexts": 129,
+      "direct_decision_phase_counts": {
+        "navigate": 48,
+        "probe": 81
+      },
+      "file": "validation.jsonl",
+      "games": 1,
+      "rows": 903,
+      "seed_start": 0,
+      "seed_stop_exclusive": 1,
+      "sha256": "24959bb5276ac60979ca6235a8101936e5ce72c71bef8dc036f2dc9bc0f7cec9",
+      "task_counts": {
+        "compose": 129,
+        "direct": 129,
+        "mapping": 516,
+        "need": 129
+      },
+      "task_target_counts": {
+        "compose:1": 43,
+        "compose:2": 34,
+        "compose:3": 28,
+        "compose:4": 24,
+        "direct:1": 43,
+        "direct:2": 34,
+        "direct:3": 28,
+        "direct:4": 24,
+        "mapping:?": 124,
+        "mapping:E": 98,
+        "mapping:N": 98,
+        "mapping:S": 98,
+        "mapping:W": 98,
+        "need:?": 81,
+        "need:E": 12,
+        "need:N": 12,
+        "need:S": 12,
+        "need:W": 12
+      }
+    }
+  }
+}
+train 516
+validation 516
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 25027.50it/s]
+{"optimizer_step": 1, "loss": 1.3233884572982788, "learning_rate": 5e-05, "elapsed_seconds": 3.7835397720336914}
+{"optimizer_step": 20, "loss": 1.5685131549835205, "learning_rate": 5.555555555555556e-05, "elapsed_seconds": 72.14572596549988}
+{"optimizer_step": 40, "loss": 2.0685863494873047, "learning_rate": 5e-06, "elapsed_seconds": 144.02777910232544}
+{
+  "status": "completed",
+  "claim_scope": "Stage-0.2 synthetic fixed-palette no-wall hidden-action curriculum; not an ARC-AGI-3 public or private score",
+  "purity_contract": "one GPT-2 causal LM and original tokenizer are the only learned components at inference; the same model performs all four calls",
+  "config": {
+    "model_name": "openai-community/gpt2",
+    "initialization": "pretrained",
+    "train_file": "outputs/stage02-mapping/data/train-mapping.jsonl",
+    "evaluation_file": "outputs/stage02-mapping/data/validation-mapping.jsonl",
+    "output_dir": "outputs/stage02-mapping/pretrained",
+    "seed": 42,
+    "max_length": 256,
+    "prefix_keep": 128,
+    "train_batch_size": 4,
+    "eval_batch_size": 16,
+    "gradient_accumulation_steps": 1,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.01,
+    "max_optimizer_steps": 40,
+    "warmup_steps": 4,
+    "freeze_first_n_blocks": 10,
+    "train_eval_seed_start": 0,
+    "train_eval_games": 1,
+    "heldout_seed_start": 20,
+    "heldout_games": 1,
+    "max_actions_per_game": 1,
+    "history_modes": [
+      "intact"
+    ],
+    "save_model": false
+  },
+  "device": "cpu",
+  "label_token_ids": {
+    "N": 45,
+    "E": 36,
+    "S": 50,
+    "W": 54,
+    "?": 30,
+    "1": 16,
+    "2": 17,
+    "3": 18,
+    "4": 19
+  },
+  "train_examples": 516,
+  "evaluation_examples": 516,
+  "trainable_parameters": 14177280,
+  "total_parameters": 124439808,
+  "sampling_design": {
+    "task_target_counts": {
+      "mapping:?": 124,
+      "mapping:E": 98,
+      "mapping:N": 98,
+      "mapping:S": 98,
+      "mapping:W": 98
+    },
+    "expected_mass_by_task_target": {
+      "mapping": {
+        "?": 0.2000000000000003,
+        "E": 0.19999999999999973,
+        "N": 0.19999999999999973,
+        "S": 0.19999999999999973,
+        "W": 0.19999999999999973
+      }
+    },
+    "total_mass": 1.000000000000006
+  },
+  "realized_task_target_counts": {
+    "mapping:?": 45,
+    "mapping:E": 22,
+    "mapping:N": 27,
+    "mapping:S": 33,
+    "mapping:W": 33
+  },
+  "mean_training_loss": 1.73254736661911,
+  "initial_classification": {
+    "loss": 1.9307978005372277,
+    "accuracy": 0.24031007751937986,
+    "examples": 516,
+    "by_task": {
+      "mapping": {
+        "count": 516,
+        "accuracy": 0.24031007751937986,
+        "predicted_counts": {
+          "?": 516
+        },
+        "target_counts": {
+          "?": 124,
+          "E": 98,
+          "N": 98,
+          "S": 98,
+          "W": 98
+        },
+        "prediction_distribution_entropy": 0.0,
+        "mean_probability_entropy": 0.7887450768613133,
+        "dominant_prediction_share": 1.0
+      }
+    },
+    "by_phase": {
+      "navigate": {
+        "correct": 0,
+        "count": 192,
+        "accuracy": 0.0
+      },
+      "probe": {
+        "correct": 124,
+        "count": 324,
+        "accuracy": 0.38271604938271603
+      }
+    }
+  },
+  "final_classification": {
+    "loss": 1.60351693168167,
+    "accuracy": 0.24031007751937986,
+    "examples": 516,
+    "by_task": {
+      "mapping": {
+        "count": 516,
+        "accuracy": 0.24031007751937986,
+        "predicted_counts": {
+          "?": 516
+        },
+        "target_counts": {
+          "?": 124,
+          "E": 98,
+          "N": 98,
+          "S": 98,
+          "W": 98
+        },
+        "prediction_distribution_entropy": 0.0,
+        "mean_probability_entropy": 0.9898350754658483,
+        "dominant_prediction_share": 1.0
+      }
+    },
+    "by_phase": {
+      "navigate": {
+        "correct": 0,
+        "count": 192,
+        "accuracy": 0.0
+      },
+      "probe": {
+        "correct": 124,
+        "count": 324,
+        "accuracy": 0.38271604938271603
+      }
+    }
+  },
+  "closed_loop": {
+    "train": {
+      "intact": {
+        "history_mode": "intact",
+        "games": 1,
+        "games_won": 0,
+        "game_win_rate": 0.0,
+        "levels_completed": 0,
+        "level_completion_rate": 0.0,
+        "total_actions": 1,
+        "mean_actions_per_game": 1.0,
+        "composed_valid_action_accuracy": 1.0,
+        "direct_oracle_action_accuracy": 1.0,
+        "mapping_slot_accuracy": 1.0,
+        "need_accuracy": 0.0,
+        "repeated_action_transition_rate": 0.0,
+        "predicted_action_counts": {
+          "1": 1
+        },
+        "dominant_action_share": 1.0,
+        "prediction_distribution_entropy": 0.0,
+        "traces": [
+          {
+            "game_seed": 0,
+            "won": false,
+            "levels_completed": 0,
+            "actions": 1,
+            "action_trace": [
+              "1"
+            ],
+            "decisions": [
+              {
+                "action_number": 1,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "?"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3",
+                  "4"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "?",
+                    "2": "?",
+                    "3": "?",
+                    "4": "?"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "?",
+                      "probabilities": {
+                        "N": 0.1876530945301056,
+                        "E": 0.19777220487594604,
+                        "S": 0.21196340024471283,
+                        "W": 0.157102569937706,
+                        "?": 0.2455088198184967
+                      }
+                    },
+                    "2": {
+                      "selected": "?",
+                      "probabilities": {
+                        "N": 0.1871192455291748,
+                        "E": 0.19946417212486267,
+                        "S": 0.21541236340999603,
+                        "W": 0.15823277831077576,
+                        "?": 0.23977144062519073
+                      }
+                    },
+                    "3": {
+                      "selected": "?",
+                      "probabilities": {
+                        "N": 0.18766243755817413,
+                        "E": 0.1923092156648636,
+                        "S": 0.2120710015296936,
+                        "W": 0.16087663173675537,
+                        "?": 0.2470806986093521
+                      }
+                    },
+                    "4": {
+                      "selected": "?",
+                      "probabilities": {
+                        "N": 0.1904425472021103,
+                        "E": 0.19684194028377533,
+                        "S": 0.21144013106822968,
+                        "W": 0.15348204970359802,
+                        "?": 0.24779336154460907
+                      }
+                    }
+                  },
+                  "needed_direction": "E",
+                  "need_details": {
+                    "selected": "E",
+                    "probabilities": {
+                      "N": 0.1813218593597412,
+                      "E": 0.2302112579345703,
+                      "S": 0.19326364994049072,
+                      "W": 0.16639283299446106,
+                      "?": 0.22881044447422028
+                    }
+                  },
+                  "composed_action": "1",
+                  "compose_details": {
+                    "selected": "1",
+                    "probabilities": {
+                      "1": 0.7028406858444214,
+                      "2": 0.14176388084888458,
+                      "3": 0.10475766658782959,
+                      "4": 0.05063778907060623
+                    }
+                  },
+                  "direct_action": "1",
+                  "direct_details": {
+                    "selected": "1",
+                    "probabilities": {
+                      "1": 0.6109834313392639,
+                      "2": 0.19397088885307312,
+                      "3": 0.13855178654193878,
+                      "4": 0.056493986397981644
+                    }
+                  }
+                },
+                "selected_was_valid": true,
+                "status": "ACTIVE",
+                "moved": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "heldout": {
+      "intact": {
+        "history_mode": "intact",
+        "games": 1,
+        "games_won": 0,
+        "game_win_rate": 0.0,
+        "levels_completed": 0,
+        "level_completion_rate": 0.0,
+        "total_actions": 1,
+        "mean_actions_per_game": 1.0,
+        "composed_valid_action_accuracy": 1.0,
+        "direct_oracle_action_accuracy": 1.0,
+        "mapping_slot_accuracy": 1.0,
+        "need_accuracy": 0.0,
+        "repeated_action_transition_rate": 0.0,
+        "predicted_action_counts": {
+          "1": 1
+        },
+        "dominant_action_share": 1.0,
+        "prediction_distribution_entropy": 0.0,
+        "traces": [
+          {
+            "game_seed": 20,
+            "won": false,
+            "levels_completed": 0,
+            "actions": 1,
+            "action_trace": [
+              "1"
+            ],
+            "decisions": [
+              {
+                "action_number": 1,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "?"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3",
+                  "4"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "?",
+                    "2": "?",
+                    "3": "?",
+                    "4": "?"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "?",
+                      "probabilities": {
+                        "N": 0.1876530945301056,
+                        "E": 0.19777220487594604,
+                        "S": 0.21196340024471283,
+                        "W": 0.157102569937706,
+                        "?": 0.2455088198184967
+                      }
+                    },
+                    "2": {
+                      "selected": "?",
+                      "probabilities": {
+                        "N": 0.1871192455291748,
+                        "E": 0.19946417212486267,
+                        "S": 0.21541236340999603,
+                        "W": 0.15823277831077576,
+                        "?": 0.23977144062519073
+                      }
+                    },
+                    "3": {
+                      "selected": "?",
+                      "probabilities": {
+                        "N": 0.18766243755817413,
+                        "E": 0.1923092156648636,
+                        "S": 0.2120710015296936,
+                        "W": 0.16087663173675537,
+                        "?": 0.2470806986093521
+                      }
+                    },
+                    "4": {
+                      "selected": "?",
+                      "probabilities": {
+                        "N": 0.1904425472021103,
+                        "E": 0.19684194028377533,
+                        "S": 0.21144013106822968,
+                        "W": 0.15348204970359802,
+                        "?": 0.24779336154460907
+                      }
+                    }
+                  },
+                  "needed_direction": "E",
+                  "need_details": {
+                    "selected": "E",
+                    "probabilities": {
+                      "N": 0.1813218593597412,
+                      "E": 0.2302112579345703,
+                      "S": 0.19326364994049072,
+                      "W": 0.16639283299446106,
+                      "?": 0.22881044447422028
+                    }
+                  },
+                  "composed_action": "1",
+                  "compose_details": {
+                    "selected": "1",
+                    "probabilities": {
+                      "1": 0.7028406858444214,
+                      "2": 0.14176388084888458,
+                      "3": 0.10475766658782959,
+                      "4": 0.05063778907060623
+                    }
+                  },
+                  "direct_action": "1",
+                  "direct_details": {
+                    "selected": "1",
+                    "probabilities": {
+                      "1": 0.6109834313392639,
+                      "2": 0.19397088885307312,
+                      "3": 0.13855178654193878,
+                      "4": 0.056493986397981644
+                    }
+                  }
+                },
+                "selected_was_valid": true,
+                "status": "ACTIVE",
+                "moved": true
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "gates": {
+    "mapping_accuracy_at_least_0_90": false,
+    "need_accuracy_at_least_0_90": false,
+    "compose_accuracy_at_least_0_95": false,
+    "direct_accuracy_at_least_0_70": false,
+    "heldout_intact_level_completion_positive": false,
+    "heldout_intact_beats_amnesic": false,
+    "heldout_no_single_action_collapse": false,
+    "stage02_gate_passed": false
+  },
+  "step_history": [
+    {
+      "optimizer_step": 1,
+      "loss": 1.3233884572982788,
+      "learning_rate": 5e-05,
+      "elapsed_seconds": 3.7835397720336914
+    },
+    {
+      "optimizer_step": 2,
+      "loss": 2.1184041500091553,
+      "learning_rate": 7.500000000000001e-05,
+      "elapsed_seconds": 7.3945348262786865
+    },
+    {
+      "optimizer_step": 3,
+      "loss": 1.597347617149353,
+      "learning_rate": 0.0001,
+      "elapsed_seconds": 11.04451298713684
+    },
+    {
+      "optimizer_step": 4,
+      "loss": 1.9944437742233276,
+      "learning_rate": 0.0001,
+      "elapsed_seconds": 14.614072322845459
+    },
+    {
+      "optimizer_step": 5,
+      "loss": 1.78541898727417,
+      "learning_rate": 9.722222222222223e-05,
+      "elapsed_seconds": 18.179347276687622
+    },
+    {
+      "optimizer_step": 6,
+      "loss": 1.8520166873931885,
+      "learning_rate": 9.444444444444444e-05,
+      "elapsed_seconds": 21.756335973739624
+    },
+    {
+      "optimizer_step": 7,
+      "loss": 1.2339229583740234,
+      "learning_rate": 9.166666666666667e-05,
+      "elapsed_seconds": 25.34451723098755
+    },
+    {
+      "optimizer_step": 8,
+      "loss": 1.6480814218521118,
+      "learning_rate": 8.888888888888889e-05,
+      "elapsed_seconds": 28.932424068450928
+    },
+    {
+      "optimizer_step": 9,
+      "loss": 1.8335083723068237,
+      "learning_rate": 8.611111111111112e-05,
+      "elapsed_seconds": 32.50732374191284
+    },
+    {
+      "optimizer_step": 10,
+      "loss": 1.614086627960205,
+      "learning_rate": 8.333333333333334e-05,
+      "elapsed_seconds": 36.088385581970215
+    },
+    {
+      "optimizer_step": 11,
+      "loss": 1.7864840030670166,
+      "learning_rate": 8.055555555555556e-05,
+      "elapsed_seconds": 39.66885471343994
+    },
+    {
+      "optimizer_step": 12,
+      "loss": 1.840109944343567,
+      "learning_rate": 7.777777777777778e-05,
+      "elapsed_seconds": 43.28865599632263
+    },
+    {
+      "optimizer_step": 13,
+      "loss": 2.025165557861328,
+      "learning_rate": 7.500000000000001e-05,
+      "elapsed_seconds": 46.91510796546936
+    },
+    {
+      "optimizer_step": 14,
+      "loss": 1.5997365713119507,
+      "learning_rate": 7.222222222222222e-05,
+      "elapsed_seconds": 50.51104235649109
+    },
+    {
+      "optimizer_step": 15,
+      "loss": 1.8130033016204834,
+      "learning_rate": 6.944444444444444e-05,
+      "elapsed_seconds": 54.12380385398865
+    },
+    {
+      "optimizer_step": 16,
+      "loss": 1.753319501876831,
+      "learning_rate": 6.666666666666667e-05,
+      "elapsed_seconds": 57.70218753814697
+    },
+    {
+      "optimizer_step": 17,
+      "loss": 1.3256276845932007,
+      "learning_rate": 6.388888888888888e-05,
+      "elapsed_seconds": 61.301024198532104
+    },
+    {
+      "optimizer_step": 18,
+      "loss": 2.0322086811065674,
+      "learning_rate": 6.111111111111112e-05,
+      "elapsed_seconds": 64.90173768997192
+    },
+    {
+      "optimizer_step": 19,
+      "loss": 1.9670673608779907,
+      "learning_rate": 5.833333333333334e-05,
+      "elapsed_seconds": 68.49827647209167
+    },
+    {
+      "optimizer_step": 20,
+      "loss": 1.5685131549835205,
+      "learning_rate": 5.555555555555556e-05,
+      "elapsed_seconds": 72.14572596549988
+    },
+    {
+      "optimizer_step": 21,
+      "loss": 1.5102267265319824,
+      "learning_rate": 5.2777777777777784e-05,
+      "elapsed_seconds": 75.73917365074158
+    },
+    {
+      "optimizer_step": 22,
+      "loss": 1.5288671255111694,
+      "learning_rate": 5e-05,
+      "elapsed_seconds": 79.31648516654968
+    },
+    {
+      "optimizer_step": 23,
+      "loss": 1.545036792755127,
+      "learning_rate": 4.722222222222222e-05,
+      "elapsed_seconds": 82.92068243026733
+    },
+    {
+      "optimizer_step": 24,
+      "loss": 1.838295340538025,
+      "learning_rate": 4.4444444444444447e-05,
+      "elapsed_seconds": 86.53030109405518
+    },
+    {
+      "optimizer_step": 25,
+      "loss": 1.667179822921753,
+      "learning_rate": 4.166666666666667e-05,
+      "elapsed_seconds": 90.12655401229858
+    },
+    {
+      "optimizer_step": 26,
+      "loss": 1.8009121417999268,
+      "learning_rate": 3.888888888888889e-05,
+      "elapsed_seconds": 93.70409822463989
+    },
+    {
+      "optimizer_step": 27,
+      "loss": 1.4812901020050049,
+      "learning_rate": 3.611111111111111e-05,
+      "elapsed_seconds": 97.31072854995728
+    },
+    {
+      "optimizer_step": 28,
+      "loss": 1.7295366525650024,
+      "learning_rate": 3.3333333333333335e-05,
+      "elapsed_seconds": 100.90000700950623
+    },
+    {
+      "optimizer_step": 29,
+      "loss": 1.8200377225875854,
+      "learning_rate": 3.055555555555556e-05,
+      "elapsed_seconds": 104.50409007072449
+    },
+    {
+      "optimizer_step": 30,
+      "loss": 1.580857276916504,
+      "learning_rate": 2.777777777777778e-05,
+      "elapsed_seconds": 108.09158039093018
+    },
+    {
+      "optimizer_step": 31,
+      "loss": 1.736701488494873,
+      "learning_rate": 2.5e-05,
+      "elapsed_seconds": 111.68150782585144
+    },
+    {
+      "optimizer_step": 32,
+      "loss": 2.146371841430664,
+      "learning_rate": 2.2222222222222223e-05,
+      "elapsed_seconds": 115.2644031047821
+    },
+    {
+      "optimizer_step": 33,
+      "loss": 2.253628969192505,
+      "learning_rate": 1.9444444444444445e-05,
+      "elapsed_seconds": 118.85871696472168
+    },
+    {
+      "optimizer_step": 34,
+      "loss": 1.416175365447998,
+      "learning_rate": 1.6666666666666667e-05,
+      "elapsed_seconds": 122.44610095024109
+    },
+    {
+      "optimizer_step": 35,
+      "loss": 1.8163650035858154,
+      "learning_rate": 1.388888888888889e-05,
+      "elapsed_seconds": 126.04108166694641
+    },
+    {
+      "optimizer_step": 36,
+      "loss": 1.7990505695343018,
+      "learning_rate": 1.1111111111111112e-05,
+      "elapsed_seconds": 129.6549768447876
+    },
+    {
+      "optimizer_step": 37,
+      "loss": 1.53087317943573,
+      "learning_rate": 8.333333333333334e-06,
+      "elapsed_seconds": 133.3001058101654
+    },
+    {
+      "optimizer_step": 38,
+      "loss": 1.8343608379364014,
+      "learning_rate": 5.555555555555556e-06,
+      "elapsed_seconds": 136.87699508666992
+    },
+    {
+      "optimizer_step": 39,
+      "loss": 1.4856865406036377,
+      "learning_rate": 5e-06,
+      "elapsed_seconds": 140.44713354110718
+    },
+    {
+      "optimizer_step": 40,
+      "loss": 2.0685863494873047,
+      "learning_rate": 5e-06,
+      "elapsed_seconds": 144.02777910232544
+    }
+  ],
+  "elapsed_seconds": 395.8516638278961
+}
