@@ -1,0 +1,43 @@
+name: Package GPT-2 Tokenizer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/gpt2-tokenizer-artifact.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Download original GPT-2 tokenizer
+        env:
+          HF_HUB_DISABLE_TELEMETRY: "1"
+        run: |
+          python -m pip install -q "transformers>=4.48,<6"
+          python - <<'PY'
+          from pathlib import Path
+          from transformers import AutoTokenizer
+
+          output = Path("gpt2-tokenizer")
+          tokenizer = AutoTokenizer.from_pretrained("openai-community/gpt2")
+          tokenizer.save_pretrained(output)
+          for path in sorted(output.iterdir()):
+              print(path.name, path.stat().st_size)
+          PY
+      - name: Upload tokenizer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gpt2-original-tokenizer
+          path: gpt2-tokenizer/
+          if-no-files-found: error
+          retention-days: 30
