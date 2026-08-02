@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+import pytest
+
 from arcgpt2.contact_world_agent import (
-    ContactScoreProvider,
     UniformContactScores,
     build_contact_worlds,
     run_contact_agent,
@@ -39,7 +40,7 @@ def test_contact_world_posterior_starts_with_all_120_worlds() -> None:
     spec = generate_contact_game(400_001)
     entries = build_contact_worlds(spec, (), None, UniformContactScores())
     assert len(entries) == 24 * len(ContactMode)
-    assert sum(entry.probability for entry in entries) == 1.0
+    assert sum(entry.probability for entry in entries) == pytest.approx(1.0)
 
 
 def test_uniform_contact_agent_solves_held_out_games() -> None:
@@ -81,9 +82,8 @@ def test_agent_uses_multistep_fracture_to_reach_contact_experiment() -> None:
         planner_depth=2,
     )
     assert result.won
-    # At least one exploratory action should have zero immediate information
-    # but positive future value: moving adjacent to the special cell is useful
-    # only because the following contact fractures the five remaining modes.
+    # At least one exploratory action has zero immediate information but is the
+    # first step of a shortest path to a later posterior-fracturing contact.
     exploratory = [
         step
         for step in result.steps
