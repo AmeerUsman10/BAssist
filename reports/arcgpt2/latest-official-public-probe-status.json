@@ -1,0 +1,9 @@
+{
+  "status": "skipped",
+  "branch": "arc-gpt2-programs",
+  "commit_sha": "ee305910a0eb24a476b9e2bc2e62f2a9c83bdc41",
+  "run_id": "30726323293",
+  "recorded_at_utc": "2026-08-02T01:02:27.323876+00:00",
+  "scope": "Bounded official public ARC-AGI-3 interface probe under anonymous development access; no competition submission",
+  "result_present": false
+}
