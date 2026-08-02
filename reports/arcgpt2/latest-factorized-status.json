@@ -1,9 +1,9 @@
 {
-  "status": "cancelled",
+  "status": "success",
   "branch": "arc-gpt2-programs",
-  "commit_sha": "552aa0d33fe3d6abafd983fcf60c6ff53d7a714e",
-  "run_id": "30721552932",
+  "commit_sha": "aa8385bf3b8ac8c674d7badfc4d797d65a7df98c",
+  "run_id": "30722014447",
   "run_attempt": "1",
-  "recorded_at_utc": "2026-08-01T22:37:52.849573+00:00",
-  "scope": "Natural-language factorized hidden-action semantics with one GPT-2 model per matched run; not ARC-AGI-3 evaluation"
+  "recorded_at_utc": "2026-08-02T03:18:11.329086+00:00",
+  "scope": "Natural-language factorized hidden-action semantics with frozen GPT-2 embeddings and one model per matched run; not ARC-AGI-3 evaluation"
 }

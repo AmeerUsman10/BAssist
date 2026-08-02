@@ -1,40 +1,700 @@
-{
-  "representation": "Exact natural-language grids and cell deltas using only the original GPT-2 vocabulary; no learned visual encoder or semantic parser.",
-  "schema": "arcgpt2.factorized_action_semantics.v1",
-  "scope": "Natural-language four-way action semantics with an exact permutation constraint; controlled Phase-0 gate, not ARC-AGI-3 evaluation.",
-  "seed_base": 112358,
-  "splits": {
-    "test": {
-      "examples": 128,
-      "examples_per_game": 4,
-      "file": "test.jsonl",
-      "games": 32,
-      "seed_start": 112574,
-      "seed_stop_exclusive": 112606,
-      "sha256": "4b138cdcd75f9cd4e52c1dca5a56ec8f9980330c522fc353a2e80e48a0550552"
+          "selected_mapping": {
+            "A1": "UP",
+            "A2": "LEFT",
+            "A3": "RIGHT",
+            "A4": "DOWN"
+          },
+          "truth_mapping": {
+            "A1": "UP",
+            "A2": "RIGHT",
+            "A3": "LEFT",
+            "A4": "DOWN"
+          },
+          "score_matrix": [
+            [
+              -3.4634385108947754,
+              -3.422720432281494,
+              -3.6248645782470703,
+              -3.4544825553894043
+            ],
+            [
+              -3.4641926288604736,
+              -3.4230215549468994,
+              -3.624039888381958,
+              -3.4541542530059814
+            ],
+            [
+              -3.464327812194824,
+              -3.422466278076172,
+              -3.6245193481445312,
+              -3.4541077613830566
+            ],
+            [
+              -3.4646847248077393,
+              -3.421637773513794,
+              -3.6254045963287354,
+              -3.453711748123169
+            ]
+          ],
+          "downstream": {
+            "game_won": false,
+            "levels_completed": 0,
+            "actions_taken_including_probes": 7,
+            "plans": [
+              [
+                "A1",
+                "A1",
+                "A3"
+              ]
+            ]
+          }
+        },
+        {
+          "game_seed": 112587,
+          "exact_mapping": false,
+          "correct_actions": 0,
+          "truth_rank": 23,
+          "truth_probability": 0.04159320832753167,
+          "selected_mapping": {
+            "A1": "UP",
+            "A2": "LEFT",
+            "A3": "DOWN",
+            "A4": "RIGHT"
+          },
+          "truth_mapping": {
+            "A1": "RIGHT",
+            "A2": "DOWN",
+            "A3": "UP",
+            "A4": "LEFT"
+          },
+          "score_matrix": [
+            [
+              -3.4567863941192627,
+              -3.448845148086548,
+              -3.6373960971832275,
+              -3.424179792404175
+            ],
+            [
+              -3.4576239585876465,
+              -3.4496917724609375,
+              -3.636181354522705,
+              -3.4237680435180664
+            ],
+            [
+              -3.4576308727264404,
+              -3.448925256729126,
+              -3.6365320682525635,
+              -3.424023389816284
+            ],
+            [
+              -3.458173990249634,
+              -3.448477029800415,
+              -3.637446165084839,
+              -3.4230573177337646
+            ]
+          ],
+          "downstream": {
+            "game_won": false,
+            "levels_completed": 0,
+            "actions_taken_including_probes": 7,
+            "plans": [
+              [
+                "A1",
+                "A1",
+                "A2"
+              ]
+            ]
+          }
+        },
+        {
+          "game_seed": 112588,
+          "exact_mapping": false,
+          "correct_actions": 0,
+          "truth_rank": 23,
+          "truth_probability": 0.041596878509449056,
+          "selected_mapping": {
+            "A1": "UP",
+            "A2": "LEFT",
+            "A3": "RIGHT",
+            "A4": "DOWN"
+          },
+          "truth_mapping": {
+            "A1": "RIGHT",
+            "A2": "UP",
+            "A3": "DOWN",
+            "A4": "LEFT"
+          },
+          "score_matrix": [
+            [
+              -3.459935188293457,
+              -3.4177169799804688,
+              -3.635542869567871,
+              -3.4511661529541016
+            ],
+            [
+              -3.461124897003174,
+              -3.4180846214294434,
+              -3.634514808654785,
+              -3.4505715370178223
+            ],
+            [
+              -3.4610378742218018,
+              -3.417752504348755,
+              -3.635091543197632,
+              -3.450343370437622
+            ],
+            [
+              -3.4613196849823,
+              -3.417151689529419,
+              -3.6359221935272217,
+              -3.4498841762542725
+            ]
+          ],
+          "downstream": {
+            "game_won": false,
+            "levels_completed": 0,
+            "actions_taken_including_probes": 8,
+            "plans": [
+              [
+                "A1",
+                "A1",
+                "A3",
+                "A3"
+              ]
+            ]
+          }
+        },
+        {
+          "game_seed": 112589,
+          "exact_mapping": false,
+          "correct_actions": 1,
+          "truth_rank": 20,
+          "truth_probability": 0.041623740748659314,
+          "selected_mapping": {
+            "A1": "UP",
+            "A2": "LEFT",
+            "A3": "DOWN",
+            "A4": "RIGHT"
+          },
+          "truth_mapping": {
+            "A1": "LEFT",
+            "A2": "RIGHT",
+            "A3": "DOWN",
+            "A4": "UP"
+          },
+          "score_matrix": [
+            [
+              -3.4693658351898193,
+              -3.4157116413116455,
+              -3.655194044113159,
+              -3.42810320854187
+            ],
+            [
+              -3.4702634811401367,
+              -3.4160046577453613,
+              -3.654162883758545,
+              -3.4278502464294434
+            ],
+            [
+              -3.4701337814331055,
+              -3.4153480529785156,
+              -3.6549324989318848,
+              -3.427806854248047
+            ],
+            [
+              -3.470909833908081,
+              -3.4150803089141846,
+              -3.655297040939331,
+              -3.4269235134124756
+            ]
+          ],
+          "downstream": {
+            "game_won": false,
+            "levels_completed": 0,
+            "actions_taken_including_probes": 7,
+            "plans": [
+              [
+                "A1",
+                "A4",
+                "A4"
+              ]
+            ]
+          }
+        },
+        {
+          "game_seed": 112590,
+          "exact_mapping": false,
+          "correct_actions": 1,
+          "truth_rank": 14,
+          "truth_probability": 0.041655517702853015,
+          "selected_mapping": {
+            "A1": "UP",
+            "A2": "LEFT",
+            "A3": "RIGHT",
+            "A4": "DOWN"
+          },
+          "truth_mapping": {
+            "A1": "RIGHT",
+            "A2": "LEFT",
+            "A3": "DOWN",
+            "A4": "UP"
+          },
+          "score_matrix": [
+            [
+              -3.432326555252075,
+              -3.4508216381073,
+              -3.6539418697357178,
+              -3.431499719619751
+            ],
+            [
+              -3.4334168434143066,
+              -3.451262950897217,
+              -3.6529221534729004,
+              -3.4309592247009277
+            ],
+            [
+              -3.433243751525879,
+              -3.450821876525879,
+              -3.653536796569824,
+              -3.4307870864868164
+            ],
+            [
+              -3.433537006378174,
+              -3.450162887573242,
+              -3.654473304748535,
+              -3.4303412437438965
+            ]
+          ],
+          "downstream": {
+            "game_won": false,
+            "levels_completed": 0,
+            "actions_taken_including_probes": 8,
+            "plans": [
+              [
+                "A1",
+                "A1",
+                "A2",
+                "A2"
+              ]
+            ]
+          }
+        },
+        {
+          "game_seed": 112591,
+          "exact_mapping": false,
+          "correct_actions": 0,
+          "truth_rank": 21,
+          "truth_probability": 0.04161508089532282,
+          "selected_mapping": {
+            "A1": "UP",
+            "A2": "LEFT",
+            "A3": "RIGHT",
+            "A4": "DOWN"
+          },
+          "truth_mapping": {
+            "A1": "LEFT",
+            "A2": "RIGHT",
+            "A3": "DOWN",
+            "A4": "UP"
+          },
+          "score_matrix": [
+            [
+              -3.5134406089782715,
+              -3.4276556968688965,
+              -3.626521587371826,
+              -3.396340847015381
+            ],
+            [
+              -3.5141937732696533,
+              -3.4285099506378174,
+              -3.624948740005493,
+              -3.396275758743286
+            ],
+            [
+              -3.513964891433716,
+              -3.4277589321136475,
+              -3.625889539718628,
+              -3.39618182182312
+            ],
+            [
+              -3.514630079269409,
+              -3.4271581172943115,
+              -3.626574754714966,
+              -3.395747423171997
+            ]
+          ],
+          "downstream": {
+            "game_won": false,
+            "levels_completed": 0,
+            "actions_taken_including_probes": 7,
+            "plans": [
+              [
+                "A3",
+                "A4",
+                "A4"
+              ]
+            ]
+          }
+        },
+        {
+          "game_seed": 112592,
+          "exact_mapping": true,
+          "correct_actions": 4,
+          "truth_rank": 1,
+          "truth_probability": 0.04175766065914248,
+          "selected_mapping": {
+            "A1": "UP",
+            "A2": "LEFT",
+            "A3": "RIGHT",
+            "A4": "DOWN"
+          },
+          "truth_mapping": {
+            "A1": "UP",
+            "A2": "LEFT",
+            "A3": "RIGHT",
+            "A4": "DOWN"
+          },
+          "score_matrix": [
+            [
+              -3.4540605545043945,
+              -3.404440402984619,
+              -3.6589455604553223,
+              -3.4486193656921387
+            ],
+            [
+              -3.4550395011901855,
+              -3.404869556427002,
+              -3.6580567359924316,
+              -3.4480810165405273
+            ],
+            [
+              -3.4550695419311523,
+              -3.40435791015625,
+              -3.65871524810791,
+              -3.4478726387023926
+            ],
+            [
+              -3.4553580284118652,
+              -3.4038796424865723,
+              -3.659432888031006,
+              -3.4474077224731445
+            ]
+          ],
+          "downstream": {
+            "game_won": true,
+            "levels_completed": 3,
+            "actions_taken_including_probes": 13,
+            "plans": [
+              [
+                "A3",
+                "A3",
+                "A4",
+                "A4"
+              ],
+              [
+                "A3",
+                "A1",
+                "A1",
+                "A3"
+              ],
+              [
+                "A2"
+              ]
+            ]
+          }
+        },
+        {
+          "game_seed": 112593,
+          "exact_mapping": false,
+          "correct_actions": 0,
+          "truth_rank": 10,
+          "truth_probability": 0.04167269169647306,
+          "selected_mapping": {
+            "A1": "UP",
+            "A2": "LEFT",
+            "A3": "DOWN",
+            "A4": "RIGHT"
+          },
+          "truth_mapping": {
+            "A1": "RIGHT",
+            "A2": "UP",
+            "A3": "LEFT",
+            "A4": "DOWN"
+          },
+          "score_matrix": [
+            [
+              -3.482517957687378,
+              -3.3698389530181885,
+              -3.6574389934539795,
+              -3.4593636989593506
+            ],
+            [
+              -3.4832534790039062,
+              -3.3700151443481445,
+              -3.6566600799560547,
+              -3.4590253829956055
+            ],
+            [
+              -3.4830803871154785,
+              -3.369628429412842,
+              -3.6571311950683594,
+              -3.4593148231506348
+            ],
+            [
+              -3.483597755432129,
+              -3.369187831878662,
+              -3.657808780670166,
+              -3.4584617614746094
+            ]
+          ],
+          "downstream": {
+            "game_won": false,
+            "levels_completed": 0,
+            "actions_taken_including_probes": 7,
+            "plans": [
+              [
+                "A1",
+                "A1",
+                "A2"
+              ]
+            ]
+          }
+        },
+        {
+          "game_seed": 112594,
+          "exact_mapping": false,
+          "correct_actions": 1,
+          "truth_rank": 18,
+          "truth_probability": 0.041641526617101104,
+          "selected_mapping": {
+            "A1": "UP",
+            "A2": "LEFT",
+            "A3": "DOWN",
+            "A4": "RIGHT"
+          },
+          "truth_mapping": {
+            "A1": "LEFT",
+            "A2": "RIGHT",
+            "A3": "DOWN",
+            "A4": "UP"
+          },
+          "score_matrix": [
+            [
+              -3.4530510902404785,
+              -3.3669676780700684,
+              -3.671804904937744,
+              -3.479884624481201
+            ],
+            [
+              -3.4537692070007324,
+              -3.367408275604248,
+              -3.670717716217041,
+              -3.479641914367676
+            ],
+            [
+              -3.453734874725342,
+              -3.3668527603149414,
+              -3.67161226272583,
+              -3.4795594215393066
+            ],
+            [
+              -3.453965187072754,
+              -3.3665690422058105,
+              -3.6719717979431152,
+              -3.479135513305664
+            ]
+          ],
+          "downstream": {
+            "game_won": false,
+            "levels_completed": 0,
+            "actions_taken_including_probes": 7,
+            "plans": [
+              [
+                "A2",
+                "A3",
+                "A3"
+              ]
+            ]
+          }
+        },
+        {
+          "game_seed": 112595,
+          "exact_mapping": false,
+          "correct_actions": 0,
+          "truth_rank": 17,
+          "truth_probability": 0.04164523495502911,
+          "selected_mapping": {
+            "A1": "UP",
+            "A2": "LEFT",
+            "A3": "DOWN",
+            "A4": "RIGHT"
+          },
+          "truth_mapping": {
+            "A1": "DOWN",
+            "A2": "RIGHT",
+            "A3": "LEFT",
+            "A4": "UP"
+          },
+          "score_matrix": [
+            [
+              -3.485563039779663,
+              -3.43279767036438,
+              -3.561906099319458,
+              -3.489403486251831
+            ],
+            [
+              -3.4870054721832275,
+              -3.43291974067688,
+              -3.560563325881958,
+              -3.4888546466827393
+            ],
+            [
+              -3.4866044521331787,
+              -3.43277907371521,
+              -3.5611822605133057,
+              -3.4888784885406494
+            ],
+            [
+              -3.4871327877044678,
+              -3.432360887527466,
+              -3.5616772174835205,
+              -3.488185167312622
+            ]
+          ],
+          "downstream": {
+            "game_won": false,
+            "levels_completed": 0,
+            "actions_taken_including_probes": 8,
+            "plans": [
+              [
+                "A3",
+                "A3",
+                "A4",
+                "A4"
+              ]
+            ]
+          }
+        },
+        {
+          "game_seed": 112596,
+          "exact_mapping": false,
+          "correct_actions": 1,
+          "truth_rank": 17,
+          "truth_probability": 0.04164145090091171,
+          "selected_mapping": {
+            "A1": "UP",
+            "A2": "LEFT",
+            "A3": "DOWN",
+            "A4": "RIGHT"
+          },
+          "truth_mapping": {
+            "A1": "LEFT",
+            "A2": "DOWN",
+            "A3": "UP",
+            "A4": "RIGHT"
+          },
+          "score_matrix": [
+            [
+              -3.45454478263855,
+              -3.4382660388946533,
+              -3.6402947902679443,
+              -3.4345242977142334
+            ],
+            [
+              -3.4553403854370117,
+              -3.43917179107666,
+              -3.63901424407959,
+              -3.4341354370117188
+            ],
+            [
+              -3.455289840698242,
+              -3.4384164810180664,
+              -3.639449119567871,
+              -3.4343671798706055
+            ],
+            [
+              -3.4558935165405273,
+              -3.437929630279541,
+              -3.640331268310547,
+              -3.4334540367126465
+            ]
+          ],
+          "downstream": {
+            "game_won": false,
+            "levels_completed": 0,
+            "actions_taken_including_probes": 8,
+            "plans": [
+              [
+                "A2",
+                "A2",
+                "A3",
+                "A3"
+              ]
+            ]
+          }
+        },
+        {
+          "game_seed": 112597,
+          "exact_mapping": false,
+          "correct_actions": 0,
+          "truth_rank": 14,
+          "truth_probability": 0.04165806059582679,
+          "selected_mapping": {
+            "A1": "UP",
+            "A2": "LEFT",
+            "A3": "DOWN",
+            "A4": "RIGHT"
+          },
+          "truth_mapping": {
+            "A1": "RIGHT",
+            "A2": "UP",
+            "A3": "LEFT",
+            "A4": "DOWN"
+          },
+          "score_matrix": [
+            [
+              -3.4564685821533203,
+              -3.3630056381225586,
+              -3.6763100624084473,
+              -3.475827693939209
+            ],
+            [
+              -3.457193613052368,
+              -3.3634393215179443,
+              -3.6751983165740967,
+              -3.4756133556365967
+            ],
+            [
+              -3.4571175575256348,
+              -3.36285400390625,
+              -3.676105499267578,
+              -3.4755821228027344
+            ],
+            [
+              -3.4573349952697754,
+              -3.3626389503479004,
+              -3.6764464378356934,
+              -3.475101947784424
+            ]
+          ],
+          "downstream": {
+            "game_won": false,
+            "levels_completed": 0,
+            "actions_taken_including_probes": 7,
+            "plans": [
+              [
+                "A1",
+                "A1",
+                "A2"
+              ]
+            ]
+          }
+        }
+      ]
     },
-    "train": {
-      "examples": 768,
-      "examples_per_game": 4,
-      "file": "train.jsonl",
-      "games": 192,
-      "seed_start": 112358,
-      "seed_stop_exclusive": 112550,
-      "sha256": "bad45b4a0d01f36e513435d943ffed9525001362501a18ac13e8c46dfcc421ad"
-    },
-    "validation": {
-      "examples": 96,
-      "examples_per_game": 4,
-      "file": "validation.jsonl",
-      "games": 24,
-      "seed_start": 112550,
-      "seed_stop_exclusive": 112574,
-      "sha256": "d9d582631babd13c2813b555c5fd88a47e6f73ccac7a9edca45676651c852f15"
+    "validation_loss": {
+      "initial": 11.3779616355896,
+      "final": 3.4920923312505088
     }
   }
 }
-Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
-
-Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
-Loading weights: 100%|██████████| 148/148 [00:00<00:00, 26631.64it/s]
-[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
