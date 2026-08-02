@@ -12,12 +12,22 @@ import json
 from collections import Counter, defaultdict
 from pathlib import Path
 from statistics import mean, median
-from typing import Any, Iterable, Mapping, Sequence
+from typing import Any, Mapping, Sequence
 
 from transformers import AutoTokenizer
 
 from . import stage02_decomposed as dense
-from .train_stage02 import truncate_ids
+
+
+def truncate_ids(ids: Sequence[int], *, budget: int, prefix_keep: int) -> list[int]:
+    """Mirror the trainer's deterministic head/tail context truncation."""
+    values = list(ids)
+    if budget < 1:
+        raise ValueError("token budget must be positive")
+    if len(values) <= budget:
+        return values
+    keep_prefix = min(prefix_keep, budget // 2)
+    return values[:keep_prefix] + values[-(budget - keep_prefix) :]
 
 
 def percentile(values: Sequence[int], probability: float) -> int:
