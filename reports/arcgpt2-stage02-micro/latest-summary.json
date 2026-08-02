@@ -1,0 +1,4976 @@
+{
+  "status": "completed",
+  "claim_scope": "Stage-0.2 synthetic fixed-palette no-wall hidden-action curriculum; not an ARC-AGI-3 public or private score",
+  "purity_contract": "one GPT-2 causal LM and original tokenizer are the only learned components at inference; the same model performs all four calls",
+  "config": {
+    "model_name": "openai-community/gpt2",
+    "initialization": "pretrained",
+    "train_file": "outputs/stage02-micro/data/train.jsonl",
+    "evaluation_file": "outputs/stage02-micro/data/validation.jsonl",
+    "output_dir": "outputs/stage02-micro/pretrained",
+    "seed": 42,
+    "max_length": 320,
+    "prefix_keep": 160,
+    "train_batch_size": 2,
+    "eval_batch_size": 8,
+    "gradient_accumulation_steps": 2,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.01,
+    "max_optimizer_steps": 80,
+    "warmup_steps": 4,
+    "freeze_first_n_blocks": 10,
+    "train_eval_seed_start": 0,
+    "train_eval_games": 1,
+    "heldout_seed_start": 20,
+    "heldout_games": 1,
+    "max_actions_per_game": 20,
+    "history_modes": [
+      "intact"
+    ],
+    "save_model": false
+  },
+  "device": "cpu",
+  "label_token_ids": {
+    "N": 45,
+    "E": 36,
+    "S": 50,
+    "W": 54,
+    "?": 30,
+    "1": 16,
+    "2": 17,
+    "3": 18,
+    "4": 19
+  },
+  "train_examples": 903,
+  "evaluation_examples": 903,
+  "trainable_parameters": 14177280,
+  "total_parameters": 124439808,
+  "sampling_design": {
+    "task_target_counts": {
+      "compose:1": 43,
+      "compose:2": 34,
+      "compose:3": 28,
+      "compose:4": 24,
+      "direct:1": 43,
+      "direct:2": 34,
+      "direct:3": 28,
+      "direct:4": 24,
+      "mapping:?": 124,
+      "mapping:E": 98,
+      "mapping:N": 98,
+      "mapping:S": 98,
+      "mapping:W": 98,
+      "need:?": 81,
+      "need:E": 12,
+      "need:N": 12,
+      "need:S": 12,
+      "need:W": 12
+    },
+    "expected_mass_by_task_target": {
+      "compose": {
+        "1": 0.06250000000000004,
+        "2": 0.0625,
+        "3": 0.06249999999999998,
+        "4": 0.06249999999999997
+      },
+      "direct": {
+        "1": 0.06250000000000004,
+        "2": 0.0625,
+        "3": 0.06249999999999998,
+        "4": 0.06249999999999997
+      },
+      "mapping": {
+        "?": 0.05000000000000007,
+        "E": 0.04999999999999993,
+        "N": 0.04999999999999993,
+        "S": 0.04999999999999993,
+        "W": 0.04999999999999993
+      },
+      "need": {
+        "?": 0.049999999999999926,
+        "E": 0.049999999999999996,
+        "N": 0.049999999999999996,
+        "S": 0.049999999999999996,
+        "W": 0.049999999999999996
+      }
+    },
+    "total_mass": 0.9999999999999905
+  },
+  "realized_task_target_counts": {
+    "compose:1": 15,
+    "compose:2": 14,
+    "compose:3": 15,
+    "compose:4": 28,
+    "direct:1": 15,
+    "direct:2": 23,
+    "direct:3": 22,
+    "direct:4": 17,
+    "mapping:?": 23,
+    "mapping:E": 17,
+    "mapping:N": 20,
+    "mapping:S": 15,
+    "mapping:W": 17,
+    "need:?": 19,
+    "need:E": 16,
+    "need:N": 19,
+    "need:S": 19,
+    "need:W": 6
+  },
+  "mean_training_loss": 1.6873180087655784,
+  "initial_classification": {
+    "loss": 1.7649498302675164,
+    "accuracy": 0.3222591362126246,
+    "examples": 903,
+    "by_task": {
+      "compose": {
+        "count": 129,
+        "accuracy": 0.3333333333333333,
+        "predicted_counts": {
+          "1": 129
+        },
+        "target_counts": {
+          "1": 43,
+          "2": 34,
+          "3": 28,
+          "4": 24
+        },
+        "prediction_distribution_entropy": 0.0,
+        "mean_probability_entropy": 0.6047398456842863,
+        "dominant_prediction_share": 1.0
+      },
+      "direct": {
+        "count": 129,
+        "accuracy": 0.3333333333333333,
+        "predicted_counts": {
+          "1": 129
+        },
+        "target_counts": {
+          "1": 43,
+          "2": 34,
+          "3": 28,
+          "4": 24
+        },
+        "prediction_distribution_entropy": 0.0,
+        "mean_probability_entropy": 0.7577103648935706,
+        "dominant_prediction_share": 1.0
+      },
+      "mapping": {
+        "count": 516,
+        "accuracy": 0.24031007751937986,
+        "predicted_counts": {
+          "?": 516
+        },
+        "target_counts": {
+          "?": 124,
+          "E": 98,
+          "N": 98,
+          "S": 98,
+          "W": 98
+        },
+        "prediction_distribution_entropy": 0.0,
+        "mean_probability_entropy": 0.7831733143694151,
+        "dominant_prediction_share": 1.0
+      },
+      "need": {
+        "count": 129,
+        "accuracy": 0.627906976744186,
+        "predicted_counts": {
+          "?": 129
+        },
+        "target_counts": {
+          "?": 81,
+          "E": 12,
+          "N": 12,
+          "S": 12,
+          "W": 12
+        },
+        "prediction_distribution_entropy": 0.0,
+        "mean_probability_entropy": 0.7798526334689536,
+        "dominant_prediction_share": 1.0
+      }
+    },
+    "by_phase": {
+      "navigate": {
+        "correct": 24,
+        "count": 336,
+        "accuracy": 0.07142857142857142
+      },
+      "probe": {
+        "correct": 267,
+        "count": 567,
+        "accuracy": 0.4708994708994709
+      }
+    }
+  },
+  "final_classification": {
+    "loss": 1.5967315142336873,
+    "accuracy": 0.17940199335548174,
+    "examples": 903,
+    "by_task": {
+      "compose": {
+        "count": 129,
+        "accuracy": 0.18604651162790697,
+        "predicted_counts": {
+          "4": 129
+        },
+        "target_counts": {
+          "1": 43,
+          "2": 34,
+          "3": 28,
+          "4": 24
+        },
+        "prediction_distribution_entropy": 0.0,
+        "mean_probability_entropy": 0.967610260776073,
+        "dominant_prediction_share": 1.0
+      },
+      "direct": {
+        "count": 129,
+        "accuracy": 0.21705426356589147,
+        "predicted_counts": {
+          "2": 1,
+          "3": 128
+        },
+        "target_counts": {
+          "1": 43,
+          "2": 34,
+          "3": 28,
+          "4": 24
+        },
+        "prediction_distribution_entropy": 0.0327454106573635,
+        "mean_probability_entropy": 0.993614190403053,
+        "dominant_prediction_share": 0.9922480620155039
+      },
+      "mapping": {
+        "count": 516,
+        "accuracy": 0.18992248062015504,
+        "predicted_counts": {
+          "N": 516
+        },
+        "target_counts": {
+          "?": 124,
+          "E": 98,
+          "N": 98,
+          "S": 98,
+          "W": 98
+        },
+        "prediction_distribution_entropy": 0.0,
+        "mean_probability_entropy": 0.9809325228668644,
+        "dominant_prediction_share": 1.0
+      },
+      "need": {
+        "count": 129,
+        "accuracy": 0.09302325581395349,
+        "predicted_counts": {
+          "N": 129
+        },
+        "target_counts": {
+          "?": 81,
+          "E": 12,
+          "N": 12,
+          "S": 12,
+          "W": 12
+        },
+        "prediction_distribution_entropy": 0.0,
+        "mean_probability_entropy": 0.9885802618542918,
+        "dominant_prediction_share": 1.0
+      }
+    },
+    "by_phase": {
+      "navigate": {
+        "correct": 84,
+        "count": 336,
+        "accuracy": 0.25
+      },
+      "probe": {
+        "correct": 78,
+        "count": 567,
+        "accuracy": 0.13756613756613756
+      }
+    }
+  },
+  "closed_loop": {
+    "train": {
+      "intact": {
+        "history_mode": "intact",
+        "games": 1,
+        "games_won": 0,
+        "game_win_rate": 0.0,
+        "levels_completed": 0,
+        "level_completion_rate": 0.0,
+        "total_actions": 20,
+        "mean_actions_per_game": 20.0,
+        "composed_valid_action_accuracy": 0.05,
+        "direct_oracle_action_accuracy": 0.0,
+        "mapping_slot_accuracy": 0.0,
+        "need_accuracy": 0.0,
+        "repeated_action_transition_rate": 1.0,
+        "predicted_action_counts": {
+          "4": 20
+        },
+        "dominant_action_share": 1.0,
+        "prediction_distribution_entropy": 0.0,
+        "traces": [
+          {
+            "game_seed": 0,
+            "won": false,
+            "levels_completed": 0,
+            "actions": 20,
+            "action_trace": [
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4"
+            ],
+            "decisions": [
+              {
+                "action_number": 1,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "?"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3",
+                  "4"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2707083225250244,
+                        "E": 0.2426539659500122,
+                        "S": 0.1560012400150299,
+                        "W": 0.15217137336730957,
+                        "?": 0.1784650981426239
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2723349332809448,
+                        "E": 0.24385884404182434,
+                        "S": 0.15691226720809937,
+                        "W": 0.1527567356824875,
+                        "?": 0.1741371750831604
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.27214428782463074,
+                        "E": 0.23882897198200226,
+                        "S": 0.15610772371292114,
+                        "W": 0.15466968715190887,
+                        "?": 0.178249329328537
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2771744430065155,
+                        "E": 0.24081149697303772,
+                        "S": 0.15463609993457794,
+                        "W": 0.14947305619716644,
+                        "?": 0.17790497839450836
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.25694209337234497,
+                      "E": 0.2538478970527649,
+                      "S": 0.1922382414340973,
+                      "W": 0.13903139531612396,
+                      "?": 0.1579403430223465
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "2",
+                  "direct_details": {
+                    "selected": "2",
+                    "probabilities": {
+                      "1": 0.20003671944141388,
+                      "2": 0.27408403158187866,
+                      "3": 0.26725324988365173,
+                      "4": 0.25862592458724976
+                    }
+                  }
+                },
+                "selected_was_valid": true,
+                "status": "ACTIVE",
+                "moved": true
+              },
+              {
+                "action_number": 2,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2510318160057068,
+                        "E": 0.226009339094162,
+                        "S": 0.14952786266803741,
+                        "W": 0.16504821181297302,
+                        "?": 0.20838278532028198
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.255201131105423,
+                        "E": 0.22627340257167816,
+                        "S": 0.15051569044589996,
+                        "W": 0.16819317638874054,
+                        "?": 0.19981664419174194
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.25346919894218445,
+                        "E": 0.22241458296775818,
+                        "S": 0.14887163043022156,
+                        "W": 0.16943015158176422,
+                        "?": 0.20581446588039398
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2586731016635895,
+                        "E": 0.22089894115924835,
+                        "S": 0.147487610578537,
+                        "W": 0.16698642075061798,
+                        "?": 0.20595386624336243
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.23595701158046722,
+                      "E": 0.22690032422542572,
+                      "S": 0.1828237622976303,
+                      "W": 0.15732282400131226,
+                      "?": 0.19699609279632568
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.18940474092960358,
+                      "2": 0.2630045711994171,
+                      "3": 0.28907227516174316,
+                      "4": 0.2585184574127197
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": true
+              },
+              {
+                "action_number": 3,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.27003759145736694,
+                        "E": 0.23143930733203888,
+                        "S": 0.1528647094964981,
+                        "W": 0.1667122095823288,
+                        "?": 0.17894616723060608
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2724829316139221,
+                        "E": 0.23181499540805817,
+                        "S": 0.1546071618795395,
+                        "W": 0.16948047280311584,
+                        "?": 0.1716143637895584
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2720748782157898,
+                        "E": 0.22788448631763458,
+                        "S": 0.1529068797826767,
+                        "W": 0.17033156752586365,
+                        "?": 0.17680223286151886
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.27578261494636536,
+                        "E": 0.22557373344898224,
+                        "S": 0.15136796236038208,
+                        "W": 0.1678561121225357,
+                        "?": 0.17941957712173462
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.2443619966506958,
+                      "E": 0.23540976643562317,
+                      "S": 0.19150656461715698,
+                      "W": 0.15952946245670319,
+                      "?": 0.16919231414794922
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.1953776329755783,
+                      "2": 0.2599831521511078,
+                      "3": 0.2894861400127411,
+                      "4": 0.2551531195640564
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": true
+              },
+              {
+                "action_number": 4,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.27730467915534973,
+                        "E": 0.23662732541561127,
+                        "S": 0.15485520660877228,
+                        "W": 0.17061451077461243,
+                        "?": 0.16059820353984833
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.28111305832862854,
+                        "E": 0.23533615469932556,
+                        "S": 0.1551707684993744,
+                        "W": 0.17262807488441467,
+                        "?": 0.15575195848941803
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2774399220943451,
+                        "E": 0.23377583920955658,
+                        "S": 0.1552288830280304,
+                        "W": 0.17409631609916687,
+                        "?": 0.1594589799642563
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.28236523270606995,
+                        "E": 0.22998027503490448,
+                        "S": 0.15327821671962738,
+                        "W": 0.17152339220046997,
+                        "?": 0.1628529131412506
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.24824927747249603,
+                      "E": 0.2399148792028427,
+                      "S": 0.19599516689777374,
+                      "W": 0.16338568925857544,
+                      "?": 0.15245498716831207
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20125095546245575,
+                      "2": 0.25933173298835754,
+                      "3": 0.28741344809532166,
+                      "4": 0.25200384855270386
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": true
+              },
+              {
+                "action_number": 5,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2825349271297455,
+                        "E": 0.23958495259284973,
+                        "S": 0.15733836591243744,
+                        "W": 0.17411652207374573,
+                        "?": 0.14642518758773804
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.28625136613845825,
+                        "E": 0.2381286770105362,
+                        "S": 0.15746070444583893,
+                        "W": 0.1758303940296173,
+                        "?": 0.14232879877090454
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.28299233317375183,
+                        "E": 0.23544089496135712,
+                        "S": 0.1571560502052307,
+                        "W": 0.17778655886650085,
+                        "?": 0.14662419259548187
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2858573794364929,
+                        "E": 0.23281389474868774,
+                        "S": 0.1562025249004364,
+                        "W": 0.17462782561779022,
+                        "?": 0.1504984050989151
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.2507154047489166,
+                      "E": 0.23841436207294464,
+                      "S": 0.19861385226249695,
+                      "W": 0.16478736698627472,
+                      "?": 0.14746896922588348
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20175568759441376,
+                      "2": 0.260128915309906,
+                      "3": 0.28611671924591064,
+                      "4": 0.2519986927509308
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 6,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2972930371761322,
+                        "E": 0.23500238358974457,
+                        "S": 0.15270212292671204,
+                        "W": 0.17328384518623352,
+                        "?": 0.1417185515165329
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3015982210636139,
+                        "E": 0.23333102464675903,
+                        "S": 0.15253615379333496,
+                        "W": 0.1748662143945694,
+                        "?": 0.13766832649707794
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.29861852526664734,
+                        "E": 0.23069818317890167,
+                        "S": 0.15222762525081635,
+                        "W": 0.17692831158638,
+                        "?": 0.14152739942073822
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3017595708370209,
+                        "E": 0.2274310439825058,
+                        "S": 0.15084432065486908,
+                        "W": 0.17386995255947113,
+                        "?": 0.1460951715707779
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.25852614641189575,
+                      "E": 0.23876401782035828,
+                      "S": 0.1953379213809967,
+                      "W": 0.16356496512889862,
+                      "?": 0.14380696415901184
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20392026007175446,
+                      "2": 0.26036664843559265,
+                      "3": 0.2860724925994873,
+                      "4": 0.24964062869548798
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 7,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2969051003456116,
+                        "E": 0.23911114037036896,
+                        "S": 0.15146738290786743,
+                        "W": 0.17128051817417145,
+                        "?": 0.14123590290546417
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.300512433052063,
+                        "E": 0.23813879489898682,
+                        "S": 0.1516997218132019,
+                        "W": 0.17310911417007446,
+                        "?": 0.13653996586799622
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2992135286331177,
+                        "E": 0.234758660197258,
+                        "S": 0.15089888870716095,
+                        "W": 0.17450574040412903,
+                        "?": 0.14062318205833435
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30199146270751953,
+                        "E": 0.23185600340366364,
+                        "S": 0.14939285814762115,
+                        "W": 0.17185701429843903,
+                        "?": 0.14490261673927307
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.25765231251716614,
+                      "E": 0.2402481585741043,
+                      "S": 0.1959322988986969,
+                      "W": 0.16164731979370117,
+                      "?": 0.14451992511749268
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20453216135501862,
+                      "2": 0.2584443986415863,
+                      "3": 0.28725945949554443,
+                      "4": 0.24976392090320587
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 8,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3022536635398865,
+                        "E": 0.23743537068367004,
+                        "S": 0.15197455883026123,
+                        "W": 0.17160119116306305,
+                        "?": 0.13673518598079681
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3059733510017395,
+                        "E": 0.2365335077047348,
+                        "S": 0.15215346217155457,
+                        "W": 0.17312422394752502,
+                        "?": 0.13221541047096252
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30461379885673523,
+                        "E": 0.23308201134204865,
+                        "S": 0.1513965129852295,
+                        "W": 0.1748369187116623,
+                        "?": 0.13607071340084076
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3075246512889862,
+                        "E": 0.2298513501882553,
+                        "S": 0.1497303992509842,
+                        "W": 0.17219406366348267,
+                        "?": 0.14069947600364685
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.2610223591327667,
+                      "E": 0.24361908435821533,
+                      "S": 0.19561606645584106,
+                      "W": 0.16254550218582153,
+                      "?": 0.13719697296619415
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20412735641002655,
+                      "2": 0.2585732638835907,
+                      "3": 0.2866778075695038,
+                      "4": 0.25062161684036255
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 9,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3037262558937073,
+                        "E": 0.2389218658208847,
+                        "S": 0.15096691250801086,
+                        "W": 0.1696007400751114,
+                        "?": 0.13678427040576935
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30691277980804443,
+                        "E": 0.23799759149551392,
+                        "S": 0.15124931931495667,
+                        "W": 0.17107310891151428,
+                        "?": 0.13276712596416473
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30654412508010864,
+                        "E": 0.2347882091999054,
+                        "S": 0.15056940913200378,
+                        "W": 0.17262735962867737,
+                        "?": 0.1354709416627884
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3094528615474701,
+                        "E": 0.23174649477005005,
+                        "S": 0.14879576861858368,
+                        "W": 0.16971242427825928,
+                        "?": 0.1402924358844757
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.2599296569824219,
+                      "E": 0.24639515578746796,
+                      "S": 0.19434145092964172,
+                      "W": 0.16109751164913177,
+                      "?": 0.13823625445365906
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20762917399406433,
+                      "2": 0.2567538619041443,
+                      "3": 0.2853173017501831,
+                      "4": 0.2502996027469635
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 10,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30152788758277893,
+                        "E": 0.23882319033145905,
+                        "S": 0.1506825089454651,
+                        "W": 0.16932903230190277,
+                        "?": 0.13963739573955536
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30488842725753784,
+                        "E": 0.23795150220394135,
+                        "S": 0.15085013210773468,
+                        "W": 0.1705760359764099,
+                        "?": 0.13573385775089264
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30431097745895386,
+                        "E": 0.23477864265441895,
+                        "S": 0.15036353468894958,
+                        "W": 0.1722756326198578,
+                        "?": 0.13827113807201385
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30714666843414307,
+                        "E": 0.23143646121025085,
+                        "S": 0.14840635657310486,
+                        "W": 0.16927990317344666,
+                        "?": 0.14373067021369934
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.2581607401371002,
+                      "E": 0.24407507479190826,
+                      "S": 0.1956057846546173,
+                      "W": 0.16273798048496246,
+                      "?": 0.13942036032676697
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20763005316257477,
+                      "2": 0.2570391595363617,
+                      "3": 0.2851465940475464,
+                      "4": 0.25018420815467834
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 11,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2989024519920349,
+                        "E": 0.24000267684459686,
+                        "S": 0.15203560888767242,
+                        "W": 0.17047066986560822,
+                        "?": 0.13858850300312042
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3021537661552429,
+                        "E": 0.23912908136844635,
+                        "S": 0.15218304097652435,
+                        "W": 0.17168065905570984,
+                        "?": 0.13485345244407654
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3014278709888458,
+                        "E": 0.2356998324394226,
+                        "S": 0.151658833026886,
+                        "W": 0.1737278699874878,
+                        "?": 0.13748563826084137
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3046330213546753,
+                        "E": 0.23246800899505615,
+                        "S": 0.14970265328884125,
+                        "W": 0.17043833434581757,
+                        "?": 0.14275792241096497
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.25872448086738586,
+                      "E": 0.24392224848270416,
+                      "S": 0.19563551247119904,
+                      "W": 0.16309085488319397,
+                      "?": 0.13862688839435577
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20802657306194305,
+                      "2": 0.2567472457885742,
+                      "3": 0.285101056098938,
+                      "4": 0.2501251697540283
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 12,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2995651960372925,
+                        "E": 0.23946550488471985,
+                        "S": 0.15182150900363922,
+                        "W": 0.17059597373008728,
+                        "?": 0.13855183124542236
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30283835530281067,
+                        "E": 0.2384834587574005,
+                        "S": 0.1519714593887329,
+                        "W": 0.1718505322933197,
+                        "?": 0.13485614955425262
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30209022760391235,
+                        "E": 0.23497571051120758,
+                        "S": 0.15141801536083221,
+                        "W": 0.17400869727134705,
+                        "?": 0.1375073492527008
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3053279519081116,
+                        "E": 0.23188640177249908,
+                        "S": 0.14942726492881775,
+                        "W": 0.17058880627155304,
+                        "?": 0.14276954531669617
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.25929319858551025,
+                      "E": 0.24302653968334198,
+                      "S": 0.1955486536026001,
+                      "W": 0.16285187005996704,
+                      "?": 0.13927972316741943
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.2086762636899948,
+                      "2": 0.2567564845085144,
+                      "3": 0.2842555642127991,
+                      "4": 0.2503117024898529
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 13,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.29975399374961853,
+                        "E": 0.2394501119852066,
+                        "S": 0.15153750777244568,
+                        "W": 0.17027294635772705,
+                        "?": 0.13898545503616333
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3030085861682892,
+                        "E": 0.23848646879196167,
+                        "S": 0.15171502530574799,
+                        "W": 0.17156840860843658,
+                        "?": 0.13522154092788696
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3023819923400879,
+                        "E": 0.23484404385089874,
+                        "S": 0.1511104851961136,
+                        "W": 0.17373216152191162,
+                        "?": 0.13793134689331055
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3055952191352844,
+                        "E": 0.23183277249336243,
+                        "S": 0.1490648090839386,
+                        "W": 0.17034649848937988,
+                        "?": 0.14316077530384064
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.25929662585258484,
+                      "E": 0.2429889589548111,
+                      "S": 0.19548559188842773,
+                      "W": 0.16299821436405182,
+                      "?": 0.13923056423664093
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.2078922539949417,
+                      "2": 0.25685372948646545,
+                      "3": 0.2850061357021332,
+                      "4": 0.250247985124588
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 14,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30000466108322144,
+                        "E": 0.23900945484638214,
+                        "S": 0.15136368572711945,
+                        "W": 0.1708449423313141,
+                        "?": 0.13877730071544647
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3032900393009186,
+                        "E": 0.23793523013591766,
+                        "S": 0.15154345333576202,
+                        "W": 0.1721554398536682,
+                        "?": 0.13507585227489471
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3025646209716797,
+                        "E": 0.2343592494726181,
+                        "S": 0.15098388493061066,
+                        "W": 0.1743910163640976,
+                        "?": 0.13770122826099396
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3058150112628937,
+                        "E": 0.231340229511261,
+                        "S": 0.14888890087604523,
+                        "W": 0.17107093334197998,
+                        "?": 0.14288495481014252
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.2592654824256897,
+                      "E": 0.24370236694812775,
+                      "S": 0.19555459916591644,
+                      "W": 0.16314037144184113,
+                      "?": 0.138337180018425
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20860449969768524,
+                      "2": 0.25685232877731323,
+                      "3": 0.2849067449569702,
+                      "4": 0.24963641166687012
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 15,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30164337158203125,
+                        "E": 0.2392302006483078,
+                        "S": 0.15104299783706665,
+                        "W": 0.1710849553346634,
+                        "?": 0.13699841499328613
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.304919958114624,
+                        "E": 0.23821406066417694,
+                        "S": 0.15128874778747559,
+                        "W": 0.1723940074443817,
+                        "?": 0.13318324089050293
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3043461740016937,
+                        "E": 0.234547957777977,
+                        "S": 0.15066227316856384,
+                        "W": 0.1746033877134323,
+                        "?": 0.13584022223949432
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3074350655078888,
+                        "E": 0.23171387612819672,
+                        "S": 0.14857743680477142,
+                        "W": 0.1713799089193344,
+                        "?": 0.14089369773864746
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.2582590878009796,
+                      "E": 0.2438776195049286,
+                      "S": 0.1954982429742813,
+                      "W": 0.16362179815769196,
+                      "?": 0.13874328136444092
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.2080378532409668,
+                      "2": 0.25682389736175537,
+                      "3": 0.28504911065101624,
+                      "4": 0.2500891089439392
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 16,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.299682080745697,
+                        "E": 0.23917175829410553,
+                        "S": 0.15098652243614197,
+                        "W": 0.17142462730407715,
+                        "?": 0.13873495161533356
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30285176634788513,
+                        "E": 0.2381231188774109,
+                        "S": 0.15119868516921997,
+                        "W": 0.1728232353925705,
+                        "?": 0.13500316441059113
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3022971451282501,
+                        "E": 0.2344130277633667,
+                        "S": 0.15056180953979492,
+                        "W": 0.1750309318304062,
+                        "?": 0.13769711554050446
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3054680824279785,
+                        "E": 0.23139004409313202,
+                        "S": 0.14849324524402618,
+                        "W": 0.17173945903778076,
+                        "?": 0.1429091840982437
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.25898003578186035,
+                      "E": 0.2443532645702362,
+                      "S": 0.19564057886600494,
+                      "W": 0.1634114384651184,
+                      "?": 0.1376146376132965
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20778454840183258,
+                      "2": 0.2573167681694031,
+                      "3": 0.2847650349140167,
+                      "4": 0.25013360381126404
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 17,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3004215955734253,
+                        "E": 0.23886731266975403,
+                        "S": 0.1511952131986618,
+                        "W": 0.17104843258857727,
+                        "?": 0.1384674608707428
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30352982878685,
+                        "E": 0.23780563473701477,
+                        "S": 0.15144705772399902,
+                        "W": 0.17246119678020477,
+                        "?": 0.13475632667541504
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30303889513015747,
+                        "E": 0.2340845763683319,
+                        "S": 0.1507597714662552,
+                        "W": 0.17465771734714508,
+                        "?": 0.13745906949043274
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30623719096183777,
+                        "E": 0.23108942806720734,
+                        "S": 0.14869117736816406,
+                        "W": 0.17139467597007751,
+                        "?": 0.14258746802806854
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.25832995772361755,
+                      "E": 0.2437436282634735,
+                      "S": 0.1960628181695938,
+                      "W": 0.16349446773529053,
+                      "?": 0.13836903870105743
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20712502300739288,
+                      "2": 0.2572270929813385,
+                      "3": 0.28543347120285034,
+                      "4": 0.2502143681049347
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 18,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.29935696721076965,
+                        "E": 0.2386244833469391,
+                        "S": 0.15136337280273438,
+                        "W": 0.1713785082101822,
+                        "?": 0.13927659392356873
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3024894595146179,
+                        "E": 0.23752452433109283,
+                        "S": 0.15161696076393127,
+                        "W": 0.1727587729692459,
+                        "?": 0.13561026751995087
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3019838333129883,
+                        "E": 0.23385047912597656,
+                        "S": 0.1509287804365158,
+                        "W": 0.17499230802059174,
+                        "?": 0.13824456930160522
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3051103949546814,
+                        "E": 0.23084419965744019,
+                        "S": 0.14887259900569916,
+                        "W": 0.1717662364244461,
+                        "?": 0.14340661466121674
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.2586376667022705,
+                      "E": 0.24342775344848633,
+                      "S": 0.19603294134140015,
+                      "W": 0.16314561665058136,
+                      "?": 0.13875599205493927
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.207534059882164,
+                      "2": 0.2572380304336548,
+                      "3": 0.2845519483089447,
+                      "4": 0.2506759464740753
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 19,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30040475726127625,
+                        "E": 0.23848246037960052,
+                        "S": 0.15114176273345947,
+                        "W": 0.17081975936889648,
+                        "?": 0.13915123045444489
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30354005098342896,
+                        "E": 0.23741662502288818,
+                        "S": 0.15140940248966217,
+                        "W": 0.17219483852386475,
+                        "?": 0.13543908298015594
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30312588810920715,
+                        "E": 0.2336806207895279,
+                        "S": 0.15068688988685608,
+                        "W": 0.17439089715480804,
+                        "?": 0.13811568915843964
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3062722384929657,
+                        "E": 0.230731800198555,
+                        "S": 0.1486174613237381,
+                        "W": 0.17120125889778137,
+                        "?": 0.14317721128463745
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.25969696044921875,
+                      "E": 0.2432750165462494,
+                      "S": 0.19588901102542877,
+                      "W": 0.16328226029872894,
+                      "?": 0.13785667717456818
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.207892507314682,
+                      "2": 0.2571050226688385,
+                      "3": 0.2848782241344452,
+                      "4": 0.2501242458820343
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 20,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "E"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30110836029052734,
+                        "E": 0.2382672131061554,
+                        "S": 0.15111252665519714,
+                        "W": 0.1713649183511734,
+                        "?": 0.1381469964981079
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30423903465270996,
+                        "E": 0.23715320229530334,
+                        "S": 0.15140071511268616,
+                        "W": 0.17278240621089935,
+                        "?": 0.13442455232143402
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3039107918739319,
+                        "E": 0.23337943851947784,
+                        "S": 0.15065120160579681,
+                        "W": 0.17499060928821564,
+                        "?": 0.1370680034160614
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3070227801799774,
+                        "E": 0.2305414229631424,
+                        "S": 0.1486104279756546,
+                        "W": 0.17187632620334625,
+                        "?": 0.14194904267787933
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.2590078115463257,
+                      "E": 0.24306298792362213,
+                      "S": 0.19609792530536652,
+                      "W": 0.16342896223068237,
+                      "?": 0.1384022831916809
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20754998922348022,
+                      "2": 0.25734415650367737,
+                      "3": 0.28439149260520935,
+                      "4": 0.25071433186531067
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "heldout": {
+      "intact": {
+        "history_mode": "intact",
+        "games": 1,
+        "games_won": 0,
+        "game_win_rate": 0.0,
+        "levels_completed": 0,
+        "level_completion_rate": 0.0,
+        "total_actions": 20,
+        "mean_actions_per_game": 20.0,
+        "composed_valid_action_accuracy": 0.05,
+        "direct_oracle_action_accuracy": 0.0,
+        "mapping_slot_accuracy": 0.0,
+        "need_accuracy": 0.0,
+        "repeated_action_transition_rate": 1.0,
+        "predicted_action_counts": {
+          "4": 20
+        },
+        "dominant_action_share": 1.0,
+        "prediction_distribution_entropy": 0.0,
+        "traces": [
+          {
+            "game_seed": 20,
+            "won": false,
+            "levels_completed": 0,
+            "actions": 20,
+            "action_trace": [
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4",
+              "4"
+            ],
+            "decisions": [
+              {
+                "action_number": 1,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "?"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3",
+                  "4"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2707083225250244,
+                        "E": 0.2426539659500122,
+                        "S": 0.1560012400150299,
+                        "W": 0.15217137336730957,
+                        "?": 0.1784650981426239
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2723349332809448,
+                        "E": 0.24385884404182434,
+                        "S": 0.15691226720809937,
+                        "W": 0.1527567356824875,
+                        "?": 0.1741371750831604
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.27214428782463074,
+                        "E": 0.23882897198200226,
+                        "S": 0.15610772371292114,
+                        "W": 0.15466968715190887,
+                        "?": 0.178249329328537
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2771744430065155,
+                        "E": 0.24081149697303772,
+                        "S": 0.15463609993457794,
+                        "W": 0.14947305619716644,
+                        "?": 0.17790497839450836
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.25694209337234497,
+                      "E": 0.2538478970527649,
+                      "S": 0.1922382414340973,
+                      "W": 0.13903139531612396,
+                      "?": 0.1579403430223465
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "2",
+                  "direct_details": {
+                    "selected": "2",
+                    "probabilities": {
+                      "1": 0.20003671944141388,
+                      "2": 0.27408403158187866,
+                      "3": 0.26725324988365173,
+                      "4": 0.25862592458724976
+                    }
+                  }
+                },
+                "selected_was_valid": true,
+                "status": "ACTIVE",
+                "moved": true
+              },
+              {
+                "action_number": 2,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.25282710790634155,
+                        "E": 0.22464102506637573,
+                        "S": 0.15012231469154358,
+                        "W": 0.16563105583190918,
+                        "?": 0.20677857100963593
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.25654059648513794,
+                        "E": 0.22487451136112213,
+                        "S": 0.15111765265464783,
+                        "W": 0.16882073879241943,
+                        "?": 0.19864647090435028
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.255525678396225,
+                        "E": 0.2210361361503601,
+                        "S": 0.1493678241968155,
+                        "W": 0.16998191177845,
+                        "?": 0.20408841967582703
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2605213522911072,
+                        "E": 0.21964894235134125,
+                        "S": 0.1482391357421875,
+                        "W": 0.16769395768642426,
+                        "?": 0.2038966864347458
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.23585709929466248,
+                      "E": 0.22698773443698883,
+                      "S": 0.18381187319755554,
+                      "W": 0.1588018536567688,
+                      "?": 0.19454139471054077
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.18831180036067963,
+                      "2": 0.2633267641067505,
+                      "3": 0.29027557373046875,
+                      "4": 0.25808584690093994
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": true
+              },
+              {
+                "action_number": 3,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.27124297618865967,
+                        "E": 0.23207367956638336,
+                        "S": 0.15303131937980652,
+                        "W": 0.16720743477344513,
+                        "?": 0.1764446198940277
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2734059691429138,
+                        "E": 0.23253284394741058,
+                        "S": 0.15472546219825745,
+                        "W": 0.16986526548862457,
+                        "?": 0.16947045922279358
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.27359896898269653,
+                        "E": 0.22834251821041107,
+                        "S": 0.1528756022453308,
+                        "W": 0.17082242667675018,
+                        "?": 0.1743604689836502
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.27692660689353943,
+                        "E": 0.22620204091072083,
+                        "S": 0.15163099765777588,
+                        "W": 0.16850998997688293,
+                        "?": 0.17673037946224213
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.2439519762992859,
+                      "E": 0.23633094131946564,
+                      "S": 0.19178712368011475,
+                      "W": 0.16078297793865204,
+                      "?": 0.16714704036712646
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.19421088695526123,
+                      "2": 0.2601616084575653,
+                      "3": 0.2904394567012787,
+                      "4": 0.2551880180835724
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": true
+              },
+              {
+                "action_number": 4,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.27209439873695374,
+                        "E": 0.23667941987514496,
+                        "S": 0.15423013269901276,
+                        "W": 0.17155149579048157,
+                        "?": 0.16544458270072937
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2757544219493866,
+                        "E": 0.23544633388519287,
+                        "S": 0.15456153452396393,
+                        "W": 0.1735105961561203,
+                        "?": 0.1607271432876587
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2729536294937134,
+                        "E": 0.23353196680545807,
+                        "S": 0.15436698496341705,
+                        "W": 0.17476196587085724,
+                        "?": 0.16438548266887665
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2766611576080322,
+                        "E": 0.22990676760673523,
+                        "S": 0.15274950861930847,
+                        "W": 0.17215675115585327,
+                        "?": 0.1685258001089096
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.24784764647483826,
+                      "E": 0.2378695160150528,
+                      "S": 0.19504907727241516,
+                      "W": 0.16304920613765717,
+                      "?": 0.15618441998958588
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20136582851409912,
+                      "2": 0.26013582944869995,
+                      "3": 0.28817927837371826,
+                      "4": 0.25031909346580505
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": true
+              },
+              {
+                "action_number": 5,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2832503914833069,
+                        "E": 0.24007073044776917,
+                        "S": 0.1580910086631775,
+                        "W": 0.17431123554706573,
+                        "?": 0.14427664875984192
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.28700587153434753,
+                        "E": 0.2387581616640091,
+                        "S": 0.15824836492538452,
+                        "W": 0.17579153180122375,
+                        "?": 0.14019601047039032
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.28404274582862854,
+                        "E": 0.23576374351978302,
+                        "S": 0.15782363712787628,
+                        "W": 0.17795430123806,
+                        "?": 0.14441557228565216
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2867146134376526,
+                        "E": 0.23324498534202576,
+                        "S": 0.15697844326496124,
+                        "W": 0.17482174932956696,
+                        "?": 0.14824029803276062
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.24943651258945465,
+                      "E": 0.23886534571647644,
+                      "S": 0.1997043490409851,
+                      "W": 0.16536885499954224,
+                      "?": 0.14662496745586395
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20022927224636078,
+                      "2": 0.26095300912857056,
+                      "3": 0.28705817461013794,
+                      "4": 0.2517595887184143
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 6,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.29607030749320984,
+                        "E": 0.2351185828447342,
+                        "S": 0.15335802733898163,
+                        "W": 0.17451214790344238,
+                        "?": 0.14094091951847076
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3003883957862854,
+                        "E": 0.23349693417549133,
+                        "S": 0.15317775309085846,
+                        "W": 0.17595043778419495,
+                        "?": 0.13698643445968628
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.297611266374588,
+                        "E": 0.23080404102802277,
+                        "S": 0.15284806489944458,
+                        "W": 0.17814213037490845,
+                        "?": 0.1405944675207138
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3005110025405884,
+                        "E": 0.2275882065296173,
+                        "S": 0.15156595408916473,
+                        "W": 0.17520228028297424,
+                        "?": 0.14513260126113892
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.2565557062625885,
+                      "E": 0.23952697217464447,
+                      "S": 0.1967531144618988,
+                      "W": 0.16414272785186768,
+                      "?": 0.14302153885364532
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20264317095279694,
+                      "2": 0.2611934542655945,
+                      "3": 0.2867729663848877,
+                      "4": 0.2493904083967209
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 7,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2957267463207245,
+                        "E": 0.23961292207241058,
+                        "S": 0.1522863358259201,
+                        "W": 0.17243404686450958,
+                        "?": 0.13993996381759644
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.29932156205177307,
+                        "E": 0.23888039588928223,
+                        "S": 0.15253829956054688,
+                        "W": 0.1738881766796112,
+                        "?": 0.13537156581878662
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.29828694462776184,
+                        "E": 0.2351628541946411,
+                        "S": 0.15163573622703552,
+                        "W": 0.17563502490520477,
+                        "?": 0.13927941024303436
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3007716238498688,
+                        "E": 0.232384592294693,
+                        "S": 0.15025413036346436,
+                        "W": 0.17308931052684784,
+                        "?": 0.1435004472732544
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.25554370880126953,
+                      "E": 0.24113677442073822,
+                      "S": 0.19676505029201508,
+                      "W": 0.16243098676204681,
+                      "?": 0.14412342011928558
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20311513543128967,
+                      "2": 0.25954651832580566,
+                      "3": 0.288062185049057,
+                      "4": 0.24927613139152527
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 8,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3005448281764984,
+                        "E": 0.23799371719360352,
+                        "S": 0.15255990624427795,
+                        "W": 0.17231865227222443,
+                        "?": 0.13658282160758972
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30439090728759766,
+                        "E": 0.2370978444814682,
+                        "S": 0.15281233191490173,
+                        "W": 0.17378638684749603,
+                        "?": 0.1319124847650528
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3033043146133423,
+                        "E": 0.23354004323482513,
+                        "S": 0.15191291272640228,
+                        "W": 0.1754319667816162,
+                        "?": 0.1358107328414917
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30595824122428894,
+                        "E": 0.2303844839334488,
+                        "S": 0.15037225186824799,
+                        "W": 0.172858327627182,
+                        "?": 0.14042672514915466
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.25850406289100647,
+                      "E": 0.24431577324867249,
+                      "S": 0.19643758237361908,
+                      "W": 0.1633053570985794,
+                      "?": 0.13743717968463898
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20310810208320618,
+                      "2": 0.26006677746772766,
+                      "3": 0.2869729995727539,
+                      "4": 0.2498520314693451
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 9,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3018695116043091,
+                        "E": 0.23928721249103546,
+                        "S": 0.15172815322875977,
+                        "W": 0.17052358388900757,
+                        "?": 0.1365916132926941
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30509302020072937,
+                        "E": 0.2385948896408081,
+                        "S": 0.1520320177078247,
+                        "W": 0.1716713011264801,
+                        "?": 0.13260872662067413
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30507850646972656,
+                        "E": 0.23505675792694092,
+                        "S": 0.15123119950294495,
+                        "W": 0.1734178513288498,
+                        "?": 0.13521569967269897
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30760878324508667,
+                        "E": 0.23207484185695648,
+                        "S": 0.149619460105896,
+                        "W": 0.17061026394367218,
+                        "?": 0.14008663594722748
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.2572862505912781,
+                      "E": 0.24705062806606293,
+                      "S": 0.1951277107000351,
+                      "W": 0.1616530418395996,
+                      "?": 0.13888238370418549
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20657280087471008,
+                      "2": 0.2577832341194153,
+                      "3": 0.2860833406448364,
+                      "4": 0.24956059455871582
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 10,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3006305396556854,
+                        "E": 0.23888395726680756,
+                        "S": 0.15154528617858887,
+                        "W": 0.17065104842185974,
+                        "?": 0.1382891833782196
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.303911954164505,
+                        "E": 0.2380450814962387,
+                        "S": 0.15174996852874756,
+                        "W": 0.17185819149017334,
+                        "?": 0.13443481922149658
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3038260042667389,
+                        "E": 0.2347373515367508,
+                        "S": 0.15115711092948914,
+                        "W": 0.1733950674533844,
+                        "?": 0.13688452541828156
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30637094378471375,
+                        "E": 0.23148156702518463,
+                        "S": 0.14935770630836487,
+                        "W": 0.17049120366573334,
+                        "?": 0.1422986537218094
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.2556658387184143,
+                      "E": 0.24473729729652405,
+                      "S": 0.19638505578041077,
+                      "W": 0.16327664256095886,
+                      "?": 0.1399352252483368
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20656204223632812,
+                      "2": 0.2581062912940979,
+                      "3": 0.285839319229126,
+                      "4": 0.249492347240448
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 11,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2971830666065216,
+                        "E": 0.24020391702651978,
+                        "S": 0.15267939865589142,
+                        "W": 0.17114423215389252,
+                        "?": 0.13878940045833588
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30053529143333435,
+                        "E": 0.23958751559257507,
+                        "S": 0.15288013219833374,
+                        "W": 0.17205308377742767,
+                        "?": 0.13494405150413513
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3001731336116791,
+                        "E": 0.2357596457004547,
+                        "S": 0.15223875641822815,
+                        "W": 0.1742512285709381,
+                        "?": 0.13757719099521637
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3029528558254242,
+                        "E": 0.23256750404834747,
+                        "S": 0.1504366546869278,
+                        "W": 0.17109639942646027,
+                        "?": 0.14294657111167908
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.25630998611450195,
+                      "E": 0.24456149339675903,
+                      "S": 0.19638778269290924,
+                      "W": 0.16359563171863556,
+                      "?": 0.13914509117603302
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.2069292664527893,
+                      "2": 0.2578303813934326,
+                      "3": 0.28583019971847534,
+                      "4": 0.24941016733646393
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 12,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2978774607181549,
+                        "E": 0.23963996767997742,
+                        "S": 0.15245696902275085,
+                        "W": 0.17128387093544006,
+                        "?": 0.1387416571378708
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3012644946575165,
+                        "E": 0.2389114797115326,
+                        "S": 0.15265361964702606,
+                        "W": 0.17222465574741364,
+                        "?": 0.13494573533535004
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30088815093040466,
+                        "E": 0.23500151932239532,
+                        "S": 0.1519763171672821,
+                        "W": 0.17455172538757324,
+                        "?": 0.13758228719234467
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3036925494670868,
+                        "E": 0.23197145760059357,
+                        "S": 0.15013812482357025,
+                        "W": 0.17126047611236572,
+                        "?": 0.14293745160102844
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.25681155920028687,
+                      "E": 0.2437051683664322,
+                      "S": 0.1962892860174179,
+                      "W": 0.1633739173412323,
+                      "?": 0.13982003927230835
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20757773518562317,
+                      "2": 0.2578384578227997,
+                      "3": 0.28498122096061707,
+                      "4": 0.24960263073444366
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 13,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2980441749095917,
+                        "E": 0.23963509500026703,
+                        "S": 0.152147114276886,
+                        "W": 0.17097356915473938,
+                        "?": 0.13920004665851593
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3013819754123688,
+                        "E": 0.23893719911575317,
+                        "S": 0.15239423513412476,
+                        "W": 0.17195825278759003,
+                        "?": 0.13532835245132446
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3011332154273987,
+                        "E": 0.23488448560237885,
+                        "S": 0.15165629982948303,
+                        "W": 0.17429716885089874,
+                        "?": 0.1380288004875183
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3039141595363617,
+                        "E": 0.23194067180156708,
+                        "S": 0.14977386593818665,
+                        "W": 0.17103014886379242,
+                        "?": 0.1433410942554474
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.25680869817733765,
+                      "E": 0.2436726987361908,
+                      "S": 0.19624517858028412,
+                      "W": 0.16353172063827515,
+                      "?": 0.1397416889667511
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20677796006202698,
+                      "2": 0.2579250633716583,
+                      "3": 0.28574761748313904,
+                      "4": 0.24954934418201447
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 14,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2982802391052246,
+                        "E": 0.2391999512910843,
+                        "S": 0.1519983410835266,
+                        "W": 0.1715625822544098,
+                        "?": 0.13895893096923828
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3016727566719055,
+                        "E": 0.23837712407112122,
+                        "S": 0.15223665535449982,
+                        "W": 0.17256729304790497,
+                        "?": 0.1351461410522461
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30132418870925903,
+                        "E": 0.23439952731132507,
+                        "S": 0.1515384316444397,
+                        "W": 0.17497414350509644,
+                        "?": 0.13776379823684692
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3041359782218933,
+                        "E": 0.23144683241844177,
+                        "S": 0.14960898458957672,
+                        "W": 0.17178423702716827,
+                        "?": 0.14302389323711395
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.2567557692527771,
+                      "E": 0.24438947439193726,
+                      "S": 0.19628557562828064,
+                      "W": 0.16368523240089417,
+                      "?": 0.13888393342494965
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.2075665295124054,
+                      "2": 0.25790324807167053,
+                      "3": 0.285627543926239,
+                      "4": 0.24890267848968506
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 15,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.29989081621170044,
+                        "E": 0.23942603170871735,
+                        "S": 0.15167377889156342,
+                        "W": 0.1718151569366455,
+                        "?": 0.13719426095485687
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30329617857933044,
+                        "E": 0.23865455389022827,
+                        "S": 0.15197260677814484,
+                        "W": 0.17282217741012573,
+                        "?": 0.1332545280456543
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.303054541349411,
+                        "E": 0.23460263013839722,
+                        "S": 0.15120990574359894,
+                        "W": 0.1752019226551056,
+                        "?": 0.13593098521232605
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30573809146881104,
+                        "E": 0.23179785907268524,
+                        "S": 0.14929386973381042,
+                        "W": 0.1721038520336151,
+                        "?": 0.14106634259223938
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.2557888627052307,
+                      "E": 0.2445526123046875,
+                      "S": 0.196248859167099,
+                      "W": 0.16416983306407928,
+                      "?": 0.1392398625612259
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20699745416641235,
+                      "2": 0.2578858435153961,
+                      "3": 0.2857499420642853,
+                      "4": 0.24936676025390625
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 16,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2979673445224762,
+                        "E": 0.2393595576286316,
+                        "S": 0.15162359178066254,
+                        "W": 0.1721452921628952,
+                        "?": 0.13890427350997925
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3012200593948364,
+                        "E": 0.23857209086418152,
+                        "S": 0.15190967917442322,
+                        "W": 0.17325085401535034,
+                        "?": 0.13504736125469208
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3010393977165222,
+                        "E": 0.23446939885616302,
+                        "S": 0.15112632513046265,
+                        "W": 0.17561885714530945,
+                        "?": 0.13774597644805908
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30379289388656616,
+                        "E": 0.23148579895496368,
+                        "S": 0.1492248922586441,
+                        "W": 0.17246586084365845,
+                        "?": 0.14303050935268402
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.2564908564090729,
+                      "E": 0.2450292706489563,
+                      "S": 0.19639745354652405,
+                      "W": 0.1639585644006729,
+                      "?": 0.13812384009361267
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20673997700214386,
+                      "2": 0.25837790966033936,
+                      "3": 0.28547942638397217,
+                      "4": 0.24940265715122223
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 17,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.29870614409446716,
+                        "E": 0.23904672265052795,
+                        "S": 0.15181757509708405,
+                        "W": 0.17177347838878632,
+                        "?": 0.13865607976913452
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3018966019153595,
+                        "E": 0.2382320761680603,
+                        "S": 0.15214402973651886,
+                        "W": 0.17289704084396362,
+                        "?": 0.13483019173145294
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3017732799053192,
+                        "E": 0.23412108421325684,
+                        "S": 0.1513180136680603,
+                        "W": 0.17526298761367798,
+                        "?": 0.1375245749950409
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3045402765274048,
+                        "E": 0.23118233680725098,
+                        "S": 0.14942090213298798,
+                        "W": 0.17212024331092834,
+                        "?": 0.14273624122142792
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.25582119822502136,
+                      "E": 0.24442683160305023,
+                      "S": 0.19682249426841736,
+                      "W": 0.16403281688690186,
+                      "?": 0.13889668881893158
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20608676970005035,
+                      "2": 0.2582857310771942,
+                      "3": 0.28615590929985046,
+                      "4": 0.24947158992290497
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 18,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.29762840270996094,
+                        "E": 0.23880290985107422,
+                        "S": 0.15200559794902802,
+                        "W": 0.1720951646566391,
+                        "?": 0.13946795463562012
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.30084896087646484,
+                        "E": 0.23793846368789673,
+                        "S": 0.15231867134571075,
+                        "W": 0.17319855093955994,
+                        "?": 0.13569535315036774
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3007121682167053,
+                        "E": 0.2338859587907791,
+                        "S": 0.15149971842765808,
+                        "W": 0.17559130489826202,
+                        "?": 0.13831090927124023
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3034166693687439,
+                        "E": 0.23093116283416748,
+                        "S": 0.1496131420135498,
+                        "W": 0.17248636484146118,
+                        "?": 0.14355260133743286
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.2561185657978058,
+                      "E": 0.2441030740737915,
+                      "S": 0.1967928558588028,
+                      "W": 0.16369809210300446,
+                      "?": 0.13928750157356262
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.20651252567768097,
+                      "2": 0.25828275084495544,
+                      "3": 0.2852654457092285,
+                      "4": 0.24993926286697388
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 19,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.2986445128917694,
+                        "E": 0.23866397142410278,
+                        "S": 0.15177929401397705,
+                        "W": 0.17155730724334717,
+                        "?": 0.1393549144268036
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.301869660615921,
+                        "E": 0.2378494292497635,
+                        "S": 0.15211303532123566,
+                        "W": 0.17264962196350098,
+                        "?": 0.1355183869600296
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3018229603767395,
+                        "E": 0.23372769355773926,
+                        "S": 0.15126095712184906,
+                        "W": 0.17500588297843933,
+                        "?": 0.13818250596523285
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3045305013656616,
+                        "E": 0.2308400422334671,
+                        "S": 0.14934659004211426,
+                        "W": 0.171946719288826,
+                        "?": 0.143336221575737
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.25716638565063477,
+                      "E": 0.24395625293254852,
+                      "S": 0.19665049016475677,
+                      "W": 0.1638469696044922,
+                      "?": 0.13837990164756775
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.2068665772676468,
+                      "2": 0.2581517994403839,
+                      "3": 0.28558236360549927,
+                      "4": 0.2493993192911148
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              },
+              {
+                "action_number": 20,
+                "level": 0,
+                "oracle_phase": "probe",
+                "oracle_mapping": {
+                  "1": "?",
+                  "2": "?",
+                  "3": "?",
+                  "4": "W"
+                },
+                "oracle_need": "?",
+                "oracle_action": "1",
+                "unknown_valid_actions": [
+                  "1",
+                  "2",
+                  "3"
+                ],
+                "prediction": {
+                  "mapping": {
+                    "1": "N",
+                    "2": "N",
+                    "3": "N",
+                    "4": "N"
+                  },
+                  "mapping_details": {
+                    "1": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.29934805631637573,
+                        "E": 0.2384554147720337,
+                        "S": 0.15176241099834442,
+                        "W": 0.17211897671222687,
+                        "?": 0.13831520080566406
+                      }
+                    },
+                    "2": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3025726079940796,
+                        "E": 0.2375735193490982,
+                        "S": 0.15211288630962372,
+                        "W": 0.17326302826404572,
+                        "?": 0.13447800278663635
+                      }
+                    },
+                    "3": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3026055693626404,
+                        "E": 0.23343795537948608,
+                        "S": 0.15122567117214203,
+                        "W": 0.17561903595924377,
+                        "?": 0.13711179792881012
+                      }
+                    },
+                    "4": {
+                      "selected": "N",
+                      "probabilities": {
+                        "N": 0.3053051829338074,
+                        "E": 0.23063760995864868,
+                        "S": 0.14935001730918884,
+                        "W": 0.1726262867450714,
+                        "?": 0.1420808732509613
+                      }
+                    }
+                  },
+                  "needed_direction": "N",
+                  "need_details": {
+                    "selected": "N",
+                    "probabilities": {
+                      "N": 0.2564901113510132,
+                      "E": 0.24377180635929108,
+                      "S": 0.19684992730617523,
+                      "W": 0.1639806032180786,
+                      "?": 0.13890758156776428
+                    }
+                  },
+                  "composed_action": "4",
+                  "compose_details": {
+                    "selected": "4",
+                    "probabilities": {
+                      "1": 0.19116723537445068,
+                      "2": 0.24797646701335907,
+                      "3": 0.20072098076343536,
+                      "4": 0.36013534665107727
+                    }
+                  },
+                  "direct_action": "3",
+                  "direct_details": {
+                    "selected": "3",
+                    "probabilities": {
+                      "1": 0.2065044343471527,
+                      "2": 0.258420467376709,
+                      "3": 0.2850845754146576,
+                      "4": 0.2499905228614807
+                    }
+                  }
+                },
+                "selected_was_valid": false,
+                "status": "ACTIVE",
+                "moved": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "gates": {
+    "mapping_accuracy_at_least_0_90": false,
+    "need_accuracy_at_least_0_90": false,
+    "compose_accuracy_at_least_0_95": false,
+    "direct_accuracy_at_least_0_70": false,
+    "heldout_intact_level_completion_positive": false,
+    "heldout_intact_beats_amnesic": false,
+    "heldout_no_single_action_collapse": false,
+    "stage02_gate_passed": false
+  },
+  "step_history": [
+    {
+      "optimizer_step": 1,
+      "loss": 1.26500004529953,
+      "learning_rate": 5e-05,
+      "elapsed_seconds": 4.699873447418213
+    },
+    {
+      "optimizer_step": 2,
+      "loss": 2.390108823776245,
+      "learning_rate": 7.500000000000001e-05,
+      "elapsed_seconds": 9.833536386489868
+    },
+    {
+      "optimizer_step": 3,
+      "loss": 2.4743614196777344,
+      "learning_rate": 0.0001,
+      "elapsed_seconds": 14.914078950881958
+    },
+    {
+      "optimizer_step": 4,
+      "loss": 1.8902844786643982,
+      "learning_rate": 0.0001,
+      "elapsed_seconds": 17.977757692337036
+    },
+    {
+      "optimizer_step": 5,
+      "loss": 2.015721917152405,
+      "learning_rate": 9.868421052631579e-05,
+      "elapsed_seconds": 23.072698831558228
+    },
+    {
+      "optimizer_step": 6,
+      "loss": 1.3765402436256409,
+      "learning_rate": 9.736842105263158e-05,
+      "elapsed_seconds": 28.196385145187378
+    },
+    {
+      "optimizer_step": 7,
+      "loss": 1.3363903760910034,
+      "learning_rate": 9.605263157894737e-05,
+      "elapsed_seconds": 32.78343486785889
+    },
+    {
+      "optimizer_step": 8,
+      "loss": 2.4912458658218384,
+      "learning_rate": 9.473684210526316e-05,
+      "elapsed_seconds": 37.6709349155426
+    },
+    {
+      "optimizer_step": 9,
+      "loss": 1.5858718156814575,
+      "learning_rate": 9.342105263157896e-05,
+      "elapsed_seconds": 40.80111765861511
+    },
+    {
+      "optimizer_step": 10,
+      "loss": 1.3306848406791687,
+      "learning_rate": 9.210526315789474e-05,
+      "elapsed_seconds": 45.942277908325195
+    },
+    {
+      "optimizer_step": 11,
+      "loss": 1.2881231307983398,
+      "learning_rate": 9.078947368421054e-05,
+      "elapsed_seconds": 51.0680468082428
+    },
+    {
+      "optimizer_step": 12,
+      "loss": 2.2433436512947083,
+      "learning_rate": 8.947368421052632e-05,
+      "elapsed_seconds": 56.19013977050781
+    },
+    {
+      "optimizer_step": 13,
+      "loss": 1.7506744265556335,
+      "learning_rate": 8.81578947368421e-05,
+      "elapsed_seconds": 59.385534048080444
+    },
+    {
+      "optimizer_step": 14,
+      "loss": 2.044311046600342,
+      "learning_rate": 8.68421052631579e-05,
+      "elapsed_seconds": 64.21245121955872
+    },
+    {
+      "optimizer_step": 15,
+      "loss": 1.720340609550476,
+      "learning_rate": 8.552631578947369e-05,
+      "elapsed_seconds": 69.34426379203796
+    },
+    {
+      "optimizer_step": 16,
+      "loss": 1.4518201351165771,
+      "learning_rate": 8.421052631578948e-05,
+      "elapsed_seconds": 74.43847870826721
+    },
+    {
+      "optimizer_step": 17,
+      "loss": 1.8194881677627563,
+      "learning_rate": 8.289473684210527e-05,
+      "elapsed_seconds": 79.5331130027771
+    },
+    {
+      "optimizer_step": 18,
+      "loss": 1.6265414953231812,
+      "learning_rate": 8.157894736842105e-05,
+      "elapsed_seconds": 84.62734413146973
+    },
+    {
+      "optimizer_step": 19,
+      "loss": 1.587778389453888,
+      "learning_rate": 8.026315789473685e-05,
+      "elapsed_seconds": 89.74028730392456
+    },
+    {
+      "optimizer_step": 20,
+      "loss": 1.5633209943771362,
+      "learning_rate": 7.894736842105263e-05,
+      "elapsed_seconds": 94.83352637290955
+    },
+    {
+      "optimizer_step": 21,
+      "loss": 1.610572636127472,
+      "learning_rate": 7.763157894736843e-05,
+      "elapsed_seconds": 99.98919534683228
+    },
+    {
+      "optimizer_step": 22,
+      "loss": 1.4557596445083618,
+      "learning_rate": 7.631578947368422e-05,
+      "elapsed_seconds": 105.19179224967957
+    },
+    {
+      "optimizer_step": 23,
+      "loss": 1.4265549778938293,
+      "learning_rate": 7.500000000000001e-05,
+      "elapsed_seconds": 110.13669061660767
+    },
+    {
+      "optimizer_step": 24,
+      "loss": 2.1177135705947876,
+      "learning_rate": 7.368421052631579e-05,
+      "elapsed_seconds": 115.29287528991699
+    },
+    {
+      "optimizer_step": 25,
+      "loss": 1.5461112260818481,
+      "learning_rate": 7.236842105263159e-05,
+      "elapsed_seconds": 120.43247079849243
+    },
+    {
+      "optimizer_step": 26,
+      "loss": 1.170541226863861,
+      "learning_rate": 7.105263157894737e-05,
+      "elapsed_seconds": 125.49230217933655
+    },
+    {
+      "optimizer_step": 27,
+      "loss": 1.1504502892494202,
+      "learning_rate": 6.973684210526315e-05,
+      "elapsed_seconds": 130.33038687705994
+    },
+    {
+      "optimizer_step": 28,
+      "loss": 1.478153258562088,
+      "learning_rate": 6.842105263157895e-05,
+      "elapsed_seconds": 135.21393418312073
+    },
+    {
+      "optimizer_step": 29,
+      "loss": 2.350387454032898,
+      "learning_rate": 6.710526315789474e-05,
+      "elapsed_seconds": 137.8132016658783
+    },
+    {
+      "optimizer_step": 30,
+      "loss": 1.5833218693733215,
+      "learning_rate": 6.578947368421054e-05,
+      "elapsed_seconds": 142.96755719184875
+    },
+    {
+      "optimizer_step": 31,
+      "loss": 2.566177189350128,
+      "learning_rate": 6.447368421052632e-05,
+      "elapsed_seconds": 148.10491251945496
+    },
+    {
+      "optimizer_step": 32,
+      "loss": 2.8738763332366943,
+      "learning_rate": 6.31578947368421e-05,
+      "elapsed_seconds": 153.2533929347992
+    },
+    {
+      "optimizer_step": 33,
+      "loss": 2.2351872324943542,
+      "learning_rate": 6.18421052631579e-05,
+      "elapsed_seconds": 158.38281846046448
+    },
+    {
+      "optimizer_step": 34,
+      "loss": 2.2582367658615112,
+      "learning_rate": 6.052631578947369e-05,
+      "elapsed_seconds": 163.52756571769714
+    },
+    {
+      "optimizer_step": 35,
+      "loss": 2.2503178119659424,
+      "learning_rate": 5.921052631578947e-05,
+      "elapsed_seconds": 166.62150812149048
+    },
+    {
+      "optimizer_step": 36,
+      "loss": 1.556314766407013,
+      "learning_rate": 5.789473684210527e-05,
+      "elapsed_seconds": 171.8080701828003
+    },
+    {
+      "optimizer_step": 37,
+      "loss": 1.991719126701355,
+      "learning_rate": 5.6578947368421056e-05,
+      "elapsed_seconds": 177.0254945755005
+    },
+    {
+      "optimizer_step": 38,
+      "loss": 1.3309537768363953,
+      "learning_rate": 5.526315789473685e-05,
+      "elapsed_seconds": 180.13212656974792
+    },
+    {
+      "optimizer_step": 39,
+      "loss": 1.4114992022514343,
+      "learning_rate": 5.3947368421052635e-05,
+      "elapsed_seconds": 185.25949358940125
+    },
+    {
+      "optimizer_step": 40,
+      "loss": 0.787946343421936,
+      "learning_rate": 5.2631578947368424e-05,
+      "elapsed_seconds": 188.34390926361084
+    },
+    {
+      "optimizer_step": 41,
+      "loss": 1.094776690006256,
+      "learning_rate": 5.131578947368422e-05,
+      "elapsed_seconds": 193.49406814575195
+    },
+    {
+      "optimizer_step": 42,
+      "loss": 2.0701045393943787,
+      "learning_rate": 5e-05,
+      "elapsed_seconds": 198.657550573349
+    },
+    {
+      "optimizer_step": 43,
+      "loss": 1.65076744556427,
+      "learning_rate": 4.868421052631579e-05,
+      "elapsed_seconds": 203.5438506603241
+    },
+    {
+      "optimizer_step": 44,
+      "loss": 1.479095220565796,
+      "learning_rate": 4.736842105263158e-05,
+      "elapsed_seconds": 208.71498727798462
+    },
+    {
+      "optimizer_step": 45,
+      "loss": 1.6068349480628967,
+      "learning_rate": 4.605263157894737e-05,
+      "elapsed_seconds": 213.3332417011261
+    },
+    {
+      "optimizer_step": 46,
+      "loss": 1.917576014995575,
+      "learning_rate": 4.473684210526316e-05,
+      "elapsed_seconds": 218.46874046325684
+    },
+    {
+      "optimizer_step": 47,
+      "loss": 1.2386301755905151,
+      "learning_rate": 4.342105263157895e-05,
+      "elapsed_seconds": 221.60684299468994
+    },
+    {
+      "optimizer_step": 48,
+      "loss": 1.9196299314498901,
+      "learning_rate": 4.210526315789474e-05,
+      "elapsed_seconds": 226.7618281841278
+    },
+    {
+      "optimizer_step": 49,
+      "loss": 1.6686921119689941,
+      "learning_rate": 4.078947368421053e-05,
+      "elapsed_seconds": 231.83888721466064
+    },
+    {
+      "optimizer_step": 50,
+      "loss": 1.5910022854804993,
+      "learning_rate": 3.9473684210526316e-05,
+      "elapsed_seconds": 236.97317552566528
+    },
+    {
+      "optimizer_step": 51,
+      "loss": 1.8992355465888977,
+      "learning_rate": 3.815789473684211e-05,
+      "elapsed_seconds": 241.87117743492126
+    },
+    {
+      "optimizer_step": 52,
+      "loss": 1.4657300114631653,
+      "learning_rate": 3.6842105263157895e-05,
+      "elapsed_seconds": 247.01387786865234
+    },
+    {
+      "optimizer_step": 53,
+      "loss": 1.7141881585121155,
+      "learning_rate": 3.5526315789473684e-05,
+      "elapsed_seconds": 252.16232872009277
+    },
+    {
+      "optimizer_step": 54,
+      "loss": 1.573932409286499,
+      "learning_rate": 3.421052631578947e-05,
+      "elapsed_seconds": 255.29247283935547
+    },
+    {
+      "optimizer_step": 55,
+      "loss": 1.7158005237579346,
+      "learning_rate": 3.289473684210527e-05,
+      "elapsed_seconds": 258.41075325012207
+    },
+    {
+      "optimizer_step": 56,
+      "loss": 1.5574721097946167,
+      "learning_rate": 3.157894736842105e-05,
+      "elapsed_seconds": 263.570543050766
+    },
+    {
+      "optimizer_step": 57,
+      "loss": 1.6956198811531067,
+      "learning_rate": 3.0263157894736844e-05,
+      "elapsed_seconds": 268.7279562950134
+    },
+    {
+      "optimizer_step": 58,
+      "loss": 1.575311005115509,
+      "learning_rate": 2.8947368421052634e-05,
+      "elapsed_seconds": 273.86225509643555
+    },
+    {
+      "optimizer_step": 59,
+      "loss": 1.5639708638191223,
+      "learning_rate": 2.7631578947368426e-05,
+      "elapsed_seconds": 278.9893844127655
+    },
+    {
+      "optimizer_step": 60,
+      "loss": 1.4857021570205688,
+      "learning_rate": 2.6315789473684212e-05,
+      "elapsed_seconds": 284.1380832195282
+    },
+    {
+      "optimizer_step": 61,
+      "loss": 1.902613639831543,
+      "learning_rate": 2.5e-05,
+      "elapsed_seconds": 289.26766872406006
+    },
+    {
+      "optimizer_step": 62,
+      "loss": 0.9971091747283936,
+      "learning_rate": 2.368421052631579e-05,
+      "elapsed_seconds": 292.37109327316284
+    },
+    {
+      "optimizer_step": 63,
+      "loss": 1.3374802470207214,
+      "learning_rate": 2.236842105263158e-05,
+      "elapsed_seconds": 295.4599652290344
+    },
+    {
+      "optimizer_step": 64,
+      "loss": 1.7454023361206055,
+      "learning_rate": 2.105263157894737e-05,
+      "elapsed_seconds": 300.33778524398804
+    },
+    {
+      "optimizer_step": 65,
+      "loss": 1.9807512164115906,
+      "learning_rate": 1.9736842105263158e-05,
+      "elapsed_seconds": 305.2274639606476
+    },
+    {
+      "optimizer_step": 66,
+      "loss": 1.5331716537475586,
+      "learning_rate": 1.8421052631578947e-05,
+      "elapsed_seconds": 310.3840787410736
+    },
+    {
+      "optimizer_step": 67,
+      "loss": 2.0627281665802,
+      "learning_rate": 1.7105263157894737e-05,
+      "elapsed_seconds": 315.5183906555176
+    },
+    {
+      "optimizer_step": 68,
+      "loss": 1.416259765625,
+      "learning_rate": 1.5789473684210526e-05,
+      "elapsed_seconds": 320.67458605766296
+    },
+    {
+      "optimizer_step": 69,
+      "loss": 1.4281504154205322,
+      "learning_rate": 1.4473684210526317e-05,
+      "elapsed_seconds": 325.5567502975464
+    },
+    {
+      "optimizer_step": 70,
+      "loss": 1.3821065425872803,
+      "learning_rate": 1.3157894736842106e-05,
+      "elapsed_seconds": 330.7142126560211
+    },
+    {
+      "optimizer_step": 71,
+      "loss": 1.516755998134613,
+      "learning_rate": 1.1842105263157895e-05,
+      "elapsed_seconds": 335.89614391326904
+    },
+    {
+      "optimizer_step": 72,
+      "loss": 2.052276849746704,
+      "learning_rate": 1.0526315789473684e-05,
+      "elapsed_seconds": 340.8044044971466
+    },
+    {
+      "optimizer_step": 73,
+      "loss": 1.6562817692756653,
+      "learning_rate": 9.210526315789474e-06,
+      "elapsed_seconds": 345.95741391181946
+    },
+    {
+      "optimizer_step": 74,
+      "loss": 1.6035315990447998,
+      "learning_rate": 7.894736842105263e-06,
+      "elapsed_seconds": 350.85117745399475
+    },
+    {
+      "optimizer_step": 75,
+      "loss": 1.596263825893402,
+      "learning_rate": 6.578947368421053e-06,
+      "elapsed_seconds": 354.73043751716614
+    },
+    {
+      "optimizer_step": 76,
+      "loss": 1.1085501909255981,
+      "learning_rate": 5.263157894736842e-06,
+      "elapsed_seconds": 359.644962310791
+    },
+    {
+      "optimizer_step": 77,
+      "loss": 1.7493104934692383,
+      "learning_rate": 5e-06,
+      "elapsed_seconds": 364.5412290096283
+    },
+    {
+      "optimizer_step": 78,
+      "loss": 1.9054036140441895,
+      "learning_rate": 5e-06,
+      "elapsed_seconds": 369.6957449913025
+    },
+    {
+      "optimizer_step": 79,
+      "loss": 1.5152037739753723,
+      "learning_rate": 5e-06,
+      "elapsed_seconds": 374.8498740196228
+    },
+    {
+      "optimizer_step": 80,
+      "loss": 1.6082708239555359,
+      "learning_rate": 5e-06,
+      "elapsed_seconds": 379.98747420310974
+    }
+  ],
+  "elapsed_seconds": 1172.5295791625977
+}

@@ -1,0 +1,8 @@
+{
+  "execution_status": "success",
+  "capability_gate": "not_yet_passed",
+  "commit_sha": "d3014b5085c7ad8a595d23f84e6856e735b37bcd",
+  "run_id": "30725166280",
+  "recorded_at_utc": "2026-08-02T00:55:40.341299+00:00",
+  "scope": "one-game Stage-0.2 micro diagnostic; not an ARC score"
+}
