@@ -1,0 +1,97 @@
+name: ARC-GPT2 Contact World Benchmark
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [arc-gpt2-programs]
+    paths:
+      - "arcgpt2/contact_world_agent.py"
+      - "arcgpt2/benchmark_contact_world_agent.py"
+      - "arcgpt2/tests/test_contact_world_agent.py"
+      - ".github/workflows/arc-gpt2-contact-world-benchmark.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arc-gpt2-contact-world-benchmark-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install runtime dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Run held-out contact-mechanics benchmark
+        id: benchmark
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python -m arcgpt2.benchmark_contact_world_agent \
+            --games 128 \
+            --seed-base 830000 \
+            --max-actions 192 \
+            --output outputs/contact_world_agent/benchmark.json \
+            2>&1 | tee contact-world-agent.log
+
+      - name: Publish durable evidence
+        if: always()
+        env:
+          BENCHMARK_OUTCOME: ${{ steps.benchmark.outcome }}
+        run: |
+          mkdir -p reports/arcgpt2
+          python - <<'PY'
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          output = Path("outputs/contact_world_agent/benchmark.json")
+          receipt = {
+              "status": os.environ.get("BENCHMARK_OUTCOME", "unknown"),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "scope": (
+                  "Synthetic hidden contact-mechanics posterior benchmark; "
+                  "not GPT-2 capability and not ARC-AGI-3 evaluation"
+              ),
+              "benchmark_present": output.exists(),
+          }
+          Path("reports/arcgpt2/latest-contact-world-status.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          if output.exists():
+              shutil.copy2(output, "reports/arcgpt2/latest-contact-world-benchmark.json")
+          log = Path("contact-world-agent.log")
+          if log.exists():
+              lines = log.read_text(encoding="utf-8", errors="replace").splitlines()
+              Path("reports/arcgpt2/latest-contact-world-log-tail.txt").write_text(
+                  "\n".join(lines[-1000:]) + "\n", encoding="utf-8"
+              )
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/arcgpt2/
+          git commit -m "Record GPT-2 contact-world benchmark ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Propagate failure
+        if: steps.benchmark.outcome != 'success'
+        run: exit 1
