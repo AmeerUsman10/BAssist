@@ -1,8 +1,8 @@
 {
-  "status": "failure",
+  "status": "success",
   "branch": "arc-gpt2-programs",
-  "commit_sha": "08f66df91232042aefe760a132f6c3041deac65c",
-  "run_id": "30725911516",
-  "recorded_at_utc": "2026-08-02T00:50:27.728416+00:00",
-  "log": ".............................F.......................................... [ 60%]\n...............................................                          [100%]\n=================================== FAILURES ===================================\n___________ test_contact_world_posterior_starts_with_all_120_worlds ____________\n\n    def test_contact_world_posterior_starts_with_all_120_worlds() -> None:\n        spec = generate_contact_game(400_001)\n        entries = build_contact_worlds(spec, (), None, UniformContactScores())\n        assert len(entries) == 24 * len(ContactMode)\n>       assert sum(entry.probability for entry in entries) == 1.0\nE       assert 1.0000000000000002 == 1.0\nE        +  where 1.0000000000000002 = sum(<generator object test_contact_world_posterior_starts_with_all_120_worlds.<locals>.<genexpr> at 0x7fdfbb042b50>)\n\narcgpt2/tests/test_contact_world_agent.py:42: AssertionError\n=========================== short test summary info ============================\nFAILED arcgpt2/tests/test_contact_world_agent.py::test_contact_world_posterior_starts_with_all_120_worlds - assert 1.0000000000000002 == 1.0\n +  where 1.0000000000000002 = sum(<generator object test_contact_world_posterior_starts_with_all_120_worlds.<locals>.<genexpr> at 0x7fdfbb042b50>)\n1 failed, 118 passed in 21.09s\n"
+  "commit_sha": "48eba640dce71213dae50eba03f950c4d9056163",
+  "run_id": "30726004321",
+  "recorded_at_utc": "2026-08-02T00:53:21.788127+00:00",
+  "log": "........................................................................ [ 60%]\n...............................................                          [100%]\n119 passed in 21.32s\n"
 }
