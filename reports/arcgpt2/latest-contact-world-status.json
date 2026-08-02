@@ -1,9 +1,9 @@
 {
-  "status": "cancelled",
+  "status": "success",
   "branch": "arc-gpt2-programs",
-  "commit_sha": "5c755843c29706e30f27fd3f7abfb04150e282fd",
-  "run_id": "30725762591",
-  "recorded_at_utc": "2026-08-02T00:49:30.357738+00:00",
+  "commit_sha": "a95a854ef3a806371bdc3bca200d83c75c58c838",
+  "run_id": "30725924510",
+  "recorded_at_utc": "2026-08-02T00:51:14.899463+00:00",
   "scope": "Synthetic hidden contact-mechanics posterior benchmark; not GPT-2 capability and not ARC-AGI-3 evaluation",
-  "benchmark_present": false
+  "benchmark_present": true
 }
