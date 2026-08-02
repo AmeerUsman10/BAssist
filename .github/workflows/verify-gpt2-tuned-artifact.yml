@@ -1,0 +1,92 @@
+name: Verify Tuned GPT-2 Artifact
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/verify-gpt2-tuned-artifact.yml"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Download original tuned-model artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir recovered
+          gh run download 30718318028 -n gpt2-tuned-model -D recovered
+          find recovered -maxdepth 2 -type f -printf '%P %s bytes\n' | sort
+      - name: Compute reference hashes and logits
+        env:
+          HF_HUB_DISABLE_TELEMETRY: "1"
+        run: |
+          python -m pip install -q "transformers>=4.48,<6" safetensors
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          import torch
+          from transformers import AutoModelForCausalLM, AutoTokenizer
+
+          root = Path("recovered")
+          model_file = root / "model.safetensors"
+          model = AutoModelForCausalLM.from_pretrained(root)
+          tokenizer = AutoTokenizer.from_pretrained(root)
+          model.eval()
+
+          prompts = [
+              "Hello world",
+              "### Instruction:\nHow should an uncertain result be reported?\n\n### Response:\n",
+              "Exact grid. Current: 9x9;b0;r4c4=2,r4c7=3.\nAnswer:",
+          ]
+          results = []
+          with torch.no_grad():
+              for prompt in prompts:
+                  ids = tokenizer.encode(prompt, add_special_tokens=False)
+                  logits = model(torch.tensor([ids], dtype=torch.long)).logits[0, -1]
+                  top_values, top_indices = torch.topk(logits, k=10)
+                  results.append({
+                      "prompt": prompt,
+                      "token_ids": ids,
+                      "top_ids": top_indices.tolist(),
+                      "top_logits": top_values.tolist(),
+                      "top_pieces": [tokenizer.decode([value]) for value in top_indices.tolist()],
+                      "selected_natural_candidate_logits": {
+                          surface: float(logits[tokenizer.encode(surface, add_special_tokens=False)[0]])
+                          for surface in [" north", " east", " south", " west", " unknown", " one", " two", " three", " four"]
+                      },
+                  })
+
+          report = {
+              "model_safetensors_size": model_file.stat().st_size,
+              "model_safetensors_sha256": hashlib.sha256(model_file.read_bytes()).hexdigest(),
+              "transformers_version": __import__("transformers").__version__,
+              "prompts": results,
+          }
+          output = Path("reports/gpt2-artifact-verification")
+          output.mkdir(parents=True, exist_ok=True)
+          (output / "latest-reference.json").write_text(
+              json.dumps(report, indent=2), encoding="utf-8"
+          )
+          print(json.dumps(report, indent=2))
+          PY
+      - name: Publish reference report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/gpt2-artifact-verification/latest-reference.json
+          git commit -m "Record tuned GPT-2 artifact reference ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
