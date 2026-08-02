@@ -6,6 +6,7 @@ on:
     branches: [arc-gpt2-programs]
     paths:
       - "arcgpt2/meta_soft_binding.py"
+      - "arcgpt2/meta_soft_runtime.py"
       - "arcgpt2/soft_belief.py"
       - "arcgpt2/belief_math.py"
       - "arcgpt2/build_epistemic_counterfactual_dataset.py"
@@ -46,7 +47,7 @@ jobs:
           HF_HUB_DISABLE_TELEMETRY: "1"
         run: |
           set -o pipefail
-          python -m arcgpt2.meta_soft_binding \
+          python -m arcgpt2.meta_soft_runtime \
             --initialization pretrained \
             --output-dir outputs/meta_soft_binding/smoke \
             --train-groups 2 \
@@ -55,7 +56,7 @@ jobs:
             --validation-mapping-variants 2 \
             --max-length 320 \
             --prefix-length 8 \
-            --inner-learning-rate 0.05 \
+            --inner-learning-rate 0.2 \
             --outer-learning-rate 0.00005 \
             --episodes-per-outer-step 1 \
             --max-outer-steps 1 \
@@ -86,8 +87,8 @@ jobs:
               "run_id": os.environ.get("GITHUB_RUN_ID"),
               "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
               "scope": (
-                  "One-outer-step CPU runtime smoke for soft-prefix meta-learning; "
-                  "not a capability result and not ARC-AGI-3 evaluation"
+                  "One-outer-step CPU runtime smoke for length-normalized soft-prefix "
+                  "meta-learning; not a capability result and not ARC-AGI-3 evaluation"
               ),
               "summary_present": output.exists(),
           }
