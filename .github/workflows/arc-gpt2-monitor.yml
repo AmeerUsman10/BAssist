@@ -1,0 +1,37 @@
+name: ARC-GPT2 Run Monitor
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/arc-gpt2-monitor.yml"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read recent ARC-GPT2 workflow runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p reports/arcgpt2-monitor
+          gh api \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "/repos/${GITHUB_REPOSITORY}/actions/runs?per_page=100" \
+            --jq '{recorded_at: now | todate, runs: [.workflow_runs[] | select(.name | startswith("ARC-GPT2")) | {id, name, status, conclusion, event, head_sha, created_at, updated_at, html_url}]}' \
+            > reports/arcgpt2-monitor/latest-runs.json
+          cat reports/arcgpt2-monitor/latest-runs.json
+      - name: Publish monitor snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/arcgpt2-monitor/latest-runs.json
+          git commit -m "Record ARC-GPT2 workflow monitor ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
