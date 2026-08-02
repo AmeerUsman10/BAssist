@@ -15,17 +15,12 @@ an integration test for the epistemic architecture, not an ARC-AGI-3 score.
 from __future__ import annotations
 
 from dataclasses import dataclass
-import math
 from typing import Any, Mapping, Protocol, Sequence
 
 import torch
 
 from .completion_scorer import score_with_contextual_calibration
-from .dsl import (
-    Program,
-    enumerate_phase0_programs,
-    shortest_plan,
-)
+from .dsl import Program, enumerate_phase0_programs, shortest_plan
 from .goal_dsl import phase0_goal
 from .natural_protocol import answer_text, direction_words, mapping_prompt
 from .phase0_hidden_action import (
@@ -236,6 +231,11 @@ def run_agent(
     if max_actions < 1:
         raise ValueError("max_actions must be positive")
     provider = score_provider or UniformMappingScores()
+    reset = getattr(provider, "reset", None)
+    if callable(reset):
+        reset()
+    observer = getattr(provider, "observe", None)
+
     game = HiddenActionGame(spec)
     history: list[StepRecord] = []
     steps: list[AgentStep] = []
@@ -248,6 +248,8 @@ def run_agent(
         action, mode, information = choose_action(entries, current_grid)
         level_before = game.level_index
         record = game.step(action)
+        if callable(observer):
+            observer(record)
         history.append(record)
         if record.status in {"LEVEL_WIN", "GAME_WIN"}:
             levels_completed += 1
