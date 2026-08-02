@@ -23,13 +23,15 @@ jobs:
           mkdir runtime
           python -m pip install --upgrade pip
           python -m pip install --target runtime "transformers>=4.48,<6"
-          rm -rf runtime/torch runtime/torch-* runtime/numpy runtime/numpy-* runtime/safetensors runtime/safetensors-*
+          rm -rf runtime/torch runtime/torch-*
           python - <<'PY'
           import sys
           sys.path.insert(0, "runtime")
-          import tokenizers, transformers
+          import numpy, safetensors, tokenizers, transformers
           print("transformers", transformers.__version__)
           print("tokenizers", tokenizers.__version__)
+          print("numpy", numpy.__version__)
+          print("safetensors", safetensors.__version__)
           PY
           du -sh runtime
       - name: Upload runtime
