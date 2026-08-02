@@ -1,0 +1,163 @@
+name: ARC-GPT2 Joint Epistemic Train
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [arc-gpt2-programs]
+    paths:
+      - ".github/workflows/arc-gpt2-joint-epistemic-train.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arc-gpt2-joint-epistemic-train-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      TOKENIZERS_PARALLELISM: "false"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install "transformers>=4.48,<6" "safetensors>=0.4"
+
+      - name: Train matched one-checkpoint epistemic models
+        id: experiment
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          {
+            python -m arcgpt2.build_joint_epistemic_dataset \
+              --output-dir outputs/joint_train/data \
+              --train-action-groups 24 \
+              --validation-action-groups 3 \
+              --test-action-groups 6 \
+              --train-goal-games 24 \
+              --validation-goal-games 3 \
+              --test-goal-games 6 \
+              --mapping-variants 4 \
+              --action-seed-base 718034 \
+              --goal-seed-base 241421
+            python -m arcgpt2.train_joint_epistemic \
+              --initialization pretrained \
+              --data-dir outputs/joint_train/data \
+              --output-dir outputs/joint_train/pretrained \
+              --max-length 512 \
+              --prefix-keep 96 \
+              --gradient-accumulation-steps 2 \
+              --learning-rate 0.00008 \
+              --max-optimizer-steps 120 \
+              --warmup-steps 10 \
+              --freeze-first-n-blocks 10 \
+              --candidate-batch-size 4 \
+              --evaluation-rows-per-task 16 \
+              --no-save-model
+            python -m arcgpt2.train_joint_epistemic \
+              --initialization random \
+              --data-dir outputs/joint_train/data \
+              --output-dir outputs/joint_train/random \
+              --max-length 512 \
+              --prefix-keep 96 \
+              --gradient-accumulation-steps 2 \
+              --learning-rate 0.00008 \
+              --max-optimizer-steps 120 \
+              --warmup-steps 10 \
+              --freeze-first-n-blocks 10 \
+              --candidate-batch-size 4 \
+              --evaluation-rows-per-task 16 \
+              --no-save-model
+            python -m arcgpt2.compare_joint_epistemic \
+              --pretrained outputs/joint_train/pretrained/summary.json \
+              --random outputs/joint_train/random/summary.json \
+              --output outputs/joint_train/comparison.json
+          } 2>&1 | tee joint-epistemic-train.log
+
+      - name: Write durable evidence
+        if: always()
+        env:
+          EXPERIMENT_OUTCOME: ${{ steps.experiment.outcome }}
+        run: |
+          mkdir -p reports/arcgpt2
+          python - <<'PY'
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          reports = Path("reports/arcgpt2")
+          outputs = Path("outputs/joint_train")
+          receipt = {
+              "status": os.environ.get("EXPERIMENT_OUTCOME", "unknown"),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "scope": (
+                  "120-step matched one-GPT-2 action-and-goal epistemic gate; "
+                  "controlled curriculum, not ARC-AGI-3 evaluation"
+              ),
+          }
+          (reports / "latest-joint-epistemic-train-status.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          copies = {
+              outputs / "data" / "manifest.json": reports / "latest-joint-epistemic-train-data.json",
+              outputs / "pretrained" / "summary.json": reports / "latest-joint-epistemic-train-pretrained.json",
+              outputs / "random" / "summary.json": reports / "latest-joint-epistemic-train-random.json",
+              outputs / "comparison.json": reports / "latest-joint-epistemic-train-comparison.json",
+          }
+          for source, target in copies.items():
+              if source.exists():
+                  shutil.copy2(source, target)
+          log = Path("joint-epistemic-train.log")
+          if log.exists():
+              lines = log.read_text(encoding="utf-8", errors="replace").splitlines()
+              (reports / "latest-joint-epistemic-train-log-tail.txt").write_text(
+                  "\n".join(lines[-2200:]) + "\n", encoding="utf-8"
+              )
+          PY
+
+      - name: Publish evidence
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/arcgpt2/
+          git commit -m "Record trained GPT-2 joint epistemic model ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload evidence artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arc-gpt2-joint-epistemic-train-evidence
+          path: |
+            reports/arcgpt2/
+            outputs/joint_train/data/manifest.json
+            outputs/joint_train/pretrained/summary.json
+            outputs/joint_train/random/summary.json
+            outputs/joint_train/comparison.json
+            joint-epistemic-train.log
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Propagate failure
+        if: steps.experiment.outcome != 'success'
+        run: exit 1
