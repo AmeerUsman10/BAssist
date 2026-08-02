@@ -1,0 +1,925 @@
+{
+  "scope": "Stage-0.2 tokenizer and context audit; no capability claim",
+  "model_name": "openai-community/gpt2",
+  "games": 2,
+  "rows": 1806,
+  "candidate_tokenization": {
+    "N": {
+      "token_ids": [
+        45
+      ],
+      "tokens": [
+        "N"
+      ],
+      "round_trip": "N"
+    },
+    "E": {
+      "token_ids": [
+        36
+      ],
+      "tokens": [
+        "E"
+      ],
+      "round_trip": "E"
+    },
+    "S": {
+      "token_ids": [
+        50
+      ],
+      "tokens": [
+        "S"
+      ],
+      "round_trip": "S"
+    },
+    "W": {
+      "token_ids": [
+        54
+      ],
+      "tokens": [
+        "W"
+      ],
+      "round_trip": "W"
+    },
+    "?": {
+      "token_ids": [
+        30
+      ],
+      "tokens": [
+        "?"
+      ],
+      "round_trip": "?"
+    },
+    "1": {
+      "token_ids": [
+        16
+      ],
+      "tokens": [
+        "1"
+      ],
+      "round_trip": "1"
+    },
+    "2": {
+      "token_ids": [
+        17
+      ],
+      "tokens": [
+        "2"
+      ],
+      "round_trip": "2"
+    },
+    "3": {
+      "token_ids": [
+        18
+      ],
+      "tokens": [
+        "3"
+      ],
+      "round_trip": "3"
+    },
+    "4": {
+      "token_ids": [
+        19
+      ],
+      "tokens": [
+        "4"
+      ],
+      "round_trip": "4"
+    },
+    " north": {
+      "token_ids": [
+        5093
+      ],
+      "tokens": [
+        "\u0120north"
+      ],
+      "round_trip": " north"
+    },
+    " east": {
+      "token_ids": [
+        7627
+      ],
+      "tokens": [
+        "\u0120east"
+      ],
+      "round_trip": " east"
+    },
+    " south": {
+      "token_ids": [
+        5366
+      ],
+      "tokens": [
+        "\u0120south"
+      ],
+      "round_trip": " south"
+    },
+    " west": {
+      "token_ids": [
+        7421
+      ],
+      "tokens": [
+        "\u0120west"
+      ],
+      "round_trip": " west"
+    },
+    " unknown": {
+      "token_ids": [
+        6439
+      ],
+      "tokens": [
+        "\u0120unknown"
+      ],
+      "round_trip": " unknown"
+    },
+    " one": {
+      "token_ids": [
+        530
+      ],
+      "tokens": [
+        "\u0120one"
+      ],
+      "round_trip": " one"
+    },
+    " two": {
+      "token_ids": [
+        734
+      ],
+      "tokens": [
+        "\u0120two"
+      ],
+      "round_trip": " two"
+    },
+    " three": {
+      "token_ids": [
+        1115
+      ],
+      "tokens": [
+        "\u0120three"
+      ],
+      "round_trip": " three"
+    },
+    " four": {
+      "token_ids": [
+        1440
+      ],
+      "tokens": [
+        "\u0120four"
+      ],
+      "round_trip": " four"
+    },
+    "north": {
+      "token_ids": [
+        43588
+      ],
+      "tokens": [
+        "north"
+      ],
+      "round_trip": "north"
+    },
+    "east": {
+      "token_ids": [
+        23316
+      ],
+      "tokens": [
+        "east"
+      ],
+      "round_trip": "east"
+    },
+    "south": {
+      "token_ids": [
+        35782
+      ],
+      "tokens": [
+        "south"
+      ],
+      "round_trip": "south"
+    },
+    "west": {
+      "token_ids": [
+        7038
+      ],
+      "tokens": [
+        "west"
+      ],
+      "round_trip": "west"
+    },
+    "unknown": {
+      "token_ids": [
+        34680
+      ],
+      "tokens": [
+        "unknown"
+      ],
+      "round_trip": "unknown"
+    }
+  },
+  "dense_protocol": {
+    "overall_lengths": {
+      "count": 1806,
+      "min": 65,
+      "median": 318.0,
+      "mean": 278.5880398671096,
+      "p90": 351,
+      "p95": 370,
+      "p99": 380,
+      "max": 381
+    },
+    "lengths_by_task": {
+      "compose": {
+        "count": 258,
+        "min": 65,
+        "median": 65.0,
+        "mean": 65,
+        "p90": 65,
+        "p95": 65,
+        "p99": 65,
+        "max": 65
+      },
+      "direct": {
+        "count": 258,
+        "min": 194,
+        "median": 349.0,
+        "mean": 335.6860465116279,
+        "p90": 380,
+        "p95": 380,
+        "p99": 381,
+        "max": 381
+      },
+      "mapping": {
+        "count": 1032,
+        "min": 164,
+        "median": 319.0,
+        "mean": 305.6860465116279,
+        "p90": 350,
+        "p95": 350,
+        "p99": 351,
+        "max": 351
+      },
+      "need": {
+        "count": 258,
+        "min": 185,
+        "median": 340.0,
+        "mean": 326.6860465116279,
+        "p90": 371,
+        "p95": 371,
+        "p99": 372,
+        "max": 372
+      }
+    },
+    "lengths_by_history": {
+      "0": {
+        "count": 14,
+        "min": 65,
+        "median": 165.0,
+        "mean": 157.57142857142858,
+        "p90": 194,
+        "p95": 194,
+        "p99": 195,
+        "max": 195
+      },
+      "1": {
+        "count": 56,
+        "min": 65,
+        "median": 230.0,
+        "mean": 213.60714285714286,
+        "p90": 259,
+        "p95": 260,
+        "p99": 261,
+        "max": 261
+      },
+      "2": {
+        "count": 224,
+        "min": 65,
+        "median": 260.0,
+        "mean": 239.1875,
+        "p90": 289,
+        "p95": 290,
+        "p99": 291,
+        "max": 291
+      },
+      "3": {
+        "count": 504,
+        "min": 65,
+        "median": 290.0,
+        "mean": 265,
+        "p90": 319,
+        "p95": 320,
+        "p99": 321,
+        "max": 321
+      },
+      "4": {
+        "count": 672,
+        "min": 65,
+        "median": 321.0,
+        "mean": 290.875,
+        "p90": 349,
+        "p95": 351,
+        "p99": 351,
+        "max": 351
+      },
+      "5": {
+        "count": 336,
+        "min": 65,
+        "median": 350.0,
+        "mean": 316.5357142857143,
+        "p90": 380,
+        "p95": 380,
+        "p99": 381,
+        "max": 381
+      }
+    },
+    "budgets": {
+      "128": {
+        "rows": 1806,
+        "truncated_rows": 1548,
+        "truncated_fraction": 0.8571428571428571,
+        "known_mapping_rows": 784,
+        "known_mapping_evidence_retained": 0,
+        "known_mapping_evidence_retention_rate": 0.0,
+        "missing_evidence_examples": [
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 1,
+            "original_tokens": 229,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every000000000/000020000/000000030/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:",
+            "decoded_suffix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every000000000/000020000/000000030/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_2",
+            "target": "S",
+            "history_length": 1,
+            "original_tokens": 231,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every000/000000000/000000000/000020000/000000000/000030000/000000000.\nQuestion: What direction does action 2 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:",
+            "decoded_suffix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every000/000000000/000000000/000020000/000000000/000030000/000000000.\nQuestion: What direction does action 2 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_3",
+            "target": "W",
+            "history_length": 1,
+            "original_tokens": 229,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every/000000000/000000000/030200000/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 3 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:",
+            "decoded_suffix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every/000000000/000000000/030200000/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 3 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_4",
+            "target": "E",
+            "history_length": 1,
+            "original_tokens": 230,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every/000000000/000000000/000002000/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 4 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:",
+            "decoded_suffix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every/000000000/000000000/000002000/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 4 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 2,
+            "original_tokens": 259,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every000000000/000000000/000020030/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:",
+            "decoded_suffix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every000000000/000000000/000020030/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          }
+        ]
+      },
+      "192": {
+        "rows": 1806,
+        "truncated_rows": 1538,
+        "truncated_fraction": 0.8516057585825028,
+        "known_mapping_rows": 784,
+        "known_mapping_evidence_retained": 0,
+        "known_mapping_evidence_retention_rate": 0.0,
+        "missing_evidence_examples": [
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 1,
+            "original_tokens": 229,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/0000000>2,r4c4:2>0; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000000000/000000000/000020000/000000030/000000000/000000000/000000000/000000",
+            "decoded_suffix": "a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/0000000>2,r4c4:2>0; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000000000/000000000/000020000/000000030/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_2",
+            "target": "S",
+            "history_length": 1,
+            "original_tokens": 231,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/000000>0,r5c4:0>2; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000000000/000000000/000000000/000000000/000020000/000000000/000030000/0000000",
+            "decoded_suffix": " a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/000000>0,r5c4:0>2; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000000000/000000000/000000000/000000000/000020000/000000000/000030000/000000000.\nQuestion: What direction does action 2 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_3",
+            "target": "W",
+            "history_length": 1,
+            "original_tokens": 229,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/000000:0>2,r4c4:2>0; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000000000/000000000/000000000/030200000/000000000/000000000/000000000/00000",
+            "decoded_suffix": " different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/000000:0>2,r4c4:2>0; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000000000/000000000/000000000/030200000/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 3 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_4",
+            "target": "E",
+            "history_length": 1,
+            "original_tokens": 230,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/00002>0,r4c5:0>2; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000030000/000000000/000000000/000002000/000000000/000000000/000000000/00000000",
+            "decoded_suffix": "e a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/00002>0,r4c5:0>2; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000030000/000000000/000000000/000002000/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 4 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 2,
+            "original_tokens": 259,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/0000002>0,r4c4:0>2; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000000000/000000000/000000000/000020030/000000000/000000000/000000000/000000",
+            "decoded_suffix": "a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/0000002>0,r4c4:0>2; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000000000/000000000/000000000/000020030/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          }
+        ]
+      },
+      "256": {
+        "rows": 1806,
+        "truncated_rows": 1496,
+        "truncated_fraction": 0.8283499446290143,
+        "known_mapping_rows": 784,
+        "known_mapping_evidence_retained": 376,
+        "known_mapping_evidence_retention_rate": 0.47959183673469385,
+        "missing_evidence_examples": [
+          {
+            "task_detail": "map_2",
+            "target": "S",
+            "history_length": 3,
+            "original_tokens": 289,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/000000000/000000000/000000000/000020030/000000000/000000000/000000000/000000000.\nStep 0: action 1; change4:2>0,r4c4:0>2; status ACTIVE.\nStep 2: ac",
+            "decoded_suffix": "th grid 9x9:000000000/000000000/000000000/000000000/000020030/000000000/000000000/000000000/000000000.\nStep 0: action 1; change4:2>0,r4c4:0>2; status ACTIVE.\nStep 2: action 3; change r4c3:0>2,r4c4:2>0; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000000000/000000000/000000000/000200030/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 2 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_2",
+            "target": "S",
+            "history_length": 3,
+            "original_tokens": 290,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/000000000/000000000/000000000/000020000/000000000/000000000/000030000/000000000.\nStep 0: action 1;4:2>0,r4c4:0>2; status ACTIVE.\nStep 2: action 4;",
+            "decoded_suffix": "egan with grid 9x9:000000000/000000000/000000000/000000000/000020000/000000000/000000000/000030000/000000000.\nStep 0: action 1;4:2>0,r4c4:0>2; status ACTIVE.\nStep 2: action 4; change r4c4:2>0,r4c5:0>2; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000000000/000000000/000000000/000002000/000000000/000000000/000030000/000000000.\nQuestion: What direction does action 2 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_3",
+            "target": "W",
+            "history_length": 3,
+            "original_tokens": 289,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/000000000/000000000/000000000/030020000/000000000/000000000/000000000/000000000.\nStep 0: action 1;c3:0>2,r3c4:2>0; status ACTIVE.\nStep 2: action 2",
+            "decoded_suffix": "gan with grid 9x9:000000000/000000000/000000000/000000000/030020000/000000000/000000000/000000000/000000000.\nStep 0: action 1;c3:0>2,r3c4:2>0; status ACTIVE.\nStep 2: action 2; change r3c3:2>0,r4c3:0>2; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000000000/000000000/000000000/030200000/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 3 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_3",
+            "target": "W",
+            "history_length": 3,
+            "original_tokens": 291,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/000030000/000000000/000000000/000020000/000000000/000000000/000000000/000000000.\nStep 0: action 1;:0>2,r3c4:2>0; status ACTIVE.\nStep 2: action 4; ",
+            "decoded_suffix": "began with grid 9x9:000000000/000030000/000000000/000000000/000020000/000000000/000000000/000000000/000000000.\nStep 0: action 1;:0>2,r3c4:2>0; status ACTIVE.\nStep 2: action 4; change r3c3:2>0,r3c4:0>2; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000030000/000000000/000020000/000000000/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 3 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_4",
+            "target": "E",
+            "history_length": 3,
+            "original_tokens": 289,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/000000000/000000000/000000000/000020030/000000000/000000000/000000000/000000000.\nStep 0: action 1; change4:2>0,r3c5:0>2; status ACTIVE.\nStep 2: ac",
+            "decoded_suffix": "th grid 9x9:000000000/000000000/000000000/000000000/000020030/000000000/000000000/000000000/000000000.\nStep 0: action 1; change4:2>0,r3c5:0>2; status ACTIVE.\nStep 2: action 2; change r3c5:2>0,r4c5:0>2; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000000000/000000000/000000000/000002030/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 4 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          }
+        ]
+      },
+      "320": {
+        "rows": 1806,
+        "truncated_rows": 664,
+        "truncated_fraction": 0.36766334440753046,
+        "known_mapping_rows": 784,
+        "known_mapping_evidence_retained": 736,
+        "known_mapping_evidence_retention_rate": 0.9387755102040817,
+        "missing_evidence_examples": [
+          {
+            "task_detail": "map_3",
+            "target": "W",
+            "history_length": 5,
+            "original_tokens": 349,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/000000000/000000000/000000000/000020030/000000000/000000000/000000000/000000000.\nStep 0: action 1; change r3c4:0>2,r4c4:2>0; status ACTIVE.\nStep 1",
+            "decoded_suffix": "ange r3c4:0>2,r4c4:2>0; status ACTIVE.\nStep 1: action 2; change r34c3:0>2,r4c4:2>0; status ACTIVE.\nStep 3: action 4; change r4c3:2>0,r4c4:0>2; status ACTIVE.\nStep 4: action 1; change r3c4:0>2,r4c4:2>0; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000000000/000000000/000020000/000000030/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 3 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_4",
+            "target": "E",
+            "history_length": 5,
+            "original_tokens": 351,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/000000000/000000000/000000000/000020000/000000000/000000000/000030000/000000000.\nStep 0: action 1; change r3c4:0>2,r4c4:2>0; status ACTIVE.\nStep 1",
+            "decoded_suffix": "change r3c4:0>2,r4c4:2>0; status ACTIVE.\nStep 1: action 2; change rc4:2>0,r4c5:0>2; status ACTIVE.\nStep 3: action 3; change r4c4:0>2,r4c5:2>0; status ACTIVE.\nStep 4: action 1; change r3c4:0>2,r4c4:2>0; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000000000/000000000/000020000/000000000/000000000/000000000/000030000/000000000.\nQuestion: What direction does action 4 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_2",
+            "target": "S",
+            "history_length": 5,
+            "original_tokens": 350,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/000000000/000000000/000000000/030020000/000000000/000000000/000000000/000000000.\nStep 0: action 1; change r3c4:0>2,r4c4:2>0; status ACTIVE.\nStep 1",
+            "decoded_suffix": "hange r3c4:0>2,r4c4:2>0; status ACTIVE.\nStep 1: action 3; change r3c3:2>0,r4c3:0>2; status ACTIVE.\nStep 3: action 4; change r4c3:2>0,r4c4:0>2; status ACTIVE.\nStep 4: action 1; change r3c4:0>2,r4c4:2>0; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000000000/000000000/000020000/030000000/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 2 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_4",
+            "target": "E",
+            "history_length": 5,
+            "original_tokens": 351,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/000030000/000000000/000000000/000020000/000000000/000000000/000000000/000000000.\nStep 0: action 1; change r3c4:0>2,r4c4:2>0; status ACTIVE.\nStep 1",
+            "decoded_suffix": "change r3c4:0>2,r4c4:2>0; status ACTIVE.\nStep 1: action 3; change rc3:2>0,r3c4:0>2; status ACTIVE.\nStep 3: action 2; change r3c4:2>0,r4c4:0>2; status ACTIVE.\nStep 4: action 1; change r3c4:0>2,r4c4:2>0; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000030000/000000000/000020000/000000000/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 4 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_2",
+            "target": "S",
+            "history_length": 5,
+            "original_tokens": 349,
+            "decoded_prefix": "This is an exact grid-control record. Grid cells are digits: 0 empty, 1 wall, 2 mover, 3 goal. Rows run top to bottom and columns left to right. Actions 1, 2, 3, and 4 are a different permutation of north, east, south, and west in every game. Infer the permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9:000000000/000000000/000000000/000000000/000020030/000000000/000000000/000000000/000000000.\nStep 0: action 1; change r3c4:0>2,r4c4:2>0; status ACTIVE.\nStep 1",
+            "decoded_suffix": "ange r3c4:0>2,r4c4:2>0; status ACTIVE.\nStep 1: action 4; change r33c5:2>0,r4c5:0>2; status ACTIVE.\nStep 3: action 3; change r4c4:0>2,r4c5:2>0; status ACTIVE.\nStep 4: action 1; change r3c4:0>2,r4c4:2>0; status ACTIVE.\nCurrent level 0 grid 9x9:000000000/000000000/000000000/000020000/000000030/000000000/000000000/000000000/000000000.\nQuestion: What direction does action 2 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          }
+        ]
+      },
+      "384": {
+        "rows": 1806,
+        "truncated_rows": 0,
+        "truncated_fraction": 0.0,
+        "known_mapping_rows": 784,
+        "known_mapping_evidence_retained": 784,
+        "known_mapping_evidence_retention_rate": 1.0,
+        "missing_evidence_examples": []
+      },
+      "512": {
+        "rows": 1806,
+        "truncated_rows": 0,
+        "truncated_fraction": 0.0,
+        "known_mapping_rows": 784,
+        "known_mapping_evidence_retained": 784,
+        "known_mapping_evidence_retention_rate": 1.0,
+        "missing_evidence_examples": []
+      },
+      "768": {
+        "rows": 1806,
+        "truncated_rows": 0,
+        "truncated_fraction": 0.0,
+        "known_mapping_rows": 784,
+        "known_mapping_evidence_retained": 784,
+        "known_mapping_evidence_retention_rate": 1.0,
+        "missing_evidence_examples": []
+      },
+      "1024": {
+        "rows": 1806,
+        "truncated_rows": 0,
+        "truncated_fraction": 0.0,
+        "known_mapping_rows": 784,
+        "known_mapping_evidence_retained": 784,
+        "known_mapping_evidence_retention_rate": 1.0,
+        "missing_evidence_examples": []
+      }
+    },
+    "known_mapping_rows": 784
+  },
+  "sparse_protocol": {
+    "overall_lengths": {
+      "count": 1806,
+      "min": 65,
+      "median": 351.0,
+      "mean": 305.30897009966776,
+      "p90": 381,
+      "p95": 402,
+      "p99": 411,
+      "max": 411
+    },
+    "lengths_by_task": {
+      "compose": {
+        "count": 258,
+        "min": 65,
+        "median": 65.0,
+        "mean": 65,
+        "p90": 65,
+        "p95": 65,
+        "p99": 65,
+        "max": 65
+      },
+      "direct": {
+        "count": 258,
+        "min": 237,
+        "median": 381.0,
+        "mean": 366.86046511627904,
+        "p90": 411,
+        "p95": 411,
+        "p99": 411,
+        "max": 411
+      },
+      "mapping": {
+        "count": 1032,
+        "min": 207,
+        "median": 351.0,
+        "mean": 336.86046511627904,
+        "p90": 381,
+        "p95": 381,
+        "p99": 381,
+        "max": 381
+      },
+      "need": {
+        "count": 258,
+        "min": 228,
+        "median": 372.0,
+        "mean": 357.86046511627904,
+        "p90": 402,
+        "p95": 402,
+        "p99": 402,
+        "max": 402
+      }
+    },
+    "lengths_by_history": {
+      "0": {
+        "count": 14,
+        "min": 65,
+        "median": 207.0,
+        "mean": 194,
+        "p90": 237,
+        "p95": 237,
+        "p99": 237,
+        "max": 237
+      },
+      "1": {
+        "count": 56,
+        "min": 65,
+        "median": 261.0,
+        "mean": 240.28571428571428,
+        "p90": 291,
+        "p95": 291,
+        "p99": 291,
+        "max": 291
+      },
+      "2": {
+        "count": 224,
+        "min": 65,
+        "median": 291.0,
+        "mean": 266,
+        "p90": 321,
+        "p95": 321,
+        "p99": 321,
+        "max": 321
+      },
+      "3": {
+        "count": 504,
+        "min": 65,
+        "median": 321.0,
+        "mean": 291.7142857142857,
+        "p90": 351,
+        "p95": 351,
+        "p99": 351,
+        "max": 351
+      },
+      "4": {
+        "count": 672,
+        "min": 65,
+        "median": 351.0,
+        "mean": 317.42857142857144,
+        "p90": 381,
+        "p95": 381,
+        "p99": 381,
+        "max": 381
+      },
+      "5": {
+        "count": 336,
+        "min": 65,
+        "median": 381.0,
+        "mean": 343.14285714285717,
+        "p90": 411,
+        "p95": 411,
+        "p99": 411,
+        "max": 411
+      }
+    },
+    "budgets": {
+      "128": {
+        "rows": 1806,
+        "truncated_rows": 1548,
+        "truncated_fraction": 0.8571428571428571,
+        "known_mapping_rows": 784,
+        "known_mapping_evidence_retained": 0,
+        "known_mapping_evidence_retention_rate": 0.0,
+        "missing_evidence_examples": [
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 1,
+            "original_tokens": 261,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. grid 9x9;b0;r3c4=2,r4c7=3.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:",
+            "decoded_suffix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. grid 9x9;b0;r3c4=2,r4c7=3.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_2",
+            "target": "S",
+            "history_length": 1,
+            "original_tokens": 261,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. grid 9x9;b0;r5c4=2,r7c4=3.\nQuestion: What direction does action 2 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:",
+            "decoded_suffix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. grid 9x9;b0;r5c4=2,r7c4=3.\nQuestion: What direction does action 2 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_3",
+            "target": "W",
+            "history_length": 1,
+            "original_tokens": 261,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. grid 9x9;b0;r4c1=3,r4c3=2.\nQuestion: What direction does action 3 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:",
+            "decoded_suffix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. grid 9x9;b0;r4c1=3,r4c3=2.\nQuestion: What direction does action 3 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_4",
+            "target": "E",
+            "history_length": 1,
+            "original_tokens": 261,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. grid 9x9;b0;r1c4=3,r4c5=2.\nQuestion: What direction does action 4 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:",
+            "decoded_suffix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. grid 9x9;b0;r1c4=3,r4c5=2.\nQuestion: What direction does action 4 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 2,
+            "original_tokens": 291,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. grid 9x9;b0;r4c4=2,r4c7=3.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:",
+            "decoded_suffix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. grid 9x9;b0;r4c4=2,r4c7=3.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          }
+        ]
+      },
+      "192": {
+        "rows": 1806,
+        "truncated_rows": 1548,
+        "truncated_fraction": 0.8571428571428571,
+        "known_mapping_rows": 784,
+        "known_mapping_evidence_retained": 256,
+        "known_mapping_evidence_retention_rate": 0.32653061224489793,
+        "missing_evidence_examples": [
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 2,
+            "original_tokens": 291,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 1: action 2; change r3c4:2>0,r4c4:0>2; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r4c4=2,r4c7=3.\nQuestion: What direction does action 1 move? If it",
+            "decoded_suffix": "ell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 1: action 2; change r3c4:2>0,r4c4:0>2; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r4c4=2,r4c7=3.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 2,
+            "original_tokens": 291,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 1: action 3; change r3c3:0>2,r3c4:2>0; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r3c3=2,r7c4=3.\nQuestion: What direction does action 1 move? If it",
+            "decoded_suffix": "ell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 1: action 3; change r3c3:0>2,r3c4:2>0; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r3c3=2,r7c4=3.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 2,
+            "original_tokens": 291,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 1: action 4; change r3c4:2>0,r3c5:0>2; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r3c5=2,r4c1=3.\nQuestion: What direction does action 1 move? If it",
+            "decoded_suffix": "ell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 1: action 4; change r3c4:2>0,r3c5:0>2; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r3c5=2,r4c1=3.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_2",
+            "target": "S",
+            "history_length": 2,
+            "original_tokens": 291,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 1: action 1; change r4c4:0>2,r5c4:2>0; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r1c4=3,r4c4=2.\nQuestion: What direction does action 2 move? If it",
+            "decoded_suffix": "ell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 1: action 1; change r4c4:0>2,r5c4:2>0; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r1c4=3,r4c4=2.\nQuestion: What direction does action 2 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_2",
+            "target": "S",
+            "history_length": 2,
+            "original_tokens": 291,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 1: action 3; change r5c3:0>2,r5c4:2>0; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r4c7=3,r5c3=2.\nQuestion: What direction does action 2 move? If it",
+            "decoded_suffix": "ell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 1: action 3; change r5c3:0>2,r5c4:2>0; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r4c7=3,r5c3=2.\nQuestion: What direction does action 2 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          }
+        ]
+      },
+      "256": {
+        "rows": 1806,
+        "truncated_rows": 1536,
+        "truncated_fraction": 0.8504983388704319,
+        "known_mapping_rows": 784,
+        "known_mapping_evidence_retained": 496,
+        "known_mapping_evidence_retention_rate": 0.6326530612244898,
+        "missing_evidence_examples": [
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 3,
+            "original_tokens": 321,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 2, 3, and 4 are a different permutation of N, E, S, and W in every game. Infer the permutation only from observed\nStep 1: action 2; change r3c4:2>0",
+            "decoded_suffix": "lumn, S increases row, and W decreases column. Actions 1, 2, 3, and 4 are a different permutation of N, E, S, and W in every game. Infer the permutation only from observed\nStep 1: action 2; change r3c4:2>0,r4c4:0>2; status ACTIVE.\nStep 2: action 3; change r4c3:0>2,r4c4:2>0; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r4c3=2,r4c7=3.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 3,
+            "original_tokens": 321,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 2, 3, and 4 are a different permutation of N, E, S, and W in every game. Infer the permutation only from observed\nStep 1: action 2; change r3c4:2>0",
+            "decoded_suffix": "lumn, S increases row, and W decreases column. Actions 1, 2, 3, and 4 are a different permutation of N, E, S, and W in every game. Infer the permutation only from observed\nStep 1: action 2; change r3c4:2>0,r4c4:0>2; status ACTIVE.\nStep 2: action 4; change r4c4:2>0,r4c5:0>2; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r4c5=2,r7c4=3.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 3,
+            "original_tokens": 321,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 2, 3, and 4 are a different permutation of N, E, S, and W in every game. Infer the permutation only from observed\nStep 1: action 3; change r3c3:0>2",
+            "decoded_suffix": "lumn, S increases row, and W decreases column. Actions 1, 2, 3, and 4 are a different permutation of N, E, S, and W in every game. Infer the permutation only from observed\nStep 1: action 3; change r3c3:0>2,r3c4:2>0; status ACTIVE.\nStep 2: action 2; change r3c3:2>0,r4c3:0>2; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r4c1=3,r4c3=2.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 3,
+            "original_tokens": 321,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 2, 3, and 4 are a different permutation of N, E, S, and W in every game. Infer the permutation only from observed\nStep 1: action 3; change r3c3:0>2",
+            "decoded_suffix": "lumn, S increases row, and W decreases column. Actions 1, 2, 3, and 4 are a different permutation of N, E, S, and W in every game. Infer the permutation only from observed\nStep 1: action 3; change r3c3:0>2,r3c4:2>0; status ACTIVE.\nStep 2: action 4; change r3c3:2>0,r3c4:0>2; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r1c4=3,r3c4=2.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 3,
+            "original_tokens": 321,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 2, 3, and 4 are a different permutation of N, E, S, and W in every game. Infer the permutation only from observed\nStep 1: action 4; change r3c4:2>0",
+            "decoded_suffix": "lumn, S increases row, and W decreases column. Actions 1, 2, 3, and 4 are a different permutation of N, E, S, and W in every game. Infer the permutation only from observed\nStep 1: action 4; change r3c4:2>0,r3c5:0>2; status ACTIVE.\nStep 2: action 2; change r3c5:2>0,r4c5:0>2; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r4c5=2,r4c7=3.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          }
+        ]
+      },
+      "320": {
+        "rows": 1806,
+        "truncated_rows": 1328,
+        "truncated_fraction": 0.7353266888150609,
+        "known_mapping_rows": 784,
+        "known_mapping_evidence_retained": 688,
+        "known_mapping_evidence_retention_rate": 0.8775510204081632,
+        "missing_evidence_examples": [
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 4,
+            "original_tokens": 351,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 2, 3, and 4 are a different permutation of N, E, S, and W in every game. Infer the permutation only from observed cell changes.\nObserved history:\nL",
+            "decoded_suffix": "he permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9;b0;r4c4=2,r4c7IVE.\nStep 1: action 2; change r3c4:2>0,r4c4:0>2; status ACTIVE.\nStep 2: action 3; change r4c3:0>2,r4c4:2>0; status ACTIVE.\nStep 3: action 4; change r4c3:2>0,r4c4:0>2; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r4c4=2,r4c7=3.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 4,
+            "original_tokens": 351,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 2, 3, and 4 are a different permutation of N, E, S, and W in every game. Infer the permutation only from observed cell changes.\nObserved history:\nL",
+            "decoded_suffix": "he permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9;b0;r4c4=2,r7c4IVE.\nStep 1: action 2; change r3c4:2>0,r4c4:0>2; status ACTIVE.\nStep 2: action 4; change r4c4:2>0,r4c5:0>2; status ACTIVE.\nStep 3: action 3; change r4c4:0>2,r4c5:2>0; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r4c4=2,r7c4=3.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 4,
+            "original_tokens": 351,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 2, 3, and 4 are a different permutation of N, E, S, and W in every game. Infer the permutation only from observed cell changes.\nObserved history:\nL",
+            "decoded_suffix": "he permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9;b0;r4c1=3,r4c4IVE.\nStep 1: action 3; change r3c3:0>2,r3c4:2>0; status ACTIVE.\nStep 2: action 2; change r3c3:2>0,r4c3:0>2; status ACTIVE.\nStep 3: action 4; change r4c3:2>0,r4c4:0>2; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r4c1=3,r4c4=2.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 4,
+            "original_tokens": 351,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 2, 3, and 4 are a different permutation of N, E, S, and W in every game. Infer the permutation only from observed cell changes.\nObserved history:\nL",
+            "decoded_suffix": "he permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9;b0;r1c4=3,r4c4IVE.\nStep 1: action 3; change r3c3:0>2,r3c4:2>0; status ACTIVE.\nStep 2: action 4; change r3c3:2>0,r3c4:0>2; status ACTIVE.\nStep 3: action 2; change r3c4:2>0,r4c4:0>2; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r1c4=3,r4c4=2.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          },
+          {
+            "task_detail": "map_1",
+            "target": "N",
+            "history_length": 4,
+            "original_tokens": 351,
+            "decoded_prefix": "This is an exact grid-control record. A grid is written as HxW;bV;cells. V is the baseline value for every unlisted cell; listed cells use exact rROWcCOLUMN=VALUE coordinates. Values are 0 empty, 1 wall, 2 mover, 3 goal. Row 0 is the top and column 0 is the left. N decreases row, E increases column, S increases row, and W decreases column. Actions 1, 2, 3, and 4 are a different permutation of N, E, S, and W in every game. Infer the permutation only from observed cell changes.\nObserved history:\nL",
+            "decoded_suffix": "he permutation only from observed cell changes.\nObserved history:\nLevel 0 began with grid 9x9;b0;r4c4=2,r4c7IVE.\nStep 1: action 4; change r3c4:2>0,r3c5:0>2; status ACTIVE.\nStep 2: action 2; change r3c5:2>0,r4c5:0>2; status ACTIVE.\nStep 3: action 3; change r4c4:0>2,r4c5:2>0; status ACTIVE.\nCurrent level 0 grid 9x9;b0;r4c4=2,r4c7=3.\nQuestion: What direction does action 1 move? If its meaning cannot be inferred from the observations, answer ?. Answer exactly one character: N, E, S, W, or ?.\nAnswer:"
+          }
+        ]
+      },
+      "384": {
+        "rows": 1806,
+        "truncated_rows": 96,
+        "truncated_fraction": 0.053156146179401995,
+        "known_mapping_rows": 784,
+        "known_mapping_evidence_retained": 784,
+        "known_mapping_evidence_retention_rate": 1.0,
+        "missing_evidence_examples": []
+      },
+      "512": {
+        "rows": 1806,
+        "truncated_rows": 0,
+        "truncated_fraction": 0.0,
+        "known_mapping_rows": 784,
+        "known_mapping_evidence_retained": 784,
+        "known_mapping_evidence_retention_rate": 1.0,
+        "missing_evidence_examples": []
+      },
+      "768": {
+        "rows": 1806,
+        "truncated_rows": 0,
+        "truncated_fraction": 0.0,
+        "known_mapping_rows": 784,
+        "known_mapping_evidence_retained": 784,
+        "known_mapping_evidence_retention_rate": 1.0,
+        "missing_evidence_examples": []
+      },
+      "1024": {
+        "rows": 1806,
+        "truncated_rows": 0,
+        "truncated_fraction": 0.0,
+        "known_mapping_rows": 784,
+        "known_mapping_evidence_retained": 784,
+        "known_mapping_evidence_retention_rate": 1.0,
+        "missing_evidence_examples": []
+      }
+    },
+    "known_mapping_rows": 784
+  }
+}
