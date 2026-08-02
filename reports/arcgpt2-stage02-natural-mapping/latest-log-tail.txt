@@ -1,0 +1,144 @@
+................                                                         [100%]
+16 passed in 0.87s
+{
+  "claim_scope": "synthetic fixed-palette no-wall hidden-action curriculum; not an ARC-AGI-3 public or private score",
+  "contexts_per_game": 129,
+  "labels": [
+    "N",
+    "E",
+    "S",
+    "W",
+    "?",
+    "1",
+    "2",
+    "3",
+    "4"
+  ],
+  "purity": "one standard GPT-2 is queried for mapping, need, composition, and direct action; deterministic code only serializes, masks labels, copies answers, executes actions, and scores offline truth",
+  "schema": "arcgpt2.stage02.decomposed-natural.v1",
+  "splits": {
+    "test": {
+      "contexts": 129,
+      "direct_decision_phase_counts": {
+        "navigate": 48,
+        "probe": 81
+      },
+      "file": "test.jsonl",
+      "games": 1,
+      "rows": 903,
+      "seed_start": 20,
+      "seed_stop_exclusive": 21,
+      "sha256": "f07d35e2ef81d1a98fe821108cb0c8bb4c854423ebd5252d06bd72a1a475841c",
+      "task_counts": {
+        "compose": 129,
+        "direct": 129,
+        "mapping": 516,
+        "need": 129
+      },
+      "task_target_counts": {
+        "compose:1": 43,
+        "compose:2": 34,
+        "compose:3": 28,
+        "compose:4": 24,
+        "direct:1": 43,
+        "direct:2": 34,
+        "direct:3": 28,
+        "direct:4": 24,
+        "mapping:?": 124,
+        "mapping:E": 98,
+        "mapping:N": 98,
+        "mapping:S": 98,
+        "mapping:W": 98,
+        "need:?": 81,
+        "need:E": 12,
+        "need:N": 12,
+        "need:S": 12,
+        "need:W": 12
+      }
+    },
+    "train": {
+      "contexts": 129,
+      "direct_decision_phase_counts": {
+        "navigate": 48,
+        "probe": 81
+      },
+      "file": "train.jsonl",
+      "games": 1,
+      "rows": 903,
+      "seed_start": 0,
+      "seed_stop_exclusive": 1,
+      "sha256": "69b34611b0c34b4e558abc4e19187392a5594d15532c3fca59186acd95b46572",
+      "task_counts": {
+        "compose": 129,
+        "direct": 129,
+        "mapping": 516,
+        "need": 129
+      },
+      "task_target_counts": {
+        "compose:1": 43,
+        "compose:2": 34,
+        "compose:3": 28,
+        "compose:4": 24,
+        "direct:1": 43,
+        "direct:2": 34,
+        "direct:3": 28,
+        "direct:4": 24,
+        "mapping:?": 124,
+        "mapping:E": 98,
+        "mapping:N": 98,
+        "mapping:S": 98,
+        "mapping:W": 98,
+        "need:?": 81,
+        "need:E": 12,
+        "need:N": 12,
+        "need:S": 12,
+        "need:W": 12
+      }
+    },
+    "validation": {
+      "contexts": 129,
+      "direct_decision_phase_counts": {
+        "navigate": 48,
+        "probe": 81
+      },
+      "file": "validation.jsonl",
+      "games": 1,
+      "rows": 903,
+      "seed_start": 0,
+      "seed_stop_exclusive": 1,
+      "sha256": "69b34611b0c34b4e558abc4e19187392a5594d15532c3fca59186acd95b46572",
+      "task_counts": {
+        "compose": 129,
+        "direct": 129,
+        "mapping": 516,
+        "need": 129
+      },
+      "task_target_counts": {
+        "compose:1": 43,
+        "compose:2": 34,
+        "compose:3": 28,
+        "compose:4": 24,
+        "direct:1": 43,
+        "direct:2": 34,
+        "direct:3": 28,
+        "direct:4": 24,
+        "mapping:?": 124,
+        "mapping:E": 98,
+        "mapping:N": 98,
+        "mapping:S": 98,
+        "mapping:W": 98,
+        "need:?": 81,
+        "need:E": 12,
+        "need:N": 12,
+        "need:S": 12,
+        "need:W": 12
+      }
+    }
+  }
+}
+train mapping rows 516
+validation mapping rows 516
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 25147.13it/s]

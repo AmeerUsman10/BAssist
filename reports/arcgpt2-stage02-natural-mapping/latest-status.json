@@ -1,0 +1,11 @@
+{
+  "execution_status": "cancelled",
+  "capability_gate": "not_evaluated",
+  "repository": "AmeerUsman10/BAssist",
+  "branch": "main",
+  "commit_sha": "b6d9b74fed1d5e9d70d61608770fe6b36b8cb3b1",
+  "run_id": "30726085285",
+  "run_attempt": "1",
+  "recorded_at_utc": "2026-08-02T00:56:37.437414+00:00",
+  "scope": "One-game compact natural-token mapping overfit diagnostic; not an ARC score"
+}
