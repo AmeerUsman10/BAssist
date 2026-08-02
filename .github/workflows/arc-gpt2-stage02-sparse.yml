@@ -1,0 +1,70 @@
+name: ARC-GPT2 Stage 0.2 Sparse Exact Codec
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/arc-gpt2-stage02-sparse.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arc-gpt2-stage02-sparse
+  cancel-in-progress: true
+
+jobs:
+  sparse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install "transformers>=4.48,<6" "safetensors>=0.4" pytest
+      - name: Run experiment
+        id: experiment
+        continue-on-error: true
+        env:
+          TOKENIZERS_PARALLELISM: "false"
+          HF_HUB_DISABLE_TELEMETRY: "1"
+        run: |
+          set -o pipefail
+          python -m pytest -q arcgpt2/tests/test_stage02.py arcgpt2/tests/test_stage02_sparse.py 2>&1 | tee stage02-sparse.log
+          python -m arcgpt2.stage02_sparse --output-dir outputs/stage02-sparse/data --train-games 4 --validation-games 1 --test-games 2 --train-seed-start 0 --validation-seed-start 8 --test-seed-start 20 2>&1 | tee -a stage02-sparse.log
+          python -m arcgpt2.train_stage02_sparse --train-file outputs/stage02-sparse/data/train.jsonl --evaluation-file outputs/stage02-sparse/data/validation.jsonl --output-dir outputs/stage02-sparse/pretrained --max-length 256 --prefix-keep 128 --train-batch-size 2 --eval-batch-size 8 --gradient-accumulation-steps 2 --learning-rate 8e-5 --max-optimizer-steps 160 --warmup-steps 8 --freeze-first-n-blocks 8 --train-eval-seed-start 0 --train-eval-games 1 --heldout-seed-start 20 --heldout-games 2 --max-actions-per-game 24 --history-modes intact amnesic 2>&1 | tee -a stage02-sparse.log
+      - name: Write receipt
+        if: always()
+        env:
+          EXPERIMENT_OUTCOME: ${{ steps.experiment.outcome }}
+        run: |
+          python -m arcgpt2.report_experiment --report-dir reports/arcgpt2-stage02-sparse --summary outputs/stage02-sparse/pretrained/summary.json --manifest outputs/stage02-sparse/data/manifest.json --log stage02-sparse.log --scope "Stage-0.2 sparse exact codec synthetic hidden-action curriculum; not an ARC score"
+      - name: Publish receipt
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/arcgpt2-stage02-sparse/
+          git commit -m "Record ARC-GPT2 Stage-0.2 sparse run ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arc-gpt2-stage02-sparse-evidence
+          path: |
+            reports/arcgpt2-stage02-sparse/
+            stage02-sparse.log
+          if-no-files-found: warn
+          retention-days: 21
+      - name: Propagate failure
+        if: steps.experiment.outcome != 'success'
+        run: exit 1
