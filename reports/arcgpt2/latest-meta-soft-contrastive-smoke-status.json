@@ -1,8 +1,8 @@
 {
-  "status": "failure",
+  "status": "success",
   "branch": "arc-gpt2-programs",
-  "commit_sha": "0839a772ac434dc7e7a66710c433476f66635184",
-  "run_id": "30725277023",
-  "recorded_at_utc": "2026-08-02T00:29:35.505947+00:00",
+  "commit_sha": "375d53867db37f2c64744fe443541bc7014aef1f",
+  "run_id": "30725331584",
+  "recorded_at_utc": "2026-08-02T00:33:28.852145+00:00",
   "scope": "One-step contrastive second-order soft-memory runtime smoke; not an ARC-AGI-3 capability result"
 }
