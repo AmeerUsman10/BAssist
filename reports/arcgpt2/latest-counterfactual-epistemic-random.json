@@ -1,3 +1,174 @@
+{
+  "status": "completed",
+  "scope": "Symmetry-aware partial-evidence action binding; controlled meta-learning gate, not ARC-AGI-3 evaluation.",
+  "config": {
+    "model_name": "openai-community/gpt2",
+    "initialization": "random",
+    "data_dir": "outputs/epistemic_counterfactual/data",
+    "output_dir": "outputs/epistemic_counterfactual/random",
+    "seed": 42,
+    "max_length": 448,
+    "prefix_keep": 96,
+    "batch_size": 2,
+    "gradient_accumulation_steps": 1,
+    "learning_rate": 0.0001,
+    "weight_decay": 0.01,
+    "max_optimizer_steps": 2,
+    "warmup_steps": 1,
+    "freeze_first_n_blocks": 11,
+    "train_embeddings": false,
+    "evaluation_games": 2,
+    "score_batch_size": 16,
+    "save_model": false
+  },
+  "device": "cpu",
+  "train_examples": 320,
+  "validation_examples": 80,
+  "test_examples": 80,
+  "trainable_parameters": 7089408,
+  "total_parameters": 124439808,
+  "initial_validation": {
+    "set_cross_entropy": 1.4672028958797454,
+    "mean_brier": 0.48502436056733134,
+    "examples": 80.0
+  },
+  "final_validation": {
+    "set_cross_entropy": 1.6441000789403915,
+    "mean_brier": 0.5722463558427989,
+    "examples": 80.0
+  },
+  "mean_training_loss": 1.5113369226455688,
+  "initial_full": {
+    "mode": "full",
+    "games": 2,
+    "groups": 10,
+    "by_probe_count": {
+      "0": {
+        "consistent_mass": 1.0,
+        "truth_probability": 0.04205632396042347,
+        "truth_rank": 8.0,
+        "joint_entropy_bits": 4.584788799285889,
+        "map_exact": 0.0,
+        "map_consistent": 1.0,
+        "per_action_accuracy": 0.25,
+        "set_cross_entropy": 1.505611538887024,
+        "brier": 0.05105365067720413,
+        "groups": 2.0
+      },
+      "1": {
+        "consistent_mass": 0.25005584210157394,
+        "truth_probability": 0.041852183640003204,
+        "truth_rank": 10.0,
+        "joint_entropy_bits": 4.584896564483643,
+        "map_exact": 0.0,
+        "map_consistent": 0.0,
+        "per_action_accuracy": 0.25,
+        "set_cross_entropy": 1.4373838901519775,
+        "brier": 0.2693184167146683,
+        "groups": 2.0
+      },
+      "2": {
+        "consistent_mass": 0.08322855457663536,
+        "truth_probability": 0.04171099327504635,
+        "truth_rank": 11.0,
+        "joint_entropy_bits": 4.584934711456299,
+        "map_exact": 0.0,
+        "map_consistent": 0.0,
+        "per_action_accuracy": 0.25,
+        "set_cross_entropy": 1.4689717888832092,
+        "brier": 0.536742091178894,
+        "groups": 2.0
+      },
+      "3": {
+        "consistent_mass": 0.041843632236123085,
+        "truth_probability": 0.041843632236123085,
+        "truth_rank": 9.5,
+        "joint_entropy_bits": 4.5849244594573975,
+        "map_exact": 0.0,
+        "map_consistent": 0.0,
+        "per_action_accuracy": 0.25,
+        "set_cross_entropy": 1.4665933847427368,
+        "brier": 0.7801373302936554,
+        "groups": 2.0
+      },
+      "4": {
+        "consistent_mass": 0.0417495034635067,
+        "truth_probability": 0.0417495034635067,
+        "truth_rank": 10.5,
+        "joint_entropy_bits": 4.5849223136901855,
+        "map_exact": 0.0,
+        "map_consistent": 0.0,
+        "per_action_accuracy": 0.25,
+        "set_cross_entropy": 1.4596394300460815,
+        "brier": 0.7821634411811829,
+        "groups": 2.0
+      }
+    },
+    "traces": [
+      {
+        "game_seed": 31416400,
+        "probe_count": 0,
+        "consistent_mapping_count": 24,
+        "consistent_mass": 1.0,
+        "truth_probability": 0.04242587089538574,
+        "truth_rank": 4,
+        "joint_entropy_bits": 4.584788799285889,
+        "map_exact": false,
+        "map_consistent": true,
+        "per_action_accuracy": 0.25,
+        "set_cross_entropy": 1.505611538887024,
+        "brier": 0.05105365067720413
+      },
+      {
+        "game_seed": 31416400,
+        "probe_count": 1,
+        "consistent_mapping_count": 6,
+        "consistent_mass": 0.24988748133182526,
+        "truth_probability": 0.04215817153453827,
+        "truth_rank": 5,
+        "joint_entropy_bits": 4.584895610809326,
+        "map_exact": false,
+        "map_consistent": false,
+        "per_action_accuracy": 0.25,
+        "set_cross_entropy": 1.4370908737182617,
+        "brier": 0.2692440450191498
+      },
+      {
+        "game_seed": 31416400,
+        "probe_count": 2,
+        "consistent_mapping_count": 2,
+        "consistent_mass": 0.083631232380867,
+        "truth_probability": 0.04199506714940071,
+        "truth_rank": 4,
+        "joint_entropy_bits": 4.584935188293457,
+        "map_exact": false,
+        "map_consistent": false,
+        "per_action_accuracy": 0.25,
+        "set_cross_entropy": 1.4666768312454224,
+        "brier": 0.5357320308685303
+      },
+      {
+        "game_seed": 31416400,
+        "probe_count": 3,
+        "consistent_mapping_count": 1,
+        "consistent_mass": 0.04213155806064606,
+        "truth_probability": 0.04213155806064606,
+        "truth_rank": 2,
+        "joint_entropy_bits": 4.584924697875977,
+        "map_exact": false,
+        "map_consistent": false,
+        "per_action_accuracy": 0.25,
+        "set_cross_entropy": 1.4645494222640991,
+        "brier": 0.7792446613311768
+      },
+      {
+        "game_seed": 31416400,
+        "probe_count": 4,
+        "consistent_mapping_count": 1,
+        "consistent_mass": 0.04188176617026329,
+        "truth_probability": 0.04188176617026329,
+        "truth_rank": 7,
+        "joint_entropy_bits": 4.5849223136901855,
         "map_exact": false,
         "map_consistent": false,
         "per_action_accuracy": 0.25,
@@ -706,295 +877,4 @@
     }
   },
   "elapsed_seconds": 433.029527425766
-}
-{
-  "status": "not_yet_passed",
-  "scope": "Partial-evidence hidden-action version-space gate. A pass would show calibrated in-context binding, not ARC-AGI-3 completion.",
-  "gates": {
-    "full_four_probe_exact_mapping_at_least_0_60": false,
-    "full_four_probe_consistent_mass_at_least_0_70": false,
-    "history_consistent_mass_gain_at_least_0_40": false,
-    "shuffled_evidence_drop_at_least_0_25": false,
-    "pretrained_beats_random_exact_mapping": false,
-    "posterior_entropy_contracts_by_at_least_2_bits": false,
-    "validation_set_cross_entropy_improves": true
-  },
-  "deltas": {
-    "full_minus_amnesic_consistent_mass_at_four_probes": -0.0024096518754959106,
-    "full_minus_shuffled_consistent_mass_at_four_probes": -0.00032082200050354004,
-    "pretrained_minus_random_exact_mapping_at_four_probes": 0.0,
-    "full_entropy_drop_zero_to_four_probes_bits": -0.011103630065917969
-  },
-  "pretrained": {
-    "initial_validation": {
-      "set_cross_entropy": 1.711896677315235,
-      "mean_brier": 0.5966709819622338,
-      "examples": 80.0
-    },
-    "final_validation": {
-      "set_cross_entropy": 1.5940836668014526,
-      "mean_brier": 0.5446733240969479,
-      "examples": 80.0
-    },
-    "full": {
-      "0": {
-        "consistent_mass": 1.0000001192092896,
-        "truth_probability": 0.045264046639204025,
-        "truth_rank": 8.5,
-        "joint_entropy_bits": 4.570407867431641,
-        "map_exact": 0.0,
-        "map_consistent": 1.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.617394208908081,
-        "brier": 0.10901792347431183,
-        "groups": 2.0
-      },
-      "1": {
-        "consistent_mass": 0.2460784912109375,
-        "truth_probability": 0.04489944316446781,
-        "truth_rank": 9.5,
-        "joint_entropy_bits": 4.570294141769409,
-        "map_exact": 0.0,
-        "map_consistent": 0.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.5912178754806519,
-        "brier": 0.34117595851421356,
-        "groups": 2.0
-      },
-      "2": {
-        "consistent_mass": 0.08281118795275688,
-        "truth_probability": 0.046194445341825485,
-        "truth_rank": 10.5,
-        "joint_entropy_bits": 4.5675129890441895,
-        "map_exact": 0.0,
-        "map_consistent": 0.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.5841976404190063,
-        "brier": 0.5938338935375214,
-        "groups": 2.0
-      },
-      "3": {
-        "consistent_mass": 0.04446532018482685,
-        "truth_probability": 0.04446532018482685,
-        "truth_rank": 8.0,
-        "joint_entropy_bits": 4.577145576477051,
-        "map_exact": 0.0,
-        "map_consistent": 0.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.5747489929199219,
-        "brier": 0.8439164161682129,
-        "groups": 2.0
-      },
-      "4": {
-        "consistent_mass": 0.04293479397892952,
-        "truth_probability": 0.04293479397892952,
-        "truth_rank": 9.0,
-        "joint_entropy_bits": 4.581511497497559,
-        "map_exact": 0.0,
-        "map_consistent": 0.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.5918457508087158,
-        "brier": 0.8489852845668793,
-        "groups": 2.0
-      }
-    },
-    "amnesic": {
-      "0": {
-        "consistent_mass": 1.0,
-        "truth_probability": 0.04534444585442543,
-        "truth_rank": 8.5,
-        "joint_entropy_bits": 4.568631172180176,
-        "map_exact": 0.0,
-        "map_consistent": 1.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.6542510986328125,
-        "brier": 0.12471809983253479,
-        "groups": 2.0
-      },
-      "1": {
-        "consistent_mass": 0.24468475580215454,
-        "truth_probability": 0.04534444585442543,
-        "truth_rank": 8.5,
-        "joint_entropy_bits": 4.568631172180176,
-        "map_exact": 0.0,
-        "map_consistent": 0.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.6590719819068909,
-        "brier": 0.378486692905426,
-        "groups": 2.0
-      },
-      "2": {
-        "consistent_mass": 0.08158852532505989,
-        "truth_probability": 0.04534444585442543,
-        "truth_rank": 8.5,
-        "joint_entropy_bits": 4.568631172180176,
-        "map_exact": 0.0,
-        "map_consistent": 0.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.6598334312438965,
-        "brier": 0.6311177909374237,
-        "groups": 2.0
-      },
-      "3": {
-        "consistent_mass": 0.04534444585442543,
-        "truth_probability": 0.04534444585442543,
-        "truth_rank": 8.5,
-        "joint_entropy_bits": 4.568631172180176,
-        "map_exact": 0.0,
-        "map_consistent": 0.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.6330528259277344,
-        "brier": 0.8743111789226532,
-        "groups": 2.0
-      },
-      "4": {
-        "consistent_mass": 0.04534444585442543,
-        "truth_probability": 0.04534444585442543,
-        "truth_rank": 8.5,
-        "joint_entropy_bits": 4.568631172180176,
-        "map_exact": 0.0,
-        "map_consistent": 0.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.6330528259277344,
-        "brier": 0.8743111789226532,
-        "groups": 2.0
-      }
-    },
-    "shuffled": {
-      "0": {
-        "consistent_mass": 1.0000001192092896,
-        "truth_probability": 0.045264046639204025,
-        "truth_rank": 8.5,
-        "joint_entropy_bits": 4.570407867431641,
-        "map_exact": 0.0,
-        "map_consistent": 1.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.617394208908081,
-        "brier": 0.10901792347431183,
-        "groups": 2.0
-      },
-      "1": {
-        "consistent_mass": 0.24559421092271805,
-        "truth_probability": 0.045459650456905365,
-        "truth_rank": 11.0,
-        "joint_entropy_bits": 4.568408250808716,
-        "map_exact": 0.0,
-        "map_consistent": 0.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.5985749959945679,
-        "brier": 0.3441014438867569,
-        "groups": 2.0
-      },
-      "2": {
-        "consistent_mass": 0.08189034089446068,
-        "truth_probability": 0.04368719458580017,
-        "truth_rank": 11.5,
-        "joint_entropy_bits": 4.57488226890564,
-        "map_exact": 0.0,
-        "map_consistent": 0.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.591688871383667,
-        "brier": 0.5957520008087158,
-        "groups": 2.0
-      },
-      "3": {
-        "consistent_mass": 0.04453040659427643,
-        "truth_probability": 0.04453040659427643,
-        "truth_rank": 11.0,
-        "joint_entropy_bits": 4.573339939117432,
-        "map_exact": 0.0,
-        "map_consistent": 0.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.5742741823196411,
-        "brier": 0.841541975736618,
-        "groups": 2.0
-      },
-      "4": {
-        "consistent_mass": 0.04325561597943306,
-        "truth_probability": 0.04325561597943306,
-        "truth_rank": 10.0,
-        "joint_entropy_bits": 4.5801942348480225,
-        "map_exact": 0.0,
-        "map_consistent": 0.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.5923556685447693,
-        "brier": 0.8496643900871277,
-        "groups": 2.0
-      }
-    }
-  },
-  "random_initialization": {
-    "initial_validation": {
-      "set_cross_entropy": 1.4672028958797454,
-      "mean_brier": 0.48502436056733134,
-      "examples": 80.0
-    },
-    "final_validation": {
-      "set_cross_entropy": 1.6441000789403915,
-      "mean_brier": 0.5722463558427989,
-      "examples": 80.0
-    },
-    "full": {
-      "0": {
-        "consistent_mass": 1.0,
-        "truth_probability": 0.04202327877283096,
-        "truth_rank": 8.5,
-        "joint_entropy_bits": 4.584802627563477,
-        "map_exact": 0.0,
-        "map_consistent": 1.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.7901651859283447,
-        "brier": 0.20230424404144287,
-        "groups": 2.0
-      },
-      "1": {
-        "consistent_mass": 0.24986200779676437,
-        "truth_probability": 0.04186066426336765,
-        "truth_rank": 10.0,
-        "joint_entropy_bits": 4.584893226623535,
-        "map_exact": 0.0,
-        "map_consistent": 0.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.6388221383094788,
-        "brier": 0.3680567294359207,
-        "groups": 2.0
-      },
-      "2": {
-        "consistent_mass": 0.08318901807069778,
-        "truth_probability": 0.0417193379253149,
-        "truth_rank": 11.5,
-        "joint_entropy_bits": 4.584928274154663,
-        "map_exact": 0.0,
-        "map_consistent": 0.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.6355659365653992,
-        "brier": 0.6202923655509949,
-        "groups": 2.0
-      },
-      "3": {
-        "consistent_mass": 0.04182332940399647,
-        "truth_probability": 0.04182332940399647,
-        "truth_rank": 9.5,
-        "joint_entropy_bits": 4.5849220752716064,
-        "map_exact": 0.0,
-        "map_consistent": 0.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.6607733368873596,
-        "brier": 0.8955657482147217,
-        "groups": 2.0
-      },
-      "4": {
-        "consistent_mass": 0.04175441898405552,
-        "truth_probability": 0.04175441898405552,
-        "truth_rank": 10.0,
-        "joint_entropy_bits": 4.584918022155762,
-        "map_exact": 0.0,
-        "map_consistent": 0.0,
-        "per_action_accuracy": 0.25,
-        "set_cross_entropy": 1.7533388137817383,
-        "brier": 0.9147060215473175,
-        "groups": 2.0
-      }
-    }
-  }
 }
