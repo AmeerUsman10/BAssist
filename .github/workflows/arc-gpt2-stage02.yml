@@ -1,0 +1,164 @@
+name: ARC-GPT2 Stage 0.2 Decomposed
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "arcgpt2/stage02_decomposed.py"
+      - "arcgpt2/train_stage02.py"
+      - "arcgpt2/tests/test_stage02.py"
+      - ".github/workflows/arc-gpt2-stage02.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arc-gpt2-stage02
+  cancel-in-progress: true
+
+jobs:
+  stage02:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install "transformers>=4.48,<6" "safetensors>=0.4" pytest
+
+      - name: Run Stage-0.2 experiment
+        id: experiment
+        continue-on-error: true
+        env:
+          TOKENIZERS_PARALLELISM: "false"
+          HF_HUB_DISABLE_TELEMETRY: "1"
+          PYTHONHASHSEED: "42"
+        run: |
+          set -o errexit -o nounset -o pipefail
+          exec > >(tee stage02.log) 2>&1
+
+          python -m pytest -q \
+            arcgpt2/tests/test_stage02.py \
+            arcgpt2/tests/test_codec.py
+
+          python -m arcgpt2.stage02_decomposed \
+            --output-dir outputs/stage02/data \
+            --train-games 8 \
+            --validation-games 1 \
+            --test-games 2 \
+            --train-seed-start 0 \
+            --validation-seed-start 8 \
+            --test-seed-start 20
+
+          python -m arcgpt2.train_stage02 \
+            --initialization pretrained \
+            --train-file outputs/stage02/data/train.jsonl \
+            --evaluation-file outputs/stage02/data/validation.jsonl \
+            --output-dir outputs/stage02/pretrained \
+            --max-length 384 \
+            --prefix-keep 192 \
+            --train-batch-size 2 \
+            --eval-batch-size 8 \
+            --gradient-accumulation-steps 2 \
+            --learning-rate 8e-5 \
+            --max-optimizer-steps 240 \
+            --warmup-steps 12 \
+            --freeze-first-n-blocks 8 \
+            --train-eval-seed-start 0 \
+            --train-eval-games 1 \
+            --heldout-seed-start 20 \
+            --heldout-games 2 \
+            --max-actions-per-game 24 \
+            --history-modes intact amnesic
+
+      - name: Write durable Stage-0.2 receipt
+        if: always()
+        env:
+          EXPERIMENT_OUTCOME: ${{ steps.experiment.outcome }}
+        run: |
+          mkdir -p reports/arcgpt2-stage02
+          python - <<'PY'
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          reports = Path("reports/arcgpt2-stage02")
+          summary_path = Path("outputs/stage02/pretrained/summary.json")
+          manifest_path = Path("outputs/stage02/data/manifest.json")
+          summary = None
+          if summary_path.exists():
+              summary = json.loads(summary_path.read_text(encoding="utf-8"))
+              shutil.copy2(summary_path, reports / "latest-summary.json")
+          if manifest_path.exists():
+              shutil.copy2(manifest_path, reports / "latest-data-manifest.json")
+
+          receipt = {
+              "execution_status": os.environ.get("EXPERIMENT_OUTCOME", "unknown"),
+              "capability_gate": (
+                  "passed"
+                  if summary and summary.get("gates", {}).get("stage02_gate_passed")
+                  else "not_yet_passed" if summary else "not_evaluated"
+              ),
+              "repository": os.environ.get("GITHUB_REPOSITORY"),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "scope": (
+                  "Stage-0.2 synthetic fixed-palette no-wall hidden-action "
+                  "curriculum; not an ARC-AGI-3 score"
+              ),
+          }
+          (reports / "latest-status.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+
+          log_path = Path("stage02.log")
+          if log_path.exists():
+              lines = log_path.read_text(encoding="utf-8", errors="replace").splitlines()
+              (reports / "latest-log-tail.txt").write_text(
+                  "\n".join(lines[-800:]) + "\n", encoding="utf-8"
+              )
+          PY
+
+      - name: Publish Stage-0.2 receipt
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/arcgpt2-stage02/
+          git commit -m "Record ARC-GPT2 Stage-0.2 run ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload Stage-0.2 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arc-gpt2-stage02-evidence
+          path: |
+            reports/arcgpt2-stage02/
+            outputs/stage02/pretrained/summary.json
+            outputs/stage02/data/manifest.json
+            stage02.log
+          if-no-files-found: warn
+          retention-days: 21
+
+      - name: Propagate execution failure
+        if: steps.experiment.outcome != 'success'
+        run: exit 1
