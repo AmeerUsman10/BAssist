@@ -1,6 +1,6 @@
       "mean_action_mapping_accuracy": 0.5,
       "mean_truth_rank": 9.0,
-      "mean_truth_probability": 0.041667599231004715,
+      "mean_truth_probability": 0.041667502373456955,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -13,7 +13,7 @@
           "exact": false,
           "mapping_accuracy": 0.5,
           "truth_rank": 9,
-          "truth_probability": 0.041667599231004715,
+          "truth_probability": 0.041667502373456955,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
@@ -36,7 +36,7 @@
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.5,
       "mean_truth_rank": 4.0,
-      "mean_truth_probability": 0.04166733846068382,
+      "mean_truth_probability": 0.04166726395487785,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -49,7 +49,7 @@
           "exact": false,
           "mapping_accuracy": 0.5,
           "truth_rank": 4,
-          "truth_probability": 0.04166733846068382,
+          "truth_probability": 0.04166726395487785,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
@@ -71,8 +71,8 @@
       "exact_programs": 0,
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.5,
-      "mean_truth_rank": 9.0,
-      "mean_truth_probability": 0.041667621582746506,
+      "mean_truth_rank": 8.0,
+      "mean_truth_probability": 0.04166761413216591,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -84,8 +84,8 @@
           "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
           "exact": false,
           "mapping_accuracy": 0.5,
-          "truth_rank": 9,
-          "truth_probability": 0.041667621582746506,
+          "truth_rank": 8,
+          "truth_probability": 0.04166761413216591,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
@@ -102,12 +102,12 @@
       ]
     }
   },
-  "elapsed_seconds": 25.27307438850403
+  "elapsed_seconds": 58.678651332855225
 }
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 [transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
 [transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
-{"step": 1, "max_steps": 8, "loss": 11.10596513748169, "learning_rate": 5e-05, "device": "cpu", "elapsed_seconds": 1.670656442642212}
+{"step": 1, "max_steps": 8, "loss": 11.105966091156006, "learning_rate": 5e-05, "device": "cpu", "elapsed_seconds": 3.3576738834381104}
 {
   "status": "completed",
   "scope": "Finite-family Phase-0 ARC-DSL induction; not ARC-AGI-3 evaluation.",
@@ -137,17 +137,17 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
   "test_examples": 4,
   "trainable_parameters": 54089472,
   "total_parameters": 124968192,
-  "initial_validation_loss": 11.103660106658936,
-  "final_validation_loss": 7.15389084815979,
-  "mean_training_loss": 8.969570010900497,
+  "initial_validation_loss": 11.103660821914673,
+  "final_validation_loss": 7.153891324996948,
+  "mean_training_loss": 8.969570249319077,
   "initial_full_selection": {
     "mode": "full",
     "games": 1,
     "exact_programs": 0,
     "exact_program_accuracy": 0.0,
     "mean_action_mapping_accuracy": 0.0,
-    "mean_truth_rank": 9.0,
-    "mean_truth_probability": 0.041666679084300995,
+    "mean_truth_rank": 19.0,
+    "mean_truth_probability": 0.04166664928197861,
     "downstream_games_won": 0,
     "downstream_game_win_rate": 0.0,
     "downstream_levels_completed": 0,
@@ -155,12 +155,12 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
     "traces": [
       {
         "game_seed": 31357,
-        "selected_program_sha256": "4606264540288e0381e0cfa79f97e95e0bff02451a335d9728e7341d2b42a5c8",
+        "selected_program_sha256": "00cc5f66fcd3f625c87d8a4050b84ecc846385ef9568ee389430f2acbb37eb9d",
         "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
         "exact": false,
         "mapping_accuracy": 0.0,
-        "truth_rank": 9,
-        "truth_probability": 0.041666679084300995,
+        "truth_rank": 19,
+        "truth_probability": 0.04166664928197861,
         "downstream": {
           "game_won": false,
           "levels_completed": 0,
@@ -169,7 +169,7 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
             [
               "A1",
               "A1",
-              "A3"
+              "A2"
             ]
           ]
         }
@@ -184,7 +184,7 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.5,
       "mean_truth_rank": 3.0,
-      "mean_truth_probability": 0.041669268161058426,
+      "mean_truth_probability": 0.04166926443576813,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -197,7 +197,7 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
           "exact": false,
           "mapping_accuracy": 0.5,
           "truth_rank": 3,
-          "truth_probability": 0.041669268161058426,
+          "truth_probability": 0.04166926443576813,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
@@ -219,8 +219,8 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
       "exact_programs": 0,
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.25,
-      "mean_truth_rank": 15.0,
-      "mean_truth_probability": 0.041666511446237564,
+      "mean_truth_rank": 14.0,
+      "mean_truth_probability": 0.04166656732559204,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -232,8 +232,8 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
           "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
           "exact": false,
           "mapping_accuracy": 0.25,
-          "truth_rank": 15,
-          "truth_probability": 0.041666511446237564,
+          "truth_rank": 14,
+          "truth_probability": 0.04166656732559204,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
@@ -256,7 +256,7 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.5,
       "mean_truth_rank": 3.0,
-      "mean_truth_probability": 0.041669294238090515,
+      "mean_truth_probability": 0.04166926443576813,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -269,7 +269,7 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
           "exact": false,
           "mapping_accuracy": 0.5,
           "truth_rank": 3,
-          "truth_probability": 0.041669294238090515,
+          "truth_probability": 0.04166926443576813,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
@@ -286,7 +286,7 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
       ]
     }
   },
-  "elapsed_seconds": 25.03330945968628
+  "elapsed_seconds": 58.70306468009949
 }
 {
   "status": "not_yet_passed",
@@ -313,7 +313,7 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.0,
       "mean_truth_rank": 13.0,
-      "mean_truth_probability": 0.041666679084300995,
+      "mean_truth_probability": 0.04166664928197861,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -326,7 +326,7 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
           "exact": false,
           "mapping_accuracy": 0.0,
           "truth_rank": 13,
-          "truth_probability": 0.041666679084300995,
+          "truth_probability": 0.04166664928197861,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
@@ -349,7 +349,7 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.5,
       "mean_truth_rank": 9.0,
-      "mean_truth_probability": 0.041667599231004715,
+      "mean_truth_probability": 0.041667502373456955,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -362,7 +362,7 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
           "exact": false,
           "mapping_accuracy": 0.5,
           "truth_rank": 9,
-          "truth_probability": 0.041667599231004715,
+          "truth_probability": 0.041667502373456955,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
@@ -385,7 +385,7 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.5,
       "mean_truth_rank": 4.0,
-      "mean_truth_probability": 0.04166733846068382,
+      "mean_truth_probability": 0.04166726395487785,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -398,7 +398,7 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
           "exact": false,
           "mapping_accuracy": 0.5,
           "truth_rank": 4,
-          "truth_probability": 0.04166733846068382,
+          "truth_probability": 0.04166726395487785,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
@@ -420,8 +420,8 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
       "exact_programs": 0,
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.5,
-      "mean_truth_rank": 9.0,
-      "mean_truth_probability": 0.041667621582746506,
+      "mean_truth_rank": 8.0,
+      "mean_truth_probability": 0.04166761413216591,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -433,8 +433,8 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
           "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
           "exact": false,
           "mapping_accuracy": 0.5,
-          "truth_rank": 9,
-          "truth_probability": 0.041667621582746506,
+          "truth_rank": 8,
+          "truth_probability": 0.04166761413216591,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
@@ -451,8 +451,8 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
       ]
     },
     "validation_loss": {
-      "initial": 9.04318904876709,
-      "final": 7.370556831359863
+      "initial": 9.043181896209717,
+      "final": 7.370583653450012
     }
   },
   "random_initialization": {
@@ -463,7 +463,7 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.5,
       "mean_truth_rank": 3.0,
-      "mean_truth_probability": 0.041669268161058426,
+      "mean_truth_probability": 0.04166926443576813,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -476,7 +476,7 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
           "exact": false,
           "mapping_accuracy": 0.5,
           "truth_rank": 3,
-          "truth_probability": 0.041669268161058426,
+          "truth_probability": 0.04166926443576813,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
@@ -493,8 +493,8 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
       ]
     },
     "validation_loss": {
-      "initial": 11.103660106658936,
-      "final": 7.15389084815979
+      "initial": 11.103660821914673,
+      "final": 7.153891324996948
     }
   }
 }
