@@ -1,0 +1,44 @@
+name: ARC-GPT2 Stage 0.2 Token Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "arcgpt2/audit_stage02.py"
+      - ".github/workflows/arc-gpt2-stage02-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arc-gpt2-stage02-audit
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install tokenizer dependency
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "transformers>=4.48,<6"
+      - name: Audit protocol tokenization
+        run: |
+          python -m arcgpt2.audit_stage02 \
+            --output reports/arcgpt2-stage02-audit/latest-audit.json \
+            --games 2
+      - name: Publish audit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/arcgpt2-stage02-audit/latest-audit.json
+          git commit -m "Record ARC-GPT2 Stage-0.2 token audit ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
