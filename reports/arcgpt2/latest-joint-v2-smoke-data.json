@@ -1,0 +1,56 @@
+{
+  "schema": "arcgpt2.joint_epistemic.v2",
+  "scope": "One-GPT-2 set-valued action, goal, and contact-mechanics curriculum; controlled gates, not ARC-AGI-3 evaluation.",
+  "splits": {
+    "test": {
+      "action_groups": 1,
+      "action_seed_start": 818036,
+      "action_seed_stop_exclusive": 818037,
+      "contact_groups": 1,
+      "contact_seed_start": 2718284,
+      "contact_seed_stop_exclusive": 2718285,
+      "examples": 68,
+      "file": "test.jsonl",
+      "goal_games": 1,
+      "goal_seed_start": 341423,
+      "goal_seed_stop_exclusive": 341424,
+      "mapping_variants_per_action_group": 2,
+      "sha256": "900ee9408517f6f38020e0dba34e234e1488692cf3e6091941edd741f4122ee5"
+    },
+    "train": {
+      "action_groups": 1,
+      "action_seed_start": 818034,
+      "action_seed_stop_exclusive": 818035,
+      "contact_groups": 1,
+      "contact_seed_start": 2718282,
+      "contact_seed_stop_exclusive": 2718283,
+      "examples": 69,
+      "file": "train.jsonl",
+      "goal_games": 1,
+      "goal_seed_start": 341421,
+      "goal_seed_stop_exclusive": 341422,
+      "mapping_variants_per_action_group": 2,
+      "sha256": "dd5a5302ef92f3c2a87356f5213d9b0320a9ccc5e9e7f032aa3b5706281a9c65"
+    },
+    "validation": {
+      "action_groups": 1,
+      "action_seed_start": 818035,
+      "action_seed_stop_exclusive": 818036,
+      "contact_groups": 1,
+      "contact_seed_start": 2718283,
+      "contact_seed_stop_exclusive": 2718284,
+      "examples": 69,
+      "file": "validation.jsonl",
+      "goal_games": 1,
+      "goal_seed_start": 341422,
+      "goal_seed_stop_exclusive": 341423,
+      "mapping_variants_per_action_group": 2,
+      "sha256": "0e2765c5fc08a48cea4318a4b68b3e3c9132570af1a9691bd8c0699269f99dd8"
+    }
+  },
+  "tasks": [
+    "action_binding",
+    "goal_inference",
+    "contact_mechanics"
+  ]
+}
