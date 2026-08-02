@@ -1,59 +1,41 @@
-...............F........................................................ [ 87%]
+........................................................................ [ 87%]
 ..........                                                               [100%]
-=================================== FAILURES ===================================
-______________ test_mean_reduction_removes_linear_length_scaling _______________
+82 passed in 8.87s
+{
+  "schema": "arcgpt2.program_induction.phase0.v2",
+  "scope": "Four-probe induction over 24 hidden movement mappings with compact atomic targets and exact DSL expansion; controlled gate, not an ARC-AGI-3 score.",
+  "seed_base": 31337,
+  "special_tokens_file": "special_tokens.json",
+  "special_tokens_sha256": "4dff94a235babda0a4c31fd70a88c889e66b7b3bcfe02a75b06f36a2d8de444b",
+  "splits": {
+    "test": {
+      "file": "test.jsonl",
+      "games": 4,
+      "seed_start": 31357,
+      "seed_stop_exclusive": 31361,
+      "sha256": "58b5a520fdd35b17cdd47704b9c7459feab140aa956f4ff92654e856ab299388"
+    },
+    "train": {
+      "file": "train.jsonl",
+      "games": 16,
+      "seed_start": 31337,
+      "seed_stop_exclusive": 31353,
+      "sha256": "611e30c53331e86d7d65cce705890e3a04e0923599410a584a50396094b6fb5c"
+    },
+    "validation": {
+      "file": "validation.jsonl",
+      "games": 4,
+      "seed_start": 31353,
+      "seed_stop_exclusive": 31357,
+      "sha256": "dcff53fe27fbf98a56062108e7905d133ad0d78702395b0ad54a0bdfe41077d2"
+    }
+  },
+  "target": "<MAP> <A1> <DIRECTION> ... <A4> <DIRECTION> </MAP>"
+}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 
-    def test_mean_reduction_removes_linear_length_scaling() -> None:
-        model = TinyCausalModel()
-        prompt = (1, 2)
-        candidates = ((3,), (3, 4, 5))
-        summed = score_candidate_completions(
-            model,
-            prompt,
-            candidates,
-            pad_token_id=0,
-            device="cpu",
-            reduction="sum",
-        )
-        averaged = score_candidate_completions(
-            model,
-            prompt,
-            candidates,
-            pad_token_id=0,
-            device="cpu",
-            reduction="mean",
-        )
->       assert averaged[0] == pytest.approx(float(summed[0]))
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-arcgpt2/tests/test_completion_scorer.py:81: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/_pytest/python_api.py:449: in __eq__
-    asarray = _as_numpy_array(actual)
-              ^^^^^^^^^^^^^^^^^^^^^^^
-/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/_pytest/python_api.py:921: in _as_numpy_array
-    return np.asarray(obj)
-           ^^^^^^^^^^^^^^^
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
-
-self = tensor(-3.3539, grad_fn=<SelectBackward0>), dtype = None
-
-    def __array__(self, dtype=None):
-        if has_torch_function_unary(self):
-            return handle_torch_function(Tensor.__array__, (self,), self, dtype=dtype)
-        if dtype is None:
->           return self.numpy()
-                   ^^^^^^^^^^^^
-E           RuntimeError: Can't call numpy() on Tensor that requires grad. Use tensor.detach().numpy() instead.
-
-/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/torch/_tensor.py:1245: RuntimeError
-=============================== warnings summary ===============================
-arcgpt2/tests/test_completion_scorer.py::test_mean_reduction_removes_linear_length_scaling
-  /home/runner/work/BAssist/BAssist/arcgpt2/tests/test_completion_scorer.py:81: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
-  Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
-    assert averaged[0] == pytest.approx(float(summed[0]))
-
--- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-=========================== short test summary info ============================
-FAILED arcgpt2/tests/test_completion_scorer.py::test_mean_reduction_removes_linear_length_scaling - RuntimeError: Can't call numpy() on Tensor that requires grad. Use tensor.detach().numpy() instead.
-1 failed, 81 passed, 1 warning in 8.18s
+Loading weights:   0%|          | 0/148 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 148/148 [00:00<00:00, 24982.17it/s]
+[transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
+[transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+{"step": 1, "max_steps": 8, "loss": 8.495745658874512, "learning_rate": 5e-05, "device": "cpu", "elapsed_seconds": 3.4749512672424316}
