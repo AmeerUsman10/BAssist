@@ -27,17 +27,17 @@
   "test_examples": 4,
   "trainable_parameters": 54089472,
   "total_parameters": 124968192,
-  "initial_validation_loss": 11.103660821914673,
-  "final_validation_loss": 7.153891324996948,
-  "mean_training_loss": 8.969570249319077,
+  "initial_validation_loss": 11.103660106658936,
+  "final_validation_loss": 7.15389084815979,
+  "mean_training_loss": 8.969570010900497,
   "initial_full_selection": {
     "mode": "full",
     "games": 1,
     "exact_programs": 0,
     "exact_program_accuracy": 0.0,
     "mean_action_mapping_accuracy": 0.0,
-    "mean_truth_rank": 19.0,
-    "mean_truth_probability": 0.04166664928197861,
+    "mean_truth_rank": 9.0,
+    "mean_truth_probability": 0.041666679084300995,
     "downstream_games_won": 0,
     "downstream_game_win_rate": 0.0,
     "downstream_levels_completed": 0,
@@ -45,12 +45,12 @@
     "traces": [
       {
         "game_seed": 31357,
-        "selected_program_sha256": "00cc5f66fcd3f625c87d8a4050b84ecc846385ef9568ee389430f2acbb37eb9d",
+        "selected_program_sha256": "4606264540288e0381e0cfa79f97e95e0bff02451a335d9728e7341d2b42a5c8",
         "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
         "exact": false,
         "mapping_accuracy": 0.0,
-        "truth_rank": 19,
-        "truth_probability": 0.04166664928197861,
+        "truth_rank": 9,
+        "truth_probability": 0.041666679084300995,
         "downstream": {
           "game_won": false,
           "levels_completed": 0,
@@ -59,7 +59,7 @@
             [
               "A1",
               "A1",
-              "A2"
+              "A3"
             ]
           ]
         }
@@ -74,7 +74,7 @@
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.5,
       "mean_truth_rank": 3.0,
-      "mean_truth_probability": 0.04166926443576813,
+      "mean_truth_probability": 0.041669268161058426,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -87,7 +87,7 @@
           "exact": false,
           "mapping_accuracy": 0.5,
           "truth_rank": 3,
-          "truth_probability": 0.04166926443576813,
+          "truth_probability": 0.041669268161058426,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
@@ -109,8 +109,8 @@
       "exact_programs": 0,
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.25,
-      "mean_truth_rank": 14.0,
-      "mean_truth_probability": 0.04166656732559204,
+      "mean_truth_rank": 15.0,
+      "mean_truth_probability": 0.041666511446237564,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -122,8 +122,8 @@
           "truth_program_sha256": "8639f88523126125f4aba199b9ebf911fe9556ed8146681c3de4a033733bc5ce",
           "exact": false,
           "mapping_accuracy": 0.25,
-          "truth_rank": 14,
-          "truth_probability": 0.04166656732559204,
+          "truth_rank": 15,
+          "truth_probability": 0.041666511446237564,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
@@ -146,7 +146,7 @@
       "exact_program_accuracy": 0.0,
       "mean_action_mapping_accuracy": 0.5,
       "mean_truth_rank": 3.0,
-      "mean_truth_probability": 0.04166926443576813,
+      "mean_truth_probability": 0.041669294238090515,
       "downstream_games_won": 0,
       "downstream_game_win_rate": 0.0,
       "downstream_levels_completed": 0,
@@ -159,7 +159,7 @@
           "exact": false,
           "mapping_accuracy": 0.5,
           "truth_rank": 3,
-          "truth_probability": 0.04166926443576813,
+          "truth_probability": 0.041669294238090515,
           "downstream": {
             "game_won": false,
             "levels_completed": 0,
@@ -176,5 +176,5 @@
       ]
     }
   },
-  "elapsed_seconds": 59.50310564041138
+  "elapsed_seconds": 25.03330945968628
 }
