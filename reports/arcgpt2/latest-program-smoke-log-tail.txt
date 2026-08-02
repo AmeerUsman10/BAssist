@@ -102,12 +102,12 @@
       ]
     }
   },
-  "elapsed_seconds": 33.824262857437134
+  "elapsed_seconds": 32.434011697769165
 }
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 [transformers] The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
 [transformers] `loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
-{"step": 1, "max_steps": 8, "loss": 11.10596513748169, "learning_rate": 5e-05, "device": "cpu", "elapsed_seconds": 2.2097978591918945}
+{"step": 1, "max_steps": 8, "loss": 11.10596513748169, "learning_rate": 5e-05, "device": "cpu", "elapsed_seconds": 2.090146541595459}
 {
   "status": "completed",
   "scope": "Finite-family Phase-0 ARC-DSL induction; not ARC-AGI-3 evaluation.",
@@ -286,7 +286,7 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
       ]
     }
   },
-  "elapsed_seconds": 33.9128143787384
+  "elapsed_seconds": 31.705668210983276
 }
 {
   "status": "not_yet_passed",
