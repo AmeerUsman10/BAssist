@@ -1,0 +1,457 @@
+{
+  "status": "completed",
+  "scope": "First-order meta-training of a per-game soft prefix for hidden action semantics; controlled gate, not ARC-AGI-3 evaluation.",
+  "config": {
+    "model_name": "openai-community/gpt2",
+    "initialization": "random",
+    "output_dir": "outputs/meta_soft_second_order/random",
+    "seed": 42,
+    "train_seed_base": 424242,
+    "train_groups": 2,
+    "train_mapping_variants": 2,
+    "validation_seed_base": 525252,
+    "validation_groups": 1,
+    "validation_mapping_variants": 2,
+    "max_length": 256,
+    "prefix_length": 4,
+    "prefix_initialization_std": 0.01,
+    "inner_learning_rate": 0.2,
+    "outer_learning_rate": 5e-05,
+    "weight_decay": 0.01,
+    "episodes_per_outer_step": 1,
+    "max_outer_steps": 1,
+    "warmup_steps": 1,
+    "freeze_first_n_blocks": 11,
+    "train_embeddings": false,
+    "query_after_every_probe": false,
+    "evaluation_groups": 1,
+    "save_model": false
+  },
+  "device": "cpu",
+  "trainable_model_parameters": 7089408,
+  "soft_prefix_parameters": 3072,
+  "total_model_parameters": 124439808,
+  "mean_meta_query_loss": 1.5403872728347778,
+  "mean_support_nll": 11.144436836242676,
+  "initial_evaluation": {
+    "summary": {
+      "intact": {
+        "0": {
+          "episodes": 2.0,
+          "exact_mapping": 0.0,
+          "consistent_mass": 1.0,
+          "truth_probability": 0.039449311792850494,
+          "truth_rank": 17.5,
+          "entropy_bits": 4.581749439239502,
+          "per_action_accuracy": 0.25
+        },
+        "1": {
+          "episodes": 2.0,
+          "exact_mapping": 0.0,
+          "consistent_mass": 0.24354331195354462,
+          "truth_probability": 0.04094923287630081,
+          "truth_rank": 16.0,
+          "entropy_bits": 4.584080219268799,
+          "per_action_accuracy": 0.25
+        }
+      },
+      "no_adaptation": {
+        "0": {
+          "episodes": 2.0,
+          "exact_mapping": 0.0,
+          "consistent_mass": 1.0,
+          "truth_probability": 0.039449311792850494,
+          "truth_rank": 17.5,
+          "entropy_bits": 4.581749439239502,
+          "per_action_accuracy": 0.25
+        },
+        "1": {
+          "episodes": 2.0,
+          "exact_mapping": 0.0,
+          "consistent_mass": 0.23606058955192566,
+          "truth_probability": 0.039449311792850494,
+          "truth_rank": 17.5,
+          "entropy_bits": 4.581749439239502,
+          "per_action_accuracy": 0.25
+        }
+      },
+      "shuffled_outcome": {
+        "0": {
+          "episodes": 2.0,
+          "exact_mapping": 0.0,
+          "consistent_mass": 1.0,
+          "truth_probability": 0.039449311792850494,
+          "truth_rank": 17.5,
+          "entropy_bits": 4.581749439239502,
+          "per_action_accuracy": 0.25
+        },
+        "1": {
+          "episodes": 2.0,
+          "exact_mapping": 0.0,
+          "consistent_mass": 0.24354331195354462,
+          "truth_probability": 0.04094923287630081,
+          "truth_rank": 16.0,
+          "entropy_bits": 4.584080219268799,
+          "per_action_accuracy": 0.25
+        }
+      }
+    },
+    "traces": [
+      {
+        "group_seed": 525252,
+        "variant_index": 0,
+        "mode": "intact",
+        "probe_count": 0,
+        "exact_mapping": false,
+        "consistent_mass": 1.0,
+        "truth_probability": 0.03901712968945503,
+        "truth_rank": 20,
+        "entropy_bits": 4.581749439239502,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 0,
+        "mode": "intact",
+        "probe_count": 1,
+        "exact_mapping": false,
+        "consistent_mass": 0.24354331195354462,
+        "truth_probability": 0.0404072180390358,
+        "truth_rank": 19,
+        "entropy_bits": 4.584080219268799,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 0,
+        "mode": "no_adaptation",
+        "probe_count": 0,
+        "exact_mapping": false,
+        "consistent_mass": 1.0,
+        "truth_probability": 0.03901712968945503,
+        "truth_rank": 20,
+        "entropy_bits": 4.581749439239502,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 0,
+        "mode": "no_adaptation",
+        "probe_count": 1,
+        "exact_mapping": false,
+        "consistent_mass": 0.23606058955192566,
+        "truth_probability": 0.03901712968945503,
+        "truth_rank": 20,
+        "entropy_bits": 4.581749439239502,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 0,
+        "mode": "shuffled_outcome",
+        "probe_count": 0,
+        "exact_mapping": false,
+        "consistent_mass": 1.0,
+        "truth_probability": 0.03901712968945503,
+        "truth_rank": 20,
+        "entropy_bits": 4.581749439239502,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 0,
+        "mode": "shuffled_outcome",
+        "probe_count": 1,
+        "exact_mapping": false,
+        "consistent_mass": 0.24354331195354462,
+        "truth_probability": 0.0404072180390358,
+        "truth_rank": 19,
+        "entropy_bits": 4.584080219268799,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 1,
+        "mode": "intact",
+        "probe_count": 0,
+        "exact_mapping": false,
+        "consistent_mass": 1.0,
+        "truth_probability": 0.039881493896245956,
+        "truth_rank": 15,
+        "entropy_bits": 4.581749439239502,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 1,
+        "mode": "intact",
+        "probe_count": 1,
+        "exact_mapping": false,
+        "consistent_mass": 0.24354331195354462,
+        "truth_probability": 0.041491247713565826,
+        "truth_rank": 13,
+        "entropy_bits": 4.584080219268799,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 1,
+        "mode": "no_adaptation",
+        "probe_count": 0,
+        "exact_mapping": false,
+        "consistent_mass": 1.0,
+        "truth_probability": 0.039881493896245956,
+        "truth_rank": 15,
+        "entropy_bits": 4.581749439239502,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 1,
+        "mode": "no_adaptation",
+        "probe_count": 1,
+        "exact_mapping": false,
+        "consistent_mass": 0.23606058955192566,
+        "truth_probability": 0.039881493896245956,
+        "truth_rank": 15,
+        "entropy_bits": 4.581749439239502,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 1,
+        "mode": "shuffled_outcome",
+        "probe_count": 0,
+        "exact_mapping": false,
+        "consistent_mass": 1.0,
+        "truth_probability": 0.039881493896245956,
+        "truth_rank": 15,
+        "entropy_bits": 4.581749439239502,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 1,
+        "mode": "shuffled_outcome",
+        "probe_count": 1,
+        "exact_mapping": false,
+        "consistent_mass": 0.24354331195354462,
+        "truth_probability": 0.041491247713565826,
+        "truth_rank": 13,
+        "entropy_bits": 4.584080219268799,
+        "per_action_accuracy": 0.25
+      }
+    ]
+  },
+  "final_evaluation": {
+    "summary": {
+      "intact": {
+        "0": {
+          "episodes": 2.0,
+          "exact_mapping": 0.0,
+          "consistent_mass": 1.0,
+          "truth_probability": 0.03931447118520737,
+          "truth_rank": 17.5,
+          "entropy_bits": 4.581874370574951,
+          "per_action_accuracy": 0.25
+        },
+        "1": {
+          "episodes": 2.0,
+          "exact_mapping": 0.0,
+          "consistent_mass": 0.24397970736026764,
+          "truth_probability": 0.04098999872803688,
+          "truth_rank": 15.5,
+          "entropy_bits": 4.584216117858887,
+          "per_action_accuracy": 0.25
+        }
+      },
+      "no_adaptation": {
+        "0": {
+          "episodes": 2.0,
+          "exact_mapping": 0.0,
+          "consistent_mass": 1.0,
+          "truth_probability": 0.03931447118520737,
+          "truth_rank": 17.5,
+          "entropy_bits": 4.581874370574951,
+          "per_action_accuracy": 0.25
+        },
+        "1": {
+          "episodes": 2.0,
+          "exact_mapping": 0.0,
+          "consistent_mass": 0.23569819331169128,
+          "truth_probability": 0.03931447118520737,
+          "truth_rank": 17.5,
+          "entropy_bits": 4.581874370574951,
+          "per_action_accuracy": 0.25
+        }
+      },
+      "shuffled_outcome": {
+        "0": {
+          "episodes": 2.0,
+          "exact_mapping": 0.0,
+          "consistent_mass": 1.0,
+          "truth_probability": 0.03931447118520737,
+          "truth_rank": 17.5,
+          "entropy_bits": 4.581874370574951,
+          "per_action_accuracy": 0.25
+        },
+        "1": {
+          "episodes": 2.0,
+          "exact_mapping": 0.0,
+          "consistent_mass": 0.24397970736026764,
+          "truth_probability": 0.04098999872803688,
+          "truth_rank": 15.5,
+          "entropy_bits": 4.584216117858887,
+          "per_action_accuracy": 0.25
+        }
+      }
+    },
+    "traces": [
+      {
+        "group_seed": 525252,
+        "variant_index": 0,
+        "mode": "intact",
+        "probe_count": 0,
+        "exact_mapping": false,
+        "consistent_mass": 1.0,
+        "truth_probability": 0.03892245516180992,
+        "truth_rank": 20,
+        "entropy_bits": 4.581874370574951,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 0,
+        "mode": "intact",
+        "probe_count": 1,
+        "exact_mapping": false,
+        "consistent_mass": 0.24397970736026764,
+        "truth_probability": 0.04046933352947235,
+        "truth_rank": 18,
+        "entropy_bits": 4.584216117858887,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 0,
+        "mode": "no_adaptation",
+        "probe_count": 0,
+        "exact_mapping": false,
+        "consistent_mass": 1.0,
+        "truth_probability": 0.03892245516180992,
+        "truth_rank": 20,
+        "entropy_bits": 4.581874370574951,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 0,
+        "mode": "no_adaptation",
+        "probe_count": 1,
+        "exact_mapping": false,
+        "consistent_mass": 0.23569819331169128,
+        "truth_probability": 0.03892245516180992,
+        "truth_rank": 20,
+        "entropy_bits": 4.581874370574951,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 0,
+        "mode": "shuffled_outcome",
+        "probe_count": 0,
+        "exact_mapping": false,
+        "consistent_mass": 1.0,
+        "truth_probability": 0.03892245516180992,
+        "truth_rank": 20,
+        "entropy_bits": 4.581874370574951,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 0,
+        "mode": "shuffled_outcome",
+        "probe_count": 1,
+        "exact_mapping": false,
+        "consistent_mass": 0.24397970736026764,
+        "truth_probability": 0.04046933352947235,
+        "truth_rank": 18,
+        "entropy_bits": 4.584216117858887,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 1,
+        "mode": "intact",
+        "probe_count": 0,
+        "exact_mapping": false,
+        "consistent_mass": 1.0,
+        "truth_probability": 0.03970648720860481,
+        "truth_rank": 15,
+        "entropy_bits": 4.581874370574951,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 1,
+        "mode": "intact",
+        "probe_count": 1,
+        "exact_mapping": false,
+        "consistent_mass": 0.24397970736026764,
+        "truth_probability": 0.04151066392660141,
+        "truth_rank": 13,
+        "entropy_bits": 4.584216117858887,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 1,
+        "mode": "no_adaptation",
+        "probe_count": 0,
+        "exact_mapping": false,
+        "consistent_mass": 1.0,
+        "truth_probability": 0.03970648720860481,
+        "truth_rank": 15,
+        "entropy_bits": 4.581874370574951,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 1,
+        "mode": "no_adaptation",
+        "probe_count": 1,
+        "exact_mapping": false,
+        "consistent_mass": 0.23569819331169128,
+        "truth_probability": 0.03970648720860481,
+        "truth_rank": 15,
+        "entropy_bits": 4.581874370574951,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 1,
+        "mode": "shuffled_outcome",
+        "probe_count": 0,
+        "exact_mapping": false,
+        "consistent_mass": 1.0,
+        "truth_probability": 0.03970648720860481,
+        "truth_rank": 15,
+        "entropy_bits": 4.581874370574951,
+        "per_action_accuracy": 0.25
+      },
+      {
+        "group_seed": 525252,
+        "variant_index": 1,
+        "mode": "shuffled_outcome",
+        "probe_count": 1,
+        "exact_mapping": false,
+        "consistent_mass": 0.24397970736026764,
+        "truth_probability": 0.04151066392660141,
+        "truth_rank": 13,
+        "entropy_bits": 4.584216117858887,
+        "per_action_accuracy": 0.25
+      }
+    ]
+  },
+  "elapsed_seconds": 22.00075340270996
+}
