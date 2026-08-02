@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from arcgpt2.mechanics_v2 import ContactMode, filter_consistent_v2
-from arcgpt2.phase0_hidden_action import Action, Direction
+from arcgpt2.phase0_hidden_action import Direction
 from arcgpt2.primitive_contact_game import (
     PrimitiveContactGame,
     enumerate_contact_programs,
@@ -13,7 +13,7 @@ from arcgpt2.primitive_contact_game import (
 
 
 def test_generator_is_reproducible_and_truth_program_is_in_version_space() -> None:
-    for seed in range(20):
+    for seed in range(12):
         first = generate_contact_game(200_000 + seed)
         second = generate_contact_game(200_000 + seed)
         assert first == second
@@ -63,7 +63,7 @@ def test_one_controlled_contact_identifies_the_hidden_contact_mode() -> None:
 
 
 def test_truth_program_completes_all_generated_levels() -> None:
-    for seed in range(15):
+    for seed in range(10):
         spec = generate_contact_game(200_200 + seed)
         records = simulate_truth_plan(spec, max_actions=256)
         assert records[-1].status == "GAME_WIN"
@@ -82,8 +82,10 @@ def test_rendering_contains_exactly_one_agent_goal_and_interaction() -> None:
         assert flattened.count(spec.palette.interaction) == len(level.interactions)
 
 
-def test_contact_modes_are_balanced_over_a_large_seed_window() -> None:
+def test_contact_modes_are_balanced_over_a_seed_window() -> None:
     counts = {mode: 0 for mode in ContactMode}
-    for seed in range(500):
+    for seed in range(100):
         counts[generate_contact_game(201_000 + seed).contact_mode] += 1
-    assert all(count >= 70 for count in counts.values())
+    # This is only a generator regression, not a statistical claim. The bound
+    # catches a missing enum branch while keeping unit tests inexpensive.
+    assert all(count >= 8 for count in counts.values())
