@@ -24,7 +24,7 @@ jobs:
           gh api \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "/repos/${GITHUB_REPOSITORY}/actions/runs?per_page=100" \
-            --jq '{recorded_at: now | todate, runs: [.workflow_runs[] | select((.name | startswith("ARC-GPT2")) or .name == "Package GPT-2 Tokenizer") | {id, name, status, conclusion, event, head_sha, created_at, updated_at, html_url}]}' \
+            --jq '{recorded_at: now | todate, runs: [.workflow_runs[] | select((.name | startswith("ARC-GPT2")) or (.name | startswith("Package")) or (.name | startswith("Verify Tuned GPT-2"))) | {id, name, status, conclusion, event, head_sha, created_at, updated_at, html_url}]}' \
             > reports/arcgpt2-monitor/latest-runs.json
           cat reports/arcgpt2-monitor/latest-runs.json
       - name: Publish monitor snapshot
@@ -36,4 +36,4 @@ jobs:
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin "HEAD:${GITHUB_REF_NAME}"
 
-# Refresh marker: 2026-08-02T01:12Z
+# Refresh marker: 2026-08-02T01:17Z
