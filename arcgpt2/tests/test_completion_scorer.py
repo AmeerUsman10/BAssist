@@ -78,8 +78,12 @@ def test_mean_reduction_removes_linear_length_scaling() -> None:
         device="cpu",
         reduction="mean",
     )
-    assert averaged[0] == pytest.approx(float(summed[0]))
-    assert averaged[1] == pytest.approx(float(summed[1]) / 3.0)
+    assert averaged[0].detach().item() == pytest.approx(
+        summed[0].detach().item()
+    )
+    assert averaged[1].detach().item() == pytest.approx(
+        summed[1].detach().item() / 3.0
+    )
 
 
 def test_scores_remain_differentiable_for_model_and_soft_memory() -> None:
