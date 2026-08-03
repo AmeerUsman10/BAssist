@@ -44,12 +44,14 @@ from .meta_soft_binding import (
 )
 from .meta_soft_contrastive import counterfactual_probe_records
 from .meta_soft_second_order import outcome_only_target
-from .phase0_hidden_action import Action, Direction, StepRecord
+from .natural_protocol import answer_text
+from .phase0_hidden_action import Action, Direction, HiddenActionGame, StepRecord
 
 
 @dataclass(frozen=True)
 class Config:
     model_name: str = "openai-community/gpt2"
+    model_revision: str | None = None
     initialization: str = "pretrained"
     output_dir: str = "outputs/meta_soft_single/pretrained"
     seed: int = 42
@@ -63,6 +65,7 @@ class Config:
     prefix_initialization_std: float = 0.01
     inner_learning_rate: float = 0.2
     outer_learning_rate: float = 8e-5
+    no_evidence_weight: float = 0.25
     weight_decay: float = 0.01
     max_outer_steps: int = 160
     warmup_steps: int = 12
@@ -87,6 +90,7 @@ class BindingTrace:
     variant_index: int
     action: str
     truth_direction: str
+    evidence_direction: str | None
     mode: str
     predicted_direction: str
     correct: bool
@@ -97,17 +101,29 @@ class BindingTrace:
 
 
 def build_model_and_tokenizer(config: Config):
-    tokenizer = AutoTokenizer.from_pretrained(config.model_name)
+    tokenizer = AutoTokenizer.from_pretrained(
+        config.model_name,
+        revision=config.model_revision,
+    )
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
     if config.initialization == "pretrained":
-        model = AutoModelForCausalLM.from_pretrained(config.model_name)
-    elif config.initialization == "random":
-        model = AutoModelForCausalLM.from_config(
-            AutoConfig.from_pretrained(config.model_name)
+        model = AutoModelForCausalLM.from_pretrained(
+            config.model_name,
+            attn_implementation="eager",
+            revision=config.model_revision,
         )
+    elif config.initialization == "random":
+        model_config = AutoConfig.from_pretrained(
+            config.model_name,
+            revision=config.model_revision,
+        )
+        model_config._attn_implementation = "eager"
+        model = AutoModelForCausalLM.from_config(model_config)
     else:
         raise ValueError("initialization must be pretrained or random")
+    if getattr(model.config, "_attn_implementation", None) != "eager":
+        raise RuntimeError("single-binding meta-training requires eager attention")
     model.config.pad_token_id = tokenizer.pad_token_id
     model.config.use_cache = False
     if not 0 <= config.freeze_first_n_blocks <= len(model.transformer.h):
@@ -131,7 +147,12 @@ def make_single_episode(
     action: Action,
 ) -> SingleBindingEpisode:
     episode = make_episode(group_seed, variant_index, variant_count)
-    record = next(record for record in episode.records if record.action is action)
+    # Every counterfactual starts from the exact same initial state. Selecting a
+    # later record from the sequential probe trajectory would leak the hidden
+    # mapping into the BEFORE grid through earlier movements.
+    record = HiddenActionGame(episode.spec).step(action)
+    if record.status != "ACTIVE" or not record.moved:
+        raise RuntimeError("single-binding probe must be a safe cardinal move")
     direction = episode.spec.action_to_direction[action]
     return SingleBindingEpisode(
         group_seed=group_seed,
@@ -224,7 +245,7 @@ def query_scores(
     prompt = encode_text(tokenizer, mapping_query(action))
     candidates = _candidate_ids(
         tokenizer,
-        tuple(" " + word + "." for word in _WORDS),
+        tuple(answer_text(word) for word in _WORDS),
     )
     return score_candidate_completions(
         model,
@@ -281,18 +302,44 @@ def episode_meta_loss(
         episode.direction,
         device,
     )
-    return loss, {
+    prior_scores = query_scores(
+        model,
+        tokenizer,
+        initial_prefix,
+        episode.action,
+        device,
+    )
+    uniform_target = torch.full_like(prior_scores, 1.0 / len(_WORDS))
+    prior_loss = -(uniform_target * F.log_softmax(prior_scores, dim=-1)).sum()
+    total_loss = loss + config.no_evidence_weight * prior_loss
+    return total_loss, {
+        "query_loss": float(loss.detach().item()),
+        "prior_loss": float(prior_loss.detach().item()),
         "support_loss": float(support_loss.detach().item()),
         "gradient_norm": float(torch.linalg.vector_norm(gradient.detach()).item()),
     }
 
 
-def _shuffled_target(record: StepRecord) -> StepRecord:
+_DERANGEMENT = {
+    Direction.UP: Direction.RIGHT,
+    Direction.RIGHT: Direction.DOWN,
+    Direction.DOWN: Direction.LEFT,
+    Direction.LEFT: Direction.UP,
+}
+
+
+def deranged_direction(direction: Direction) -> Direction:
+    """Return a fixed balanced wrong direction for corruption controls."""
+
+    return _DERANGEMENT[direction]
+
+
+def corrupted_target(record: StepRecord, truth: Direction) -> tuple[StepRecord, Direction]:
+    """Inject the fixed deranged outcome and return its semantic direction."""
+
     candidates = counterfactual_probe_records(record)
-    for candidate in candidates:
-        if candidate.after != record.after:
-            return candidate
-    raise RuntimeError("counterfactual set contains no alternate outcome")
+    injected = deranged_direction(truth)
+    return candidates[_DIRECTIONS.index(injected)], injected
 
 
 def _entropy_bits(probabilities: torch.Tensor) -> float:
@@ -315,12 +362,16 @@ def evaluate_episode(
     prefix = initial_prefix.detach().clone().requires_grad_(True)
     support_value: float | None = None
     gradient_norm: float | None = None
+    evidence_direction: Direction | None = None
     if mode != "no_adaptation":
-        target = (
-            episode.record
-            if mode == "intact"
-            else _shuffled_target(episode.record)
-        )
+        if mode == "intact":
+            target = episode.record
+            evidence_direction = episode.direction
+        else:
+            target, evidence_direction = corrupted_target(
+                episode.record,
+                episode.direction,
+            )
         prefix, support_loss, gradient = adapt_prefix(
             model,
             tokenizer,
@@ -352,6 +403,11 @@ def evaluate_episode(
         variant_index=episode.variant_index,
         action=episode.action.value,
         truth_direction=truth_word,
+        evidence_direction=(
+            _DIRECTION_WORD[evidence_direction]
+            if evidence_direction is not None
+            else None
+        ),
         mode=mode,
         predicted_direction=_WORDS[predicted_index],
         correct=predicted_index == truth_index,
@@ -394,29 +450,34 @@ def evaluate(
     config: Config,
     device: torch.device,
 ) -> dict[str, Any]:
+    was_training = model.training
+    model.eval()
     traces: list[BindingTrace] = []
-    for group_offset in range(config.evaluation_groups):
-        group_seed = config.validation_seed_base + group_offset
-        for variant_index in range(config.validation_mapping_variants):
-            for action in Action:
-                episode = make_single_episode(
-                    group_seed,
-                    variant_index,
-                    config.validation_mapping_variants,
-                    action,
-                )
-                for mode in ("intact", "no_adaptation", "shuffled_outcome"):
-                    traces.append(
-                        evaluate_episode(
-                            model,
-                            tokenizer,
-                            initial_prefix,
-                            episode,
-                            config,
-                            device,
-                            mode=mode,
-                        )
+    try:
+        for group_offset in range(config.evaluation_groups):
+            group_seed = config.validation_seed_base + group_offset
+            for variant_index in range(config.validation_mapping_variants):
+                for action in Action:
+                    episode = make_single_episode(
+                        group_seed,
+                        variant_index,
+                        config.validation_mapping_variants,
+                        action,
                     )
+                    for mode in ("intact", "no_adaptation", "shuffled_outcome"):
+                        traces.append(
+                            evaluate_episode(
+                                model,
+                                tokenizer,
+                                initial_prefix,
+                                episode,
+                                config,
+                                device,
+                                mode=mode,
+                            )
+                        )
+    finally:
+        model.train(was_training)
     return {
         "summary": summarize(traces),
         "traces": [asdict(trace) for trace in traces],
@@ -466,12 +527,16 @@ def train(config: Config) -> dict[str, Any]:
     )
     rng = random.Random(config.seed ^ 0x51A61E)
     losses: list[float] = []
+    query_losses: list[float] = []
+    prior_losses: list[float] = []
     support_losses: list[float] = []
     gradient_norms: list[float] = []
     started = time.time()
 
     for outer_step in range(1, config.max_outer_steps + 1):
-        model.train()
+        # eval() disables dropout while preserving autograd. Counterfactual
+        # differences must come from evidence, not independent dropout masks.
+        model.eval()
         optimizer.zero_grad(set_to_none=True)
         group_seed = config.train_seed_base + rng.randrange(config.train_groups)
         variant_index = rng.randrange(config.train_mapping_variants)
@@ -495,6 +560,8 @@ def train(config: Config) -> dict[str, Any]:
         optimizer.step()
         scheduler.step()
         losses.append(float(loss.detach().item()))
+        query_losses.append(diagnostics["query_loss"])
+        prior_losses.append(diagnostics["prior_loss"])
         support_losses.append(diagnostics["support_loss"])
         gradient_norms.append(diagnostics["gradient_norm"])
         if outer_step == 1 or outer_step % 10 == 0:
@@ -503,7 +570,9 @@ def train(config: Config) -> dict[str, Any]:
                     {
                         "outer_step": outer_step,
                         "max_outer_steps": config.max_outer_steps,
-                        "query_loss": sum(losses[-10:]) / min(10, len(losses)),
+                        "loss": sum(losses[-10:]) / min(10, len(losses)),
+                        "query_loss": sum(query_losses[-10:]) / min(10, len(query_losses)),
+                        "prior_loss": sum(prior_losses[-10:]) / min(10, len(prior_losses)),
                         "support_loss": sum(support_losses[-10:]) / min(10, len(support_losses)),
                         "gradient_norm": sum(gradient_norms[-10:]) / min(10, len(gradient_norms)),
                         "learning_rate": scheduler.get_last_lr()[0],
@@ -545,7 +614,9 @@ def train(config: Config) -> dict[str, Any]:
         "trainable_model_parameters": sum(parameter.numel() for parameter in model_trainable),
         "soft_prefix_parameters": initial_prefix.numel(),
         "total_model_parameters": sum(parameter.numel() for parameter in model.parameters()),
-        "mean_query_loss": sum(losses) / len(losses),
+        "mean_total_loss": sum(losses) / len(losses),
+        "mean_post_update_query_loss": sum(query_losses) / len(query_losses),
+        "mean_no_evidence_loss": sum(prior_losses) / len(prior_losses),
         "mean_support_loss": sum(support_losses) / len(support_losses),
         "mean_gradient_norm": sum(gradient_norms) / len(gradient_norms),
         "initial_evaluation": initial_evaluation,
@@ -562,6 +633,7 @@ def train(config: Config) -> dict[str, Any]:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--model-name", default="openai-community/gpt2")
+    parser.add_argument("--model-revision")
     parser.add_argument("--initialization", choices=("pretrained", "random"), default="pretrained")
     parser.add_argument("--output-dir", default="outputs/meta_soft_single/pretrained")
     parser.add_argument("--seed", type=int, default=42)
@@ -575,6 +647,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--prefix-initialization-std", type=float, default=0.01)
     parser.add_argument("--inner-learning-rate", type=float, default=0.2)
     parser.add_argument("--outer-learning-rate", type=float, default=8e-5)
+    parser.add_argument("--no-evidence-weight", type=float, default=0.25)
     parser.add_argument("--weight-decay", type=float, default=0.01)
     parser.add_argument("--max-outer-steps", type=int, default=160)
     parser.add_argument("--warmup-steps", type=int, default=12)
@@ -590,6 +663,7 @@ def main() -> None:
     train(
         Config(
             model_name=args.model_name,
+            model_revision=args.model_revision,
             initialization=args.initialization,
             output_dir=args.output_dir,
             seed=args.seed,
@@ -603,6 +677,7 @@ def main() -> None:
             prefix_initialization_std=args.prefix_initialization_std,
             inner_learning_rate=args.inner_learning_rate,
             outer_learning_rate=args.outer_learning_rate,
+            no_evidence_weight=args.no_evidence_weight,
             weight_decay=args.weight_decay,
             max_outer_steps=args.max_outer_steps,
             warmup_steps=args.warmup_steps,
