@@ -38,12 +38,14 @@ def test_raw_support_quartet_has_one_prompt_and_four_exact_targets() -> None:
         for episode in quartet
     ):
         words = set(re.findall(r"[a-z]+", (prompt + "\n" + target).lower()))
-        assert words.isdisjoint({"north", "south", "west", "east"})
+        assert words.isdisjoint(
+            {"north", "south", "west", "east", "up", "down", "left", "right"}
+        )
 
 
 def test_raw_support_rejects_cardinal_semantic_leakage(monkeypatch) -> None:
     episode = raw.build_quartet(960_005, Action.A1)[0]
-    monkeypatch.setattr(raw, "transition_prompt", lambda record: "It moved north.")
+    monkeypatch.setattr(raw, "transition_prompt", lambda record: "It moved left.")
 
     with pytest.raises(RuntimeError, match="leaked cardinal semantics"):
         raw.raw_support_text(episode.record, episode.record)

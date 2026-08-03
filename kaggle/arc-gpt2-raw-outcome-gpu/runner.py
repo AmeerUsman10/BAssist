@@ -297,6 +297,7 @@ def main() -> None:
     summary = load_json(summary_path)
     config = summary.get("config", {})
     gate = summary.get("gate", {})
+    support = summary.get("metrics", {}).get("support", {})
     if (OUTPUT_DIR / "model").exists():
         raise RuntimeError("experiment saved a model despite --no-save-model")
     execution_gates = {
@@ -304,7 +305,19 @@ def main() -> None:
         "tesla_t4_verified": "T4" in device_name.upper() and tuple(capability) == (7, 5),
         "summary_source_sha_matches": summary.get("source_sha") == SOURCE_SHA,
         "raw_outcome_support_objective": summary.get("support_objective") == "raw_outcome_nll",
-        "no_counterfactual_inner_targets": summary.get("counterfactuals_used_in_inner_update") is False,
+        "no_counterfactual_training_or_intact_targets": summary.get(
+            "counterfactuals_used_in_training_or_intact_update"
+        ) is False,
+        "corruption_counterfactual_disclosed": summary.get(
+            "counterfactuals_used_in_corruption_evaluation"
+        ) is True,
+        "support_metric_objective": support.get("objective") == "raw_outcome_nll",
+        "support_metric_candidate_count": support.get("candidate_count") == 1,
+        "support_metric_reduction": support.get("reduction") == "mean",
+        "support_metric_unique_target_count": support.get("unique_target_count") == 4,
+        "support_metric_no_counterfactual_inner_targets": support.get(
+            "counterfactuals_used_in_inner_update"
+        ) is False,
         "pretrained_initialization": config.get("initialization") == "pretrained",
         "pinned_model_revision": config.get("model_revision") == GPT2_REVISION,
         "cuda_required_by_experiment": config.get("require_cuda") is True,

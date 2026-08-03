@@ -59,7 +59,7 @@ from .phase0_hidden_action import Action, StepRecord
 
 
 SUPPORT_OBJECTIVE = "raw_outcome_nll"
-_CARDINAL_WORDS = frozenset(_WORDS)
+_DIRECTION_SEMANTIC_WORDS = frozenset((*_WORDS, "up", "down", "left", "right"))
 
 
 @dataclass(frozen=True)
@@ -106,7 +106,7 @@ def raw_support_text(
     prompt = transition_prompt(prompt_record)
     target = outcome_only_target(target_record)
     words = set(re.findall(r"[a-z]+", (prompt + "\n" + target).lower()))
-    leaked = sorted(words & _CARDINAL_WORDS)
+    leaked = sorted(words & _DIRECTION_SEMANTIC_WORDS)
     if leaked:
         raise RuntimeError(
             "raw support text leaked cardinal semantics: " + ", ".join(leaked)
@@ -633,7 +633,8 @@ def train(config: Config) -> dict[str, Any]:
         "seed": config.seed,
         "initialization": config.initialization,
         "support_objective": SUPPORT_OBJECTIVE,
-        "counterfactuals_used_in_inner_update": False,
+        "counterfactuals_used_in_training_or_intact_update": False,
+        "counterfactuals_used_in_corruption_evaluation": True,
         "config": asdict(config),
         "device": str(device),
         "initial": initial,
