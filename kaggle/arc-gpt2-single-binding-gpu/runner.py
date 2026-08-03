@@ -13,6 +13,7 @@ import importlib.metadata
 import json
 import os
 import platform
+import string
 import shutil
 import subprocess
 import sys
@@ -70,6 +71,11 @@ def package_version(name: str) -> str | None:
         return importlib.metadata.version(name)
     except importlib.metadata.PackageNotFoundError:
         return None
+
+
+def validate_source_sha(value: str) -> None:
+    if len(value) != 40 or any(character not in string.hexdigits for character in value):
+        raise RuntimeError("runner source SHA was not resolved by the dispatch workflow")
 
 
 def run(command: list[str], *, cwd: Path | None = None, log: Path | None = None) -> None:
@@ -152,8 +158,7 @@ class GpuSampler:
 
 def main() -> None:
     started = time.time()
-    if SOURCE_SHA == "__SOURCE_SHA__" or len(SOURCE_SHA) != 40:
-        raise RuntimeError("runner source SHA was not resolved by the dispatch workflow")
+    validate_source_sha(SOURCE_SHA)
 
     RUN_ROOT.mkdir(parents=True, exist_ok=True)
     LOG_DIR.mkdir(parents=True, exist_ok=True)
