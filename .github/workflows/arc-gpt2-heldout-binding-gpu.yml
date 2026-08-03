@@ -91,7 +91,12 @@ jobs:
     timeout-minutes: 210
     env:
       KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
-      KAGGLE_KERNEL_SLUG: arc-gpt2-heldout-binding-dual-t4
+      # Kaggle normalizes the title's "Held-Out" segment into this slug. The
+      # original workflow tracked the unnormalized spelling and lost the status
+      # response after launch; recover only that exact preregistered kernel.
+      KAGGLE_KERNEL_SLUG: arc-gpt2-held-out-binding-dual-t4
+      EXPECTED_KERNEL_SOURCE_SHA: 1da10742a317a6cf8bbade54814c70ae1386cf3c
+      RECOVERY_ONLY: "true"
 
     steps:
       - uses: actions/checkout@v4
@@ -254,7 +259,12 @@ jobs:
           import os
 
           result = json.load(open(os.environ["EXISTING_RESULT"], encoding="utf-8"))
-          raise SystemExit(0 if result.get("source_sha") == os.environ.get("GITHUB_SHA") else 1)
+          raise SystemExit(
+              0
+              if result.get("source_sha")
+              == os.environ.get("EXPECTED_KERNEL_SOURCE_SHA")
+              else 1
+          )
           PY
                 then
                   reuse_complete=true
@@ -264,6 +274,10 @@ jobs:
                 fi
               fi
             fi
+          fi
+
+          if [[ "$reuse_complete" != "true" && "$resume_running" != "true" && "${RECOVERY_ONLY:-}" == "true" ]]; then
+            fail "Exact preregistered recovery kernel is absent; refusing a new allocation"
           fi
 
           if [[ "$reuse_complete" != "true" && "$resume_running" != "true" ]]; then
@@ -279,11 +293,19 @@ jobs:
             write_state "running"
             deadline=$((SECONDS + 10800))
             completed=false
+            status_failures=0
             while (( SECONDS < deadline )); do
               if ! kaggle kernels status "$PRIVATE_KERNEL_REF" > "${RUNNER_TEMP}/status.log" 2>&1; then
                 redact_file "${RUNNER_TEMP}/status.log" dispatch-evidence/dispatch-redacted.log
-                fail "Kaggle status query failed"
+                status_failures=$((status_failures + 1))
+                if (( status_failures >= 5 )); then
+                  fail "Kaggle status query failed five consecutive times"
+                fi
+                write_state "status_retry" "transient Kaggle status query failure ${status_failures}/5"
+                sleep 20
+                continue
               fi
+              status_failures=0
               status_text="$(tr '[:upper:]' '[:lower:]' < "${RUNNER_TEMP}/status.log")"
               printf '%s\n' "$status_text" | sed -E "s/${owner}/[REDACTED_OWNER]/g" | tail -n 3
               if grep -Eq 'complete|success' <<< "$status_text"; then
@@ -314,7 +336,7 @@ jobs:
           import os
 
           result = json.load(open(os.environ["RESULT_PATH"], encoding="utf-8"))
-          if result.get("source_sha") != os.environ.get("GITHUB_SHA"):
+          if result.get("source_sha") != os.environ.get("EXPECTED_KERNEL_SOURCE_SHA"):
               raise SystemExit("source SHA mismatch")
           if result.get("protocol") != "heldout_layout_action_v1":
               raise SystemExit("protocol mismatch")
@@ -383,6 +405,8 @@ jobs:
               "branch": os.environ.get("GITHUB_REF_NAME"),
               "workflow_sha": os.environ.get("GITHUB_SHA"),
               "kernel_source_sha": result.get("source_sha"),
+              "expected_kernel_source_sha": os.environ.get("EXPECTED_KERNEL_SOURCE_SHA"),
+              "recovery_only": os.environ.get("RECOVERY_ONLY") == "true",
               "protocol": result.get("protocol"),
               "github_run_id": os.environ.get("GITHUB_RUN_ID"),
               "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
