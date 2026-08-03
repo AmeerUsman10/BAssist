@@ -202,7 +202,11 @@ def extract_legal_action(text: str, legal_actions: Sequence[str | int]) -> tuple
     if match is not None:
         action = f"A{int(match.group(1))}"
         if action in allowed:
-            return action, _optional_int(payload.get("x")), _optional_int(payload.get("y"))
+            return (
+                action,
+                _optional_int_or_none(payload.get("x")),
+                _optional_int_or_none(payload.get("y")),
+            )
 
     for match in reversed(list(ACTION_PATTERN.finditer(text))):
         action = f"A{int(match.group(1))}"
@@ -217,3 +221,10 @@ def _optional_int(value: Any) -> int | None:
     if isinstance(value, bool):
         raise ValueError("coordinate may not be boolean")
     return int(value)
+
+
+def _optional_int_or_none(value: Any) -> int | None:
+    try:
+        return _optional_int(value)
+    except (TypeError, ValueError):
+        return None

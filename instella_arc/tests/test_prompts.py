@@ -49,3 +49,8 @@ def test_action_parser_falls_back_to_last_legal_plain_token() -> None:
     assert extract_legal_action(text, ("A1", "A3")) == ("A3", None, None)
     with pytest.raises(ValueError):
         extract_legal_action("A2", ("A1", "A3"))
+
+
+def test_action_parser_tolerates_invalid_coordinates_when_action_is_legal() -> None:
+    text = '<FINAL>{"action":"A3","x":true,"y":"oops"}</FINAL>'
+    assert extract_legal_action(text, ("A1", "A3")) == ("A3", None, None)
