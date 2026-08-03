@@ -1,9 +1,9 @@
 {
   "status": "success",
   "branch": "arc-gpt2-programs",
-  "commit_sha": "27055b174e6008cba035eedcd6e66f1995225613",
-  "run_id": "30724539945",
-  "recorded_at_utc": "2026-08-02T00:07:18.132930+00:00",
+  "commit_sha": "265a8676363e212aed0ea60cc1fd591483522351",
+  "run_id": "30808852682",
+  "recorded_at_utc": "2026-08-03T11:18:50.085173+00:00",
   "scope": "One-outer-step CPU runtime smoke for length-normalized soft-prefix meta-learning; not a capability result and not ARC-AGI-3 evaluation",
   "summary_present": true
 }

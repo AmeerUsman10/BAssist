@@ -31,8 +31,8 @@
   "trainable_model_parameters": 7089408,
   "soft_prefix_parameters": 6144,
   "total_model_parameters": 124439808,
-  "mean_meta_query_loss": 1.8807752132415771,
-  "mean_support_nll": 3.7759941816329956,
+  "mean_meta_query_loss": 1.880765676498413,
+  "mean_support_nll": 3.775995373725891,
   "initial_evaluation": {
     "summary": {
       "intact": {
@@ -40,7 +40,7 @@
           "episodes": 2.0,
           "exact_mapping": 0.0,
           "consistent_mass": 0.9999999403953552,
-          "truth_probability": 0.04171121306717396,
+          "truth_probability": 0.041711023077368736,
           "truth_rank": 11.5,
           "entropy_bits": 4.58212423324585,
           "per_action_accuracy": 0.25
@@ -48,8 +48,8 @@
         "1": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.2545989751815796,
-          "truth_probability": 0.04187593050301075,
+          "consistent_mass": 0.254596471786499,
+          "truth_probability": 0.04187658056616783,
           "truth_rank": 10.5,
           "entropy_bits": 4.584747791290283,
           "per_action_accuracy": 0.25
@@ -57,28 +57,28 @@
         "2": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.08640743792057037,
-          "truth_probability": 0.042067209258675575,
+          "consistent_mass": 0.08640579134225845,
+          "truth_probability": 0.042066412046551704,
           "truth_rank": 10.0,
-          "entropy_bits": 4.584218502044678,
+          "entropy_bits": 4.5842180252075195,
           "per_action_accuracy": 0.25
         },
         "3": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.041795888915658,
-          "truth_probability": 0.041795888915658,
+          "consistent_mass": 0.041794292628765106,
+          "truth_probability": 0.041794292628765106,
           "truth_rank": 10.0,
-          "entropy_bits": 4.584928274154663,
+          "entropy_bits": 4.584928512573242,
           "per_action_accuracy": 0.25
         },
         "4": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.04214285872876644,
-          "truth_probability": 0.04214285872876644,
+          "consistent_mass": 0.04214209504425526,
+          "truth_probability": 0.04214209504425526,
           "truth_rank": 10.0,
-          "entropy_bits": 4.5840699672698975,
+          "entropy_bits": 4.584070920944214,
           "per_action_accuracy": 0.25
         }
       },
@@ -87,7 +87,7 @@
           "episodes": 2.0,
           "exact_mapping": 0.0,
           "consistent_mass": 0.9999999403953552,
-          "truth_probability": 0.04171121306717396,
+          "truth_probability": 0.041711023077368736,
           "truth_rank": 11.5,
           "entropy_bits": 4.58212423324585,
           "per_action_accuracy": 0.25
@@ -95,8 +95,8 @@
         "1": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.2607584595680237,
-          "truth_probability": 0.04171121306717396,
+          "consistent_mass": 0.26075810194015503,
+          "truth_probability": 0.041711023077368736,
           "truth_rank": 11.5,
           "entropy_bits": 4.58212423324585,
           "per_action_accuracy": 0.25
@@ -104,8 +104,8 @@
         "2": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.08810972794890404,
-          "truth_probability": 0.04171121306717396,
+          "consistent_mass": 0.08811004087328911,
+          "truth_probability": 0.041711023077368736,
           "truth_rank": 11.5,
           "entropy_bits": 4.58212423324585,
           "per_action_accuracy": 0.25
@@ -113,8 +113,8 @@
         "3": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.04171121306717396,
-          "truth_probability": 0.04171121306717396,
+          "consistent_mass": 0.041711023077368736,
+          "truth_probability": 0.041711023077368736,
           "truth_rank": 11.5,
           "entropy_bits": 4.58212423324585,
           "per_action_accuracy": 0.25
@@ -122,8 +122,8 @@
         "4": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.04171121306717396,
-          "truth_probability": 0.04171121306717396,
+          "consistent_mass": 0.041711023077368736,
+          "truth_probability": 0.041711023077368736,
           "truth_rank": 11.5,
           "entropy_bits": 4.58212423324585,
           "per_action_accuracy": 0.25
@@ -134,7 +134,7 @@
           "episodes": 2.0,
           "exact_mapping": 0.0,
           "consistent_mass": 0.9999999403953552,
-          "truth_probability": 0.04171121306717396,
+          "truth_probability": 0.041711023077368736,
           "truth_rank": 11.5,
           "entropy_bits": 4.58212423324585,
           "per_action_accuracy": 0.25
@@ -142,37 +142,37 @@
         "1": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.2536346763372421,
-          "truth_probability": 0.04177548177540302,
+          "consistent_mass": 0.25363127887248993,
+          "truth_probability": 0.041774289682507515,
           "truth_rank": 11.0,
-          "entropy_bits": 4.584809303283691,
+          "entropy_bits": 4.5848095417022705,
           "per_action_accuracy": 0.25
         },
         "2": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.0877976305782795,
-          "truth_probability": 0.04242057166993618,
+          "consistent_mass": 0.08779850229620934,
+          "truth_probability": 0.04242083989083767,
           "truth_rank": 10.0,
-          "entropy_bits": 4.583537817001343,
+          "entropy_bits": 4.583537340164185,
           "per_action_accuracy": 0.25
         },
         "3": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.0418841689825058,
-          "truth_probability": 0.0418841689825058,
+          "consistent_mass": 0.04188366420567036,
+          "truth_probability": 0.04188366420567036,
           "truth_rank": 8.0,
-          "entropy_bits": 4.58492636680603,
+          "entropy_bits": 4.584926605224609,
           "per_action_accuracy": 0.25
         },
         "4": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.041805071756243706,
-          "truth_probability": 0.041805071756243706,
+          "consistent_mass": 0.04180503077805042,
+          "truth_probability": 0.04180503077805042,
           "truth_rank": 11.0,
-          "entropy_bits": 4.584798812866211,
+          "entropy_bits": 4.584798336029053,
           "per_action_accuracy": 0.25
         }
       }
@@ -185,7 +185,7 @@
         "probe_count": 0,
         "exact_mapping": false,
         "consistent_mass": 0.9999999403953552,
-        "truth_probability": 0.04426310211420059,
+        "truth_probability": 0.04426258057355881,
         "truth_rank": 4,
         "entropy_bits": 4.58212423324585,
         "per_action_accuracy": 0.25
@@ -196,8 +196,8 @@
         "mode": "intact",
         "probe_count": 1,
         "exact_mapping": false,
-        "consistent_mass": 0.2545989751815796,
-        "truth_probability": 0.04238453134894371,
+        "consistent_mass": 0.254596471786499,
+        "truth_probability": 0.042385827749967575,
         "truth_rank": 4,
         "entropy_bits": 4.584747791290283,
         "per_action_accuracy": 0.25
@@ -208,10 +208,10 @@
         "mode": "intact",
         "probe_count": 2,
         "exact_mapping": false,
-        "consistent_mass": 0.08802613615989685,
-        "truth_probability": 0.04322000965476036,
+        "consistent_mass": 0.08802597224712372,
+        "truth_probability": 0.043219927698373795,
         "truth_rank": 3,
-        "entropy_bits": 4.5843682289123535,
+        "entropy_bits": 4.584368705749512,
         "per_action_accuracy": 0.25
       },
       {
@@ -220,10 +220,10 @@
         "mode": "intact",
         "probe_count": 3,
         "exact_mapping": false,
-        "consistent_mass": 0.04187104105949402,
-        "truth_probability": 0.04187104105949402,
+        "consistent_mass": 0.041868168860673904,
+        "truth_probability": 0.041868168860673904,
         "truth_rank": 8,
-        "entropy_bits": 4.584921836853027,
+        "entropy_bits": 4.5849223136901855,
         "per_action_accuracy": 0.25
       },
       {
@@ -232,10 +232,10 @@
         "mode": "intact",
         "probe_count": 4,
         "exact_mapping": false,
-        "consistent_mass": 0.04347612336277962,
-        "truth_probability": 0.04347612336277962,
+        "consistent_mass": 0.04347611963748932,
+        "truth_probability": 0.04347611963748932,
         "truth_rank": 3,
-        "entropy_bits": 4.584242820739746,
+        "entropy_bits": 4.584243297576904,
         "per_action_accuracy": 0.25
       },
       {
@@ -245,7 +245,7 @@
         "probe_count": 0,
         "exact_mapping": false,
         "consistent_mass": 0.9999999403953552,
-        "truth_probability": 0.04426310211420059,
+        "truth_probability": 0.04426258057355881,
         "truth_rank": 4,
         "entropy_bits": 4.58212423324585,
         "per_action_accuracy": 0.25
@@ -256,8 +256,8 @@
         "mode": "no_adaptation",
         "probe_count": 1,
         "exact_mapping": false,
-        "consistent_mass": 0.2607584595680237,
-        "truth_probability": 0.04426310211420059,
+        "consistent_mass": 0.26075810194015503,
+        "truth_probability": 0.04426258057355881,
         "truth_rank": 4,
         "entropy_bits": 4.58212423324585,
         "per_action_accuracy": 0.25
@@ -268,8 +268,8 @@
         "mode": "no_adaptation",
         "probe_count": 2,
         "exact_mapping": false,
-        "consistent_mass": 0.09264276921749115,
-        "truth_probability": 0.04426310211420059,
+        "consistent_mass": 0.0926424190402031,
+        "truth_probability": 0.04426258057355881,
         "truth_rank": 4,
         "entropy_bits": 4.58212423324585,
         "per_action_accuracy": 0.25
@@ -280,8 +280,8 @@
         "mode": "no_adaptation",
         "probe_count": 3,
         "exact_mapping": false,
-        "consistent_mass": 0.04426310211420059,
-        "truth_probability": 0.04426310211420059,
+        "consistent_mass": 0.04426258057355881,
+        "truth_probability": 0.04426258057355881,
         "truth_rank": 4,
         "entropy_bits": 4.58212423324585,
         "per_action_accuracy": 0.25
@@ -292,8 +292,8 @@
         "mode": "no_adaptation",
         "probe_count": 4,
         "exact_mapping": false,
-        "consistent_mass": 0.04426310211420059,
-        "truth_probability": 0.04426310211420059,
+        "consistent_mass": 0.04426258057355881,
+        "truth_probability": 0.04426258057355881,
         "truth_rank": 4,
         "entropy_bits": 4.58212423324585,
         "per_action_accuracy": 0.25
@@ -305,7 +305,7 @@
         "probe_count": 0,
         "exact_mapping": false,
         "consistent_mass": 0.9999999403953552,
-        "truth_probability": 0.04426310211420059,
+        "truth_probability": 0.04426258057355881,
         "truth_rank": 4,
         "entropy_bits": 4.58212423324585,
         "per_action_accuracy": 0.25
@@ -316,8 +316,8 @@
         "mode": "shuffled_outcome",
         "probe_count": 1,
         "exact_mapping": false,
-        "consistent_mass": 0.25385451316833496,
-        "truth_probability": 0.04219290614128113,
+        "consistent_mass": 0.2538573741912842,
+        "truth_probability": 0.042191460728645325,
         "truth_rank": 4,
         "entropy_bits": 4.5847978591918945,
         "per_action_accuracy": 0.25
@@ -328,10 +328,10 @@
         "mode": "shuffled_outcome",
         "probe_count": 2,
         "exact_mapping": false,
-        "consistent_mass": 0.09063353389501572,
-        "truth_probability": 0.04417399317026138,
+        "consistent_mass": 0.09063523262739182,
+        "truth_probability": 0.04417499527335167,
         "truth_rank": 3,
-        "entropy_bits": 4.583539962768555,
+        "entropy_bits": 4.5835394859313965,
         "per_action_accuracy": 0.25
       },
       {
@@ -340,10 +340,10 @@
         "mode": "shuffled_outcome",
         "probe_count": 3,
         "exact_mapping": false,
-        "consistent_mass": 0.04188341647386551,
-        "truth_probability": 0.04188341647386551,
+        "consistent_mass": 0.04188238084316254,
+        "truth_probability": 0.04188238084316254,
         "truth_rank": 8,
-        "entropy_bits": 4.584924697875977,
+        "entropy_bits": 4.584925174713135,
         "per_action_accuracy": 0.25
       },
       {
@@ -352,10 +352,10 @@
         "mode": "shuffled_outcome",
         "probe_count": 4,
         "exact_mapping": false,
-        "consistent_mass": 0.04214274138212204,
-        "truth_probability": 0.04214274138212204,
+        "consistent_mass": 0.042142901569604874,
+        "truth_probability": 0.042142901569604874,
         "truth_rank": 7,
-        "entropy_bits": 4.58481502532959,
+        "entropy_bits": 4.584814548492432,
         "per_action_accuracy": 0.25
       },
       {
@@ -365,7 +365,7 @@
         "probe_count": 0,
         "exact_mapping": false,
         "consistent_mass": 0.9999999403953552,
-        "truth_probability": 0.039159324020147324,
+        "truth_probability": 0.039159465581178665,
         "truth_rank": 19,
         "entropy_bits": 4.58212423324585,
         "per_action_accuracy": 0.25
@@ -376,8 +376,8 @@
         "mode": "intact",
         "probe_count": 1,
         "exact_mapping": false,
-        "consistent_mass": 0.2545989751815796,
-        "truth_probability": 0.04136732965707779,
+        "consistent_mass": 0.254596471786499,
+        "truth_probability": 0.04136733338236809,
         "truth_rank": 17,
         "entropy_bits": 4.584747791290283,
         "per_action_accuracy": 0.25
@@ -388,10 +388,10 @@
         "mode": "intact",
         "probe_count": 2,
         "exact_mapping": false,
-        "consistent_mass": 0.0847887396812439,
-        "truth_probability": 0.04091440886259079,
+        "consistent_mass": 0.08478561043739319,
+        "truth_probability": 0.040912896394729614,
         "truth_rank": 17,
-        "entropy_bits": 4.584068775177002,
+        "entropy_bits": 4.584067344665527,
         "per_action_accuracy": 0.25
       },
       {
@@ -400,8 +400,8 @@
         "mode": "intact",
         "probe_count": 3,
         "exact_mapping": false,
-        "consistent_mass": 0.041720736771821976,
-        "truth_probability": 0.041720736771821976,
+        "consistent_mass": 0.04172041639685631,
+        "truth_probability": 0.04172041639685631,
         "truth_rank": 12,
         "entropy_bits": 4.584934711456299,
         "per_action_accuracy": 0.25
@@ -412,10 +412,10 @@
         "mode": "intact",
         "probe_count": 4,
         "exact_mapping": false,
-        "consistent_mass": 0.040809594094753265,
-        "truth_probability": 0.040809594094753265,
+        "consistent_mass": 0.040808070451021194,
+        "truth_probability": 0.040808070451021194,
         "truth_rank": 17,
-        "entropy_bits": 4.583897113800049,
+        "entropy_bits": 4.583898544311523,
         "per_action_accuracy": 0.25
       },
       {
@@ -425,7 +425,7 @@
         "probe_count": 0,
         "exact_mapping": false,
         "consistent_mass": 0.9999999403953552,
-        "truth_probability": 0.039159324020147324,
+        "truth_probability": 0.039159465581178665,
         "truth_rank": 19,
         "entropy_bits": 4.58212423324585,
         "per_action_accuracy": 0.25
@@ -436,8 +436,8 @@
         "mode": "no_adaptation",
         "probe_count": 1,
         "exact_mapping": false,
-        "consistent_mass": 0.2607584595680237,
-        "truth_probability": 0.039159324020147324,
+        "consistent_mass": 0.26075810194015503,
+        "truth_probability": 0.039159465581178665,
         "truth_rank": 19,
         "entropy_bits": 4.58212423324585,
         "per_action_accuracy": 0.25
@@ -448,8 +448,8 @@
         "mode": "no_adaptation",
         "probe_count": 2,
         "exact_mapping": false,
-        "consistent_mass": 0.08357668668031693,
-        "truth_probability": 0.039159324020147324,
+        "consistent_mass": 0.08357766270637512,
+        "truth_probability": 0.039159465581178665,
         "truth_rank": 19,
         "entropy_bits": 4.58212423324585,
         "per_action_accuracy": 0.25
@@ -460,8 +460,8 @@
         "mode": "no_adaptation",
         "probe_count": 3,
         "exact_mapping": false,
-        "consistent_mass": 0.039159324020147324,
-        "truth_probability": 0.039159324020147324,
+        "consistent_mass": 0.039159465581178665,
+        "truth_probability": 0.039159465581178665,
         "truth_rank": 19,
         "entropy_bits": 4.58212423324585,
         "per_action_accuracy": 0.25
@@ -472,8 +472,8 @@
         "mode": "no_adaptation",
         "probe_count": 4,
         "exact_mapping": false,
-        "consistent_mass": 0.039159324020147324,
-        "truth_probability": 0.039159324020147324,
+        "consistent_mass": 0.039159465581178665,
+        "truth_probability": 0.039159465581178665,
         "truth_rank": 19,
         "entropy_bits": 4.58212423324585,
         "per_action_accuracy": 0.25
@@ -485,7 +485,7 @@
         "probe_count": 0,
         "exact_mapping": false,
         "consistent_mass": 0.9999999403953552,
-        "truth_probability": 0.039159324020147324,
+        "truth_probability": 0.039159465581178665,
         "truth_rank": 19,
         "entropy_bits": 4.58212423324585,
         "per_action_accuracy": 0.25
@@ -496,10 +496,10 @@
         "mode": "shuffled_outcome",
         "probe_count": 1,
         "exact_mapping": false,
-        "consistent_mass": 0.2534148395061493,
-        "truth_probability": 0.04135805740952492,
+        "consistent_mass": 0.2534051835536957,
+        "truth_probability": 0.041357118636369705,
         "truth_rank": 18,
-        "entropy_bits": 4.584820747375488,
+        "entropy_bits": 4.5848212242126465,
         "per_action_accuracy": 0.25
       },
       {
@@ -508,10 +508,10 @@
         "mode": "shuffled_outcome",
         "probe_count": 2,
         "exact_mapping": false,
-        "consistent_mass": 0.08496172726154327,
-        "truth_probability": 0.04066715016961098,
+        "consistent_mass": 0.08496177196502686,
+        "truth_probability": 0.04066668450832367,
         "truth_rank": 17,
-        "entropy_bits": 4.583535671234131,
+        "entropy_bits": 4.583535194396973,
         "per_action_accuracy": 0.25
       },
       {
@@ -520,8 +520,8 @@
         "mode": "shuffled_outcome",
         "probe_count": 3,
         "exact_mapping": false,
-        "consistent_mass": 0.04188492149114609,
-        "truth_probability": 0.04188492149114609,
+        "consistent_mass": 0.04188494756817818,
+        "truth_probability": 0.04188494756817818,
         "truth_rank": 8,
         "entropy_bits": 4.584928035736084,
         "per_action_accuracy": 0.25
@@ -532,10 +532,10 @@
         "mode": "shuffled_outcome",
         "probe_count": 4,
         "exact_mapping": false,
-        "consistent_mass": 0.04146740213036537,
-        "truth_probability": 0.04146740213036537,
+        "consistent_mass": 0.04146715998649597,
+        "truth_probability": 0.04146715998649597,
         "truth_rank": 15,
-        "entropy_bits": 4.584782600402832,
+        "entropy_bits": 4.584782123565674,
         "per_action_accuracy": 0.25
       }
     ]
@@ -546,46 +546,46 @@
         "0": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.9999999403953552,
-          "truth_probability": 0.04173643887042999,
+          "consistent_mass": 0.9999998807907104,
+          "truth_probability": 0.0417369045317173,
           "truth_rank": 11.5,
-          "entropy_bits": 4.582173824310303,
+          "entropy_bits": 4.582172393798828,
           "per_action_accuracy": 0.25
         },
         "1": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.25455978512763977,
-          "truth_probability": 0.041890278458595276,
+          "consistent_mass": 0.25456681847572327,
+          "truth_probability": 0.04189186543226242,
           "truth_rank": 10.5,
-          "entropy_bits": 4.58475399017334,
+          "entropy_bits": 4.584753513336182,
           "per_action_accuracy": 0.25
         },
         "2": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.08624010905623436,
-          "truth_probability": 0.04206142947077751,
+          "consistent_mass": 0.08624040335416794,
+          "truth_probability": 0.042062150314450264,
           "truth_rank": 9.5,
-          "entropy_bits": 4.584301233291626,
+          "entropy_bits": 4.584301471710205,
           "per_action_accuracy": 0.25
         },
         "3": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.041806576773524284,
-          "truth_probability": 0.041806576773524284,
+          "consistent_mass": 0.04180418327450752,
+          "truth_probability": 0.04180418327450752,
           "truth_rank": 9.5,
-          "entropy_bits": 4.584927797317505,
+          "entropy_bits": 4.584928035736084,
           "per_action_accuracy": 0.25
         },
         "4": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.0421622097492218,
-          "truth_probability": 0.0421622097492218,
+          "consistent_mass": 0.04216383397579193,
+          "truth_probability": 0.04216383397579193,
           "truth_rank": 10.0,
-          "entropy_bits": 4.584146022796631,
+          "entropy_bits": 4.584146499633789,
           "per_action_accuracy": 0.25
         }
       },
@@ -593,46 +593,46 @@
         "0": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.9999999403953552,
-          "truth_probability": 0.04173643887042999,
+          "consistent_mass": 0.9999998807907104,
+          "truth_probability": 0.0417369045317173,
           "truth_rank": 11.5,
-          "entropy_bits": 4.582173824310303,
+          "entropy_bits": 4.582172393798828,
           "per_action_accuracy": 0.25
         },
         "1": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.26059430837631226,
-          "truth_probability": 0.04173643887042999,
+          "consistent_mass": 0.26059919595718384,
+          "truth_probability": 0.0417369045317173,
           "truth_rank": 11.5,
-          "entropy_bits": 4.582173824310303,
+          "entropy_bits": 4.582172393798828,
           "per_action_accuracy": 0.25
         },
         "2": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.08806739747524261,
-          "truth_probability": 0.04173643887042999,
+          "consistent_mass": 0.08806908130645752,
+          "truth_probability": 0.0417369045317173,
           "truth_rank": 11.5,
-          "entropy_bits": 4.582173824310303,
+          "entropy_bits": 4.582172393798828,
           "per_action_accuracy": 0.25
         },
         "3": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.04173643887042999,
-          "truth_probability": 0.04173643887042999,
+          "consistent_mass": 0.0417369045317173,
+          "truth_probability": 0.0417369045317173,
           "truth_rank": 11.5,
-          "entropy_bits": 4.582173824310303,
+          "entropy_bits": 4.582172393798828,
           "per_action_accuracy": 0.25
         },
         "4": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.04173643887042999,
-          "truth_probability": 0.04173643887042999,
+          "consistent_mass": 0.0417369045317173,
+          "truth_probability": 0.0417369045317173,
           "truth_rank": 11.5,
-          "entropy_bits": 4.582173824310303,
+          "entropy_bits": 4.582172393798828,
           "per_action_accuracy": 0.25
         }
       },
@@ -640,26 +640,26 @@
         "0": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.9999999403953552,
-          "truth_probability": 0.04173643887042999,
+          "consistent_mass": 0.9999998807907104,
+          "truth_probability": 0.0417369045317173,
           "truth_rank": 11.5,
-          "entropy_bits": 4.582173824310303,
+          "entropy_bits": 4.582172393798828,
           "per_action_accuracy": 0.25
         },
         "1": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.25361283123493195,
-          "truth_probability": 0.04179389774799347,
+          "consistent_mass": 0.2536145895719528,
+          "truth_probability": 0.041793329641222954,
           "truth_rank": 11.0,
-          "entropy_bits": 4.584815502166748,
+          "entropy_bits": 4.58481502532959,
           "per_action_accuracy": 0.25
         },
         "2": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.08772838115692139,
-          "truth_probability": 0.04242886044085026,
+          "consistent_mass": 0.08772756531834602,
+          "truth_probability": 0.042428307235240936,
           "truth_rank": 10.0,
           "entropy_bits": 4.583583354949951,
           "per_action_accuracy": 0.25
@@ -667,19 +667,19 @@
         "3": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.0418953001499176,
-          "truth_probability": 0.0418953001499176,
+          "consistent_mass": 0.04189479537308216,
+          "truth_probability": 0.04189479537308216,
           "truth_rank": 6.0,
-          "entropy_bits": 4.584928274154663,
+          "entropy_bits": 4.584928035736084,
           "per_action_accuracy": 0.25
         },
         "4": {
           "episodes": 2.0,
           "exact_mapping": 0.0,
-          "consistent_mass": 0.04182328097522259,
-          "truth_probability": 0.04182328097522259,
+          "consistent_mass": 0.04182371310889721,
+          "truth_probability": 0.04182371310889721,
           "truth_rank": 11.0,
-          "entropy_bits": 4.584801435470581,
+          "entropy_bits": 4.584800958633423,
           "per_action_accuracy": 0.25
         }
       }
@@ -691,10 +691,10 @@
         "mode": "intact",
         "probe_count": 0,
         "exact_mapping": false,
-        "consistent_mass": 0.9999999403953552,
-        "truth_probability": 0.04427337273955345,
+        "consistent_mass": 0.9999998807907104,
+        "truth_probability": 0.044274184852838516,
         "truth_rank": 4,
-        "entropy_bits": 4.582173824310303,
+        "entropy_bits": 4.582172393798828,
         "per_action_accuracy": 0.25
       },
       {
@@ -703,10 +703,10 @@
         "mode": "intact",
         "probe_count": 1,
         "exact_mapping": false,
-        "consistent_mass": 0.25455978512763977,
-        "truth_probability": 0.04240640252828598,
+        "consistent_mass": 0.25456681847572327,
+        "truth_probability": 0.04240800812840462,
         "truth_rank": 4,
-        "entropy_bits": 4.58475399017334,
+        "entropy_bits": 4.584753513336182,
         "per_action_accuracy": 0.25
       },
       {
@@ -715,10 +715,10 @@
         "mode": "intact",
         "probe_count": 2,
         "exact_mapping": false,
-        "consistent_mass": 0.08776742964982986,
-        "truth_probability": 0.04314955323934555,
+        "consistent_mass": 0.08776658773422241,
+        "truth_probability": 0.04315014183521271,
         "truth_rank": 3,
-        "entropy_bits": 4.584433555603027,
+        "entropy_bits": 4.5844340324401855,
         "per_action_accuracy": 0.25
       },
       {
@@ -727,10 +727,10 @@
         "mode": "intact",
         "probe_count": 3,
         "exact_mapping": false,
-        "consistent_mass": 0.04189397394657135,
-        "truth_probability": 0.04189397394657135,
+        "consistent_mass": 0.041889820247888565,
+        "truth_probability": 0.041889820247888565,
         "truth_rank": 7,
-        "entropy_bits": 4.584919452667236,
+        "entropy_bits": 4.5849199295043945,
         "per_action_accuracy": 0.25
       },
       {
@@ -739,10 +739,10 @@
         "mode": "intact",
         "probe_count": 4,
         "exact_mapping": false,
-        "consistent_mass": 0.04345081001520157,
-        "truth_probability": 0.04345081001520157,
+        "consistent_mass": 0.04345263913273811,
+        "truth_probability": 0.04345263913273811,
         "truth_rank": 3,
-        "entropy_bits": 4.58429479598999,
+        "entropy_bits": 4.584295272827148,
         "per_action_accuracy": 0.25
       },
       {
@@ -751,10 +751,10 @@
         "mode": "no_adaptation",
         "probe_count": 0,
         "exact_mapping": false,
-        "consistent_mass": 0.9999999403953552,
-        "truth_probability": 0.04427337273955345,
+        "consistent_mass": 0.9999998807907104,
+        "truth_probability": 0.044274184852838516,
         "truth_rank": 4,
-        "entropy_bits": 4.582173824310303,
+        "entropy_bits": 4.582172393798828,
         "per_action_accuracy": 0.25
       },
       {
@@ -763,10 +763,10 @@
         "mode": "no_adaptation",
         "probe_count": 1,
         "exact_mapping": false,
-        "consistent_mass": 0.26059430837631226,
-        "truth_probability": 0.04427337273955345,
+        "consistent_mass": 0.26059919595718384,
+        "truth_probability": 0.044274184852838516,
         "truth_rank": 4,
-        "entropy_bits": 4.582173824310303,
+        "entropy_bits": 4.582172393798828,
         "per_action_accuracy": 0.25
       },
       {
@@ -775,10 +775,10 @@
         "mode": "no_adaptation",
         "probe_count": 2,
         "exact_mapping": false,
-        "consistent_mass": 0.0925794243812561,
-        "truth_probability": 0.04427337273955345,
+        "consistent_mass": 0.0925818607211113,
+        "truth_probability": 0.044274184852838516,
         "truth_rank": 4,
-        "entropy_bits": 4.582173824310303,
+        "entropy_bits": 4.582172393798828,
         "per_action_accuracy": 0.25
       },
       {
@@ -787,10 +787,10 @@
         "mode": "no_adaptation",
         "probe_count": 3,
         "exact_mapping": false,
-        "consistent_mass": 0.04427337273955345,
-        "truth_probability": 0.04427337273955345,
+        "consistent_mass": 0.044274184852838516,
+        "truth_probability": 0.044274184852838516,
         "truth_rank": 4,
-        "entropy_bits": 4.582173824310303,
+        "entropy_bits": 4.582172393798828,
         "per_action_accuracy": 0.25
       },
       {
@@ -799,10 +799,10 @@
         "mode": "no_adaptation",
         "probe_count": 4,
         "exact_mapping": false,
-        "consistent_mass": 0.04427337273955345,
-        "truth_probability": 0.04427337273955345,
+        "consistent_mass": 0.044274184852838516,
+        "truth_probability": 0.044274184852838516,
         "truth_rank": 4,
-        "entropy_bits": 4.582173824310303,
+        "entropy_bits": 4.582172393798828,
         "per_action_accuracy": 0.25
       },
       {
@@ -811,10 +811,10 @@
         "mode": "shuffled_outcome",
         "probe_count": 0,
         "exact_mapping": false,
-        "consistent_mass": 0.9999999403953552,
-        "truth_probability": 0.04427337273955345,
+        "consistent_mass": 0.9999998807907104,
+        "truth_probability": 0.044274184852838516,
         "truth_rank": 4,
-        "entropy_bits": 4.582173824310303,
+        "entropy_bits": 4.582172393798828,
         "per_action_accuracy": 0.25
       },
       {
@@ -823,10 +823,10 @@
         "mode": "shuffled_outcome",
         "probe_count": 1,
         "exact_mapping": false,
-        "consistent_mass": 0.2538236975669861,
-        "truth_probability": 0.042218226939439774,
+        "consistent_mass": 0.2538224160671234,
+        "truth_probability": 0.042216937988996506,
         "truth_rank": 4,
-        "entropy_bits": 4.584805011749268,
+        "entropy_bits": 4.584804534912109,
         "per_action_accuracy": 0.25
       },
       {
@@ -835,10 +835,10 @@
         "mode": "shuffled_outcome",
         "probe_count": 2,
         "exact_mapping": false,
-        "consistent_mass": 0.09053075313568115,
-        "truth_probability": 0.044159967452287674,
+        "consistent_mass": 0.09052956849336624,
+        "truth_probability": 0.04415956139564514,
         "truth_rank": 3,
-        "entropy_bits": 4.583582878112793,
+        "entropy_bits": 4.583583354949951,
         "per_action_accuracy": 0.25
       },
       {
@@ -847,10 +847,10 @@
         "mode": "shuffled_outcome",
         "probe_count": 3,
         "exact_mapping": false,
-        "consistent_mass": 0.04189402982592583,
-        "truth_probability": 0.04189402982592583,
+        "consistent_mass": 0.04189366102218628,
+        "truth_probability": 0.04189366102218628,
         "truth_rank": 6,
-        "entropy_bits": 4.584927082061768,
+        "entropy_bits": 4.584926605224609,
         "per_action_accuracy": 0.25
       },
       {
@@ -859,8 +859,8 @@
         "mode": "shuffled_outcome",
         "probe_count": 4,
         "exact_mapping": false,
-        "consistent_mass": 0.04217010736465454,
-        "truth_probability": 0.04217010736465454,
+        "consistent_mass": 0.042170822620391846,
+        "truth_probability": 0.042170822620391846,
         "truth_rank": 7,
         "entropy_bits": 4.584815979003906,
         "per_action_accuracy": 0.25
@@ -871,10 +871,10 @@
         "mode": "intact",
         "probe_count": 0,
         "exact_mapping": false,
-        "consistent_mass": 0.9999999403953552,
-        "truth_probability": 0.039199505001306534,
+        "consistent_mass": 0.9999998807907104,
+        "truth_probability": 0.039199624210596085,
         "truth_rank": 19,
-        "entropy_bits": 4.582173824310303,
+        "entropy_bits": 4.582172393798828,
         "per_action_accuracy": 0.25
       },
       {
@@ -883,10 +883,10 @@
         "mode": "intact",
         "probe_count": 1,
         "exact_mapping": false,
-        "consistent_mass": 0.25455978512763977,
-        "truth_probability": 0.04137415438890457,
+        "consistent_mass": 0.25456681847572327,
+        "truth_probability": 0.041375722736120224,
         "truth_rank": 17,
-        "entropy_bits": 4.58475399017334,
+        "entropy_bits": 4.584753513336182,
         "per_action_accuracy": 0.25
       },
       {
@@ -895,8 +895,8 @@
         "mode": "intact",
         "probe_count": 2,
         "exact_mapping": false,
-        "consistent_mass": 0.08471278846263885,
-        "truth_probability": 0.04097330570220947,
+        "consistent_mass": 0.08471421897411346,
+        "truth_probability": 0.04097415879368782,
         "truth_rank": 16,
         "entropy_bits": 4.584168910980225,
         "per_action_accuracy": 0.25
@@ -907,8 +907,8 @@
         "mode": "intact",
         "probe_count": 3,
         "exact_mapping": false,
-        "consistent_mass": 0.04171917960047722,
-        "truth_probability": 0.04171917960047722,
+        "consistent_mass": 0.04171854630112648,
+        "truth_probability": 0.04171854630112648,
         "truth_rank": 12,
         "entropy_bits": 4.584936141967773,
         "per_action_accuracy": 0.25
@@ -919,10 +919,10 @@
         "mode": "intact",
         "probe_count": 4,
         "exact_mapping": false,
-        "consistent_mass": 0.040873609483242035,
-        "truth_probability": 0.040873609483242035,
+        "consistent_mass": 0.04087502881884575,
+        "truth_probability": 0.04087502881884575,
         "truth_rank": 17,
-        "entropy_bits": 4.5839972496032715,
+        "entropy_bits": 4.58399772644043,
         "per_action_accuracy": 0.25
       },
       {
@@ -931,10 +931,10 @@
         "mode": "no_adaptation",
         "probe_count": 0,
         "exact_mapping": false,
-        "consistent_mass": 0.9999999403953552,
-        "truth_probability": 0.039199505001306534,
+        "consistent_mass": 0.9999998807907104,
+        "truth_probability": 0.039199624210596085,
         "truth_rank": 19,
-        "entropy_bits": 4.582173824310303,
+        "entropy_bits": 4.582172393798828,
         "per_action_accuracy": 0.25
       },
       {
@@ -943,10 +943,10 @@
         "mode": "no_adaptation",
         "probe_count": 1,
         "exact_mapping": false,
-        "consistent_mass": 0.26059430837631226,
-        "truth_probability": 0.039199505001306534,
+        "consistent_mass": 0.26059919595718384,
+        "truth_probability": 0.039199624210596085,
         "truth_rank": 19,
-        "entropy_bits": 4.582173824310303,
+        "entropy_bits": 4.582172393798828,
         "per_action_accuracy": 0.25
       },
       {
@@ -955,10 +955,10 @@
         "mode": "no_adaptation",
         "probe_count": 2,
         "exact_mapping": false,
-        "consistent_mass": 0.08355537056922913,
-        "truth_probability": 0.039199505001306534,
+        "consistent_mass": 0.08355630189180374,
+        "truth_probability": 0.039199624210596085,
         "truth_rank": 19,
-        "entropy_bits": 4.582173824310303,
+        "entropy_bits": 4.582172393798828,
         "per_action_accuracy": 0.25
       },
       {
@@ -967,10 +967,10 @@
         "mode": "no_adaptation",
         "probe_count": 3,
         "exact_mapping": false,
-        "consistent_mass": 0.039199505001306534,
-        "truth_probability": 0.039199505001306534,
+        "consistent_mass": 0.039199624210596085,
+        "truth_probability": 0.039199624210596085,
         "truth_rank": 19,
-        "entropy_bits": 4.582173824310303,
+        "entropy_bits": 4.582172393798828,
         "per_action_accuracy": 0.25
       },
       {
@@ -979,10 +979,10 @@
         "mode": "no_adaptation",
         "probe_count": 4,
         "exact_mapping": false,
-        "consistent_mass": 0.039199505001306534,
-        "truth_probability": 0.039199505001306534,
+        "consistent_mass": 0.039199624210596085,
+        "truth_probability": 0.039199624210596085,
         "truth_rank": 19,
-        "entropy_bits": 4.582173824310303,
+        "entropy_bits": 4.582172393798828,
         "per_action_accuracy": 0.25
       },
       {
@@ -991,10 +991,10 @@
         "mode": "shuffled_outcome",
         "probe_count": 0,
         "exact_mapping": false,
-        "consistent_mass": 0.9999999403953552,
-        "truth_probability": 0.039199505001306534,
+        "consistent_mass": 0.9999998807907104,
+        "truth_probability": 0.039199624210596085,
         "truth_rank": 19,
-        "entropy_bits": 4.582173824310303,
+        "entropy_bits": 4.582172393798828,
         "per_action_accuracy": 0.25
       },
       {
@@ -1003,10 +1003,10 @@
         "mode": "shuffled_outcome",
         "probe_count": 1,
         "exact_mapping": false,
-        "consistent_mass": 0.2534019649028778,
-        "truth_probability": 0.041369568556547165,
+        "consistent_mass": 0.2534067630767822,
+        "truth_probability": 0.0413697212934494,
         "truth_rank": 18,
-        "entropy_bits": 4.5848259925842285,
+        "entropy_bits": 4.58482551574707,
         "per_action_accuracy": 0.25
       },
       {
@@ -1015,10 +1015,10 @@
         "mode": "shuffled_outcome",
         "probe_count": 2,
         "exact_mapping": false,
-        "consistent_mass": 0.08492600917816162,
-        "truth_probability": 0.04069775342941284,
+        "consistent_mass": 0.0849255621433258,
+        "truth_probability": 0.04069705307483673,
         "truth_rank": 17,
-        "entropy_bits": 4.583583831787109,
+        "entropy_bits": 4.583583354949951,
         "per_action_accuracy": 0.25
       },
       {
@@ -1027,8 +1027,8 @@
         "mode": "shuffled_outcome",
         "probe_count": 3,
         "exact_mapping": false,
-        "consistent_mass": 0.04189657047390938,
-        "truth_probability": 0.04189657047390938,
+        "consistent_mass": 0.04189592972397804,
+        "truth_probability": 0.04189592972397804,
         "truth_rank": 6,
         "entropy_bits": 4.584929466247559,
         "per_action_accuracy": 0.25
@@ -1039,13 +1039,13 @@
         "mode": "shuffled_outcome",
         "probe_count": 4,
         "exact_mapping": false,
-        "consistent_mass": 0.041476454585790634,
-        "truth_probability": 0.041476454585790634,
+        "consistent_mass": 0.04147660359740257,
+        "truth_probability": 0.04147660359740257,
         "truth_rank": 15,
-        "entropy_bits": 4.584786891937256,
+        "entropy_bits": 4.5847859382629395,
         "per_action_accuracy": 0.25
       }
     ]
   },
-  "elapsed_seconds": 66.53862643241882
+  "elapsed_seconds": 60.14397144317627
 }
