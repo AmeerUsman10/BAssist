@@ -17,6 +17,7 @@ concurrency:
 
 jobs:
   dispatch:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[run-kaggle-gate-a]')
     runs-on: ubuntu-latest
     timeout-minutes: 150
     env:
@@ -212,6 +213,9 @@ jobs:
 
           source = Path("kaggle-output/arc_gpt2_gate_a_gpu")
           target = Path("reports/arcgpt2/kaggle-gate-a/latest")
+          if target.exists():
+              shutil.rmtree(target)
+          target.mkdir(parents=True)
           state_path = Path("dispatch-evidence/workflow-state.json")
           state = json.loads(state_path.read_text(encoding="utf-8")) if state_path.exists() else {}
           copies = {
@@ -267,8 +271,17 @@ jobs:
           git fetch origin "${GITHUB_REF_NAME}"
           publish_dir="$(mktemp -d)"
           git worktree add --detach "$publish_dir" "origin/${GITHUB_REF_NAME}"
-          mkdir -p "$publish_dir/reports/arcgpt2/kaggle-gate-a"
-          cp -R reports/arcgpt2/kaggle-gate-a/latest "$publish_dir/reports/arcgpt2/kaggle-gate-a/"
+          PUBLISH_DIR="$publish_dir" python - <<'PY'
+          import os
+          import shutil
+          from pathlib import Path
+
+          target = Path(os.environ["PUBLISH_DIR"]) / "reports/arcgpt2/kaggle-gate-a/latest"
+          if target.exists():
+              shutil.rmtree(target)
+          target.parent.mkdir(parents=True, exist_ok=True)
+          shutil.copytree(Path("reports/arcgpt2/kaggle-gate-a/latest"), target)
+          PY
           cd "$publish_dir"
           git add reports/arcgpt2/kaggle-gate-a/latest
           git commit -m "Record ARC-GPT2 Kaggle Gate A ${GITHUB_RUN_ID}" || exit 0
