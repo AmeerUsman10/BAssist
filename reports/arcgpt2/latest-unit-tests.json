@@ -1,8 +1,8 @@
 {
   "status": "failure",
   "branch": "arc-gpt2-programs",
-  "commit_sha": "47880d9c00bde09ce71ac5cbe563ad2bd04c2f6b",
-  "run_id": "30842725877",
-  "recorded_at_utc": "2026-08-03T18:46:45.493076+00:00",
-  "log": "\n==================================== ERRORS ====================================\n_________ ERROR collecting arcgpt2/tests/test_official_observation.py __________\nImportError while importing test module '/home/runner/work/BAssist/BAssist/arcgpt2/tests/test_official_observation.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\narcgpt2/tests/test_official_observation.py:8: in <module>\n    from arcgpt2.codec import decode_delta, decode_grid\nE   ImportError: cannot import name 'decode_delta' from 'arcgpt2.codec' (/home/runner/work/BAssist/BAssist/arcgpt2/codec.py)\n=========================== short test summary info ============================\nERROR arcgpt2/tests/test_official_observation.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 4.26s\n"
+  "commit_sha": "eb4eb0e04f91aa20046aa04920a871d28eeaddaf",
+  "run_id": "30843206871",
+  "recorded_at_utc": "2026-08-03T18:53:19.336441+00:00",
+  "log": "\n==================================== ERRORS ====================================\n_________ ERROR collecting arcgpt2/tests/test_official_observation.py __________\nImportError while importing test module '/home/runner/work/BAssist/BAssist/arcgpt2/tests/test_official_observation.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\narcgpt2/tests/test_official_observation.py:8: in <module>\n    from arcgpt2.codec import decode_delta, decode_grid\nE   ImportError: cannot import name 'decode_delta' from 'arcgpt2.codec' (/home/runner/work/BAssist/BAssist/arcgpt2/codec.py)\n=========================== short test summary info ============================\nERROR arcgpt2/tests/test_official_observation.py\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 4.06s\n"
 }
