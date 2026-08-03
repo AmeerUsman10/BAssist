@@ -54,7 +54,7 @@ def main() -> None:
     run(
         sys.executable,
         "-m",
-        "instella_arc.action_qlora",
+        "instella_arc.action_qlora_entry",
         "--checkpoint",
         "dpo",
         "--train-seed-base",
