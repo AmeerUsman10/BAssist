@@ -1,0 +1,17 @@
+{
+  "schema": "instella_arc.kaggle_monitor.v1",
+  "recorded_at_utc": "2026-08-03T11:36:33.044895+00:00",
+  "status": "query_failure",
+  "credential_present": true,
+  "credential_format": "KAGGLE_API_TOKEN",
+  "kernel_id_present": true,
+  "kernel_slug": "instella-arc-frozen-probe",
+  "command_exit_code": 1,
+  "sanitized_output": "Cannot access kernel '<redacted>/instella-arc-frozen-probe' (Permission 'kernels.get' was denied). The most likely cause is a wrong kernel slug. The benchmark_task_slug returned by get_benchmark_leaderboard differs from the actual kernel slug \u2014 use the slug from the notebook URL (kaggle.com/code/owner/KERNEL-SLUG), not from the leaderboard. It can also occur if the notebook is private.",
+  "reason": "Kaggle CLI could not read the kernel status.",
+  "mutated_kaggle": false,
+  "github_branch": "instella-arc",
+  "github_commit_sha": "d147e7ee3dfd7287d3a8fe20e34145fde275182b",
+  "github_run_id": "30810191457",
+  "github_run_attempt": "1"
+}
