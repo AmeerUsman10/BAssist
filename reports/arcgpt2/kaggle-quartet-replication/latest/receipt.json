@@ -1,0 +1,101 @@
+{
+  "status": "completed",
+  "dispatch_outcome": "success",
+  "scope": "Private dual-T4 three-seed quartet replication; no competition submission.",
+  "branch": "arc-gpt2-programs",
+  "workflow_sha": "f20c5b90acb38f186f4e13b95d19b127ab4ef3e5",
+  "kernel_source_sha": "f20c5b90acb38f186f4e13b95d19b127ab4ef3e5",
+  "github_run_id": "30813450350",
+  "github_run_attempt": "1",
+  "recorded_at_utc": "2026-08-03T12:37:22.685850+00:00",
+  "kernel_slug": "arc-gpt2-quartet-replication-dual-t4",
+  "kernel_ref_sha256": "1968b65033f955dc6d1fe488a5505bca12265d0de3e0d32a4d9b97f0a5361f1a",
+  "final_dispatch_state": "outputs_retrieved",
+  "dispatch_detail": null,
+  "accelerator_requested": "NvidiaTeslaT4",
+  "dual_gpu_required_by_runner": true,
+  "internet_enabled_only_for_pinned_source_and_checkpoint_fetch": true,
+  "competition_submission_performed": false,
+  "output_files": {
+    "arc-gpt2-quartet-replication-dual-t4.log": {
+      "bytes": 717225,
+      "sha256": "b6b425207db504d8fadb17ca0a24efc27bd9af550077027fe698b2725f79dfa3"
+    },
+    "arc_gpt2_quartet_replication_gpu/artifact-manifest.json": {
+      "bytes": 2595,
+      "sha256": "59b2e249fd08ac65e399237a4042a963d05c66c06950e92b68656eb18983e58d"
+    },
+    "arc_gpt2_quartet_replication_gpu/environment.json": {
+      "bytes": 816,
+      "sha256": "8f85e9cc2f35af0711b9ec5ea9df6fb97820ff92ecb2087a6f4168b62b632031"
+    },
+    "arc_gpt2_quartet_replication_gpu/gpu-samples.json": {
+      "bytes": 64225,
+      "sha256": "1cb31d7c0adbc0e9dd2f365ecb2468f786ece03ae9eee68336f59c671b859713"
+    },
+    "arc_gpt2_quartet_replication_gpu/logs/cpu-preflight-tests.log": {
+      "bytes": 100,
+      "sha256": "9671ea6e9f80ae1dd2e9afdd44c98a8eb07f4e4abd57ac7bfffd742b99536789"
+    },
+    "arc_gpt2_quartet_replication_gpu/logs/dependency-install.log": {
+      "bytes": 642,
+      "sha256": "6eb9aaeed87ee1aab72744656db825c5882e8e32415f8948f83a4a012e31c9c5"
+    },
+    "arc_gpt2_quartet_replication_gpu/logs/seed-141421-pretrained.log": {
+      "bytes": 28625,
+      "sha256": "b938c7cef461e4a7ad6e48bcad4ca5061ba6742f533c9d2fbd210e1ac1b2ebae"
+    },
+    "arc_gpt2_quartet_replication_gpu/logs/seed-141421-random.log": {
+      "bytes": 28818,
+      "sha256": "17e0e1e583e3965c585ae67eda00bdf0b10181dcbdebe0b35dc8b0c5d9b1492c"
+    },
+    "arc_gpt2_quartet_replication_gpu/logs/seed-161803-pretrained.log": {
+      "bytes": 28722,
+      "sha256": "5cd2322a9f1a696b9caf1b638dc319d21c147558d2e62e0cbbabbb35bd3cf784"
+    },
+    "arc_gpt2_quartet_replication_gpu/logs/seed-161803-random.log": {
+      "bytes": 28792,
+      "sha256": "452271e7d176904defe20aeabb9b858019981be3b43a5c5ef830b928562f184a"
+    },
+    "arc_gpt2_quartet_replication_gpu/logs/seed-314159-pretrained.log": {
+      "bytes": 28701,
+      "sha256": "e298107c28d6bb7781e6305faa773f9b16b7faec5fb801247eca83ab28307383"
+    },
+    "arc_gpt2_quartet_replication_gpu/logs/seed-314159-random.log": {
+      "bytes": 28805,
+      "sha256": "ea8f9518d1ca265c67f6ecabbda59e8c9361f8b4ee45f18ac5f7498d8e138084"
+    },
+    "arc_gpt2_quartet_replication_gpu/model-manifest.json": {
+      "bytes": 907,
+      "sha256": "a348eaa644ec7c670c7f28a751762b38b5a2cca62f8ceb7a5fbaf7d9f746f69a"
+    },
+    "arc_gpt2_quartet_replication_gpu/outputs/seed-141421/pretrained/summary.json": {
+      "bytes": 23628,
+      "sha256": "33e5c05030f63f1f0e8938c1a74ab1d00fe1da72a6dd9074c5cb2156d92d38ae"
+    },
+    "arc_gpt2_quartet_replication_gpu/outputs/seed-141421/random/summary.json": {
+      "bytes": 23807,
+      "sha256": "01c07c81f1fcdaa594d7dc70f6800d90cec09ecef7f5441133ba7363e9dc7a4a"
+    },
+    "arc_gpt2_quartet_replication_gpu/outputs/seed-161803/pretrained/summary.json": {
+      "bytes": 23709,
+      "sha256": "40f0c4399f801fd14b727f74d40b231f4d303459a7bfbdfea702f9e6d54ca134"
+    },
+    "arc_gpt2_quartet_replication_gpu/outputs/seed-161803/random/summary.json": {
+      "bytes": 23778,
+      "sha256": "3f2abd1711b710310dc73bb4aead7c0e1aedebe3ec282b38c9f9e21b271a56d8"
+    },
+    "arc_gpt2_quartet_replication_gpu/outputs/seed-314159/pretrained/summary.json": {
+      "bytes": 23700,
+      "sha256": "bb20580d255bc517b7c7ea828032d2fafb37cef07c708d1a3f28e6df662889af"
+    },
+    "arc_gpt2_quartet_replication_gpu/outputs/seed-314159/random/summary.json": {
+      "bytes": 23787,
+      "sha256": "5cf772c315192c1d43e7e754bc581943b9f39fa1319dd9ea62a9d2531a4c015e"
+    },
+    "arc_gpt2_quartet_replication_gpu/replication-result.json": {
+      "bytes": 14274,
+      "sha256": "bde26fa3c83bb1beb479eb9429244e84c9f4de77f8db5c548fd0aa85006e169e"
+    }
+  }
+}
