@@ -1,5 +1,6 @@
 name: ARC-GPT2 Raw-Outcome Kaggle GPU
 # A CPU preflight and explicit commit marker guard every private GPU allocation.
+# Preregistered launch: raw_outcome_nll_v1, seed 314159, group 920000, action A1.
 
 on:
   workflow_dispatch:
