@@ -1,28 +1,60 @@
 {
-  "status": "execution_failed",
-  "dispatch_outcome": "failure",
+  "status": "completed",
+  "dispatch_outcome": "success",
   "scope": "Private Kaggle T4 one-seed single-binding four-world overfit gate; no competition submission.",
   "branch": "arc-gpt2-programs",
-  "workflow_sha": "73ce00d70b5355b35bafd7fdce77baeccc8f976a",
-  "kernel_source_sha": null,
-  "github_run_id": "30811716129",
+  "workflow_sha": "ccd8b35f6282c40519f6d98e506e95c8429bcbde",
+  "kernel_source_sha": "ccd8b35f6282c40519f6d98e506e95c8429bcbde",
+  "github_run_id": "30812149096",
   "github_run_attempt": "1",
-  "recorded_at_utc": "2026-08-03T12:01:10.939508+00:00",
+  "recorded_at_utc": "2026-08-03T12:10:20.893687+00:00",
   "kernel_slug": "arc-gpt2-single-binding-four-world-gpu",
   "kernel_ref_sha256": "2aba2c3864efe84dc299150b6964ecc9bf6d0bb449be4ec5832a1eec4b5fc8b9",
-  "final_dispatch_state": "failed",
-  "dispatch_detail": "Kaggle kernel terminated unsuccessfully",
+  "final_dispatch_state": "outputs_retrieved",
+  "dispatch_detail": null,
   "accelerator_requested": "NvidiaTeslaT4",
   "internet_enabled_only_for_pinned_source_and_checkpoint_fetch": true,
   "competition_submission_performed": false,
   "output_files": {
     "arc-gpt2-single-binding-four-world-gpu.log": {
-      "bytes": 2246,
-      "sha256": "43c1f43dfe5de5dccbcf01ddb71c52d8dec547b6888a1629a50b01f8bb04acb3"
+      "bytes": 74014,
+      "sha256": "0d1b2e697701c4be7d41cf13a5f97406bef782c20027264fbc90b301ffec11a6"
     },
-    "arc_gpt2_single_binding_gpu/failure.json": {
-      "bytes": 308,
-      "sha256": "af7bfaeea3d270e82fa9273a5fedf11fe34df7573bd6e02a2f2c3648bd0ea34c"
+    "arc_gpt2_single_binding_gpu/artifact-manifest.json": {
+      "bytes": 1083,
+      "sha256": "46b392c28e4a492d97a96505f5b6d82b2b1194a33125f36257f26520feb1d39a"
+    },
+    "arc_gpt2_single_binding_gpu/environment.json": {
+      "bytes": 651,
+      "sha256": "26cc4b9a095c45e280f1b99552eb51807eb6c2eac56314c8f6bbe5de77dd3478"
+    },
+    "arc_gpt2_single_binding_gpu/gpu-samples.json": {
+      "bytes": 10568,
+      "sha256": "8da36306316bd9c2f5ecddf449ec21727d1392fee785da1421653f0ed7f476ef"
+    },
+    "arc_gpt2_single_binding_gpu/logs/dependency-install.log": {
+      "bytes": 641,
+      "sha256": "ee6bf3d775c39035dc61952454b3934b61e0eb12584066531cb71a9d66c4c8aa"
+    },
+    "arc_gpt2_single_binding_gpu/logs/preflight-tests.log": {
+      "bytes": 100,
+      "sha256": "8f1c3b5acef3624a9d1014a59b5796f9b1c64aa2e9bdd3e91ba6a87c60f27f36"
+    },
+    "arc_gpt2_single_binding_gpu/logs/pretrained.log": {
+      "bytes": 19373,
+      "sha256": "53103f25648b335d29b08d2950211bf0717e9c142bc61024267573fcf9919a2e"
+    },
+    "arc_gpt2_single_binding_gpu/model-manifest.json": {
+      "bytes": 907,
+      "sha256": "a348eaa644ec7c670c7f28a751762b38b5a2cca62f8ceb7a5fbaf7d9f746f69a"
+    },
+    "arc_gpt2_single_binding_gpu/outputs/pretrained/summary.json": {
+      "bytes": 17101,
+      "sha256": "144c1c3269021feb3142ea7c623ac2d1d2db3bd8f068d20620d068f5256b9840"
+    },
+    "arc_gpt2_single_binding_gpu/single-binding-result.json": {
+      "bytes": 2055,
+      "sha256": "77e53beee4fa228c03cafa9f8dcd38fad2d80fe3241d53eff511fc492066f3f9"
     }
   }
 }
