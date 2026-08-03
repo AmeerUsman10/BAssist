@@ -1,20 +1,20 @@
 {
-  "status": "blocked",
+  "status": "failure",
   "branch": "instella-arc",
-  "commit_sha": "1e7addaa577cbd6abaa20024d756f02941ab4b6c",
-  "run_id": "30808051141",
+  "commit_sha": "276d461eab01bca7cd084ad0abfdddf31febc27c",
+  "run_id": "30808883356",
   "run_attempt": "1",
-  "recorded_at_utc": "2026-08-03T11:04:43.637567+00:00",
+  "recorded_at_utc": "2026-08-03T11:43:59.229677+00:00",
   "prepare_outcome": "success",
-  "push_outcome": "failure",
-  "poll_outcome": "skipped",
+  "push_outcome": "success",
+  "poll_outcome": "cancelled",
   "preparation": {
-    "status": "blocked",
+    "status": "ready",
     "authenticated_credential_present": true,
     "credential_format": "KAGGLE_API_TOKEN",
-    "kernel_id_present": false,
-    "kernel_id": null,
-    "reason": "Set KAGGLE_KERNEL_ID to username/instella-arc-frozen-probe or provide KAGGLE_USERNAME with legacy credentials."
+    "kernel_id_present": true,
+    "kernel_id": "AmeerUsman10/instella-arc-frozen-probe",
+    "reason": null
   },
   "output_files": []
 }
