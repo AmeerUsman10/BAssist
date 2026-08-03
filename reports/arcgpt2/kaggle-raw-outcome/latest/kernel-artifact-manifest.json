@@ -1,0 +1,34 @@
+{
+  "environment.json": {
+    "bytes": 651,
+    "sha256": "a5438e9683351997a731b599aba777f0a934db6082ee8d6a8b454c85f65bbb6c"
+  },
+  "gpu-samples.json": {
+    "bytes": 12868,
+    "sha256": "e671b1767650c5052cb2ac8199f98b6cdcce4e4f342fb282b73c203cad19b150"
+  },
+  "logs/dependency-install.log": {
+    "bytes": 641,
+    "sha256": "2b86d33a9329ca432d9fc1f8896db3cba7362cd3f8dc5e6efb6697902c4f9d7a"
+  },
+  "logs/preflight-tests.log": {
+    "bytes": 100,
+    "sha256": "53ed655561867414bf20fa0a50235240f749aad1b9d4b6d2e013ead1fd4eb7c9"
+  },
+  "logs/pretrained.log": {
+    "bytes": 42593,
+    "sha256": "2be5cfb1579f87f325d5e2011d3d9ea87c1afe379a9c516aa002940752fd8b8c"
+  },
+  "model-manifest.json": {
+    "bytes": 907,
+    "sha256": "a348eaa644ec7c670c7f28a751762b38b5a2cca62f8ceb7a5fbaf7d9f746f69a"
+  },
+  "outputs/pretrained/summary.json": {
+    "bytes": 35677,
+    "sha256": "db09afe39024600a1c5985f8bc97ac2a3a10570a7e7639b8ab55b255279732e0"
+  },
+  "raw-outcome-result.json": {
+    "bytes": 2556,
+    "sha256": "b69d33113fe41cfb64e8f1ce2e6c9e6cfcd66a6eabfe92762000960632e41e03"
+  }
+}
