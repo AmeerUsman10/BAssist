@@ -17,9 +17,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import hashlib
-from typing import Any, Iterable, Sequence
+from typing import Any
 
-from .codec import Grid, encode_delta, encode_grid, normalize_grid
+from .codec import Grid, normalize_grid
+from .codec_text import encode_delta_text, encode_grid
 
 
 class OfficialObservationError(ValueError):
@@ -147,7 +148,7 @@ class OfficialFrameSequence:
     @property
     def animation_deltas(self) -> tuple[str, ...]:
         return tuple(
-            encode_delta(before, after)
+            encode_delta_text(before, after)
             for before, after in zip(
                 self.rendered_frames,
                 self.rendered_frames[1:],
@@ -160,7 +161,7 @@ class OfficialFrameSequence:
         return hashlib.sha256(self.canonical_text().encode("utf-8")).hexdigest()
 
     def canonical_text(self) -> str:
-        """Return a reversible, stable textual record for GPT-2 or evidence logs."""
+        """Return a reversible, stable textual record for model input or logs."""
 
         actions = ",".join(self.available_actions) or "-"
         metadata = (
@@ -175,7 +176,7 @@ class OfficialFrameSequence:
             if index > 0:
                 lines.append(
                     f"ANIMATION_DELTA {index - 1}->{index} "
-                    f"{encode_delta(self.rendered_frames[index - 1], grid)}"
+                    f"{encode_delta_text(self.rendered_frames[index - 1], grid)}"
                 )
         lines.append("END_OFFICIAL_FRAME_SEQUENCE")
         return "\n".join(lines)
@@ -195,7 +196,7 @@ class OfficialActionTransition:
     def persistent_delta(self) -> str | None:
         if self.before_final is None or self.after_final is None:
             return None
-        return encode_delta(self.before_final, self.after_final)
+        return encode_delta_text(self.before_final, self.after_final)
 
     def canonical_text(self) -> str:
         lines = [f"OFFICIAL_ACTION {self.action}"]
