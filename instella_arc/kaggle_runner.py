@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-from dataclasses import asdict
 from datetime import datetime, timezone
 import gc
 import json
@@ -15,6 +14,7 @@ from .backend import LoadPlan, TransformersBackend
 from .benchmark import run_benchmark
 from .catalog import CHECKPOINTS
 from .prompts import TaskKind, build_prompt, extract_final_json
+from .smoke_benchmark import run_smoke_benchmark
 
 
 def gpu_inventory() -> list[dict[str, Any]]:
@@ -137,6 +137,7 @@ def parse_args() -> argparse.Namespace:
         choices=("action", "goal", "contact"),
         default=["action"],
     )
+    parser.add_argument("--profile", choices=("smoke", "full"), default="smoke")
     parser.add_argument("--games-per-task", type=int, default=1)
     parser.add_argument("--seed-base", type=int, default=930_000)
     parser.add_argument("--max-context-tokens", type=int, default=6144)
@@ -170,12 +171,19 @@ def main() -> None:
         )
         status["load_attempts"] = attempts
         status["sanity_generation"] = sanity_generation(backend)
-        report = run_benchmark(
-            backend,
-            tasks=args.tasks,
-            seed_base=args.seed_base,
-            games_per_task=args.games_per_task,
-        )
+        if args.profile == "smoke":
+            report = run_smoke_benchmark(
+                backend,
+                tasks=args.tasks,
+                seed_base=args.seed_base,
+            )
+        else:
+            report = run_benchmark(
+                backend,
+                tasks=args.tasks,
+                seed_base=args.seed_base,
+                games_per_task=args.games_per_task,
+            )
         report_path = args.output_dir / "frozen_benchmark.json"
         report_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
         status.update(
