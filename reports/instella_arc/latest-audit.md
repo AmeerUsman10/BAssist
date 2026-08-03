@@ -1,6 +1,6 @@
 # Instella-MoE ARC architecture audit
 
-Recorded: `2026-08-03T04:37:28.301920+00:00`
+Recorded: `2026-08-03T04:39:28.191364+00:00`
 
 This audit downloads configuration, tokenizer, and remote model code only. It does not download the 16B weights.
 
@@ -11,7 +11,7 @@ This audit downloads configuration, tokenizer, and remote model code only. It do
 - Safetensor bytes: `31,726,245,248`
 - Config class: `InstellaMoEConfig`
 - Full meta model: `success`
-- Tiny forward/generation: `failure`
+- Tiny forward/generation: `success`
 
 ## dpo
 
@@ -20,7 +20,7 @@ This audit downloads configuration, tokenizer, and remote model code only. It do
 - Safetensor bytes: `31,726,245,216`
 - Config class: `InstellaMoEConfig`
 - Full meta model: `success`
-- Tiny forward/generation: `failure`
+- Tiny forward/generation: `success`
 
 ## think
 
@@ -29,5 +29,5 @@ This audit downloads configuration, tokenizer, and remote model code only. It do
 - Safetensor bytes: `31,726,245,240`
 - Config class: `InstellaMoEConfig`
 - Full meta model: `success`
-- Tiny forward/generation: `failure`
+- Tiny forward/generation: `success`
 

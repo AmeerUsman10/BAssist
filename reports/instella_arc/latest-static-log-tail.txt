@@ -1,6 +1,6 @@
 ........................................................................ [ 52%]
 ..................................................................       [100%]
-138 passed in 22.01s
+138 passed in 22.35s
 A new version of the following files was downloaded from https://huggingface.co/amd/Instella-MoE-16B-A3B-Base:
 - configuration_instella_moe.py
 . Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
@@ -32,33 +32,7 @@ A new version of the following files was downloaded from https://huggingface.co/
       "status": "success"
     },
     "tiny_forward_and_generation": {
-      "status": "failure",
-      "error": {
-        "type": "RuntimeError",
-        "message": "The size of tensor a (8) must match the size of tensor b (32) at non-singleton dimension 3",
-        "traceback_tail": [
-          "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
-          "  File \"/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1789, in _call_impl",
-          "    return forward_call(*args, **kwargs)",
-          "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
-          "  File \"/home/runner/.cache/huggingface/modules/transformers_modules/amd/Instella_hyphen_MoE_hyphen_16B_hyphen_A3B_hyphen_Base/5ca845e88b237ca66c9c8e1f2551933a47b0daf9/modeling_instella_moe.py\", line 206, in forward",
-          "    attn_output, _ = self.self_attn(",
-          "                     ^^^^^^^^^^^^^^^",
-          "  File \"/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1778, in _wrapped_call_impl",
-          "    return self._call_impl(*args, **kwargs)",
-          "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
-          "  File \"/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1789, in _call_impl",
-          "    return forward_call(*args, **kwargs)",
-          "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
-          "  File \"/home/runner/.cache/huggingface/modules/transformers_modules/amd/Instella_hyphen_MoE_hyphen_16B_hyphen_A3B_hyphen_Base/5ca845e88b237ca66c9c8e1f2551933a47b0daf9/modeling_instella_moe.py\", line 87, in forward",
-          "    q_rot, k_rot = apply_rotary_pos_emb_interleave(q_rot, k_rot, cos, sin)",
-          "                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
-          "  File \"/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/transformers/models/deepseek_v3/modeling_deepseek_v3.py\", line 316, in apply_rotary_pos_emb_interleave",
-          "    q_embed = (q * cos) + (rotate_half(q) * sin)",
-          "               ~~^~~~~",
-          "RuntimeError: The size of tensor a (8) must match the size of tensor b (32) at non-singleton dimension 3"
-        ]
-      }
+      "status": "success"
     }
   },
   "dpo": {
@@ -72,33 +46,7 @@ A new version of the following files was downloaded from https://huggingface.co/
       "status": "success"
     },
     "tiny_forward_and_generation": {
-      "status": "failure",
-      "error": {
-        "type": "RuntimeError",
-        "message": "The size of tensor a (8) must match the size of tensor b (32) at non-singleton dimension 3",
-        "traceback_tail": [
-          "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
-          "  File \"/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1789, in _call_impl",
-          "    return forward_call(*args, **kwargs)",
-          "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
-          "  File \"/home/runner/.cache/huggingface/modules/transformers_modules/amd/Instella_hyphen_MoE_hyphen_16B_hyphen_A3B_hyphen_DPO/ef5a850b1e5638a98b2e28cf321a6c1b63ccde39/modeling_instella_moe.py\", line 206, in forward",
-          "    attn_output, _ = self.self_attn(",
-          "                     ^^^^^^^^^^^^^^^",
-          "  File \"/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1778, in _wrapped_call_impl",
-          "    return self._call_impl(*args, **kwargs)",
-          "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
-          "  File \"/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1789, in _call_impl",
-          "    return forward_call(*args, **kwargs)",
-          "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
-          "  File \"/home/runner/.cache/huggingface/modules/transformers_modules/amd/Instella_hyphen_MoE_hyphen_16B_hyphen_A3B_hyphen_DPO/ef5a850b1e5638a98b2e28cf321a6c1b63ccde39/modeling_instella_moe.py\", line 87, in forward",
-          "    q_rot, k_rot = apply_rotary_pos_emb_interleave(q_rot, k_rot, cos, sin)",
-          "                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
-          "  File \"/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/transformers/models/deepseek_v3/modeling_deepseek_v3.py\", line 316, in apply_rotary_pos_emb_interleave",
-          "    q_embed = (q * cos) + (rotate_half(q) * sin)",
-          "               ~~^~~~~",
-          "RuntimeError: The size of tensor a (8) must match the size of tensor b (32) at non-singleton dimension 3"
-        ]
-      }
+      "status": "success"
     }
   },
   "think": {
@@ -112,33 +60,7 @@ A new version of the following files was downloaded from https://huggingface.co/
       "status": "success"
     },
     "tiny_forward_and_generation": {
-      "status": "failure",
-      "error": {
-        "type": "RuntimeError",
-        "message": "The size of tensor a (8) must match the size of tensor b (32) at non-singleton dimension 3",
-        "traceback_tail": [
-          "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
-          "  File \"/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1789, in _call_impl",
-          "    return forward_call(*args, **kwargs)",
-          "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
-          "  File \"/home/runner/.cache/huggingface/modules/transformers_modules/amd/Instella_hyphen_MoE_hyphen_16B_hyphen_A3B_hyphen_Think/e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83/modeling_instella_moe.py\", line 206, in forward",
-          "    attn_output, _ = self.self_attn(",
-          "                     ^^^^^^^^^^^^^^^",
-          "  File \"/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1778, in _wrapped_call_impl",
-          "    return self._call_impl(*args, **kwargs)",
-          "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
-          "  File \"/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/torch/nn/modules/module.py\", line 1789, in _call_impl",
-          "    return forward_call(*args, **kwargs)",
-          "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
-          "  File \"/home/runner/.cache/huggingface/modules/transformers_modules/amd/Instella_hyphen_MoE_hyphen_16B_hyphen_A3B_hyphen_Think/e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83/modeling_instella_moe.py\", line 87, in forward",
-          "    q_rot, k_rot = apply_rotary_pos_emb_interleave(q_rot, k_rot, cos, sin)",
-          "                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
-          "  File \"/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/site-packages/transformers/models/deepseek_v3/modeling_deepseek_v3.py\", line 316, in apply_rotary_pos_emb_interleave",
-          "    q_embed = (q * cos) + (rotate_half(q) * sin)",
-          "               ~~^~~~~",
-          "RuntimeError: The size of tensor a (8) must match the size of tensor b (32) at non-singleton dimension 3"
-        ]
-      }
+      "status": "success"
     }
   }
 }
