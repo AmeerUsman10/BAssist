@@ -7,7 +7,8 @@ The controller has two memory scopes:
 
 Every action is followed by an exact receipt. Plans are invalidated immediately
 when the observed transition contradicts their predicted movement or when the
-same state repeats without progress.
+same state repeats without progress. Complex-action probes use the complete
+rendered observation sequence, so temporary animation evidence is not discarded.
 """
 
 from __future__ import annotations
@@ -19,7 +20,12 @@ from typing import Any, Protocol, Sequence
 
 from arcgpt2.official_observation import OfficialFrameSequence
 
-from .action_belief import ActionBeliefState, ProbeChoice, choose_probe
+from .action_belief import (
+    ActionBeliefState,
+    ProbeChoice,
+    choose_probe,
+    sequence_candidate_coordinates,
+)
 from .navigation import NavigationPlan, generate_navigation_plans
 from .receipts import RichActionObservation, rich_action_observation
 from .world_state import GridFacts, grid_facts
@@ -146,8 +152,7 @@ class ClosedLoopController:
         if observation.final_grid is None:
             raise ValueError("controller requires a persistent initial grid")
         self.state.current = observation
-        facts = grid_facts(observation.final_grid)
-        self.state.belief.observe_state(facts.sha256)
+        self.state.belief.observe_state(observation.sha256)
         self.state.actions_this_level = 0
 
     def observe(
@@ -161,8 +166,7 @@ class ClosedLoopController:
             return None
         if action is None:
             self.state.current = observation
-            if observation.final_grid is not None:
-                self.state.belief.observe_state(grid_facts(observation.final_grid).sha256)
+            self.state.belief.observe_state(observation.sha256)
             return None
 
         receipt = rich_action_observation(
@@ -244,7 +248,8 @@ class ClosedLoopController:
             self.state.failed_plan_ids.add(active.plan_id)
             self.state.active_navigation = None
             return None
-        active.state_before_action = facts.sha256
+        if self.state.current is not None:
+            active.state_before_action = self.state.current.sha256
         return PlannedAction(
             action=action,
             coordinate=None,
@@ -300,11 +305,18 @@ class ClosedLoopController:
         *,
         action_complexity: dict[str, bool] | None,
     ) -> PlannedAction:
+        if self.state.current is None:
+            raise RuntimeError("controller has no current observation")
+        coordinates = sequence_candidate_coordinates(
+            self.state.current.rendered_frames
+        )
         choice: ProbeChoice = choose_probe(
             self.state.belief,
             legal_actions=self._legal_actions(),
             current_facts=facts,
             complex_actions=self._complex_actions(action_complexity),
+            current_state_id=self.state.current.sha256,
+            coordinate_candidates=coordinates,
         )
         return PlannedAction(
             action=choice.action,
@@ -356,7 +368,7 @@ class ClosedLoopController:
     def summary(self) -> dict[str, Any]:
         current = self.state.current
         return {
-            "schema": "instella_arc.closed_loop_controller.v1",
+            "schema": "instella_arc.closed_loop_controller.v2",
             "game_id": current.game_id if current else None,
             "state": current.state if current else None,
             "levels_completed": current.levels_completed if current else None,
@@ -376,6 +388,7 @@ class ClosedLoopController:
                     "trials": profile.trials,
                     "consistency": profile.consistency,
                     "no_change_rate": profile.no_change_rate,
+                    "informative_rate": profile.informative_rate,
                     "progress_rate": profile.progress_rate,
                     "translation_vectors": profile.translation_vectors,
                 }
