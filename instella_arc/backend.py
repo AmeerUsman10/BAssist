@@ -104,6 +104,10 @@ class TransformersBackend:
             trust_remote_code=plan.trust_remote_code,
             revision=plan.revision,
         )
+        if tokenizer.pad_token_id is None:
+            if tokenizer.eos_token_id is None:
+                raise BackendError("checkpoint tokenizer has neither pad nor EOS token")
+            tokenizer.pad_token = tokenizer.eos_token
         kwargs: dict[str, Any] = {
             "trust_remote_code": plan.trust_remote_code,
             "revision": plan.revision,
@@ -156,6 +160,15 @@ class TransformersBackend:
             ids = ids[:prefix] + ids[-suffix:]
         return ids
 
+    def _fit_prompt(self, prompt_ids: Sequence[int], target_length: int) -> list[int]:
+        max_context = self.max_context_tokens
+        if max_context is None or len(prompt_ids) + target_length <= max_context:
+            return list(prompt_ids)
+        prompt_budget = max_context - target_length
+        if prompt_budget < 32:
+            raise ValueError("completion leaves insufficient prompt context")
+        return list(prompt_ids[-prompt_budget:])
+
     def generate(
         self,
         prompt: Prompt,
@@ -193,26 +206,49 @@ class TransformersBackend:
         prompt: Prompt,
         completions: Sequence[str],
     ) -> tuple[float, ...]:
-        """Return summed autoregressive log-probability for each completion."""
+        """Return summed autoregressive log-probability for each completion.
+
+        Most hidden-action labels are one tokenizer token. In that common case
+        all candidates are scored from one model forward pass rather than one
+        pass per candidate. Longer goal/program completions use the conservative
+        exact sequential path until shared-cache behavior is validated for the
+        custom Instella implementation.
+        """
         import torch
         from torch.nn import functional as F
 
         if not completions:
             raise ValueError("at least one completion is required")
         prompt_ids = self._prompt_ids(prompt)
+        encoded_targets = [
+            self.tokenizer.encode(completion, add_special_tokens=False)
+            for completion in completions
+        ]
+        if any(not target for target in encoded_targets):
+            raise ValueError("a candidate completion tokenized to an empty sequence")
+
+        if all(len(target) == 1 for target in encoded_targets):
+            local_prompt = self._fit_prompt(prompt_ids, 1)
+            input_ids = torch.tensor(
+                [local_prompt], dtype=torch.long, device=self.input_device
+            )
+            attention_mask = torch.ones_like(input_ids)
+            with torch.inference_mode():
+                last_logits = self.model(
+                    input_ids=input_ids,
+                    attention_mask=attention_mask,
+                    use_cache=False,
+                ).logits[0, -1]
+            log_probabilities = F.log_softmax(last_logits, dim=-1)
+            self.metadata["last_scoring_strategy"] = "shared_single_token_forward"
+            return tuple(
+                float(log_probabilities[target[0]].item())
+                for target in encoded_targets
+            )
+
         scores: list[float] = []
-        for completion in completions:
-            target_ids = self.tokenizer.encode(completion, add_special_tokens=False)
-            if not target_ids:
-                raise ValueError("a candidate completion tokenized to an empty sequence")
-            max_context = self.max_context_tokens
-            if max_context is not None and len(prompt_ids) + len(target_ids) > max_context:
-                prompt_budget = max_context - len(target_ids)
-                if prompt_budget < 32:
-                    raise ValueError("completion leaves insufficient prompt context")
-                local_prompt = prompt_ids[-prompt_budget:]
-            else:
-                local_prompt = prompt_ids
+        for target_ids in encoded_targets:
+            local_prompt = self._fit_prompt(prompt_ids, len(target_ids))
             sequence = local_prompt + target_ids
             input_ids = torch.tensor(
                 [sequence], dtype=torch.long, device=self.input_device
@@ -233,6 +269,7 @@ class TransformersBackend:
                 1, target_tensor.unsqueeze(1)
             )[:, 0].sum()
             scores.append(float(log_probability.item()))
+        self.metadata["last_scoring_strategy"] = "exact_sequential_completion"
         return tuple(scores)
 
 
