@@ -20,19 +20,47 @@ from .smoke_benchmark import run_smoke_benchmark
 def gpu_inventory() -> list[dict[str, Any]]:
     import torch
 
+    supported_architectures = set(torch.cuda.get_arch_list()) if torch.cuda.is_available() else set()
     inventory: list[dict[str, Any]] = []
     for index in range(torch.cuda.device_count()):
         properties = torch.cuda.get_device_properties(index)
+        capability = tuple(torch.cuda.get_device_capability(index))
+        architecture = f"sm_{capability[0]}{capability[1]}"
         inventory.append(
             {
                 "index": index,
                 "name": properties.name,
                 "total_bytes": properties.total_memory,
                 "total_gib": properties.total_memory / (1024.0**3),
-                "capability": list(torch.cuda.get_device_capability(index)),
+                "capability": list(capability),
+                "architecture": architecture,
+                "architecture_compiled_into_torch": (
+                    architecture in supported_architectures
+                    if supported_architectures
+                    else None
+                ),
             }
         )
     return inventory
+
+
+def validate_gpu_runtime(gpus: list[dict[str, Any]]) -> None:
+    if not gpus:
+        raise RuntimeError("No CUDA GPU is visible. Enable a Kaggle GPU accelerator.")
+    unsupported = [
+        gpu
+        for gpu in gpus
+        if gpu["architecture_compiled_into_torch"] is False
+    ]
+    if unsupported:
+        names = ", ".join(
+            f"{gpu['name']} ({gpu['architecture']})" for gpu in unsupported
+        )
+        raise RuntimeError(
+            "The current PyTorch build does not contain kernels for: "
+            f"{names}. Select an NVIDIA T4 Kaggle accelerator rather than the "
+            "legacy P100 image, or install a compatible PyTorch build explicitly."
+        )
 
 
 def kaggle_max_memory(gpus: list[dict[str, Any]], cpu_gib: int = 24) -> dict[int | str, str]:
@@ -63,8 +91,7 @@ def load_with_fallbacks(
     import torch
 
     gpus = gpu_inventory()
-    if not gpus:
-        raise RuntimeError("No CUDA GPU is visible. Enable a Kaggle GPU accelerator.")
+    validate_gpu_runtime(gpus)
     max_memory = kaggle_max_memory(gpus)
     attempts: list[dict[str, Any]] = []
     modes = list(quantizations)
