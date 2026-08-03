@@ -1,0 +1,31 @@
+......F................................................................. [ 52%]
+.................................................................        [100%]
+=================================== FAILURES ===================================
+_____________ test_action_normalization_is_stable_and_deduplicated _____________
+
+    def test_action_normalization_is_stable_and_deduplicated() -> None:
+>       assert normalize_actions((1, "A2", "ACTION1", "action7")) == (
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            "A1",
+            "A2",
+            "A7",
+        )
+
+instella_arc/tests/test_prompts.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+actions = (1, 'A2', 'ACTION1', 'action7')
+
+    def normalize_actions(actions: Iterable[str | int]) -> tuple[str, ...]:
+        normalized: list[str] = []
+        for action in actions:
+            text = str(action).strip().upper()
+            match = ACTION_PATTERN.search(text)
+            if match is None:
+>               raise ValueError(f"invalid ARC action: {action!r}")
+E               ValueError: invalid ARC action: 1
+
+instella_arc/prompts.py:92: ValueError
+=========================== short test summary info ============================
+FAILED instella_arc/tests/test_prompts.py::test_action_normalization_is_stable_and_deduplicated - ValueError: invalid ARC action: 1
+1 failed, 136 passed in 22.21s
