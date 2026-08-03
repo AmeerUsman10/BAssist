@@ -316,10 +316,18 @@ def main() -> None:
         "model_save_disabled": config.get("save_model") is False,
         "model_not_saved": True,
     }
+    failed_execution_gates = [
+        name for name, passed in execution_gates.items() if passed is not True
+    ]
+    if failed_execution_gates:
+        raise RuntimeError(
+            "raw-outcome execution gate failure: "
+            + ", ".join(failed_execution_gates)
+        )
     max_memory = max((sample.get("memory_used_mib", 0) for sample in sampler.samples), default=0)
     max_utilization = max((sample.get("utilization_percent", 0) for sample in sampler.samples), default=0)
     result = {
-        "status": "pass" if all(execution_gates.values()) and gate.get("passed") is True else "not_yet_passed",
+        "status": "pass" if gate.get("passed") is True else "not_yet_passed",
         "scope": "One-seed raw observed-outcome NLL gradient-memory gate; not an ARC-AGI-3 capability claim.",
         "completed_at_utc": utc_now(),
         "elapsed_seconds": time.time() - started,
