@@ -6,6 +6,8 @@ on:
     branches: [instella-arc]
     paths:
       - ".github/workflows/instella-arc-kaggle-recovery.yml"
+      - "instella_arc/kaggle_recover.py"
+      - "instella_arc/tests/test_kaggle_recover.py"
       - "instella_arc/kaggle/recovery/**"
 
 permissions:
@@ -33,255 +35,20 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install official Kaggle CLI
-        run: python -m pip install --quiet --upgrade kaggle
+      - name: Install recovery dependencies
+        run: |
+          python -m pip install --quiet --upgrade kaggle pytest
+
+      - name: Verify recovery helpers
+        run: python -m pytest -q instella_arc/tests/test_kaggle_recover.py
 
       - name: Resolve completed kernel and recover bounded evidence
         id: recover
         continue-on-error: true
         run: |
-          set -o pipefail
-          python - <<'PY'
-          import hashlib
-          import json
-          import os
-          import re
-          import shutil
-          import subprocess
-          from datetime import datetime, timezone
-          from pathlib import Path
-          from urllib.error import HTTPError
-          from urllib.request import Request, urlopen
-
-          slug = "instella-arc-frozen-probe"
-          output_root = Path("kaggle-recovered-output")
-          output_root.mkdir(parents=True, exist_ok=True)
-          report = {
-              "schema": "instella_arc.kaggle_recovery.v1",
-              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
-              "kernel_ref_resolved": False,
-              "kernel_status": "unknown",
-              "status_query_exit_code": None,
-              "output_download_exit_code": None,
-              "output_files": [],
-              "output_sha256": {},
-              "runner_status": None,
-              "benchmark_summary": None,
-              "sanitized_kernel_log_tail": "",
-              "cancellations": [],
-              "status": "failure",
-              "reason": None,
-              "mutated_kaggle": False,
-          }
-
-          listing = subprocess.run(
-              ["kaggle", "kernels", "list", "--mine", "--page-size", "100", "-v"],
-              text=True,
-              capture_output=True,
-              timeout=180,
-          )
-          listing_text = (listing.stdout + "\n" + listing.stderr).strip()
-          refs = sorted(set(re.findall(
-              rf"([A-Za-z0-9_-]+/{re.escape(slug)})",
-              listing_text,
-              flags=re.IGNORECASE,
-          )))
-          if listing.returncode != 0:
-              report["reason"] = "Unable to list kernels owned by the authenticated Kaggle account."
-          elif len(refs) != 1:
-              report["reason"] = f"Expected one owned target kernel, found {len(refs)}."
-          else:
-              actual_ref = refs[0]
-              owner = actual_ref.split("/", 1)[0]
-              report["kernel_ref_resolved"] = True
-
-              status_process = subprocess.run(
-                  ["kaggle", "kernels", "status", actual_ref],
-                  text=True,
-                  capture_output=True,
-                  timeout=180,
-              )
-              status_text = (status_process.stdout + "\n" + status_process.stderr).strip()
-              report["status_query_exit_code"] = status_process.returncode
-              lowered = status_text.lower()
-              if status_process.returncode != 0:
-                  report["kernel_status"] = "query_failure"
-              elif any(word in lowered for word in ("complete", "success")):
-                  report["kernel_status"] = "complete"
-              elif any(word in lowered for word in ("running", "queued", "pending")):
-                  report["kernel_status"] = "running"
-              elif any(word in lowered for word in ("error", "failed", "cancelled")):
-                  report["kernel_status"] = "failure"
-
-              # Download only the two bounded evidence files. Avoid model caches,
-              # repository clones, or offload directories under /kaggle/working.
-              download = subprocess.run(
-                  [
-                      "kaggle", "kernels", "output", actual_ref,
-                      "--path", str(output_root),
-                      "--force", "--quiet",
-                      "--file-pattern", r".*(status\\.json|frozen_benchmark\\.json)$",
-                  ],
-                  text=True,
-                  capture_output=True,
-                  timeout=600,
-              )
-              report["output_download_exit_code"] = download.returncode
-
-              # Logs are diagnostic evidence when the runner failed before writing
-              # its result files. This command is read-only and available in the
-              # current Kaggle CLI; failure is non-fatal.
-              logs = subprocess.run(
-                  ["kaggle", "kernels", "logs", actual_ref],
-                  text=True,
-                  capture_output=True,
-                  timeout=180,
-              )
-              raw_log = (logs.stdout + "\n" + logs.stderr).strip()
-              sanitized_log = raw_log.replace(actual_ref, f"<redacted>/{slug}")
-              sanitized_log = re.sub(
-                  rf"(?<![A-Za-z0-9_-]){re.escape(owner)}(?![A-Za-z0-9_-])",
-                  "<redacted>",
-                  sanitized_log,
-                  flags=re.IGNORECASE,
-              )
-              report["sanitized_kernel_log_tail"] = sanitized_log[-12000:]
-
-              files = sorted(path for path in output_root.rglob("*") if path.is_file())
-              report["output_files"] = [str(path.relative_to(output_root)) for path in files]
-              for path in files:
-                  digest = hashlib.sha256(path.read_bytes()).hexdigest()
-                  report["output_sha256"][str(path.relative_to(output_root))] = digest
-
-              status_candidates = [path for path in files if path.name == "status.json"]
-              benchmark_candidates = [
-                  path for path in files if path.name == "frozen_benchmark.json"
-              ]
-              if len(status_candidates) == 1:
-                  try:
-                      runner_status = json.loads(
-                          status_candidates[0].read_text(encoding="utf-8")
-                      )
-                      report["runner_status"] = runner_status
-                  except Exception as exc:
-                      report["runner_status"] = {
-                          "parse_error": f"{type(exc).__name__}: {exc}"
-                      }
-              if len(benchmark_candidates) == 1:
-                  try:
-                      benchmark = json.loads(
-                          benchmark_candidates[0].read_text(encoding="utf-8")
-                      )
-                      report["benchmark_summary"] = {
-                          "schema": benchmark.get("schema"),
-                          "profile": benchmark.get("profile"),
-                          "backend": benchmark.get("backend"),
-                          "tasks": benchmark.get("tasks"),
-                          "seed_base": benchmark.get("seed_base"),
-                          "case_count": benchmark.get("case_count"),
-                          "selected_case_ids": benchmark.get("selected_case_ids"),
-                          "summary": benchmark.get("summary"),
-                      }
-                  except Exception as exc:
-                      report["benchmark_summary"] = {
-                          "parse_error": f"{type(exc).__name__}: {exc}"
-                      }
-
-              runner_success = (
-                  isinstance(report["runner_status"], dict)
-                  and report["runner_status"].get("status") == "success"
-              )
-              benchmark_present = isinstance(report["benchmark_summary"], dict) and (
-                  "summary" in report["benchmark_summary"]
-              )
-              if report["kernel_status"] == "complete" and runner_success and benchmark_present:
-                  report["status"] = "success"
-                  report["reason"] = None
-              elif report["kernel_status"] == "complete":
-                  report["status"] = "recovered_failure"
-                  report["reason"] = (
-                      "Kaggle completed, but the bounded runner did not produce a "
-                      "successful status and benchmark pair."
-                  )
-              else:
-                  report["status"] = "not_ready"
-                  report["reason"] = "The target Kaggle run is not complete."
-
-          # Prevent the queued duplicate from launching. Once evidence is recovered,
-          # also cancel the stale poller that is querying a case-mismatched owner ref.
-          repository = os.environ["GITHUB_REPOSITORY"]
-          token = os.environ["GH_ACTIONS_TOKEN"]
-          runs_url = (
-              f"https://api.github.com/repos/{repository}/actions/workflows/"
-              "instella-arc-kaggle-dispatch.yml/runs"
-              "?branch=instella-arc&per_page=20"
-          )
-          request = Request(
-              runs_url,
-              headers={
-                  "Accept": "application/vnd.github+json",
-                  "Authorization": f"Bearer {token}",
-                  "X-GitHub-Api-Version": "2022-11-28",
-                  "User-Agent": "BAssist-Instella-Recovery",
-              },
-          )
-          with urlopen(request, timeout=60) as response:
-              runs_payload = json.load(response)
-
-          for run in runs_payload.get("workflow_runs", []):
-              run_status = run.get("status")
-              should_cancel = run_status in {"queued", "pending"}
-              if report["status"] in {"success", "recovered_failure"}:
-                  should_cancel = should_cancel or run_status == "in_progress"
-              if not should_cancel:
-                  continue
-              run_id = int(run["id"])
-              cancel_url = (
-                  f"https://api.github.com/repos/{repository}/actions/runs/"
-                  f"{run_id}/cancel"
-              )
-              cancel_request = Request(
-                  cancel_url,
-                  data=b"",
-                  method="POST",
-                  headers={
-                      "Accept": "application/vnd.github+json",
-                      "Authorization": f"Bearer {token}",
-                      "X-GitHub-Api-Version": "2022-11-28",
-                      "User-Agent": "BAssist-Instella-Recovery",
-                  },
-              )
-              entry = {
-                  "run_id": run_id,
-                  "previous_status": run_status,
-                  "requested": True,
-                  "accepted": False,
-                  "error": None,
-              }
-              try:
-                  with urlopen(cancel_request, timeout=60) as response:
-                      entry["accepted"] = response.status in {202, 204}
-              except HTTPError as exc:
-                  entry["error"] = f"HTTP {exc.code}: {exc.reason}"
-              report["cancellations"].append(entry)
-
-          Path("outputs/instella_arc").mkdir(parents=True, exist_ok=True)
-          Path("outputs/instella_arc/kaggle-recovery-status.json").write_text(
-              json.dumps(report, indent=2), encoding="utf-8"
-          )
-          print(json.dumps({
-              "status": report["status"],
-              "kernel_status": report["kernel_status"],
-              "output_files": report["output_files"],
-              "runner_status": (
-                  report["runner_status"].get("status")
-                  if isinstance(report["runner_status"], dict)
-                  else None
-              ),
-              "cancellations": report["cancellations"],
-              "reason": report["reason"],
-          }, indent=2))
-          PY
+          python -m instella_arc.kaggle_recover \
+            --output-root kaggle-recovered-output \
+            --report outputs/instella_arc/kaggle-recovery-status.json
 
       - name: Publish recovery receipt and bounded evidence
         if: always()
@@ -297,7 +64,7 @@ jobs:
           from pathlib import Path
           Path("reports/instella_arc/latest-kaggle-recovery-status.json").write_text(
               json.dumps({
-                  "schema": "instella_arc.kaggle_recovery.v1",
+                  "schema": "instella_arc.kaggle_recovery.v2",
                   "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
                   "status": "workflow_failure",
                   "reason": "Recovery output was not produced."
@@ -305,14 +72,16 @@ jobs:
           )
           PY
           fi
+
+          find reports/instella_arc/latest-kaggle-recovered-output -type f -delete
           if [[ -d kaggle-recovered-output ]]; then
-            find reports/instella_arc/latest-kaggle-recovered-output -type f -delete
             while IFS= read -r -d '' file; do
               rel="${file#kaggle-recovered-output/}"
               mkdir -p "reports/instella_arc/latest-kaggle-recovered-output/$(dirname "$rel")"
               cp "$file" "reports/instella_arc/latest-kaggle-recovered-output/$rel"
             done < <(find kaggle-recovered-output -type f -print0)
           fi
+
           python - <<'PY'
           import json
           import os
@@ -325,6 +94,7 @@ jobs:
           payload["github_run_attempt"] = os.environ.get("GITHUB_RUN_ATTEMPT")
           path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
           PY
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add reports/instella_arc/latest-kaggle-recovery-status.json \
@@ -343,3 +113,7 @@ jobs:
             reports/instella_arc/latest-kaggle-recovered-output/
           if-no-files-found: warn
           retention-days: 14
+
+      - name: Propagate recovery infrastructure failure
+        if: steps.recover.outcome == 'failure'
+        run: exit 1
