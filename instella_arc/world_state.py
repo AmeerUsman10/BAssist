@@ -252,33 +252,72 @@ def _component_translation(
     )
 
 
+def _color_positions(grid: Grid) -> dict[int, frozenset[Coordinate]]:
+    positions: dict[int, set[Coordinate]] = {}
+    for row, values in enumerate(grid):
+        for column, color in enumerate(values):
+            positions.setdefault(color, set()).add((row, column))
+    return {color: frozenset(cells) for color, cells in positions.items()}
+
+
 def match_component_translations(
     before: Sequence[Sequence[int]],
     after: Sequence[Sequence[int]],
 ) -> tuple[ComponentTranslation, ...]:
-    before_components = connected_components(before)
-    after_components = connected_components(after)
-    candidates: list[tuple[int, int, ComponentTranslation]] = []
-    for before_index, source in enumerate(before_components):
-        for after_index, target in enumerate(after_components):
-            translation = _component_translation(source, target)
-            if translation is not None:
-                candidates.append((before_index, after_index, translation))
+    first = normalize_grid(before)
+    second = normalize_grid(after)
+    changes = changed_cells(first, second)
+    changed_positions = frozenset((change.row, change.column) for change in changes)
+    if not changed_positions:
+        return ()
 
-    # Match shortest translations first, then deterministically. A component may
-    # participate in at most one translation receipt.
+    before_positions = _color_positions(first)
+    after_positions = _color_positions(second)
+    before_components = connected_components(first)
+    after_components = connected_components(second)
+    candidates: list[
+        tuple[int, int, int, int, ComponentTranslation]
+    ] = []
+    for before_index, source in enumerate(before_components):
+        source_cells = frozenset(source.cells)
+        removed = source_cells - after_positions.get(source.color, frozenset())
+        if not removed or not removed.issubset(changed_positions):
+            continue
+        for after_index, target in enumerate(after_components):
+            target_cells = frozenset(target.cells)
+            added = target_cells - before_positions.get(target.color, frozenset())
+            if not added or not added.issubset(changed_positions):
+                continue
+            translation = _component_translation(source, target)
+            if translation is None:
+                continue
+            changed_support = len(removed) + len(added)
+            distance = abs(translation.delta_row) + abs(translation.delta_column)
+            candidates.append(
+                (
+                    -changed_support,
+                    distance,
+                    before_index,
+                    after_index,
+                    translation,
+                )
+            )
+
+    # Prefer candidates explaining more exact changed cells, then shorter
+    # translations. A component participates in at most one motion receipt.
     candidates.sort(
         key=lambda item: (
-            abs(item[2].delta_row) + abs(item[2].delta_column),
-            item[2].color,
             item[0],
             item[1],
+            item[4].color,
+            item[2],
+            item[3],
         )
     )
     used_before: set[int] = set()
     used_after: set[int] = set()
     selected: list[ComponentTranslation] = []
-    for before_index, after_index, translation in candidates:
+    for _, _, before_index, after_index, translation in candidates:
         if before_index in used_before or after_index in used_after:
             continue
         used_before.add(before_index)
