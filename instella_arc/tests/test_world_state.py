@@ -58,6 +58,39 @@ def test_component_translation_detects_exact_shape_motion() -> None:
     assert len(target.before_cells) == 2
 
 
+def test_stationary_lookalikes_are_not_invented_as_motion() -> None:
+    before = (
+        (0, 2, 0, 2, 0),
+        (0, 0, 0, 0, 0),
+        (0, 3, 0, 0, 0),
+    )
+    after = (
+        (0, 2, 0, 2, 0),
+        (0, 0, 0, 0, 0),
+        (0, 0, 3, 0, 0),
+    )
+    translations = match_component_translations(before, after)
+    assert [(item.color, item.delta_row, item.delta_column) for item in translations] == [
+        (3, 0, 1)
+    ]
+
+
+def test_identical_component_swap_with_unchanged_grid_has_no_motion_receipt() -> None:
+    grid = (
+        (0, 2, 0, 2),
+        (0, 0, 0, 0),
+    )
+    assert match_component_translations(grid, grid) == ()
+
+
+def test_partial_overlap_translation_requires_removed_and_added_changed_cells() -> None:
+    before = ((0, 2, 2, 0, 0),)
+    after = ((0, 0, 2, 2, 0),)
+    translations = match_component_translations(before, after)
+    target = next(item for item in translations if item.color == 2)
+    assert (target.delta_row, target.delta_column) == (0, 1)
+
+
 def test_transition_facts_separate_motion_and_color_count_changes() -> None:
     before = (
         (0, 2, 0),
