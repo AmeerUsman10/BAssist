@@ -69,6 +69,7 @@ class Config:
     evaluation_interval: int = 10
     plateau_patience: int = 60
     freeze_first_n_blocks: int = 11
+    stop_on_gate_pass: bool = True
     save_model: bool = True
     require_cuda: bool = False
 
@@ -444,9 +445,11 @@ def train(config: Config) -> dict[str, Any]:
                 "elapsed_seconds": time.time() - started,
             }), flush=True)
             if evaluation["gate"]["passed"]:
-                first_passing_step = step
-                stopped_reason = "gate_passed"
-                break
+                if first_passing_step is None:
+                    first_passing_step = step
+                if config.stop_on_gate_pass:
+                    stopped_reason = "gate_passed"
+                    break
         if step - last_improvement >= config.plateau_patience:
             stopped_reason = "plateau"
             break
@@ -518,6 +521,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--evaluation-interval", type=int, default=10)
     parser.add_argument("--plateau-patience", type=int, default=60)
     parser.add_argument("--freeze-first-n-blocks", type=int, default=11)
+    parser.add_argument("--continue-after-pass", action="store_true")
     parser.add_argument("--no-save-model", action="store_true")
     parser.add_argument("--require-cuda", action="store_true")
     return parser.parse_args()
@@ -544,6 +548,7 @@ def main() -> None:
         evaluation_interval=args.evaluation_interval,
         plateau_patience=args.plateau_patience,
         freeze_first_n_blocks=args.freeze_first_n_blocks,
+        stop_on_gate_pass=not args.continue_after_pass,
         save_model=not args.no_save_model,
         require_cuda=args.require_cuda,
     ))
