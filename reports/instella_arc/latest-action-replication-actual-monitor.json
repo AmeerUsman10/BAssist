@@ -1,0 +1,14 @@
+{
+  "schema": "instella_arc.action_replication_actual_monitor.v1",
+  "recorded_at_utc": "2026-08-03T12:15:00.111060+00:00",
+  "kernel_slug": "instella-arc-action-replication-64",
+  "kernel_match_count": 1,
+  "kernel_ref_resolved": true,
+  "status": "running",
+  "status_exit_code": 0,
+  "sanitized_output": "<redacted>/instella-arc-action-replication-64 has status \"KernelWorkerStatus.RUNNING\"",
+  "mutated_kaggle": false,
+  "github_branch": "instella-arc",
+  "github_commit_sha": "5b8a6f8f21036d2e586044c5fa3a69649b90ed17",
+  "github_run_id": "30812788061"
+}
