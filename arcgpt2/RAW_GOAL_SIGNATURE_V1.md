@@ -190,3 +190,9 @@ promotion requires both. Random initialization is not required to fail.
 
 Scale promotion requires both the absolute capability gate and the separate
 pretraining-promotion gate. Thresholds are not relaxed after results are seen.
+
+## Launch ledger
+
+- Timing allocation preregistered in issue #12 as
+  `arc-gpt2-raw-goal-timing-prereg-20260803-001`; the launch commit changes
+  documentation only and leaves the frozen implementation and manifest unchanged.
