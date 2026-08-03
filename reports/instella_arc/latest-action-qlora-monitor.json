@@ -1,0 +1,41 @@
+{
+  "schema": "instella_arc.action_qlora_monitor.v1",
+  "recorded_at_utc": "2026-08-03T12:31:23.810942+00:00",
+  "latest_github_run": {
+    "id": 30813668821,
+    "status": "in_progress",
+    "conclusion": null,
+    "head_sha": "0596b58195f33e5ab485cbe87cfbd12bab3a4422",
+    "run_number": 1,
+    "run_attempt": 1,
+    "created_at": "2026-08-03T12:27:45Z",
+    "updated_at": "2026-08-03T12:27:49Z",
+    "html_url": "https://github.com/AmeerUsman10/BAssist/actions/runs/30813668821"
+  },
+  "recent_github_runs": [
+    {
+      "id": 30813668821,
+      "status": "in_progress",
+      "conclusion": null,
+      "head_sha": "0596b58195f33e5ab485cbe87cfbd12bab3a4422",
+      "run_number": 1,
+      "run_attempt": 1,
+      "created_at": "2026-08-03T12:27:45Z",
+      "updated_at": "2026-08-03T12:27:49Z",
+      "html_url": "https://github.com/AmeerUsman10/BAssist/actions/runs/30813668821"
+    }
+  ],
+  "kaggle": {
+    "list_exit_code": 0,
+    "kernel_slug": "instella-arc-action-qlora-v1",
+    "kernel_match_count": 1,
+    "kernel_ref_resolved": true,
+    "status": "running",
+    "status_exit_code": 0,
+    "sanitized_output": "<redacted>/instella-arc-action-qlora-v1 has status \"KernelWorkerStatus.RUNNING\""
+  },
+  "mutated_kaggle": false,
+  "github_branch": "instella-arc",
+  "github_commit_sha": "775342efc4cc420e4589c0caef3d0cebc4458ad7",
+  "github_run_id": "30813896013"
+}
