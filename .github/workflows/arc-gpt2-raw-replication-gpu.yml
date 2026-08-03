@@ -100,6 +100,9 @@ jobs:
     env:
       KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
       KAGGLE_KERNEL_SLUG: arc-gpt2-raw-nll-replication-dual-t4
+      # Adopt only the exact kernel launched by failed retrieval run 30815480003.
+      EXPECTED_KERNEL_SOURCE_SHA: ead4d44cb366923e54a3c2aad801726afde6d6f4
+      RECOVERY_ONLY: "true"
 
     steps:
       - uses: actions/checkout@v4
@@ -270,7 +273,12 @@ jobs:
           import os
 
           result = json.load(open(os.environ["EXISTING_RESULT"], encoding="utf-8"))
-          raise SystemExit(0 if result.get("source_sha") == os.environ.get("GITHUB_SHA") else 1)
+          raise SystemExit(
+              0
+              if result.get("source_sha")
+              == os.environ.get("EXPECTED_KERNEL_SOURCE_SHA")
+              else 1
+          )
           PY
                 then
                   reuse_complete=true
@@ -280,6 +288,10 @@ jobs:
                 fi
               fi
             fi
+          fi
+
+          if [[ "$reuse_complete" != "true" && "$resume_running" != "true" && "${RECOVERY_ONLY:-}" == "true" ]]; then
+            fail "Exact preregistered recovery kernel is absent; refusing a new allocation"
           fi
 
           if [[ "$reuse_complete" != "true" && "$resume_running" != "true" ]]; then
@@ -338,7 +350,7 @@ jobs:
           import os
 
           result = json.load(open(os.environ["RESULT_PATH"], encoding="utf-8"))
-          if result.get("source_sha") != os.environ.get("GITHUB_SHA"):
+          if result.get("source_sha") != os.environ.get("EXPECTED_KERNEL_SOURCE_SHA"):
               raise SystemExit("source SHA mismatch")
           gates = result.get("execution_gates", {})
           if not gates or not all(gates.values()):
@@ -401,6 +413,8 @@ jobs:
               "branch": os.environ.get("GITHUB_REF_NAME"),
               "workflow_sha": os.environ.get("GITHUB_SHA"),
               "kernel_source_sha": result.get("source_sha"),
+              "expected_kernel_source_sha": os.environ.get("EXPECTED_KERNEL_SOURCE_SHA"),
+              "recovery_only": os.environ.get("RECOVERY_ONLY") == "true",
               "github_run_id": os.environ.get("GITHUB_RUN_ID"),
               "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
               "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
