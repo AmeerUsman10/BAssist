@@ -1,8 +1,0 @@
-{
-  "status": "success",
-  "branch": "arc-gpt2-programs",
-  "commit_sha": "338a8922ba72b716d19c0e29e4b3d7bf1b188a95",
-  "run_id": "30726046299",
-  "recorded_at_utc": "2026-08-02T01:15:28.871973+00:00",
-  "scope": "CPU smoke for one GPT-2 jointly scoring action semantics, goals, and contact mechanics; not ARC-AGI-3 evaluation"
-}

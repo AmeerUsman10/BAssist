@@ -1,9 +1,0 @@
-{
-  "status": "success",
-  "branch": "arc-gpt2-programs",
-  "commit_sha": "d4a5ed8c25daddfd74acdd95eee6247f795867ef",
-  "run_id": "30725004193",
-  "run_attempt": "1",
-  "recorded_at_utc": "2026-08-02T01:05:57.730385+00:00",
-  "scope": "160-step matched second-order hidden-action soft-memory gate; synthetic controlled curriculum, not ARC-AGI-3 evaluation"
-}

@@ -1,8 +1,0 @@
-{
-  "status": "success",
-  "branch": "arc-gpt2-programs",
-  "commit_sha": "7764a9ce3d10ece96a50aeea1c58118d1506624c",
-  "run_id": "30725672008",
-  "recorded_at_utc": "2026-08-02T00:58:37.965193+00:00",
-  "scope": "CPU smoke for set-valued hidden contact mechanics; controlled Gate C, not ARC-AGI-3 evaluation"
-}
