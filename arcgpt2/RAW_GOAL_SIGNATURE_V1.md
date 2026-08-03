@@ -50,15 +50,27 @@ values are not exposed as group identifiers.
 - all 24 candidate-order permutations occur 5/1/3 times
 - each family occupies each candidate position 30/6/18 times
 - each of six semantic-role colors occurs 20/4/12 times in every named role
+- twelve full five-role color tuples occur 10/2/6 times, and 24 inert nuisance
+  layouts occur 5/1/3 times
+- signature-assignment/candidate-order, signature-assignment/full-color-tuple,
+  and signature-assignment/nuisance-layout edges are each unique within a split
+  and have zero overlap between every pair of splits
 - all six two-of-four Trial-3 masks are balanced in every split
 - both evidence orders, Trial 1 then 2 and Trial 2 then 1, are evaluated
 
-Candidate order is sampled once per group and shared across its four worlds.
-The canonical split hash excludes candidate order and terminal values but
-includes candidate programs and colors, exact before/action/after states,
-coordinates, dimensions, and level identity for all three trials. Exact hashes
-must be disjoint across train, validation, and locked test. Manifests, rejected
-surfaces, and a canonical manifest digest are retained.
+Candidate order is assigned once per group and shared across its four worlds.
+The canonical physical-surface hash excludes candidate order, terminal values,
+group IDs, split-bearing level identity, and all other identifiers. It includes
+candidate programs and colors plus exact before/action/after states,
+coordinates, and dimensions for all three trials. Exact hashes must be
+disjoint across train, validation, and locked test. The accepted balanced
+nuisance-layout schedule is frozen directly in the data contract; the runtime
+builder performs no rejection or resampling. Manifests retain the level identity
+as non-model metadata, an explicit empty `rejected_surfaces` field, and a
+canonical manifest digest. Any future builder that rejects a candidate must
+retain its reason and canonical payload and constitutes a new protocol version.
+The frozen canonical manifest digest is
+`02e59b60dab038e16f45fbfe03dc9dadece1c0d1fc8082210834965e7634ab04`.
 
 No seed, group/world ID, signature assignment, truth bit, candidate index, or
 rejection index may enter model text. Token audits must prove that the two
@@ -79,6 +91,11 @@ Candidate evidence logits are the post-update mean completion log probability
 minus the same candidate's no-update mean completion log probability. Raw scores
 remain diagnostics. Temperature is fixed at one.
 
+The checkpoint/tokenizer are pinned to `openai-community/gpt2` revision
+`607a30d783dfa663caf39e06633721c8d4cfcd7e`. The learned initial soft prefix has
+length 8, Gaussian initialization standard deviation `.01`, and inner update
+learning rate `.2`.
+
 For every training group, reset to the same prefix and evaluate both orders:
 
 `Louter = 0.25*Lprior + (Lsingle1 + Lsingle2 + Lfinal12 + Lfinal21 + Lsemantic12 + Lsemantic21)/6`
@@ -92,6 +109,14 @@ matched neutral field. Derangement uses a fixed other valid signature.
 Validation selects the epoch with the lowest preregistered total objective,
 breaking ties toward the earlier epoch. The complete selected checkpoint is
 hashed and frozen before one locked-test evaluation.
+
+The outer loop runs exactly two ordered passes over the 120 training groups
+(240 optimizer steps, no shuffle). It uses AdamW with prefix/model learning
+rates `1e-3`/`1e-4`, weight decay `0` on the prefix and `.01` on trainable GPT-2
+parameters, betas `(.9, .999)`, epsilon `1e-8`, and global gradient-norm clipping
+at `1.0`. GPT-2 blocks 0 through 10 plus token and position embeddings are
+frozen; block 11 and final layer normalization are trainable. Dropout, TF32,
+early stopping, and learned checkpoint persistence are disabled.
 
 ## Absolute pretrained capability gate
 
@@ -132,6 +157,25 @@ Run three preregistered matched initialization seeds. Each pair uses pretrained
 GPT-2 on one T4 and the identical randomly initialized architecture on the
 other, with identical data, order, and hyperparameters. Every pretrained seed
 must pass the absolute gate.
+
+The exact matched seeds are `(577215, 618033, 707106)`. Within each seed the
+pretrained and random lanes run concurrently on physical T4 0 and T4 1; the
+three matched pairs run sequentially. The independent-group bootstrap uses base
+seed `20260804`. The hierarchical promotion bootstrap uses seeds `20260805` and
+`20260806` for identification accuracy/probability, and `20260815` and
+`20260816` for Trial-3 accuracy/probability. Every bootstrap uses exactly 10,000
+draws and a one-sided 95% lower bound.
+
+Before a full allocation may perform any optimizer step, a timing-only dual-T4
+guard uses seed `577215` and train/validation surfaces only. Per lane it runs one
+unmeasured exact-group warmup, times two exact training-group backward/clip
+paths with gradients cleared between groups, times two intact validation
+groups, and times one locked-shaped evaluator on a training group with the
+timing-only bootstrap reduced to one draw. It performs zero optimizer steps and
+does not convert or query a locked-test group. The raw three-sequential-pair
+projection is conservatively transformed to `1.25 * projection + 900 seconds`;
+the full kernel may continue only when this upper projection is at most 16,200
+seconds. Timing results cannot satisfy any scientific or promotion gate.
 
 For a metric, each hierarchical bootstrap draw resamples the three seeds and
 then the 72 matched groups within each selected seed, computes one mean paired

@@ -1,0 +1,558 @@
+name: ARC-GPT2 Raw Goal Signature Kaggle GPU
+
+on:
+  workflow_dispatch:
+    inputs:
+      launch_marker:
+        description: Explicit allocation marker (preflight-only does not allocate a GPU)
+        required: true
+        type: choice
+        default: preflight-only
+        options:
+          - preflight-only
+          - "[run-kaggle-raw-goal-signature-timing]"
+          - "[run-kaggle-raw-goal-signature]"
+  push:
+    branches: [arc-gpt2-programs]
+    paths:
+      - ".github/workflows/arc-gpt2-raw-goal-signature-gpu.yml"
+      - "kaggle/arc-gpt2-raw-goal-signature-gpu/runner.py"
+      - "arcgpt2/RAW_GOAL_SIGNATURE_V1.md"
+      - "arcgpt2/raw_goal_signature_data.py"
+      - "arcgpt2/meta_soft_raw_goal_signature.py"
+      - "arcgpt2/tests/test_raw_goal_signature_data.py"
+      - "arcgpt2/tests/test_meta_soft_raw_goal_signature.py"
+      - "arcgpt2/tests/test_raw_goal_signature_runner.py"
+      - "arcgpt2/tests/test_raw_goal_signature_statistics.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arc-gpt2-raw-goal-signature-kaggle-gpu
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install pinned CPU test dependencies
+        run: |
+          python -m pip install --quiet --disable-pip-version-check torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --quiet --disable-pip-version-check "transformers==4.57.6" "safetensors==0.6.2" "pytest==8.4.2"
+
+      - name: Validate frozen goal-signature implementation and runner
+        run: |
+          python -m pytest -q \
+            arcgpt2/tests/test_raw_goal_signature_data.py \
+            arcgpt2/tests/test_meta_soft_raw_goal_signature.py \
+            arcgpt2/tests/test_raw_goal_signature_runner.py \
+            arcgpt2/tests/test_raw_goal_signature_statistics.py \
+            arcgpt2/tests/test_meta_soft_second_order.py \
+            arcgpt2/tests/test_completion_scorer.py
+          RUNNER_SOURCE=kaggle/arc-gpt2-raw-goal-signature-gpu/runner.py \
+          RUNNER_INJECTED="${RUNNER_TEMP}/raw-goal-runner-injected.py" \
+          SOURCE_SHA=0000000000000000000000000000000000000000 python - <<'PY'
+          import importlib.util
+          import os
+          from pathlib import Path
+
+          source = Path(os.environ["RUNNER_SOURCE"]).read_text(encoding="utf-8")
+          needle = 'SOURCE_SHA = "__SOURCE_SHA__"'
+          mode_needle = 'RUN_MODE = "__RUN_MODE__"'
+          if source.count(needle) != 1 or source.count(mode_needle) != 1:
+              raise SystemExit("runner must contain exactly one source and mode placeholder")
+          injected = source.replace(needle, f'SOURCE_SHA = "{os.environ["SOURCE_SHA"]}"')
+          injected = injected.replace(mode_needle, 'RUN_MODE = "full"')
+          path = Path(os.environ["RUNNER_INJECTED"])
+          path.write_text(injected, encoding="utf-8")
+          spec = importlib.util.spec_from_file_location("raw_goal_runner_injected", path)
+          module = importlib.util.module_from_spec(spec)
+          assert spec.loader is not None
+          spec.loader.exec_module(module)
+          module.validate_source_sha(module.SOURCE_SHA)
+          assert module.RUN_MODE == "full"
+          assert module.PROTOCOL == "raw_goal_signature_v1"
+          assert module.MATCHED_SEEDS == (577_215, 618_033, 707_106)
+          assert module.OPTIMIZER_STEPS == 240
+          assert module.BOOTSTRAP_SAMPLES == 10_000
+          assert module.HIERARCHICAL_BOOTSTRAP_SEED == 20_260_805
+          assert module.FULL_KERNEL_RUNTIME_CEILING_SECONDS == 16_200
+          assert module.TIMING_TRAIN_GROUPS == module.TIMING_VALIDATION_GROUPS == 2
+          assert module.TIMING_PROJECTION_MULTIPLIER == 1.25
+          assert module.TIMING_FIXED_ALLOWANCE_SECONDS == 900
+          PY
+
+  dispatch:
+    needs: preflight
+    if: >-
+      (github.event_name == 'push' &&
+        (contains(github.event.head_commit.message, '[run-kaggle-raw-goal-signature]') ||
+         contains(github.event.head_commit.message, '[run-kaggle-raw-goal-signature-timing]'))) ||
+      (github.event_name == 'workflow_dispatch' &&
+        (inputs.launch_marker == '[run-kaggle-raw-goal-signature]' ||
+         inputs.launch_marker == '[run-kaggle-raw-goal-signature-timing]'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+      EXPECTED_KERNEL_SOURCE_SHA: ${{ github.sha }}
+      MANUAL_LAUNCH_MARKER: ${{ inputs.launch_marker || '' }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pinned official Kaggle CLI
+        run: python -m pip install --quiet --disable-pip-version-check "kaggle==2.2.2"
+
+      - name: Authenticate, dispatch private dual-T4 run, and retrieve outputs
+        id: kaggle
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -uo pipefail
+          mkdir -p kaggle-output dispatch-evidence
+
+          commit_message="$(git log -1 --pretty=%B)"
+          trigger_text="${MANUAL_LAUNCH_MARKER:-} ${commit_message}"
+          full_marker='[run-kaggle-raw-goal-signature]'
+          timing_marker='[run-kaggle-raw-goal-signature-timing]'
+          has_full=false
+          has_timing=false
+          [[ "$trigger_text" == *"$full_marker"* ]] && has_full=true
+          [[ "$trigger_text" == *"$timing_marker"* ]] && has_timing=true
+          if [[ "$has_full" == "$has_timing" ]]; then
+            echo "Exactly one explicit raw-goal allocation marker is required"
+            exit 1
+          fi
+          if [[ "$has_timing" == "true" ]]; then
+            export ARC_RUN_MODE=timing
+            export KAGGLE_KERNEL_SLUG=arc-gpt2-raw-goal-signature-timing-dual-t4
+            export REQUIRED_RESULT=timing-result.json
+          else
+            export ARC_RUN_MODE=full
+            export KAGGLE_KERNEL_SLUG=arc-gpt2-raw-goal-signature-dual-t4
+            export REQUIRED_RESULT=raw-goal-signature-result.json
+          fi
+          echo "ARC_RUN_MODE=$ARC_RUN_MODE" >> "$GITHUB_ENV"
+          echo "KAGGLE_KERNEL_SLUG=$KAGGLE_KERNEL_SLUG" >> "$GITHUB_ENV"
+          echo "REQUIRED_RESULT=$REQUIRED_RESULT" >> "$GITHUB_ENV"
+
+          write_state() {
+            ARC_STATE="$1" ARC_DETAIL="${2:-}" python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          path = Path("dispatch-evidence/workflow-state.json")
+          current = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+          current.update({
+              "state": os.environ["ARC_STATE"],
+              "detail": os.environ.get("ARC_DETAIL") or None,
+              "updated_at_utc": datetime.now(timezone.utc).isoformat(),
+              "source_sha": os.environ.get("GITHUB_SHA"),
+              "github_run_id": os.environ.get("GITHUB_RUN_ID"),
+              "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+              "kernel_slug": os.environ.get("KAGGLE_KERNEL_SLUG"),
+              "run_mode": os.environ.get("ARC_RUN_MODE"),
+          })
+          private_ref = os.environ.get("PRIVATE_KERNEL_REF", "")
+          if private_ref:
+              current["kernel_ref_sha256"] = hashlib.sha256(private_ref.encode()).hexdigest()
+          path.write_text(json.dumps(current, indent=2), encoding="utf-8")
+          PY
+          }
+
+          redact_file() {
+            REDACT_SOURCE="$1" REDACT_TARGET="$2" REDACT_OWNER="${owner:-}" python - <<'PY'
+          import os
+          from pathlib import Path
+          import re
+
+          source = Path(os.environ["REDACT_SOURCE"])
+          target = Path(os.environ["REDACT_TARGET"])
+          text = source.read_text(encoding="utf-8", errors="replace") if source.exists() else ""
+          owner = os.environ.get("REDACT_OWNER", "")
+          if owner:
+              text = text.replace(owner, "[REDACTED_OWNER]")
+          text = re.sub(r"KGAT_[A-Za-z0-9_-]+", "[REDACTED_TOKEN]", text)
+          with target.open("a", encoding="utf-8") as handle:
+              handle.write(text)
+              if text and not text.endswith("\n"):
+                  handle.write("\n")
+          PY
+          }
+
+          fail() {
+            write_state failed "$1"
+            echo "Raw-goal Kaggle dispatch failed: $1"
+            exit 1
+          }
+
+          [[ -n "${KAGGLE_API_TOKEN:-}" ]] || fail "KAGGLE_API_TOKEN is not configured"
+          write_state authenticating
+          if ! kaggle kernels list --mine --page-size 100 --csv > "${RUNNER_TEMP}/mine.csv" 2> "${RUNNER_TEMP}/auth.err"; then
+            redact_file "${RUNNER_TEMP}/auth.err" dispatch-evidence/dispatch-redacted.log
+            fail "Kaggle authentication or private kernel listing failed"
+          fi
+          owner="$({ python - "${RUNNER_TEMP}/mine.csv" <<'PY'
+          import csv
+          import re
+          import sys
+
+          with open(sys.argv[1], newline="", encoding="utf-8") as handle:
+              for row in csv.reader(handle):
+                  for value in row:
+                      if "/" not in value:
+                          continue
+                      candidate = value.split("/", 1)[0].strip()
+                      if re.fullmatch(r"[A-Za-z0-9_-]+", candidate) and candidate.lower() not in {"ref", "kernelref"}:
+                          print(candidate)
+                          raise SystemExit(0)
+          raise SystemExit("No owned kernel reference was returned")
+          PY
+          } 2> "${RUNNER_TEMP}/owner.err")" || fail "Could not resolve authenticated Kaggle owner"
+          [[ "$owner" =~ ^[A-Za-z0-9_-]+$ ]] || fail "Resolved Kaggle owner has invalid shape"
+          export PRIVATE_KERNEL_REF="${owner}/${KAGGLE_KERNEL_SLUG}"
+          printf 'resolved_owner_sha256=%s\n' "$(printf '%s' "$owner" | sha256sum | cut -d' ' -f1)" >> dispatch-evidence/dispatch-redacted.log
+
+          stage="${RUNNER_TEMP}/arc-gpt2-raw-goal-signature-${ARC_RUN_MODE}"
+          mkdir -p "$stage"
+          RUNNER_SOURCE=kaggle/arc-gpt2-raw-goal-signature-gpu/runner.py \
+          RUNNER_TARGET="${stage}/runner.py" python - <<'PY' || fail "Exact source SHA injection failed"
+          import os
+          from pathlib import Path
+
+          source = Path(os.environ["RUNNER_SOURCE"]).read_text(encoding="utf-8")
+          needle = 'SOURCE_SHA = "__SOURCE_SHA__"'
+          mode_needle = 'RUN_MODE = "__RUN_MODE__"'
+          if source.count(needle) != 1 or source.count(mode_needle) != 1:
+              raise SystemExit("expected exactly one source and mode placeholder")
+          injected = source.replace(needle, f'SOURCE_SHA = "{os.environ["GITHUB_SHA"]}"')
+          injected = injected.replace(mode_needle, f'RUN_MODE = "{os.environ["ARC_RUN_MODE"]}"')
+          if "__SOURCE_SHA__" in injected or '__RUN_MODE__' in injected:
+              raise SystemExit("unresolved runner placeholder remains")
+          Path(os.environ["RUNNER_TARGET"]).write_text(injected, encoding="utf-8")
+          PY
+          PRIVATE_OWNER="$owner" STAGE="$stage" python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          stage = Path(os.environ["STAGE"])
+          mode = os.environ["ARC_RUN_MODE"]
+          title = "ARC GPT2 Raw Goal Signature Timing Dual T4" if mode == "timing" else "ARC GPT2 Raw Goal Signature Dual T4"
+          metadata = {
+              "id": f"{os.environ['PRIVATE_OWNER']}/{os.environ['KAGGLE_KERNEL_SLUG']}",
+              "title": title,
+              "code_file": "runner.py",
+              "language": "python",
+              "kernel_type": "script",
+              "is_private": True,
+              "enable_gpu": True,
+              "enable_internet": True,
+              "dataset_sources": [],
+              "competition_sources": [],
+              "kernel_sources": [],
+              "model_sources": [],
+          }
+          (stage / "kernel-metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
+          PY
+          STAGE="$stage" python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          state_path = Path("dispatch-evidence/workflow-state.json")
+          state = json.loads(state_path.read_text(encoding="utf-8"))
+          stage = Path(os.environ["STAGE"])
+          state["staged_runner_sha256"] = hashlib.sha256((stage / "runner.py").read_bytes()).hexdigest()
+          state["kernel_metadata_sha256"] = hashlib.sha256((stage / "kernel-metadata.json").read_bytes()).hexdigest()
+          state_path.write_text(json.dumps(state, indent=2), encoding="utf-8")
+          PY
+          staged_runner_sha="$(sha256sum "${stage}/runner.py" | cut -d' ' -f1)"
+          write_state staged
+
+          reuse_complete=false
+          resume_running=false
+          existing_source_matches=false
+          if kaggle kernels status "$PRIVATE_KERNEL_REF" > "${RUNNER_TEMP}/existing-status.log" 2>&1; then
+            rm -rf "${RUNNER_TEMP}/existing-source"
+            mkdir -p "${RUNNER_TEMP}/existing-source"
+            if kaggle kernels pull "$PRIVATE_KERNEL_REF" -p "${RUNNER_TEMP}/existing-source" --metadata > "${RUNNER_TEMP}/existing-pull.log" 2>&1; then
+              existing_runner="$(find "${RUNNER_TEMP}/existing-source" -name runner.py -type f | head -n 1)"
+              if [[ -n "$existing_runner" && "$(sha256sum "$existing_runner" | cut -d' ' -f1)" == "$staged_runner_sha" ]]; then
+                existing_source_matches=true
+              fi
+            fi
+            existing_text="$(tr '[:upper:]' '[:lower:]' < "${RUNNER_TEMP}/existing-status.log")"
+            if grep -Eq 'running|queued' <<< "$existing_text"; then
+              [[ "$existing_source_matches" == "true" ]] || fail "A different source version is already running under the private slug"
+              resume_running=true
+              write_state resuming_exact_running_kernel
+            elif grep -Eq 'complete|success' <<< "$existing_text" && [[ "$existing_source_matches" == "true" ]]; then
+              rm -rf "${RUNNER_TEMP}/existing-output"
+              mkdir -p "${RUNNER_TEMP}/existing-output"
+              if kaggle kernels output "$PRIVATE_KERNEL_REF" -p "${RUNNER_TEMP}/existing-output" --force --quiet > "${RUNNER_TEMP}/existing-output.log" 2>&1; then
+                existing_result="${RUNNER_TEMP}/existing-output/arc_gpt2_raw_goal_signature_gpu/${REQUIRED_RESULT}"
+                if [[ -f "$existing_result" ]] && EXISTING_RESULT="$existing_result" STAGED_HASH="$staged_runner_sha" python - <<'PY'
+          import json
+          import os
+
+          result = json.load(open(os.environ["EXISTING_RESULT"], encoding="utf-8"))
+          raise SystemExit(0 if (
+              result.get("source_sha") == os.environ.get("EXPECTED_KERNEL_SOURCE_SHA")
+              and result.get("runner_source_sha256") == os.environ.get("STAGED_HASH")
+              and result.get("protocol") == "raw_goal_signature_v1"
+          ) else 1)
+          PY
+                then
+                  reuse_complete=true
+                  rm -rf kaggle-output
+                  cp -R "${RUNNER_TEMP}/existing-output" kaggle-output
+                  write_state reusing_exact_completed_kernel
+                fi
+              fi
+            elif grep -Eq 'error|failed|cancel' <<< "$existing_text" && [[ "$existing_source_matches" == "true" ]]; then
+              kaggle kernels output "$PRIVATE_KERNEL_REF" -p kaggle-output --force --quiet > "${RUNNER_TEMP}/failed-output.log" 2>&1 || true
+              fail "Exact source version already terminated unsuccessfully; refusing a blind duplicate"
+            fi
+          fi
+
+          if [[ "$reuse_complete" != "true" && "$resume_running" != "true" ]]; then
+            write_state pushing
+            if ! kaggle kernels push -p "$stage" --accelerator NvidiaTeslaT4 --timeout 18000 > "${RUNNER_TEMP}/push.log" 2>&1; then
+              redact_file "${RUNNER_TEMP}/push.log" dispatch-evidence/dispatch-redacted.log
+              fail "Kaggle kernel push failed"
+            fi
+            redact_file "${RUNNER_TEMP}/push.log" dispatch-evidence/dispatch-redacted.log
+          fi
+
+          if [[ "$reuse_complete" != "true" ]]; then
+            write_state running
+            deadline=$((SECONDS + 18000))
+            completed=false
+            status_failures=0
+            while (( SECONDS < deadline )); do
+              if ! kaggle kernels status "$PRIVATE_KERNEL_REF" > "${RUNNER_TEMP}/status.log" 2>&1; then
+                redact_file "${RUNNER_TEMP}/status.log" dispatch-evidence/dispatch-redacted.log
+                status_failures=$((status_failures + 1))
+                if (( status_failures >= 5 )); then
+                  fail "Kaggle status query failed five consecutive times"
+                fi
+                sleep 20
+                continue
+              fi
+              status_failures=0
+              status_text="$(tr '[:upper:]' '[:lower:]' < "${RUNNER_TEMP}/status.log")"
+              printf '%s\n' "$status_text" | sed -E "s/${owner}/[REDACTED_OWNER]/g" | tail -n 3
+              if grep -Eq 'complete|success' <<< "$status_text"; then
+                completed=true
+                write_state completed
+                break
+              fi
+              if grep -Eq 'error|failed|cancel' <<< "$status_text"; then
+                redact_file "${RUNNER_TEMP}/status.log" dispatch-evidence/dispatch-redacted.log
+                kaggle kernels output "$PRIVATE_KERNEL_REF" -p kaggle-output --force --quiet > "${RUNNER_TEMP}/failed-output.log" 2>&1 || true
+                fail "Kaggle kernel terminated unsuccessfully"
+              fi
+              sleep 20
+            done
+            [[ "$completed" == "true" ]] || fail "Kaggle kernel exceeded the five-hour workflow ceiling"
+            if ! kaggle kernels output "$PRIVATE_KERNEL_REF" -p kaggle-output --force --quiet > "${RUNNER_TEMP}/output.log" 2>&1; then
+              redact_file "${RUNNER_TEMP}/output.log" dispatch-evidence/dispatch-redacted.log
+              fail "Kaggle output download failed"
+            fi
+          fi
+
+          result_path="kaggle-output/arc_gpt2_raw_goal_signature_gpu/${REQUIRED_RESULT}"
+          environment_path="kaggle-output/arc_gpt2_raw_goal_signature_gpu/environment.json"
+          console_path="kaggle-output/arc_gpt2_raw_goal_signature_gpu/kernel-console.log"
+          test -f "$result_path" || fail "Required result JSON is missing"
+          test -f "$environment_path" || fail "Required environment JSON is missing"
+          test -s "$console_path" || fail "Required top-level kernel console log is missing or empty"
+          RESULT_PATH="$result_path" STAGED_HASH="$staged_runner_sha" python - <<'PY' || fail "Downloaded output failed provenance or execution validation"
+          import json
+          import os
+
+          result = json.load(open(os.environ["RESULT_PATH"], encoding="utf-8"))
+          if result.get("source_sha") != os.environ.get("EXPECTED_KERNEL_SOURCE_SHA"):
+              raise SystemExit("source SHA mismatch")
+          if result.get("protocol") != "raw_goal_signature_v1":
+              raise SystemExit("protocol mismatch")
+          if result.get("runner_source_sha256") != os.environ.get("STAGED_HASH"):
+              raise SystemExit("staged runner hash mismatch")
+          if os.environ.get("ARC_RUN_MODE") == "full":
+              gates = result.get("execution_gates", {})
+              if not gates or not all(gates.values()):
+                  raise SystemExit("one or more execution-contract gates failed")
+              absolute = result.get("absolute_pretrained_capability", {}).get("passed") is True
+              promotion = result.get("pretraining_promotion", {}).get("passed") is True
+              eligible = result.get("scale_promotion", {}).get("eligible") is True
+              if eligible != (absolute and promotion):
+                  raise SystemExit("scale decision is inconsistent")
+          else:
+              lanes = result.get("lanes", {})
+              if set(lanes) != {"pretrained", "random"}:
+                  raise SystemExit("timing lanes missing")
+              if any(lane.get("optimizer_steps_performed") != 0 for lane in lanes.values()):
+                  raise SystemExit("timing mode mutated an optimizer")
+              if any(lane.get("locked_test_groups_converted_or_queried") is not False for lane in lanes.values()):
+                  raise SystemExit("timing mode accessed locked-test groups")
+          PY
+          write_state outputs_retrieved
+
+      - name: Build redacted durable receipt
+        if: always()
+        env:
+          DISPATCH_OUTCOME: ${{ steps.kaggle.outcome }}
+        run: |
+          mkdir -p reports/arcgpt2/kaggle-raw-goal-signature/latest
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          source = Path("kaggle-output/arc_gpt2_raw_goal_signature_gpu")
+          target = Path("reports/arcgpt2/kaggle-raw-goal-signature/latest")
+          if target.exists():
+              shutil.rmtree(target)
+          target.mkdir(parents=True)
+          state_path = Path("dispatch-evidence/workflow-state.json")
+          state = json.loads(state_path.read_text(encoding="utf-8")) if state_path.exists() else {}
+          for name in (
+              "raw-goal-signature-result.json",
+              "timing-result.json",
+              "environment.json",
+              "model-manifest.json",
+              "pretraining-audit.json",
+              "canonical-manifest.json",
+              "gpu-samples.json",
+              "kernel-console.log",
+              "artifact-manifest.json",
+              "failure.json",
+          ):
+              candidate = source / name
+              if candidate.exists():
+                  renamed = "kernel-artifact-manifest.json" if name == "artifact-manifest.json" else name
+                  shutil.copy2(candidate, target / renamed)
+          summaries = target / "summaries"
+          for path in sorted((source / "outputs").glob("seed-*/*/summary.json")):
+              summaries.mkdir(exist_ok=True)
+              shutil.copy2(path, summaries / f"{path.parents[1].name}-{path.parent.name}.json")
+          timing_summaries = target / "timing-summaries"
+          for path in sorted((source / "timing").glob("seed-*/*/timing-summary.json")):
+              timing_summaries.mkdir(exist_ok=True)
+              shutil.copy2(path, timing_summaries / f"{path.parents[1].name}-{path.parent.name}.json")
+
+          output_hashes = {}
+          for path in sorted(Path("kaggle-output").rglob("*")):
+              if path.is_file():
+                  output_hashes[str(path.relative_to("kaggle-output"))] = {
+                      "bytes": path.stat().st_size,
+                      "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                  }
+          result_name = "timing-result.json" if state.get("run_mode") == "timing" else "raw-goal-signature-result.json"
+          result_path = target / result_name
+          result = json.loads(result_path.read_text(encoding="utf-8")) if result_path.exists() else {}
+          workflow_path = Path(".github/workflows/arc-gpt2-raw-goal-signature-gpu.yml")
+          receipt = {
+              "status": "completed" if os.environ.get("DISPATCH_OUTCOME") == "success" else "execution_failed",
+              "dispatch_outcome": os.environ.get("DISPATCH_OUTCOME"),
+              "scope": "Private dual-T4 raw-goal-signature run; no competition submission.",
+              "run_mode": state.get("run_mode"),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "workflow_sha": os.environ.get("GITHUB_SHA"),
+              "workflow_file_sha256": hashlib.sha256(workflow_path.read_bytes()).hexdigest(),
+              "kernel_source_sha": result.get("source_sha"),
+              "expected_kernel_source_sha": os.environ.get("EXPECTED_KERNEL_SOURCE_SHA"),
+              "staged_runner_sha256": state.get("staged_runner_sha256"),
+              "result_runner_sha256": result.get("runner_source_sha256"),
+              "kernel_metadata_sha256": state.get("kernel_metadata_sha256"),
+              "github_run_id": os.environ.get("GITHUB_RUN_ID"),
+              "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "kernel_slug": state.get("kernel_slug"),
+              "kernel_ref_sha256": state.get("kernel_ref_sha256"),
+              "final_dispatch_state": state.get("state"),
+              "dispatch_detail": state.get("detail"),
+              "accelerator_requested": "NvidiaTeslaT4",
+              "dual_gpu_required_by_runner": True,
+              "explicit_marker_required": True,
+              "internet_enabled_only_for_pinned_source_and_checkpoint_fetch": True,
+              "competition_submission_performed": False,
+              "model_weights_persisted": False,
+              "top_level_console_log_retained": (target / "kernel-console.log").is_file(),
+              "output_files": output_hashes,
+          }
+          (target / "receipt.json").write_text(json.dumps(receipt, indent=2), encoding="utf-8")
+          PY
+
+      - name: Publish evidence from a fresh branch tip
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin "${GITHUB_REF_NAME}"
+          publish_dir="$(mktemp -d)"
+          git worktree add --detach "$publish_dir" "origin/${GITHUB_REF_NAME}"
+          PUBLISH_DIR="$publish_dir" python - <<'PY'
+          import os
+          import shutil
+          from pathlib import Path
+
+          target = Path(os.environ["PUBLISH_DIR"]) / "reports/arcgpt2/kaggle-raw-goal-signature/latest"
+          if target.exists():
+              shutil.rmtree(target)
+          target.parent.mkdir(parents=True, exist_ok=True)
+          shutil.copytree(Path("reports/arcgpt2/kaggle-raw-goal-signature/latest"), target)
+          PY
+          cd "$publish_dir"
+          git add reports/arcgpt2/kaggle-raw-goal-signature/latest
+          git commit -m "Record ARC-GPT2 raw goal signature ${GITHUB_RUN_ID}" || exit 0
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then
+              exit 0
+            fi
+            git fetch origin "${GITHUB_REF_NAME}"
+            git rebase "origin/${GITHUB_REF_NAME}"
+          done
+          exit 1
+
+      - name: Upload full raw-goal artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arc-gpt2-raw-goal-signature-${{ github.run_id }}
+          path: |
+            reports/arcgpt2/kaggle-raw-goal-signature/latest/
+            kaggle-output/arc_gpt2_raw_goal_signature_gpu/outputs/
+            kaggle-output/arc_gpt2_raw_goal_signature_gpu/timing/
+            kaggle-output/arc_gpt2_raw_goal_signature_gpu/logs/
+            dispatch-evidence/
+          if-no-files-found: warn
+          retention-days: 90
+
+      - name: Propagate execution failure
+        if: steps.kaggle.outcome != 'success'
+        run: exit 1
