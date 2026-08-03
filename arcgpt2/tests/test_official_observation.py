@@ -5,7 +5,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from arcgpt2.codec import decode_delta, decode_grid
+from arcgpt2.codec_text import decode_delta, decode_grid
 from arcgpt2.official_observation import (
     OfficialFrameSequence,
     OfficialObservationError,
