@@ -146,13 +146,27 @@ jobs:
           # only because it polled a title-normalized slug. Resume that GPU job
           # instead of spending quota on a duplicate version.
           resume_existing=false
+          inspect_failed_existing=false
           if kaggle kernels status "$PRIVATE_KERNEL_REF" > "${RUNNER_TEMP}/existing-status.log" 2>&1; then
             existing_text="$(tr '[:upper:]' '[:lower:]' < "${RUNNER_TEMP}/existing-status.log")"
             if grep -Eq 'running|queued|complete|success' <<< "$existing_text"; then
               resume_existing=true
               write_state "resuming_existing_kernel"
               printf 'resuming_existing_kernel=true\n' >> dispatch-evidence/dispatch-redacted.log
+            elif grep -Eq 'error|failed|cancel' <<< "$existing_text"; then
+              inspect_failed_existing=true
             fi
+          fi
+
+          if [[ "$inspect_failed_existing" == "true" ]]; then
+            write_state "retrieving_failed_kernel_outputs"
+            if kaggle kernels output "$PRIVATE_KERNEL_REF" -p kaggle-output --force --quiet > "${RUNNER_TEMP}/failed-output.log" 2>&1; then
+              write_state "failed_kernel_outputs_retrieved" "Existing kernel failed; outputs retrieved for diagnosis before any retry"
+            else
+              sed -E "s/${owner}/[REDACTED_OWNER]/g; s/KGAT_[A-Za-z0-9_-]+/[REDACTED_TOKEN]/g" "${RUNNER_TEMP}/failed-output.log" >> dispatch-evidence/dispatch-redacted.log
+              write_state "failed_kernel_output_retrieval_failed" "Existing kernel failed and its outputs could not be retrieved"
+            fi
+            exit 1
           fi
 
           if [[ "$resume_existing" != "true" ]]; then
