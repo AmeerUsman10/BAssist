@@ -106,14 +106,22 @@ def build_model_and_tokenizer(config: Config):
     tokenizer = AutoTokenizer.from_pretrained(config.model_name)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
+    # Soft-memory meta-training differentiates through a gradient update.
+    # PyTorch's efficient SDPA backward does not implement the derivative of
+    # its own backward pass, so second-order runs must use eager attention.
     if config.initialization == "pretrained":
-        model = AutoModelForCausalLM.from_pretrained(config.model_name)
-    elif config.initialization == "random":
-        model = AutoModelForCausalLM.from_config(
-            AutoConfig.from_pretrained(config.model_name)
+        model = AutoModelForCausalLM.from_pretrained(
+            config.model_name,
+            attn_implementation="eager",
         )
+    elif config.initialization == "random":
+        model_config = AutoConfig.from_pretrained(config.model_name)
+        model_config._attn_implementation = "eager"
+        model = AutoModelForCausalLM.from_config(model_config)
     else:
         raise ValueError("initialization must be pretrained or random")
+    if getattr(model.config, "_attn_implementation", None) != "eager":
+        raise RuntimeError("soft-memory meta-training requires eager attention")
     model.config.pad_token_id = tokenizer.pad_token_id
     model.config.use_cache = False
     if not 0 <= config.freeze_first_n_blocks <= len(model.transformer.h):
