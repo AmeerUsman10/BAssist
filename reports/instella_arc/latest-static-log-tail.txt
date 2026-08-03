@@ -28,4 +28,4 @@ E               ValueError: invalid ARC action: 1
 instella_arc/prompts.py:92: ValueError
 =========================== short test summary info ============================
 FAILED instella_arc/tests/test_prompts.py::test_action_normalization_is_stable_and_deduplicated - ValueError: invalid ARC action: 1
-1 failed, 136 passed in 21.61s
+1 failed, 136 passed in 21.83s
