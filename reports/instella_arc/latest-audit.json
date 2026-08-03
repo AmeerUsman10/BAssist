@@ -1,11 +1,12 @@
 {
   "schema": "instella_arc.audit.v1",
-  "recorded_at_utc": "2026-08-03T04:39:28.191364+00:00",
+  "recorded_at_utc": "2026-08-03T04:42:28.490346+00:00",
   "catalog": {
     "checkpoints": {
       "base": {
         "key": "base",
         "repository_id": "amd/Instella-MoE-16B-A3B-Base",
+        "revision": "5ca845e88b237ca66c9c8e1f2551933a47b0daf9",
         "stage": "long-context base",
         "chat_tuned": false,
         "preferred_use": "clean adaptation and causal-scoring control"
@@ -13,6 +14,7 @@
       "dpo": {
         "key": "dpo",
         "repository_id": "amd/Instella-MoE-16B-A3B-DPO",
+        "revision": "ef5a850b1e5638a98b2e28cf321a6c1b63ccde39",
         "stage": "direct preference optimization",
         "chat_tuned": true,
         "preferred_use": "first ARC-specific parameter-efficient tuning substrate"
@@ -20,6 +22,7 @@
       "think": {
         "key": "think",
         "repository_id": "amd/Instella-MoE-16B-A3B-Think",
+        "revision": "e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83",
         "stage": "reinforcement learning / multi-teacher on-policy distillation",
         "chat_tuned": true,
         "preferred_use": "strongest frozen reasoning baseline"
@@ -36,7 +39,8 @@
         "base",
         "think"
       ],
-      "one_checkpoint_per_run": true
+      "one_checkpoint_per_run": true,
+      "pinned_upstream_revisions": true
     }
   },
   "checkpoints": {
@@ -44,6 +48,7 @@
       "spec": {
         "key": "base",
         "repository_id": "amd/Instella-MoE-16B-A3B-Base",
+        "revision": "5ca845e88b237ca66c9c8e1f2551933a47b0daf9",
         "stage": "long-context base",
         "chat_tuned": false,
         "preferred_use": "clean adaptation and causal-scoring control"
@@ -326,6 +331,7 @@
       "spec": {
         "key": "dpo",
         "repository_id": "amd/Instella-MoE-16B-A3B-DPO",
+        "revision": "ef5a850b1e5638a98b2e28cf321a6c1b63ccde39",
         "stage": "direct preference optimization",
         "chat_tuned": true,
         "preferred_use": "first ARC-specific parameter-efficient tuning substrate"
@@ -608,6 +614,7 @@
       "spec": {
         "key": "think",
         "repository_id": "amd/Instella-MoE-16B-A3B-Think",
+        "revision": "e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83",
         "stage": "reinforcement learning / multi-teacher on-policy distillation",
         "chat_tuned": true,
         "preferred_use": "strongest frozen reasoning baseline"
