@@ -1,0 +1,17 @@
+{
+  "protocol": "raw_goal_signature_v1",
+  "event_id": "arc-gpt2-raw-goal-timing-retry-20260803-001",
+  "run_mode": "timing",
+  "implementation_commit": "f1e4b609347d10cbcff13185742f3e50120eb6e5",
+  "dispatcher_fix_commit": "168f3db4178a668d419b3ce7fea108676b0f671f",
+  "green_preflight_run": 30842551928,
+  "issue_number": 12,
+  "issue_update_comment_id": 5170393592,
+  "manifest_digest": "02e59b60dab038e16f45fbfe03dc9dadece1c0d1fc8082210834965e7634ab04",
+  "matched_seed": 577215,
+  "optimizer_steps": 0,
+  "locked_groups_queried": 0,
+  "conservative_runtime_ceiling_seconds": 16200,
+  "competition_submission": false,
+  "model_weights_persisted": false
+}
