@@ -1,0 +1,6 @@
+{
+  "schema": "instella_arc.action_replication_actual_monitor_request.v1",
+  "purpose": "Follow-up read-only status check while the recovery workflow waits for version 1 outputs.",
+  "kernel_slug": "instella-arc-action-replication-64",
+  "read_only": true
+}
