@@ -18,6 +18,7 @@ on:
       - ".github/workflows/arc-gpt2-raw-goal-signature-gpu.yml"
       - "kaggle/arc-gpt2-raw-goal-signature-gpu/runner.py"
       - "arcgpt2/RAW_GOAL_SIGNATURE_V1.md"
+      - "arcgpt2/launches/raw-goal-signature/**"
       - "arcgpt2/raw_goal_signature_data.py"
       - "arcgpt2/meta_soft_raw_goal_signature.py"
       - "arcgpt2/tests/test_raw_goal_signature_data.py"
@@ -246,8 +247,8 @@ jobs:
               raise SystemExit("expected exactly one source and mode placeholder")
           injected = source.replace(needle, f'SOURCE_SHA = "{os.environ["GITHUB_SHA"]}"')
           injected = injected.replace(mode_needle, f'RUN_MODE = "{os.environ["ARC_RUN_MODE"]}"')
-          if "__SOURCE_SHA__" in injected or '__RUN_MODE__' in injected:
-              raise SystemExit("unresolved runner placeholder remains")
+          if needle in injected or mode_needle in injected:
+              raise SystemExit("unresolved runner assignment placeholder remains")
           Path(os.environ["RUNNER_TARGET"]).write_text(injected, encoding="utf-8")
           PY
           PRIVATE_OWNER="$owner" STAGE="$stage" python - <<'PY'

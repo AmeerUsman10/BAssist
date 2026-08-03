@@ -17,6 +17,12 @@ RUNNER_PATH = (
     / "arc-gpt2-raw-goal-signature-gpu"
     / "runner.py"
 )
+WORKFLOW_PATH = (
+    Path(__file__).resolve().parents[2]
+    / ".github"
+    / "workflows"
+    / "arc-gpt2-raw-goal-signature-gpu.yml"
+)
 
 
 @pytest.fixture(scope="module")
@@ -76,3 +82,27 @@ def test_timing_mode_is_bounded_to_nonlocked_surfaces(runner):
     assert runner.TIMING_PROJECTION_MULTIPLIER == 1.25
     assert runner.TIMING_FIXED_ALLOWANCE_SECONDS == 900
     assert runner.FULL_KERNEL_RUNTIME_CEILING_SECONDS <= 11 * 60 * 60
+
+
+@pytest.mark.parametrize("mode", ("full", "timing"))
+def test_staging_replaces_assignments_not_every_validation_literal(mode):
+    """The allowed-value guard intentionally retains ``__RUN_MODE__`` text."""
+
+    source = RUNNER_PATH.read_text(encoding="utf-8")
+    source_needle = 'SOURCE_SHA = "__SOURCE_SHA__"'
+    mode_needle = 'RUN_MODE = "__RUN_MODE__"'
+    assert source.count(source_needle) == source.count(mode_needle) == 1
+    injected = source.replace(
+        source_needle, 'SOURCE_SHA = "0000000000000000000000000000000000000000"'
+    ).replace(mode_needle, f'RUN_MODE = "{mode}"')
+    assert source_needle not in injected
+    assert mode_needle not in injected
+    # parse_args validates the uninjected source too, so the bare sentinel is
+    # still present in a set literal.  A whole-file substring check is invalid.
+    assert "__RUN_MODE__" in injected
+    compile(injected, str(RUNNER_PATH), "exec")
+
+    workflow = WORKFLOW_PATH.read_text(encoding="utf-8")
+    assert "if needle in injected or mode_needle in injected:" in workflow
+    assert "unresolved runner assignment placeholder remains" in workflow
+    assert '"arcgpt2/launches/raw-goal-signature/**"' in workflow
