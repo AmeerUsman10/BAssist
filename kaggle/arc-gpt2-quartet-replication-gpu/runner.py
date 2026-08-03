@@ -42,6 +42,7 @@ MODEL_LEARNING_RATE = 0.0001
 EVALUATION_INTERVAL = 10
 PLATEAU_PATIENCE = 101
 NONPASS_CENSORED_T = MAX_OUTER_STEPS + EVALUATION_INTERVAL
+REPLICATION_SCHEMA_VERSION = 1
 
 WORKING = Path("/kaggle/working")
 RUN_ROOT = WORKING / "arc_gpt2_quartet_replication_gpu"
@@ -634,6 +635,7 @@ def main() -> None:
         }
 
     result = {
+        "schema_version": REPLICATION_SCHEMA_VERSION,
         "status": (
             "pass"
             if all(execution_gates.values()) and scientific_gate["passed"]
