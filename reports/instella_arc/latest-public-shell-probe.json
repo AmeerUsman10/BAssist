@@ -1,7 +1,7 @@
 {
   "schema": "instella_arc.public_shell_probe.v1",
-  "started_at_utc": "2026-08-03T12:38:09.538919+00:00",
-  "finished_at_utc": "2026-08-03T12:38:11.286127+00:00",
+  "started_at_utc": "2026-08-03T12:41:33.567293+00:00",
+  "finished_at_utc": "2026-08-03T12:41:57.614840+00:00",
   "operation_mode": "ONLINE",
   "competition_mode": false,
   "anonymous_or_environment_key": true,
@@ -13,55 +13,3333 @@
   "games": [
     {
       "game_id": "ft09",
-      "status": "failure",
-      "result": null,
-      "error": {
-        "type": "RuntimeError",
-        "message": "controller selected non-legal action '6'; available=('ACTION6',)",
-        "traceback_tail": [
-          "Traceback (most recent call last):",
-          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/toolkit_runner.py\", line 135, in run",
-          "    action_object = action_map[decision.action]",
-          "                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^",
-          "KeyError: '6'",
-          "",
-          "The above exception was the direct cause of the following exception:",
-          "",
-          "Traceback (most recent call last):",
-          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/public_probe.py\", line 81, in run_probe",
-          "    ).run()",
-          "      ^^^^^",
-          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/toolkit_runner.py\", line 137, in run",
-          "    raise RuntimeError(",
-          "RuntimeError: controller selected non-legal action '6'; available=('ACTION6',)"
+      "status": "success",
+      "result": {
+        "schema": "instella_arc.toolkit_run.v1",
+        "started_at_utc": "2026-08-03T12:41:34.262364+00:00",
+        "finished_at_utc": "2026-08-03T12:41:50.068557+00:00",
+        "game_id": "ft09-0d8bbf25",
+        "terminal_state": "NOT_FINISHED",
+        "levels_completed": 0,
+        "win_levels": 6,
+        "actions": 80,
+        "max_actions": 80,
+        "controller_summary": {
+          "schema": "instella_arc.closed_loop_controller.v1",
+          "game_id": "ft09-0d8bbf25",
+          "state": "NOT_FINISHED",
+          "levels_completed": 0,
+          "level_epoch": 0,
+          "actions_this_level": 80,
+          "total_actions": 80,
+          "receipts": 80,
+          "failed_plans": 0,
+          "completed_plans": 0,
+          "active_plan_id": null,
+          "action_profiles": {
+            "ACTION6": {
+              "trials": 80,
+              "consistency": 1.0,
+              "no_change_rate": 1.0,
+              "progress_rate": 0.0,
+              "translation_vectors": [
+                [
+                  -16,
+                  0
+                ],
+                [
+                  -8,
+                  0
+                ],
+                [
+                  -8,
+                  8
+                ],
+                [
+                  -4,
+                  0
+                ],
+                [
+                  -4,
+                  2
+                ],
+                [
+                  -2,
+                  -4
+                ],
+                [
+                  -2,
+                  2
+                ],
+                [
+                  0,
+                  -34
+                ],
+                [
+                  0,
+                  -32
+                ],
+                [
+                  0,
+                  -16
+                ],
+                [
+                  0,
+                  -8
+                ],
+                [
+                  0,
+                  -4
+                ],
+                [
+                  0,
+                  4
+                ],
+                [
+                  0,
+                  8
+                ],
+                [
+                  0,
+                  16
+                ],
+                [
+                  0,
+                  32
+                ],
+                [
+                  0,
+                  34
+                ],
+                [
+                  2,
+                  -2
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  4,
+                  -2
+                ],
+                [
+                  4,
+                  0
+                ],
+                [
+                  8,
+                  -8
+                ],
+                [
+                  8,
+                  0
+                ],
+                [
+                  16,
+                  0
+                ]
+              ]
+            }
+          }
+        },
+        "trace": [
+          {
+            "step": 0,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "untried-action;untried-coordinate;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 0.16424957499999948
+          },
+          {
+            "step": 1,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "ea5ac65fdb7cea3a8838db0db532c2b7eb1eb4ca47d86f55afccf59aadd58db8",
+            "elapsed_seconds": 0.36199539400000447
+          },
+          {
+            "step": 2,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              0
+            ],
+            "api_data": {
+              "x": 0,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "567149be7638b6f3a2dd03133593b6db15701242aa48b8d849e282b9eb9c0179",
+            "elapsed_seconds": 0.563206993999998
+          },
+          {
+            "step": 3,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              49,
+              45
+            ],
+            "api_data": {
+              "x": 45,
+              "y": 49
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "d5876880d715cfe56d859fb05d2225b8ea5cb592bd6c5598826340e6b6cc8a5c",
+            "elapsed_seconds": 0.6912969380000078
+          },
+          {
+            "step": 4,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              49,
+              17
+            ],
+            "api_data": {
+              "x": 17,
+              "y": 49
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "f0d1c282958cdaca7831b05bd8754a1e131959fb1de0fd5ae4a49009c989a3da",
+            "elapsed_seconds": 0.8192111780000033
+          },
+          {
+            "step": 5,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              48,
+              16
+            ],
+            "api_data": {
+              "x": 16,
+              "y": 48
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "d954a71fc3692c8dc1619f2ed55fdb55d5472d74c49dd3d863062c17f2ef67ce",
+            "elapsed_seconds": 1.023059711000002
+          },
+          {
+            "step": 6,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              47,
+              49
+            ],
+            "api_data": {
+              "x": 49,
+              "y": 47
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "e5c9f8dbf6efb6b0e256ccfe1c4e8a7f8cda099f6d5371ebd799030aea290a39",
+            "elapsed_seconds": 1.1737387780000006
+          },
+          {
+            "step": 7,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              47,
+              13
+            ],
+            "api_data": {
+              "x": 13,
+              "y": 47
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "c4e6da5410bdb6eed6b4c47e538298b87efe5d2324967f9d55ba006f253f8c99",
+            "elapsed_seconds": 1.318645525000008
+          },
+          {
+            "step": 8,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "e6cbade865c496000dbbabb24bc7086f866dc3dc7d593b7ac0d2a26126a98701",
+            "elapsed_seconds": 1.4134812089999969
+          },
+          {
+            "step": 9,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              44
+            ],
+            "api_data": {
+              "x": 44,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "f234916462dfdc7aea7e4f6de23d4f9700cf67a860dfeb317b1cef1ffb9343cf",
+            "elapsed_seconds": 1.549824786000002
+          },
+          {
+            "step": 10,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              16
+            ],
+            "api_data": {
+              "x": 16,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "a34fea1500b16b42dbebf44df702caf379afdf0f12de7941d08e970184784655",
+            "elapsed_seconds": 1.756541764000005
+          },
+          {
+            "step": 11,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              12
+            ],
+            "api_data": {
+              "x": 12,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "671c0d1f6d82fb09d0f82d4621675f1f541a5b6e96b630c53ef857f0dd6c8fef",
+            "elapsed_seconds": 1.963313522000007
+          },
+          {
+            "step": 12,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              44,
+              44
+            ],
+            "api_data": {
+              "x": 44,
+              "y": 44
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "d98dfff1edd33ba5c496751fd6c3fe92f6d4024740bd6b00c4b40129a24cc530",
+            "elapsed_seconds": 2.103872933000005
+          },
+          {
+            "step": 13,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              44,
+              12
+            ],
+            "api_data": {
+              "x": 12,
+              "y": 44
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "89b745936415cb3f45b38f311ae330a72c6d83e55eb78ed781a3cadc907760a9",
+            "elapsed_seconds": 2.311243317000006
+          },
+          {
+            "step": 14,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              32,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 32
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "d6f53fd9c329e9f765f3c9de0bb81f27623bee9ebdec0d6f55740d74917c14ef",
+            "elapsed_seconds": 2.5385609550000083
+          },
+          {
+            "step": 15,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              15,
+              49
+            ],
+            "api_data": {
+              "x": 49,
+              "y": 15
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "a7e189af9c72c9dc870ba82c6e2a4ebbfbf7d2d52035d09d3253387cf55c662d",
+            "elapsed_seconds": 2.757398770000009
+          },
+          {
+            "step": 16,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              15,
+              17
+            ],
+            "api_data": {
+              "x": 17,
+              "y": 15
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "b67cf4c6388a5a17b32870892085b507d799a21fad0556835f619f9c352279ad",
+            "elapsed_seconds": 2.973670052000003
+          },
+          {
+            "step": 17,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              14,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 14
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "7c944b760ac33794299bd9a6726e530017d50e2dd4b3d12614e96b1ee68a8640",
+            "elapsed_seconds": 3.1054717190000076
+          },
+          {
+            "step": 18,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              14,
+              16
+            ],
+            "api_data": {
+              "x": 16,
+              "y": 14
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "7541d590a3473c2ba3e1f0cf366818ed4e22c12e870cbc8b08aec0e2a23fa002",
+            "elapsed_seconds": 3.3137018660000024
+          },
+          {
+            "step": 19,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              14,
+              14
+            ],
+            "api_data": {
+              "x": 14,
+              "y": 14
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "703501a5eb877cb49793d9b85b1e1d011be42d2dd3c5e84debf7fb6373fb1263",
+            "elapsed_seconds": 3.4476601559999978
+          },
+          {
+            "step": 20,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              13,
+              51
+            ],
+            "api_data": {
+              "x": 51,
+              "y": 13
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "ecb5e7ccc0d64d3502b811c10d613b64d4a1a76802145b71abb3115c16c14cea",
+            "elapsed_seconds": 3.6612527310000047
+          },
+          {
+            "step": 21,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              13,
+              47
+            ],
+            "api_data": {
+              "x": 47,
+              "y": 13
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "43984e44cf8cae0556dc6ca2c203e724b320816c203d56c3c5b24f2471cf1db1",
+            "elapsed_seconds": 3.7991509240000028
+          },
+          {
+            "step": 22,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              13,
+              13
+            ],
+            "api_data": {
+              "x": 13,
+              "y": 13
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "c5532e801eb4d63d8b930d5792f235fac525b9c3a7f403d8a4dbe7b2af40702d",
+            "elapsed_seconds": 4.012479226000011
+          },
+          {
+            "step": 23,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              12,
+              50
+            ],
+            "api_data": {
+              "x": 50,
+              "y": 12
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "0ca80168db834112102a68089eacc41ce5d66113808e9db4221dc2e7ccfb47c3",
+            "elapsed_seconds": 4.414553147000007
+          },
+          {
+            "step": 24,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              12,
+              46
+            ],
+            "api_data": {
+              "x": 46,
+              "y": 12
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "4de7a6cdde0447f8daad8e29a7a3763f0a9cac40a8044f2e417d0607ebd84e1e",
+            "elapsed_seconds": 4.555727926000003
+          },
+          {
+            "step": 25,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              12,
+              12
+            ],
+            "api_data": {
+              "x": 12,
+              "y": 12
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3157834e43f0e5c96510dd9485aab5e88676986ddee721d937d6c2ed549d2b49",
+            "elapsed_seconds": 4.771268000000006
+          },
+          {
+            "step": 26,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              11,
+              49
+            ],
+            "api_data": {
+              "x": 49,
+              "y": 11
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "b5aecefd449a730e3290ba2e6dac3ef1f05eac1c7d8aba29d2f608758e781269",
+            "elapsed_seconds": 4.9158642860000015
+          },
+          {
+            "step": 27,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              11,
+              15
+            ],
+            "api_data": {
+              "x": 15,
+              "y": 11
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "17119789f937dc1d48511d9dcbbc2113a1bb12b461982b46ff5c631d577fdb25",
+            "elapsed_seconds": 5.135997051000004
+          },
+          {
+            "step": 28,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              10,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 10
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "517ca19f1bb7c143a36124933ba065c177172f4e4358be3f222b8a0104c11fe9",
+            "elapsed_seconds": 5.350591813999998
+          },
+          {
+            "step": 29,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              10,
+              14
+            ],
+            "api_data": {
+              "x": 14,
+              "y": 10
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "0cac48cf4a4143614cc40a872fafdff7923980a5ae1993a630070a95d2081fbb",
+            "elapsed_seconds": 5.5748557770000104
+          },
+          {
+            "step": 30,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              0,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 0
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "fc90abf6a2af265fffd2fb9bf0ba9f33558d535c02c769aa259798d5b02e0b0f",
+            "elapsed_seconds": 5.796012430000005
+          },
+          {
+            "step": 31,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              0,
+              0
+            ],
+            "api_data": {
+              "x": 0,
+              "y": 0
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;untried-coordinate;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "4ae324dc65ed08c68a5a77eb19f0874e2171c8a7c8356610a3fc1accd6688a68",
+            "elapsed_seconds": 5.943805674000004
+          },
+          {
+            "step": 32,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 6.16689370600001
+          },
+          {
+            "step": 33,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 6.317073027000006
+          },
+          {
+            "step": 34,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 6.496282983
+          },
+          {
+            "step": 35,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 6.720775693000007
+          },
+          {
+            "step": 36,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 6.951157088000002
+          },
+          {
+            "step": 37,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 7.10325541600001
+          },
+          {
+            "step": 38,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 7.32603352000001
+          },
+          {
+            "step": 39,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 7.478176781000002
+          },
+          {
+            "step": 40,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 7.708335681999998
+          },
+          {
+            "step": 41,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 7.929754772999999
+          },
+          {
+            "step": 42,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 8.085929549
+          },
+          {
+            "step": 43,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 8.238726748000005
+          },
+          {
+            "step": 44,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 8.46929843800001
+          },
+          {
+            "step": 45,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 8.620245300000008
+          },
+          {
+            "step": 46,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 8.773025848000003
+          },
+          {
+            "step": 47,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 9.005231754999997
+          },
+          {
+            "step": 48,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 9.205034988999998
+          },
+          {
+            "step": 49,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 9.436702777000008
+          },
+          {
+            "step": 50,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 9.678843959000005
+          },
+          {
+            "step": 51,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 9.919469926000005
+          },
+          {
+            "step": 52,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 10.079894336999999
+          },
+          {
+            "step": 53,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 10.324981663000003
+          },
+          {
+            "step": 54,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 10.563845227000002
+          },
+          {
+            "step": 55,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 10.799586805000004
+          },
+          {
+            "step": 56,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 11.043092858999998
+          },
+          {
+            "step": 57,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 11.278668156999998
+          },
+          {
+            "step": 58,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 11.523818820000002
+          },
+          {
+            "step": 59,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 11.762127485000008
+          },
+          {
+            "step": 60,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 11.927413158000007
+          },
+          {
+            "step": 61,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 12.166667462000007
+          },
+          {
+            "step": 62,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 12.337681091999997
+          },
+          {
+            "step": 63,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 12.576739312
+          },
+          {
+            "step": 64,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 12.81720947800001
+          },
+          {
+            "step": 65,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 13.116524709000004
+          },
+          {
+            "step": 66,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 13.288722460000002
+          },
+          {
+            "step": 67,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 13.531904392000001
+          },
+          {
+            "step": 68,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 13.702868050000006
+          },
+          {
+            "step": 69,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 13.95253107100001
+          },
+          {
+            "step": 70,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 14.126720371000005
+          },
+          {
+            "step": 71,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 14.296221136
+          },
+          {
+            "step": 72,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 14.466173693000002
+          },
+          {
+            "step": 73,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 14.644521991000005
+          },
+          {
+            "step": 74,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 14.828349524000004
+          },
+          {
+            "step": 75,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 15.088622126000004
+          },
+          {
+            "step": 76,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 15.27740415800001
+          },
+          {
+            "step": 77,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 15.453596834999999
+          },
+          {
+            "step": 78,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 15.628265827000007
+          },
+          {
+            "step": 79,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              63,
+              63
+            ],
+            "api_data": {
+              "x": 63,
+              "y": 63
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;usually-no-change;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3469e95fb5e12bc004bf7f04acb7f4d8d48b0e80438322e66d7b11c0823dc304",
+            "elapsed_seconds": 15.806148739000008
+          }
         ]
-      }
+      },
+      "error": null
     },
     {
       "game_id": "ls20",
-      "status": "failure",
-      "result": null,
-      "error": {
-        "type": "RuntimeError",
-        "message": "controller selected non-legal action '4'; available=('ACTION1', 'ACTION2', 'ACTION3', 'ACTION4')",
-        "traceback_tail": [
-          "Traceback (most recent call last):",
-          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/toolkit_runner.py\", line 135, in run",
-          "    action_object = action_map[decision.action]",
-          "                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^",
-          "KeyError: '4'",
-          "",
-          "The above exception was the direct cause of the following exception:",
-          "",
-          "Traceback (most recent call last):",
-          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/public_probe.py\", line 81, in run_probe",
-          "    ).run()",
-          "      ^^^^^",
-          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/toolkit_runner.py\", line 137, in run",
-          "    raise RuntimeError(",
-          "RuntimeError: controller selected non-legal action '4'; available=('ACTION1', 'ACTION2', 'ACTION3', 'ACTION4')"
+      "status": "success",
+      "result": {
+        "schema": "instella_arc.toolkit_run.v1",
+        "started_at_utc": "2026-08-03T12:41:50.358469+00:00",
+        "finished_at_utc": "2026-08-03T12:41:57.533708+00:00",
+        "game_id": "ls20-9607627b",
+        "terminal_state": "NOT_FINISHED",
+        "levels_completed": 0,
+        "win_levels": 7,
+        "actions": 80,
+        "max_actions": 80,
+        "controller_summary": {
+          "schema": "instella_arc.closed_loop_controller.v1",
+          "game_id": "ls20-9607627b",
+          "state": "NOT_FINISHED",
+          "levels_completed": 0,
+          "level_epoch": 0,
+          "actions_this_level": 80,
+          "total_actions": 80,
+          "receipts": 80,
+          "failed_plans": 0,
+          "completed_plans": 0,
+          "active_plan_id": null,
+          "action_profiles": {
+            "ACTION1": {
+              "trials": 1,
+              "consistency": 1.0,
+              "no_change_rate": 0.0,
+              "progress_rate": 0.0,
+              "translation_vectors": [
+                [
+                  -5,
+                  0
+                ],
+                [
+                  -1,
+                  -1
+                ],
+                [
+                  0,
+                  -3
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  1,
+                  1
+                ]
+              ]
+            },
+            "ACTION2": {
+              "trials": 1,
+              "consistency": 1.0,
+              "no_change_rate": 0.0,
+              "progress_rate": 0.0,
+              "translation_vectors": [
+                [
+                  -1,
+                  -1
+                ],
+                [
+                  0,
+                  -3
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  1,
+                  1
+                ]
+              ]
+            },
+            "ACTION3": {
+              "trials": 39,
+              "consistency": 0.9743589743589743,
+              "no_change_rate": 0.0,
+              "progress_rate": 0.0,
+              "translation_vectors": [
+                [
+                  -1,
+                  -1
+                ],
+                [
+                  0,
+                  -5
+                ],
+                [
+                  0,
+                  -3
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  0,
+                  49
+                ],
+                [
+                  1,
+                  1
+                ]
+              ]
+            },
+            "ACTION4": {
+              "trials": 39,
+              "consistency": 0.9487179487179487,
+              "no_change_rate": 0.0,
+              "progress_rate": 0.0,
+              "translation_vectors": [
+                [
+                  -1,
+                  -1
+                ],
+                [
+                  0,
+                  -49
+                ],
+                [
+                  0,
+                  -3
+                ],
+                [
+                  0,
+                  3
+                ],
+                [
+                  0,
+                  5
+                ],
+                [
+                  1,
+                  1
+                ],
+                [
+                  5,
+                  0
+                ]
+              ]
+            }
+          }
+        },
+        "trace": [
+          {
+            "step": 0,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "untried-action;untried-coordinate;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "6b84582c750eea432aad05a95ca430afcaec2fe4916fd7973ae4b4e8c028b2bc",
+            "action_receipt_sha256": "ea5dd9efef7e0d19f8cc0c1ce87993740beeaf49031d5627186db9a082625a98",
+            "elapsed_seconds": 0.08780787199999907
+          },
+          {
+            "step": 1,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "untried-action;untried-coordinate;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "db7b90c5bff2f5d4abd9180876efb9c50cb8c82e008007ca207b244dcca1348a",
+            "action_receipt_sha256": "a885f435fcdb584b9694e819907e232f0909db46bda0e41be9024d3f2bee226a",
+            "elapsed_seconds": 0.20763951099999645
+          },
+          {
+            "step": 2,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "untried-action;untried-coordinate;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "bd15c35fac9922c1877a3b7918e1a08c3b192cd4c745d81e53b5f122ee9fa5d9",
+            "action_receipt_sha256": "6756b638b2e15c39c13a205daacafca722202c33e74f76fa526811f69dd7352b",
+            "elapsed_seconds": 0.32144174799999803
+          },
+          {
+            "step": 3,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "untried-action;untried-coordinate;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "3474482cb6333bf38e923432fe71b641924939ed84d8403cd50c455cbea237be",
+            "action_receipt_sha256": "056326c6270d6caeb0da4c5ff96e89825eb3c6fb27ba5bd0e35a373a7a74ffe2",
+            "elapsed_seconds": 0.3998988689999976
+          },
+          {
+            "step": 4,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "c9037bac22640ed840b1094c6a7bda2957a5f21ad7d7b6f8cc126a9bc8016813",
+            "action_receipt_sha256": "39662341be7f75cbfd7776117d3830f73361057f988d5f39cc08cf17e30cbaf5",
+            "elapsed_seconds": 0.47817635900000255
+          },
+          {
+            "step": 5,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "3214f394653e31a1c9a3b0b508298fd19971288e0191dc890cfc314edb0fe235",
+            "action_receipt_sha256": "9ea11adb7dd2b767b0faae742078d0674e1aebf3d375df1ad38397e97e2959ef",
+            "elapsed_seconds": 0.5958451779999905
+          },
+          {
+            "step": 6,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "78d30a51291e320c1a4d1d4a7a76237c4a6945e5234a412fe576dd60e5480591",
+            "action_receipt_sha256": "f220f39ffa0aa6883c5d9879a3e9b495bb2530a23a695d1cb83c4c228ee28086",
+            "elapsed_seconds": 0.7120766489999966
+          },
+          {
+            "step": 7,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "8a9fa9710d16a073d2dfcd6d0f561afdf0f5ece3557a8b16d1c7b704fcdcd05f",
+            "action_receipt_sha256": "494337c3b8bb882f9bc72e4c922d970eb080d4e6874df16e0b4e6d20b842019f",
+            "elapsed_seconds": 0.7917903529999819
+          },
+          {
+            "step": 8,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "a699522e261507e0cb0f64b0a25a9498916217b6db241485bc9409aaffa90977",
+            "action_receipt_sha256": "b213fd769a76cf984c5d5572c03824d107143f0f27ac7e033fcba91d6b6240f2",
+            "elapsed_seconds": 0.8705957249999869
+          },
+          {
+            "step": 9,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "396ea44d2b90af94ac0e1ba1f4a8de847b2c0bccc67b7c6bd4ce4273b213ead6",
+            "action_receipt_sha256": "05d43d0bef17c3c3986e177902fc11dc1ed18c650cb18447854cfa21804e96b8",
+            "elapsed_seconds": 0.9510392679999882
+          },
+          {
+            "step": 10,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "7b0ed11f2d2cf951071d99f003c4f8953b17b5b18d171a035962d7a09ba239ea",
+            "action_receipt_sha256": "af033e95ac22ca86e1b40227f61a6d145a984c8b5483fc6e69e10e4f8fa8f9e7",
+            "elapsed_seconds": 1.0691555789999825
+          },
+          {
+            "step": 11,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "ecab1cd605897f9501115263a1bcd1e4895a54e052d56e37b293caa8ea2109df",
+            "action_receipt_sha256": "7ad25e3ee83694c411fba3423afd977a1f3b6988b8adff0ea150c5e88f8f13ce",
+            "elapsed_seconds": 1.1856878209999877
+          },
+          {
+            "step": 12,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "34dd7b01d6c654132e0fe9d178fe583a41f1eab56ed2be6d1c4217fbe6a5a47e",
+            "action_receipt_sha256": "7f4d0205f51f261caca399a295b1fab12f85165855e0e9f42cb4d35fa36653b4",
+            "elapsed_seconds": 1.3041524719999984
+          },
+          {
+            "step": 13,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "534b79758c52e3b85d8c40b08cba6ea4c416dd5b7a6e806963b08dab2193d8e6",
+            "action_receipt_sha256": "5e073695246ba29ccb6457d4b926c306281db873e3651ec75c1ab72eb745316c",
+            "elapsed_seconds": 1.4222597970000095
+          },
+          {
+            "step": 14,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "d60442e20d9d8fab382aa908dbc78fb00aed9fbd9ddd29184423adf9180e9d0b",
+            "action_receipt_sha256": "41d9f7b45c2accfb8f0ed1798e9ca1655f8ff47ca99bccec9f81cf5e5a20a5e3",
+            "elapsed_seconds": 1.4994864880000023
+          },
+          {
+            "step": 15,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "1a91cdeb16ef6fa2bcdd4e5c099673700758337bb722894b5949d26587bc02b0",
+            "action_receipt_sha256": "46a40d36a89214014146e6e3c2308f6401312d2ac51b4cf2101e89ca25e56551",
+            "elapsed_seconds": 1.5765179160000002
+          },
+          {
+            "step": 16,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "7cf14584917614930fb7a2e08fb9f71f183d48b9129421481d8470d9ce388649",
+            "action_receipt_sha256": "9262e2204009edf1a6c75586a2239fd4a875929854fd5b71951fa88c15d05a32",
+            "elapsed_seconds": 1.6935644060000072
+          },
+          {
+            "step": 17,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "c7aa90ec86a0939f41feb28569607621e46e1104abbf69e3918d9c2619b2bede",
+            "action_receipt_sha256": "0a4a17e7a552d5b67d732930eb40934324cc9391e23e821a47f53b087f3d4cfd",
+            "elapsed_seconds": 1.773251762000001
+          },
+          {
+            "step": 18,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "45d864df92da129f5756e41b24c77523d0fed865f35b7eb4080c29cc915cb5bd",
+            "action_receipt_sha256": "cf00fbdf0f21bd0694fd33e74dc18a26b49ce9ac15a205b8ba3a6824bcbafb2c",
+            "elapsed_seconds": 1.8924967940000101
+          },
+          {
+            "step": 19,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "a1c4a0368f38e4a941de0f80db9aa3187d140fb733b67fa97e96bae67381becc",
+            "action_receipt_sha256": "02e95d746d6d652fd8c3f37f79cda75af87e435a10ee679c86aa9092f85d309f",
+            "elapsed_seconds": 2.009377704000002
+          },
+          {
+            "step": 20,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "6c1497053e0a01b8413299cd733d7026b8a4ae3565e760568c3deb409507e18e",
+            "action_receipt_sha256": "e549c98a18b72cd61c1a9cdf61b32ed28a82c6e5669bccaed01f904dbed208bc",
+            "elapsed_seconds": 2.0881792899999994
+          },
+          {
+            "step": 21,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "b41c88921fa4f768c8d8fd4ff1ccd2c6c102075d98edfb3ec1257d641c805cd3",
+            "action_receipt_sha256": "964465d6568c637abae6453c35c54814e76613cfc7e3aab64270ee963032b09d",
+            "elapsed_seconds": 2.2046644339999943
+          },
+          {
+            "step": 22,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "f9bedbafea5187eca8fe5e0a6a021406749944b4fb6c6cfabcca0542911824e7",
+            "action_receipt_sha256": "9b11944d07ff17fa22e86d2d3cfbdf1866d8e8db59e422682b31dffd5b40e4f2",
+            "elapsed_seconds": 2.285372628999994
+          },
+          {
+            "step": 23,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "0276334cd67fa82f6880f90e7e787b302dc85322276a35cbb7dba43319fd5bd3",
+            "action_receipt_sha256": "d9260b0d55b6219f72d4d12ed996d647d377cf25a6e69ce01953faa7f57c0a48",
+            "elapsed_seconds": 2.399961760999986
+          },
+          {
+            "step": 24,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "6107322f46643f73180610eee38b2a9b3e7863387dcdec5e347f75dcb9da9f59",
+            "action_receipt_sha256": "ac4ae187dad9b1a464a4d59ba77cfb211fc4d0c21d503b83d9a35478ce2a32ec",
+            "elapsed_seconds": 2.5183142029999885
+          },
+          {
+            "step": 25,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "b5231bf0c23121d531e5ee836d4c03a231c827c2daf01ba5c165c4cd571577ef",
+            "action_receipt_sha256": "f5aeaf2424abe8ed1da1f142d4d789b4d92dbb67cf2759413d1cea6166dc981f",
+            "elapsed_seconds": 2.595647203999988
+          },
+          {
+            "step": 26,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "bad9e48db7d3731873775773ec54315e7334ea7094421ab2e6dc497cbe150ee2",
+            "action_receipt_sha256": "44ae7e5d09e59df851233e1508a3e75957f50ea060d483ee1a0cccd8f6567787",
+            "elapsed_seconds": 2.6732551549999926
+          },
+          {
+            "step": 27,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "be40657b5350514f8ecdcb0af099e8976d30f12c9a0982257428e84ab13627f9",
+            "action_receipt_sha256": "3e470b2eab28206e37c5ceaca930803f2d1cea47349d15d78f5320e87c19334e",
+            "elapsed_seconds": 2.750602530000009
+          },
+          {
+            "step": 28,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "2614b1cd464432a82e55466061f1a4f10fbf8cf31e17b98617e8f5a4594c2fdd",
+            "action_receipt_sha256": "a7405d584d81dda7714480b02056e58c5202c0288947967b657f5c02837068fb",
+            "elapsed_seconds": 2.8278228510000076
+          },
+          {
+            "step": 29,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "de3cf6e7d45e8731769a4f0ef2d507d0d70a07b21221d7c947e2c86a5062ba18",
+            "action_receipt_sha256": "b955d1f1fcbebf8c1dc94f4277985cc2d4fc3d676e978b2e1d9e8d28cff79059",
+            "elapsed_seconds": 2.943165886999992
+          },
+          {
+            "step": 30,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "1a68a19a3c7b7658b33df38b6591724226ad80217d0655ca1a67079bba87aa0b",
+            "action_receipt_sha256": "8aba208f6ef6201bc2d5a4bbe81f4873cfd0aac9631fb8d51b91e794444e5df3",
+            "elapsed_seconds": 3.058112594999983
+          },
+          {
+            "step": 31,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "21162916c3265371aaa8c1c73ddaa8284fd0f651ce6f12687da8bdd63b366cb2",
+            "action_receipt_sha256": "90049ea1fae75ed1425aeae6d91ed041bf6489ea9f34ecc29f84b39c1aa9b6f5",
+            "elapsed_seconds": 3.136487426000002
+          },
+          {
+            "step": 32,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "2bcdec2b4a9938560de39fa613804857e3f5632b648d9448ae350bd0163c5ea1",
+            "action_receipt_sha256": "f02f61fceb6cf419666f24a7b6f21ffaeb127f8fe8d0121863d99cd273a60717",
+            "elapsed_seconds": 3.2518513089999885
+          },
+          {
+            "step": 33,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "2a35d6006bd3568ea2d95739572f7f0f15ca7499a51e1bc9cb8e2e791b029fe6",
+            "action_receipt_sha256": "b1318c9c722856f3098e60a991481e380e99b29c4f54cb221bb40779e138c2f5",
+            "elapsed_seconds": 3.329079622999984
+          },
+          {
+            "step": 34,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "c9380aef9fe4605a014b95ebcfd92005e1f963a046a372d116864a26653fb58f",
+            "action_receipt_sha256": "40e5b7e6056b7564078b3bc2619cf6ac0ca620e491eb8d18b743c2070018e7b2",
+            "elapsed_seconds": 3.4434772939999903
+          },
+          {
+            "step": 35,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "4ca8163c6d5b3466dcaabe3dbc8d5f6595d0f4d83aff336dc49bfcf0032f714a",
+            "action_receipt_sha256": "c9e6d76171d6d0ca5e7b6dd42914bc9348725f6ebc7258b51a54922dbcc5ff09",
+            "elapsed_seconds": 3.561829620999987
+          },
+          {
+            "step": 36,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "ee47411a966dcc463c765f36cd5c32b731089b5a8156076d4d4646a1b1353790",
+            "action_receipt_sha256": "a7e6c4635105af9f12c21a297daa2706464e1624cd22469a5f7ea2f4b7f89669",
+            "elapsed_seconds": 3.6826403529999823
+          },
+          {
+            "step": 37,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "39a55b8402029f6a2d73d8d12f8aa9d5a0f82101357e7bbad25712eb66f33f8a",
+            "action_receipt_sha256": "c25e26facfc556f68f9a6980817e58292ff9e425e0ed56bca7456e218fb33b6b",
+            "elapsed_seconds": 3.8015494450000062
+          },
+          {
+            "step": 38,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "75eecf2d4dd9d191a5f524cb6d645712d441faae87934c559775cd89e7a23345",
+            "action_receipt_sha256": "5ac2acff957595a8ec53e7456b839bc4b9b163940acd1fb53840d9086b8aa70a",
+            "elapsed_seconds": 3.878814157999983
+          },
+          {
+            "step": 39,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "414c2fecdd0e76a3ba21f5609d552aaf1732015f63f0229b0c6384b6f4d19c1a",
+            "action_receipt_sha256": "522724517e248636de552c250470345b1307c5b7908739e15b5c33634c226704",
+            "elapsed_seconds": 3.957377027000007
+          },
+          {
+            "step": 40,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "14d3dd1fd5ee6f3c5c244b5ee6cceacf29c3a1d3bfe50915b502432dbd0c17a4",
+            "action_receipt_sha256": "a7972671b22026d46ae42bc148be43903df0de74e9b72d8f23393a2b04f31e25",
+            "elapsed_seconds": 4.036262265999994
+          },
+          {
+            "step": 41,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "26153899e156a08e08a44d68bf675e44b97311b0c12ccc534f64e1d0189651dd",
+            "action_receipt_sha256": "0b4f6a0d1aefa190a2bdf65bc7526068638c72207dae8321b1ecf7e83ab0a5d9",
+            "elapsed_seconds": 4.112311005000009
+          },
+          {
+            "step": 42,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "41619272d895c7a7646a94a74aa1ba6d52419b02dd764a4a2237ab4d1f74b738",
+            "action_receipt_sha256": "f92515fb02aa46027b6f31e49f7d761907942a66466aa8de83191407758b28ec",
+            "elapsed_seconds": 4.302548879
+          },
+          {
+            "step": 43,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "c2587dab028e9c4f684041a2baefaff13c501e93c5101320c84aaa5a4e1ecbe5",
+            "action_receipt_sha256": "ac8006376c1c4053f38671a73a962a23a604afec2200015b482bc75b64dc2b0b",
+            "elapsed_seconds": 4.377783411999985
+          },
+          {
+            "step": 44,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "a3083a2b04d6fd69f63fe08c8fde86cb92b4713d55b99bc5f211d669192cb7cd",
+            "action_receipt_sha256": "1809374d6618932297b5861333c0d6129268a40fecde53c48a8ad40b4cd4ffc4",
+            "elapsed_seconds": 4.456165535999986
+          },
+          {
+            "step": 45,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "70dbb8d24a35e9c82a0094b24a4eb1b9feae83d9eb372871b186d03e30ce1af3",
+            "action_receipt_sha256": "fe31171ba76224d29dead45b525b3f702dec76c226595ceda8070bf778abb8cf",
+            "elapsed_seconds": 4.532907563000009
+          },
+          {
+            "step": 46,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "527191a796032346ee90179d17bbf548b29190a09eb0426b92a64cd62e260fdc",
+            "action_receipt_sha256": "0acb543e363115ac300b4c4af2c1163308961ed01c6638eff75ff58a6db0e79b",
+            "elapsed_seconds": 4.610299032
+          },
+          {
+            "step": 47,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "7b42d34bff1e436a44e398c7f7164fd3b91afcf7b6b00d92295627bd1bfc7d9a",
+            "action_receipt_sha256": "4996d73acd44a7523af41aecf21b8b347112fdc5b6bb2a1012cf57b8d0e8b539",
+            "elapsed_seconds": 4.685416277000002
+          },
+          {
+            "step": 48,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "2ebef4ecad4f52c8a71213420af71f84ad04214d3faa07bb6c5b79ac048a93df",
+            "action_receipt_sha256": "d535dde6713632323cf0464de1d42bd5c0723232e3b71f696a865d1e3ef332b8",
+            "elapsed_seconds": 4.762890650000003
+          },
+          {
+            "step": 49,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "732ee5781e12a0798abc857a200c3adbe84e7d7fce141340aeed816a6d12fdef",
+            "action_receipt_sha256": "cd0369980808e4287ff3905ebe4c32adec6a8ec57ea291beddcb3ca68e061c5e",
+            "elapsed_seconds": 4.839441142999988
+          },
+          {
+            "step": 50,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "37b299c59086e4fe63f2268503b7c5e01352664c30cd8f82270328d68cc0ba14",
+            "action_receipt_sha256": "f554871e46b5aadd2d611ff70751b5a8fe73eef84a635d69a62d1e0f54b205de",
+            "elapsed_seconds": 4.917129364999994
+          },
+          {
+            "step": 51,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "0c1ac5652a8d5ae3b8aacc248d86f350928a311351aa6a8fcf0da5084f801e83",
+            "action_receipt_sha256": "a9177cdcf9db8d5ad14686d3f243f482567e2ac7df502bd72c891ecc9c4c473e",
+            "elapsed_seconds": 4.994180930999988
+          },
+          {
+            "step": 52,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "c5cf3e1669064d02916609b9a4718bdc0a6e83733eff649c918abde3bfdf71e1",
+            "action_receipt_sha256": "4523a6fa49fa0ed4e519e9b32c34866bd973461fa13bd117fbdedd60392ed356",
+            "elapsed_seconds": 5.072475381000004
+          },
+          {
+            "step": 53,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "0ea83a4b963163afed28a152e8589dad39c3df78b5a192c4c630d75d8fc3c706",
+            "action_receipt_sha256": "808f9951a4d3fac3551a2706acb5840e71918957314ac3145dd62570e6c794a1",
+            "elapsed_seconds": 5.1504271119999885
+          },
+          {
+            "step": 54,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "4536cb1986ff5c4cb9744b0a9b52608712ba89de59061aece1d57fc477ec1de5",
+            "action_receipt_sha256": "7d213815632e23ca65d9dddbeaa001d4a23348cefcbe0ccd5fe85df63e6531cf",
+            "elapsed_seconds": 5.227317529000004
+          },
+          {
+            "step": 55,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "ce778798ca8d3735f2777fc02e5457624c7762ca3b86ead17c409d9af27bb963",
+            "action_receipt_sha256": "df36edcaa3be4645f575e32683e45a9efb3ee577406bdab7b4ce0cc2b72c919c",
+            "elapsed_seconds": 5.304887049000001
+          },
+          {
+            "step": 56,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "90c982c56dfd38fee6cccce01905efc49a7d796a56e6d20fababbc7bde95ad4a",
+            "action_receipt_sha256": "1cfb188e3ffc87c0e03fb7dc122bb45ec169fa8a9dda7251d2d2cd0097a258df",
+            "elapsed_seconds": 5.383164778000008
+          },
+          {
+            "step": 57,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "2ca07e4517e30b18f936a0c751897e0df755df218b71bf4cc3f448b85706d923",
+            "action_receipt_sha256": "b84cf7fdd218f157a91c1d1fac55941345ea688b4aa483eab37dc9232d3320b3",
+            "elapsed_seconds": 5.459652253000002
+          },
+          {
+            "step": 58,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "53416063276f0a9a4490d4454c263a25ead077296918840359a1c757b142e161",
+            "action_receipt_sha256": "aaeaee9621f4a602743542ebdf5d3e467be6259fe66cf8bfc45ea75f2d6102be",
+            "elapsed_seconds": 5.536026187999994
+          },
+          {
+            "step": 59,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "8e60060e464db32d0089f5f9bd7ed6d1cb775c986a38ca311ee49afb0c2f80a7",
+            "action_receipt_sha256": "bb680af177a19b570c26e0a12e2e09ee07f9f6a116fa8c56e85cd217a32c2599",
+            "elapsed_seconds": 5.61239827899999
+          },
+          {
+            "step": 60,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "66dbfaa24672743f12eabdf3946056d864b8beedf54e5ab1dcaa8e944761a2f5",
+            "action_receipt_sha256": "ffb9f3c9e372903b6b6a17f46284102682eb6bf2655e9bca184dea26ce119ea5",
+            "elapsed_seconds": 5.688553487000007
+          },
+          {
+            "step": 61,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "747ef6000d4ede68a3ef2ac3ee8bd87018ed07d012e65c72f407b7b6fafa6d67",
+            "action_receipt_sha256": "fb5d37ae4440d2eda69ad8a85d7e0c13efa01b54bb930964bf9636d8867eea71",
+            "elapsed_seconds": 5.77140662299999
+          },
+          {
+            "step": 62,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "0f7caf8a6d1a354ce9ec9b681ce3a91b4e22dcb469c06235dab2ce146cfeca4a",
+            "action_receipt_sha256": "ea29eaba96ba1f3fd97251da3dac14d1ba76592563ed9c60a1adacaa85bebe9d",
+            "elapsed_seconds": 5.849999569000005
+          },
+          {
+            "step": 63,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "06802ecf9e08bc137d473223370cc2bc1f3205d1a3520f9473418201b97f1503",
+            "action_receipt_sha256": "28ce8425978f171a444a30590e14f27646aa58628d431222a1e7ca9283ebbc19",
+            "elapsed_seconds": 5.928398764000008
+          },
+          {
+            "step": 64,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "5a2e3b473b2fb07c4f77974813d522dfe15102dd3565b90c91b9f79882eb6c9e",
+            "action_receipt_sha256": "dc8f1f1159b31ebf3bb8018c97af0cfe872f3139a687366039ee658a3e900df7",
+            "elapsed_seconds": 6.006329606999998
+          },
+          {
+            "step": 65,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "b53eeccb9b2ac41ccbb978c9d8dc5c668b2fedc4a010e7b2b6f945c05b4ce3f5",
+            "action_receipt_sha256": "a9a2df35553f48a69086615666321965a11147d0c48ed4caf453297d774a04b9",
+            "elapsed_seconds": 6.0845011179999915
+          },
+          {
+            "step": 66,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "b3b3b4ab0ee29007319bdc81e57d37199627759310a1005e5b0f60b558e25118",
+            "action_receipt_sha256": "c046c5091761a028bd0bf8d1db63d947d9741cbffe26d74bcdb301e57f99580c",
+            "elapsed_seconds": 6.162396384999994
+          },
+          {
+            "step": 67,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "bb1ec2b9db0622bf5ff2b2a94e2542458db3b1b423ee7ce1fc860457cf0b6e1c",
+            "action_receipt_sha256": "55d67b82159d0d8d1b9fc15f1a09522108e89b883162192dfd6803df775dd5ef",
+            "elapsed_seconds": 6.239318169000001
+          },
+          {
+            "step": 68,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "b5a7b42b2288e7aceebad6415a3397aff5369fb7847c3f2cff62c68589c7bc99",
+            "action_receipt_sha256": "b89f176b2fd55d4d225b20e6f7e3c448ccae0a7afac151696cca44333ae6cb00",
+            "elapsed_seconds": 6.3167064319999895
+          },
+          {
+            "step": 69,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "35659adb1e4cd129a6335cf1fe646cb1859b58afbd46ceac33573cde8f7d388e",
+            "action_receipt_sha256": "1545afea7b29b7389954094562c94d430ed83185b0b73636c5486e3490474f26",
+            "elapsed_seconds": 6.394704349999984
+          },
+          {
+            "step": 70,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "0ef7c3eee8c995d32505efdfbb04c5e7838754a3693d5181a633044498205869",
+            "action_receipt_sha256": "e78707d05689e5a6879a0121cba29ea102e86176157e8eebf270e06d82f60638",
+            "elapsed_seconds": 6.474253685999997
+          },
+          {
+            "step": 71,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "d51830d9a000abe97b67fe54c8a3441d8cf54b6ebba5254379c87d42e4979a84",
+            "action_receipt_sha256": "ad521783d6033e177bc3e488f5d5163bec5ac5a73cac77d29c2f0063f1f1a52d",
+            "elapsed_seconds": 6.550327130999989
+          },
+          {
+            "step": 72,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "60711348a22d2d4a89e5be0ac42a7e1513da70a361e131bb253d395226658357",
+            "action_receipt_sha256": "7fd044cd1117b7efc418000af5e3b3c8762b1dd5efe2688cc590ee697b0439d1",
+            "elapsed_seconds": 6.628251452000001
+          },
+          {
+            "step": 73,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "14cb9892cc7b383d806f19c339491a88dc05caa701f1fddf6a48f96d2efe05c8",
+            "action_receipt_sha256": "05f5fe6c3f5144089e5b9a9864cd9acb8d0971af56779ee6e5676bf1ece1e95a",
+            "elapsed_seconds": 6.706341882000004
+          },
+          {
+            "step": 74,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "ad4db75407c12396a8d4bd5b0696612217bc5f186350f71511ffbc2ae6b2e1b3",
+            "action_receipt_sha256": "8934676cd7c2adda8538d93dbeb3bc7ecf3475f797d3b3e660a39a720ecd8d55",
+            "elapsed_seconds": 6.785477437999987
+          },
+          {
+            "step": 75,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "73b4022d8565f75e375976157fd7973ea0cafde0b08f27d9dfd0ab9c4aaf7cae",
+            "action_receipt_sha256": "468882c043f3c9a8043f26d33b079a1a0253058203fa789857e3e34e7f9980f1",
+            "elapsed_seconds": 6.865228248999983
+          },
+          {
+            "step": 76,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "96ffe4d3e6ecee1e44bdf7a69868197da11d3274e96a085a383a03faccc61a0b",
+            "action_receipt_sha256": "05c2a1193aeee05182b54693fc6e4905eda3deb5dc2b5c2b714ea18ffe381cc5",
+            "elapsed_seconds": 6.94365483499999
+          },
+          {
+            "step": 77,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "183317effb99b2cc1f080c9c193ee7c6bfdae97e53b140866a3220792c941fab",
+            "action_receipt_sha256": "9e3ef3bf3a60e5179c5aca81906163ecd80055e11fbee7e97052a56a33468ceb",
+            "elapsed_seconds": 7.020654323999992
+          },
+          {
+            "step": 78,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "ec4c497d12dd656dcbf90dd5a962e5601fc8b36f746134fa6234f421651d63f9",
+            "action_receipt_sha256": "7b115adb09762dd8d1872748751080476897eab4f428e23eef3e759a8a81959a",
+            "elapsed_seconds": 7.0961200179999935
+          },
+          {
+            "step": 79,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;state-repetition-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "92bb0ea34066180ece9b64d254ee57266e26ec598e1e616d7334f735310b30e5",
+            "action_receipt_sha256": "4256364f4f49e964fd4b1aac836ef0aedd260be97f06115dfec5873ce3835dfd",
+            "elapsed_seconds": 7.175220427999989
+          }
         ]
-      }
+      },
+      "error": null
     }
   ],
   "completed_levels_total": 0,
@@ -72,7 +3350,7 @@
       "agent"
     ],
     "opaque": null,
-    "card_id": "ad45622b-6142-430d-84f6-af2128a737cb",
+    "card_id": "41077f1f-f1b1-4901-93e9-91c1dd243765",
     "api_key": null,
     "score": 0.0,
     "environments": [
@@ -81,10 +3359,10 @@
         "runs": [
           {
             "id": null,
-            "guid": "af47075c-2e47-431b-b0a9-74ac84248c91",
+            "guid": "b864da3f-69a1-4ff7-acc2-507861e1115c",
             "score": 0.0,
             "levels_completed": 0,
-            "actions": 0,
+            "actions": 80,
             "resets": 0,
             "state": "NOT_FINISHED",
             "completed": false,
@@ -97,7 +3375,7 @@
               0.0
             ],
             "level_actions": [
-              0,
+              80,
               0,
               0,
               0,
@@ -118,7 +3396,7 @@
           }
         ],
         "score": 0.0,
-        "actions": 0,
+        "actions": 80,
         "levels_completed": 0,
         "completed": false,
         "level_count": 6,
@@ -129,10 +3407,10 @@
         "runs": [
           {
             "id": null,
-            "guid": "cf6a4c81-b0f4-4943-bd50-78415f1d9a19",
+            "guid": "58664754-0d08-482e-a48b-2abb7a21b0f9",
             "score": 0.0,
             "levels_completed": 0,
-            "actions": 0,
+            "actions": 80,
             "resets": 0,
             "state": "NOT_FINISHED",
             "completed": false,
@@ -146,7 +3424,7 @@
               0.0
             ],
             "level_actions": [
-              0,
+              80,
               0,
               0,
               0,
@@ -169,7 +3447,7 @@
           }
         ],
         "score": 0.0,
-        "actions": 0,
+        "actions": 80,
         "levels_completed": 0,
         "completed": false,
         "level_count": 7,
@@ -182,7 +3460,7 @@
         "guid": null,
         "score": 0.0,
         "levels_completed": 0,
-        "actions": 0,
+        "actions": 80,
         "resets": null,
         "state": null,
         "completed": null,
@@ -199,7 +3477,7 @@
     "total_environments": 2,
     "total_levels_completed": 0,
     "total_levels": 13,
-    "total_actions": 0
+    "total_actions": 160
   },
   "scope": "Public development probe of deterministic evidence/navigation shell. No competition submission and no Instella model capability claim."
 }

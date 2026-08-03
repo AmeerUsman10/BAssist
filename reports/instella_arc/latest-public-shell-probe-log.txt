@@ -1,71 +1,31 @@
 INFO:arc_agi.scorecard:Initialized ScorecardManager with idle_for=0:15:00 and max_open_for=3 days, 0:00:00
-2026-08-03 12:38:09 | INFO | Got anonymous API key: a3c1a476-e357-4421-89e9-1dc0009e1f25
-2026-08-03 12:38:09 | INFO | You can register for an API key at https://three.arcprize.org
-2026-08-03 12:38:10 | INFO | Successfully fetched 25 environment(s) from API
-2026-08-03 12:38:10 | INFO | Created new scorecard: ad45622b-6142-430d-84f6-af2128a737cb
-2026-08-03 12:38:10 | INFO | Successfully fetched metadata for game ft09
-2026-08-03 12:38:10 | INFO | Successfully reset game ft09-0d8bbf25, guid=af47075c-2e47-431b-b0a9-74ac84248c91, scorecard_id=ad45622b-6142-430d-84f6-af2128a737cb
-2026-08-03 12:38:10 | INFO | Successfully fetched metadata for game ls20
-2026-08-03 12:38:11 | INFO | Successfully reset game ls20-9607627b, guid=cf6a4c81-b0f4-4943-bd50-78415f1d9a19, scorecard_id=ad45622b-6142-430d-84f6-af2128a737cb
-2026-08-03 12:38:11 | INFO | Closed scorecard: ad45622b-6142-430d-84f6-af2128a737cb
+2026-08-03 12:41:33 | INFO | Got anonymous API key: dca34121-1428-438d-8c2f-0f1593d4e03b
+2026-08-03 12:41:33 | INFO | You can register for an API key at https://three.arcprize.org
+2026-08-03 12:41:33 | INFO | Successfully fetched 25 environment(s) from API
+2026-08-03 12:41:34 | INFO | Created new scorecard: 41077f1f-f1b1-4901-93e9-91c1dd243765
+2026-08-03 12:41:34 | INFO | Successfully fetched metadata for game ft09
+2026-08-03 12:41:34 | INFO | Successfully reset game ft09-0d8bbf25, guid=b864da3f-69a1-4ff7-acc2-507861e1115c, scorecard_id=41077f1f-f1b1-4901-93e9-91c1dd243765
+2026-08-03 12:41:50 | INFO | Successfully fetched metadata for game ls20
+2026-08-03 12:41:50 | INFO | Successfully reset game ls20-9607627b, guid=58664754-0d08-482e-a48b-2abb7a21b0f9, scorecard_id=41077f1f-f1b1-4901-93e9-91c1dd243765
+2026-08-03 12:41:57 | INFO | Closed scorecard: 41077f1f-f1b1-4901-93e9-91c1dd243765
 {
   "output": "outputs/instella_arc/public-shell-probe.json",
-  "sha256": "8f419d85125a5ed8977975bee75ccfc5f99102ee2613ddbe77e954e818b28dc0",
+  "sha256": "8a0dfd6e18a2550c1cc755727b6c35695499a1b928ebe4a6507808bb2a77b1f3",
   "completed_levels_total": 0,
   "games": [
     {
       "game_id": "ft09",
-      "status": "failure",
-      "levels_completed": null,
-      "actions": null,
-      "error": {
-        "type": "RuntimeError",
-        "message": "controller selected non-legal action '6'; available=('ACTION6',)",
-        "traceback_tail": [
-          "Traceback (most recent call last):",
-          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/toolkit_runner.py\", line 135, in run",
-          "    action_object = action_map[decision.action]",
-          "                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^",
-          "KeyError: '6'",
-          "",
-          "The above exception was the direct cause of the following exception:",
-          "",
-          "Traceback (most recent call last):",
-          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/public_probe.py\", line 81, in run_probe",
-          "    ).run()",
-          "      ^^^^^",
-          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/toolkit_runner.py\", line 137, in run",
-          "    raise RuntimeError(",
-          "RuntimeError: controller selected non-legal action '6'; available=('ACTION6',)"
-        ]
-      }
+      "status": "success",
+      "levels_completed": 0,
+      "actions": 80,
+      "error": null
     },
     {
       "game_id": "ls20",
-      "status": "failure",
-      "levels_completed": null,
-      "actions": null,
-      "error": {
-        "type": "RuntimeError",
-        "message": "controller selected non-legal action '4'; available=('ACTION1', 'ACTION2', 'ACTION3', 'ACTION4')",
-        "traceback_tail": [
-          "Traceback (most recent call last):",
-          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/toolkit_runner.py\", line 135, in run",
-          "    action_object = action_map[decision.action]",
-          "                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^",
-          "KeyError: '4'",
-          "",
-          "The above exception was the direct cause of the following exception:",
-          "",
-          "Traceback (most recent call last):",
-          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/public_probe.py\", line 81, in run_probe",
-          "    ).run()",
-          "      ^^^^^",
-          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/toolkit_runner.py\", line 137, in run",
-          "    raise RuntimeError(",
-          "RuntimeError: controller selected non-legal action '4'; available=('ACTION1', 'ACTION2', 'ACTION3', 'ACTION4')"
-        ]
-      }
+      "status": "success",
+      "levels_completed": 0,
+      "actions": 80,
+      "error": null
     }
   ]
 }
