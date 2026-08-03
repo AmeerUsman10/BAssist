@@ -1,0 +1,2360 @@
+[
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:11:48.258",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 151,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:11:48.269184+00:00",
+    "utilization_percent": 0
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:11:48.260",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 151,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:11:48.269217+00:00",
+    "utilization_percent": 0
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:11:53.302",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 151,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:11:53.312951+00:00",
+    "utilization_percent": 0
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:11:53.304",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 151,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:11:53.312971+00:00",
+    "utilization_percent": 0
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:11:58.344",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 151,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:11:58.354058+00:00",
+    "utilization_percent": 0
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:11:58.346",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 151,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:11:58.354080+00:00",
+    "utilization_percent": 0
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:12:03.381",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 151,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:03.391160+00:00",
+    "utilization_percent": 0
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:12:03.384",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 151,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:03.391181+00:00",
+    "utilization_percent": 0
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:12:08.422",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 151,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:08.433218+00:00",
+    "utilization_percent": 0
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:12:08.425",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 151,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:08.433264+00:00",
+    "utilization_percent": 0
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:12:13.465",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 785,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:13.476236+00:00",
+    "utilization_percent": 21
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:12:13.468",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 151,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:13.476266+00:00",
+    "utilization_percent": 0
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:12:18.508",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:18.519246+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:12:18.510",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:18.519277+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:12:23.549",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:23.561339+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:12:23.552",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:23.561373+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:12:28.593",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:28.604679+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:12:28.596",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:28.604702+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:12:33.636",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:33.647450+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:12:33.639",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:33.647479+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:12:38.678",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:38.690399+00:00",
+    "utilization_percent": 84
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:12:38.681",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:38.690430+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:12:43.721",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:43.734888+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:12:43.725",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:43.734918+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:12:48.767",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:48.778462+00:00",
+    "utilization_percent": 82
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:12:48.769",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:48.778490+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:12:53.808",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:53.819415+00:00",
+    "utilization_percent": 80
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:12:53.810",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:53.819445+00:00",
+    "utilization_percent": 83
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:12:58.851",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:58.865671+00:00",
+    "utilization_percent": 82
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:12:58.855",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:12:58.865701+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:13:03.897",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:03.909132+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:13:03.899",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:03.909174+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:13:08.940",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:08.952320+00:00",
+    "utilization_percent": 88
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:13:08.942",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:08.952350+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:13:13.980",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:13.990721+00:00",
+    "utilization_percent": 77
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:13:13.982",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:13.990750+00:00",
+    "utilization_percent": 78
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:13:19.022",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:19.034338+00:00",
+    "utilization_percent": 83
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:13:19.026",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:19.034368+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:13:24.066",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:24.077814+00:00",
+    "utilization_percent": 82
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:13:24.068",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:24.077844+00:00",
+    "utilization_percent": 84
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:13:29.109",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:29.122660+00:00",
+    "utilization_percent": 84
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:13:29.111",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:29.122691+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:13:34.154",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:34.168290+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:13:34.158",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:34.168347+00:00",
+    "utilization_percent": 89
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:13:39.200",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:39.211940+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:13:39.203",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:39.211963+00:00",
+    "utilization_percent": 89
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:13:44.241",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:44.254603+00:00",
+    "utilization_percent": 88
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:13:44.246",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:44.254625+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:13:49.287",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:49.301435+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:13:49.290",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:49.301466+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:13:54.333",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:54.346766+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:13:54.335",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:54.346799+00:00",
+    "utilization_percent": 84
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:13:59.379",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:59.392795+00:00",
+    "utilization_percent": 81
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:13:59.382",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:13:59.392838+00:00",
+    "utilization_percent": 88
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:14:04.424",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:04.437258+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:14:04.427",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:04.437288+00:00",
+    "utilization_percent": 84
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:14:09.469",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:09.480480+00:00",
+    "utilization_percent": 84
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:14:09.472",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:09.480508+00:00",
+    "utilization_percent": 88
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:14:14.514",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:14.525868+00:00",
+    "utilization_percent": 79
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:14:14.516",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:14.525899+00:00",
+    "utilization_percent": 80
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:14:19.553",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:19.564582+00:00",
+    "utilization_percent": 73
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:14:19.556",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:19.564604+00:00",
+    "utilization_percent": 79
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:14:24.596",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:24.608393+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:14:24.599",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:24.608423+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:14:29.640",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:29.654590+00:00",
+    "utilization_percent": 82
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:14:29.644",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:29.654621+00:00",
+    "utilization_percent": 84
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:14:34.686",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:34.698669+00:00",
+    "utilization_percent": 81
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:14:34.689",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:34.698692+00:00",
+    "utilization_percent": 89
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:14:39.731",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:39.744432+00:00",
+    "utilization_percent": 83
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:14:39.734",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:39.744467+00:00",
+    "utilization_percent": 82
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:14:44.776",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:44.787894+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:14:44.778",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:44.787917+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:14:49.819",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:49.832379+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:14:49.823",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:49.832409+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:14:54.864",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:54.877178+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:14:54.867",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:54.877208+00:00",
+    "utilization_percent": 89
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:14:59.910",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:59.922858+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:14:59.913",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:14:59.922909+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:15:04.950",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:04.960406+00:00",
+    "utilization_percent": 73
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:15:04.952",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:04.960428+00:00",
+    "utilization_percent": 83
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:15:09.992",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:10.004562+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:15:09.994",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:10.004594+00:00",
+    "utilization_percent": 89
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:15:15.036",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:15.048980+00:00",
+    "utilization_percent": 82
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:15:15.039",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:15.049003+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:15:20.081",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:20.092196+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:15:20.084",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:20.092225+00:00",
+    "utilization_percent": 89
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:15:25.124",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:25.136269+00:00",
+    "utilization_percent": 75
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:15:25.127",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:25.136324+00:00",
+    "utilization_percent": 88
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:15:30.165",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:30.177526+00:00",
+    "utilization_percent": 72
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:15:30.167",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:30.177557+00:00",
+    "utilization_percent": 77
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:15:35.207",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:35.217379+00:00",
+    "utilization_percent": 69
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:15:35.209",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:35.217402+00:00",
+    "utilization_percent": 76
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:15:40.250",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:40.262704+00:00",
+    "utilization_percent": 69
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:15:40.253",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:40.262737+00:00",
+    "utilization_percent": 75
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:15:45.292",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:45.303966+00:00",
+    "utilization_percent": 74
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:15:45.294",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:45.303993+00:00",
+    "utilization_percent": 76
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:15:50.336",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:50.347833+00:00",
+    "utilization_percent": 73
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:15:50.339",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:50.347862+00:00",
+    "utilization_percent": 79
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:15:55.376",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:55.386393+00:00",
+    "utilization_percent": 75
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:15:55.378",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:15:55.386417+00:00",
+    "utilization_percent": 81
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:16:00.417",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:00.428782+00:00",
+    "utilization_percent": 64
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:16:00.419",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:00.428817+00:00",
+    "utilization_percent": 64
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:16:05.459",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:05.470560+00:00",
+    "utilization_percent": 80
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:16:05.461",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:05.470588+00:00",
+    "utilization_percent": 71
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:16:10.500",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:10.510979+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:16:10.502",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:10.511009+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:16:15.542",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:15.554242+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:16:15.545",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:15.554268+00:00",
+    "utilization_percent": 88
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:16:20.586",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:20.597508+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:16:20.588",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:20.597539+00:00",
+    "utilization_percent": 82
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:16:25.629",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:25.641093+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:16:25.631",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:25.641122+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:16:30.673",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:30.684707+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:16:30.676",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:30.684736+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:16:35.716",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:35.727440+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:16:35.718",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:35.727472+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:16:40.759",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:40.771270+00:00",
+    "utilization_percent": 79
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:16:40.762",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:40.771325+00:00",
+    "utilization_percent": 83
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:16:45.803",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:45.816258+00:00",
+    "utilization_percent": 84
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:16:45.806",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:45.816289+00:00",
+    "utilization_percent": 88
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:16:50.845",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:50.858386+00:00",
+    "utilization_percent": 81
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:16:50.849",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:50.858414+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:16:55.889",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:55.900659+00:00",
+    "utilization_percent": 84
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:16:55.892",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:16:55.900688+00:00",
+    "utilization_percent": 84
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:17:00.932",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:00.946946+00:00",
+    "utilization_percent": 84
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:17:00.935",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:00.946974+00:00",
+    "utilization_percent": 88
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:17:05.979",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:05.994641+00:00",
+    "utilization_percent": 84
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:17:05.982",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:05.994672+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:17:11.026",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:11.037734+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:17:11.029",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:11.037766+00:00",
+    "utilization_percent": 89
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:17:16.070",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:16.081240+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:17:16.072",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:16.081269+00:00",
+    "utilization_percent": 84
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:17:21.113",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:21.125904+00:00",
+    "utilization_percent": 81
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:17:21.116",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:21.125936+00:00",
+    "utilization_percent": 89
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:17:26.157",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:26.170062+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:17:26.160",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:26.170091+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:17:31.204",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:31.215405+00:00",
+    "utilization_percent": 79
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:17:31.206",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:31.215437+00:00",
+    "utilization_percent": 84
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:17:36.248",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:36.258784+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:17:36.250",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:36.258816+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:17:41.290",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:41.302727+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:17:41.293",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:41.302754+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:17:46.334",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:46.346627+00:00",
+    "utilization_percent": 88
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:17:46.337",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:46.346658+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:17:51.376",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:51.387900+00:00",
+    "utilization_percent": 82
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:17:51.379",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:51.387924+00:00",
+    "utilization_percent": 84
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:17:56.419",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:56.433390+00:00",
+    "utilization_percent": 83
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:17:56.422",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:17:56.433418+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:18:01.465",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:01.477544+00:00",
+    "utilization_percent": 78
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:18:01.468",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:01.477576+00:00",
+    "utilization_percent": 83
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:18:06.509",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:06.522502+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:18:06.512",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:06.522534+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:18:11.554",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:11.567637+00:00",
+    "utilization_percent": 82
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:18:11.556",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:11.567668+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:18:16.599",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:16.610780+00:00",
+    "utilization_percent": 82
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:18:16.601",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:16.610810+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:18:21.642",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:21.654243+00:00",
+    "utilization_percent": 79
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:18:21.645",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:21.654272+00:00",
+    "utilization_percent": 87
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:18:26.686",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:26.697799+00:00",
+    "utilization_percent": 80
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:18:26.688",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:26.697830+00:00",
+    "utilization_percent": 89
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:18:31.729",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:31.741234+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:18:31.731",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:31.741262+00:00",
+    "utilization_percent": 88
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:18:36.773",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:36.787441+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:18:36.777",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:36.787468+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:18:41.819",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:41.831789+00:00",
+    "utilization_percent": 83
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:18:41.822",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:41.831819+00:00",
+    "utilization_percent": 88
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:18:46.864",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:46.877181+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:18:46.867",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:46.877213+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:18:51.905",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:51.918162+00:00",
+    "utilization_percent": 85
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:18:51.908",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:51.918191+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:18:56.950",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:56.963505+00:00",
+    "utilization_percent": 81
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:18:56.953",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:18:56.963535+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:19:01.997",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:02.011717+00:00",
+    "utilization_percent": 76
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:19:01.999",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:02.011750+00:00",
+    "utilization_percent": 86
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:19:07.043",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:07.053183+00:00",
+    "utilization_percent": 61
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:19:07.045",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:07.053205+00:00",
+    "utilization_percent": 78
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:19:12.085",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:12.097495+00:00",
+    "utilization_percent": 72
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:19:12.088",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:12.097523+00:00",
+    "utilization_percent": 89
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:19:17.128",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:17.140385+00:00",
+    "utilization_percent": 71
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:19:17.131",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:17.140408+00:00",
+    "utilization_percent": 84
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:19:22.172",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:22.183151+00:00",
+    "utilization_percent": 74
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:19:22.174",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:22.183183+00:00",
+    "utilization_percent": 84
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:19:27.215",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:27.226255+00:00",
+    "utilization_percent": 56
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:19:27.218",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:27.226277+00:00",
+    "utilization_percent": 63
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:19:32.257",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:32.268671+00:00",
+    "utilization_percent": 75
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:19:32.259",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:32.268698+00:00",
+    "utilization_percent": 80
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:19:37.299",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:37.310369+00:00",
+    "utilization_percent": 58
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:19:37.302",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:37.310395+00:00",
+    "utilization_percent": 67
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:19:42.342",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:42.353688+00:00",
+    "utilization_percent": 68
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:19:42.345",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:42.353718+00:00",
+    "utilization_percent": 78
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:19:47.386",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:47.398182+00:00",
+    "utilization_percent": 0
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:19:47.388",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:47.398243+00:00",
+    "utilization_percent": 75
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:19:52.429",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:52.438421+00:00",
+    "utilization_percent": 72
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:19:52.431",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:52.438444+00:00",
+    "utilization_percent": 70
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:19:57.468",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:57.479861+00:00",
+    "utilization_percent": 74
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:19:57.471",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:19:57.479889+00:00",
+    "utilization_percent": 72
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:20:02.510",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:02.522315+00:00",
+    "utilization_percent": 66
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:20:02.513",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:02.522346+00:00",
+    "utilization_percent": 5
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:20:07.554",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:07.565534+00:00",
+    "utilization_percent": 65
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:20:07.556",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:07.565564+00:00",
+    "utilization_percent": 76
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:20:12.596",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:12.607632+00:00",
+    "utilization_percent": 71
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:20:12.598",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:12.607662+00:00",
+    "utilization_percent": 77
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:20:17.642",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:17.655898+00:00",
+    "utilization_percent": 75
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:20:17.647",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:17.655934+00:00",
+    "utilization_percent": 70
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:20:22.687",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:22.699104+00:00",
+    "utilization_percent": 74
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:20:22.689",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:22.699134+00:00",
+    "utilization_percent": 75
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:20:27.729",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:27.740551+00:00",
+    "utilization_percent": 57
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:20:27.731",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:27.740581+00:00",
+    "utilization_percent": 75
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:20:32.776",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:32.788194+00:00",
+    "utilization_percent": 65
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:20:32.778",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:32.788223+00:00",
+    "utilization_percent": 74
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:20:37.815",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:37.825742+00:00",
+    "utilization_percent": 68
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:20:37.817",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:37.825770+00:00",
+    "utilization_percent": 64
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:20:42.856",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:42.867711+00:00",
+    "utilization_percent": 67
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:20:42.859",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:42.867739+00:00",
+    "utilization_percent": 72
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:20:47.899",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:47.911143+00:00",
+    "utilization_percent": 53
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:20:47.902",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:47.911172+00:00",
+    "utilization_percent": 54
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:20:52.942",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:52.953105+00:00",
+    "utilization_percent": 71
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:20:52.945",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:52.953134+00:00",
+    "utilization_percent": 78
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:20:57.984",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:57.996095+00:00",
+    "utilization_percent": 70
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:20:57.987",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:20:57.996122+00:00",
+    "utilization_percent": 74
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:21:03.029",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:03.041125+00:00",
+    "utilization_percent": 74
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:21:03.032",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:03.041154+00:00",
+    "utilization_percent": 70
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:21:08.072",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:08.085576+00:00",
+    "utilization_percent": 71
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:21:08.075",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:08.085605+00:00",
+    "utilization_percent": 76
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:21:13.117",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:13.128932+00:00",
+    "utilization_percent": 74
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:21:13.120",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:13.128962+00:00",
+    "utilization_percent": 70
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:21:18.161",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:18.171893+00:00",
+    "utilization_percent": 72
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:21:18.163",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:18.171923+00:00",
+    "utilization_percent": 75
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:21:23.203",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:23.216036+00:00",
+    "utilization_percent": 70
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:21:23.205",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:23.216067+00:00",
+    "utilization_percent": 78
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:21:28.243",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:28.253221+00:00",
+    "utilization_percent": 55
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:21:28.245",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:28.253251+00:00",
+    "utilization_percent": 65
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:21:33.284",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:33.296245+00:00",
+    "utilization_percent": 74
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:21:33.287",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:33.296276+00:00",
+    "utilization_percent": 77
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:21:38.328",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:38.342485+00:00",
+    "utilization_percent": 66
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:21:38.332",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:38.342517+00:00",
+    "utilization_percent": 77
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:21:43.375",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:43.385886+00:00",
+    "utilization_percent": 63
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:21:43.378",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:43.385918+00:00",
+    "utilization_percent": 76
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:21:48.417",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:48.427991+00:00",
+    "utilization_percent": 73
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:21:48.420",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:48.428020+00:00",
+    "utilization_percent": 76
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:21:53.462",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:53.473446+00:00",
+    "utilization_percent": 75
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:21:53.464",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:53.473478+00:00",
+    "utilization_percent": 71
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:21:58.505",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:58.518914+00:00",
+    "utilization_percent": 66
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:21:58.509",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:21:58.518942+00:00",
+    "utilization_percent": 77
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:22:03.553",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:22:03.564686+00:00",
+    "utilization_percent": 75
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:22:03.555",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:22:03.564717+00:00",
+    "utilization_percent": 75
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:22:08.596",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:22:08.607594+00:00",
+    "utilization_percent": 75
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:22:08.598",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:22:08.607623+00:00",
+    "utilization_percent": 77
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:22:13.639",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:22:13.651488+00:00",
+    "utilization_percent": 73
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:22:13.642",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:22:13.651518+00:00",
+    "utilization_percent": 81
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:22:18.683",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:22:18.692458+00:00",
+    "utilization_percent": 0
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:22:18.684",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:22:18.692486+00:00",
+    "utilization_percent": 71
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:22:23.783",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 151,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:22:23.796414+00:00",
+    "utilization_percent": 0
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:22:23.788",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:22:23.796438+00:00",
+    "utilization_percent": 63
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:22:28.823",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 151,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:22:28.834369+00:00",
+    "utilization_percent": 0
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:22:28.826",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:22:28.834399+00:00",
+    "utilization_percent": 77
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:22:33.862",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 151,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:22:33.872756+00:00",
+    "utilization_percent": 0
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:22:33.864",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:22:33.872784+00:00",
+    "utilization_percent": 76
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:22:38.900",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 151,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:22:38.910972+00:00",
+    "utilization_percent": 0
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:22:38.902",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:22:38.911002+00:00",
+    "utilization_percent": 77
+  },
+  {
+    "device_index": 0,
+    "device_timestamp": "2026/08/03 13:22:43.938",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 151,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:22:43.948579+00:00",
+    "utilization_percent": 0
+  },
+  {
+    "device_index": 1,
+    "device_timestamp": "2026/08/03 13:22:43.940",
+    "memory_total_mib": 15360,
+    "memory_used_mib": 1547,
+    "name": "Tesla T4",
+    "sampled_at_utc": "2026-08-03T13:22:43.948609+00:00",
+    "utilization_percent": 0
+  }
+]
