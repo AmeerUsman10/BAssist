@@ -85,6 +85,7 @@ class Config:
     freeze_first_n_blocks: int = 11
     save_model: bool = True
     require_cuda: bool = False
+    stop_on_gate_pass: bool = True
 
 
 def resolve_source_sha(config: Config) -> str | None:
@@ -583,9 +584,11 @@ def train(config: Config) -> dict[str, Any]:
                 flush=True,
             )
             if evaluation["gate"]["passed"]:
-                first_passing_step = step
-                stopped_reason = "gate_passed"
-                break
+                if first_passing_step is None:
+                    first_passing_step = step
+                if config.stop_on_gate_pass:
+                    stopped_reason = "gate_passed"
+                    break
         if step - last_improvement >= config.plateau_patience:
             stopped_reason = "plateau"
             break
@@ -699,6 +702,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--freeze-first-n-blocks", type=int, default=11)
     parser.add_argument("--no-save-model", action="store_true")
     parser.add_argument("--require-cuda", action="store_true")
+    parser.add_argument("--continue-after-pass", action="store_true")
     return parser.parse_args()
 
 
@@ -727,6 +731,7 @@ def main() -> None:
             freeze_first_n_blocks=args.freeze_first_n_blocks,
             save_model=not args.no_save_model,
             require_cuda=args.require_cuda,
+            stop_on_gate_pass=not args.continue_after_pass,
         )
     )
 

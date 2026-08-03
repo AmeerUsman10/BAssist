@@ -152,3 +152,8 @@ def test_source_sha_is_an_explicit_reproducibility_input(monkeypatch) -> None:
     config = raw.Config(source_sha="0123456789abcdef")
     assert raw.resolve_source_sha(config) == "0123456789abcdef"
     assert raw.resolve_source_sha(raw.Config()) == "environment-sha"
+
+
+def test_replication_can_record_a_full_curve_after_first_pass() -> None:
+    assert raw.Config().stop_on_gate_pass is True
+    assert raw.Config(stop_on_gate_pass=False).stop_on_gate_pass is False
