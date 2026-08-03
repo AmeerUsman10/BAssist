@@ -1,20 +1,20 @@
 {
   "status": "blocked",
   "branch": "instella-arc",
-  "commit_sha": "2cf0e3c551c012d5b7d4208a497466d014e145e4",
-  "run_id": "30785424019",
+  "commit_sha": "1e7addaa577cbd6abaa20024d756f02941ab4b6c",
+  "run_id": "30808051141",
   "run_attempt": "1",
-  "recorded_at_utc": "2026-08-03T04:48:46.251376+00:00",
+  "recorded_at_utc": "2026-08-03T11:04:43.637567+00:00",
   "prepare_outcome": "success",
   "push_outcome": "failure",
   "poll_outcome": "skipped",
   "preparation": {
     "status": "blocked",
-    "authenticated_credential_present": false,
-    "credential_format": null,
+    "authenticated_credential_present": true,
+    "credential_format": "KAGGLE_API_TOKEN",
     "kernel_id_present": false,
     "kernel_id": null,
-    "reason": "No Kaggle API credential is configured in GitHub secrets."
+    "reason": "Set KAGGLE_KERNEL_ID to username/instella-arc-frozen-probe or provide KAGGLE_USERNAME with legacy credentials."
   },
   "output_files": []
 }

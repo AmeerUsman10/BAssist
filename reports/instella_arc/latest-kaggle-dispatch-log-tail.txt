@@ -1,8 +1,8 @@
 {
   "status": "blocked",
-  "authenticated_credential_present": false,
-  "credential_format": null,
+  "authenticated_credential_present": true,
+  "credential_format": "KAGGLE_API_TOKEN",
   "kernel_id_present": false,
   "kernel_id": null,
-  "reason": "No Kaggle API credential is configured in GitHub secrets."
+  "reason": "Set KAGGLE_KERNEL_ID to username/instella-arc-frozen-probe or provide KAGGLE_USERNAME with legacy credentials."
 }
