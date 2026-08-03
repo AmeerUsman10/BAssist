@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "branch": "instella-arc",
+  "commit_sha": "333087a4781e2aca1c2734566f272f84ac16600c",
+  "run_id": "30785508843",
+  "run_attempt": "1",
+  "recorded_at_utc": "2026-08-03T04:52:06.119531+00:00",
+  "weight_downloaded": false,
+  "audit_present": true,
+  "audit_sha256": "dbb0bed021971466566e8e34fe9401e2ed36c61263a5d3c00c6c19131a590914",
+  "lora_plan_present": true,
+  "lora_plan_sha256": "15d5168ce371d4300b8e88587fcc121d5cc07f670501ac7141edb562a9f44036"
+}

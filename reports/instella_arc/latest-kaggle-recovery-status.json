@@ -1,40 +1,340 @@
 {
-  "schema": "instella_arc.kaggle_recovery.v1",
-  "recorded_at_utc": "2026-08-03T11:43:38.193314+00:00",
+  "schema": "instella_arc.kaggle_recovery.v2",
+  "recorded_at_utc": "2026-08-03T11:47:15.609100+00:00",
   "kernel_ref_resolved": true,
   "kernel_status": "complete",
   "status_query_exit_code": 0,
   "output_download_exit_code": 0,
   "output_files": [
-    "instella-arc-frozen-probe.log"
+    "BAssist-instella-arc/reports/arcgpt2/latest-contact-smoke-status.json",
+    "BAssist-instella-arc/reports/arcgpt2/latest-contact-world-status.json",
+    "BAssist-instella-arc/reports/arcgpt2/latest-counterfactual-epistemic-status.json",
+    "BAssist-instella-arc/reports/arcgpt2/latest-epistemic-status.json",
+    "BAssist-instella-arc/reports/arcgpt2/latest-factorized-status.json",
+    "BAssist-instella-arc/reports/arcgpt2/latest-goal-smoke-status.json",
+    "BAssist-instella-arc/reports/arcgpt2/latest-joint-epistemic-smoke-status.json",
+    "BAssist-instella-arc/reports/arcgpt2/latest-joint-epistemic-train-status.json",
+    "BAssist-instella-arc/reports/arcgpt2/latest-joint-v2-smoke-status.json",
+    "BAssist-instella-arc/reports/arcgpt2/latest-meta-soft-contrastive-smoke-status.json",
+    "BAssist-instella-arc/reports/arcgpt2/latest-meta-soft-contrastive-train-status.json",
+    "BAssist-instella-arc/reports/arcgpt2/latest-meta-soft-second-order-status.json",
+    "BAssist-instella-arc/reports/arcgpt2/latest-meta-soft-second-order-train-status.json",
+    "BAssist-instella-arc/reports/arcgpt2/latest-meta-soft-smoke-status.json",
+    "BAssist-instella-arc/reports/arcgpt2/latest-official-public-probe-status.json",
+    "BAssist-instella-arc/reports/arcgpt2/latest-program-smoke-status.json",
+    "BAssist-instella-arc/reports/arcgpt2/latest-world-agent-status.json",
+    "BAssist-instella-arc/reports/instella_arc/latest-kaggle-dispatch-status.json",
+    "BAssist-instella-arc/reports/instella_arc/latest-static-status.json",
+    "BAssist-instella-arc/reports/latest-status.json",
+    "instella-arc-frozen-probe.log",
+    "instella_arc_results/frozen_benchmark.json",
+    "instella_arc_results/status.json"
   ],
   "output_sha256": {
-    "instella-arc-frozen-probe.log": "663ccb3cac560e9da7b52d7e968cdab0f3e5bda698569c303f4377cfd4923475"
+    "BAssist-instella-arc/reports/arcgpt2/latest-contact-smoke-status.json": "ea62c5647184105b200bee0d9a66ab2f95d0df4344fc5edef96bf605f89795c9",
+    "BAssist-instella-arc/reports/arcgpt2/latest-contact-world-status.json": "815751e6759f992a107c988b265a87e4e0cfcb7d4c4f407930db7eb0a83a1e7a",
+    "BAssist-instella-arc/reports/arcgpt2/latest-counterfactual-epistemic-status.json": "84fc3320d6b0ae2879f28419771771d71eed1d7823145b804e60af8364f94dac",
+    "BAssist-instella-arc/reports/arcgpt2/latest-epistemic-status.json": "942bf01b4100026e9dd9f2cb9309b9780857e38ebd293cd6fc1092247728a138",
+    "BAssist-instella-arc/reports/arcgpt2/latest-factorized-status.json": "b8953db6465e97ed2f04aa357a16134d108366e48281748b281cd5e6831e06cf",
+    "BAssist-instella-arc/reports/arcgpt2/latest-goal-smoke-status.json": "3feadcf9602faa0fc2dbc3cea7a9defc73a7dc7b861345be7cd2d43599a222ac",
+    "BAssist-instella-arc/reports/arcgpt2/latest-joint-epistemic-smoke-status.json": "7892dcbdd1dcfad6f295e1f7a84aae62c10d830bfb25eaf6c440ab575d5bfa5b",
+    "BAssist-instella-arc/reports/arcgpt2/latest-joint-epistemic-train-status.json": "4609dcceb1c659dd6173a557a73366e970700954c94eb2b79567466542383ae5",
+    "BAssist-instella-arc/reports/arcgpt2/latest-joint-v2-smoke-status.json": "5337095332c488086ea61f7857ee32786f3b713e84e1e89b7bb46d0c6c2596be",
+    "BAssist-instella-arc/reports/arcgpt2/latest-meta-soft-contrastive-smoke-status.json": "8aca7def0c8192390b50892e9b6d7a88d607d18df424fd2c7a61bb81db35e07c",
+    "BAssist-instella-arc/reports/arcgpt2/latest-meta-soft-contrastive-train-status.json": "4bccb5bf783934607404770edfaff0d73ce8c18d27d9ccec450b2c2697610195",
+    "BAssist-instella-arc/reports/arcgpt2/latest-meta-soft-second-order-status.json": "bc35c22c8cc0be69ba8c077bd5a06f68d5b5b77b7d3b4249bd41ffbf6a84ec54",
+    "BAssist-instella-arc/reports/arcgpt2/latest-meta-soft-second-order-train-status.json": "112efc245bcb7249349c4b511cde1f4187bfef17dff326e41a409e92d7e44101",
+    "BAssist-instella-arc/reports/arcgpt2/latest-meta-soft-smoke-status.json": "0fb4726d0f49867a3d70243a8bcf75f3972e1e7272af384d69aba1f3e58b5918",
+    "BAssist-instella-arc/reports/arcgpt2/latest-official-public-probe-status.json": "0bc59aa03c00a4b3c5ba172ad56f619cda0a3e469f86acf7a6f887db1a5ca763",
+    "BAssist-instella-arc/reports/arcgpt2/latest-program-smoke-status.json": "3d43bdbda5487b7082795731e637b8247c38203988d445d0ea26c1f0c66a5ee1",
+    "BAssist-instella-arc/reports/arcgpt2/latest-world-agent-status.json": "dd4279f484d26469837193a3c4e1438c24e5e85f59b79335992d10af6f79a399",
+    "BAssist-instella-arc/reports/instella_arc/latest-kaggle-dispatch-status.json": "680341c4669cd7465dc60b50f1780c9ea36447938263d17f9d8b5456e62e2e2b",
+    "BAssist-instella-arc/reports/instella_arc/latest-static-status.json": "f7e944709588f71e8748b4f73c01306673ebb11277dbec672ded8bed36ebee95",
+    "BAssist-instella-arc/reports/latest-status.json": "5555313cc792c3034b5d467f19d28fffcd92c544eb9942fe8de9319d65d0d58c",
+    "instella-arc-frozen-probe.log": "663ccb3cac560e9da7b52d7e968cdab0f3e5bda698569c303f4377cfd4923475",
+    "instella_arc_results/frozen_benchmark.json": "eecbdc87cca3f21bf56586b6666f8766a1b21067e2deee119f8abe181bc11a83",
+    "instella_arc_results/status.json": "1996c39d2c9bf392448e7b54163b4b6052cb71a2ceb0e2f7136ab0c03f4cd365"
   },
-  "runner_status": null,
-  "benchmark_summary": null,
-  "sanitized_kernel_log_tail": "3144,\"data\":\"  ],\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385535158,\"data\":\"  \\\"status\\\": \\\"success\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385539182,\"data\":\"  \\\"load_attempts\\\": [\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385543135,\"data\":\"    {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385552345,\"data\":\"      \\\"quantization\\\": \\\"int4\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385556237,\"data\":\"      \\\"repository_id\\\": \\\"amd/Instella-MoE-16B-A3B-Think\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38557298,\"data\":\"      \\\"revision\\\": \\\"e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38557858,\"data\":\"      \\\"started_at_utc\\\": \\\"2026-08-03T11:17:45.432238+00:00\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385583437,\"data\":\"      \\\"status\\\": \\\"success\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385588147,\"data\":\"      \\\"backend_metadata\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38559866,\"data\":\"        \\\"checkpoint\\\": \\\"amd/Instella-MoE-16B-A3B-Think\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385602986,\"data\":\"        \\\"quantization\\\": \\\"int4\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385607038,\"data\":\"        \\\"dtype\\\": \\\"float16\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38561125,\"data\":\"        \\\"revision\\\": \\\"e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385615718,\"data\":\"        \\\"device_map\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385619716,\"data\":\"          \\\"model.embed_tokens\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385623656,\"data\":\"          \\\"model.layers.0\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385627538,\"data\":\"          \\\"model.layers.1\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385631511,\"data\":\"          \\\"model.layers.2\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385635395,\"data\":\"          \\\"model.layers.3\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385639327,\"data\":\"          \\\"model.layers.4\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385643321,\"data\":\"          \\\"model.layers.5\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385653233,\"data\":\"          \\\"model.layers.6\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385669119,\"data\":\"          \\\"model.layers.7\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385673747,\"data\":\"          \\\"model.layers.8\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385678435,\"data\":\"          \\\"model.layers.9\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38568641,\"data\":\"          \\\"model.layers.10\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385692919,\"data\":\"          \\\"model.layers.11\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385697026,\"data\":\"          \\\"model.layers.12\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385700937,\"data\":\"          \\\"model.layers.13\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385704921,\"data\":\"          \\\"model.layers.14\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385708895,\"data\":\"          \\\"model.layers.15\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385712801,\"data\":\"          \\\"model.layers.16\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385716687,\"data\":\"          \\\"model.layers.17\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385720613,\"data\":\"          \\\"model.layers.18\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385724507,\"data\":\"          \\\"model.layers.19\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385728366,\"data\":\"          \\\"model.layers.20\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385732247,\"data\":\"          \\\"model.layers.21\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385736171,\"data\":\"          \\\"model.layers.22\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385740084,\"data\":\"          \\\"model.layers.23\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38574402,\"data\":\"          \\\"model.layers.24\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385759052,\"data\":\"          \\\"model.layers.25\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385775455,\"data\":\"          \\\"model.layers.26\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385780108,\"data\":\"          \\\"model.norm\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385784787,\"data\":\"          \\\"model.rotary_emb\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385789585,\"data\":\"          \\\"lm_head\\\": 1\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385794109,\"data\":\"        },\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385797973,\"data\":\"        \\\"last_scoring_strategy\\\": \\\"shared_single_token_forward\\\"\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385802181,\"data\":\"      }\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385810235,\"data\":\"    }\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385814102,\"data\":\"  ],\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385817793,\"data\":\"  \\\"sanity_generation\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385825241,\"data\":\"    \\\"output\\\": \\\"\\u003cthink\\u003e\\\\nWe are given the exact evidence: \\\\n  - \\\\\\\"Rows increase toward the south and columns increase toward the east.\\\\\\\"\\\\n  - \\\\\\\"I applied A3. A color-2 cell left row 4 column 4 and appeared at row 4 column 5.\\\\\\\"\\\\n  - \\\\\\\"No other persistent cell changed. The environment did not report success.\\\\\\\"\\\\n\\\\nWe are to infer the meaning of the action \\\\\\\"A3\\\\\\\". The action is applied to a cell (row4, col4) and then the cell moves to (row4, col5). \\\\n\\\\nGiven the grid layout: \\\\n  - Rows increase toward the south. So row 1 is north, row 2 is north of row 3? Actually, if rows increase toward the south, then row 1 is the northernmost and row n is the southernmost. \\\\n  - Columns increase toward the east, so column 1 is west and column n is east.\\\\n\\\\nIn\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385836098,\"data\":\"    \\\"parsed\\\": null\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385840006,\"data\":\"  },\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385843845,\"data\":\"  \\\"finished_at_utc\\\": \\\"2026-08-03T11:24:35.061629+00:00\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385849981,\"data\":\"  \\\"report\\\": \\\"/kaggle/working/instella_arc_results/frozen_benchmark.json\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385857638,\"data\":\"  \\\"report_summary\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385874278,\"data\":\"    \\\"groups\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385879092,\"data\":\"      \\\"action_binding/amnesic/depth_4\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.3858839,\"data\":\"        \\\"cases\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385888626,\"data\":\"        \\\"set_cross_entropy\\\": 2.079272790519409,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38589334,\"data\":\"        \\\"brier\\\": 1.1582113501644975,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385897425,\"data\":\"        \\\"consistent_mass\\\": 0.12502109567496314,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385901442,\"data\":\"        \\\"top1_consistent\\\": 0.0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385905422,\"data\":\"        \\\"truth_probability\\\": 0.12502109567496314,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385909463,\"data\":\"        \\\"truth_rank\\\": 3.0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385913428,\"data\":\"        \\\"latency_seconds\\\": 1.228271446000008\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385917426,\"data\":\"      },\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385921287,\"data\":\"      \\\"action_binding/intact/depth_0\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385926023,\"data\":\"        \\\"cases\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385929956,\"data\":\"        \\\"set_cross_entropy\\\": 2.070986330016537,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385933969,\"data\":\"        \\\"brier\\\": 0.08741610669157626,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385937877,\"data\":\"        \\\"consistent_mass\\\": 1.0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385941839,\"data\":\"        \\\"top1_consistent\\\": 1.0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385946051,\"data\":\"        \\\"truth_probability\\\": 0.2566482445095551,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385956129,\"data\":\"        \\\"truth_rank\\\": 3.0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385972181,\"data\":\"        \\\"latency_seconds\\\": 1.3045189210000672\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385977273,\"data\":\"      },\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385981728,\"data\":\"      \\\"action_binding/intact/depth_4\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385986516,\"data\":\"        \\\"cases\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385995604,\"data\":\"        \\\"set_cross_entropy\\\": 1.6799076070591101,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385999787,\"data\":\"        \\\"brier\\\": 0.9956259616133447,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386003733,\"data\":\"        \\\"consistent_mass\\\": 0.18639119647467267,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386007722,\"data\":\"        \\\"top1_consistent\\\": 0.0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386011694,\"data\":\"        \\\"truth_probability\\\": 0.18639119647467267,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386015776,\"data\":\"        \\\"truth_rank\\\": 3.0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386019693,\"data\":\"        \\\"latency_seconds\\\": 1.3264667690000351\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386023708,\"data\":\"      },\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386027476,\"data\":\"      \\\"action_binding/shuffled/depth_4\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386031534,\"data\":\"        \\\"cases\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386035436,\"data\":\"        \\\"set_cross_entropy\\\": 1.5071752600330768,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386039405,\"data\":\"        \\\"brier\\\": 0.9061543277148667,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386043372,\"data\":\"        \\\"consistent_mass\\\": 0.22153487337122324,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386052978,\"data\":\"        \\\"top1_consistent\\\": 0.0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386069361,\"data\":\"        \\\"truth_probability\\\": 0.22153487337122324,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386074164,\"data\":\"        \\\"truth_rank\\\": 3.0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386078768,\"data\":\"        \\\"latency_seconds\\\": 1.3431827599999906\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386083131,\"data\":\"      }\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386087603,\"data\":\"    },\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38609196,\"data\":\"    \\\"evidence_deltas\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386095835,\"data\":\"      \\\"action_binding\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386099772,\"data\":\"        \\\"max_evidence_depth\\\": 4,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38610382,\"data\":\"        \\\"consistent_mass_by_mode\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386107822,\"data\":\"          \\\"amnesic\\\": 0.12502109567496314,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386111924,\"data\":\"          \\\"intact\\\": 0.18639119647467267,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386115961,\"data\":\"          \\\"shuffled\\\": 0.22153487337122324\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386120025,\"data\":\"        },\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386123784,\"data\":\"        \\\"intact_minus_amnesic\\\": 0.06137010079970953,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386127807,\"data\":\"        \\\"intact_minus_shuffled\\\": -0.03514367689655057\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386131799,\"data\":\"      }\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386135553,\"data\":\"    }\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386139337,\"data\":\"  }\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386143154,\"data\":\"}\\n\"}\n,{\"stream_name\":\"stderr\",\"time\":447.777913368,\"data\":\"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\\\|'\\n\"}\n,{\"stream_name\":\"stderr\",\"time\":447.777952105,\"data\":\"  cells[i][c] = re.sub('\\\\\\\\\\\\\\\\\\\\|', '|', cell)\\n\"}\n,{\"stream_name\":\"stderr\",\"time\":448.117118426,\"data\":\"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\\\_'\\n\"}\n,{\"stream_name\":\"stderr\",\"time\":448.117159396,\"data\":\"  text = re.sub(r'_', '\\\\_', text) # Escape underscores in display text\\n\"}\n,{\"stream_name\":\"stderr\",\"time\":448.867131317,\"data\":\"[NbConvertApp] Converting notebook __script__.ipynb to html\\n\"}\n,{\"stream_name\":\"stderr\",\"time\":449.890016505,\"data\":\"[NbConvertApp] Writing 280732 bytes to __results__.html\\n\"}\n]",
-  "cancellations": [
-    {
-      "run_id": 30809699353,
-      "previous_status": "pending",
-      "requested": true,
-      "accepted": true,
-      "error": null
+  "runner_status": {
+    "schema": "instella_arc.kaggle_run.v1",
+    "started_at_utc": "2026-08-03T11:17:39.675663+00:00",
+    "arguments": {
+      "checkpoint": "think",
+      "quantizations": [
+        "int4",
+        "int8"
+      ],
+      "allow_fp16_offload": false,
+      "tasks": [
+        "action"
+      ],
+      "profile": "smoke",
+      "games_per_task": 1,
+      "seed_base": 930000,
+      "max_context_tokens": 6144,
+      "output_dir": "/kaggle/working/instella_arc_results"
     },
-    {
-      "run_id": 30808883356,
-      "previous_status": "in_progress",
-      "requested": true,
-      "accepted": true,
-      "error": null
+    "checkpoint_spec": {
+      "repository_id": "amd/Instella-MoE-16B-A3B-Think",
+      "revision": "e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83"
+    },
+    "gpu_inventory": [
+      {
+        "index": 0,
+        "name": "Tesla T4",
+        "total_bytes": 15636037632,
+        "total_gib": 14.56219482421875,
+        "capability": [
+          7,
+          5
+        ],
+        "architecture": "sm_75",
+        "architecture_compiled_into_torch": true
+      },
+      {
+        "index": 1,
+        "name": "Tesla T4",
+        "total_bytes": 15636037632,
+        "total_gib": 14.56219482421875,
+        "capability": [
+          7,
+          5
+        ],
+        "architecture": "sm_75",
+        "architecture_compiled_into_torch": true
+      }
+    ],
+    "status": "success",
+    "load_attempts": [
+      {
+        "quantization": "int4",
+        "repository_id": "amd/Instella-MoE-16B-A3B-Think",
+        "revision": "e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83",
+        "started_at_utc": "2026-08-03T11:17:45.432238+00:00",
+        "status": "success",
+        "backend_metadata": {
+          "checkpoint": "amd/Instella-MoE-16B-A3B-Think",
+          "quantization": "int4",
+          "dtype": "float16",
+          "revision": "e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83",
+          "device_map": {
+            "model.embed_tokens": 0,
+            "model.layers.0": 0,
+            "model.layers.1": 0,
+            "model.layers.2": 0,
+            "model.layers.3": 0,
+            "model.layers.4": 0,
+            "model.layers.5": 0,
+            "model.layers.6": 0,
+            "model.layers.7": 0,
+            "model.layers.8": 0,
+            "model.layers.9": 0,
+            "model.layers.10": 0,
+            "model.layers.11": 1,
+            "model.layers.12": 1,
+            "model.layers.13": 1,
+            "model.layers.14": 1,
+            "model.layers.15": 1,
+            "model.layers.16": 1,
+            "model.layers.17": 1,
+            "model.layers.18": 1,
+            "model.layers.19": 1,
+            "model.layers.20": 1,
+            "model.layers.21": 1,
+            "model.layers.22": 1,
+            "model.layers.23": 1,
+            "model.layers.24": 1,
+            "model.layers.25": 1,
+            "model.layers.26": 1,
+            "model.norm": 1,
+            "model.rotary_emb": 1,
+            "lm_head": 1
+          },
+          "last_scoring_strategy": "shared_single_token_forward"
+        }
+      }
+    ],
+    "sanity_generation": {
+      "output": "<think>\nWe are given the exact evidence: \n  - \"Rows increase toward the south and columns increase toward the east.\"\n  - \"I applied A3. A color-2 cell left row 4 column 4 and appeared at row 4 column 5.\"\n  - \"No other persistent cell changed. The environment did not report success.\"\n\nWe are to infer the meaning of the action \"A3\". The action is applied to a cell (row4, col4) and then the cell moves to (row4, col5). \n\nGiven the grid layout: \n  - Rows increase toward the south. So row 1 is north, row 2 is north of row 3? Actually, if rows increase toward the south, then row 1 is the northernmost and row n is the southernmost. \n  - Columns increase toward the east, so column 1 is west and column n is east.\n\nIn",
+      "parsed": null
+    },
+    "finished_at_utc": "2026-08-03T11:24:35.061629+00:00",
+    "report": "/kaggle/working/instella_arc_results/frozen_benchmark.json",
+    "report_summary": {
+      "groups": {
+        "action_binding/amnesic/depth_4": {
+          "cases": 1,
+          "set_cross_entropy": 2.079272790519409,
+          "brier": 1.1582113501644975,
+          "consistent_mass": 0.12502109567496314,
+          "top1_consistent": 0.0,
+          "truth_probability": 0.12502109567496314,
+          "truth_rank": 3.0,
+          "latency_seconds": 1.228271446000008
+        },
+        "action_binding/intact/depth_0": {
+          "cases": 1,
+          "set_cross_entropy": 2.070986330016537,
+          "brier": 0.08741610669157626,
+          "consistent_mass": 1.0,
+          "top1_consistent": 1.0,
+          "truth_probability": 0.2566482445095551,
+          "truth_rank": 3.0,
+          "latency_seconds": 1.3045189210000672
+        },
+        "action_binding/intact/depth_4": {
+          "cases": 1,
+          "set_cross_entropy": 1.6799076070591101,
+          "brier": 0.9956259616133447,
+          "consistent_mass": 0.18639119647467267,
+          "top1_consistent": 0.0,
+          "truth_probability": 0.18639119647467267,
+          "truth_rank": 3.0,
+          "latency_seconds": 1.3264667690000351
+        },
+        "action_binding/shuffled/depth_4": {
+          "cases": 1,
+          "set_cross_entropy": 1.5071752600330768,
+          "brier": 0.9061543277148667,
+          "consistent_mass": 0.22153487337122324,
+          "top1_consistent": 0.0,
+          "truth_probability": 0.22153487337122324,
+          "truth_rank": 3.0,
+          "latency_seconds": 1.3431827599999906
+        }
+      },
+      "evidence_deltas": {
+        "action_binding": {
+          "max_evidence_depth": 4,
+          "consistent_mass_by_mode": {
+            "amnesic": 0.12502109567496314,
+            "intact": 0.18639119647467267,
+            "shuffled": 0.22153487337122324
+          },
+          "intact_minus_amnesic": 0.06137010079970953,
+          "intact_minus_shuffled": -0.03514367689655057
+        }
+      }
     }
-  ],
-  "status": "recovered_failure",
-  "reason": "Kaggle completed, but the bounded runner did not produce a successful status and benchmark pair.",
+  },
+  "benchmark_summary": {
+    "schema": "instella_arc.frozen_benchmark.v1",
+    "profile": "smoke",
+    "backend": {
+      "checkpoint": "amd/Instella-MoE-16B-A3B-Think",
+      "quantization": "int4",
+      "dtype": "float16",
+      "revision": "e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83",
+      "device_map": {
+        "model.embed_tokens": 0,
+        "model.layers.0": 0,
+        "model.layers.1": 0,
+        "model.layers.2": 0,
+        "model.layers.3": 0,
+        "model.layers.4": 0,
+        "model.layers.5": 0,
+        "model.layers.6": 0,
+        "model.layers.7": 0,
+        "model.layers.8": 0,
+        "model.layers.9": 0,
+        "model.layers.10": 0,
+        "model.layers.11": 1,
+        "model.layers.12": 1,
+        "model.layers.13": 1,
+        "model.layers.14": 1,
+        "model.layers.15": 1,
+        "model.layers.16": 1,
+        "model.layers.17": 1,
+        "model.layers.18": 1,
+        "model.layers.19": 1,
+        "model.layers.20": 1,
+        "model.layers.21": 1,
+        "model.layers.22": 1,
+        "model.layers.23": 1,
+        "model.layers.24": 1,
+        "model.layers.25": 1,
+        "model.layers.26": 1,
+        "model.norm": 1,
+        "model.rotary_emb": 1,
+        "lm_head": 1
+      },
+      "last_scoring_strategy": "shared_single_token_forward"
+    },
+    "tasks": [
+      "action"
+    ],
+    "seed_base": 930000,
+    "case_count": 4,
+    "selected_case_ids": [
+      "action:930000:0:A1:intact",
+      "action:930000:4:A1:amnesic",
+      "action:930000:4:A1:intact",
+      "action:930000:4:A1:shuffled"
+    ],
+    "summary": {
+      "groups": {
+        "action_binding/amnesic/depth_4": {
+          "cases": 1,
+          "set_cross_entropy": 2.079272790519409,
+          "brier": 1.1582113501644975,
+          "consistent_mass": 0.12502109567496314,
+          "top1_consistent": 0.0,
+          "truth_probability": 0.12502109567496314,
+          "truth_rank": 3.0,
+          "latency_seconds": 1.228271446000008
+        },
+        "action_binding/intact/depth_0": {
+          "cases": 1,
+          "set_cross_entropy": 2.070986330016537,
+          "brier": 0.08741610669157626,
+          "consistent_mass": 1.0,
+          "top1_consistent": 1.0,
+          "truth_probability": 0.2566482445095551,
+          "truth_rank": 3.0,
+          "latency_seconds": 1.3045189210000672
+        },
+        "action_binding/intact/depth_4": {
+          "cases": 1,
+          "set_cross_entropy": 1.6799076070591101,
+          "brier": 0.9956259616133447,
+          "consistent_mass": 0.18639119647467267,
+          "top1_consistent": 0.0,
+          "truth_probability": 0.18639119647467267,
+          "truth_rank": 3.0,
+          "latency_seconds": 1.3264667690000351
+        },
+        "action_binding/shuffled/depth_4": {
+          "cases": 1,
+          "set_cross_entropy": 1.5071752600330768,
+          "brier": 0.9061543277148667,
+          "consistent_mass": 0.22153487337122324,
+          "top1_consistent": 0.0,
+          "truth_probability": 0.22153487337122324,
+          "truth_rank": 3.0,
+          "latency_seconds": 1.3431827599999906
+        }
+      },
+      "evidence_deltas": {
+        "action_binding": {
+          "max_evidence_depth": 4,
+          "consistent_mass_by_mode": {
+            "amnesic": 0.12502109567496314,
+            "intact": 0.18639119647467267,
+            "shuffled": 0.22153487337122324
+          },
+          "intact_minus_amnesic": 0.06137010079970953,
+          "intact_minus_shuffled": -0.03514367689655057
+        }
+      }
+    }
+  },
+  "sanitized_kernel_log_tail": "\",\"time\":439.385196719,\"data\":\"{\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385255481,\"data\":\"  \\\"schema\\\": \\\"instella_arc.kaggle_run.v1\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385264916,\"data\":\"  \\\"started_at_utc\\\": \\\"2026-08-03T11:17:39.675663+00:00\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385271655,\"data\":\"  \\\"arguments\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385277034,\"data\":\"    \\\"checkpoint\\\": \\\"think\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385282381,\"data\":\"    \\\"quantizations\\\": [\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385287474,\"data\":\"      \\\"int4\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385292547,\"data\":\"      \\\"int8\\\"\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385303073,\"data\":\"    ],\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385307488,\"data\":\"    \\\"allow_fp16_offload\\\": false,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385311214,\"data\":\"    \\\"tasks\\\": [\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385314737,\"data\":\"      \\\"action\\\"\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385318239,\"data\":\"    ],\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385321721,\"data\":\"    \\\"profile\\\": \\\"smoke\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385325304,\"data\":\"    \\\"games_per_task\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385328827,\"data\":\"    \\\"seed_base\\\": 930000,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385361275,\"data\":\"    \\\"max_context_tokens\\\": 6144,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385366762,\"data\":\"    \\\"output_dir\\\": \\\"/kaggle/working/instella_arc_results\\\"\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385393601,\"data\":\"  },\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385397918,\"data\":\"  \\\"checkpoint_spec\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385401984,\"data\":\"    \\\"repository_id\\\": \\\"amd/Instella-MoE-16B-A3B-Think\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38540618,\"data\":\"    \\\"revision\\\": \\\"e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83\\\"\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385410365,\"data\":\"  },\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385414138,\"data\":\"  \\\"gpu_inventory\\\": [\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385418359,\"data\":\"    {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38542209,\"data\":\"      \\\"index\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385426255,\"data\":\"      \\\"name\\\": \\\"Tesla T4\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385430307,\"data\":\"      \\\"total_bytes\\\": 15636037632,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385436393,\"data\":\"      \\\"total_gib\\\": 14.56219482421875,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385444138,\"data\":\"      \\\"capability\\\": [\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.3854469,\"data\":\"        7,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.3854494,\"data\":\"        5\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385452135,\"data\":\"      ],\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385468965,\"data\":\"      \\\"architecture\\\": \\\"sm_75\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385474007,\"data\":\"      \\\"architecture_compiled_into_torch\\\": true\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385478728,\"data\":\"    },\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385483162,\"data\":\"    {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385487632,\"data\":\"      \\\"index\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385492124,\"data\":\"      \\\"name\\\": \\\"Tesla T4\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385496375,\"data\":\"      \\\"total_bytes\\\": 15636037632,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385500381,\"data\":\"      \\\"total_gib\\\": 14.56219482421875,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385504318,\"data\":\"      \\\"capability\\\": [\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38550836,\"data\":\"        7,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385512111,\"data\":\"        5\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385515921,\"data\":\"      ],\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38551969,\"data\":\"      \\\"architecture\\\": \\\"sm_75\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385523727,\"data\":\"      \\\"architecture_compiled_into_torch\\\": true\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385527676,\"data\":\"    }\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38553144,\"data\":\"  ],\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385535158,\"data\":\"  \\\"status\\\": \\\"success\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385539182,\"data\":\"  \\\"load_attempts\\\": [\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385543135,\"data\":\"    {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385552345,\"data\":\"      \\\"quantization\\\": \\\"int4\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385556237,\"data\":\"      \\\"repository_id\\\": \\\"amd/Instella-MoE-16B-A3B-Think\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38557298,\"data\":\"      \\\"revision\\\": \\\"e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38557858,\"data\":\"      \\\"started_at_utc\\\": \\\"2026-08-03T11:17:45.432238+00:00\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385583437,\"data\":\"      \\\"status\\\": \\\"success\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385588147,\"data\":\"      \\\"backend_metadata\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38559866,\"data\":\"        \\\"checkpoint\\\": \\\"amd/Instella-MoE-16B-A3B-Think\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385602986,\"data\":\"        \\\"quantization\\\": \\\"int4\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385607038,\"data\":\"        \\\"dtype\\\": \\\"float16\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38561125,\"data\":\"        \\\"revision\\\": \\\"e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385615718,\"data\":\"        \\\"device_map\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385619716,\"data\":\"          \\\"model.embed_tokens\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385623656,\"data\":\"          \\\"model.layers.0\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385627538,\"data\":\"          \\\"model.layers.1\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385631511,\"data\":\"          \\\"model.layers.2\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385635395,\"data\":\"          \\\"model.layers.3\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385639327,\"data\":\"          \\\"model.layers.4\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385643321,\"data\":\"          \\\"model.layers.5\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385653233,\"data\":\"          \\\"model.layers.6\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385669119,\"data\":\"          \\\"model.layers.7\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385673747,\"data\":\"          \\\"model.layers.8\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385678435,\"data\":\"          \\\"model.layers.9\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38568641,\"data\":\"          \\\"model.layers.10\\\": 0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385692919,\"data\":\"          \\\"model.layers.11\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385697026,\"data\":\"          \\\"model.layers.12\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385700937,\"data\":\"          \\\"model.layers.13\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385704921,\"data\":\"          \\\"model.layers.14\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385708895,\"data\":\"          \\\"model.layers.15\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385712801,\"data\":\"          \\\"model.layers.16\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385716687,\"data\":\"          \\\"model.layers.17\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385720613,\"data\":\"          \\\"model.layers.18\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385724507,\"data\":\"          \\\"model.layers.19\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385728366,\"data\":\"          \\\"model.layers.20\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385732247,\"data\":\"          \\\"model.layers.21\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385736171,\"data\":\"          \\\"model.layers.22\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385740084,\"data\":\"          \\\"model.layers.23\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38574402,\"data\":\"          \\\"model.layers.24\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385759052,\"data\":\"          \\\"model.layers.25\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385775455,\"data\":\"          \\\"model.layers.26\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385780108,\"data\":\"          \\\"model.norm\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385784787,\"data\":\"          \\\"model.rotary_emb\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385789585,\"data\":\"          \\\"lm_head\\\": 1\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385794109,\"data\":\"        },\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385797973,\"data\":\"        \\\"last_scoring_strategy\\\": \\\"shared_single_token_forward\\\"\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385802181,\"data\":\"      }\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385810235,\"data\":\"    }\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385814102,\"data\":\"  ],\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385817793,\"data\":\"  \\\"sanity_generation\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385825241,\"data\":\"    \\\"output\\\": \\\"\\u003cthink\\u003e\\\\nWe are given the exact evidence: \\\\n  - \\\\\\\"Rows increase toward the south and columns increase toward the east.\\\\\\\"\\\\n  - \\\\\\\"I applied A3. A color-2 cell left row 4 column 4 and appeared at row 4 column 5.\\\\\\\"\\\\n  - \\\\\\\"No other persistent cell changed. The environment did not report success.\\\\\\\"\\\\n\\\\nWe are to infer the meaning of the action \\\\\\\"A3\\\\\\\". The action is applied to a cell (row4, col4) and then the cell moves to (row4, col5). \\\\n\\\\nGiven the grid layout: \\\\n  - Rows increase toward the south. So row 1 is north, row 2 is north of row 3? Actually, if rows increase toward the south, then row 1 is the northernmost and row n is the southernmost. \\\\n  - Columns increase toward the east, so column 1 is west and column n is east.\\\\n\\\\nIn\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385836098,\"data\":\"    \\\"parsed\\\": null\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385840006,\"data\":\"  },\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385843845,\"data\":\"  \\\"finished_at_utc\\\": \\\"2026-08-03T11:24:35.061629+00:00\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385849981,\"data\":\"  \\\"report\\\": \\\"/kaggle/working/instella_arc_results/frozen_benchmark.json\\\",\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385857638,\"data\":\"  \\\"report_summary\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385874278,\"data\":\"    \\\"groups\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385879092,\"data\":\"      \\\"action_binding/amnesic/depth_4\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.3858839,\"data\":\"        \\\"cases\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385888626,\"data\":\"        \\\"set_cross_entropy\\\": 2.079272790519409,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38589334,\"data\":\"        \\\"brier\\\": 1.1582113501644975,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385897425,\"data\":\"        \\\"consistent_mass\\\": 0.12502109567496314,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385901442,\"data\":\"        \\\"top1_consistent\\\": 0.0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385905422,\"data\":\"        \\\"truth_probability\\\": 0.12502109567496314,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385909463,\"data\":\"        \\\"truth_rank\\\": 3.0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385913428,\"data\":\"        \\\"latency_seconds\\\": 1.228271446000008\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385917426,\"data\":\"      },\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385921287,\"data\":\"      \\\"action_binding/intact/depth_0\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385926023,\"data\":\"        \\\"cases\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385929956,\"data\":\"        \\\"set_cross_entropy\\\": 2.070986330016537,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385933969,\"data\":\"        \\\"brier\\\": 0.08741610669157626,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385937877,\"data\":\"        \\\"consistent_mass\\\": 1.0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385941839,\"data\":\"        \\\"top1_consistent\\\": 1.0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385946051,\"data\":\"        \\\"truth_probability\\\": 0.2566482445095551,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385956129,\"data\":\"        \\\"truth_rank\\\": 3.0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385972181,\"data\":\"        \\\"latency_seconds\\\": 1.3045189210000672\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385977273,\"data\":\"      },\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385981728,\"data\":\"      \\\"action_binding/intact/depth_4\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385986516,\"data\":\"        \\\"cases\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385995604,\"data\":\"        \\\"set_cross_entropy\\\": 1.6799076070591101,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.385999787,\"data\":\"        \\\"brier\\\": 0.9956259616133447,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386003733,\"data\":\"        \\\"consistent_mass\\\": 0.18639119647467267,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386007722,\"data\":\"        \\\"top1_consistent\\\": 0.0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386011694,\"data\":\"        \\\"truth_probability\\\": 0.18639119647467267,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386015776,\"data\":\"        \\\"truth_rank\\\": 3.0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386019693,\"data\":\"        \\\"latency_seconds\\\": 1.3264667690000351\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386023708,\"data\":\"      },\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386027476,\"data\":\"      \\\"action_binding/shuffled/depth_4\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386031534,\"data\":\"        \\\"cases\\\": 1,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386035436,\"data\":\"        \\\"set_cross_entropy\\\": 1.5071752600330768,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386039405,\"data\":\"        \\\"brier\\\": 0.9061543277148667,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386043372,\"data\":\"        \\\"consistent_mass\\\": 0.22153487337122324,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386052978,\"data\":\"        \\\"top1_consistent\\\": 0.0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386069361,\"data\":\"        \\\"truth_probability\\\": 0.22153487337122324,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386074164,\"data\":\"        \\\"truth_rank\\\": 3.0,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386078768,\"data\":\"        \\\"latency_seconds\\\": 1.3431827599999906\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386083131,\"data\":\"      }\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386087603,\"data\":\"    },\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38609196,\"data\":\"    \\\"evidence_deltas\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386095835,\"data\":\"      \\\"action_binding\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386099772,\"data\":\"        \\\"max_evidence_depth\\\": 4,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.38610382,\"data\":\"        \\\"consistent_mass_by_mode\\\": {\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386107822,\"data\":\"          \\\"amnesic\\\": 0.12502109567496314,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386111924,\"data\":\"          \\\"intact\\\": 0.18639119647467267,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386115961,\"data\":\"          \\\"shuffled\\\": 0.22153487337122324\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386120025,\"data\":\"        },\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386123784,\"data\":\"        \\\"intact_minus_amnesic\\\": 0.06137010079970953,\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386127807,\"data\":\"        \\\"intact_minus_shuffled\\\": -0.03514367689655057\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386131799,\"data\":\"      }\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386135553,\"data\":\"    }\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386139337,\"data\":\"  }\\n\"}\n,{\"stream_name\":\"stdout\",\"time\":439.386143154,\"data\":\"}\\n\"}\n,{\"stream_name\":\"stderr\",\"time\":447.777913368,\"data\":\"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\\\|'\\n\"}\n,{\"stream_name\":\"stderr\",\"time\":447.777952105,\"data\":\"  cells[i][c] = re.sub('\\\\\\\\\\\\\\\\\\\\|', '|', cell)\\n\"}\n,{\"stream_name\":\"stderr\",\"time\":448.117118426,\"data\":\"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\\\_'\\n\"}\n,{\"stream_name\":\"stderr\",\"time\":448.117159396,\"data\":\"  text = re.sub(r'_', '\\\\_', text) # Escape underscores in display text\\n\"}\n,{\"stream_name\":\"stderr\",\"time\":448.867131317,\"data\":\"[NbConvertApp] Converting notebook __script__.ipynb to html\\n\"}\n,{\"stream_name\":\"stderr\",\"time\":449.890016505,\"data\":\"[NbConvertApp] Writing 280732 bytes to __results__.html\\n\"}\n]",
+  "cancellations": [],
+  "status": "success",
+  "reason": null,
   "mutated_kaggle": false,
   "github_branch": "instella-arc",
-  "github_commit_sha": "a22981750c0a15523e831be045e1bde01261910c",
-  "github_run_id": "30810650220",
+  "github_commit_sha": "1c9ec2a8e360610aa079d8d951a4215c5345c9fe",
+  "github_run_id": "30810886444",
   "github_run_attempt": "1"
 }

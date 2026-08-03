@@ -1,0 +1,162 @@
+{
+  "schema": "instella_arc.kaggle_run.v1",
+  "started_at_utc": "2026-08-03T11:17:39.675663+00:00",
+  "arguments": {
+    "checkpoint": "think",
+    "quantizations": [
+      "int4",
+      "int8"
+    ],
+    "allow_fp16_offload": false,
+    "tasks": [
+      "action"
+    ],
+    "profile": "smoke",
+    "games_per_task": 1,
+    "seed_base": 930000,
+    "max_context_tokens": 6144,
+    "output_dir": "/kaggle/working/instella_arc_results"
+  },
+  "checkpoint_spec": {
+    "repository_id": "amd/Instella-MoE-16B-A3B-Think",
+    "revision": "e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83"
+  },
+  "gpu_inventory": [
+    {
+      "index": 0,
+      "name": "Tesla T4",
+      "total_bytes": 15636037632,
+      "total_gib": 14.56219482421875,
+      "capability": [
+        7,
+        5
+      ],
+      "architecture": "sm_75",
+      "architecture_compiled_into_torch": true
+    },
+    {
+      "index": 1,
+      "name": "Tesla T4",
+      "total_bytes": 15636037632,
+      "total_gib": 14.56219482421875,
+      "capability": [
+        7,
+        5
+      ],
+      "architecture": "sm_75",
+      "architecture_compiled_into_torch": true
+    }
+  ],
+  "status": "success",
+  "load_attempts": [
+    {
+      "quantization": "int4",
+      "repository_id": "amd/Instella-MoE-16B-A3B-Think",
+      "revision": "e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83",
+      "started_at_utc": "2026-08-03T11:17:45.432238+00:00",
+      "status": "success",
+      "backend_metadata": {
+        "checkpoint": "amd/Instella-MoE-16B-A3B-Think",
+        "quantization": "int4",
+        "dtype": "float16",
+        "revision": "e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83",
+        "device_map": {
+          "model.embed_tokens": 0,
+          "model.layers.0": 0,
+          "model.layers.1": 0,
+          "model.layers.2": 0,
+          "model.layers.3": 0,
+          "model.layers.4": 0,
+          "model.layers.5": 0,
+          "model.layers.6": 0,
+          "model.layers.7": 0,
+          "model.layers.8": 0,
+          "model.layers.9": 0,
+          "model.layers.10": 0,
+          "model.layers.11": 1,
+          "model.layers.12": 1,
+          "model.layers.13": 1,
+          "model.layers.14": 1,
+          "model.layers.15": 1,
+          "model.layers.16": 1,
+          "model.layers.17": 1,
+          "model.layers.18": 1,
+          "model.layers.19": 1,
+          "model.layers.20": 1,
+          "model.layers.21": 1,
+          "model.layers.22": 1,
+          "model.layers.23": 1,
+          "model.layers.24": 1,
+          "model.layers.25": 1,
+          "model.layers.26": 1,
+          "model.norm": 1,
+          "model.rotary_emb": 1,
+          "lm_head": 1
+        },
+        "last_scoring_strategy": "shared_single_token_forward"
+      }
+    }
+  ],
+  "sanity_generation": {
+    "output": "<think>\nWe are given the exact evidence: \n  - \"Rows increase toward the south and columns increase toward the east.\"\n  - \"I applied A3. A color-2 cell left row 4 column 4 and appeared at row 4 column 5.\"\n  - \"No other persistent cell changed. The environment did not report success.\"\n\nWe are to infer the meaning of the action \"A3\". The action is applied to a cell (row4, col4) and then the cell moves to (row4, col5). \n\nGiven the grid layout: \n  - Rows increase toward the south. So row 1 is north, row 2 is north of row 3? Actually, if rows increase toward the south, then row 1 is the northernmost and row n is the southernmost. \n  - Columns increase toward the east, so column 1 is west and column n is east.\n\nIn",
+    "parsed": null
+  },
+  "finished_at_utc": "2026-08-03T11:24:35.061629+00:00",
+  "report": "/kaggle/working/instella_arc_results/frozen_benchmark.json",
+  "report_summary": {
+    "groups": {
+      "action_binding/amnesic/depth_4": {
+        "cases": 1,
+        "set_cross_entropy": 2.079272790519409,
+        "brier": 1.1582113501644975,
+        "consistent_mass": 0.12502109567496314,
+        "top1_consistent": 0.0,
+        "truth_probability": 0.12502109567496314,
+        "truth_rank": 3.0,
+        "latency_seconds": 1.228271446000008
+      },
+      "action_binding/intact/depth_0": {
+        "cases": 1,
+        "set_cross_entropy": 2.070986330016537,
+        "brier": 0.08741610669157626,
+        "consistent_mass": 1.0,
+        "top1_consistent": 1.0,
+        "truth_probability": 0.2566482445095551,
+        "truth_rank": 3.0,
+        "latency_seconds": 1.3045189210000672
+      },
+      "action_binding/intact/depth_4": {
+        "cases": 1,
+        "set_cross_entropy": 1.6799076070591101,
+        "brier": 0.9956259616133447,
+        "consistent_mass": 0.18639119647467267,
+        "top1_consistent": 0.0,
+        "truth_probability": 0.18639119647467267,
+        "truth_rank": 3.0,
+        "latency_seconds": 1.3264667690000351
+      },
+      "action_binding/shuffled/depth_4": {
+        "cases": 1,
+        "set_cross_entropy": 1.5071752600330768,
+        "brier": 0.9061543277148667,
+        "consistent_mass": 0.22153487337122324,
+        "top1_consistent": 0.0,
+        "truth_probability": 0.22153487337122324,
+        "truth_rank": 3.0,
+        "latency_seconds": 1.3431827599999906
+      }
+    },
+    "evidence_deltas": {
+      "action_binding": {
+        "max_evidence_depth": 4,
+        "consistent_mass_by_mode": {
+          "amnesic": 0.12502109567496314,
+          "intact": 0.18639119647467267,
+          "shuffled": 0.22153487337122324
+        },
+        "intact_minus_amnesic": 0.06137010079970953,
+        "intact_minus_shuffled": -0.03514367689655057
+      }
+    }
+  }
+}
