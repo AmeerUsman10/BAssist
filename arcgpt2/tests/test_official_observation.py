@@ -54,6 +54,33 @@ def test_frame_sequence_preserves_every_animation_frame_and_final_state() -> Non
     assert decode_delta(sequence.rendered_frames[1], sequence.animation_deltas[1]) == sequence.rendered_frames[2]
 
 
+def test_numeric_and_transport_action_forms_are_canonicalized() -> None:
+    sequence = OfficialFrameSequence.from_frame_data(
+        _frame_data(
+            [[0, 1], [0, 0]],
+            actions=[0, 4, "6", "A2", "GameAction.ACTION7"],
+        )
+    )
+    assert sequence.available_actions == (
+        "ACTION2",
+        "ACTION4",
+        "ACTION6",
+        "ACTION7",
+        "RESET",
+    )
+
+
+def test_invalid_numeric_action_id_fails_loudly() -> None:
+    with pytest.raises(OfficialObservationError):
+        OfficialFrameSequence.from_frame_data(
+            _frame_data([[0]], actions=[8])
+        )
+    with pytest.raises(OfficialObservationError):
+        OfficialFrameSequence.from_frame_data(
+            _frame_data([[0]], actions=[True])
+        )
+
+
 def test_single_grid_form_is_accepted_without_inventing_an_animation_axis() -> None:
     sequence = OfficialFrameSequence.from_frame_data(
         _frame_data([[0, 1, 0], [0, 0, 0]])
@@ -97,6 +124,12 @@ def test_action_transition_separates_animation_from_persistent_delta() -> None:
     assert decode_delta(transition.before_final, transition.persistent_delta) == transition.after_final
     assert "ANIMATION_DELTA 0->1" in transition.canonical_text()
     assert "PERSISTENT_DELTA" in transition.canonical_text()
+
+
+def test_action_transition_canonicalizes_numeric_action() -> None:
+    previous = OfficialFrameSequence.from_frame_data(_frame_data([[0]]))
+    transition = action_transition(6, previous, _frame_data([[0]], actions=[6]))
+    assert transition.action == "ACTION6"
 
 
 def test_empty_frame_sequence_is_metadata_only() -> None:
