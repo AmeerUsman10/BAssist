@@ -46,6 +46,7 @@ from .phase0_hidden_action import Action, Direction, HiddenActionGame
 
 
 GPT2_REVISION = "607a30d783dfa663caf39e06633721c8d4cfcd7e"
+RESULT_SCHEMA_VERSION = 1
 
 
 @dataclass(frozen=True)
@@ -470,7 +471,7 @@ def train(config: Config) -> dict[str, Any]:
     output_dir = Path(config.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     summary = {
-        "schema_version": 1,
+        "schema_version": RESULT_SCHEMA_VERSION,
         "experiment": "meta_soft_single_quartet",
         "scope": "contrastive cardinal gradient-memory channel diagnostic; not ARC-AGI-3 capability",
         "source_sha": os.environ.get("ARC_GPT2_SOURCE_SHA", os.environ.get("GITHUB_SHA")),
