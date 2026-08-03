@@ -13,7 +13,7 @@ from typing import Iterable, Mapping, Sequence
 from .codec import Grid, encode_delta, encode_grid
 
 ACTION_PATTERN = re.compile(r"\bA([0-7])\b", flags=re.IGNORECASE)
-MAPPING_ITEM_PATTERN = re.compile(r"\bA([1-4])\s*=\s*([NESW?])\b", flags=re.IGNORECASE)
+MAPPING_ITEM_PATTERN = re.compile(r"\bA([1-4])\s*=\s*([NESW?])(?!\w)", flags=re.IGNORECASE)
 COORDINATE_PATTERN = re.compile(
     r"\bX\s*=?\s*(\d{1,2})\s*[,; ]+\s*Y\s*=?\s*(\d{1,2})\b",
     flags=re.IGNORECASE,
