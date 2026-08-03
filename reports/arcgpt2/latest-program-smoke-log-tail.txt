@@ -13,4 +13,4 @@ E   ImportError: cannot import name 'decode_delta' from 'arcgpt2.codec' (/home/r
 =========================== short test summary info ============================
 ERROR arcgpt2/tests/test_official_observation.py
 !!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
-1 error in 4.28s
+1 error in 4.07s
