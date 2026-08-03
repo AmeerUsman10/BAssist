@@ -12,15 +12,19 @@ from typing import Any, Mapping
 class CheckpointSpec:
     key: str
     repository_id: str
+    revision: str
     stage: str
     chat_tuned: bool
     preferred_use: str
 
 
+# Revisions were resolved by the no-weight audit on 2026-08-03. Pinning them
+# prevents a silent upstream change from invalidating a frozen comparison.
 CHECKPOINTS: dict[str, CheckpointSpec] = {
     "base": CheckpointSpec(
         key="base",
         repository_id="amd/Instella-MoE-16B-A3B-Base",
+        revision="5ca845e88b237ca66c9c8e1f2551933a47b0daf9",
         stage="long-context base",
         chat_tuned=False,
         preferred_use="clean adaptation and causal-scoring control",
@@ -28,6 +32,7 @@ CHECKPOINTS: dict[str, CheckpointSpec] = {
     "dpo": CheckpointSpec(
         key="dpo",
         repository_id="amd/Instella-MoE-16B-A3B-DPO",
+        revision="ef5a850b1e5638a98b2e28cf321a6c1b63ccde39",
         stage="direct preference optimization",
         chat_tuned=True,
         preferred_use="first ARC-specific parameter-efficient tuning substrate",
@@ -35,6 +40,7 @@ CHECKPOINTS: dict[str, CheckpointSpec] = {
     "think": CheckpointSpec(
         key="think",
         repository_id="amd/Instella-MoE-16B-A3B-Think",
+        revision="e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83",
         stage="reinforcement learning / multi-teacher on-policy distillation",
         chat_tuned=True,
         preferred_use="strongest frozen reasoning baseline",
@@ -88,6 +94,7 @@ def catalog_payload() -> dict[str, Any]:
             "frozen_order": ["think", "dpo", "base"],
             "tuning_order": ["dpo", "base", "think"],
             "one_checkpoint_per_run": True,
+            "pinned_upstream_revisions": True,
         },
     }
 
