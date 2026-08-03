@@ -1,0 +1,87 @@
+name: Instella Action Replication Tests
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [instella-arc]
+    paths:
+      - "instella_arc/action_replication.py"
+      - "instella_arc/kaggle_action_replication.py"
+      - "instella_arc/tests/test_action_replication.py"
+      - ".github/workflows/instella-action-replication-tests.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instella-action-replication-tests
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deterministic test dependencies
+        run: python -m pip install --quiet pytest
+
+      - name: Run replication tests
+        id: test
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python -m pytest -q \
+            instella_arc/tests/test_action_replication.py \
+            instella_arc/tests/test_kaggle_recover.py \
+            2>&1 | tee instella-action-replication-tests.log
+
+      - name: Write durable test receipt
+        if: always()
+        env:
+          TEST_OUTCOME: ${{ steps.test.outcome }}
+        run: |
+          mkdir -p reports/instella_arc
+          python - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          log = Path("instella-action-replication-tests.log")
+          receipt = {
+              "schema": "instella_arc.action_replication_tests.v1",
+              "status": os.environ.get("TEST_OUTCOME", "unknown"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+          }
+          Path("reports/instella_arc/latest-action-replication-tests.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          if log.exists():
+              lines = log.read_text(encoding="utf-8", errors="replace").splitlines()
+              Path("reports/instella_arc/latest-action-replication-tests-log.txt").write_text(
+                  "\n".join(lines[-500:]) + "\n", encoding="utf-8"
+              )
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/instella_arc/latest-action-replication-tests.json \
+            reports/instella_arc/latest-action-replication-tests-log.txt
+          git commit -m "Record Instella action replication tests ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Propagate test failure
+        if: steps.test.outcome != 'success'
+        run: exit 1
