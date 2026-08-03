@@ -1,4 +1,5 @@
 name: ARC-GPT2 Held-Out Binding Kaggle GPU
+# Preregistered launch: heldout_layout_action_v1, paired pretrained/random T4s.
 # Promotion is separate from the absolute pretrained capability gate:
 # paired primary delta accuracy >= .10 with one-sided 95% LB > 0, OR paired
 # truth-probability delta >= .05 with its one-sided 95% LB > 0 (10k draws).
