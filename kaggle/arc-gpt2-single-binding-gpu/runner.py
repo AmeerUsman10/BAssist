@@ -35,6 +35,7 @@ MAX_OUTER_STEPS = 400
 INNER_LEARNING_RATE = 0.2
 PREFIX_LEARNING_RATE = 0.001
 MODEL_LEARNING_RATE = 0.0001
+RUNNER_SCHEMA_VERSION = 1
 
 WORKING = Path("/kaggle/working")
 RUN_ROOT = WORKING / "arc_gpt2_single_binding_gpu"
@@ -206,6 +207,7 @@ def main() -> None:
         raise RuntimeError("CUDA compute probe returned an invalid result")
 
     environment = {
+        "runner_schema_version": RUNNER_SCHEMA_VERSION,
         "recorded_at_utc": utc_now(),
         "source_sha": SOURCE_SHA,
         "gpt2_repository": GPT2_REPOSITORY,
