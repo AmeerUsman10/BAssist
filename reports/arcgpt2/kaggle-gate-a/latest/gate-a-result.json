@@ -1,0 +1,106 @@
+{
+  "comparison": {
+    "deltas": {
+      "intact_minus_no_adaptation_consistent_mass": -0.0006270697340369225,
+      "intact_minus_shuffled_consistent_mass": 0.0,
+      "pretrained_minus_random_consistent_mass": 0.0007222974672913551
+    },
+    "gates": {
+      "intact_consistent_mass_at_least_0_40": false,
+      "meta_query_loss_is_finite": true,
+      "online_adaptation_gain_at_least_0_10": false,
+      "per_action_accuracy_at_least_0_50": false,
+      "pretrained_beats_random_consistent_mass": true,
+      "shuffled_outcome_drop_at_least_0_10": false
+    },
+    "pretrained": {
+      "intact": {
+        "consistent_mass": 0.250887100584805,
+        "entropy_bits": 4.584656894207001,
+        "episodes": 16.0,
+        "exact_mapping": 0.0625,
+        "per_action_accuracy": 0.25,
+        "truth_probability": 0.04165471298620105,
+        "truth_rank": 12.9375
+      },
+      "mean_meta_query_loss": 1.480448241531849,
+      "mean_support_nll": 4.099086214601994,
+      "no_adaptation": {
+        "consistent_mass": 0.25151417031884193,
+        "entropy_bits": 4.583298683166504,
+        "episodes": 16.0,
+        "exact_mapping": 0.0625,
+        "per_action_accuracy": 0.25,
+        "truth_probability": 0.041423858143389225,
+        "truth_rank": 13.375
+      },
+      "shuffled_outcome": {
+        "consistent_mass": 0.250887100584805,
+        "entropy_bits": 4.584656894207001,
+        "episodes": 16.0,
+        "exact_mapping": 0.0625,
+        "per_action_accuracy": 0.25,
+        "truth_probability": 0.04165471298620105,
+        "truth_rank": 12.9375
+      }
+    },
+    "random_initialization": {
+      "intact": {
+        "consistent_mass": 0.25016480311751366,
+        "entropy_bits": 4.584888368844986,
+        "episodes": 16.0,
+        "exact_mapping": 0.0,
+        "per_action_accuracy": 0.25,
+        "truth_probability": 0.04162746504880488,
+        "truth_rank": 13.125
+      },
+      "mean_meta_query_loss": 1.410843401402235,
+      "mean_support_nll": 10.467713797092438
+    },
+    "scope": "Soft-prefix hidden-action meta-learning control. A pass would show evidence-dependent temporary memory, not ARC-AGI-3 completion.",
+    "status": "not_yet_passed",
+    "support_probe_count": 1
+  },
+  "completed_at_utc": "2026-08-03T11:23:19.228808+00:00",
+  "elapsed_seconds": 271.672324180603,
+  "epistemic_gates": {
+    "intact_consistent_mass_at_least_0_40": false,
+    "meta_query_loss_is_finite": true,
+    "no_evidence_entropy_at_least_4_bits": true,
+    "no_evidence_truth_probability_at_most_0_10": true,
+    "online_adaptation_gain_at_least_0_10": false,
+    "per_action_accuracy_at_least_0_50": false,
+    "pretrained_beats_random_consistent_mass": true,
+    "shuffled_outcome_drop_at_least_0_10": false
+  },
+  "execution_gates": {
+    "matched_seed": true,
+    "matched_training_configuration": true,
+    "pretrained_used_cuda": true,
+    "random_used_cuda": true
+  },
+  "gpt2_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+  "gpu": {
+    "compute_capability": [
+      7,
+      5
+    ],
+    "max_observed_memory_used_mib": 2319,
+    "max_observed_utilization_percent": 100,
+    "name": "Tesla T4",
+    "sample_count": 90
+  },
+  "pretrained_no_evidence": {
+    "consistent_mass": 0.9999999403953552,
+    "entropy_bits": 4.583298683166504,
+    "episodes": 16.0,
+    "exact_mapping": 0.0625,
+    "per_action_accuracy": 0.25,
+    "truth_probability": 0.041423858143389225,
+    "truth_rank": 13.375
+  },
+  "scope": "Synthetic counterfactual Gate A diagnostic; not an ARC-AGI-3 score or capability claim.",
+  "seed": 271828,
+  "source_sha": "c7c6840f85f1baf8392486e3a36796d5e7da610d",
+  "status": "not_yet_passed"
+}

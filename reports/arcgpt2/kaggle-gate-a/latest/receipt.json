@@ -1,48 +1,76 @@
 {
-  "status": "execution_failed",
-  "dispatch_outcome": "failure",
+  "status": "completed",
+  "dispatch_outcome": "success",
   "scope": "Private Kaggle T4 synthetic Gate A diagnostic; no competition submission.",
   "branch": "arc-gpt2-programs",
-  "workflow_sha": "9c3f557513ad826759fc45bfb04d66b36237af72",
-  "kernel_source_sha": null,
-  "github_run_id": "30808714266",
+  "workflow_sha": "c7c6840f85f1baf8392486e3a36796d5e7da610d",
+  "kernel_source_sha": "c7c6840f85f1baf8392486e3a36796d5e7da610d",
+  "github_run_id": "30808885665",
   "github_run_attempt": "1",
-  "recorded_at_utc": "2026-08-03T11:14:17.153775+00:00",
+  "recorded_at_utc": "2026-08-03T11:23:36.116804+00:00",
   "kernel_slug": "arc-gpt2-gate-a-gpu-diagnostic",
   "kernel_ref_sha256": "9d4c25099132fc7105a7de6c2df753f7e2390a8625982bb8b50091051d79ac21",
-  "final_dispatch_state": "failed_kernel_outputs_retrieved",
-  "dispatch_detail": "Existing kernel failed; outputs retrieved for diagnosis before any retry",
+  "final_dispatch_state": "outputs_retrieved",
+  "dispatch_detail": null,
   "accelerator_requested": "NvidiaTeslaT4",
   "internet_enabled_only_for_pinned_source_and_checkpoint_fetch": true,
   "competition_submission_performed": false,
   "output_files": {
     "arc-gpt2-gate-a-gpu-diagnostic.log": {
-      "bytes": 16178,
-      "sha256": "49c311d19fef5ca6318a27bafb69d6a06e9f3ee7fa757038041df6d9526e748d"
+      "bytes": 485225,
+      "sha256": "9d455cabdf3c2484146c7f525da21814723bd801d7461028ebab9e382d36f4ee"
+    },
+    "arc_gpt2_gate_a_gpu/artifact-manifest.json": {
+      "bytes": 1612,
+      "sha256": "538f5d63a7d881f26c9eba0a82fff219a34db36d9aec6552c9f1bc318d720516"
     },
     "arc_gpt2_gate_a_gpu/environment.json": {
       "bytes": 621,
-      "sha256": "d7083ed0946624af7ffde6c9293b897b83a5562e5ab3aa5d27f5cf853e35c847"
+      "sha256": "9a8f27858c36ea803b358cab976f7dba41fa18aa54d11a3765e5947ab65e2369"
     },
-    "arc_gpt2_gate_a_gpu/failure.json": {
-      "bytes": 915,
-      "sha256": "c7c2d9108eb438ef069b95e681d73f880dbd8bf2cdcaa6596ad3f054aa175a72"
+    "arc_gpt2_gate_a_gpu/gate-a-result.json": {
+      "bytes": 3646,
+      "sha256": "e248aa3ea0efd6014647e52fbba173a2a43f3b840463dece880c3b420c4877df"
+    },
+    "arc_gpt2_gate_a_gpu/gpu-samples.json": {
+      "bytes": 20689,
+      "sha256": "d2d0c5d0e069b27eb4e9c7711e22a7ad2c5564db5481cd96717d114bcfa9689b"
+    },
+    "arc_gpt2_gate_a_gpu/logs/comparison.log": {
+      "bytes": 2075,
+      "sha256": "985b323140b5a28657aa287a3adac94370cfabbc4fc248bf93c6863cc0d050cf"
     },
     "arc_gpt2_gate_a_gpu/logs/dependency-install.log": {
       "bytes": 642,
-      "sha256": "f3c3441122fa571c7c86208c16143e3ac16619cae0c109f43045a87d478bba17"
+      "sha256": "cdea8262786179f4eeb3cfdde7fa38945d83465232aee8eaccd8be218be2032f"
     },
     "arc_gpt2_gate_a_gpu/logs/preflight-tests.log": {
       "bytes": 99,
-      "sha256": "231a259bbf4b5a25154fabe132e2ce03520d4a3009acdd68a18b7e9e8d8f9cfa"
+      "sha256": "d09a6cc057ad329d0265e1558f24c6040bc8aa0102e14f166d4fdadd79693192"
     },
     "arc_gpt2_gate_a_gpu/logs/pretrained.log": {
-      "bytes": 1267,
-      "sha256": "5e24d5314cbeb6b8b2fd5b71b989a9875a53496b846b6e36990016c73fc8755f"
+      "bytes": 78473,
+      "sha256": "7ef17629d696383219c2fbfd6394cfe40f3dc31f6da9b9e0126f271111a24f39"
+    },
+    "arc_gpt2_gate_a_gpu/logs/random.log": {
+      "bytes": 79222,
+      "sha256": "73d42ae1d5ce9eb375ca2af070b9d5029cae13b99c64525d68522953263016ee"
     },
     "arc_gpt2_gate_a_gpu/model-manifest.json": {
       "bytes": 907,
       "sha256": "a348eaa644ec7c670c7f28a751762b38b5a2cca62f8ceb7a5fbaf7d9f746f69a"
+    },
+    "arc_gpt2_gate_a_gpu/outputs/comparison.json": {
+      "bytes": 2074,
+      "sha256": "4263f9028b3f87f3f67305d9f6cbd8f23448eef5f9f10f8c9ac7091e5d8cf55b"
+    },
+    "arc_gpt2_gate_a_gpu/outputs/pretrained/summary.json": {
+      "bytes": 74864,
+      "sha256": "1aae83a67981c82496fef0b62cb7f23bef901581c81bd146517ed9dbe52d1fb6"
+    },
+    "arc_gpt2_gate_a_gpu/outputs/random/summary.json": {
+      "bytes": 75609,
+      "sha256": "7860e7207cb6efdb49ebacd1e4875e6d009e3541dbeae544d80d6b22bda27c43"
     }
   }
 }
