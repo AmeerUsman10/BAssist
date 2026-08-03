@@ -1,0 +1,12 @@
+{
+  "schema": "instella_arc.action_replication_recovery_request.v1",
+  "requested_at_utc": "2026-08-03T12:20:00Z",
+  "kernel_slug": "instella-arc-action-replication-64",
+  "expected_version": 1,
+  "resubmit": false,
+  "read_only_kaggle": true,
+  "expected_outputs": [
+    "replication_status.json",
+    "action_replication.json"
+  ]
+}
