@@ -1,9 +1,9 @@
 {
   "schema": "instella_arc.core_adaptation_tests.v1",
-  "status": "failure",
-  "recorded_at_utc": "2026-08-03T12:29:43.815719+00:00",
+  "status": "success",
+  "recorded_at_utc": "2026-08-03T12:30:21.924606+00:00",
   "branch": "instella-arc",
-  "commit_sha": "d4cbe7105fee92973fdb5aa7cccd51af934538d1",
-  "run_id": "30813781667",
+  "commit_sha": "6a888178fdae1ca77ba95810e05b5efe4c02b261",
+  "run_id": "30813828614",
   "run_attempt": "1"
 }
