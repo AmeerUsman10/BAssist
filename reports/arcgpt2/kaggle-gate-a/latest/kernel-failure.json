@@ -1,0 +1,7 @@
+{
+  "error_message": "Command '['/usr/bin/python3', '-m', 'arcgpt2.meta_soft_second_order', '--initialization', 'pretrained', '--output-dir', '/kaggle/working/arc_gpt2_gate_a_gpu/outputs/pretrained', '--model-name', '/kaggle/temp/arc_gpt2_gate_a_gpu/gpt2-small-pinned', '--seed', '271828', '--train-groups', '128', '--train-mapping-variants', '6', '--validation-groups', '4', '--validation-mapping-variants', '4', '--max-length', '256', '--prefix-length', '8', '--inner-learning-rate', '0.2', '--outer-learning-rate', '0.0001', '--episodes-per-outer-step', '1', '--max-outer-steps', '160', '--warmup-steps', '12', '--freeze-first-n-blocks', '11', '--evaluation-groups', '4', '--no-save-model']' returned non-zero exit status 1.",
+  "error_type": "CalledProcessError",
+  "failed_at_utc": "2026-08-03T11:12:14.263619+00:00",
+  "source_sha": "2a30aeedb27c1ff9d78b7ca1d24d37b92b32827e",
+  "status": "execution_failed"
+}

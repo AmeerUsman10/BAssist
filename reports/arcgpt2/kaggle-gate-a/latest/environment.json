@@ -1,0 +1,20 @@
+{
+  "cuda_available": true,
+  "cuda_compute_capability": [
+    7,
+    5
+  ],
+  "cuda_compute_probe": 256.0,
+  "cuda_device_count": 2,
+  "cuda_device_name": "Tesla T4",
+  "cuda_runtime": "12.8",
+  "gpt2_repository": "openai-community/gpt2",
+  "gpt2_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+  "platform": "Linux-6.12.90+-x86_64-with-glibc2.35",
+  "python": "3.12.13 (main, Mar  4 2026, 09:23:07) [GCC 11.4.0]",
+  "recorded_at_utc": "2026-08-03T11:11:15.757219+00:00",
+  "safetensors": "0.6.2",
+  "source_sha": "2a30aeedb27c1ff9d78b7ca1d24d37b92b32827e",
+  "torch": "2.10.0+cu128",
+  "transformers": "4.57.6"
+}
