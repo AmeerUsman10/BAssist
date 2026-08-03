@@ -1,0 +1,16 @@
+{
+  "schema": "instella_arc.dispatch_request.v1",
+  "requested_at_utc": "2026-08-03T11:27:00Z",
+  "task_issue": 6,
+  "coordination_issue": 12,
+  "branch": "instella-arc",
+  "checkpoint": "amd/Instella-MoE-16B-A3B-Think",
+  "checkpoint_revision": "e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83",
+  "accelerator": "NvidiaTeslaT4",
+  "load_order": ["int4", "int8"],
+  "profile": "smoke",
+  "tasks": ["action"],
+  "external_submission": false,
+  "start_qlora": false,
+  "reason": "KAGGLE_API_TOKEN and KAGGLE_KERNEL_ID are now configured; execute exactly one bounded frozen-evidence gate."
+}
