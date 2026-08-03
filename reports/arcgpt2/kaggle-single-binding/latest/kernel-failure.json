@@ -1,0 +1,8 @@
+{
+  "competition_submission_performed": false,
+  "error_message": "runner source SHA was not resolved by the dispatch workflow",
+  "error_type": "RuntimeError",
+  "failed_at_utc": "2026-08-03T12:00:51.499889+00:00",
+  "source_sha": "73ce00d70b5355b35bafd7fdce77baeccc8f976a",
+  "status": "execution_failed"
+}
