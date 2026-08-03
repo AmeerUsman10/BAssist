@@ -34,7 +34,15 @@ class ToolkitActionReceipt:
     levels_before: int | None
     levels_after: int | None
     state_after: str
-    observation_sha256: str
+    observation_before_sha256: str
+    observation_after_sha256: str
+    persistent_unchanged: bool | None
+    changed_cell_count: int | None
+    translation_vectors: tuple[tuple[int, int], ...]
+    animation_frame_count: int
+    animation_delta_count: int
+    moved_components: tuple[Mapping[str, Any], ...]
+    changed_cells: tuple[Mapping[str, Any], ...]
     action_receipt_sha256: str | None
     elapsed_seconds: float
 
@@ -50,6 +58,10 @@ class ToolkitRunResult:
     win_levels: int | None
     actions: int
     max_actions: int
+    initial_observation_sha256: str
+    final_observation_sha256: str
+    initial_final_grid: tuple[tuple[int, ...], ...] | None
+    final_final_grid: tuple[tuple[int, ...], ...] | None
     controller_summary: Mapping[str, Any]
     trace: tuple[ToolkitActionReceipt, ...]
 
@@ -116,6 +128,7 @@ class ToolkitControllerRunner:
         started_at = datetime.now(timezone.utc)
         started_clock = time.perf_counter()
         current = self._initial_observation()
+        initial = current
         self.controller.initialize(current)
         trace: list[ToolkitActionReceipt] = []
 
@@ -140,6 +153,7 @@ class ToolkitControllerRunner:
                 ) from exc
             data = _api_data(decision, action_object=action_object)
             levels_before = current.levels_completed
+            observation_before_sha = current.sha256
             raw_after = self.environment.step(
                 action_object,
                 data=data,
@@ -147,6 +161,7 @@ class ToolkitControllerRunner:
             )
             after = OfficialFrameSequence.from_frame_data(raw_after)
             receipt = self.controller.observe(after)
+            metadata = receipt.metadata if receipt is not None else {}
             trace.append(
                 ToolkitActionReceipt(
                     step=step,
@@ -160,7 +175,29 @@ class ToolkitControllerRunner:
                     levels_before=levels_before,
                     levels_after=after.levels_completed,
                     state_after=after.state,
-                    observation_sha256=after.sha256,
+                    observation_before_sha256=observation_before_sha,
+                    observation_after_sha256=after.sha256,
+                    persistent_unchanged=(
+                        receipt.effect.unchanged if receipt is not None else None
+                    ),
+                    changed_cell_count=(
+                        receipt.effect.changed_cell_count
+                        if receipt is not None
+                        else None
+                    ),
+                    translation_vectors=(
+                        receipt.effect.translation_vectors
+                        if receipt is not None
+                        else ()
+                    ),
+                    animation_frame_count=len(after.rendered_frames),
+                    animation_delta_count=len(after.animation_deltas),
+                    moved_components=tuple(
+                        metadata.get("moved_components", ())
+                    ),
+                    changed_cells=tuple(
+                        metadata.get("changed_cells", ())[:96]
+                    ),
                     action_receipt_sha256=(
                         receipt.receipt_sha256 if receipt is not None else None
                     ),
@@ -171,7 +208,7 @@ class ToolkitControllerRunner:
 
         finished_at = datetime.now(timezone.utc)
         return ToolkitRunResult(
-            schema="instella_arc.toolkit_run.v1",
+            schema="instella_arc.toolkit_run.v2",
             started_at_utc=started_at.isoformat(),
             finished_at_utc=finished_at.isoformat(),
             game_id=current.game_id,
@@ -180,6 +217,10 @@ class ToolkitControllerRunner:
             win_levels=current.win_levels,
             actions=len(trace),
             max_actions=self.max_actions,
+            initial_observation_sha256=initial.sha256,
+            final_observation_sha256=current.sha256,
+            initial_final_grid=initial.final_grid,
+            final_final_grid=current.final_grid,
             controller_summary=self.controller.summary(),
             trace=tuple(trace),
         )
