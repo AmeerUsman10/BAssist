@@ -1,5 +1,5 @@
 {
-  "status": "failure",
+  "status": "superseded_by_recovery",
   "branch": "instella-arc",
   "commit_sha": "276d461eab01bca7cd084ad0abfdddf31febc27c",
   "run_id": "30808883356",
@@ -13,8 +13,10 @@
     "authenticated_credential_present": true,
     "credential_format": "KAGGLE_API_TOKEN",
     "kernel_id_present": true,
-    "kernel_id": "AmeerUsman10/instella-arc-frozen-probe",
+    "kernel_slug": "instella-arc-frozen-probe",
     "reason": null
   },
-  "output_files": []
+  "output_files": [],
+  "superseded_by": "reports/instella_arc/latest-kaggle-recovery-status.json",
+  "note": "The original poll used the configured owner string rather than the owner-qualified ref returned by Kaggle. The Kaggle kernel completed and its bounded evidence was recovered separately."
 }
