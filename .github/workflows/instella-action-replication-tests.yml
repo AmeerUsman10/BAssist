@@ -12,10 +12,13 @@ on:
       - "instella_arc/action_training_data.py"
       - "instella_arc/action_qlora.py"
       - "instella_arc/controller.py"
+      - "instella_arc/controller_stride.py"
       - "instella_arc/kaggle_action_replication.py"
       - "instella_arc/kaggle_recover.py"
       - "instella_arc/model_ranker.py"
       - "instella_arc/navigation.py"
+      - "instella_arc/navigation_stride.py"
+      - "instella_arc/qlora_compat.py"
       - "instella_arc/receipts.py"
       - "instella_arc/toolkit_runner.py"
       - "instella_arc/world_state.py"
@@ -27,6 +30,7 @@ on:
       - "instella_arc/tests/test_kaggle_recover.py"
       - "instella_arc/tests/test_model_ranker.py"
       - "instella_arc/tests/test_navigation.py"
+      - "instella_arc/tests/test_navigation_stride.py"
       - "instella_arc/tests/test_receipts.py"
       - "instella_arc/tests/test_toolkit_runner.py"
       - "instella_arc/tests/test_world_state.py"
@@ -65,6 +69,7 @@ jobs:
             instella_arc/tests/test_receipts.py \
             instella_arc/tests/test_action_belief.py \
             instella_arc/tests/test_navigation.py \
+            instella_arc/tests/test_navigation_stride.py \
             instella_arc/tests/test_controller.py \
             instella_arc/tests/test_model_ranker.py \
             instella_arc/tests/test_toolkit_runner.py \
@@ -88,7 +93,7 @@ jobs:
 
           log = Path("instella-core-adaptation-tests.log")
           receipt = {
-              "schema": "instella_arc.core_adaptation_tests.v2",
+              "schema": "instella_arc.core_adaptation_tests.v3",
               "status": os.environ.get("TEST_OUTCOME", "unknown"),
               "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
               "branch": os.environ.get("GITHUB_REF_NAME"),
