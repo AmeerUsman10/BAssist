@@ -1,9 +1,9 @@
 {
-  "schema": "instella_arc.action_replication_tests.v2",
+  "schema": "instella_arc.action_replication_tests.v3",
   "status": "success",
-  "recorded_at_utc": "2026-08-03T12:03:59.258002+00:00",
+  "recorded_at_utc": "2026-08-03T12:07:00.729030+00:00",
   "branch": "instella-arc",
-  "commit_sha": "69125724cf069a363f135322b6b122435fffbd3b",
-  "run_id": "30812001366",
+  "commit_sha": "48a81d9c113c5c5b7597de893bf8d031b1947543",
+  "run_id": "30812217467",
   "run_attempt": "1"
 }
