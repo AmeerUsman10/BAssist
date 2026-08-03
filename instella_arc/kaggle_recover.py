@@ -3,10 +3,10 @@
 This program is intentionally conservative:
 
 * it discovers the actual owner-qualified kernel ref from ``kernels list --mine``;
-* it downloads only ``status.json`` and ``frozen_benchmark.json``;
+* it retains only the runner's ``status.json`` and ``frozen_benchmark.json``;
 * it records a redacted log tail and checksums;
 * it cancels queued duplicate GitHub dispatches;
-* it cancels the stale in-progress poller only after the Kaggle run is terminal.
+* it cancels a stale in-progress poller only after the Kaggle run is terminal.
 
 No Kaggle kernel is created, updated, deleted, or resubmitted here.
 """
@@ -27,6 +27,7 @@ from urllib.request import Request, urlopen
 
 TARGET_SLUG = "instella-arc-frozen-probe"
 DISPATCH_WORKFLOW = "instella-arc-kaggle-dispatch.yml"
+RESULT_DIRECTORY = "instella_arc_results"
 
 
 def run_command(arguments: list[str], *, timeout: int) -> subprocess.CompletedProcess[str]:
@@ -73,6 +74,44 @@ def sanitize_owner(text: str, actual_ref: str) -> str:
         sanitized,
         flags=re.IGNORECASE,
     )
+
+
+def select_bounded_evidence(files: list[Path]) -> tuple[Path | None, Path | None]:
+    """Select only the two files written by the bounded Instella runner.
+
+    Kaggle's current ``--file-pattern`` handling may return additional files with
+    matching substrings. Selecting by both the parent directory and exact file
+    name prevents cloned repository receipts from being promoted as run output.
+    """
+
+    status_matches = [
+        path
+        for path in files
+        if path.name == "status.json" and path.parent.name == RESULT_DIRECTORY
+    ]
+    benchmark_matches = [
+        path
+        for path in files
+        if path.name == "frozen_benchmark.json"
+        and path.parent.name == RESULT_DIRECTORY
+    ]
+    status_path = status_matches[0] if len(status_matches) == 1 else None
+    benchmark_path = benchmark_matches[0] if len(benchmark_matches) == 1 else None
+    return status_path, benchmark_path
+
+
+def retain_only(output_root: Path, keep: set[Path]) -> list[Path]:
+    """Delete unrelated downloaded files and empty directories."""
+
+    for path in sorted(output_root.rglob("*"), reverse=True):
+        if path.is_file() and path not in keep:
+            path.unlink()
+        elif path.is_dir():
+            try:
+                path.rmdir()
+            except OSError:
+                pass
+    return sorted(path for path in output_root.rglob("*") if path.is_file())
 
 
 def sha256(path: Path) -> str:
@@ -142,14 +181,9 @@ def cancel_dispatches(
     return cancellations
 
 
-def locate_unique(files: list[Path], name: str) -> Path | None:
-    matches = [path for path in files if path.name == name]
-    return matches[0] if len(matches) == 1 else None
-
-
 def recover(output_root: Path) -> dict[str, Any]:
     report: dict[str, Any] = {
-        "schema": "instella_arc.kaggle_recovery.v2",
+        "schema": "instella_arc.kaggle_recovery.v3",
         "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
         "kernel_ref_resolved": False,
         "kernel_status": "unknown",
@@ -189,8 +223,6 @@ def recover(output_root: Path) -> dict[str, Any]:
         )
 
         output_root.mkdir(parents=True, exist_ok=True)
-        # Deliberately broad substring pattern: Kaggle may preserve nested output
-        # paths, but these two file names are unique in the bounded runner.
         download = run_command(
             [
                 "kaggle",
@@ -212,22 +244,29 @@ def recover(output_root: Path) -> dict[str, Any]:
         raw_log = (logs.stdout + "\n" + logs.stderr).strip()
         report["sanitized_kernel_log_tail"] = sanitize_owner(raw_log, actual_ref)[-16000:]
 
-        files = sorted(path for path in output_root.rglob("*") if path.is_file())
+        downloaded_files = sorted(
+            path for path in output_root.rglob("*") if path.is_file()
+        )
+        status_path, benchmark_path = select_bounded_evidence(downloaded_files)
+        keep = {
+            path for path in (status_path, benchmark_path) if path is not None
+        }
+        files = retain_only(output_root, keep)
         report["output_files"] = [str(path.relative_to(output_root)) for path in files]
         report["output_sha256"] = {
             str(path.relative_to(output_root)): sha256(path) for path in files
         }
 
-        status_path = locate_unique(files, "status.json")
-        benchmark_path = locate_unique(files, "frozen_benchmark.json")
-        if status_path is not None:
+        if status_path is not None and status_path.exists():
             try:
-                report["runner_status"] = json.loads(status_path.read_text(encoding="utf-8"))
+                report["runner_status"] = json.loads(
+                    status_path.read_text(encoding="utf-8")
+                )
             except Exception as exc:  # pragma: no cover - durable diagnostic path
                 report["runner_status"] = {
                     "parse_error": f"{type(exc).__name__}: {exc}"
                 }
-        if benchmark_path is not None:
+        if benchmark_path is not None and benchmark_path.exists():
             try:
                 benchmark = json.loads(benchmark_path.read_text(encoding="utf-8"))
                 report["benchmark_summary"] = {
