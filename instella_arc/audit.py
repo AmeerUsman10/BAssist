@@ -7,7 +7,6 @@ import copy
 from dataclasses import asdict
 from datetime import datetime, timezone
 import json
-import math
 from pathlib import Path
 import platform
 import traceback
@@ -33,11 +32,17 @@ def _file_size(sibling: Any) -> int:
     lfs = getattr(sibling, "lfs", None)
     if isinstance(lfs, dict) and lfs.get("size") is not None:
         return int(lfs["size"])
-    return 0
+    lfs_size = getattr(lfs, "size", None)
+    return int(lfs_size) if lfs_size is not None else 0
 
 
 def _tiny_config(config: Any, torch: Any) -> Any:
     tiny = copy.deepcopy(config)
+    # DeepSeek-V3's rotary helper derives its cosine width from
+    # hidden_size/num_attention_heads. The custom Instella attention then applies
+    # that tensor to qk_rope_head_dim, so these values must match in a shape-
+    # reduced audit model. This is only an architectural execution probe; it is
+    # not intended to preserve the full model's capacity ratios.
     updates = {
         "hidden_size": 128,
         "intermediate_size": 256,
@@ -45,15 +50,17 @@ def _tiny_config(config: Any, torch: Any) -> Any:
         "num_hidden_layers": 2,
         "num_attention_heads": 4,
         "num_key_value_heads": 4,
-        "qk_head_dim": 32,
-        "qk_nope_head_dim": 24,
-        "qk_rope_head_dim": 8,
+        "qk_head_dim": 64,
+        "qk_nope_head_dim": 32,
+        "qk_rope_head_dim": 32,
         "v_head_dim": 32,
+        "q_lora_rank": None,
         "kv_lora_rank": 32,
         "n_routed_experts": 4,
         "n_shared_experts": 1,
         "num_experts_per_tok": 2,
         "first_k_dense_replace": 1,
+        "moe_layer_freq": 1,
         "vocab_size": 512,
         "max_position_embeddings": 128,
         "original_max_position_embeddings": 128,
@@ -210,18 +217,39 @@ def audit_checkpoint(key: str) -> dict[str, Any]:
             spec.repository_id, trust_remote_code=True
         )
         config_dict = config.to_dict()
+        reported_fields = (
+            "hidden_size",
+            "intermediate_size",
+            "moe_intermediate_size",
+            "num_hidden_layers",
+            "num_attention_heads",
+            "num_key_value_heads",
+            "q_lora_rank",
+            "kv_lora_rank",
+            "qk_head_dim",
+            "qk_nope_head_dim",
+            "qk_rope_head_dim",
+            "v_head_dim",
+            "n_routed_experts",
+            "n_shared_experts",
+            "num_experts_per_tok",
+            "first_k_dense_replace",
+            "moe_layer_freq",
+            "n_group",
+            "topk_group",
+            "topk_method",
+            "scoring_func",
+            "routed_scaling_factor",
+            "max_position_embeddings",
+            "original_max_position_embeddings",
+            "farskip",
+            "ep_size",
+        )
         report["config"] = {
             "class": type(config).__name__,
             "architectures": config_dict.get("architectures"),
             "model_type": config_dict.get("model_type"),
-            "hidden_size": config_dict.get("hidden_size"),
-            "num_hidden_layers": config_dict.get("num_hidden_layers"),
-            "num_attention_heads": config_dict.get("num_attention_heads"),
-            "n_routed_experts": config_dict.get("n_routed_experts"),
-            "n_shared_experts": config_dict.get("n_shared_experts"),
-            "num_experts_per_tok": config_dict.get("num_experts_per_tok"),
-            "moe_intermediate_size": config_dict.get("moe_intermediate_size"),
-            "max_position_embeddings": config_dict.get("max_position_embeddings"),
+            **{field: config_dict.get(field) for field in reported_fields},
             "rope_scaling": config_dict.get("rope_scaling"),
             "torch_dtype": str(config_dict.get("torch_dtype")),
             "auto_map": config_dict.get("auto_map"),
@@ -302,6 +330,19 @@ def audit_checkpoint(key: str) -> dict[str, Any]:
         report["tiny_model"] = {
             "class": type(tiny_model).__name__,
             "parameters": sum(parameter.numel() for parameter in tiny_model.parameters()),
+            "config": {
+                field: getattr(tiny_config, field, None)
+                for field in (
+                    "hidden_size",
+                    "num_attention_heads",
+                    "qk_nope_head_dim",
+                    "qk_rope_head_dim",
+                    "v_head_dim",
+                    "kv_lora_rank",
+                    "n_routed_experts",
+                    "num_experts_per_tok",
+                )
+            },
             "logits_shape": list(output.logits.shape),
             "generated_shape": list(generated.shape),
             "cache_tensor_shapes": cache_shapes,
