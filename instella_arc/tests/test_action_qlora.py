@@ -4,6 +4,7 @@ from instella_arc.action_qlora import (
     EXPECTED_RANK8_TRAINABLE_PARAMETERS,
     trainable_inventory,
 )
+from instella_arc.qlora_compat import is_moe_router_module
 
 
 class _Parameter:
@@ -53,3 +54,16 @@ def test_trainable_inventory_detects_router_or_expert_escape() -> None:
 
 def test_audited_rank8_parameter_count_is_pinned() -> None:
     assert EXPECTED_RANK8_TRAINABLE_PARAMETERS == 1_769_472
+
+
+def test_router_compatibility_detection_is_narrow() -> None:
+    MoEGate = type("MoEGate", (), {})
+    DenseGateProjection = type("DenseGateProjection", (), {})
+    AttributeRouter = type(
+        "AttributeRouter",
+        (),
+        {"top_k": 2, "scoring_func": "softmax"},
+    )
+    assert is_moe_router_module(MoEGate())
+    assert is_moe_router_module(AttributeRouter())
+    assert not is_moe_router_module(DenseGateProjection())
