@@ -70,10 +70,13 @@ def load_with_fallbacks(
     modes = list(quantizations)
     if allow_fp16_offload and "none" not in modes:
         modes.append("none")
+    spec = CHECKPOINTS[checkpoint]
 
     for mode in modes:
         attempt: dict[str, Any] = {
             "quantization": mode,
+            "repository_id": spec.repository_id,
+            "revision": spec.revision,
             "started_at_utc": datetime.now(timezone.utc).isoformat(),
         }
         try:
@@ -84,6 +87,7 @@ def load_with_fallbacks(
                     dtype="float16",
                     max_memory=max_memory,
                     offload_folder="/kaggle/working/instella_offload",
+                    revision=spec.revision,
                     max_context_tokens=max_context_tokens,
                 )
             )
@@ -156,6 +160,10 @@ def main() -> None:
         "schema": "instella_arc.kaggle_run.v1",
         "started_at_utc": datetime.now(timezone.utc).isoformat(),
         "arguments": vars(args) | {"output_dir": str(args.output_dir)},
+        "checkpoint_spec": {
+            "repository_id": CHECKPOINTS[args.checkpoint].repository_id,
+            "revision": CHECKPOINTS[args.checkpoint].revision,
+        },
         "gpu_inventory": gpu_inventory(),
         "status": "running",
     }
