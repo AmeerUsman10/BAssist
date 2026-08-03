@@ -1,4 +1,5 @@
 name: ARC-GPT2 Raw NLL Replication Kaggle GPU
+# Preregistered launch: raw_replication_v1, fresh seeds 161803/141421/173205.
 
 on:
   workflow_dispatch:
