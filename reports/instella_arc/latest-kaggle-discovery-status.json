@@ -1,0 +1,111 @@
+{
+  "schema": "instella_arc.kaggle_discovery.v1",
+  "recorded_at_utc": "2026-08-03T11:41:34.954833+00:00",
+  "list_exit_code": 0,
+  "kernel_match_count": 1,
+  "kernel_ref_resolved": true,
+  "kernel_slug": "instella-arc-frozen-probe",
+  "status": "complete",
+  "status_exit_code": 0,
+  "sanitized_status_output": "<redacted>/instella-arc-frozen-probe has status \"KernelWorkerStatus.COMPLETE\"",
+  "reason": null,
+  "mutated_kaggle": false,
+  "github_dispatch": {
+    "latest": {
+      "id": 30809699353,
+      "status": "pending",
+      "conclusion": null,
+      "head_sha": "cf7363a864c88fa7ee32ffefac745a9457a736c9",
+      "run_number": 8,
+      "created_at": "2026-08-03T11:28:50Z",
+      "updated_at": "2026-08-03T11:28:51Z",
+      "html_url": "https://github.com/AmeerUsman10/BAssist/actions/runs/30809699353"
+    },
+    "recent_runs": [
+      {
+        "id": 30809699353,
+        "status": "pending",
+        "conclusion": null,
+        "head_sha": "cf7363a864c88fa7ee32ffefac745a9457a736c9",
+        "run_number": 8,
+        "created_at": "2026-08-03T11:28:50Z",
+        "updated_at": "2026-08-03T11:28:51Z",
+        "html_url": "https://github.com/AmeerUsman10/BAssist/actions/runs/30809699353"
+      },
+      {
+        "id": 30808883356,
+        "status": "in_progress",
+        "conclusion": null,
+        "head_sha": "276d461eab01bca7cd084ad0abfdddf31febc27c",
+        "run_number": 7,
+        "created_at": "2026-08-03T11:16:30Z",
+        "updated_at": "2026-08-03T11:17:04Z",
+        "html_url": "https://github.com/AmeerUsman10/BAssist/actions/runs/30808883356"
+      },
+      {
+        "id": 30808051141,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "1e7addaa577cbd6abaa20024d756f02941ab4b6c",
+        "run_number": 6,
+        "created_at": "2026-08-03T11:04:23Z",
+        "updated_at": "2026-08-03T11:04:48Z",
+        "html_url": "https://github.com/AmeerUsman10/BAssist/actions/runs/30808051141"
+      },
+      {
+        "id": 30785424019,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "2cf0e3c551c012d5b7d4208a497466d014e145e4",
+        "run_number": 5,
+        "created_at": "2026-08-03T04:48:35Z",
+        "updated_at": "2026-08-03T04:48:53Z",
+        "html_url": "https://github.com/AmeerUsman10/BAssist/actions/runs/30785424019"
+      },
+      {
+        "id": 30785378666,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "be453e3bb32f4c0ace4a26bfaf5907165f4fe508",
+        "run_number": 4,
+        "created_at": "2026-08-03T04:47:30Z",
+        "updated_at": "2026-08-03T04:47:44Z",
+        "html_url": "https://github.com/AmeerUsman10/BAssist/actions/runs/30785378666"
+      },
+      {
+        "id": 30785102182,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "12019f72af1f3b6b3ffdb04a017484282ad1744d",
+        "run_number": 3,
+        "created_at": "2026-08-03T04:41:16Z",
+        "updated_at": "2026-08-03T04:41:38Z",
+        "html_url": "https://github.com/AmeerUsman10/BAssist/actions/runs/30785102182"
+      },
+      {
+        "id": 30784820795,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "457ef6285631e4b1152bb03e44ddabe559f36c7d",
+        "run_number": 2,
+        "created_at": "2026-08-03T04:34:42Z",
+        "updated_at": "2026-08-03T04:35:07Z",
+        "html_url": "https://github.com/AmeerUsman10/BAssist/actions/runs/30784820795"
+      },
+      {
+        "id": 30784463823,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "8d6e2d1beef839c161f1dcba8a7a1d8d464b6e20",
+        "run_number": 1,
+        "created_at": "2026-08-03T04:26:56Z",
+        "updated_at": "2026-08-03T04:27:11Z",
+        "html_url": "https://github.com/AmeerUsman10/BAssist/actions/runs/30784463823"
+      }
+    ]
+  },
+  "github_branch": "instella-arc",
+  "github_commit_sha": "ee1773ee99f91bb2dc82c1550220513933ae556c",
+  "github_run_id": "30810510736",
+  "github_run_attempt": "1"
+}
