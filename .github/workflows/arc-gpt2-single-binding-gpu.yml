@@ -44,6 +44,18 @@ jobs:
             arcgpt2/tests/test_meta_soft_single_binding_gate.py \
             arcgpt2/tests/test_meta_soft_second_order.py \
             arcgpt2/tests/test_completion_scorer.py
+          sed "s/__SOURCE_SHA__/0000000000000000000000000000000000000000/g" \
+            kaggle/arc-gpt2-single-binding-gpu/runner.py > "${RUNNER_TEMP}/runner-injected.py"
+          RUNNER_INJECTED="${RUNNER_TEMP}/runner-injected.py" python - <<'PY'
+          import importlib.util
+          import os
+
+          spec = importlib.util.spec_from_file_location("runner_injected", os.environ["RUNNER_INJECTED"])
+          module = importlib.util.module_from_spec(spec)
+          assert spec.loader is not None
+          spec.loader.exec_module(module)
+          module.validate_source_sha(module.SOURCE_SHA)
+          PY
 
   dispatch:
     needs: preflight
