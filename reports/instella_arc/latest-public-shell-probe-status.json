@@ -1,0 +1,70 @@
+{
+  "schema": "instella_arc.public_shell_probe_receipt.v1",
+  "status": "success",
+  "recorded_at_utc": "2026-08-03T12:38:11.411145+00:00",
+  "branch": "instella-arc",
+  "commit_sha": "9df50ecb681e680bd8b78253ed0fbcb549a4f94c",
+  "run_id": "30814362857",
+  "run_attempt": "1",
+  "report_present": true,
+  "report_sha256": "8f419d85125a5ed8977975bee75ccfc5f99102ee2613ddbe77e954e818b28dc0",
+  "competition_mode": false,
+  "external_submission": false,
+  "completed_levels_total": 0,
+  "game_summary": [
+    {
+      "game_id": "ft09",
+      "status": "failure",
+      "levels_completed": null,
+      "actions": null,
+      "error": {
+        "type": "RuntimeError",
+        "message": "controller selected non-legal action '6'; available=('ACTION6',)",
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/toolkit_runner.py\", line 135, in run",
+          "    action_object = action_map[decision.action]",
+          "                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^",
+          "KeyError: '6'",
+          "",
+          "The above exception was the direct cause of the following exception:",
+          "",
+          "Traceback (most recent call last):",
+          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/public_probe.py\", line 81, in run_probe",
+          "    ).run()",
+          "      ^^^^^",
+          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/toolkit_runner.py\", line 137, in run",
+          "    raise RuntimeError(",
+          "RuntimeError: controller selected non-legal action '6'; available=('ACTION6',)"
+        ]
+      }
+    },
+    {
+      "game_id": "ls20",
+      "status": "failure",
+      "levels_completed": null,
+      "actions": null,
+      "error": {
+        "type": "RuntimeError",
+        "message": "controller selected non-legal action '4'; available=('ACTION1', 'ACTION2', 'ACTION3', 'ACTION4')",
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/toolkit_runner.py\", line 135, in run",
+          "    action_object = action_map[decision.action]",
+          "                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^",
+          "KeyError: '4'",
+          "",
+          "The above exception was the direct cause of the following exception:",
+          "",
+          "Traceback (most recent call last):",
+          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/public_probe.py\", line 81, in run_probe",
+          "    ).run()",
+          "      ^^^^^",
+          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/toolkit_runner.py\", line 137, in run",
+          "    raise RuntimeError(",
+          "RuntimeError: controller selected non-legal action '4'; available=('ACTION1', 'ACTION2', 'ACTION3', 'ACTION4')"
+        ]
+      }
+    }
+  ]
+}

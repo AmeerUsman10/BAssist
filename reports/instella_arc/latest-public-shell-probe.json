@@ -1,0 +1,205 @@
+{
+  "schema": "instella_arc.public_shell_probe.v1",
+  "started_at_utc": "2026-08-03T12:38:09.538919+00:00",
+  "finished_at_utc": "2026-08-03T12:38:11.286127+00:00",
+  "operation_mode": "ONLINE",
+  "competition_mode": false,
+  "anonymous_or_environment_key": true,
+  "games_requested": [
+    "ft09",
+    "ls20"
+  ],
+  "max_actions_per_game": 80,
+  "games": [
+    {
+      "game_id": "ft09",
+      "status": "failure",
+      "result": null,
+      "error": {
+        "type": "RuntimeError",
+        "message": "controller selected non-legal action '6'; available=('ACTION6',)",
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/toolkit_runner.py\", line 135, in run",
+          "    action_object = action_map[decision.action]",
+          "                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^",
+          "KeyError: '6'",
+          "",
+          "The above exception was the direct cause of the following exception:",
+          "",
+          "Traceback (most recent call last):",
+          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/public_probe.py\", line 81, in run_probe",
+          "    ).run()",
+          "      ^^^^^",
+          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/toolkit_runner.py\", line 137, in run",
+          "    raise RuntimeError(",
+          "RuntimeError: controller selected non-legal action '6'; available=('ACTION6',)"
+        ]
+      }
+    },
+    {
+      "game_id": "ls20",
+      "status": "failure",
+      "result": null,
+      "error": {
+        "type": "RuntimeError",
+        "message": "controller selected non-legal action '4'; available=('ACTION1', 'ACTION2', 'ACTION3', 'ACTION4')",
+        "traceback_tail": [
+          "Traceback (most recent call last):",
+          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/toolkit_runner.py\", line 135, in run",
+          "    action_object = action_map[decision.action]",
+          "                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^",
+          "KeyError: '4'",
+          "",
+          "The above exception was the direct cause of the following exception:",
+          "",
+          "Traceback (most recent call last):",
+          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/public_probe.py\", line 81, in run_probe",
+          "    ).run()",
+          "      ^^^^^",
+          "  File \"/home/runner/work/BAssist/BAssist/instella_arc/toolkit_runner.py\", line 137, in run",
+          "    raise RuntimeError(",
+          "RuntimeError: controller selected non-legal action '4'; available=('ACTION1', 'ACTION2', 'ACTION3', 'ACTION4')"
+        ]
+      }
+    }
+  ],
+  "completed_levels_total": 0,
+  "scorecard": {
+    "source_url": null,
+    "tags": [
+      "wrapper",
+      "agent"
+    ],
+    "opaque": null,
+    "card_id": "ad45622b-6142-430d-84f6-af2128a737cb",
+    "api_key": null,
+    "score": 0.0,
+    "environments": [
+      {
+        "id": "ft09-0d8bbf25",
+        "runs": [
+          {
+            "id": null,
+            "guid": "af47075c-2e47-431b-b0a9-74ac84248c91",
+            "score": 0.0,
+            "levels_completed": 0,
+            "actions": 0,
+            "resets": 0,
+            "state": "NOT_FINISHED",
+            "completed": false,
+            "level_scores": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "level_actions": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "level_baseline_actions": [
+              43,
+              12,
+              23,
+              28,
+              65,
+              37
+            ],
+            "number_of_levels": null,
+            "number_of_environments": 0,
+            "message": null
+          }
+        ],
+        "score": 0.0,
+        "actions": 0,
+        "levels_completed": 0,
+        "completed": false,
+        "level_count": 6,
+        "resets": 0
+      },
+      {
+        "id": "ls20-9607627b",
+        "runs": [
+          {
+            "id": null,
+            "guid": "cf6a4c81-b0f4-4943-bd50-78415f1d9a19",
+            "score": 0.0,
+            "levels_completed": 0,
+            "actions": 0,
+            "resets": 0,
+            "state": "NOT_FINISHED",
+            "completed": false,
+            "level_scores": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "level_actions": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "level_baseline_actions": [
+              22,
+              123,
+              73,
+              84,
+              96,
+              192,
+              186
+            ],
+            "number_of_levels": null,
+            "number_of_environments": 0,
+            "message": null
+          }
+        ],
+        "score": 0.0,
+        "actions": 0,
+        "levels_completed": 0,
+        "completed": false,
+        "level_count": 7,
+        "resets": 0
+      }
+    ],
+    "tags_scores": [
+      {
+        "id": "keyboard",
+        "guid": null,
+        "score": 0.0,
+        "levels_completed": 0,
+        "actions": 0,
+        "resets": null,
+        "state": null,
+        "completed": null,
+        "level_scores": null,
+        "level_actions": null,
+        "level_baseline_actions": null,
+        "number_of_levels": 7,
+        "number_of_environments": 1,
+        "message": null
+      }
+    ],
+    "competition_mode": false,
+    "total_environments_completed": 0,
+    "total_environments": 2,
+    "total_levels_completed": 0,
+    "total_levels": 13,
+    "total_actions": 0
+  },
+  "scope": "Public development probe of deterministic evidence/navigation shell. No competition submission and no Instella model capability claim."
+}
