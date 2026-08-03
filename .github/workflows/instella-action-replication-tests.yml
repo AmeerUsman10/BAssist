@@ -5,6 +5,8 @@ on:
   push:
     branches: [instella-arc]
     paths:
+      - "arcgpt2/official_observation.py"
+      - "arcgpt2/tests/test_official_observation.py"
       - "instella_arc/action_belief.py"
       - "instella_arc/action_replication.py"
       - "instella_arc/action_training_data.py"
@@ -12,8 +14,10 @@ on:
       - "instella_arc/controller.py"
       - "instella_arc/kaggle_action_replication.py"
       - "instella_arc/kaggle_recover.py"
+      - "instella_arc/model_ranker.py"
       - "instella_arc/navigation.py"
       - "instella_arc/receipts.py"
+      - "instella_arc/toolkit_runner.py"
       - "instella_arc/world_state.py"
       - "instella_arc/tests/test_action_belief.py"
       - "instella_arc/tests/test_action_replication.py"
@@ -21,8 +25,10 @@ on:
       - "instella_arc/tests/test_action_qlora.py"
       - "instella_arc/tests/test_controller.py"
       - "instella_arc/tests/test_kaggle_recover.py"
+      - "instella_arc/tests/test_model_ranker.py"
       - "instella_arc/tests/test_navigation.py"
       - "instella_arc/tests/test_receipts.py"
+      - "instella_arc/tests/test_toolkit_runner.py"
       - "instella_arc/tests/test_world_state.py"
       - ".github/workflows/instella-action-replication-tests.yml"
 
@@ -48,17 +54,20 @@ jobs:
       - name: Install deterministic test dependencies
         run: python -m pip install --quiet pytest
 
-      - name: Run exact-world, controller, replication, and QLoRA tests
+      - name: Run exact-world, controller, toolkit, replication, and QLoRA tests
         id: test
         continue-on-error: true
         run: |
           set -o pipefail
           python -m pytest -q \
+            arcgpt2/tests/test_official_observation.py \
             instella_arc/tests/test_world_state.py \
             instella_arc/tests/test_receipts.py \
             instella_arc/tests/test_action_belief.py \
             instella_arc/tests/test_navigation.py \
             instella_arc/tests/test_controller.py \
+            instella_arc/tests/test_model_ranker.py \
+            instella_arc/tests/test_toolkit_runner.py \
             instella_arc/tests/test_action_replication.py \
             instella_arc/tests/test_action_training_data.py \
             instella_arc/tests/test_action_qlora.py \
@@ -79,7 +88,7 @@ jobs:
 
           log = Path("instella-core-adaptation-tests.log")
           receipt = {
-              "schema": "instella_arc.core_adaptation_tests.v1",
+              "schema": "instella_arc.core_adaptation_tests.v2",
               "status": os.environ.get("TEST_OUTCOME", "unknown"),
               "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
               "branch": os.environ.get("GITHUB_REF_NAME"),
@@ -93,7 +102,7 @@ jobs:
           if log.exists():
               lines = log.read_text(encoding="utf-8", errors="replace").splitlines()
               Path("reports/instella_arc/latest-core-adaptation-tests-log.txt").write_text(
-                  "\n".join(lines[-1000:]) + "\n", encoding="utf-8"
+                  "\n".join(lines[-1500:]) + "\n", encoding="utf-8"
               )
           PY
 
