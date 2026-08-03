@@ -1,0 +1,7 @@
+{
+  "schema": "instella_arc.action_qlora_monitor_request.v1",
+  "purpose": "Read-only snapshot of QLoRA version 2 after the verified MoE router dtype repair.",
+  "kernel_slug": "instella-arc-action-qlora-v1",
+  "expected_retry_request": "action-dpo-r8-v2-router-dtype.json",
+  "read_only": true
+}
