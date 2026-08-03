@@ -6,8 +6,12 @@ on:
     branches: [instella-arc]
     paths:
       - "instella_arc/action_replication.py"
+      - "instella_arc/action_training_data.py"
       - "instella_arc/kaggle_action_replication.py"
+      - "instella_arc/kaggle_recover.py"
       - "instella_arc/tests/test_action_replication.py"
+      - "instella_arc/tests/test_action_training_data.py"
+      - "instella_arc/tests/test_kaggle_recover.py"
       - ".github/workflows/instella-action-replication-tests.yml"
 
 permissions:
@@ -32,13 +36,14 @@ jobs:
       - name: Install deterministic test dependencies
         run: python -m pip install --quiet pytest
 
-      - name: Run replication tests
+      - name: Run replication and training-data tests
         id: test
         continue-on-error: true
         run: |
           set -o pipefail
           python -m pytest -q \
             instella_arc/tests/test_action_replication.py \
+            instella_arc/tests/test_action_training_data.py \
             instella_arc/tests/test_kaggle_recover.py \
             2>&1 | tee instella-action-replication-tests.log
 
@@ -56,7 +61,7 @@ jobs:
 
           log = Path("instella-action-replication-tests.log")
           receipt = {
-              "schema": "instella_arc.action_replication_tests.v1",
+              "schema": "instella_arc.action_replication_tests.v2",
               "status": os.environ.get("TEST_OUTCOME", "unknown"),
               "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
               "branch": os.environ.get("GITHUB_REF_NAME"),
