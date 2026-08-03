@@ -1,6 +1,6 @@
 {
   "schema": "instella_arc.audit.v1",
-  "recorded_at_utc": "2026-08-03T04:42:28.490346+00:00",
+  "recorded_at_utc": "2026-08-03T04:51:46.536153+00:00",
   "catalog": {
     "checkpoints": {
       "base": {

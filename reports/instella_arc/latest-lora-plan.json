@@ -1,70 +1,6 @@
-........................................................................ [ 51%]
-.....................................................................    [100%]
-141 passed in 21.92s
-A new version of the following files was downloaded from https://huggingface.co/amd/Instella-MoE-16B-A3B-Base:
-- configuration_instella_moe.py
-. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
-A new version of the following files was downloaded from https://huggingface.co/amd/Instella-MoE-16B-A3B-Base:
-- modeling_instella_moe.py
-. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
-`torch_dtype` is deprecated! Use `dtype` instead!
-A new version of the following files was downloaded from https://huggingface.co/amd/Instella-MoE-16B-A3B-DPO:
-- configuration_instella_moe.py
-. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
-A new version of the following files was downloaded from https://huggingface.co/amd/Instella-MoE-16B-A3B-DPO:
-- modeling_instella_moe.py
-. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
-A new version of the following files was downloaded from https://huggingface.co/amd/Instella-MoE-16B-A3B-Think:
-- configuration_instella_moe.py
-. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
-A new version of the following files was downloaded from https://huggingface.co/amd/Instella-MoE-16B-A3B-Think:
-- modeling_instella_moe.py
-. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
 {
-  "base": {
-    "hub_metadata": {
-      "status": "success"
-    },
-    "config_and_tokenizer": {
-      "status": "success"
-    },
-    "full_meta_instantiation": {
-      "status": "success"
-    },
-    "tiny_forward_and_generation": {
-      "status": "success"
-    }
-  },
-  "dpo": {
-    "hub_metadata": {
-      "status": "success"
-    },
-    "config_and_tokenizer": {
-      "status": "success"
-    },
-    "full_meta_instantiation": {
-      "status": "success"
-    },
-    "tiny_forward_and_generation": {
-      "status": "success"
-    }
-  },
-  "think": {
-    "hub_metadata": {
-      "status": "success"
-    },
-    "config_and_tokenizer": {
-      "status": "success"
-    },
-    "full_meta_instantiation": {
-      "status": "success"
-    },
-    "tiny_forward_and_generation": {
-      "status": "success"
-    }
-  }
-}
-{
+  "schema": "instella_arc.lora_plan.v1",
+  "recorded_at_utc": "2026-08-03T04:52:05.435163+00:00",
   "checkpoint": {
     "key": "dpo",
     "repository_id": "amd/Instella-MoE-16B-A3B-DPO",
@@ -72,6 +8,14 @@ A new version of the following files was downloaded from https://huggingface.co/
     "stage": "direct preference optimization",
     "chat_tuned": true,
     "preferred_use": "first ARC-specific parameter-efficient tuning substrate"
+  },
+  "total_linear_modules": 5209,
+  "linear_categories": {
+    "attention": 108,
+    "dense_mlp": 30,
+    "lm_head": 1,
+    "routed_expert_mlp": 4992,
+    "shared_expert_mlp": 78
   },
   "plans": [
     {
@@ -334,6 +278,222 @@ A new version of the following files was downloaded from https://huggingface.co/
       ],
       "includes_routed_experts": true,
       "note": "Upper-bound plan. Usually inappropriate for a free-GPU first experiment because thousands of routed-expert adapters are created."
+    }
+  ],
+  "router_policy": {
+    "train_router": false,
+    "reason": "The initial ARC adaptation isolates representation learning. Router parameters and load-balancing behavior remain frozen until an attention-only adapter passes locked evidence controls."
+  },
+  "representative_modules": [
+    {
+      "name": "model.layers.0.self_attn.q_proj",
+      "suffix": "q_proj",
+      "in_features": 2048,
+      "out_features": 2048,
+      "category": "attention"
+    },
+    {
+      "name": "model.layers.0.self_attn.kv_a_proj_with_mqa",
+      "suffix": "kv_a_proj_with_mqa",
+      "in_features": 2048,
+      "out_features": 544,
+      "category": "attention"
+    },
+    {
+      "name": "model.layers.0.self_attn.kv_b_proj",
+      "suffix": "kv_b_proj",
+      "in_features": 512,
+      "out_features": 3584,
+      "category": "attention"
+    },
+    {
+      "name": "model.layers.0.self_attn.o_proj",
+      "suffix": "o_proj",
+      "in_features": 2048,
+      "out_features": 2048,
+      "category": "attention"
+    },
+    {
+      "name": "model.layers.0.self_attn.gate_proj",
+      "suffix": "gate_proj",
+      "in_features": 2048,
+      "out_features": 2048,
+      "category": "dense_mlp"
+    },
+    {
+      "name": "model.layers.0.mlp.gate_proj",
+      "suffix": "gate_proj",
+      "in_features": 2048,
+      "out_features": 10944,
+      "category": "dense_mlp"
+    },
+    {
+      "name": "model.layers.0.mlp.up_proj",
+      "suffix": "up_proj",
+      "in_features": 2048,
+      "out_features": 10944,
+      "category": "dense_mlp"
+    },
+    {
+      "name": "model.layers.0.mlp.down_proj",
+      "suffix": "down_proj",
+      "in_features": 10944,
+      "out_features": 2048,
+      "category": "dense_mlp"
+    },
+    {
+      "name": "model.layers.1.self_attn.q_proj",
+      "suffix": "q_proj",
+      "in_features": 2048,
+      "out_features": 2048,
+      "category": "attention"
+    },
+    {
+      "name": "model.layers.1.self_attn.kv_a_proj_with_mqa",
+      "suffix": "kv_a_proj_with_mqa",
+      "in_features": 2048,
+      "out_features": 544,
+      "category": "attention"
+    },
+    {
+      "name": "model.layers.1.self_attn.kv_b_proj",
+      "suffix": "kv_b_proj",
+      "in_features": 512,
+      "out_features": 3584,
+      "category": "attention"
+    },
+    {
+      "name": "model.layers.1.self_attn.o_proj",
+      "suffix": "o_proj",
+      "in_features": 2048,
+      "out_features": 2048,
+      "category": "attention"
+    },
+    {
+      "name": "model.layers.1.self_attn.gate_proj",
+      "suffix": "gate_proj",
+      "in_features": 2048,
+      "out_features": 2048,
+      "category": "dense_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.0.gate_proj",
+      "suffix": "gate_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.0.up_proj",
+      "suffix": "up_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.0.down_proj",
+      "suffix": "down_proj",
+      "in_features": 1408,
+      "out_features": 2048,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.1.gate_proj",
+      "suffix": "gate_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.1.up_proj",
+      "suffix": "up_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.1.down_proj",
+      "suffix": "down_proj",
+      "in_features": 1408,
+      "out_features": 2048,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.2.gate_proj",
+      "suffix": "gate_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.2.up_proj",
+      "suffix": "up_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.2.down_proj",
+      "suffix": "down_proj",
+      "in_features": 1408,
+      "out_features": 2048,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.3.gate_proj",
+      "suffix": "gate_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.3.up_proj",
+      "suffix": "up_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.3.down_proj",
+      "suffix": "down_proj",
+      "in_features": 1408,
+      "out_features": 2048,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.4.gate_proj",
+      "suffix": "gate_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.4.up_proj",
+      "suffix": "up_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.4.down_proj",
+      "suffix": "down_proj",
+      "in_features": 1408,
+      "out_features": 2048,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.5.gate_proj",
+      "suffix": "gate_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.5.up_proj",
+      "suffix": "up_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
     }
   ]
 }

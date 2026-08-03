@@ -1,6 +1,6 @@
 # Instella-MoE ARC architecture audit
 
-Recorded: `2026-08-03T04:42:28.490346+00:00`
+Recorded: `2026-08-03T04:51:46.536153+00:00`
 
 This audit downloads configuration, tokenizer, and remote model code only. It does not download the 16B weights.
 
