@@ -86,11 +86,18 @@ class Prompt:
 def normalize_actions(actions: Iterable[str | int]) -> tuple[str, ...]:
     normalized: list[str] = []
     for action in actions:
-        text = str(action).strip().upper()
-        match = ACTION_PATTERN.search(text)
-        if match is None:
+        if isinstance(action, bool):
             raise ValueError(f"invalid ARC action: {action!r}")
-        value = int(match.group(1))
+        if isinstance(action, int):
+            value = action
+        else:
+            text = str(action).strip().upper()
+            match = ACTION_PATTERN.search(text)
+            if match is None:
+                raise ValueError(f"invalid ARC action: {action!r}")
+            value = int(match.group(1))
+        if not 0 <= value <= 7:
+            raise ValueError(f"ARC action id must be in 0..7: {value}")
         canonical = f"A{value}"
         if canonical not in normalized:
             normalized.append(canonical)
