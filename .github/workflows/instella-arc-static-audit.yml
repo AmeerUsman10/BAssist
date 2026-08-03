@@ -16,7 +16,7 @@ permissions:
 
 concurrency:
   group: instella-arc-static-audit
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   audit:
@@ -39,7 +39,7 @@ jobs:
           grep -v '^torch' instella_arc/requirements-audit.txt > /tmp/requirements-audit-no-torch.txt
           python -m pip install -r /tmp/requirements-audit-no-torch.txt
 
-      - name: Run deterministic tests and official architecture audit
+      - name: Run deterministic tests, architecture audit, and adapter plan
         id: audit
         continue-on-error: true
         env:
@@ -53,6 +53,10 @@ jobs:
               --checkpoints base dpo think \
               --output outputs/instella_arc/audit.json \
               --markdown outputs/instella_arc/audit.md
+            python -m instella_arc.lora_plan \
+              --checkpoint dpo \
+              --ranks 4 8 16 \
+              --output outputs/instella_arc/lora-plan.json
           } 2>&1 | tee instella-static-audit.log
 
       - name: Write durable receipt
@@ -79,6 +83,7 @@ jobs:
           report_dir = Path('reports/instella_arc')
           output_json = Path('outputs/instella_arc/audit.json')
           output_md = Path('outputs/instella_arc/audit.md')
+          lora_plan = Path('outputs/instella_arc/lora-plan.json')
           log = Path('instella-static-audit.log')
           receipt = {
               'status': os.environ.get('AUDIT_OUTCOME', 'unknown'),
@@ -90,6 +95,8 @@ jobs:
               'weight_downloaded': False,
               'audit_present': output_json.exists(),
               'audit_sha256': digest(output_json) if output_json.exists() else None,
+              'lora_plan_present': lora_plan.exists(),
+              'lora_plan_sha256': digest(lora_plan) if lora_plan.exists() else None,
           }
           (report_dir / 'latest-static-status.json').write_text(
               json.dumps(receipt, indent=2), encoding='utf-8'
@@ -98,10 +105,12 @@ jobs:
               shutil.copy2(output_json, report_dir / 'latest-audit.json')
           if output_md.exists():
               shutil.copy2(output_md, report_dir / 'latest-audit.md')
+          if lora_plan.exists():
+              shutil.copy2(lora_plan, report_dir / 'latest-lora-plan.json')
           if log.exists():
               lines = log.read_text(encoding='utf-8', errors='replace').splitlines()
               (report_dir / 'latest-static-log-tail.txt').write_text(
-                  '\n'.join(lines[-1200:]) + '\n', encoding='utf-8'
+                  '\n'.join(lines[-1400:]) + '\n', encoding='utf-8'
               )
           PY
 
@@ -124,6 +133,7 @@ jobs:
             reports/instella_arc/
             outputs/instella_arc/audit.json
             outputs/instella_arc/audit.md
+            outputs/instella_arc/lora-plan.json
             instella-static-audit.log
           if-no-files-found: warn
           retention-days: 14
