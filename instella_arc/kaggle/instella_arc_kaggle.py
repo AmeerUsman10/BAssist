@@ -18,9 +18,13 @@ WORKING = Path("/kaggle/working")
 REPOSITORY = WORKING / "BAssist-instella-arc"
 
 
-def run(*arguments: str) -> None:
+def run(*arguments: str, cwd: Path | None = None) -> None:
     print("+", " ".join(arguments), flush=True)
-    subprocess.run(arguments, check=True)
+    subprocess.run(
+        arguments,
+        check=True,
+        cwd=str(cwd) if cwd is not None else None,
+    )
 
 
 def main() -> None:
@@ -74,12 +78,9 @@ def main() -> None:
         "6144",
         "--output-dir",
         str(WORKING / "instella_arc_results"),
+        cwd=REPOSITORY,
     )
 
 
 if __name__ == "__main__":
-    # `python -m` needs the checked-out repository on sys.path. Re-execute from
-    # the repository after cloning when this entry file is run standalone.
-    if REPOSITORY.exists():
-        sys.path.insert(0, str(REPOSITORY))
     main()
