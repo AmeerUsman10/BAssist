@@ -168,6 +168,7 @@ def main() -> None:
             "TOKENIZERS_PARALLELISM": "false",
             "HF_HUB_DISABLE_TELEMETRY": "1",
             "PYTORCH_CUDA_ALLOC_CONF": "expandable_segments:True",
+            "ARC_GPT2_SOURCE_SHA": SOURCE_SHA,
         }
     )
 
