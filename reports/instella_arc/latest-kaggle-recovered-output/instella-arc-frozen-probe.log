@@ -1,0 +1,179 @@
+[{"stream_name":"stdout","time":1.002094866,"data":"+ /usr/bin/python3 -m pip install --quiet --upgrade pip\n"}
+,{"stream_name":"stdout","time":4.707550989,"data":"   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 30.8 MB/s eta 0:00:00\n"}
+,{"stream_name":"stdout","time":8.253285721,"data":"+ /usr/bin/python3 -m pip install --quiet transformers==4.57.1 accelerate\u003e=1.2,\u003c2 huggingface_hub\u003e=0.34,\u003c1 safetensors\u003e=0.5,\u003c1 bitsandbytes\u003e=0.45,\u003c1 peft\u003e=0.14,\u003c1\n"}
+,{"stream_name":"stdout","time":22.97077242,"data":"+ git clone --depth 1 --branch instella-arc https://github.com/AmeerUsman10/BAssist.git /kaggle/working/BAssist-instella-arc\n"}
+,{"stream_name":"stderr","time":23.014151871,"data":"Cloning into '/kaggle/working/BAssist-instella-arc'...\n"}
+,{"stream_name":"stdout","time":23.807414914,"data":"+ /usr/bin/python3 -m instella_arc.kaggle_runner --checkpoint think --quantizations int4 int8 --tasks action --games-per-task 1 --seed-base 930000 --max-context-tokens 6144 --output-dir /kaggle/working/instella_arc_results\n"}
+,{"stream_name":"stderr","time":42.816122721,"data":"`torch_dtype` is deprecated! Use `dtype` instead!\n"}
+,{"stream_name":"stderr","time":193.72777914,"data":"\rFetching 6 files:   0%|          | 0/6 [00:00\u003c?, ?it/s]\rFetching 6 files:  17%|█▋        | 1/6 [02:08\u003c10:41, 128.32s/it]\rFetching 6 files: 100%|██████████| 6/6 [02:08\u003c00:00, 21.39s/it] \n"}
+,{"stream_name":"stderr","time":374.087350365,"data":"\rLoading checkpoint shards:   0%|          | 0/6 [00:00\u003c?, ?it/s]\rLoading checkpoint shards:  17%|█▋        | 1/6 [00:19\u003c01:36, 19.20s/it]\rLoading checkpoint shards:  33%|███▎      | 2/6 [00:42\u003c01:26, 21.72s/it]\rLoading checkpoint shards:  50%|█████     | 3/6 [01:16\u003c01:21, 27.30s/it]\rLoading checkpoint shards:  67%|██████▋   | 4/6 [01:53\u003c01:01, 30.90s/it]\rLoading checkpoint shards:  83%|████████▎ | 5/6 [02:31\u003c00:33, 33.68s/it]\rLoading checkpoint shards: 100%|██████████| 6/6 [02:54\u003c00:00, 30.01s/it]\rLoading checkpoint shards: 100%|██████████| 6/6 [02:54\u003c00:00, 29.09s/it]\n"}
+,{"stream_name":"stderr","time":379.281338239,"data":"The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.\n"}
+,{"stream_name":"stdout","time":439.385196719,"data":"{\n"}
+,{"stream_name":"stdout","time":439.385255481,"data":"  \"schema\": \"instella_arc.kaggle_run.v1\",\n"}
+,{"stream_name":"stdout","time":439.385264916,"data":"  \"started_at_utc\": \"2026-08-03T11:17:39.675663+00:00\",\n"}
+,{"stream_name":"stdout","time":439.385271655,"data":"  \"arguments\": {\n"}
+,{"stream_name":"stdout","time":439.385277034,"data":"    \"checkpoint\": \"think\",\n"}
+,{"stream_name":"stdout","time":439.385282381,"data":"    \"quantizations\": [\n"}
+,{"stream_name":"stdout","time":439.385287474,"data":"      \"int4\",\n"}
+,{"stream_name":"stdout","time":439.385292547,"data":"      \"int8\"\n"}
+,{"stream_name":"stdout","time":439.385303073,"data":"    ],\n"}
+,{"stream_name":"stdout","time":439.385307488,"data":"    \"allow_fp16_offload\": false,\n"}
+,{"stream_name":"stdout","time":439.385311214,"data":"    \"tasks\": [\n"}
+,{"stream_name":"stdout","time":439.385314737,"data":"      \"action\"\n"}
+,{"stream_name":"stdout","time":439.385318239,"data":"    ],\n"}
+,{"stream_name":"stdout","time":439.385321721,"data":"    \"profile\": \"smoke\",\n"}
+,{"stream_name":"stdout","time":439.385325304,"data":"    \"games_per_task\": 1,\n"}
+,{"stream_name":"stdout","time":439.385328827,"data":"    \"seed_base\": 930000,\n"}
+,{"stream_name":"stdout","time":439.385361275,"data":"    \"max_context_tokens\": 6144,\n"}
+,{"stream_name":"stdout","time":439.385366762,"data":"    \"output_dir\": \"/kaggle/working/instella_arc_results\"\n"}
+,{"stream_name":"stdout","time":439.385393601,"data":"  },\n"}
+,{"stream_name":"stdout","time":439.385397918,"data":"  \"checkpoint_spec\": {\n"}
+,{"stream_name":"stdout","time":439.385401984,"data":"    \"repository_id\": \"amd/Instella-MoE-16B-A3B-Think\",\n"}
+,{"stream_name":"stdout","time":439.38540618,"data":"    \"revision\": \"e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83\"\n"}
+,{"stream_name":"stdout","time":439.385410365,"data":"  },\n"}
+,{"stream_name":"stdout","time":439.385414138,"data":"  \"gpu_inventory\": [\n"}
+,{"stream_name":"stdout","time":439.385418359,"data":"    {\n"}
+,{"stream_name":"stdout","time":439.38542209,"data":"      \"index\": 0,\n"}
+,{"stream_name":"stdout","time":439.385426255,"data":"      \"name\": \"Tesla T4\",\n"}
+,{"stream_name":"stdout","time":439.385430307,"data":"      \"total_bytes\": 15636037632,\n"}
+,{"stream_name":"stdout","time":439.385436393,"data":"      \"total_gib\": 14.56219482421875,\n"}
+,{"stream_name":"stdout","time":439.385444138,"data":"      \"capability\": [\n"}
+,{"stream_name":"stdout","time":439.3854469,"data":"        7,\n"}
+,{"stream_name":"stdout","time":439.3854494,"data":"        5\n"}
+,{"stream_name":"stdout","time":439.385452135,"data":"      ],\n"}
+,{"stream_name":"stdout","time":439.385468965,"data":"      \"architecture\": \"sm_75\",\n"}
+,{"stream_name":"stdout","time":439.385474007,"data":"      \"architecture_compiled_into_torch\": true\n"}
+,{"stream_name":"stdout","time":439.385478728,"data":"    },\n"}
+,{"stream_name":"stdout","time":439.385483162,"data":"    {\n"}
+,{"stream_name":"stdout","time":439.385487632,"data":"      \"index\": 1,\n"}
+,{"stream_name":"stdout","time":439.385492124,"data":"      \"name\": \"Tesla T4\",\n"}
+,{"stream_name":"stdout","time":439.385496375,"data":"      \"total_bytes\": 15636037632,\n"}
+,{"stream_name":"stdout","time":439.385500381,"data":"      \"total_gib\": 14.56219482421875,\n"}
+,{"stream_name":"stdout","time":439.385504318,"data":"      \"capability\": [\n"}
+,{"stream_name":"stdout","time":439.38550836,"data":"        7,\n"}
+,{"stream_name":"stdout","time":439.385512111,"data":"        5\n"}
+,{"stream_name":"stdout","time":439.385515921,"data":"      ],\n"}
+,{"stream_name":"stdout","time":439.38551969,"data":"      \"architecture\": \"sm_75\",\n"}
+,{"stream_name":"stdout","time":439.385523727,"data":"      \"architecture_compiled_into_torch\": true\n"}
+,{"stream_name":"stdout","time":439.385527676,"data":"    }\n"}
+,{"stream_name":"stdout","time":439.38553144,"data":"  ],\n"}
+,{"stream_name":"stdout","time":439.385535158,"data":"  \"status\": \"success\",\n"}
+,{"stream_name":"stdout","time":439.385539182,"data":"  \"load_attempts\": [\n"}
+,{"stream_name":"stdout","time":439.385543135,"data":"    {\n"}
+,{"stream_name":"stdout","time":439.385552345,"data":"      \"quantization\": \"int4\",\n"}
+,{"stream_name":"stdout","time":439.385556237,"data":"      \"repository_id\": \"amd/Instella-MoE-16B-A3B-Think\",\n"}
+,{"stream_name":"stdout","time":439.38557298,"data":"      \"revision\": \"e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83\",\n"}
+,{"stream_name":"stdout","time":439.38557858,"data":"      \"started_at_utc\": \"2026-08-03T11:17:45.432238+00:00\",\n"}
+,{"stream_name":"stdout","time":439.385583437,"data":"      \"status\": \"success\",\n"}
+,{"stream_name":"stdout","time":439.385588147,"data":"      \"backend_metadata\": {\n"}
+,{"stream_name":"stdout","time":439.38559866,"data":"        \"checkpoint\": \"amd/Instella-MoE-16B-A3B-Think\",\n"}
+,{"stream_name":"stdout","time":439.385602986,"data":"        \"quantization\": \"int4\",\n"}
+,{"stream_name":"stdout","time":439.385607038,"data":"        \"dtype\": \"float16\",\n"}
+,{"stream_name":"stdout","time":439.38561125,"data":"        \"revision\": \"e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83\",\n"}
+,{"stream_name":"stdout","time":439.385615718,"data":"        \"device_map\": {\n"}
+,{"stream_name":"stdout","time":439.385619716,"data":"          \"model.embed_tokens\": 0,\n"}
+,{"stream_name":"stdout","time":439.385623656,"data":"          \"model.layers.0\": 0,\n"}
+,{"stream_name":"stdout","time":439.385627538,"data":"          \"model.layers.1\": 0,\n"}
+,{"stream_name":"stdout","time":439.385631511,"data":"          \"model.layers.2\": 0,\n"}
+,{"stream_name":"stdout","time":439.385635395,"data":"          \"model.layers.3\": 0,\n"}
+,{"stream_name":"stdout","time":439.385639327,"data":"          \"model.layers.4\": 0,\n"}
+,{"stream_name":"stdout","time":439.385643321,"data":"          \"model.layers.5\": 0,\n"}
+,{"stream_name":"stdout","time":439.385653233,"data":"          \"model.layers.6\": 0,\n"}
+,{"stream_name":"stdout","time":439.385669119,"data":"          \"model.layers.7\": 0,\n"}
+,{"stream_name":"stdout","time":439.385673747,"data":"          \"model.layers.8\": 0,\n"}
+,{"stream_name":"stdout","time":439.385678435,"data":"          \"model.layers.9\": 0,\n"}
+,{"stream_name":"stdout","time":439.38568641,"data":"          \"model.layers.10\": 0,\n"}
+,{"stream_name":"stdout","time":439.385692919,"data":"          \"model.layers.11\": 1,\n"}
+,{"stream_name":"stdout","time":439.385697026,"data":"          \"model.layers.12\": 1,\n"}
+,{"stream_name":"stdout","time":439.385700937,"data":"          \"model.layers.13\": 1,\n"}
+,{"stream_name":"stdout","time":439.385704921,"data":"          \"model.layers.14\": 1,\n"}
+,{"stream_name":"stdout","time":439.385708895,"data":"          \"model.layers.15\": 1,\n"}
+,{"stream_name":"stdout","time":439.385712801,"data":"          \"model.layers.16\": 1,\n"}
+,{"stream_name":"stdout","time":439.385716687,"data":"          \"model.layers.17\": 1,\n"}
+,{"stream_name":"stdout","time":439.385720613,"data":"          \"model.layers.18\": 1,\n"}
+,{"stream_name":"stdout","time":439.385724507,"data":"          \"model.layers.19\": 1,\n"}
+,{"stream_name":"stdout","time":439.385728366,"data":"          \"model.layers.20\": 1,\n"}
+,{"stream_name":"stdout","time":439.385732247,"data":"          \"model.layers.21\": 1,\n"}
+,{"stream_name":"stdout","time":439.385736171,"data":"          \"model.layers.22\": 1,\n"}
+,{"stream_name":"stdout","time":439.385740084,"data":"          \"model.layers.23\": 1,\n"}
+,{"stream_name":"stdout","time":439.38574402,"data":"          \"model.layers.24\": 1,\n"}
+,{"stream_name":"stdout","time":439.385759052,"data":"          \"model.layers.25\": 1,\n"}
+,{"stream_name":"stdout","time":439.385775455,"data":"          \"model.layers.26\": 1,\n"}
+,{"stream_name":"stdout","time":439.385780108,"data":"          \"model.norm\": 1,\n"}
+,{"stream_name":"stdout","time":439.385784787,"data":"          \"model.rotary_emb\": 1,\n"}
+,{"stream_name":"stdout","time":439.385789585,"data":"          \"lm_head\": 1\n"}
+,{"stream_name":"stdout","time":439.385794109,"data":"        },\n"}
+,{"stream_name":"stdout","time":439.385797973,"data":"        \"last_scoring_strategy\": \"shared_single_token_forward\"\n"}
+,{"stream_name":"stdout","time":439.385802181,"data":"      }\n"}
+,{"stream_name":"stdout","time":439.385810235,"data":"    }\n"}
+,{"stream_name":"stdout","time":439.385814102,"data":"  ],\n"}
+,{"stream_name":"stdout","time":439.385817793,"data":"  \"sanity_generation\": {\n"}
+,{"stream_name":"stdout","time":439.385825241,"data":"    \"output\": \"\u003cthink\u003e\\nWe are given the exact evidence: \\n  - \\\"Rows increase toward the south and columns increase toward the east.\\\"\\n  - \\\"I applied A3. A color-2 cell left row 4 column 4 and appeared at row 4 column 5.\\\"\\n  - \\\"No other persistent cell changed. The environment did not report success.\\\"\\n\\nWe are to infer the meaning of the action \\\"A3\\\". The action is applied to a cell (row4, col4) and then the cell moves to (row4, col5). \\n\\nGiven the grid layout: \\n  - Rows increase toward the south. So row 1 is north, row 2 is north of row 3? Actually, if rows increase toward the south, then row 1 is the northernmost and row n is the southernmost. \\n  - Columns increase toward the east, so column 1 is west and column n is east.\\n\\nIn\",\n"}
+,{"stream_name":"stdout","time":439.385836098,"data":"    \"parsed\": null\n"}
+,{"stream_name":"stdout","time":439.385840006,"data":"  },\n"}
+,{"stream_name":"stdout","time":439.385843845,"data":"  \"finished_at_utc\": \"2026-08-03T11:24:35.061629+00:00\",\n"}
+,{"stream_name":"stdout","time":439.385849981,"data":"  \"report\": \"/kaggle/working/instella_arc_results/frozen_benchmark.json\",\n"}
+,{"stream_name":"stdout","time":439.385857638,"data":"  \"report_summary\": {\n"}
+,{"stream_name":"stdout","time":439.385874278,"data":"    \"groups\": {\n"}
+,{"stream_name":"stdout","time":439.385879092,"data":"      \"action_binding/amnesic/depth_4\": {\n"}
+,{"stream_name":"stdout","time":439.3858839,"data":"        \"cases\": 1,\n"}
+,{"stream_name":"stdout","time":439.385888626,"data":"        \"set_cross_entropy\": 2.079272790519409,\n"}
+,{"stream_name":"stdout","time":439.38589334,"data":"        \"brier\": 1.1582113501644975,\n"}
+,{"stream_name":"stdout","time":439.385897425,"data":"        \"consistent_mass\": 0.12502109567496314,\n"}
+,{"stream_name":"stdout","time":439.385901442,"data":"        \"top1_consistent\": 0.0,\n"}
+,{"stream_name":"stdout","time":439.385905422,"data":"        \"truth_probability\": 0.12502109567496314,\n"}
+,{"stream_name":"stdout","time":439.385909463,"data":"        \"truth_rank\": 3.0,\n"}
+,{"stream_name":"stdout","time":439.385913428,"data":"        \"latency_seconds\": 1.228271446000008\n"}
+,{"stream_name":"stdout","time":439.385917426,"data":"      },\n"}
+,{"stream_name":"stdout","time":439.385921287,"data":"      \"action_binding/intact/depth_0\": {\n"}
+,{"stream_name":"stdout","time":439.385926023,"data":"        \"cases\": 1,\n"}
+,{"stream_name":"stdout","time":439.385929956,"data":"        \"set_cross_entropy\": 2.070986330016537,\n"}
+,{"stream_name":"stdout","time":439.385933969,"data":"        \"brier\": 0.08741610669157626,\n"}
+,{"stream_name":"stdout","time":439.385937877,"data":"        \"consistent_mass\": 1.0,\n"}
+,{"stream_name":"stdout","time":439.385941839,"data":"        \"top1_consistent\": 1.0,\n"}
+,{"stream_name":"stdout","time":439.385946051,"data":"        \"truth_probability\": 0.2566482445095551,\n"}
+,{"stream_name":"stdout","time":439.385956129,"data":"        \"truth_rank\": 3.0,\n"}
+,{"stream_name":"stdout","time":439.385972181,"data":"        \"latency_seconds\": 1.3045189210000672\n"}
+,{"stream_name":"stdout","time":439.385977273,"data":"      },\n"}
+,{"stream_name":"stdout","time":439.385981728,"data":"      \"action_binding/intact/depth_4\": {\n"}
+,{"stream_name":"stdout","time":439.385986516,"data":"        \"cases\": 1,\n"}
+,{"stream_name":"stdout","time":439.385995604,"data":"        \"set_cross_entropy\": 1.6799076070591101,\n"}
+,{"stream_name":"stdout","time":439.385999787,"data":"        \"brier\": 0.9956259616133447,\n"}
+,{"stream_name":"stdout","time":439.386003733,"data":"        \"consistent_mass\": 0.18639119647467267,\n"}
+,{"stream_name":"stdout","time":439.386007722,"data":"        \"top1_consistent\": 0.0,\n"}
+,{"stream_name":"stdout","time":439.386011694,"data":"        \"truth_probability\": 0.18639119647467267,\n"}
+,{"stream_name":"stdout","time":439.386015776,"data":"        \"truth_rank\": 3.0,\n"}
+,{"stream_name":"stdout","time":439.386019693,"data":"        \"latency_seconds\": 1.3264667690000351\n"}
+,{"stream_name":"stdout","time":439.386023708,"data":"      },\n"}
+,{"stream_name":"stdout","time":439.386027476,"data":"      \"action_binding/shuffled/depth_4\": {\n"}
+,{"stream_name":"stdout","time":439.386031534,"data":"        \"cases\": 1,\n"}
+,{"stream_name":"stdout","time":439.386035436,"data":"        \"set_cross_entropy\": 1.5071752600330768,\n"}
+,{"stream_name":"stdout","time":439.386039405,"data":"        \"brier\": 0.9061543277148667,\n"}
+,{"stream_name":"stdout","time":439.386043372,"data":"        \"consistent_mass\": 0.22153487337122324,\n"}
+,{"stream_name":"stdout","time":439.386052978,"data":"        \"top1_consistent\": 0.0,\n"}
+,{"stream_name":"stdout","time":439.386069361,"data":"        \"truth_probability\": 0.22153487337122324,\n"}
+,{"stream_name":"stdout","time":439.386074164,"data":"        \"truth_rank\": 3.0,\n"}
+,{"stream_name":"stdout","time":439.386078768,"data":"        \"latency_seconds\": 1.3431827599999906\n"}
+,{"stream_name":"stdout","time":439.386083131,"data":"      }\n"}
+,{"stream_name":"stdout","time":439.386087603,"data":"    },\n"}
+,{"stream_name":"stdout","time":439.38609196,"data":"    \"evidence_deltas\": {\n"}
+,{"stream_name":"stdout","time":439.386095835,"data":"      \"action_binding\": {\n"}
+,{"stream_name":"stdout","time":439.386099772,"data":"        \"max_evidence_depth\": 4,\n"}
+,{"stream_name":"stdout","time":439.38610382,"data":"        \"consistent_mass_by_mode\": {\n"}
+,{"stream_name":"stdout","time":439.386107822,"data":"          \"amnesic\": 0.12502109567496314,\n"}
+,{"stream_name":"stdout","time":439.386111924,"data":"          \"intact\": 0.18639119647467267,\n"}
+,{"stream_name":"stdout","time":439.386115961,"data":"          \"shuffled\": 0.22153487337122324\n"}
+,{"stream_name":"stdout","time":439.386120025,"data":"        },\n"}
+,{"stream_name":"stdout","time":439.386123784,"data":"        \"intact_minus_amnesic\": 0.06137010079970953,\n"}
+,{"stream_name":"stdout","time":439.386127807,"data":"        \"intact_minus_shuffled\": -0.03514367689655057\n"}
+,{"stream_name":"stdout","time":439.386131799,"data":"      }\n"}
+,{"stream_name":"stdout","time":439.386135553,"data":"    }\n"}
+,{"stream_name":"stdout","time":439.386139337,"data":"  }\n"}
+,{"stream_name":"stdout","time":439.386143154,"data":"}\n"}
+,{"stream_name":"stderr","time":447.777913368,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":447.777952105,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":448.117118426,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":448.117159396,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":448.867131317,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":449.890016505,"data":"[NbConvertApp] Writing 280732 bytes to __results__.html\n"}
+]
