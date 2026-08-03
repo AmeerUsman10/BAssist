@@ -17,7 +17,7 @@ from pathlib import Path
 import traceback
 from typing import Any
 
-from .controller import ClosedLoopController
+from .controller_stride import StrideClosedLoopController
 from .toolkit_runner import ToolkitControllerRunner
 
 
@@ -76,7 +76,7 @@ def run_probe(games: list[str], *, max_actions: int) -> dict[str, Any]:
                 raise RuntimeError("Arcade.make returned None")
             result = ToolkitControllerRunner(
                 environment=environment,
-                controller=ClosedLoopController(),
+                controller=StrideClosedLoopController(),
                 max_actions=max_actions,
             ).run()
             entry["status"] = "success"
@@ -98,12 +98,13 @@ def run_probe(games: list[str], *, max_actions: int) -> dict[str, Any]:
         if isinstance(entry.get("result"), dict)
     )
     return {
-        "schema": "instella_arc.public_shell_probe.v1",
+        "schema": "instella_arc.public_shell_probe.v2",
         "started_at_utc": started.isoformat(),
         "finished_at_utc": finished.isoformat(),
         "operation_mode": "ONLINE",
         "competition_mode": False,
         "anonymous_or_environment_key": True,
+        "controller": "StrideClosedLoopController",
         "games_requested": games,
         "max_actions_per_game": max_actions,
         "games": game_reports,
