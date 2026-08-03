@@ -20,6 +20,11 @@ def test_mapping_format_and_parse() -> None:
     }
 
 
+def test_parse_mapping_prefers_latest_unknown_assignment() -> None:
+    text = "A1=N;A2=E;A3=N;A4=W then later A3=?"
+    assert parse_mapping(text)["A3"] == "?"
+
+
 def test_parse_action_uses_last_available_action() -> None:
     text = "consider A2, reject A3, final A4"
     assert parse_action(text) == "A4"
