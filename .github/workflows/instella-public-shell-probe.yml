@@ -1,0 +1,146 @@
+name: Instella Public Shell Probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [instella-arc]
+    paths:
+      - "instella_arc/public_probe_requests/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instella-public-shell-probe
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install official ARC toolkit and tests
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "arc-agi>=0.9.8,<1" pytest
+
+      - name: Run exact controller tests required by live probe
+        run: |
+          python -m pytest -q \
+            instella_arc/tests/test_world_state.py \
+            instella_arc/tests/test_receipts.py \
+            instella_arc/tests/test_action_belief.py \
+            instella_arc/tests/test_navigation.py \
+            instella_arc/tests/test_controller.py \
+            instella_arc/tests/test_toolkit_runner.py
+
+      - name: Run one bounded public development probe
+        id: probe
+        continue-on-error: true
+        env:
+          ARC_API_KEY: ${{ secrets.ARC_API_KEY }}
+        run: |
+          set -o pipefail
+          python -m instella_arc.public_probe \
+            --games ft09 ls20 \
+            --max-actions 80 \
+            --output outputs/instella_arc/public-shell-probe.json \
+            2>&1 | tee instella-public-shell-probe.log
+
+      - name: Publish exact probe receipt
+        if: always()
+        env:
+          PROBE_OUTCOME: ${{ steps.probe.outcome }}
+        run: |
+          mkdir -p reports/instella_arc
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          output = Path("outputs/instella_arc/public-shell-probe.json")
+          receipt = {
+              "schema": "instella_arc.public_shell_probe_receipt.v1",
+              "status": os.environ.get("PROBE_OUTCOME", "unknown"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+              "report_present": output.exists(),
+              "report_sha256": (
+                  hashlib.sha256(output.read_bytes()).hexdigest()
+                  if output.exists()
+                  else None
+              ),
+              "competition_mode": False,
+              "external_submission": False,
+          }
+          if output.exists():
+              payload = json.loads(output.read_text(encoding="utf-8"))
+              receipt["completed_levels_total"] = payload.get("completed_levels_total")
+              receipt["game_summary"] = [
+                  {
+                      "game_id": entry.get("game_id"),
+                      "status": entry.get("status"),
+                      "levels_completed": (
+                          entry.get("result", {}).get("levels_completed")
+                          if isinstance(entry.get("result"), dict)
+                          else None
+                      ),
+                      "actions": (
+                          entry.get("result", {}).get("actions")
+                          if isinstance(entry.get("result"), dict)
+                          else None
+                      ),
+                      "error": entry.get("error"),
+                  }
+                  for entry in payload.get("games", [])
+              ]
+              shutil.copy2(
+                  output,
+                  Path("reports/instella_arc/latest-public-shell-probe.json"),
+              )
+          Path("reports/instella_arc/latest-public-shell-probe-status.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          log = Path("instella-public-shell-probe.log")
+          if log.exists():
+              lines = log.read_text(encoding="utf-8", errors="replace").splitlines()
+              Path("reports/instella_arc/latest-public-shell-probe-log.txt").write_text(
+                  "\n".join(lines[-2000:]) + "\n", encoding="utf-8"
+              )
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/instella_arc/latest-public-shell-probe*.json \
+            reports/instella_arc/latest-public-shell-probe-log.txt
+          git commit -m "Record Instella public shell probe ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload public probe artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: instella-public-shell-probe
+          path: |
+            reports/instella_arc/latest-public-shell-probe*.json
+            reports/instella_arc/latest-public-shell-probe-log.txt
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Propagate probe failure
+        if: steps.probe.outcome != 'success'
+        run: exit 1
