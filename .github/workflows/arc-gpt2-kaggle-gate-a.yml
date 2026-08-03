@@ -21,7 +21,7 @@ jobs:
     timeout-minutes: 150
     env:
       KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
-      KAGGLE_KERNEL_SLUG: arc-gpt2-gate-a-gpu
+      KAGGLE_KERNEL_SLUG: arc-gpt2-gate-a-gpu-diagnostic
 
     steps:
       - uses: actions/checkout@v4
@@ -33,7 +33,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install pinned official Kaggle CLI
-        run: python -m pip install --quiet --disable-pip-version-check "kaggle==2.2.0"
+        run: python -m pip install --quiet --disable-pip-version-check "kaggle==2.2.2"
 
       - name: Authenticate, dispatch T4 kernel, and retrieve outputs
         id: kaggle
@@ -142,12 +142,27 @@ jobs:
           )
           PY
 
-          write_state "pushing"
-          if ! kaggle kernels push -p "$stage" --accelerator NvidiaTeslaT4 --timeout 7200 > "${RUNNER_TEMP}/push.log" 2>&1; then
-            sed -E "s/${owner}/[REDACTED_OWNER]/g; s/KGAT_[A-Za-z0-9_-]+/[REDACTED_TOKEN]/g" "${RUNNER_TEMP}/push.log" >> dispatch-evidence/dispatch-redacted.log
-            fail "Kaggle kernel push failed"
+          # A prior workflow may have pushed successfully and then lost the run
+          # only because it polled a title-normalized slug. Resume that GPU job
+          # instead of spending quota on a duplicate version.
+          resume_existing=false
+          if kaggle kernels status "$PRIVATE_KERNEL_REF" > "${RUNNER_TEMP}/existing-status.log" 2>&1; then
+            existing_text="$(tr '[:upper:]' '[:lower:]' < "${RUNNER_TEMP}/existing-status.log")"
+            if grep -Eq 'running|queued|complete|success' <<< "$existing_text"; then
+              resume_existing=true
+              write_state "resuming_existing_kernel"
+              printf 'resuming_existing_kernel=true\n' >> dispatch-evidence/dispatch-redacted.log
+            fi
           fi
-          sed -E "s/${owner}/[REDACTED_OWNER]/g; s/KGAT_[A-Za-z0-9_-]+/[REDACTED_TOKEN]/g" "${RUNNER_TEMP}/push.log" >> dispatch-evidence/dispatch-redacted.log
+
+          if [[ "$resume_existing" != "true" ]]; then
+            write_state "pushing"
+            if ! kaggle kernels push -p "$stage" --accelerator NvidiaTeslaT4 --timeout 7200 > "${RUNNER_TEMP}/push.log" 2>&1; then
+              sed -E "s/${owner}/[REDACTED_OWNER]/g; s/KGAT_[A-Za-z0-9_-]+/[REDACTED_TOKEN]/g" "${RUNNER_TEMP}/push.log" >> dispatch-evidence/dispatch-redacted.log
+              fail "Kaggle kernel push failed"
+            fi
+            sed -E "s/${owner}/[REDACTED_OWNER]/g; s/KGAT_[A-Za-z0-9_-]+/[REDACTED_TOKEN]/g" "${RUNNER_TEMP}/push.log" >> dispatch-evidence/dispatch-redacted.log
+          fi
 
           write_state "running"
           deadline=$((SECONDS + 7200))
@@ -217,12 +232,15 @@ jobs:
                       "bytes": path.stat().st_size,
                       "sha256": digest,
                   }
+          gate_path = target / "gate-a-result.json"
+          gate = json.loads(gate_path.read_text(encoding="utf-8")) if gate_path.exists() else {}
           receipt = {
               "status": "completed" if os.environ.get("DISPATCH_OUTCOME") == "success" else "execution_failed",
               "dispatch_outcome": os.environ.get("DISPATCH_OUTCOME"),
               "scope": "Private Kaggle T4 synthetic Gate A diagnostic; no competition submission.",
               "branch": os.environ.get("GITHUB_REF_NAME"),
-              "source_sha": os.environ.get("GITHUB_SHA"),
+              "workflow_sha": os.environ.get("GITHUB_SHA"),
+              "kernel_source_sha": gate.get("source_sha"),
               "github_run_id": os.environ.get("GITHUB_RUN_ID"),
               "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
               "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
