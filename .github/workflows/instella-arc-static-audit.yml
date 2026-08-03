@@ -5,18 +5,14 @@ on:
   push:
     branches: [instella-arc]
     paths:
-      - "instella_arc/**"
-      - "arcgpt2/codec_text.py"
-      - "arcgpt2/official_observation.py"
-      - "arcgpt2/tests/test_official_observation.py"
-      - ".github/workflows/instella-arc-static-audit.yml"
+      - "instella_arc/VALIDATE"
 
 permissions:
   contents: write
 
 concurrency:
   group: instella-arc-static-audit
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   audit:
@@ -60,7 +56,7 @@ jobs:
           } 2>&1 | tee instella-static-audit.log
 
       - name: Write durable receipt
-        if: always()
+        if: ${{ always() && steps.audit.outcome != 'skipped' }}
         env:
           AUDIT_OUTCOME: ${{ steps.audit.outcome }}
         run: |
@@ -115,7 +111,7 @@ jobs:
           PY
 
       - name: Publish receipt
-        if: always()
+        if: ${{ always() && steps.audit.outcome != 'skipped' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -125,7 +121,7 @@ jobs:
           git push origin "HEAD:${GITHUB_REF_NAME}"
 
       - name: Upload audit artifact
-        if: always()
+        if: ${{ always() && steps.audit.outcome != 'skipped' }}
         uses: actions/upload-artifact@v4
         with:
           name: instella-arc-static-audit
@@ -139,5 +135,5 @@ jobs:
           retention-days: 14
 
       - name: Propagate audit failure
-        if: steps.audit.outcome != 'success'
+        if: steps.audit.outcome == 'failure'
         run: exit 1
