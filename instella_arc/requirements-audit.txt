@@ -1,0 +1,6 @@
+torch>=2.5,<3
+transformers==4.57.1
+accelerate>=1.2,<2
+huggingface_hub>=0.34,<1
+safetensors>=0.5,<1
+pytest>=8,<10
