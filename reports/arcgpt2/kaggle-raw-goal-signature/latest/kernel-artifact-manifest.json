@@ -1,0 +1,54 @@
+{
+  "canonical-manifest.json": {
+    "bytes": 3504584,
+    "sha256": "f270bf8fda03022923b674bf3112dc769f5e8416b584c1ed5cc6f694f426c2f6"
+  },
+  "environment.json": {
+    "bytes": 844,
+    "sha256": "5164e8368a5d7032562683ef8e517a00f6d7c5847dc16f6b344837fe9f6335a6"
+  },
+  "gpu-samples.json": {
+    "bytes": 5589,
+    "sha256": "dac832754f8c2d8aee47ffc579104d558bc20d34f15d4b16b69c13505fc8b898"
+  },
+  "kernel-console.log": {
+    "bytes": 18184,
+    "sha256": "7c123bfefaf931a304f7f93bd515ccf442346bcc4a9cb912a64677c7a9f4b1c0"
+  },
+  "logs/cpu-preflight-tests.log": {
+    "bytes": 100,
+    "sha256": "7515b3e863ab2383df213fef5c38640b04f8eeb4049bca364274381a301d5fd8"
+  },
+  "logs/dependency-install.log": {
+    "bytes": 641,
+    "sha256": "ae3bf83ce5c75382ad19908445ecfb8939f6eb9e3a8ec2d1486eaf941f3652c1"
+  },
+  "logs/timing-seed-577215-pretrained.log": {
+    "bytes": 2329,
+    "sha256": "9c0c35e7056feb8c88c74478a89c790e33889dee8bcbdf979710fe4dbae75c54"
+  },
+  "logs/timing-seed-577215-random.log": {
+    "bytes": 2321,
+    "sha256": "f975ada1d3753d9613fd07ab90fe3080c259dc017e1e7db0ce78ab35d2a123a3"
+  },
+  "model-manifest.json": {
+    "bytes": 907,
+    "sha256": "a348eaa644ec7c670c7f28a751762b38b5a2cca62f8ceb7a5fbaf7d9f746f69a"
+  },
+  "pretraining-audit.json": {
+    "bytes": 80869,
+    "sha256": "a82d70f4bc27a844a9c7664f941a21e73e15ef41f8437a73de0afa8d94a08f4a"
+  },
+  "timing-result.json": {
+    "bytes": 6503,
+    "sha256": "f9cc6c815f787ebfa08e3582d4e36ccd24d522e3004900d9ebe4d4cb159d5962"
+  },
+  "timing/seed-577215/pretrained/timing-summary.json": {
+    "bytes": 2328,
+    "sha256": "7b98f04bb7760a005da187cb8bb4c31500fad4c6347e609b71905928b91e8715"
+  },
+  "timing/seed-577215/random/timing-summary.json": {
+    "bytes": 2320,
+    "sha256": "463899c97e7a6e80db41dbf8c9b2f7af78cd836306ff797f8e09fd34c21e299c"
+  }
+}

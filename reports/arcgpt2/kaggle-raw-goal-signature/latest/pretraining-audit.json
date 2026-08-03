@@ -1,0 +1,4119 @@
+{
+  "canonical_manifest_sha256": "51cb6c6b2822a6acc00c637871b2398573cdda5b11353e7eb63cb3f7dee49f0e",
+  "data_token_contract": {
+    "candidate_length_patterns": [
+      {
+        "count": 144,
+        "lengths": [
+          17,
+          17,
+          17,
+          17
+        ]
+      }
+    ],
+    "groups_audited": 144,
+    "groups_passed": 144,
+    "terminal_length_patterns": [
+      {
+        "count": 144,
+        "lengths": [
+          2,
+          2,
+          2
+        ]
+      }
+    ]
+  },
+  "gpt2_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+  "manifest_audit": {
+    "errors": [],
+    "signature_factor_overlaps": {
+      "candidate_order": {
+        "train:validation": []
+      },
+      "nuisance": {
+        "train:validation": []
+      },
+      "role_colors": {
+        "train:validation": []
+      }
+    },
+    "splits": {
+      "train": {
+        "candidate_order_counts": {
+          "__type__": "typed_mapping",
+          "entries": [
+            {
+              "key": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                0,
+                1,
+                3,
+                2
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                0,
+                2,
+                1,
+                3
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                0,
+                2,
+                3,
+                1
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                0,
+                3,
+                1,
+                2
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                0,
+                3,
+                2,
+                1
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                1,
+                0,
+                2,
+                3
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                1,
+                0,
+                3,
+                2
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                1,
+                2,
+                0,
+                3
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                1,
+                2,
+                3,
+                0
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                1,
+                3,
+                0,
+                2
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                1,
+                3,
+                2,
+                0
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                2,
+                0,
+                1,
+                3
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                2,
+                0,
+                3,
+                1
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                2,
+                1,
+                0,
+                3
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                2,
+                1,
+                3,
+                0
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                2,
+                3,
+                0,
+                1
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                2,
+                3,
+                1,
+                0
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                3,
+                0,
+                1,
+                2
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                3,
+                0,
+                2,
+                1
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                3,
+                1,
+                0,
+                2
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                3,
+                1,
+                2,
+                0
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                3,
+                2,
+                0,
+                1
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                3,
+                2,
+                1,
+                0
+              ],
+              "value": 5
+            }
+          ]
+        },
+        "errors": [],
+        "family_color_truth": {
+          "__type__": "typed_mapping",
+          "entries": [
+            {
+              "key": [
+                "ABSENT",
+                2,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "ABSENT",
+                2,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "ABSENT",
+                3,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "ABSENT",
+                3,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "ABSENT",
+                4,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "ABSENT",
+                4,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "ABSENT",
+                5,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "ABSENT",
+                5,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "ABSENT",
+                6,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "ABSENT",
+                6,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "ABSENT",
+                7,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "ABSENT",
+                7,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "CONTACT",
+                2,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "CONTACT",
+                2,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "CONTACT",
+                3,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "CONTACT",
+                3,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "CONTACT",
+                4,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "CONTACT",
+                4,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "CONTACT",
+                5,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "CONTACT",
+                5,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "CONTACT",
+                6,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "CONTACT",
+                6,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "CONTACT",
+                7,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "CONTACT",
+                7,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "COUNT",
+                2,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "COUNT",
+                2,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "COUNT",
+                3,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "COUNT",
+                3,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "COUNT",
+                4,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "COUNT",
+                4,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "COUNT",
+                5,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "COUNT",
+                5,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "COUNT",
+                6,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "COUNT",
+                6,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "COUNT",
+                7,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "COUNT",
+                7,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH",
+                2,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH",
+                2,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH",
+                3,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH",
+                3,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH",
+                4,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH",
+                4,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH",
+                5,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH",
+                5,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH",
+                6,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH",
+                6,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH",
+                7,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH",
+                7,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                2,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                2,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                3,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                3,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                4,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                4,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                5,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                5,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                6,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                6,
+                1
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                7,
+                0
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                7,
+                1
+              ],
+              "value": 10
+            }
+          ]
+        },
+        "family_position_truth": {
+          "__type__": "typed_mapping",
+          "entries": [
+            {
+              "key": [
+                "ABSENT",
+                0,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "ABSENT",
+                0,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "ABSENT",
+                1,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "ABSENT",
+                1,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "ABSENT",
+                2,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "ABSENT",
+                2,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "ABSENT",
+                3,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "ABSENT",
+                3,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "CONTACT",
+                0,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "CONTACT",
+                0,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "CONTACT",
+                1,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "CONTACT",
+                1,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "CONTACT",
+                2,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "CONTACT",
+                2,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "CONTACT",
+                3,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "CONTACT",
+                3,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "COUNT",
+                0,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "COUNT",
+                0,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "COUNT",
+                1,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "COUNT",
+                1,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "COUNT",
+                2,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "COUNT",
+                2,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "COUNT",
+                3,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "COUNT",
+                3,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "TOUCH",
+                0,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "TOUCH",
+                0,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "TOUCH",
+                1,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "TOUCH",
+                1,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "TOUCH",
+                2,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "TOUCH",
+                2,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "TOUCH",
+                3,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "TOUCH",
+                3,
+                1
+              ],
+              "value": 15
+            }
+          ]
+        },
+        "family_signature_truth": {
+          "__type__": "typed_mapping",
+          "entries": [
+            {
+              "key": [
+                "ABSENT",
+                0,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "ABSENT",
+                0,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "ABSENT",
+                1,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "ABSENT",
+                1,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "ABSENT",
+                2,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "ABSENT",
+                2,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "ABSENT",
+                3,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "ABSENT",
+                3,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "CONTACT",
+                0,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "CONTACT",
+                0,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "CONTACT",
+                1,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "CONTACT",
+                1,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "CONTACT",
+                2,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "CONTACT",
+                2,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "CONTACT",
+                3,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "CONTACT",
+                3,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "COUNT",
+                0,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "COUNT",
+                0,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "COUNT",
+                1,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "COUNT",
+                1,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "COUNT",
+                2,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "COUNT",
+                2,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "COUNT",
+                3,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "COUNT",
+                3,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "TOUCH",
+                0,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "TOUCH",
+                0,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "TOUCH",
+                1,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "TOUCH",
+                1,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "TOUCH",
+                2,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "TOUCH",
+                2,
+                1
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "TOUCH",
+                3,
+                0
+              ],
+              "value": 15
+            },
+            {
+              "key": [
+                "TOUCH",
+                3,
+                1
+              ],
+              "value": 15
+            }
+          ]
+        },
+        "groups": 120,
+        "joint_schedule_max_multiplicity": 1,
+        "joint_schedule_unique_pairs": 120,
+        "name": "train",
+        "named_role_color_counts": {
+          "__type__": "typed_mapping",
+          "entries": [
+            {
+              "key": [
+                "ABSENT",
+                2
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "ABSENT",
+                3
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "ABSENT",
+                4
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "ABSENT",
+                5
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "ABSENT",
+                6
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "ABSENT",
+                7
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "CONTACT",
+                2
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "CONTACT",
+                3
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "CONTACT",
+                4
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "CONTACT",
+                5
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "CONTACT",
+                6
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "CONTACT",
+                7
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "COUNT",
+                2
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "COUNT",
+                3
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "COUNT",
+                4
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "COUNT",
+                5
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "COUNT",
+                6
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "COUNT",
+                7
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "TOUCH_LEFT",
+                2
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "TOUCH_LEFT",
+                3
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "TOUCH_LEFT",
+                4
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "TOUCH_LEFT",
+                5
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "TOUCH_LEFT",
+                6
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "TOUCH_LEFT",
+                7
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                2
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                3
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                4
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                5
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                6
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                7
+              ],
+              "value": 20
+            }
+          ]
+        },
+        "nuisance_layout_counts": {
+          "__type__": "typed_mapping",
+          "entries": [
+            {
+              "key": [
+                4,
+                0
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                4,
+                10
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                4,
+                11
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                4,
+                1
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                4,
+                2
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                4,
+                3
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                4,
+                4
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                4,
+                5
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                4,
+                6
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                4,
+                7
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                4,
+                8
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                4,
+                9
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                5,
+                0
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                5,
+                10
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                5,
+                11
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                5,
+                1
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                5,
+                2
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                5,
+                3
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                5,
+                4
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                5,
+                5
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                5,
+                6
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                5,
+                7
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                5,
+                8
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                5,
+                9
+              ],
+              "value": 5
+            }
+          ]
+        },
+        "role_color_tuple_counts": {
+          "__type__": "typed_mapping",
+          "entries": [
+            {
+              "key": [
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                2,
+                7,
+                6,
+                5,
+                4
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                3,
+                2,
+                7,
+                6,
+                5
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                3,
+                4,
+                5,
+                6,
+                7
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                4,
+                3,
+                2,
+                7,
+                6
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                4,
+                5,
+                6,
+                7,
+                2
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                5,
+                4,
+                3,
+                2,
+                7
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                5,
+                6,
+                7,
+                2,
+                3
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                6,
+                5,
+                4,
+                3,
+                2
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                6,
+                7,
+                2,
+                3,
+                4
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                7,
+                2,
+                3,
+                4,
+                5
+              ],
+              "value": 10
+            },
+            {
+              "key": [
+                7,
+                6,
+                5,
+                4,
+                3
+              ],
+              "value": 10
+            }
+          ]
+        },
+        "semantic_mask_counts": {
+          "__type__": "typed_mapping",
+          "entries": [
+            {
+              "key": [
+                0,
+                1
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                0,
+                2
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                0,
+                3
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                1,
+                2
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                1,
+                3
+              ],
+              "value": 20
+            },
+            {
+              "key": [
+                2,
+                3
+              ],
+              "value": 20
+            }
+          ]
+        },
+        "signature_candidate_edge_count": 120,
+        "signature_color_edge_count": 120,
+        "signature_nuisance_edge_count": 120,
+        "signature_permutation_counts": {
+          "__type__": "typed_mapping",
+          "entries": [
+            {
+              "key": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                0,
+                1,
+                3,
+                2
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                0,
+                2,
+                1,
+                3
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                0,
+                2,
+                3,
+                1
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                0,
+                3,
+                1,
+                2
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                0,
+                3,
+                2,
+                1
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                1,
+                0,
+                2,
+                3
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                1,
+                0,
+                3,
+                2
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                1,
+                2,
+                0,
+                3
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                1,
+                2,
+                3,
+                0
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                1,
+                3,
+                0,
+                2
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                1,
+                3,
+                2,
+                0
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                2,
+                0,
+                1,
+                3
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                2,
+                0,
+                3,
+                1
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                2,
+                1,
+                0,
+                3
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                2,
+                1,
+                3,
+                0
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                2,
+                3,
+                0,
+                1
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                2,
+                3,
+                1,
+                0
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                3,
+                0,
+                1,
+                2
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                3,
+                0,
+                2,
+                1
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                3,
+                1,
+                0,
+                2
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                3,
+                1,
+                2,
+                0
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                3,
+                2,
+                0,
+                1
+              ],
+              "value": 5
+            },
+            {
+              "key": [
+                3,
+                2,
+                1,
+                0
+              ],
+              "value": 5
+            }
+          ]
+        }
+      },
+      "validation": {
+        "candidate_order_counts": {
+          "__type__": "typed_mapping",
+          "entries": [
+            {
+              "key": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                0,
+                1,
+                3,
+                2
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                0,
+                2,
+                1,
+                3
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                0,
+                2,
+                3,
+                1
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                0,
+                3,
+                1,
+                2
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                0,
+                3,
+                2,
+                1
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                1,
+                0,
+                2,
+                3
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                1,
+                0,
+                3,
+                2
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                1,
+                2,
+                0,
+                3
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                1,
+                2,
+                3,
+                0
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                1,
+                3,
+                0,
+                2
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                1,
+                3,
+                2,
+                0
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                2,
+                0,
+                1,
+                3
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                2,
+                0,
+                3,
+                1
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                2,
+                1,
+                0,
+                3
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                2,
+                1,
+                3,
+                0
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                2,
+                3,
+                0,
+                1
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                2,
+                3,
+                1,
+                0
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                3,
+                0,
+                1,
+                2
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                3,
+                0,
+                2,
+                1
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                3,
+                1,
+                0,
+                2
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                3,
+                1,
+                2,
+                0
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                3,
+                2,
+                0,
+                1
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                3,
+                2,
+                1,
+                0
+              ],
+              "value": 1
+            }
+          ]
+        },
+        "errors": [],
+        "family_color_truth": {
+          "__type__": "typed_mapping",
+          "entries": [
+            {
+              "key": [
+                "ABSENT",
+                2,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "ABSENT",
+                2,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "ABSENT",
+                3,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "ABSENT",
+                3,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "ABSENT",
+                4,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "ABSENT",
+                4,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "ABSENT",
+                5,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "ABSENT",
+                5,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "ABSENT",
+                6,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "ABSENT",
+                6,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "ABSENT",
+                7,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "ABSENT",
+                7,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "CONTACT",
+                2,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "CONTACT",
+                2,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "CONTACT",
+                3,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "CONTACT",
+                3,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "CONTACT",
+                4,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "CONTACT",
+                4,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "CONTACT",
+                5,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "CONTACT",
+                5,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "CONTACT",
+                6,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "CONTACT",
+                6,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "CONTACT",
+                7,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "CONTACT",
+                7,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "COUNT",
+                2,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "COUNT",
+                2,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "COUNT",
+                3,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "COUNT",
+                3,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "COUNT",
+                4,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "COUNT",
+                4,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "COUNT",
+                5,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "COUNT",
+                5,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "COUNT",
+                6,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "COUNT",
+                6,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "COUNT",
+                7,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "COUNT",
+                7,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH",
+                2,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH",
+                2,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH",
+                3,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH",
+                3,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH",
+                4,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH",
+                4,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH",
+                5,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH",
+                5,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH",
+                6,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH",
+                6,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH",
+                7,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH",
+                7,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                2,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                2,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                3,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                3,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                4,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                4,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                5,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                5,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                6,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                6,
+                1
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                7,
+                0
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                7,
+                1
+              ],
+              "value": 2
+            }
+          ]
+        },
+        "family_position_truth": {
+          "__type__": "typed_mapping",
+          "entries": [
+            {
+              "key": [
+                "ABSENT",
+                0,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "ABSENT",
+                0,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "ABSENT",
+                1,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "ABSENT",
+                1,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "ABSENT",
+                2,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "ABSENT",
+                2,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "ABSENT",
+                3,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "ABSENT",
+                3,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "CONTACT",
+                0,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "CONTACT",
+                0,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "CONTACT",
+                1,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "CONTACT",
+                1,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "CONTACT",
+                2,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "CONTACT",
+                2,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "CONTACT",
+                3,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "CONTACT",
+                3,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "COUNT",
+                0,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "COUNT",
+                0,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "COUNT",
+                1,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "COUNT",
+                1,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "COUNT",
+                2,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "COUNT",
+                2,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "COUNT",
+                3,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "COUNT",
+                3,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "TOUCH",
+                0,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "TOUCH",
+                0,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "TOUCH",
+                1,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "TOUCH",
+                1,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "TOUCH",
+                2,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "TOUCH",
+                2,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "TOUCH",
+                3,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "TOUCH",
+                3,
+                1
+              ],
+              "value": 3
+            }
+          ]
+        },
+        "family_signature_truth": {
+          "__type__": "typed_mapping",
+          "entries": [
+            {
+              "key": [
+                "ABSENT",
+                0,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "ABSENT",
+                0,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "ABSENT",
+                1,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "ABSENT",
+                1,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "ABSENT",
+                2,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "ABSENT",
+                2,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "ABSENT",
+                3,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "ABSENT",
+                3,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "CONTACT",
+                0,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "CONTACT",
+                0,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "CONTACT",
+                1,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "CONTACT",
+                1,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "CONTACT",
+                2,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "CONTACT",
+                2,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "CONTACT",
+                3,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "CONTACT",
+                3,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "COUNT",
+                0,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "COUNT",
+                0,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "COUNT",
+                1,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "COUNT",
+                1,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "COUNT",
+                2,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "COUNT",
+                2,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "COUNT",
+                3,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "COUNT",
+                3,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "TOUCH",
+                0,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "TOUCH",
+                0,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "TOUCH",
+                1,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "TOUCH",
+                1,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "TOUCH",
+                2,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "TOUCH",
+                2,
+                1
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "TOUCH",
+                3,
+                0
+              ],
+              "value": 3
+            },
+            {
+              "key": [
+                "TOUCH",
+                3,
+                1
+              ],
+              "value": 3
+            }
+          ]
+        },
+        "groups": 24,
+        "joint_schedule_max_multiplicity": 1,
+        "joint_schedule_unique_pairs": 24,
+        "name": "validation",
+        "named_role_color_counts": {
+          "__type__": "typed_mapping",
+          "entries": [
+            {
+              "key": [
+                "ABSENT",
+                2
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "ABSENT",
+                3
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "ABSENT",
+                4
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "ABSENT",
+                5
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "ABSENT",
+                6
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "ABSENT",
+                7
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "CONTACT",
+                2
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "CONTACT",
+                3
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "CONTACT",
+                4
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "CONTACT",
+                5
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "CONTACT",
+                6
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "CONTACT",
+                7
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "COUNT",
+                2
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "COUNT",
+                3
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "COUNT",
+                4
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "COUNT",
+                5
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "COUNT",
+                6
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "COUNT",
+                7
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "TOUCH_LEFT",
+                2
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "TOUCH_LEFT",
+                3
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "TOUCH_LEFT",
+                4
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "TOUCH_LEFT",
+                5
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "TOUCH_LEFT",
+                6
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "TOUCH_LEFT",
+                7
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                2
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                3
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                4
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                5
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                6
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                "TOUCH_RIGHT",
+                7
+              ],
+              "value": 4
+            }
+          ]
+        },
+        "nuisance_layout_counts": {
+          "__type__": "typed_mapping",
+          "entries": [
+            {
+              "key": [
+                4,
+                0
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                4,
+                10
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                4,
+                11
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                4,
+                1
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                4,
+                2
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                4,
+                3
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                4,
+                4
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                4,
+                5
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                4,
+                6
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                4,
+                7
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                4,
+                8
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                4,
+                9
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                5,
+                0
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                5,
+                10
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                5,
+                11
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                5,
+                1
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                5,
+                2
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                5,
+                3
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                5,
+                4
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                5,
+                5
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                5,
+                6
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                5,
+                7
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                5,
+                8
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                5,
+                9
+              ],
+              "value": 1
+            }
+          ]
+        },
+        "role_color_tuple_counts": {
+          "__type__": "typed_mapping",
+          "entries": [
+            {
+              "key": [
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                2,
+                7,
+                6,
+                5,
+                4
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                3,
+                2,
+                7,
+                6,
+                5
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                3,
+                4,
+                5,
+                6,
+                7
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                4,
+                3,
+                2,
+                7,
+                6
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                4,
+                5,
+                6,
+                7,
+                2
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                5,
+                4,
+                3,
+                2,
+                7
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                5,
+                6,
+                7,
+                2,
+                3
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                6,
+                5,
+                4,
+                3,
+                2
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                6,
+                7,
+                2,
+                3,
+                4
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                7,
+                2,
+                3,
+                4,
+                5
+              ],
+              "value": 2
+            },
+            {
+              "key": [
+                7,
+                6,
+                5,
+                4,
+                3
+              ],
+              "value": 2
+            }
+          ]
+        },
+        "semantic_mask_counts": {
+          "__type__": "typed_mapping",
+          "entries": [
+            {
+              "key": [
+                0,
+                1
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                0,
+                2
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                0,
+                3
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                1,
+                2
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                1,
+                3
+              ],
+              "value": 4
+            },
+            {
+              "key": [
+                2,
+                3
+              ],
+              "value": 4
+            }
+          ]
+        },
+        "signature_candidate_edge_count": 24,
+        "signature_color_edge_count": 24,
+        "signature_nuisance_edge_count": 24,
+        "signature_permutation_counts": {
+          "__type__": "typed_mapping",
+          "entries": [
+            {
+              "key": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                0,
+                1,
+                3,
+                2
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                0,
+                2,
+                1,
+                3
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                0,
+                2,
+                3,
+                1
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                0,
+                3,
+                1,
+                2
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                0,
+                3,
+                2,
+                1
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                1,
+                0,
+                2,
+                3
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                1,
+                0,
+                3,
+                2
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                1,
+                2,
+                0,
+                3
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                1,
+                2,
+                3,
+                0
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                1,
+                3,
+                0,
+                2
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                1,
+                3,
+                2,
+                0
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                2,
+                0,
+                1,
+                3
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                2,
+                0,
+                3,
+                1
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                2,
+                1,
+                0,
+                3
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                2,
+                1,
+                3,
+                0
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                2,
+                3,
+                0,
+                1
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                2,
+                3,
+                1,
+                0
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                3,
+                0,
+                1,
+                2
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                3,
+                0,
+                2,
+                1
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                3,
+                1,
+                0,
+                2
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                3,
+                1,
+                2,
+                0
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                3,
+                2,
+                0,
+                1
+              ],
+              "value": 1
+            },
+            {
+              "key": [
+                3,
+                2,
+                1,
+                0
+              ],
+              "value": 1
+            }
+          ]
+        }
+      }
+    },
+    "surface_overlaps": {
+      "train:validation": []
+    }
+  },
+  "manifest_file_sha256": "f270bf8fda03022923b674bf3112dc769f5e8416b584c1ed5cc6f694f426c2f6",
+  "model_token_length_audit": {
+    "binary_completion_lengths": [
+      2,
+      2
+    ],
+    "binary_lengths_equal": true,
+    "candidate_length_patterns": [
+      [
+        17,
+        17,
+        17,
+        17
+      ]
+    ],
+    "candidate_lengths_equal": true,
+    "neutral_lengths_matched": true,
+    "neutral_pair_count": 2304,
+    "passed": true,
+    "structural_errors": [],
+    "tokenizer_name_or_path": "/kaggle/temp/arc_gpt2_raw_goal_signature_gpu/gpt2-small-pinned"
+  },
+  "passed": true,
+  "performed_before_training": true,
+  "protocol": "raw_goal_signature_v1",
+  "scope": "train_validation_only",
+  "source_sha": "47880d9c00bde09ce71ac5cbe563ad2bd04c2f6b",
+  "timing_manifest_sha256": "51cb6c6b2822a6acc00c637871b2398573cdda5b11353e7eb63cb3f7dee49f0e",
+  "tokenizer": {
+    "class": "GPT2TokenizerFast",
+    "model_max_length": 1024,
+    "vocab_size": 50257
+  }
+}

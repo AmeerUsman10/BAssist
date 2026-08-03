@@ -1,0 +1,323 @@
+{"event": "command_start", "command": ["/usr/bin/python3", "-m", "pip", "install", "--quiet", "--disable-pip-version-check", "--no-input", "transformers==4.57.6", "safetensors==0.6.2", "pytest==8.4.2"], "utc": "2026-08-03T18:47:11.036402+00:00"}
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.0/44.0 kB 1.7 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 94.5 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 485.8/485.8 kB 28.1 MB/s eta 0:00:00
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.4/566.4 kB 33.9 MB/s eta 0:00:00
+{"event": "command_start", "command": ["git", "init", "/kaggle/temp/arc_gpt2_raw_goal_signature_gpu/source"], "utc": "2026-08-03T18:47:29.205678+00:00"}
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint: 
+hint: 	git config --global init.defaultBranch <name>
+hint: 
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint: 
+hint: 	git branch -m <name>
+Initialized empty Git repository in /kaggle/temp/arc_gpt2_raw_goal_signature_gpu/source/.git/
+{"event": "command_start", "command": ["git", "-C", "/kaggle/temp/arc_gpt2_raw_goal_signature_gpu/source", "remote", "add", "origin", "https://github.com/AmeerUsman10/BAssist.git"], "utc": "2026-08-03T18:47:29.259200+00:00"}
+{"event": "command_start", "command": ["git", "-C", "/kaggle/temp/arc_gpt2_raw_goal_signature_gpu/source", "fetch", "--depth", "1", "origin", "47880d9c00bde09ce71ac5cbe563ad2bd04c2f6b"], "utc": "2026-08-03T18:47:29.264271+00:00"}
+From https://github.com/AmeerUsman10/BAssist
+ * branch            47880d9c00bde09ce71ac5cbe563ad2bd04c2f6b -> FETCH_HEAD
+{"event": "command_start", "command": ["git", "-C", "/kaggle/temp/arc_gpt2_raw_goal_signature_gpu/source", "checkout", "--detach", "FETCH_HEAD"], "utc": "2026-08-03T18:47:30.097689+00:00"}
+HEAD is now at 47880d9 [run-kaggle-raw-goal-signature-timing] Retry preregistered dual-T4 timing gate
+{"event": "command_start", "command": ["/usr/bin/python3", "-m", "pytest", "-q", "arcgpt2/tests/test_raw_goal_signature_data.py", "arcgpt2/tests/test_meta_soft_raw_goal_signature.py", "arcgpt2/tests/test_raw_goal_signature_runner.py", "arcgpt2/tests/test_raw_goal_signature_statistics.py", "arcgpt2/tests/test_meta_soft_second_order.py", "arcgpt2/tests/test_completion_scorer.py"], "utc": "2026-08-03T18:47:30.142544+00:00"}
+...........................................                              [100%]
+43 passed in 19.75s
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files:  14%|#4        | 1/7 [00:00<00:01,  4.88it/s]Fetching 7 files:  57%|#####7    | 4/7 [00:03<00:02,  1.08it/s]Fetching 7 files: 100%|##########| 7/7 [00:03<00:00,  2.01it/s]
+[seed=577215 pretrained gpu=0] {
+[seed=577215 pretrained gpu=0]   "canonical_train_validation_manifest_sha256": "51cb6c6b2822a6acc00c637871b2398573cdda5b11353e7eb63cb3f7dee49f0e",
+[seed=577215 pretrained gpu=0]   "checks": {
+[seed=577215 pretrained gpu=0]     "locked_shape_path_finite": true,
+[seed=577215 pretrained gpu=0]     "no_locked_test_access": true,
+[seed=577215 pretrained gpu=0]     "no_optimizer_step": true,
+[seed=577215 pretrained gpu=0]     "training_path_finite": true,
+[seed=577215 pretrained gpu=0]     "validation_path_finite": true
+[seed=577215 pretrained gpu=0]   },
+[seed=577215 pretrained gpu=0]   "config": {
+[seed=577215 pretrained gpu=0]     "adam_beta1": 0.9,
+[seed=577215 pretrained gpu=0]     "adam_beta2": 0.999,
+[seed=577215 pretrained gpu=0]     "adam_epsilon": 1e-08,
+[seed=577215 pretrained gpu=0]     "bootstrap_confidence": 0.95,
+[seed=577215 pretrained gpu=0]     "bootstrap_samples": 10000,
+[seed=577215 pretrained gpu=0]     "bootstrap_seed": 20260804,
+[seed=577215 pretrained gpu=0]     "epochs": 2,
+[seed=577215 pretrained gpu=0]     "freeze_first_n_blocks": 11,
+[seed=577215 pretrained gpu=0]     "initialization": "pretrained",
+[seed=577215 pretrained gpu=0]     "inner_learning_rate": 0.2,
+[seed=577215 pretrained gpu=0]     "max_gradient_norm": 1.0,
+[seed=577215 pretrained gpu=0]     "model_learning_rate": 0.0001,
+[seed=577215 pretrained gpu=0]     "model_name": "openai-community/gpt2",
+[seed=577215 pretrained gpu=0]     "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+[seed=577215 pretrained gpu=0]     "no_evidence_weight": 0.25,
+[seed=577215 pretrained gpu=0]     "outer_optimizer": "AdamW",
+[seed=577215 pretrained gpu=0]     "prefix_initialization_std": 0.01,
+[seed=577215 pretrained gpu=0]     "prefix_learning_rate": 0.001,
+[seed=577215 pretrained gpu=0]     "prefix_length": 8,
+[seed=577215 pretrained gpu=0]     "seed": 577215,
+[seed=577215 pretrained gpu=0]     "source_sha": "47880d9c00bde09ce71ac5cbe563ad2bd04c2f6b",
+[seed=577215 pretrained gpu=0]     "weight_decay": 0.01
+[seed=577215 pretrained gpu=0]   },
+[seed=577215 pretrained gpu=0]   "initialization": "pretrained",
+[seed=577215 pretrained gpu=0]   "locked_test_groups_converted_or_queried": false,
+[seed=577215 pretrained gpu=0]   "measurements": {
+[seed=577215 pretrained gpu=0]     "kernel_fixed_allowance_seconds": 900,
+[seed=577215 pretrained gpu=0]     "locked_shape_bootstrap_samples": 1,
+[seed=577215 pretrained gpu=0]     "locked_shape_seconds_per_group": 5.453355939999938,
+[seed=577215 pretrained gpu=0]     "locked_shape_train_groups": 1,
+[seed=577215 pretrained gpu=0]     "peak_cuda_memory_bytes": 2921515520,
+[seed=577215 pretrained gpu=0]     "projected_full_lane_raw_seconds": 1509.5147010719975,
+[seed=577215 pretrained gpu=0]     "projected_full_lane_upper_seconds": 2186.893376339997,
+[seed=577215 pretrained gpu=0]     "projected_three_sequential_pairs_upper_seconds": 6560.680129019991,
+[seed=577215 pretrained gpu=0]     "projection_multiplier": 1.25,
+[seed=577215 pretrained gpu=0]     "seconds_per_training_group": 4.336424232500008,
+[seed=577215 pretrained gpu=0]     "seconds_per_validation_group": 1.5860678665000023,
+[seed=577215 pretrained gpu=0]     "timing_only_config_drift": {
+[seed=577215 pretrained gpu=0]       "bootstrap_samples": 1
+[seed=577215 pretrained gpu=0]     },
+[seed=577215 pretrained gpu=0]     "training_groups": 2,
+[seed=577215 pretrained gpu=0]     "training_seconds": 8.672848465000015,
+[seed=577215 pretrained gpu=0]     "unmeasured_warmup_training_groups": 1,
+[seed=577215 pretrained gpu=0]     "validation_groups": 2,
+[seed=577215 pretrained gpu=0]     "validation_seconds": 3.1721357330000046
+[seed=577215 pretrained gpu=0]   },
+[seed=577215 pretrained gpu=0]   "mode": "timing_only_train_validation_surfaces",
+[seed=577215 pretrained gpu=0]   "optimizer_steps_performed": 0,
+[seed=577215 pretrained gpu=0]   "protocol": "raw_goal_signature_v1",
+[seed=577215 pretrained gpu=0]   "run_mode": "timing",
+[seed=577215 pretrained gpu=0]   "runner_source_sha256": "e7f40b3b504817a18b05fd5d84b109a31088eccf53d7f3cde2e496abf076202f",
+[seed=577215 pretrained gpu=0]   "schema_version": 1,
+[seed=577215 pretrained gpu=0]   "seed": 577215,
+[seed=577215 pretrained gpu=0]   "source_sha": "47880d9c00bde09ce71ac5cbe563ad2bd04c2f6b"
+[seed=577215 pretrained gpu=0] }
+[seed=577215 random gpu=1] {
+[seed=577215 random gpu=1]   "canonical_train_validation_manifest_sha256": "51cb6c6b2822a6acc00c637871b2398573cdda5b11353e7eb63cb3f7dee49f0e",
+[seed=577215 random gpu=1]   "checks": {
+[seed=577215 random gpu=1]     "locked_shape_path_finite": true,
+[seed=577215 random gpu=1]     "no_locked_test_access": true,
+[seed=577215 random gpu=1]     "no_optimizer_step": true,
+[seed=577215 random gpu=1]     "training_path_finite": true,
+[seed=577215 random gpu=1]     "validation_path_finite": true
+[seed=577215 random gpu=1]   },
+[seed=577215 random gpu=1]   "config": {
+[seed=577215 random gpu=1]     "adam_beta1": 0.9,
+[seed=577215 random gpu=1]     "adam_beta2": 0.999,
+[seed=577215 random gpu=1]     "adam_epsilon": 1e-08,
+[seed=577215 random gpu=1]     "bootstrap_confidence": 0.95,
+[seed=577215 random gpu=1]     "bootstrap_samples": 10000,
+[seed=577215 random gpu=1]     "bootstrap_seed": 20260804,
+[seed=577215 random gpu=1]     "epochs": 2,
+[seed=577215 random gpu=1]     "freeze_first_n_blocks": 11,
+[seed=577215 random gpu=1]     "initialization": "random",
+[seed=577215 random gpu=1]     "inner_learning_rate": 0.2,
+[seed=577215 random gpu=1]     "max_gradient_norm": 1.0,
+[seed=577215 random gpu=1]     "model_learning_rate": 0.0001,
+[seed=577215 random gpu=1]     "model_name": "openai-community/gpt2",
+[seed=577215 random gpu=1]     "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+[seed=577215 random gpu=1]     "no_evidence_weight": 0.25,
+[seed=577215 random gpu=1]     "outer_optimizer": "AdamW",
+[seed=577215 random gpu=1]     "prefix_initialization_std": 0.01,
+[seed=577215 random gpu=1]     "prefix_learning_rate": 0.001,
+[seed=577215 random gpu=1]     "prefix_length": 8,
+[seed=577215 random gpu=1]     "seed": 577215,
+[seed=577215 random gpu=1]     "source_sha": "47880d9c00bde09ce71ac5cbe563ad2bd04c2f6b",
+[seed=577215 random gpu=1]     "weight_decay": 0.01
+[seed=577215 random gpu=1]   },
+[seed=577215 random gpu=1]   "initialization": "random",
+[seed=577215 random gpu=1]   "locked_test_groups_converted_or_queried": false,
+[seed=577215 random gpu=1]   "measurements": {
+[seed=577215 random gpu=1]     "kernel_fixed_allowance_seconds": 900,
+[seed=577215 random gpu=1]     "locked_shape_bootstrap_samples": 1,
+[seed=577215 random gpu=1]     "locked_shape_seconds_per_group": 5.502143085000171,
+[seed=577215 random gpu=1]     "locked_shape_train_groups": 1,
+[seed=577215 random gpu=1]     "peak_cuda_memory_bytes": 2921515520,
+[seed=577215 random gpu=1]     "projected_full_lane_raw_seconds": 1527.3393212400279,
+[seed=577215 random gpu=1]     "projected_full_lane_upper_seconds": 2209.174151550035,
+[seed=577215 random gpu=1]     "projected_three_sequential_pairs_upper_seconds": 6627.522454650105,
+[seed=577215 random gpu=1]     "projection_multiplier": 1.25,
+[seed=577215 random gpu=1]     "seconds_per_training_group": 4.402582708000068,
+[seed=577215 random gpu=1]     "seconds_per_validation_group": 1.5534410249999837,
+[seed=577215 random gpu=1]     "timing_only_config_drift": {
+[seed=577215 random gpu=1]       "bootstrap_samples": 1
+[seed=577215 random gpu=1]     },
+[seed=577215 random gpu=1]     "training_groups": 2,
+[seed=577215 random gpu=1]     "training_seconds": 8.805165416000136,
+[seed=577215 random gpu=1]     "unmeasured_warmup_training_groups": 1,
+[seed=577215 random gpu=1]     "validation_groups": 2,
+[seed=577215 random gpu=1]     "validation_seconds": 3.1068820499999674
+[seed=577215 random gpu=1]   },
+[seed=577215 random gpu=1]   "mode": "timing_only_train_validation_surfaces",
+[seed=577215 random gpu=1]   "optimizer_steps_performed": 0,
+[seed=577215 random gpu=1]   "protocol": "raw_goal_signature_v1",
+[seed=577215 random gpu=1]   "run_mode": "timing",
+[seed=577215 random gpu=1]   "runner_source_sha256": "e7f40b3b504817a18b05fd5d84b109a31088eccf53d7f3cde2e496abf076202f",
+[seed=577215 random gpu=1]   "schema_version": 1,
+[seed=577215 random gpu=1]   "seed": 577215,
+[seed=577215 random gpu=1]   "source_sha": "47880d9c00bde09ce71ac5cbe563ad2bd04c2f6b"
+[seed=577215 random gpu=1] }
+{
+  "checks": {
+    "pretrained_finite": true,
+    "pretrained_identity": true,
+    "pretrained_no_locked_access": true,
+    "pretrained_no_optimizer_step": true,
+    "pretrained_projection_finite": true,
+    "pretrained_runner_hash": true,
+    "pretrained_seed": true,
+    "pretrained_source": true,
+    "projected_kernel_within_ceiling": true,
+    "random_finite": true,
+    "random_identity": true,
+    "random_no_locked_access": true,
+    "random_no_optimizer_step": true,
+    "random_projection_finite": true,
+    "random_runner_hash": true,
+    "random_seed": true,
+    "random_source": true
+  },
+  "competition_submission_performed": false,
+  "lanes": {
+    "pretrained": {
+      "canonical_train_validation_manifest_sha256": "51cb6c6b2822a6acc00c637871b2398573cdda5b11353e7eb63cb3f7dee49f0e",
+      "checks": {
+        "locked_shape_path_finite": true,
+        "no_locked_test_access": true,
+        "no_optimizer_step": true,
+        "training_path_finite": true,
+        "validation_path_finite": true
+      },
+      "config": {
+        "adam_beta1": 0.9,
+        "adam_beta2": 0.999,
+        "adam_epsilon": 1e-08,
+        "bootstrap_confidence": 0.95,
+        "bootstrap_samples": 10000,
+        "bootstrap_seed": 20260804,
+        "epochs": 2,
+        "freeze_first_n_blocks": 11,
+        "initialization": "pretrained",
+        "inner_learning_rate": 0.2,
+        "max_gradient_norm": 1.0,
+        "model_learning_rate": 0.0001,
+        "model_name": "openai-community/gpt2",
+        "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+        "no_evidence_weight": 0.25,
+        "outer_optimizer": "AdamW",
+        "prefix_initialization_std": 0.01,
+        "prefix_learning_rate": 0.001,
+        "prefix_length": 8,
+        "seed": 577215,
+        "source_sha": "47880d9c00bde09ce71ac5cbe563ad2bd04c2f6b",
+        "weight_decay": 0.01
+      },
+      "initialization": "pretrained",
+      "locked_test_groups_converted_or_queried": false,
+      "measurements": {
+        "kernel_fixed_allowance_seconds": 900,
+        "locked_shape_bootstrap_samples": 1,
+        "locked_shape_seconds_per_group": 5.453355939999938,
+        "locked_shape_train_groups": 1,
+        "peak_cuda_memory_bytes": 2921515520,
+        "projected_full_lane_raw_seconds": 1509.5147010719975,
+        "projected_full_lane_upper_seconds": 2186.893376339997,
+        "projected_three_sequential_pairs_upper_seconds": 6560.680129019991,
+        "projection_multiplier": 1.25,
+        "seconds_per_training_group": 4.336424232500008,
+        "seconds_per_validation_group": 1.5860678665000023,
+        "timing_only_config_drift": {
+          "bootstrap_samples": 1
+        },
+        "training_groups": 2,
+        "training_seconds": 8.672848465000015,
+        "unmeasured_warmup_training_groups": 1,
+        "validation_groups": 2,
+        "validation_seconds": 3.1721357330000046
+      },
+      "mode": "timing_only_train_validation_surfaces",
+      "optimizer_steps_performed": 0,
+      "protocol": "raw_goal_signature_v1",
+      "run_mode": "timing",
+      "runner_source_sha256": "e7f40b3b504817a18b05fd5d84b109a31088eccf53d7f3cde2e496abf076202f",
+      "schema_version": 1,
+      "seed": 577215,
+      "source_sha": "47880d9c00bde09ce71ac5cbe563ad2bd04c2f6b"
+    },
+    "random": {
+      "canonical_train_validation_manifest_sha256": "51cb6c6b2822a6acc00c637871b2398573cdda5b11353e7eb63cb3f7dee49f0e",
+      "checks": {
+        "locked_shape_path_finite": true,
+        "no_locked_test_access": true,
+        "no_optimizer_step": true,
+        "training_path_finite": true,
+        "validation_path_finite": true
+      },
+      "config": {
+        "adam_beta1": 0.9,
+        "adam_beta2": 0.999,
+        "adam_epsilon": 1e-08,
+        "bootstrap_confidence": 0.95,
+        "bootstrap_samples": 10000,
+        "bootstrap_seed": 20260804,
+        "epochs": 2,
+        "freeze_first_n_blocks": 11,
+        "initialization": "random",
+        "inner_learning_rate": 0.2,
+        "max_gradient_norm": 1.0,
+        "model_learning_rate": 0.0001,
+        "model_name": "openai-community/gpt2",
+        "model_revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+        "no_evidence_weight": 0.25,
+        "outer_optimizer": "AdamW",
+        "prefix_initialization_std": 0.01,
+        "prefix_learning_rate": 0.001,
+        "prefix_length": 8,
+        "seed": 577215,
+        "source_sha": "47880d9c00bde09ce71ac5cbe563ad2bd04c2f6b",
+        "weight_decay": 0.01
+      },
+      "initialization": "random",
+      "locked_test_groups_converted_or_queried": false,
+      "measurements": {
+        "kernel_fixed_allowance_seconds": 900,
+        "locked_shape_bootstrap_samples": 1,
+        "locked_shape_seconds_per_group": 5.502143085000171,
+        "locked_shape_train_groups": 1,
+        "peak_cuda_memory_bytes": 2921515520,
+        "projected_full_lane_raw_seconds": 1527.3393212400279,
+        "projected_full_lane_upper_seconds": 2209.174151550035,
+        "projected_three_sequential_pairs_upper_seconds": 6627.522454650105,
+        "projection_multiplier": 1.25,
+        "seconds_per_training_group": 4.402582708000068,
+        "seconds_per_validation_group": 1.5534410249999837,
+        "timing_only_config_drift": {
+          "bootstrap_samples": 1
+        },
+        "training_groups": 2,
+        "training_seconds": 8.805165416000136,
+        "unmeasured_warmup_training_groups": 1,
+        "validation_groups": 2,
+        "validation_seconds": 3.1068820499999674
+      },
+      "mode": "timing_only_train_validation_surfaces",
+      "optimizer_steps_performed": 0,
+      "protocol": "raw_goal_signature_v1",
+      "run_mode": "timing",
+      "runner_source_sha256": "e7f40b3b504817a18b05fd5d84b109a31088eccf53d7f3cde2e496abf076202f",
+      "schema_version": 1,
+      "seed": 577215,
+      "source_sha": "47880d9c00bde09ce71ac5cbe563ad2bd04c2f6b"
+    }
+  },
+  "model_weights_persisted": false,
+  "projected_seconds_per_concurrent_pair": 2209.174151550035,
+  "projected_three_pair_kernel_seconds": 6627.522454650105,
+  "protocol": "raw_goal_signature_v1",
+  "run_mode": "timing",
+  "runner_source_sha256": "e7f40b3b504817a18b05fd5d84b109a31088eccf53d7f3cde2e496abf076202f",
+  "runtime_ceiling_seconds": 16200,
+  "schema_version": 1,
+  "scope": "Timing-only exact training/intact-validation and locked-shaped compute on train surfaces; no locked-test group and no optimizer mutation.",
+  "seed": 577215,
+  "source_sha": "47880d9c00bde09ce71ac5cbe563ad2bd04c2f6b",
+  "status": "within_runtime_ceiling"
+}
