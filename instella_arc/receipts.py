@@ -79,8 +79,18 @@ def rich_action_observation(
         "win_levels": current.win_levels,
         "full_reset": current.full_reset,
         "available_actions_after": list(current.available_actions),
+        # Full observation hashes preserve temporary animation evidence that may
+        # disappear from the final persistent frame in click/timing games.
+        "observation_before_sha256": previous.sha256,
+        "observation_after_sha256": current.sha256,
         "rendered_frame_count": len(current.rendered_frames),
         "animation_deltas": list(current.animation_deltas),
+        "rendered_frame_sha256": [
+            hashlib.sha256(
+                json.dumps(frame, separators=(",", ":")).encode("utf-8")
+            ).hexdigest()
+            for frame in current.rendered_frames
+        ],
         "moved_components": [
             moved_component_payload(translation)
             for translation in facts.translations
