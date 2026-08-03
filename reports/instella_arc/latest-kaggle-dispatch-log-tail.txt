@@ -1,0 +1,8 @@
+{
+  "status": "blocked",
+  "authenticated_credential_present": false,
+  "credential_format": null,
+  "kernel_id_present": false,
+  "kernel_id": null,
+  "reason": "No Kaggle API credential is configured in GitHub secrets."
+}
