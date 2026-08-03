@@ -28,7 +28,7 @@
     "prefix_learning_rate": 0.001,
     "prefix_length": 8,
     "seed": 577215,
-    "source_sha": "47880d9c00bde09ce71ac5cbe563ad2bd04c2f6b",
+    "source_sha": "eb4eb0e04f91aa20046aa04920a871d28eeaddaf",
     "weight_decay": 0.01
   },
   "initialization": "random",
@@ -36,30 +36,30 @@
   "measurements": {
     "kernel_fixed_allowance_seconds": 900,
     "locked_shape_bootstrap_samples": 1,
-    "locked_shape_seconds_per_group": 5.502143085000171,
+    "locked_shape_seconds_per_group": 5.253933900999982,
     "locked_shape_train_groups": 1,
     "peak_cuda_memory_bytes": 2921515520,
-    "projected_full_lane_raw_seconds": 1527.3393212400279,
-    "projected_full_lane_upper_seconds": 2209.174151550035,
-    "projected_three_sequential_pairs_upper_seconds": 6627.522454650105,
+    "projected_full_lane_raw_seconds": 1469.3201950799948,
+    "projected_full_lane_upper_seconds": 2136.650243849994,
+    "projected_three_sequential_pairs_upper_seconds": 6409.950731549981,
     "projection_multiplier": 1.25,
-    "seconds_per_training_group": 4.402582708000068,
-    "seconds_per_validation_group": 1.5534410249999837,
+    "seconds_per_training_group": 4.241732179999985,
+    "seconds_per_validation_group": 1.5212756459999923,
     "timing_only_config_drift": {
       "bootstrap_samples": 1
     },
     "training_groups": 2,
-    "training_seconds": 8.805165416000136,
+    "training_seconds": 8.48346435999997,
     "unmeasured_warmup_training_groups": 1,
     "validation_groups": 2,
-    "validation_seconds": 3.1068820499999674
+    "validation_seconds": 3.0425512919999846
   },
   "mode": "timing_only_train_validation_surfaces",
   "optimizer_steps_performed": 0,
   "protocol": "raw_goal_signature_v1",
   "run_mode": "timing",
-  "runner_source_sha256": "e7f40b3b504817a18b05fd5d84b109a31088eccf53d7f3cde2e496abf076202f",
+  "runner_source_sha256": "ba3276b61a7af8b5ddb5ba4b7eab45128ad4d213e62cc292bda54a4daf9ddbc1",
   "schema_version": 1,
   "seed": 577215,
-  "source_sha": "47880d9c00bde09ce71ac5cbe563ad2bd04c2f6b"
+  "source_sha": "eb4eb0e04f91aa20046aa04920a871d28eeaddaf"
 }
