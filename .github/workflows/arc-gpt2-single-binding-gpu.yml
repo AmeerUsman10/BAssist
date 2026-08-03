@@ -1,4 +1,5 @@
 name: ARC-GPT2 Single-Binding Kaggle GPU
+# GPU dispatch remains commit-marker gated after the CPU preflight job.
 
 on:
   workflow_dispatch:
