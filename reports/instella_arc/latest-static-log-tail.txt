@@ -1,0 +1,339 @@
+........................................................................ [ 51%]
+.....................................................................    [100%]
+141 passed in 21.92s
+A new version of the following files was downloaded from https://huggingface.co/amd/Instella-MoE-16B-A3B-Base:
+- configuration_instella_moe.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+A new version of the following files was downloaded from https://huggingface.co/amd/Instella-MoE-16B-A3B-Base:
+- modeling_instella_moe.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+`torch_dtype` is deprecated! Use `dtype` instead!
+A new version of the following files was downloaded from https://huggingface.co/amd/Instella-MoE-16B-A3B-DPO:
+- configuration_instella_moe.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+A new version of the following files was downloaded from https://huggingface.co/amd/Instella-MoE-16B-A3B-DPO:
+- modeling_instella_moe.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+A new version of the following files was downloaded from https://huggingface.co/amd/Instella-MoE-16B-A3B-Think:
+- configuration_instella_moe.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+A new version of the following files was downloaded from https://huggingface.co/amd/Instella-MoE-16B-A3B-Think:
+- modeling_instella_moe.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+{
+  "base": {
+    "hub_metadata": {
+      "status": "success"
+    },
+    "config_and_tokenizer": {
+      "status": "success"
+    },
+    "full_meta_instantiation": {
+      "status": "success"
+    },
+    "tiny_forward_and_generation": {
+      "status": "success"
+    }
+  },
+  "dpo": {
+    "hub_metadata": {
+      "status": "success"
+    },
+    "config_and_tokenizer": {
+      "status": "success"
+    },
+    "full_meta_instantiation": {
+      "status": "success"
+    },
+    "tiny_forward_and_generation": {
+      "status": "success"
+    }
+  },
+  "think": {
+    "hub_metadata": {
+      "status": "success"
+    },
+    "config_and_tokenizer": {
+      "status": "success"
+    },
+    "full_meta_instantiation": {
+      "status": "success"
+    },
+    "tiny_forward_and_generation": {
+      "status": "success"
+    }
+  }
+}
+{
+  "checkpoint": {
+    "key": "dpo",
+    "repository_id": "amd/Instella-MoE-16B-A3B-DPO",
+    "revision": "ef5a850b1e5638a98b2e28cf321a6c1b63ccde39",
+    "stage": "direct preference optimization",
+    "chat_tuned": true,
+    "preferred_use": "first ARC-specific parameter-efficient tuning substrate"
+  },
+  "plans": [
+    {
+      "name": "attention_q_o",
+      "rank": 4,
+      "module_count": 54,
+      "trainable_parameters": 884736,
+      "adapter_mib_fp16": 1.6875,
+      "training_state_mib_estimate": 10.125,
+      "target_suffixes": [
+        "o_proj",
+        "q_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "Lowest-risk first QLoRA target; router and all experts stay frozen."
+    },
+    {
+      "name": "attention_all",
+      "rank": 4,
+      "module_count": 108,
+      "trainable_parameters": 1607040,
+      "adapter_mib_fp16": 3.065185546875,
+      "training_state_mib_estimate": 18.39111328125,
+      "target_suffixes": [
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "All Gated-MLA projection matrices; router and experts stay frozen."
+    },
+    {
+      "name": "attention_plus_dense_mlp",
+      "rank": 4,
+      "module_count": 138,
+      "trainable_parameters": 2205312,
+      "adapter_mib_fp16": 4.206298828125,
+      "training_state_mib_estimate": 25.23779296875,
+      "target_suffixes": [
+        "down_proj",
+        "gate_proj",
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "Adds only non-MoE dense MLP blocks to attention adaptation."
+    },
+    {
+      "name": "attention_plus_shared_experts",
+      "rank": 4,
+      "module_count": 186,
+      "trainable_parameters": 3124608,
+      "adapter_mib_fp16": 5.959716796875,
+      "training_state_mib_estimate": 35.75830078125,
+      "target_suffixes": [
+        "down_proj",
+        "gate_proj",
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "Adapts attention and shared experts while leaving routed experts and router frozen."
+    },
+    {
+      "name": "all_projection_matrices",
+      "rank": 4,
+      "module_count": 5208,
+      "trainable_parameters": 72732288,
+      "adapter_mib_fp16": 138.725830078125,
+      "training_state_mib_estimate": 832.35498046875,
+      "target_suffixes": [
+        "down_proj",
+        "gate_proj",
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj"
+      ],
+      "includes_routed_experts": true,
+      "note": "Upper-bound plan. Usually inappropriate for a free-GPU first experiment because thousands of routed-expert adapters are created."
+    },
+    {
+      "name": "attention_q_o",
+      "rank": 8,
+      "module_count": 54,
+      "trainable_parameters": 1769472,
+      "adapter_mib_fp16": 3.375,
+      "training_state_mib_estimate": 20.25,
+      "target_suffixes": [
+        "o_proj",
+        "q_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "Lowest-risk first QLoRA target; router and all experts stay frozen."
+    },
+    {
+      "name": "attention_all",
+      "rank": 8,
+      "module_count": 108,
+      "trainable_parameters": 3214080,
+      "adapter_mib_fp16": 6.13037109375,
+      "training_state_mib_estimate": 36.7822265625,
+      "target_suffixes": [
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "All Gated-MLA projection matrices; router and experts stay frozen."
+    },
+    {
+      "name": "attention_plus_dense_mlp",
+      "rank": 8,
+      "module_count": 138,
+      "trainable_parameters": 4410624,
+      "adapter_mib_fp16": 8.41259765625,
+      "training_state_mib_estimate": 50.4755859375,
+      "target_suffixes": [
+        "down_proj",
+        "gate_proj",
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "Adds only non-MoE dense MLP blocks to attention adaptation."
+    },
+    {
+      "name": "attention_plus_shared_experts",
+      "rank": 8,
+      "module_count": 186,
+      "trainable_parameters": 6249216,
+      "adapter_mib_fp16": 11.91943359375,
+      "training_state_mib_estimate": 71.5166015625,
+      "target_suffixes": [
+        "down_proj",
+        "gate_proj",
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "Adapts attention and shared experts while leaving routed experts and router frozen."
+    },
+    {
+      "name": "all_projection_matrices",
+      "rank": 8,
+      "module_count": 5208,
+      "trainable_parameters": 145464576,
+      "adapter_mib_fp16": 277.45166015625,
+      "training_state_mib_estimate": 1664.7099609375,
+      "target_suffixes": [
+        "down_proj",
+        "gate_proj",
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj"
+      ],
+      "includes_routed_experts": true,
+      "note": "Upper-bound plan. Usually inappropriate for a free-GPU first experiment because thousands of routed-expert adapters are created."
+    },
+    {
+      "name": "attention_q_o",
+      "rank": 16,
+      "module_count": 54,
+      "trainable_parameters": 3538944,
+      "adapter_mib_fp16": 6.75,
+      "training_state_mib_estimate": 40.5,
+      "target_suffixes": [
+        "o_proj",
+        "q_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "Lowest-risk first QLoRA target; router and all experts stay frozen."
+    },
+    {
+      "name": "attention_all",
+      "rank": 16,
+      "module_count": 108,
+      "trainable_parameters": 6428160,
+      "adapter_mib_fp16": 12.2607421875,
+      "training_state_mib_estimate": 73.564453125,
+      "target_suffixes": [
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "All Gated-MLA projection matrices; router and experts stay frozen."
+    },
+    {
+      "name": "attention_plus_dense_mlp",
+      "rank": 16,
+      "module_count": 138,
+      "trainable_parameters": 8821248,
+      "adapter_mib_fp16": 16.8251953125,
+      "training_state_mib_estimate": 100.951171875,
+      "target_suffixes": [
+        "down_proj",
+        "gate_proj",
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "Adds only non-MoE dense MLP blocks to attention adaptation."
+    },
+    {
+      "name": "attention_plus_shared_experts",
+      "rank": 16,
+      "module_count": 186,
+      "trainable_parameters": 12498432,
+      "adapter_mib_fp16": 23.8388671875,
+      "training_state_mib_estimate": 143.033203125,
+      "target_suffixes": [
+        "down_proj",
+        "gate_proj",
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "Adapts attention and shared experts while leaving routed experts and router frozen."
+    },
+    {
+      "name": "all_projection_matrices",
+      "rank": 16,
+      "module_count": 5208,
+      "trainable_parameters": 290929152,
+      "adapter_mib_fp16": 554.9033203125,
+      "training_state_mib_estimate": 3329.419921875,
+      "target_suffixes": [
+        "down_proj",
+        "gate_proj",
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj"
+      ],
+      "includes_routed_experts": true,
+      "note": "Upper-bound plan. Usually inappropriate for a free-GPU first experiment because thousands of routed-expert adapters are created."
+    }
+  ]
+}

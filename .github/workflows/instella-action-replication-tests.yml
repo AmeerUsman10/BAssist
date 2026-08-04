@@ -1,0 +1,124 @@
+name: Instella Core and Adaptation Tests
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [instella-arc]
+    paths:
+      - "arcgpt2/official_observation.py"
+      - "arcgpt2/tests/test_official_observation.py"
+      - "instella_arc/action_belief.py"
+      - "instella_arc/action_replication.py"
+      - "instella_arc/action_training_data.py"
+      - "instella_arc/action_qlora.py"
+      - "instella_arc/controller.py"
+      - "instella_arc/controller_stride.py"
+      - "instella_arc/kaggle_action_replication.py"
+      - "instella_arc/kaggle_recover.py"
+      - "instella_arc/model_ranker.py"
+      - "instella_arc/navigation.py"
+      - "instella_arc/navigation_stride.py"
+      - "instella_arc/qlora_compat.py"
+      - "instella_arc/receipts.py"
+      - "instella_arc/toolkit_runner.py"
+      - "instella_arc/world_state.py"
+      - "instella_arc/tests/test_action_belief.py"
+      - "instella_arc/tests/test_action_replication.py"
+      - "instella_arc/tests/test_action_training_data.py"
+      - "instella_arc/tests/test_action_qlora.py"
+      - "instella_arc/tests/test_controller.py"
+      - "instella_arc/tests/test_kaggle_recover.py"
+      - "instella_arc/tests/test_model_ranker.py"
+      - "instella_arc/tests/test_navigation.py"
+      - "instella_arc/tests/test_navigation_stride.py"
+      - "instella_arc/tests/test_receipts.py"
+      - "instella_arc/tests/test_toolkit_runner.py"
+      - "instella_arc/tests/test_world_state.py"
+      - ".github/workflows/instella-action-replication-tests.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instella-core-adaptation-tests
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deterministic test dependencies
+        run: python -m pip install --quiet pytest
+
+      - name: Run exact-world, controller, toolkit, replication, and QLoRA tests
+        id: test
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python -m pytest -q \
+            arcgpt2/tests/test_official_observation.py \
+            instella_arc/tests/test_world_state.py \
+            instella_arc/tests/test_receipts.py \
+            instella_arc/tests/test_action_belief.py \
+            instella_arc/tests/test_navigation.py \
+            instella_arc/tests/test_navigation_stride.py \
+            instella_arc/tests/test_controller.py \
+            instella_arc/tests/test_model_ranker.py \
+            instella_arc/tests/test_toolkit_runner.py \
+            instella_arc/tests/test_action_replication.py \
+            instella_arc/tests/test_action_training_data.py \
+            instella_arc/tests/test_action_qlora.py \
+            instella_arc/tests/test_kaggle_recover.py \
+            2>&1 | tee instella-core-adaptation-tests.log
+
+      - name: Write durable test receipt
+        if: always()
+        env:
+          TEST_OUTCOME: ${{ steps.test.outcome }}
+        run: |
+          mkdir -p reports/instella_arc
+          python - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          log = Path("instella-core-adaptation-tests.log")
+          receipt = {
+              "schema": "instella_arc.core_adaptation_tests.v3",
+              "status": os.environ.get("TEST_OUTCOME", "unknown"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+          }
+          Path("reports/instella_arc/latest-core-adaptation-tests.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          if log.exists():
+              lines = log.read_text(encoding="utf-8", errors="replace").splitlines()
+              Path("reports/instella_arc/latest-core-adaptation-tests-log.txt").write_text(
+                  "\n".join(lines[-1500:]) + "\n", encoding="utf-8"
+              )
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/instella_arc/latest-core-adaptation-tests.json \
+            reports/instella_arc/latest-core-adaptation-tests-log.txt
+          git commit -m "Record Instella core tests ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Propagate test failure
+        if: steps.test.outcome != 'success'
+        run: exit 1

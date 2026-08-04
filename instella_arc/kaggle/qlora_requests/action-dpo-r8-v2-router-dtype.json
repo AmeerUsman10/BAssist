@@ -1,0 +1,39 @@
+{
+  "schema": "instella_arc.action_qlora_request.v1",
+  "authorized": true,
+  "authority_source": "Ameer explicitly directed the Instella track to pursue the approach aggressively; this retry repairs one verified runtime dtype mismatch and changes no experiment objective.",
+  "promotion_basis": {
+    "frozen_recovery_receipt": "reports/instella_arc/latest-action-replication-recovery.json",
+    "frozen_report_sha256": "9c9180bfd9b14a09e11049e52691e74c00aeb2e449354455d6f839d4412b6aad",
+    "case_count": 256,
+    "frozen_gate_passed": false,
+    "diagnostic_adaptation_authorized": true
+  },
+  "retry_basis": {
+    "previous_dispatch_receipt": "reports/instella_arc/latest-action-qlora-dispatch.json",
+    "previous_failure": "DeepSeek-V3 MoE index_add_ accumulator was FP16 while PEFT-promoted routing weights produced FP32 weighted expert outputs.",
+    "exact_error": "index_add_(): self (Half) and source (Float) must have the same scalar type",
+    "repair": "Cast floating MoE router outputs back to router input activation dtype through frozen-router forward hooks.",
+    "resubmit_reason": "The previous run failed before its first optimizer step; no training result exists."
+  },
+  "checkpoint": "dpo",
+  "checkpoint_revision": "ef5a850b1e5638a98b2e28cf321a6c1b63ccde39",
+  "quantization_order": ["int4", "int8"],
+  "rank": 8,
+  "alpha": 16,
+  "dropout": 0.05,
+  "target_modules": ["q_proj", "o_proj"],
+  "expected_trainable_parameters": 1769472,
+  "train_router": false,
+  "train_experts": false,
+  "train_games": 32,
+  "validation_games": 8,
+  "test_games": 32,
+  "whole_seed_disjoint": true,
+  "epochs": 1,
+  "learning_rate": 0.0002,
+  "gradient_accumulation": 8,
+  "external_submission": false,
+  "authorize_arc_submission": false,
+  "stop_condition": "Stop after held-out pre/post causal evaluation and publish the adapter only if the trainable-parameter boundary and result receipts are valid."
+}

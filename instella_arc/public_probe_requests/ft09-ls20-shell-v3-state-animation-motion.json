@@ -1,0 +1,19 @@
+{
+  "schema": "instella_arc.public_shell_probe_request.v1",
+  "games": ["ft09", "ls20"],
+  "seed": 0,
+  "max_actions_per_game": 80,
+  "competition_mode": false,
+  "external_submission": false,
+  "model_loaded": false,
+  "fixes": [
+    "Canonical numeric FrameData action IDs to executable GameAction names.",
+    "Require source disappearance and destination appearance in exact changed cells before accepting component motion.",
+    "Scope complex-action coordinate history to the full rendered observation state.",
+    "Treat animation-only responses as informative evidence.",
+    "Generate click candidates from every rendered frame and preserve candidate priority."
+  ],
+  "test_receipt": "reports/instella_arc/latest-core-adaptation-tests.json",
+  "test_count": 67,
+  "previous_probe_run_id": "30814590040"
+}

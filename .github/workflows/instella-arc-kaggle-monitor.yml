@@ -1,0 +1,259 @@
+name: Instella ARC Kaggle Monitor
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [instella-arc]
+    paths:
+      - ".github/workflows/instella-arc-kaggle-monitor.yml"
+      - "instella_arc/kaggle/monitor/**"
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: instella-arc-kaggle-monitor
+  cancel-in-progress: true
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+      KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+      KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+      KAGGLE_KERNEL_ID_SECRET: ${{ secrets.KAGGLE_KERNEL_ID }}
+      KAGGLE_KERNEL_ID_VAR: ${{ vars.KAGGLE_KERNEL_ID }}
+      GH_READ_TOKEN: ${{ github.token }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install official Kaggle CLI
+        run: python -m pip install --quiet --upgrade kaggle
+
+      - name: Read current Kaggle kernel and dispatch status without mutation
+        id: monitor
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import os
+          import re
+          import subprocess
+          from datetime import datetime, timezone
+          from pathlib import Path
+          from urllib.error import HTTPError, URLError
+          from urllib.request import Request, urlopen
+
+          raw_kernel_id = (
+              os.environ.get("KAGGLE_KERNEL_ID_SECRET", "").strip()
+              or os.environ.get("KAGGLE_KERNEL_ID_VAR", "").strip()
+          )
+          legacy_username = os.environ.get("KAGGLE_USERNAME", "").strip()
+          if raw_kernel_id and "/" not in raw_kernel_id:
+              kernel_id = f"{raw_kernel_id}/instella-arc-frozen-probe"
+          elif raw_kernel_id:
+              kernel_id = raw_kernel_id
+          elif legacy_username:
+              kernel_id = f"{legacy_username}/instella-arc-frozen-probe"
+          else:
+              kernel_id = ""
+
+          has_current_token = bool(os.environ.get("KAGGLE_API_TOKEN", "").strip())
+          has_legacy_token = bool(
+              legacy_username and os.environ.get("KAGGLE_KEY", "").strip()
+          )
+          credential_present = has_current_token or has_legacy_token
+
+          report = {
+              "schema": "instella_arc.kaggle_monitor.v2",
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "status": "unknown",
+              "credential_present": credential_present,
+              "credential_format": (
+                  "KAGGLE_API_TOKEN"
+                  if has_current_token
+                  else "KAGGLE_USERNAME+KAGGLE_KEY"
+                  if has_legacy_token
+                  else None
+              ),
+              "kernel_id_present": bool(kernel_id),
+              "kernel_slug": "instella-arc-frozen-probe" if kernel_id else None,
+              "command_exit_code": None,
+              "sanitized_output": "",
+              "reason": None,
+              "mutated_kaggle": False,
+              "github_dispatch": {
+                  "query_status": "not_attempted",
+                  "reason": None,
+                  "latest": None,
+                  "recent_runs": [],
+              },
+          }
+
+          # Read the target GitHub Actions workflow directly so a long-running
+          # Kaggle poll cannot hide whether dispatch was accepted or failed.
+          try:
+              repository = os.environ["GITHUB_REPOSITORY"]
+              token = os.environ["GH_READ_TOKEN"]
+              url = (
+                  f"https://api.github.com/repos/{repository}/actions/workflows/"
+                  "instella-arc-kaggle-dispatch.yml/runs"
+                  "?branch=instella-arc&per_page=10"
+              )
+              request = Request(
+                  url,
+                  headers={
+                      "Accept": "application/vnd.github+json",
+                      "Authorization": f"Bearer {token}",
+                      "X-GitHub-Api-Version": "2022-11-28",
+                      "User-Agent": "BAssist-Instella-Monitor",
+                  },
+              )
+              with urlopen(request, timeout=60) as response:
+                  payload = json.load(response)
+              recent_runs = []
+              for run in payload.get("workflow_runs", []):
+                  recent_runs.append(
+                      {
+                          "id": run.get("id"),
+                          "status": run.get("status"),
+                          "conclusion": run.get("conclusion"),
+                          "event": run.get("event"),
+                          "head_sha": run.get("head_sha"),
+                          "run_number": run.get("run_number"),
+                          "run_attempt": run.get("run_attempt"),
+                          "created_at": run.get("created_at"),
+                          "updated_at": run.get("updated_at"),
+                          "html_url": run.get("html_url"),
+                      }
+                  )
+              report["github_dispatch"] = {
+                  "query_status": "success",
+                  "reason": None,
+                  "latest": recent_runs[0] if recent_runs else None,
+                  "recent_runs": recent_runs,
+              }
+          except (HTTPError, URLError, KeyError, TimeoutError, ValueError) as exc:
+              report["github_dispatch"] = {
+                  "query_status": "failure",
+                  "reason": f"{type(exc).__name__}: {exc}",
+                  "latest": None,
+                  "recent_runs": [],
+              }
+
+          if not credential_present:
+              report["status"] = "blocked"
+              report["reason"] = "No Kaggle API credential is available to the monitor."
+          elif not kernel_id or "/" not in kernel_id:
+              report["status"] = "blocked"
+              report["reason"] = "KAGGLE_KERNEL_ID is missing or malformed."
+          else:
+              process = subprocess.run(
+                  ["kaggle", "kernels", "status", kernel_id],
+                  text=True,
+                  capture_output=True,
+                  timeout=120,
+              )
+              combined = (process.stdout + "\n" + process.stderr).strip()
+              owner = kernel_id.split("/", 1)[0]
+              sanitized = combined.replace(kernel_id, "<redacted>/instella-arc-frozen-probe")
+              sanitized = re.sub(
+                  rf"(?<![A-Za-z0-9_-]){re.escape(owner)}(?![A-Za-z0-9_-])",
+                  "<redacted>",
+                  sanitized,
+                  flags=re.IGNORECASE,
+              )
+              report["command_exit_code"] = process.returncode
+              report["sanitized_output"] = sanitized[-4000:]
+              lowered = combined.lower()
+              if process.returncode != 0:
+                  report["status"] = "query_failure"
+                  report["reason"] = "Kaggle CLI could not read the kernel status."
+              elif any(word in lowered for word in ("complete", "success")):
+                  report["status"] = "complete"
+              elif any(word in lowered for word in ("running", "queued", "pending")):
+                  report["status"] = "running"
+              elif any(word in lowered for word in ("error", "failed", "cancelled")):
+                  report["status"] = "failure"
+              else:
+                  report["status"] = "unknown"
+                  report["reason"] = "The CLI response did not match a known terminal or active state."
+
+          output = Path("outputs/instella_arc")
+          output.mkdir(parents=True, exist_ok=True)
+          (output / "kaggle-monitor-status.json").write_text(
+              json.dumps(report, indent=2), encoding="utf-8"
+          )
+          print(json.dumps({
+              "status": report["status"],
+              "credential_present": report["credential_present"],
+              "kernel_id_present": report["kernel_id_present"],
+              "command_exit_code": report["command_exit_code"],
+              "reason": report["reason"],
+              "dispatch_latest": report["github_dispatch"]["latest"],
+          }, indent=2))
+          PY
+
+      - name: Publish redacted monitor receipt
+        if: always()
+        run: |
+          mkdir -p reports/instella_arc
+          if [[ -f outputs/instella_arc/kaggle-monitor-status.json ]]; then
+            cp outputs/instella_arc/kaggle-monitor-status.json \
+              reports/instella_arc/latest-kaggle-monitor-status.json
+          else
+            python - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+          Path("reports/instella_arc/latest-kaggle-monitor-status.json").write_text(
+              json.dumps({
+                  "schema": "instella_arc.kaggle_monitor.v2",
+                  "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+                  "status": "monitor_failure",
+                  "reason": "Monitor output was not produced.",
+                  "mutated_kaggle": False,
+                  "run_id": os.environ.get("GITHUB_RUN_ID"),
+              }, indent=2),
+              encoding="utf-8",
+          )
+          PY
+          fi
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          path = Path("reports/instella_arc/latest-kaggle-monitor-status.json")
+          payload = json.loads(path.read_text(encoding="utf-8"))
+          payload["github_branch"] = os.environ.get("GITHUB_REF_NAME")
+          payload["github_commit_sha"] = os.environ.get("GITHUB_SHA")
+          payload["github_run_id"] = os.environ.get("GITHUB_RUN_ID")
+          payload["github_run_attempt"] = os.environ.get("GITHUB_RUN_ATTEMPT")
+          path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/instella_arc/latest-kaggle-monitor-status.json
+          git commit -m "Record Instella ARC Kaggle monitor ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload redacted monitor artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: instella-arc-kaggle-monitor
+          path: reports/instella_arc/latest-kaggle-monitor-status.json
+          if-no-files-found: warn
+          retention-days: 7

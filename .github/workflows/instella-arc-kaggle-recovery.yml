@@ -1,0 +1,119 @@
+name: Instella ARC Kaggle Recovery
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [instella-arc]
+    paths:
+      - ".github/workflows/instella-arc-kaggle-recovery.yml"
+      - "instella_arc/kaggle_recover.py"
+      - "instella_arc/tests/test_kaggle_recover.py"
+      - "instella_arc/kaggle/recovery/**"
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: instella-arc-kaggle-recovery
+  cancel-in-progress: true
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+      KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+      KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+      GH_ACTIONS_TOKEN: ${{ github.token }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install recovery dependencies
+        run: |
+          python -m pip install --quiet --upgrade kaggle pytest
+
+      - name: Verify recovery helpers
+        run: python -m pytest -q instella_arc/tests/test_kaggle_recover.py
+
+      - name: Resolve completed kernel and recover bounded evidence
+        id: recover
+        continue-on-error: true
+        run: |
+          python -m instella_arc.kaggle_recover \
+            --output-root kaggle-recovered-output \
+            --report outputs/instella_arc/kaggle-recovery-status.json
+
+      - name: Publish recovery receipt and bounded evidence
+        if: always()
+        run: |
+          mkdir -p reports/instella_arc/latest-kaggle-recovered-output
+          if [[ -f outputs/instella_arc/kaggle-recovery-status.json ]]; then
+            cp outputs/instella_arc/kaggle-recovery-status.json \
+              reports/instella_arc/latest-kaggle-recovery-status.json
+          else
+            python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+          Path("reports/instella_arc/latest-kaggle-recovery-status.json").write_text(
+              json.dumps({
+                  "schema": "instella_arc.kaggle_recovery.v2",
+                  "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+                  "status": "workflow_failure",
+                  "reason": "Recovery output was not produced."
+              }, indent=2), encoding="utf-8"
+          )
+          PY
+          fi
+
+          find reports/instella_arc/latest-kaggle-recovered-output -type f -delete
+          if [[ -d kaggle-recovered-output ]]; then
+            while IFS= read -r -d '' file; do
+              rel="${file#kaggle-recovered-output/}"
+              mkdir -p "reports/instella_arc/latest-kaggle-recovered-output/$(dirname "$rel")"
+              cp "$file" "reports/instella_arc/latest-kaggle-recovered-output/$rel"
+            done < <(find kaggle-recovered-output -type f -print0)
+          fi
+
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          path = Path("reports/instella_arc/latest-kaggle-recovery-status.json")
+          payload = json.loads(path.read_text(encoding="utf-8"))
+          payload["github_branch"] = os.environ.get("GITHUB_REF_NAME")
+          payload["github_commit_sha"] = os.environ.get("GITHUB_SHA")
+          payload["github_run_id"] = os.environ.get("GITHUB_RUN_ID")
+          payload["github_run_attempt"] = os.environ.get("GITHUB_RUN_ATTEMPT")
+          path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/instella_arc/latest-kaggle-recovery-status.json \
+            reports/instella_arc/latest-kaggle-recovered-output/
+          git commit -m "Recover Instella ARC Kaggle evidence ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload recovery artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: instella-arc-kaggle-recovery
+          path: |
+            reports/instella_arc/latest-kaggle-recovery-status.json
+            reports/instella_arc/latest-kaggle-recovered-output/
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Propagate recovery infrastructure failure
+        if: steps.recover.outcome == 'failure'
+        run: exit 1

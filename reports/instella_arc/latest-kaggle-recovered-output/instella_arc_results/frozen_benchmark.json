@@ -1,0 +1,263 @@
+{
+  "schema": "instella_arc.frozen_benchmark.v1",
+  "profile": "smoke",
+  "backend": {
+    "checkpoint": "amd/Instella-MoE-16B-A3B-Think",
+    "quantization": "int4",
+    "dtype": "float16",
+    "revision": "e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83",
+    "device_map": {
+      "model.embed_tokens": 0,
+      "model.layers.0": 0,
+      "model.layers.1": 0,
+      "model.layers.2": 0,
+      "model.layers.3": 0,
+      "model.layers.4": 0,
+      "model.layers.5": 0,
+      "model.layers.6": 0,
+      "model.layers.7": 0,
+      "model.layers.8": 0,
+      "model.layers.9": 0,
+      "model.layers.10": 0,
+      "model.layers.11": 1,
+      "model.layers.12": 1,
+      "model.layers.13": 1,
+      "model.layers.14": 1,
+      "model.layers.15": 1,
+      "model.layers.16": 1,
+      "model.layers.17": 1,
+      "model.layers.18": 1,
+      "model.layers.19": 1,
+      "model.layers.20": 1,
+      "model.layers.21": 1,
+      "model.layers.22": 1,
+      "model.layers.23": 1,
+      "model.layers.24": 1,
+      "model.layers.25": 1,
+      "model.layers.26": 1,
+      "model.norm": 1,
+      "model.rotary_emb": 1,
+      "lm_head": 1
+    },
+    "last_scoring_strategy": "shared_single_token_forward"
+  },
+  "tasks": [
+    "action"
+  ],
+  "seed_base": 930000,
+  "games_per_task": 1,
+  "generated_case_count": 48,
+  "case_count": 4,
+  "selected_case_ids": [
+    "action:930000:0:A1:intact",
+    "action:930000:4:A1:amnesic",
+    "action:930000:4:A1:intact",
+    "action:930000:4:A1:shuffled"
+  ],
+  "summary": {
+    "groups": {
+      "action_binding/amnesic/depth_4": {
+        "cases": 1,
+        "set_cross_entropy": 2.079272790519409,
+        "brier": 1.1582113501644975,
+        "consistent_mass": 0.12502109567496314,
+        "top1_consistent": 0.0,
+        "truth_probability": 0.12502109567496314,
+        "truth_rank": 3.0,
+        "latency_seconds": 1.228271446000008
+      },
+      "action_binding/intact/depth_0": {
+        "cases": 1,
+        "set_cross_entropy": 2.070986330016537,
+        "brier": 0.08741610669157626,
+        "consistent_mass": 1.0,
+        "top1_consistent": 1.0,
+        "truth_probability": 0.2566482445095551,
+        "truth_rank": 3.0,
+        "latency_seconds": 1.3045189210000672
+      },
+      "action_binding/intact/depth_4": {
+        "cases": 1,
+        "set_cross_entropy": 1.6799076070591101,
+        "brier": 0.9956259616133447,
+        "consistent_mass": 0.18639119647467267,
+        "top1_consistent": 0.0,
+        "truth_probability": 0.18639119647467267,
+        "truth_rank": 3.0,
+        "latency_seconds": 1.3264667690000351
+      },
+      "action_binding/shuffled/depth_4": {
+        "cases": 1,
+        "set_cross_entropy": 1.5071752600330768,
+        "brier": 0.9061543277148667,
+        "consistent_mass": 0.22153487337122324,
+        "top1_consistent": 0.0,
+        "truth_probability": 0.22153487337122324,
+        "truth_rank": 3.0,
+        "latency_seconds": 1.3431827599999906
+      }
+    },
+    "evidence_deltas": {
+      "action_binding": {
+        "max_evidence_depth": 4,
+        "consistent_mass_by_mode": {
+          "amnesic": 0.12502109567496314,
+          "intact": 0.18639119647467267,
+          "shuffled": 0.22153487337122324
+        },
+        "intact_minus_amnesic": 0.06137010079970953,
+        "intact_minus_shuffled": -0.03514367689655057
+      }
+    }
+  },
+  "results": [
+    {
+      "case_id": "action:930000:0:A1:intact",
+      "task": "action_binding",
+      "mode": "intact",
+      "evidence_depth": 0,
+      "prompt_sha256": "9be583b96d9795cfa8c9cfc570598e7fbd1d5051e3008de7a43d4757a6bd9055",
+      "scores": [
+        -27.78125,
+        -27.46875,
+        -27.375,
+        -31.34375
+      ],
+      "probabilities": [
+        0.2566482445095551,
+        0.35079655813130933,
+        0.38527464706674747,
+        0.007280550292388147
+      ],
+      "target": [
+        0.25,
+        0.25,
+        0.25,
+        0.25
+      ],
+      "set_cross_entropy": 2.070986330016537,
+      "brier": 0.08741610669157626,
+      "consistent_mass": 1.0,
+      "top1_consistent": true,
+      "truth_probability": 0.2566482445095551,
+      "truth_rank": 3,
+      "latency_seconds": 1.3045189210000672,
+      "metadata": {
+        "game_seed": 930000,
+        "query_action": "A1",
+        "consistent_mapping_count": 24
+      }
+    },
+    {
+      "case_id": "action:930000:4:A1:amnesic",
+      "task": "action_binding",
+      "mode": "amnesic",
+      "evidence_depth": 4,
+      "prompt_sha256": "c574f7090bd86813e31a29d5b63e689b51b6ac1a95691345ad66073f5f2daa15",
+      "scores": [
+        -31.34375,
+        -30.34375,
+        -29.90625,
+        -34.0
+      ],
+      "probabilities": [
+        0.12502109567496314,
+        0.339842572547292,
+        0.5263584731270143,
+        0.008777858650730571
+      ],
+      "target": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "set_cross_entropy": 2.079272790519409,
+      "brier": 1.1582113501644975,
+      "consistent_mass": 0.12502109567496314,
+      "top1_consistent": false,
+      "truth_probability": 0.12502109567496314,
+      "truth_rank": 3,
+      "latency_seconds": 1.228271446000008,
+      "metadata": {
+        "game_seed": 930000,
+        "query_action": "A1",
+        "consistent_mapping_count": 1
+      }
+    },
+    {
+      "case_id": "action:930000:4:A1:intact",
+      "task": "action_binding",
+      "mode": "intact",
+      "evidence_depth": 4,
+      "prompt_sha256": "e79c99d456bd8630ed700495330ca5889e62838f783c1dd24aea4c3f4c618478",
+      "scores": [
+        -30.71875,
+        -29.78125,
+        -30.15625,
+        -33.59375
+      ],
+      "probabilities": [
+        0.18639119647467267,
+        0.47596659439345995,
+        0.3271267373892763,
+        0.010515471742591107
+      ],
+      "target": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "set_cross_entropy": 1.6799076070591101,
+      "brier": 0.9956259616133447,
+      "consistent_mass": 0.18639119647467267,
+      "top1_consistent": false,
+      "truth_probability": 0.18639119647467267,
+      "truth_rank": 3,
+      "latency_seconds": 1.3264667690000351,
+      "metadata": {
+        "game_seed": 930000,
+        "query_action": "A1",
+        "consistent_mapping_count": 1
+      }
+    },
+    {
+      "case_id": "action:930000:4:A1:shuffled",
+      "task": "action_binding",
+      "mode": "shuffled",
+      "evidence_depth": 4,
+      "prompt_sha256": "dfa76d73f3ab43f19c7f16b8d5eb2586575e89ad2197c2d7ec6b765db531f18d",
+      "scores": [
+        -30.90625,
+        -30.25,
+        -30.46875,
+        -34.1875
+      ],
+      "probabilities": [
+        0.22153487337122324,
+        0.4270196448945114,
+        0.3431199240814266,
+        0.008325557652838697
+      ],
+      "target": [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "set_cross_entropy": 1.5071752600330768,
+      "brier": 0.9061543277148667,
+      "consistent_mass": 0.22153487337122324,
+      "top1_consistent": false,
+      "truth_probability": 0.22153487337122324,
+      "truth_rank": 3,
+      "latency_seconds": 1.3431827599999906,
+      "metadata": {
+        "game_seed": 930000,
+        "query_action": "A1",
+        "consistent_mapping_count": 1
+      }
+    }
+  ]
+}

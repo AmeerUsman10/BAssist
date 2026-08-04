@@ -1,0 +1,296 @@
+name: Instella Action Replication Recover
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [instella-arc]
+    paths:
+      - "instella_arc/kaggle/replication_recovery_requests/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instella-action-replication-recover
+  cancel-in-progress: true
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    env:
+      KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+      KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+      KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Kaggle CLI
+        run: python -m pip install --quiet --upgrade kaggle
+
+      - name: Resolve actual slug, wait, and recover exact outputs
+        id: recover
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python - <<'PY' 2>&1 | tee instella-action-replication-recovery.log
+          import hashlib
+          import json
+          import re
+          import subprocess
+          import time
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          slug = "instella-arc-action-replication-64"
+          output = Path("kaggle-replication-recovered")
+          output.mkdir(parents=True, exist_ok=True)
+          receipt = {
+              "schema": "instella_arc.action_replication_recovery.v1",
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "status": "running",
+              "kernel_slug": slug,
+              "kernel_ref_resolved": False,
+              "kernel_status": "unknown",
+              "output_files": [],
+              "output_sha256": {},
+              "runner_status": None,
+              "replication_summary": None,
+              "sanitized_log_tail": "",
+              "reason": None,
+              "mutated_kaggle": False,
+          }
+
+          actual_ref = None
+          discovery_deadline = time.time() + 10 * 60
+          while time.time() < discovery_deadline:
+              listing = subprocess.run(
+                  ["kaggle", "kernels", "list", "--mine", "--page-size", "100", "-v"],
+                  text=True,
+                  capture_output=True,
+                  timeout=180,
+              )
+              matches = sorted(set(re.findall(
+                  rf"([A-Za-z0-9_-]+/{re.escape(slug)})",
+                  listing.stdout + "\n" + listing.stderr,
+                  flags=re.IGNORECASE,
+              )))
+              if listing.returncode == 0 and len(matches) == 1:
+                  actual_ref = matches[0]
+                  break
+              time.sleep(20)
+
+          if actual_ref is None:
+              receipt["status"] = "failure"
+              receipt["reason"] = "Could not resolve the title-normalized replication slug."
+          else:
+              receipt["kernel_ref_resolved"] = True
+              owner = actual_ref.split("/", 1)[0]
+              deadline = time.time() + 120 * 60
+              while time.time() < deadline:
+                  process = subprocess.run(
+                      ["kaggle", "kernels", "status", actual_ref],
+                      text=True,
+                      capture_output=True,
+                      timeout=180,
+                  )
+                  raw = (process.stdout + "\n" + process.stderr).strip()
+                  lowered = raw.lower()
+                  if process.returncode != 0:
+                      receipt["kernel_status"] = "query_failure"
+                      receipt["reason"] = "Kaggle status query failed."
+                      break
+                  if any(word in lowered for word in ("complete", "success")):
+                      receipt["kernel_status"] = "complete"
+                      break
+                  if any(word in lowered for word in ("error", "failed", "cancelled")):
+                      receipt["kernel_status"] = "failure"
+                      break
+                  receipt["kernel_status"] = "running"
+                  time.sleep(60)
+              else:
+                  receipt["kernel_status"] = "timeout"
+                  receipt["reason"] = "Timed out waiting for replication kernel."
+
+              logs = subprocess.run(
+                  ["kaggle", "kernels", "logs", actual_ref],
+                  text=True,
+                  capture_output=True,
+                  timeout=180,
+              )
+              raw_log = (logs.stdout + "\n" + logs.stderr).strip()
+              sanitized = raw_log.replace(actual_ref, f"<redacted>/{slug}")
+              sanitized = re.sub(
+                  rf"(?<![A-Za-z0-9_-]){re.escape(owner)}(?![A-Za-z0-9_-])",
+                  "<redacted>",
+                  sanitized,
+                  flags=re.IGNORECASE,
+              )
+              receipt["sanitized_log_tail"] = sanitized[-30000:]
+
+              if receipt["kernel_status"] == "complete":
+                  for filename in ("replication_status.json", "action_replication.json"):
+                      subprocess.run(
+                          [
+                              "kaggle", "kernels", "output", actual_ref,
+                              "--path", str(output),
+                              "--force", "--quiet",
+                              "--file-pattern", filename,
+                          ],
+                          text=True,
+                          capture_output=True,
+                          timeout=900,
+                      )
+
+                  all_files = sorted(path for path in output.rglob("*") if path.is_file())
+                  selected = [
+                      path for path in all_files
+                      if path.name in {"replication_status.json", "action_replication.json"}
+                      and path.parent.name == "instella_action_replication"
+                  ]
+                  keep = set(selected)
+                  for path in sorted(output.rglob("*"), reverse=True):
+                      if path.is_file() and path not in keep:
+                          path.unlink()
+                      elif path.is_dir():
+                          try:
+                              path.rmdir()
+                          except OSError:
+                              pass
+                  files = sorted(path for path in output.rglob("*") if path.is_file())
+                  receipt["output_files"] = [str(path.relative_to(output)) for path in files]
+                  receipt["output_sha256"] = {
+                      str(path.relative_to(output)): hashlib.sha256(path.read_bytes()).hexdigest()
+                      for path in files
+                  }
+
+                  statuses = [path for path in files if path.name == "replication_status.json"]
+                  reports = [path for path in files if path.name == "action_replication.json"]
+                  if len(statuses) == 1:
+                      receipt["runner_status"] = json.loads(
+                          statuses[0].read_text(encoding="utf-8")
+                      )
+                  if len(reports) == 1:
+                      report = json.loads(reports[0].read_text(encoding="utf-8"))
+                      receipt["replication_summary"] = {
+                          "schema": report.get("schema"),
+                          "backend": report.get("backend"),
+                          "seed_base": report.get("seed_base"),
+                          "games": report.get("games"),
+                          "case_count": report.get("case_count"),
+                          "summary": report.get("summary"),
+                      }
+
+                  runner_success = (
+                      isinstance(receipt["runner_status"], dict)
+                      and receipt["runner_status"].get("status") == "success"
+                  )
+                  summary_present = isinstance(receipt["replication_summary"], dict)
+                  if runner_success and summary_present:
+                      receipt["status"] = "success"
+                      receipt["reason"] = None
+                  else:
+                      receipt["status"] = "failure"
+                      receipt["reason"] = "Completed kernel lacked a valid result pair."
+              elif receipt["kernel_status"] == "failure":
+                  receipt["status"] = "failure"
+                  receipt["reason"] = "Kaggle replication kernel failed."
+
+          Path("action-replication-recovery.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          print(json.dumps({
+              "status": receipt["status"],
+              "kernel_status": receipt["kernel_status"],
+              "output_files": receipt["output_files"],
+              "gates": (
+                  receipt["replication_summary"].get("summary", {}).get("gates")
+                  if isinstance(receipt["replication_summary"], dict)
+                  else None
+              ),
+              "reason": receipt["reason"],
+          }, indent=2))
+          PY
+
+      - name: Publish recovered result
+        if: always()
+        run: |
+          mkdir -p reports/instella_arc/latest-action-replication-output
+          if [[ -f action-replication-recovery.json ]]; then
+            cp action-replication-recovery.json \
+              reports/instella_arc/latest-action-replication-recovery.json
+          else
+            python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+          Path("reports/instella_arc/latest-action-replication-recovery.json").write_text(
+              json.dumps({
+                  "schema": "instella_arc.action_replication_recovery.v1",
+                  "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+                  "status": "workflow_failure",
+                  "reason": "Recovery receipt was not produced."
+              }, indent=2), encoding="utf-8"
+          )
+          PY
+          fi
+
+          find reports/instella_arc/latest-action-replication-output -type f -delete
+          if [[ -d kaggle-replication-recovered ]]; then
+            while IFS= read -r -d '' file; do
+              rel="${file#kaggle-replication-recovered/}"
+              mkdir -p "reports/instella_arc/latest-action-replication-output/$(dirname "$rel")"
+              cp "$file" "reports/instella_arc/latest-action-replication-output/$rel"
+            done < <(find kaggle-replication-recovered -type f -print0)
+          fi
+
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          path = Path("reports/instella_arc/latest-action-replication-recovery.json")
+          payload = json.loads(path.read_text(encoding="utf-8"))
+          payload["github_branch"] = os.environ.get("GITHUB_REF_NAME")
+          payload["github_commit_sha"] = os.environ.get("GITHUB_SHA")
+          payload["github_run_id"] = os.environ.get("GITHUB_RUN_ID")
+          payload["github_run_attempt"] = os.environ.get("GITHUB_RUN_ATTEMPT")
+          path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/instella_arc/latest-action-replication-recovery.json \
+            reports/instella_arc/latest-action-replication-output/
+          git commit -m "Recover Instella action replication ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload recovered replication artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: instella-action-replication-recovery
+          path: |
+            reports/instella_arc/latest-action-replication-recovery.json
+            reports/instella_arc/latest-action-replication-output/
+            instella-action-replication-recovery.log
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Propagate real recovery failure
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          receipt = json.loads(
+              Path("reports/instella_arc/latest-action-replication-recovery.json").read_text()
+          )
+          if receipt.get("status") != "success":
+              raise SystemExit(1)
+          PY

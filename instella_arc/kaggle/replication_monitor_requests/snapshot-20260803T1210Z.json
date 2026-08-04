@@ -1,0 +1,7 @@
+{
+  "schema": "instella_arc.action_replication_monitor_request.v1",
+  "requested_at_utc": "2026-08-03T12:10:00Z",
+  "target_workflow": "instella-action-replication-kaggle.yml",
+  "target_kernel_slug": "instella-arc-replication-64",
+  "read_only": true
+}

@@ -1,0 +1,437 @@
+name: Instella Action QLoRA Kaggle
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [instella-arc]
+    paths:
+      - "instella_arc/kaggle/qlora_requests/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instella-action-qlora-kaggle
+  cancel-in-progress: true
+
+jobs:
+  adapt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 720
+    env:
+      KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+      KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+      KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+      KAGGLE_KERNEL_ID_SECRET: ${{ secrets.KAGGLE_KERNEL_ID }}
+      KAGGLE_KERNEL_ID_VAR: ${{ vars.KAGGLE_KERNEL_ID }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Kaggle CLI
+        run: python -m pip install --quiet --upgrade kaggle
+
+      - name: Validate explicit adaptation authorization
+        id: authorize
+        continue-on-error: true
+        run: |
+          python - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          requests = sorted(Path("instella_arc/kaggle/qlora_requests").glob("*.json"))
+          if not requests:
+              print("No QLoRA authorization request exists.")
+              sys.exit(78)
+          payload = json.loads(requests[-1].read_text(encoding="utf-8"))
+          required = {
+              "schema": "instella_arc.action_qlora_request.v1",
+              "checkpoint": "dpo",
+              "rank": 8,
+              "train_router": False,
+              "train_experts": False,
+              "external_submission": False,
+              "authorized": True,
+          }
+          mismatches = {
+              key: {"expected": value, "actual": payload.get(key)}
+              for key, value in required.items()
+              if payload.get(key) != value
+          }
+          if mismatches:
+              print(json.dumps({"status": "blocked", "mismatches": mismatches}, indent=2))
+              sys.exit(78)
+          print(json.dumps({
+              "status": "authorized",
+              "request_file": requests[-1].name,
+              "promotion_basis": payload.get("promotion_basis"),
+          }, indent=2))
+          PY
+
+      - name: Prepare private QLoRA kernel
+        id: prepare
+        if: steps.authorize.outcome == 'success'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python - <<'PY' 2>&1 | tee instella-action-qlora-dispatch.log
+          import json
+          import os
+          import shutil
+          from pathlib import Path
+
+          raw = (
+              os.environ.get("KAGGLE_KERNEL_ID_SECRET", "").strip()
+              or os.environ.get("KAGGLE_KERNEL_ID_VAR", "").strip()
+          )
+          legacy_username = os.environ.get("KAGGLE_USERNAME", "").strip()
+          owner = raw.split("/", 1)[0] if raw else legacy_username
+          current_token = bool(os.environ.get("KAGGLE_API_TOKEN", "").strip())
+          legacy_token = bool(
+              legacy_username and os.environ.get("KAGGLE_KEY", "").strip()
+          )
+          credential_present = current_token or legacy_token
+          slug = "instella-arc-action-qlora-v1"
+          status = {
+              "schema": "instella_arc.action_qlora_preparation.v1",
+              "status": "ready",
+              "credential_present": credential_present,
+              "credential_format": (
+                  "KAGGLE_API_TOKEN"
+                  if current_token
+                  else "KAGGLE_USERNAME+KAGGLE_KEY"
+                  if legacy_token
+                  else None
+              ),
+              "configured_owner_present": bool(owner),
+              "kernel_slug": slug,
+              "reason": None,
+          }
+          if not credential_present:
+              status["status"] = "blocked"
+              status["reason"] = "No Kaggle credential is configured."
+          elif not owner:
+              status["status"] = "blocked"
+              status["reason"] = "No Kaggle owner is configured."
+
+          work = Path("kaggle-qlora-kernel")
+          if work.exists():
+              shutil.rmtree(work)
+          work.mkdir()
+          shutil.copy2(
+              "instella_arc/kaggle/instella_arc_action_qlora.py",
+              work / "instella_arc_action_qlora.py",
+          )
+          if status["status"] == "ready":
+              metadata = {
+                  "id": f"{owner}/{slug}",
+                  "title": "Instella ARC Action QLoRA V1",
+                  "code_file": "instella_arc_action_qlora.py",
+                  "language": "python",
+                  "kernel_type": "script",
+                  "is_private": "true",
+                  "enable_gpu": "true",
+                  "enable_internet": "true",
+                  "machine_shape": "NvidiaTeslaT4",
+                  "dataset_sources": [],
+                  "competition_sources": [],
+                  "kernel_sources": [],
+                  "model_sources": [],
+              }
+              (work / "kernel-metadata.json").write_text(
+                  json.dumps(metadata, indent=2), encoding="utf-8"
+              )
+          Path("qlora-preparation.json").write_text(
+              json.dumps(status, indent=2), encoding="utf-8"
+          )
+          print(json.dumps(status, indent=2))
+          PY
+
+      - name: Push QLoRA kernel
+        id: push
+        if: steps.prepare.outcome == 'success'
+        continue-on-error: true
+        run: |
+          python - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          status = json.loads(Path("qlora-preparation.json").read_text())
+          if status["status"] != "ready":
+              sys.exit(78)
+          PY
+          kaggle kernels push \
+            -p kaggle-qlora-kernel \
+            --accelerator NvidiaTeslaT4 \
+            --timeout 21600 2>&1 | tee -a instella-action-qlora-dispatch.log
+
+      - name: Resolve, poll, and recover QLoRA evidence
+        id: poll
+        if: steps.push.outcome == 'success'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python - <<'PY' 2>&1 | tee -a instella-action-qlora-dispatch.log
+          import hashlib
+          import json
+          import re
+          import subprocess
+          import time
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          slug = "instella-arc-action-qlora-v1"
+          output = Path("kaggle-qlora-output")
+          output.mkdir(parents=True, exist_ok=True)
+          receipt = {
+              "schema": "instella_arc.action_qlora_dispatch.v1",
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "status": "running",
+              "kernel_slug": slug,
+              "kernel_status": "unknown",
+              "kernel_ref_resolved": False,
+              "output_files": [],
+              "output_sha256": {},
+              "qlora_status": None,
+              "promotion": None,
+              "sanitized_log_tail": "",
+              "reason": None,
+          }
+
+          actual_ref = None
+          for _ in range(30):
+              listing = subprocess.run(
+                  ["kaggle", "kernels", "list", "--mine", "--page-size", "100", "-v"],
+                  text=True,
+                  capture_output=True,
+                  timeout=180,
+              )
+              matches = sorted(set(re.findall(
+                  rf"([A-Za-z0-9_-]+/{re.escape(slug)})",
+                  listing.stdout + "\n" + listing.stderr,
+                  flags=re.IGNORECASE,
+              )))
+              if listing.returncode == 0 and len(matches) == 1:
+                  actual_ref = matches[0]
+                  break
+              time.sleep(20)
+
+          if actual_ref is None:
+              receipt["status"] = "failure"
+              receipt["reason"] = "Could not resolve one owned QLoRA kernel ref."
+          else:
+              receipt["kernel_ref_resolved"] = True
+              owner = actual_ref.split("/", 1)[0]
+              deadline = time.time() + 11 * 60 * 60
+              while time.time() < deadline:
+                  process = subprocess.run(
+                      ["kaggle", "kernels", "status", actual_ref],
+                      text=True,
+                      capture_output=True,
+                      timeout=180,
+                  )
+                  raw = (process.stdout + "\n" + process.stderr).strip()
+                  lowered = raw.lower()
+                  if process.returncode != 0:
+                      receipt["kernel_status"] = "query_failure"
+                      receipt["reason"] = "Kaggle status query failed."
+                      break
+                  if any(word in lowered for word in ("complete", "success")):
+                      receipt["kernel_status"] = "complete"
+                      break
+                  if any(word in lowered for word in ("error", "failed", "cancelled")):
+                      receipt["kernel_status"] = "failure"
+                      break
+                  receipt["kernel_status"] = "running"
+                  time.sleep(120)
+              else:
+                  receipt["kernel_status"] = "timeout"
+                  receipt["reason"] = "Timed out waiting for QLoRA kernel."
+
+              logs = subprocess.run(
+                  ["kaggle", "kernels", "logs", actual_ref],
+                  text=True,
+                  capture_output=True,
+                  timeout=180,
+              )
+              raw_log = (logs.stdout + "\n" + logs.stderr).strip()
+              sanitized = raw_log.replace(actual_ref, f"<redacted>/{slug}")
+              sanitized = re.sub(
+                  rf"(?<![A-Za-z0-9_-]){re.escape(owner)}(?![A-Za-z0-9_-])",
+                  "<redacted>",
+                  sanitized,
+                  flags=re.IGNORECASE,
+              )
+              receipt["sanitized_log_tail"] = sanitized[-30000:]
+
+              if receipt["kernel_status"] == "complete":
+                  patterns = (
+                      "qlora_status.json",
+                      "qlora_report.json",
+                      "adapter_model.safetensors",
+                      "adapter_config.json",
+                      "tokenizer_config.json",
+                      "tokenizer.json",
+                      "special_tokens_map.json",
+                      "chat_template.jinja",
+                  )
+                  for pattern in patterns:
+                      subprocess.run(
+                          [
+                              "kaggle", "kernels", "output", actual_ref,
+                              "--path", str(output),
+                              "--force", "--quiet",
+                              "--file-pattern", pattern,
+                          ],
+                          text=True,
+                          capture_output=True,
+                          timeout=900,
+                      )
+
+                  files = sorted(
+                      path for path in output.rglob("*")
+                      if path.is_file()
+                      and "instella_action_qlora" in path.parts
+                  )
+                  keep = set(files)
+                  for path in sorted(output.rglob("*"), reverse=True):
+                      if path.is_file() and path not in keep:
+                          path.unlink()
+                      elif path.is_dir():
+                          try:
+                              path.rmdir()
+                          except OSError:
+                              pass
+                  files = sorted(path for path in output.rglob("*") if path.is_file())
+                  receipt["output_files"] = [str(path.relative_to(output)) for path in files]
+                  receipt["output_sha256"] = {
+                      str(path.relative_to(output)): hashlib.sha256(path.read_bytes()).hexdigest()
+                      for path in files
+                  }
+                  statuses = [path for path in files if path.name == "qlora_status.json"]
+                  reports = [path for path in files if path.name == "qlora_report.json"]
+                  if len(statuses) == 1:
+                      receipt["qlora_status"] = json.loads(
+                          statuses[0].read_text(encoding="utf-8")
+                      )
+                  if len(reports) == 1:
+                      report = json.loads(reports[0].read_text(encoding="utf-8"))
+                      receipt["promotion"] = report.get("promotion")
+                  if (
+                      isinstance(receipt["qlora_status"], dict)
+                      and receipt["qlora_status"].get("status") == "success"
+                      and isinstance(receipt["promotion"], dict)
+                  ):
+                      receipt["status"] = "success"
+                      receipt["reason"] = None
+                  else:
+                      receipt["status"] = "failure"
+                      receipt["reason"] = "QLoRA output pair was missing or unsuccessful."
+              elif receipt["kernel_status"] == "failure":
+                  receipt["status"] = "failure"
+                  receipt["reason"] = "Kaggle QLoRA kernel failed."
+
+          Path("qlora-dispatch-status.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          print(json.dumps({
+              "status": receipt["status"],
+              "kernel_status": receipt["kernel_status"],
+              "promotion": receipt["promotion"],
+              "reason": receipt["reason"],
+          }, indent=2))
+          PY
+
+      - name: Publish QLoRA evidence
+        if: always()
+        env:
+          AUTHORIZE_OUTCOME: ${{ steps.authorize.outcome }}
+          PREPARE_OUTCOME: ${{ steps.prepare.outcome }}
+          PUSH_OUTCOME: ${{ steps.push.outcome }}
+          POLL_OUTCOME: ${{ steps.poll.outcome }}
+        run: |
+          mkdir -p reports/instella_arc/latest-action-qlora-output
+          if [[ -f qlora-dispatch-status.json ]]; then
+            cp qlora-dispatch-status.json \
+              reports/instella_arc/latest-action-qlora-dispatch.json
+          else
+            python - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+          status = "blocked" if os.environ.get("AUTHORIZE_OUTCOME") != "success" else "workflow_failure"
+          Path("reports/instella_arc/latest-action-qlora-dispatch.json").write_text(
+              json.dumps({
+                  "schema": "instella_arc.action_qlora_dispatch.v1",
+                  "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+                  "status": status,
+                  "reason": "No valid QLoRA dispatch receipt was produced."
+              }, indent=2), encoding="utf-8"
+          )
+          PY
+          fi
+
+          find reports/instella_arc/latest-action-qlora-output -type f -delete
+          if [[ -d kaggle-qlora-output ]]; then
+            while IFS= read -r -d '' file; do
+              rel="${file#kaggle-qlora-output/}"
+              mkdir -p "reports/instella_arc/latest-action-qlora-output/$(dirname "$rel")"
+              cp "$file" "reports/instella_arc/latest-action-qlora-output/$rel"
+            done < <(find kaggle-qlora-output -type f -print0)
+          fi
+
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          path = Path("reports/instella_arc/latest-action-qlora-dispatch.json")
+          payload = json.loads(path.read_text(encoding="utf-8"))
+          payload["github_branch"] = os.environ.get("GITHUB_REF_NAME")
+          payload["github_commit_sha"] = os.environ.get("GITHUB_SHA")
+          payload["github_run_id"] = os.environ.get("GITHUB_RUN_ID")
+          payload["github_run_attempt"] = os.environ.get("GITHUB_RUN_ATTEMPT")
+          payload["authorize_outcome"] = os.environ.get("AUTHORIZE_OUTCOME")
+          payload["prepare_outcome"] = os.environ.get("PREPARE_OUTCOME")
+          payload["push_outcome"] = os.environ.get("PUSH_OUTCOME")
+          payload["poll_outcome"] = os.environ.get("POLL_OUTCOME")
+          path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/instella_arc/latest-action-qlora-dispatch.json \
+            reports/instella_arc/latest-action-qlora-output/
+          git commit -m "Record Instella action QLoRA ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload complete QLoRA artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: instella-action-qlora-kaggle
+          path: |
+            reports/instella_arc/latest-action-qlora-dispatch.json
+            reports/instella_arc/latest-action-qlora-output/
+            instella-action-qlora-dispatch.log
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Propagate real QLoRA failure
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          receipt = json.loads(
+              Path("reports/instella_arc/latest-action-qlora-dispatch.json").read_text()
+          )
+          if receipt.get("status") not in {"success", "blocked"}:
+              raise SystemExit(1)
+          PY

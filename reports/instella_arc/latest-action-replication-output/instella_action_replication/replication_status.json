@@ -1,0 +1,200 @@
+{
+  "schema": "instella_arc.kaggle_action_replication.v1",
+  "started_at_utc": "2026-08-03T12:00:22.401881+00:00",
+  "status": "success",
+  "arguments": {
+    "checkpoint": "think",
+    "quantizations": [
+      "int4",
+      "int8"
+    ],
+    "seed_base": 940000,
+    "games": 64,
+    "max_context_tokens": 6144,
+    "output_dir": "/kaggle/working/instella_action_replication"
+  },
+  "checkpoint_spec": {
+    "repository_id": "amd/Instella-MoE-16B-A3B-Think",
+    "revision": "e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83"
+  },
+  "gpu_inventory": [
+    {
+      "index": 0,
+      "name": "Tesla T4",
+      "total_bytes": 15636037632,
+      "total_gib": 14.56219482421875,
+      "capability": [
+        7,
+        5
+      ],
+      "architecture": "sm_75",
+      "architecture_compiled_into_torch": true
+    },
+    {
+      "index": 1,
+      "name": "Tesla T4",
+      "total_bytes": 15636037632,
+      "total_gib": 14.56219482421875,
+      "capability": [
+        7,
+        5
+      ],
+      "architecture": "sm_75",
+      "architecture_compiled_into_torch": true
+    }
+  ],
+  "load_attempts": [
+    {
+      "quantization": "int4",
+      "repository_id": "amd/Instella-MoE-16B-A3B-Think",
+      "revision": "e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83",
+      "started_at_utc": "2026-08-03T12:00:26.894086+00:00",
+      "status": "success",
+      "backend_metadata": {
+        "checkpoint": "amd/Instella-MoE-16B-A3B-Think",
+        "quantization": "int4",
+        "dtype": "float16",
+        "revision": "e67a4a54d81b19692ec85ea1d1c777aa5c0bfd83",
+        "device_map": {
+          "model.embed_tokens": 0,
+          "model.layers.0": 0,
+          "model.layers.1": 0,
+          "model.layers.2": 0,
+          "model.layers.3": 0,
+          "model.layers.4": 0,
+          "model.layers.5": 0,
+          "model.layers.6": 0,
+          "model.layers.7": 0,
+          "model.layers.8": 0,
+          "model.layers.9": 0,
+          "model.layers.10": 0,
+          "model.layers.11": 1,
+          "model.layers.12": 1,
+          "model.layers.13": 1,
+          "model.layers.14": 1,
+          "model.layers.15": 1,
+          "model.layers.16": 1,
+          "model.layers.17": 1,
+          "model.layers.18": 1,
+          "model.layers.19": 1,
+          "model.layers.20": 1,
+          "model.layers.21": 1,
+          "model.layers.22": 1,
+          "model.layers.23": 1,
+          "model.layers.24": 1,
+          "model.layers.25": 1,
+          "model.layers.26": 1,
+          "model.norm": 1,
+          "model.rotary_emb": 1,
+          "lm_head": 1
+        },
+        "last_scoring_strategy": "shared_single_token_forward"
+      }
+    }
+  ],
+  "finished_at_utc": "2026-08-03T12:24:52.807899+00:00",
+  "report": "/kaggle/working/instella_action_replication/action_replication.json",
+  "report_sha256": "9c9180bfd9b14a09e11049e52691e74c00aeb2e449354455d6f839d4412b6aad",
+  "summary": {
+    "metrics": {
+      "calibrated_intact_truth_probability": {
+        "mean": 0.25610459756819326,
+        "median": 0.24599541917980705,
+        "minimum": 0.06805733501113076,
+        "maximum": 0.5969595732585729,
+        "bootstrap_95": [
+          0.24131028952756778,
+          0.27042419339097595
+        ],
+        "count": 256
+      },
+      "calibrated_shuffled_mode_truth_probability": {
+        "mean": 0.25532981759136203,
+        "median": 0.2519907947677611,
+        "minimum": 0.0728095123565588,
+        "maximum": 0.598740973563411,
+        "bootstrap_95": [
+          0.24181266141959845,
+          0.2687127555404424
+        ],
+        "count": 256
+      },
+      "calibrated_shuffled_original_truth_probability": {
+        "mean": 0.2547728778715955,
+        "median": 0.24796920773590117,
+        "minimum": 0.06831640030722337,
+        "maximum": 0.541096114924729,
+        "bootstrap_95": [
+          0.24060327263187004,
+          0.268696557712708
+        ],
+        "count": 256
+      },
+      "calibrated_corruption_preference_margin": {
+        "mean": 0.0005569397197664955,
+        "median": 0.008978209855312724,
+        "minimum": -0.39826583528625337,
+        "maximum": 0.4350116833386637,
+        "bootstrap_95": [
+          -0.02028054463996872,
+          0.022485832890208567
+        ],
+        "count": 256
+      },
+      "calibrated_intact_top1_accuracy": {
+        "mean": 0.2734375,
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "bootstrap_95": [
+          0.21875,
+          0.328125
+        ],
+        "count": 256
+      },
+      "calibrated_shuffled_follows_corruption_top1_accuracy": {
+        "mean": 0.2578125,
+        "median": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "bootstrap_95": [
+          0.203125,
+          0.3125
+        ],
+        "count": 256
+      }
+    },
+    "per_direction": {
+      "north": {
+        "cases": 64,
+        "intact_top1_accuracy": 0.8125,
+        "intact_truth_probability": 0.4010507767312113
+      },
+      "south": {
+        "cases": 64,
+        "intact_top1_accuracy": 0.09375,
+        "intact_truth_probability": 0.25932506851566306
+      },
+      "west": {
+        "cases": 64,
+        "intact_top1_accuracy": 0.0,
+        "intact_truth_probability": 0.11821767774587257
+      },
+      "east": {
+        "cases": 64,
+        "intact_top1_accuracy": 0.1875,
+        "intact_truth_probability": 0.2458248672800262
+      }
+    },
+    "gates": {
+      "intact_probability_above_chance": false,
+      "intact_top1_above_chance": false,
+      "corrupted_evidence_preferred_over_original": false,
+      "shuffled_world_top1_above_chance": false,
+      "no_direction_collapse": true,
+      "promote_to_frozen_goal_and_mechanics": false,
+      "promote_to_qlora": false
+    },
+    "interpretation": "Promotion here means only that the frozen checkpoint follows exact action-binding evidence across unseen synthetic worlds. It is not an ARC-AGI-3 score and does not itself authorize QLoRA."
+  }
+}

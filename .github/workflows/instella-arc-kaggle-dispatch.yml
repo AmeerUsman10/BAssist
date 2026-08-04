@@ -1,0 +1,280 @@
+name: Instella ARC Kaggle Dispatch
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [instella-arc]
+    paths:
+      - "instella_arc/kaggle/**"
+      - "instella_arc/kaggle_runner.py"
+      - ".github/workflows/instella-arc-kaggle-dispatch.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instella-arc-kaggle-dispatch
+  cancel-in-progress: false
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    env:
+      KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+      KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+      KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+      KAGGLE_KERNEL_ID_SECRET: ${{ secrets.KAGGLE_KERNEL_ID }}
+      KAGGLE_KERNEL_ID_VAR: ${{ vars.KAGGLE_KERNEL_ID }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install official Kaggle CLI
+        run: python -m pip install --quiet --upgrade kaggle
+
+      - name: Prepare authenticated private T4 kernel
+        id: prepare
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python - <<'PY' 2>&1 | tee kaggle-dispatch.log
+          import json
+          import os
+          import shutil
+          from pathlib import Path
+
+          kernel_id = (
+              os.environ.get("KAGGLE_KERNEL_ID_SECRET", "").strip()
+              or os.environ.get("KAGGLE_KERNEL_ID_VAR", "").strip()
+          )
+          username = os.environ.get("KAGGLE_USERNAME", "").strip()
+          if kernel_id and "/" not in kernel_id:
+              kernel_id = f"{kernel_id}/instella-arc-frozen-probe"
+          elif not kernel_id and username:
+              kernel_id = f"{username}/instella-arc-frozen-probe"
+
+          current_token = bool(os.environ.get("KAGGLE_API_TOKEN", "").strip())
+          legacy_token = bool(
+              username and os.environ.get("KAGGLE_KEY", "").strip()
+          )
+          status = {
+              "status": "ready",
+              "authenticated_credential_present": current_token or legacy_token,
+              "credential_format": (
+                  "KAGGLE_API_TOKEN"
+                  if current_token
+                  else "KAGGLE_USERNAME+KAGGLE_KEY"
+                  if legacy_token
+                  else None
+              ),
+              "kernel_id_present": bool(kernel_id),
+              "kernel_id": kernel_id or None,
+              "reason": None,
+          }
+          if not status["authenticated_credential_present"]:
+              status["status"] = "blocked"
+              status["reason"] = "No Kaggle API credential is configured in GitHub secrets."
+          elif not kernel_id or "/" not in kernel_id:
+              status["status"] = "blocked"
+              status["reason"] = (
+                  "Set KAGGLE_KERNEL_ID to a Kaggle username or to "
+                  "username/instella-arc-frozen-probe."
+              )
+
+          work = Path("kaggle-kernel")
+          if work.exists():
+              shutil.rmtree(work)
+          work.mkdir()
+          shutil.copy2(
+              "instella_arc/kaggle/instella_arc_kaggle.py",
+              work / "instella_arc_kaggle.py",
+          )
+          if status["status"] == "ready":
+              metadata = {
+                  "id": kernel_id,
+                  "title": "Instella ARC Frozen Probe",
+                  "code_file": "instella_arc_kaggle.py",
+                  "language": "python",
+                  "kernel_type": "script",
+                  "is_private": "true",
+                  "enable_gpu": "true",
+                  "enable_internet": "true",
+                  "machine_shape": "NvidiaTeslaT4",
+                  "dataset_sources": [],
+                  "competition_sources": [],
+                  "kernel_sources": [],
+                  "model_sources": [],
+              }
+              (work / "kernel-metadata.json").write_text(
+                  json.dumps(metadata, indent=2), encoding="utf-8"
+              )
+
+          Path("kaggle-dispatch-preparation.json").write_text(
+              json.dumps(status, indent=2), encoding="utf-8"
+          )
+          print(json.dumps(status, indent=2))
+          PY
+
+      - name: Push and run the Kaggle kernel
+        id: push
+        if: steps.prepare.outcome == 'success'
+        continue-on-error: true
+        run: |
+          python - <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+          status = json.loads(Path("kaggle-dispatch-preparation.json").read_text())
+          if status["status"] != "ready":
+              print("Kaggle dispatch is blocked; no external write attempted.")
+              sys.exit(78)
+          PY
+          kaggle kernels push \
+            -p kaggle-kernel \
+            --accelerator NvidiaTeslaT4 \
+            --timeout 21600 2>&1 | tee -a kaggle-dispatch.log
+
+      - name: Poll kernel and retrieve outputs
+        id: poll
+        if: steps.push.outcome == 'success'
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          KERNEL_ID=$(python - <<'PY'
+          import json
+          from pathlib import Path
+          print(json.loads(Path("kaggle-dispatch-preparation.json").read_text())["kernel_id"])
+          PY
+          )
+          mkdir -p kaggle-output
+          python - "$KERNEL_ID" <<'PY' 2>&1 | tee -a kaggle-dispatch.log
+          import subprocess
+          import sys
+          import time
+
+          kernel = sys.argv[1]
+          deadline = time.time() + 3 * 60 * 60
+          last = ""
+          while time.time() < deadline:
+              process = subprocess.run(
+                  ["kaggle", "kernels", "status", kernel],
+                  text=True,
+                  capture_output=True,
+              )
+              last = (process.stdout + "\n" + process.stderr).strip()
+              print(last, flush=True)
+              lowered = last.lower()
+              if any(word in lowered for word in ("complete", "success")):
+                  sys.exit(0)
+              if any(word in lowered for word in ("error", "failed", "cancelled")):
+                  sys.exit(1)
+              time.sleep(60)
+          print("Timed out while waiting for Kaggle kernel completion.")
+          sys.exit(2)
+          PY
+          kaggle kernels output "$KERNEL_ID" \
+            -p kaggle-output \
+            --force 2>&1 | tee -a kaggle-dispatch.log
+
+      - name: Write durable dispatch receipt
+        if: always()
+        env:
+          PREPARE_OUTCOME: ${{ steps.prepare.outcome }}
+          PUSH_OUTCOME: ${{ steps.push.outcome }}
+          POLL_OUTCOME: ${{ steps.poll.outcome }}
+        run: |
+          mkdir -p reports/instella_arc
+          python - <<'PY'
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          preparation_path = Path("kaggle-dispatch-preparation.json")
+          preparation = (
+              json.loads(preparation_path.read_text(encoding="utf-8"))
+              if preparation_path.exists()
+              else {"status": "failure", "reason": "preparation receipt missing"}
+          )
+          output_root = Path("kaggle-output")
+          output_files = sorted(
+              str(path.relative_to(output_root))
+              for path in output_root.rglob("*")
+              if path.is_file()
+          ) if output_root.exists() else []
+          receipt = {
+              "status": (
+                  "success"
+                  if os.environ.get("POLL_OUTCOME") == "success"
+                  else preparation.get("status", "failure")
+                  if preparation.get("status") == "blocked"
+                  else "failure"
+              ),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "prepare_outcome": os.environ.get("PREPARE_OUTCOME"),
+              "push_outcome": os.environ.get("PUSH_OUTCOME"),
+              "poll_outcome": os.environ.get("POLL_OUTCOME"),
+              "preparation": preparation,
+              "output_files": output_files,
+          }
+          report_dir = Path("reports/instella_arc")
+          (report_dir / "latest-kaggle-dispatch-status.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          log = Path("kaggle-dispatch.log")
+          if log.exists():
+              lines = log.read_text(encoding="utf-8", errors="replace").splitlines()
+              (report_dir / "latest-kaggle-dispatch-log-tail.txt").write_text(
+                  "\n".join(lines[-1000:]) + "\n", encoding="utf-8"
+              )
+          if output_root.exists():
+              destination = report_dir / "latest-kaggle-output"
+              if destination.exists():
+                  shutil.rmtree(destination)
+              shutil.copytree(output_root, destination)
+          PY
+
+      - name: Publish receipt and retrieved outputs
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/instella_arc/
+          git commit -m "Record Instella ARC Kaggle dispatch ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload dispatch artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: instella-arc-kaggle-dispatch
+          path: |
+            reports/instella_arc/
+            kaggle-output/
+            kaggle-dispatch.log
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Propagate a real dispatch failure
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          receipt = json.loads(
+              Path("reports/instella_arc/latest-kaggle-dispatch-status.json").read_text()
+          )
+          if receipt["status"] == "failure":
+              raise SystemExit(1)
+          PY

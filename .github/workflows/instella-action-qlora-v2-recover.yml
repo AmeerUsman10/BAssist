@@ -1,0 +1,297 @@
+name: Instella Action QLoRA V2 Recover
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [instella-arc]
+    paths:
+      - "instella_arc/kaggle/qlora_recovery_requests/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instella-action-qlora-v2-recover
+  cancel-in-progress: true
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 720
+    env:
+      KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+      KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+      KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install --quiet --upgrade kaggle
+
+      - name: Wait for repaired version marker and recover its evidence
+        id: recover
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python - <<'PY' 2>&1 | tee instella-action-qlora-v2-recovery.log
+          import hashlib
+          import json
+          import re
+          import subprocess
+          import time
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          slug = "instella-arc-action-qlora-v1"
+          marker = "instella_arc.action_qlora_entry"
+          output = Path("kaggle-qlora-v2-output")
+          output.mkdir(parents=True, exist_ok=True)
+          receipt = {
+              "schema": "instella_arc.action_qlora_v2_recovery.v1",
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "status": "waiting",
+              "kernel_slug": slug,
+              "kernel_ref_resolved": False,
+              "version_marker": marker,
+              "version_marker_seen": False,
+              "kernel_status": "unknown",
+              "output_files": [],
+              "output_sha256": {},
+              "qlora_status": None,
+              "promotion": None,
+              "sanitized_log_tail": "",
+              "reason": None,
+              "mutated_kaggle": False,
+          }
+
+          actual_ref = None
+          for _ in range(30):
+              listing = subprocess.run(
+                  ["kaggle", "kernels", "list", "--mine", "--page-size", "100", "-v"],
+                  text=True,
+                  capture_output=True,
+                  timeout=180,
+              )
+              refs = sorted(set(re.findall(
+                  rf"([A-Za-z0-9_-]+/{re.escape(slug)})",
+                  listing.stdout + "\n" + listing.stderr,
+                  flags=re.IGNORECASE,
+              )))
+              if listing.returncode == 0 and len(refs) == 1:
+                  actual_ref = refs[0]
+                  break
+              time.sleep(20)
+
+          if actual_ref is None:
+              receipt["status"] = "failure"
+              receipt["reason"] = "Could not resolve one owned QLoRA kernel ref."
+          else:
+              receipt["kernel_ref_resolved"] = True
+              owner = actual_ref.split("/", 1)[0]
+              deadline = time.time() + 11 * 60 * 60
+              marker_deadline = time.time() + 30 * 60
+              latest_sanitized = ""
+
+              while time.time() < deadline:
+                  status_process = subprocess.run(
+                      ["kaggle", "kernels", "status", actual_ref],
+                      text=True,
+                      capture_output=True,
+                      timeout=180,
+                  )
+                  status_raw = (
+                      status_process.stdout + "\n" + status_process.stderr
+                  ).strip()
+                  logs_process = subprocess.run(
+                      ["kaggle", "kernels", "logs", actual_ref],
+                      text=True,
+                      capture_output=True,
+                      timeout=180,
+                  )
+                  logs_raw = (
+                      logs_process.stdout + "\n" + logs_process.stderr
+                  ).strip()
+                  latest_sanitized = logs_raw.replace(
+                      actual_ref, f"<redacted>/{slug}"
+                  )
+                  latest_sanitized = re.sub(
+                      rf"(?<![A-Za-z0-9_-]){re.escape(owner)}(?![A-Za-z0-9_-])",
+                      "<redacted>",
+                      latest_sanitized,
+                      flags=re.IGNORECASE,
+                  )
+                  receipt["sanitized_log_tail"] = latest_sanitized[-40000:]
+
+                  if marker in logs_raw:
+                      receipt["version_marker_seen"] = True
+                  elif time.time() >= marker_deadline:
+                      receipt["status"] = "failure"
+                      receipt["reason"] = (
+                          "The repaired QLoRA version marker never appeared; "
+                          "only an older Kaggle version is visible."
+                      )
+                      break
+                  else:
+                      time.sleep(60)
+                      continue
+
+                  lowered = status_raw.lower()
+                  if status_process.returncode != 0:
+                      receipt["kernel_status"] = "query_failure"
+                      receipt["status"] = "failure"
+                      receipt["reason"] = "Kaggle status query failed after v2 marker."
+                      break
+                  if any(word in lowered for word in ("complete", "success")):
+                      receipt["kernel_status"] = "complete"
+                      break
+                  if any(word in lowered for word in ("error", "failed", "cancelled")):
+                      receipt["kernel_status"] = "failure"
+                      receipt["status"] = "failure"
+                      receipt["reason"] = "Repaired QLoRA Kaggle version failed."
+                      break
+                  receipt["kernel_status"] = "running"
+                  time.sleep(120)
+              else:
+                  receipt["kernel_status"] = "timeout"
+                  receipt["status"] = "failure"
+                  receipt["reason"] = "Timed out waiting for repaired QLoRA version."
+
+              if receipt["version_marker_seen"] and receipt["kernel_status"] == "complete":
+                  patterns = (
+                      "qlora_status.json",
+                      "qlora_report.json",
+                      "adapter_model.safetensors",
+                      "adapter_config.json",
+                      "tokenizer_config.json",
+                      "tokenizer.json",
+                      "special_tokens_map.json",
+                      "chat_template.jinja",
+                  )
+                  for pattern in patterns:
+                      subprocess.run(
+                          [
+                              "kaggle", "kernels", "output", actual_ref,
+                              "--path", str(output),
+                              "--force", "--quiet",
+                              "--file-pattern", pattern,
+                          ],
+                          text=True,
+                          capture_output=True,
+                          timeout=900,
+                      )
+
+                  all_files = sorted(path for path in output.rglob("*") if path.is_file())
+                  keep = {
+                      path for path in all_files
+                      if "instella_action_qlora" in path.parts
+                      and path.name in set(patterns)
+                  }
+                  for path in sorted(output.rglob("*"), reverse=True):
+                      if path.is_file() and path not in keep:
+                          path.unlink()
+                      elif path.is_dir():
+                          try:
+                              path.rmdir()
+                          except OSError:
+                              pass
+                  files = sorted(path for path in output.rglob("*") if path.is_file())
+                  receipt["output_files"] = [str(path.relative_to(output)) for path in files]
+                  receipt["output_sha256"] = {
+                      str(path.relative_to(output)): hashlib.sha256(path.read_bytes()).hexdigest()
+                      for path in files
+                  }
+                  statuses = [path for path in files if path.name == "qlora_status.json"]
+                  reports = [path for path in files if path.name == "qlora_report.json"]
+                  if len(statuses) == 1:
+                      receipt["qlora_status"] = json.loads(
+                          statuses[0].read_text(encoding="utf-8")
+                      )
+                  if len(reports) == 1:
+                      report = json.loads(reports[0].read_text(encoding="utf-8"))
+                      receipt["promotion"] = report.get("promotion")
+                  if (
+                      isinstance(receipt["qlora_status"], dict)
+                      and receipt["qlora_status"].get("status") == "success"
+                      and isinstance(receipt["promotion"], dict)
+                  ):
+                      receipt["status"] = "success"
+                      receipt["reason"] = None
+                  else:
+                      receipt["status"] = "failure"
+                      receipt["reason"] = "Completed v2 lacked a valid result pair."
+
+          Path("qlora-v2-recovery.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          print(json.dumps({
+              "status": receipt["status"],
+              "version_marker_seen": receipt["version_marker_seen"],
+              "kernel_status": receipt["kernel_status"],
+              "promotion": receipt["promotion"],
+              "reason": receipt["reason"],
+          }, indent=2))
+          PY
+
+      - name: Publish version-aware recovery
+        if: always()
+        run: |
+          mkdir -p reports/instella_arc/latest-action-qlora-output
+          if [[ -f qlora-v2-recovery.json ]]; then
+            cp qlora-v2-recovery.json \
+              reports/instella_arc/latest-action-qlora-v2-recovery.json
+          else
+            python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+          Path("reports/instella_arc/latest-action-qlora-v2-recovery.json").write_text(
+              json.dumps({
+                  "schema": "instella_arc.action_qlora_v2_recovery.v1",
+                  "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+                  "status": "workflow_failure",
+                  "reason": "Version-aware recovery receipt was not produced."
+              }, indent=2), encoding="utf-8"
+          )
+          PY
+          fi
+          find reports/instella_arc/latest-action-qlora-output -type f -delete
+          if [[ -d kaggle-qlora-v2-output ]]; then
+            while IFS= read -r -d '' file; do
+              rel="${file#kaggle-qlora-v2-output/}"
+              mkdir -p "reports/instella_arc/latest-action-qlora-output/$(dirname "$rel")"
+              cp "$file" "reports/instella_arc/latest-action-qlora-output/$rel"
+            done < <(find kaggle-qlora-v2-output -type f -print0)
+          fi
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          path = Path("reports/instella_arc/latest-action-qlora-v2-recovery.json")
+          payload = json.loads(path.read_text(encoding="utf-8"))
+          payload["github_branch"] = os.environ.get("GITHUB_REF_NAME")
+          payload["github_commit_sha"] = os.environ.get("GITHUB_SHA")
+          payload["github_run_id"] = os.environ.get("GITHUB_RUN_ID")
+          payload["github_run_attempt"] = os.environ.get("GITHUB_RUN_ATTEMPT")
+          path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/instella_arc/latest-action-qlora-v2-recovery.json \
+            reports/instella_arc/latest-action-qlora-output/
+          git commit -m "Recover Instella action QLoRA v2 ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload v2 recovery artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: instella-action-qlora-v2-recovery
+          path: |
+            reports/instella_arc/latest-action-qlora-v2-recovery.json
+            reports/instella_arc/latest-action-qlora-output/
+            instella-action-qlora-v2-recovery.log
+          if-no-files-found: warn
+          retention-days: 30

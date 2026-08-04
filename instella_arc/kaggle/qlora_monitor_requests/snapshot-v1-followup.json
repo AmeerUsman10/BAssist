@@ -1,0 +1,6 @@
+{
+  "schema": "instella_arc.action_qlora_monitor_request.v1",
+  "purpose": "Follow-up read-only snapshot of the bounded DPO rank-8 q/o-only QLoRA run.",
+  "kernel_slug": "instella-arc-action-qlora-v1",
+  "read_only": true
+}

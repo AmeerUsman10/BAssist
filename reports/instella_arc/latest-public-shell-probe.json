@@ -1,0 +1,3319 @@
+{
+  "schema": "instella_arc.public_shell_probe.v1",
+  "started_at_utc": "2026-08-03T12:59:37.710041+00:00",
+  "finished_at_utc": "2026-08-03T13:00:10.963545+00:00",
+  "operation_mode": "ONLINE",
+  "competition_mode": false,
+  "anonymous_or_environment_key": true,
+  "games_requested": [
+    "ft09",
+    "ls20"
+  ],
+  "max_actions_per_game": 80,
+  "games": [
+    {
+      "game_id": "ft09",
+      "status": "success",
+      "result": {
+        "schema": "instella_arc.toolkit_run.v1",
+        "started_at_utc": "2026-08-03T12:59:38.330825+00:00",
+        "finished_at_utc": "2026-08-03T13:00:00.868188+00:00",
+        "game_id": "ft09-0d8bbf25",
+        "terminal_state": "NOT_FINISHED",
+        "levels_completed": 0,
+        "win_levels": 6,
+        "actions": 80,
+        "max_actions": 80,
+        "controller_summary": {
+          "schema": "instella_arc.closed_loop_controller.v2",
+          "game_id": "ft09-0d8bbf25",
+          "state": "NOT_FINISHED",
+          "levels_completed": 0,
+          "level_epoch": 0,
+          "actions_this_level": 80,
+          "total_actions": 80,
+          "receipts": 80,
+          "failed_plans": 0,
+          "completed_plans": 0,
+          "active_plan_id": null,
+          "action_profiles": {
+            "ACTION6": {
+              "trials": 80,
+              "consistency": 1.0,
+              "no_change_rate": 1.0,
+              "informative_rate": 1.0,
+              "progress_rate": 0.0,
+              "translation_vectors": []
+            }
+          }
+        },
+        "trace": [
+          {
+            "step": 0,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              32,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 32
+            },
+            "source": "probe",
+            "purpose": "untried-action;untried-coordinate-in-state",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "f61483802f91fe13bed5553eec4a50ba5a7b70ba56dabca1dd2831204f23b120",
+            "elapsed_seconds": 0.20076690499999472
+          },
+          {
+            "step": 1,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              32,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 32
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "4d5bd441e9a08857f32746909434f0699e473883aa7b9d85a31fd4822a4fc4f3",
+            "elapsed_seconds": 0.4787888679999952
+          },
+          {
+            "step": 2,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              32,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 32
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "4d5bd441e9a08857f32746909434f0699e473883aa7b9d85a31fd4822a4fc4f3",
+            "elapsed_seconds": 0.7560840589999955
+          },
+          {
+            "step": 3,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              10,
+              14
+            ],
+            "api_data": {
+              "x": 14,
+              "y": 10
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "80aca73e3b5eda868cb1d0a510cc60cc3d4e51479c393c05b2b5597f47747ba6",
+            "elapsed_seconds": 0.9560593789999956
+          },
+          {
+            "step": 4,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              10,
+              14
+            ],
+            "api_data": {
+              "x": 14,
+              "y": 10
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "80aca73e3b5eda868cb1d0a510cc60cc3d4e51479c393c05b2b5597f47747ba6",
+            "elapsed_seconds": 1.2342982659999961
+          },
+          {
+            "step": 5,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              10,
+              15
+            ],
+            "api_data": {
+              "x": 15,
+              "y": 10
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "adc9504e734198774f9d11483a97a6193a08aec56893610e2d65826313c1a693",
+            "elapsed_seconds": 1.5142274229999941
+          },
+          {
+            "step": 6,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              10,
+              15
+            ],
+            "api_data": {
+              "x": 15,
+              "y": 10
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "adc9504e734198774f9d11483a97a6193a08aec56893610e2d65826313c1a693",
+            "elapsed_seconds": 1.7982771209999981
+          },
+          {
+            "step": 7,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              11,
+              14
+            ],
+            "api_data": {
+              "x": 14,
+              "y": 11
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "478103d15d64dc8d39f11290208ceaf833d196bdfe62eb140ef13964f5277cad",
+            "elapsed_seconds": 2.085064402999997
+          },
+          {
+            "step": 8,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              11,
+              14
+            ],
+            "api_data": {
+              "x": 14,
+              "y": 11
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "478103d15d64dc8d39f11290208ceaf833d196bdfe62eb140ef13964f5277cad",
+            "elapsed_seconds": 2.3689272029999984
+          },
+          {
+            "step": 9,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              11,
+              15
+            ],
+            "api_data": {
+              "x": 15,
+              "y": 11
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "d3ca3d0e7be6896135196c27802559ec0523f0b72c008344b7ff7b76b533b0bf",
+            "elapsed_seconds": 2.6551990159999974
+          },
+          {
+            "step": 10,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              11,
+              15
+            ],
+            "api_data": {
+              "x": 15,
+              "y": 11
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "d3ca3d0e7be6896135196c27802559ec0523f0b72c008344b7ff7b76b533b0bf",
+            "elapsed_seconds": 2.941182254999994
+          },
+          {
+            "step": 11,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              10,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 10
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "67c22b5b8f3af85e8c7cdce085d5da4c0e4bd0b95ccf7cec1985d3831aa7cc66",
+            "elapsed_seconds": 3.2331218639999975
+          },
+          {
+            "step": 12,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              10,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 10
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "67c22b5b8f3af85e8c7cdce085d5da4c0e4bd0b95ccf7cec1985d3831aa7cc66",
+            "elapsed_seconds": 3.4472356609999935
+          },
+          {
+            "step": 13,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              10,
+              49
+            ],
+            "api_data": {
+              "x": 49,
+              "y": 10
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "4031e226e550c3079a72f31e5c663ce8464bde774e7fe50774d7e1546008cb6d",
+            "elapsed_seconds": 3.6637091949999956
+          },
+          {
+            "step": 14,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              10,
+              49
+            ],
+            "api_data": {
+              "x": 49,
+              "y": 10
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "4031e226e550c3079a72f31e5c663ce8464bde774e7fe50774d7e1546008cb6d",
+            "elapsed_seconds": 3.8830077489999937
+          },
+          {
+            "step": 15,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              11,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 11
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3a5923dd71aafb7ee885b86386e1eacd69a3c6e3a6880ecd2ec71644136ac292",
+            "elapsed_seconds": 4.178502502999997
+          },
+          {
+            "step": 16,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              11,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 11
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "3a5923dd71aafb7ee885b86386e1eacd69a3c6e3a6880ecd2ec71644136ac292",
+            "elapsed_seconds": 4.399825825999997
+          },
+          {
+            "step": 17,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              11,
+              49
+            ],
+            "api_data": {
+              "x": 49,
+              "y": 11
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "7fe6bae75c04ab28791a01d7f37bb53e3a60093fe9dc6e8cbb06917ae0f7fa98",
+            "elapsed_seconds": 4.698724405999997
+          },
+          {
+            "step": 18,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              11,
+              49
+            ],
+            "api_data": {
+              "x": 49,
+              "y": 11
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "7fe6bae75c04ab28791a01d7f37bb53e3a60093fe9dc6e8cbb06917ae0f7fa98",
+            "elapsed_seconds": 4.9984455619999935
+          },
+          {
+            "step": 19,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              12,
+              12
+            ],
+            "api_data": {
+              "x": 12,
+              "y": 12
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "47fccfa469ec6474a78bec3ccab217d43be82c00f8c4e8a2cd85ed594c5fe3ce",
+            "elapsed_seconds": 5.223938664999999
+          },
+          {
+            "step": 20,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              12,
+              12
+            ],
+            "api_data": {
+              "x": 12,
+              "y": 12
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "47fccfa469ec6474a78bec3ccab217d43be82c00f8c4e8a2cd85ed594c5fe3ce",
+            "elapsed_seconds": 5.527079119999996
+          },
+          {
+            "step": 21,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              12,
+              13
+            ],
+            "api_data": {
+              "x": 13,
+              "y": 12
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "b1d71b5e8d1c34b0eab9718c1067ad6c60fae50d572e6287d9f785eb5c5ecb95",
+            "elapsed_seconds": 5.756430615999996
+          },
+          {
+            "step": 22,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              12,
+              13
+            ],
+            "api_data": {
+              "x": 13,
+              "y": 12
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "b1d71b5e8d1c34b0eab9718c1067ad6c60fae50d572e6287d9f785eb5c5ecb95",
+            "elapsed_seconds": 6.061029998999999
+          },
+          {
+            "step": 23,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              13,
+              12
+            ],
+            "api_data": {
+              "x": 12,
+              "y": 13
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "66c74bc31829a8d721ad3c327b8a8c72718909c7802149e94fbff3e43f2bbac3",
+            "elapsed_seconds": 6.292711849
+          },
+          {
+            "step": 24,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              13,
+              12
+            ],
+            "api_data": {
+              "x": 12,
+              "y": 13
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "66c74bc31829a8d721ad3c327b8a8c72718909c7802149e94fbff3e43f2bbac3",
+            "elapsed_seconds": 6.598597598999994
+          },
+          {
+            "step": 25,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              13,
+              13
+            ],
+            "api_data": {
+              "x": 13,
+              "y": 13
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "4a8ddec97db428bd14ead365cc029ed46e74a837a28084265654064140050b59",
+            "elapsed_seconds": 6.914633480999996
+          },
+          {
+            "step": 26,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              13,
+              13
+            ],
+            "api_data": {
+              "x": 13,
+              "y": 13
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "4a8ddec97db428bd14ead365cc029ed46e74a837a28084265654064140050b59",
+            "elapsed_seconds": 7.1518121769999965
+          },
+          {
+            "step": 27,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              12,
+              46
+            ],
+            "api_data": {
+              "x": 46,
+              "y": 12
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "4a4bb5a5fc9728bb7ddcac598e0076fa8f6c0a51b28b770e25bd1be60ca94771",
+            "elapsed_seconds": 7.4720113190000035
+          },
+          {
+            "step": 28,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              12,
+              46
+            ],
+            "api_data": {
+              "x": 46,
+              "y": 12
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "4a4bb5a5fc9728bb7ddcac598e0076fa8f6c0a51b28b770e25bd1be60ca94771",
+            "elapsed_seconds": 7.789979328000001
+          },
+          {
+            "step": 29,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              12,
+              47
+            ],
+            "api_data": {
+              "x": 47,
+              "y": 12
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "84fdf68b28aeb4a1c8b8793623fd967d1144e97d2077db63eaa1a8249468d331",
+            "elapsed_seconds": 8.108823569999998
+          },
+          {
+            "step": 30,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              12,
+              47
+            ],
+            "api_data": {
+              "x": 47,
+              "y": 12
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "84fdf68b28aeb4a1c8b8793623fd967d1144e97d2077db63eaa1a8249468d331",
+            "elapsed_seconds": 8.356476333000003
+          },
+          {
+            "step": 31,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              13,
+              46
+            ],
+            "api_data": {
+              "x": 46,
+              "y": 13
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "6a86c52b747054d2606b572bd31e4845719b39c5929f10127ab9e839a52ee7fd",
+            "elapsed_seconds": 8.676241266999995
+          },
+          {
+            "step": 32,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              13,
+              46
+            ],
+            "api_data": {
+              "x": 46,
+              "y": 13
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "6a86c52b747054d2606b572bd31e4845719b39c5929f10127ab9e839a52ee7fd",
+            "elapsed_seconds": 8.997286368999994
+          },
+          {
+            "step": 33,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              13,
+              47
+            ],
+            "api_data": {
+              "x": 47,
+              "y": 13
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "85c3a7ddc021399785d67103c8d835084c419f9d79df481469e0ca4ef16d6d5c",
+            "elapsed_seconds": 9.325807526999995
+          },
+          {
+            "step": 34,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              13,
+              47
+            ],
+            "api_data": {
+              "x": 47,
+              "y": 13
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "85c3a7ddc021399785d67103c8d835084c419f9d79df481469e0ca4ef16d6d5c",
+            "elapsed_seconds": 9.654680708
+          },
+          {
+            "step": 35,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              12,
+              50
+            ],
+            "api_data": {
+              "x": 50,
+              "y": 12
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "d3f6e2d987e373d87c857e0df2dffa45b1b468b7c3a94b1cdde604a51d115335",
+            "elapsed_seconds": 9.906467831
+          },
+          {
+            "step": 36,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              12,
+              50
+            ],
+            "api_data": {
+              "x": 50,
+              "y": 12
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "d3f6e2d987e373d87c857e0df2dffa45b1b468b7c3a94b1cdde604a51d115335",
+            "elapsed_seconds": 10.23528796699999
+          },
+          {
+            "step": 37,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              12,
+              51
+            ],
+            "api_data": {
+              "x": 51,
+              "y": 12
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "94bd0334bb2eba186c7bf9f1fdaa1c5e91991e54013bd54f233a81e3a58d319d",
+            "elapsed_seconds": 10.569866930999993
+          },
+          {
+            "step": 38,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              12,
+              51
+            ],
+            "api_data": {
+              "x": 51,
+              "y": 12
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "94bd0334bb2eba186c7bf9f1fdaa1c5e91991e54013bd54f233a81e3a58d319d",
+            "elapsed_seconds": 10.905739889000003
+          },
+          {
+            "step": 39,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              13,
+              50
+            ],
+            "api_data": {
+              "x": 50,
+              "y": 13
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "165b7c39b36c9ebb75e286538e7be395550cd6f0c9b51d49a617b84220c285ad",
+            "elapsed_seconds": 11.239394129999994
+          },
+          {
+            "step": 40,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              13,
+              50
+            ],
+            "api_data": {
+              "x": 50,
+              "y": 13
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "165b7c39b36c9ebb75e286538e7be395550cd6f0c9b51d49a617b84220c285ad",
+            "elapsed_seconds": 11.575703191999992
+          },
+          {
+            "step": 41,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              13,
+              51
+            ],
+            "api_data": {
+              "x": 51,
+              "y": 13
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "cad8f9980ddb388d830ae2698502c8fed4404b2b154fa938c44e327c46d7a03a",
+            "elapsed_seconds": 11.910003136
+          },
+          {
+            "step": 42,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              13,
+              51
+            ],
+            "api_data": {
+              "x": 51,
+              "y": 13
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "cad8f9980ddb388d830ae2698502c8fed4404b2b154fa938c44e327c46d7a03a",
+            "elapsed_seconds": 12.250371630000004
+          },
+          {
+            "step": 43,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              14,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 14
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "883afc5b6c4232666dc36400550e465b3c8b5c4371f42dc8c65800871adfe02f",
+            "elapsed_seconds": 12.588371065999993
+          },
+          {
+            "step": 44,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              14,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 14
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "883afc5b6c4232666dc36400550e465b3c8b5c4371f42dc8c65800871adfe02f",
+            "elapsed_seconds": 12.854010021999997
+          },
+          {
+            "step": 45,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              14,
+              49
+            ],
+            "api_data": {
+              "x": 49,
+              "y": 14
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "85dc08e1f14651bf995b88e6705221033d579639f7dd47c60df851d902ad02a7",
+            "elapsed_seconds": 13.121567900000002
+          },
+          {
+            "step": 46,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              14,
+              49
+            ],
+            "api_data": {
+              "x": 49,
+              "y": 14
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "85dc08e1f14651bf995b88e6705221033d579639f7dd47c60df851d902ad02a7",
+            "elapsed_seconds": 13.469108199999994
+          },
+          {
+            "step": 47,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              15,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 15
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "2e4e4a7cbc05c8dd125351762675692cca80ab1b61f828947098f6470d74ac30",
+            "elapsed_seconds": 13.814564966999995
+          },
+          {
+            "step": 48,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              15,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 15
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "2e4e4a7cbc05c8dd125351762675692cca80ab1b61f828947098f6470d74ac30",
+            "elapsed_seconds": 14.159823536999994
+          },
+          {
+            "step": 49,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              15,
+              49
+            ],
+            "api_data": {
+              "x": 49,
+              "y": 15
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "ba9dd9ed35de3672dc23ed37ace223a5eccd999b4ff1e1535082702aa8d796c1",
+            "elapsed_seconds": 14.511205149999995
+          },
+          {
+            "step": 50,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              15,
+              49
+            ],
+            "api_data": {
+              "x": 49,
+              "y": 15
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "ba9dd9ed35de3672dc23ed37ace223a5eccd999b4ff1e1535082702aa8d796c1",
+            "elapsed_seconds": 14.865204817999995
+          },
+          {
+            "step": 51,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;untried-coordinate-in-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "54b23bdaf57ff452a793860ce05e39e0c945b01599daae56b6d99aec4b1727d8",
+            "elapsed_seconds": 15.129845418999992
+          },
+          {
+            "step": 52,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              32,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 32
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "f61483802f91fe13bed5553eec4a50ba5a7b70ba56dabca1dd2831204f23b120",
+            "elapsed_seconds": 15.41764776299999
+          },
+          {
+            "step": 53,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "54b23bdaf57ff452a793860ce05e39e0c945b01599daae56b6d99aec4b1727d8",
+            "elapsed_seconds": 15.693448603999997
+          },
+          {
+            "step": 54,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              32,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 32
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "f61483802f91fe13bed5553eec4a50ba5a7b70ba56dabca1dd2831204f23b120",
+            "elapsed_seconds": 15.883007210999992
+          },
+          {
+            "step": 55,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "54b23bdaf57ff452a793860ce05e39e0c945b01599daae56b6d99aec4b1727d8",
+            "elapsed_seconds": 16.150807208999993
+          },
+          {
+            "step": 56,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              32,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 32
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "f61483802f91fe13bed5553eec4a50ba5a7b70ba56dabca1dd2831204f23b120",
+            "elapsed_seconds": 16.416640384999994
+          },
+          {
+            "step": 57,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "54b23bdaf57ff452a793860ce05e39e0c945b01599daae56b6d99aec4b1727d8",
+            "elapsed_seconds": 16.650747370999994
+          },
+          {
+            "step": 58,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              32,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 32
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "f61483802f91fe13bed5553eec4a50ba5a7b70ba56dabca1dd2831204f23b120",
+            "elapsed_seconds": 16.84300067299999
+          },
+          {
+            "step": 59,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "54b23bdaf57ff452a793860ce05e39e0c945b01599daae56b6d99aec4b1727d8",
+            "elapsed_seconds": 17.142691697999993
+          },
+          {
+            "step": 60,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              32,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 32
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "f61483802f91fe13bed5553eec4a50ba5a7b70ba56dabca1dd2831204f23b120",
+            "elapsed_seconds": 17.411634332999995
+          },
+          {
+            "step": 61,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "54b23bdaf57ff452a793860ce05e39e0c945b01599daae56b6d99aec4b1727d8",
+            "elapsed_seconds": 17.691372607999995
+          },
+          {
+            "step": 62,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              32,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 32
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "f61483802f91fe13bed5553eec4a50ba5a7b70ba56dabca1dd2831204f23b120",
+            "elapsed_seconds": 17.969517694000004
+          },
+          {
+            "step": 63,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "54b23bdaf57ff452a793860ce05e39e0c945b01599daae56b6d99aec4b1727d8",
+            "elapsed_seconds": 18.253010852000003
+          },
+          {
+            "step": 64,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              32,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 32
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "f61483802f91fe13bed5553eec4a50ba5a7b70ba56dabca1dd2831204f23b120",
+            "elapsed_seconds": 18.528287089999992
+          },
+          {
+            "step": 65,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "54b23bdaf57ff452a793860ce05e39e0c945b01599daae56b6d99aec4b1727d8",
+            "elapsed_seconds": 18.814769490000003
+          },
+          {
+            "step": 66,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              32,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 32
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "f61483802f91fe13bed5553eec4a50ba5a7b70ba56dabca1dd2831204f23b120",
+            "elapsed_seconds": 19.091230581999994
+          },
+          {
+            "step": 67,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "54b23bdaf57ff452a793860ce05e39e0c945b01599daae56b6d99aec4b1727d8",
+            "elapsed_seconds": 19.376429559
+          },
+          {
+            "step": 68,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              32,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 32
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "f61483802f91fe13bed5553eec4a50ba5a7b70ba56dabca1dd2831204f23b120",
+            "elapsed_seconds": 19.579684387
+          },
+          {
+            "step": 69,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "54b23bdaf57ff452a793860ce05e39e0c945b01599daae56b6d99aec4b1727d8",
+            "elapsed_seconds": 19.831544125999997
+          },
+          {
+            "step": 70,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              32,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 32
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "f61483802f91fe13bed5553eec4a50ba5a7b70ba56dabca1dd2831204f23b120",
+            "elapsed_seconds": 20.053105433
+          },
+          {
+            "step": 71,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "54b23bdaf57ff452a793860ce05e39e0c945b01599daae56b6d99aec4b1727d8",
+            "elapsed_seconds": 20.349521660999997
+          },
+          {
+            "step": 72,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              32,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 32
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "f61483802f91fe13bed5553eec4a50ba5a7b70ba56dabca1dd2831204f23b120",
+            "elapsed_seconds": 20.634223981999995
+          },
+          {
+            "step": 73,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "54b23bdaf57ff452a793860ce05e39e0c945b01599daae56b6d99aec4b1727d8",
+            "elapsed_seconds": 20.933521662000004
+          },
+          {
+            "step": 74,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              32,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 32
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "f61483802f91fe13bed5553eec4a50ba5a7b70ba56dabca1dd2831204f23b120",
+            "elapsed_seconds": 21.141228177000002
+          },
+          {
+            "step": 75,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "54b23bdaf57ff452a793860ce05e39e0c945b01599daae56b6d99aec4b1727d8",
+            "elapsed_seconds": 21.402465542
+          },
+          {
+            "step": 76,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              32,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 32
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "f61483802f91fe13bed5553eec4a50ba5a7b70ba56dabca1dd2831204f23b120",
+            "elapsed_seconds": 21.696306472999993
+          },
+          {
+            "step": 77,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "54b23bdaf57ff452a793860ce05e39e0c945b01599daae56b6d99aec4b1727d8",
+            "elapsed_seconds": 22.006973141000003
+          },
+          {
+            "step": 78,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              32,
+              32
+            ],
+            "api_data": {
+              "x": 32,
+              "y": 32
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "825472dcd50ee65180251006761c88eddb09d7de1ce8c87855fa665c00740b27",
+            "action_receipt_sha256": "f61483802f91fe13bed5553eec4a50ba5a7b70ba56dabca1dd2831204f23b120",
+            "elapsed_seconds": 22.226060668000002
+          },
+          {
+            "step": 79,
+            "action": "ACTION6",
+            "coordinate_row_column": [
+              46,
+              48
+            ],
+            "api_data": {
+              "x": 48,
+              "y": 46
+            },
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence;coordinate-produced-new-state;state-repetition-penalty;repeat-action-penalty",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "93c0772344e9708b75f06d6a2472664059f4e8cf2f590d15db3794dc4acd6072",
+            "action_receipt_sha256": "54b23bdaf57ff452a793860ce05e39e0c945b01599daae56b6d99aec4b1727d8",
+            "elapsed_seconds": 22.537311378
+          }
+        ]
+      },
+      "error": null
+    },
+    {
+      "game_id": "ls20",
+      "status": "success",
+      "result": {
+        "schema": "instella_arc.toolkit_run.v1",
+        "started_at_utc": "2026-08-03T13:00:01.144147+00:00",
+        "finished_at_utc": "2026-08-03T13:00:10.932250+00:00",
+        "game_id": "ls20-9607627b",
+        "terminal_state": "NOT_FINISHED",
+        "levels_completed": 0,
+        "win_levels": 7,
+        "actions": 80,
+        "max_actions": 80,
+        "controller_summary": {
+          "schema": "instella_arc.closed_loop_controller.v2",
+          "game_id": "ls20-9607627b",
+          "state": "NOT_FINISHED",
+          "levels_completed": 0,
+          "level_epoch": 0,
+          "actions_this_level": 80,
+          "total_actions": 80,
+          "receipts": 80,
+          "failed_plans": 0,
+          "completed_plans": 0,
+          "active_plan_id": null,
+          "action_profiles": {
+            "ACTION1": {
+              "trials": 36,
+              "consistency": 0.9722222222222222,
+              "no_change_rate": 0.0,
+              "informative_rate": 1.0,
+              "progress_rate": 0.0,
+              "translation_vectors": [
+                [
+                  -5,
+                  0
+                ]
+              ]
+            },
+            "ACTION2": {
+              "trials": 36,
+              "consistency": 0.9722222222222222,
+              "no_change_rate": 0.0,
+              "informative_rate": 1.0,
+              "progress_rate": 0.0,
+              "translation_vectors": [
+                [
+                  5,
+                  0
+                ]
+              ]
+            },
+            "ACTION3": {
+              "trials": 4,
+              "consistency": 1.0,
+              "no_change_rate": 0.0,
+              "informative_rate": 1.0,
+              "progress_rate": 0.0,
+              "translation_vectors": [
+                [
+                  0,
+                  -5
+                ]
+              ]
+            },
+            "ACTION4": {
+              "trials": 4,
+              "consistency": 1.0,
+              "no_change_rate": 0.0,
+              "informative_rate": 1.0,
+              "progress_rate": 0.0,
+              "translation_vectors": [
+                [
+                  0,
+                  5
+                ]
+              ]
+            }
+          }
+        },
+        "trace": [
+          {
+            "step": 0,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "untried-action;untried-coordinate-in-state",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "a8a184525bcb305f828c919457ea5d3bcee8c634b74879df342b6c29f0b48423",
+            "action_receipt_sha256": "632f3529ece077601ad37566033278ce62db2820f1e65983ef7b62599515475b",
+            "elapsed_seconds": 0.1229958149999959
+          },
+          {
+            "step": 1,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "untried-action;untried-coordinate-in-state",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "db7b90c5bff2f5d4abd9180876efb9c50cb8c82e008007ca207b244dcca1348a",
+            "action_receipt_sha256": "17a0eff5d2a72a91c1ec6f89ceabe2e627fb8aaed9f72085b70c8a3d00821aa8",
+            "elapsed_seconds": 0.2677667269999944
+          },
+          {
+            "step": 2,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "untried-action;untried-coordinate-in-state",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "c8327fe44fdb99b6a70737fe0311a0b3bfb4e173e01002b1e52e1ba8037f6297",
+            "action_receipt_sha256": "d7076bdef26b9ddc3886bd6607a0a2751b138d8c0b9177e667b0e9b501711601",
+            "elapsed_seconds": 0.4705536509999888
+          },
+          {
+            "step": 3,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "untried-action;untried-coordinate-in-state",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "285b8dce0e06683709c8a91f908180d4c4e9d4c8726fa0f43d1f89aef3b01950",
+            "action_receipt_sha256": "464e0b24ae77e22b015830feb85ad602f04a64c508f620e8226f8c225af2c044",
+            "elapsed_seconds": 0.6796083710000005
+          },
+          {
+            "step": 4,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "d16cf80fc065036ad48bd9cb3eb65e609e307d88fbd3cfe0fc8211aff1ce889a",
+            "action_receipt_sha256": "ee8d5425c2632fe31f2d7f8060922809ad420b1e12b2cbe0a44c10c79785856b",
+            "elapsed_seconds": 0.9277796889999905
+          },
+          {
+            "step": 5,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "84e596579326fca310a934f476989437544696a962552e8729b173c2ea2e5136",
+            "action_receipt_sha256": "08cbc1598e43f7f12d5c1a454e3fca226b85536c7583e629c2ca2b822b0039fb",
+            "elapsed_seconds": 1.0416045359999941
+          },
+          {
+            "step": 6,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "dcdab23c4d95890c7ffda89f9a732555c09049cb6e0f6a53d17ad2106e730621",
+            "action_receipt_sha256": "67d4ae0fdead22b1ff0bd6f9ac1380e8a5ef860a1be535be1c335da93e1d54d1",
+            "elapsed_seconds": 1.1902230939999896
+          },
+          {
+            "step": 7,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "eeb3fd167ca2bdf5cd68c2aafd5322b77fc85cc1f293da2c00083cc0b29dd562",
+            "action_receipt_sha256": "7a1465d7cae23c1f13dff52da813961d1272083131a76ad3e6183ef57bd8c6a0",
+            "elapsed_seconds": 1.3589972229999887
+          },
+          {
+            "step": 8,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "81b029af7de1bea71401958928c664a2bf192353bebd97bc4fc49949cb066797",
+            "action_receipt_sha256": "f87a2509b6f85de5f6f50d5f5c4f43249e6d72d8fc0a1b2cf07aa85adc80e092",
+            "elapsed_seconds": 1.4989048479999951
+          },
+          {
+            "step": 9,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "493f72d9a3cf1eff80ddf09c44ee15739cec7d2a6b69aa28ce20f2c70345df0c",
+            "action_receipt_sha256": "23a3af63842521e972c9e0054fa86fe4f41674c5e6b8d249a24954be11d5a0cc",
+            "elapsed_seconds": 1.6260333999999972
+          },
+          {
+            "step": 10,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "06e185237185a74852bca4b4a30570539682451b515ed774d272986ba3af0159",
+            "action_receipt_sha256": "d83882452d48ea8d8dee6fed00e684b7f1e5cdd51fbc31f1d62f2ff38d43686c",
+            "elapsed_seconds": 1.7359322399999968
+          },
+          {
+            "step": 11,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "5d53e6ce5536c0852a4ddc6f9e13964896f4393b449cbec346e2c5d5d20a9862",
+            "action_receipt_sha256": "565bac16fb876e8716bc938087e618f8f4a02ce4ddf66ab745fe228887ddee97",
+            "elapsed_seconds": 1.8615449869999878
+          },
+          {
+            "step": 12,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "441655d644fd3e19928f376c08bd8824d03c2cc0537ea601db646b0ab032467d",
+            "action_receipt_sha256": "a98752e6675fb00141379e0f182331248a3b6ae9f75147d83eb3bc38d9fdb397",
+            "elapsed_seconds": 1.97687655
+          },
+          {
+            "step": 13,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "d59c4cbb410c26a93977597e79c948fe9c9178fca68701941ed67c38d459288d",
+            "action_receipt_sha256": "a121a76e7f75fb1906e20632861bbf1a6c9acb9cb5dc69597a5a5e160e039673",
+            "elapsed_seconds": 2.0970584169999995
+          },
+          {
+            "step": 14,
+            "action": "ACTION3",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "d2624b767fc43d65aa2e4acce0d0e6e2870373b1501c25e27fc37196ab4b30db",
+            "action_receipt_sha256": "61f782689b305731f6c658c6aca2065615c7a828c305457c36fea7a61e2840f7",
+            "elapsed_seconds": 2.232933610999993
+          },
+          {
+            "step": 15,
+            "action": "ACTION4",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "2bcdd78553189d743d4257d01ed261c08f28c6894a8daba180c0334ad32f40bd",
+            "action_receipt_sha256": "a41f2f20af7031a5c7d23d2aa6f6faa45082fe4f833ccb6e468b260245aa97e9",
+            "elapsed_seconds": 2.342610707999995
+          },
+          {
+            "step": 16,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "2a63e86dc5d2052624e96e81a200d85e28328849901b3201edab87a78afff30c",
+            "action_receipt_sha256": "40871afa55fcaee2d890c5016b059aaac858babe8bcd83b0eff2413830ddc53c",
+            "elapsed_seconds": 2.4424425839999913
+          },
+          {
+            "step": 17,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "d6d852eef06fa2bd4d899afc30561a58e36d904110e841d96f94b28d5fb7752a",
+            "action_receipt_sha256": "3991f1c558580510fa3a2c1406cf99631645bd230966ef69fc1d50115ae186b9",
+            "elapsed_seconds": 2.5426735109999896
+          },
+          {
+            "step": 18,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "c71b9320df49858c5da01d5c044f90e9a34becc4a8ebe3659b11b4d3b34e11c6",
+            "action_receipt_sha256": "1a45ef8c98177fbe40d371a70f57f5211a74b8d2c4d96b47c0ac17625aaae95a",
+            "elapsed_seconds": 2.644803216999989
+          },
+          {
+            "step": 19,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "edcfcf2e024cced1a2ce292317c7ab1a64b76b3eed550d824dcbff780a01e00d",
+            "action_receipt_sha256": "7843ad818da09e26b6ceffb4f19f23cac0a7fd8536a601fa93cc9c361ad71965",
+            "elapsed_seconds": 2.7875458499999866
+          },
+          {
+            "step": 20,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "a1578be0e90466f98e3c32a16f2a4b42b2745f29aa44c5705147e3296ae0de31",
+            "action_receipt_sha256": "9081b729e39e50acaef080100cec1cca0b3f78b7c92c151651244c107b8b8b02",
+            "elapsed_seconds": 2.9328168409999904
+          },
+          {
+            "step": 21,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "afe5c079f93653b253ec3d00a2a601fad2633ac60ad5c5d0ddbd0b735cbc5e86",
+            "action_receipt_sha256": "0d6a604aa9ac488e02f77fc251275195e14c2d93de478fc774f735e286f05ea9",
+            "elapsed_seconds": 3.0311772529999956
+          },
+          {
+            "step": 22,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "702f830fe069c7fa900d296c1d0fb0eaf1a75db14bd485cb36378258d7497b65",
+            "action_receipt_sha256": "1946e2f364b1ff882677d9f9ea888efe3cb04589fb94c815f619f83ef468c4e2",
+            "elapsed_seconds": 3.13585226699999
+          },
+          {
+            "step": 23,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "9794083bc59e2d36fc02d5a4c4c8fd879cecac88b919b8fcaa6abc926c402024",
+            "action_receipt_sha256": "4e18de04cb1adce7a30afbdc09bf63d3a38aa5f46459b620db9ccb76616dc313",
+            "elapsed_seconds": 3.2771069289999986
+          },
+          {
+            "step": 24,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "56e9bf1eff0b9598e0f812ecd0ab64377ec8b8762e2343140852f9338fb572c2",
+            "action_receipt_sha256": "d3f651f99b84535df8d6cc5b683c7ee834282d17cea5eb6abbbe621539681ca4",
+            "elapsed_seconds": 3.424164265999991
+          },
+          {
+            "step": 25,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "6f6975ee6b38aee11c57028d89824f18f81951614f8facd9fd95d0e0723202ff",
+            "action_receipt_sha256": "80fc79e1b9e629c87d937e79e040126af7306a4041ae2eb9f8850a4253732551",
+            "elapsed_seconds": 3.586114436999992
+          },
+          {
+            "step": 26,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "285e99741488f1e1c8341d13596b77747dbe91aa60fe39a56df1e8ffa86629d4",
+            "action_receipt_sha256": "d61fa91ceb00f4092be47bd705ff4dadcfa585ca8e01249569da81c591536466",
+            "elapsed_seconds": 3.700545707999993
+          },
+          {
+            "step": 27,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "8eb50a97590e29d9f3e832bc08a67b288c39f30966b424aca2c79c7551d99cb5",
+            "action_receipt_sha256": "1f15e99c117c9e3548eb1611323c9d4a6f911709e34b86063078df6ecb0b9e65",
+            "elapsed_seconds": 3.808558513999998
+          },
+          {
+            "step": 28,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "e68a904f691ce16ca651276dc67faa897072e6107c54ba35d577d5827e03341d",
+            "action_receipt_sha256": "013ee652a38ef9beab7587f0b02b23df455f16f590cfe1fe71d75f4686d84a6d",
+            "elapsed_seconds": 3.9673358599999915
+          },
+          {
+            "step": 29,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "301ab5c704de1a7ee1613cbb58e699af2dfb8e47858bd4b0f676262ff55d234f",
+            "action_receipt_sha256": "5b120d6065c280ea2a9f39086ecce6c67d24b18197196b633b65cbbdc7a90453",
+            "elapsed_seconds": 4.06758756699999
+          },
+          {
+            "step": 30,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "ebe6d8b575199c3a7e5c742d29f3eeaeead53fa01a392771d339b9a119233073",
+            "action_receipt_sha256": "c880fccab0f369eaba180432dcd82a3c9dbb49bd8175e30574065a7e1e8524ff",
+            "elapsed_seconds": 4.171075433999988
+          },
+          {
+            "step": 31,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "2a033fdf769e35c932a3c5afb8920bc430b83b570ee57efa0e89ed01d2e7a8a9",
+            "action_receipt_sha256": "1858923908d1810664af637b54c8ed560959ef269c5471b1e4fa17d5cc8681c2",
+            "elapsed_seconds": 4.271951790999992
+          },
+          {
+            "step": 32,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "5fe652e2d4c832569a27c04451a581ff90f0b3cee3cc99145bcf293d810732ff",
+            "action_receipt_sha256": "a3d5424df0c1667e272ad37cf5344a18a24902dd68706e0200a14db646b11147",
+            "elapsed_seconds": 4.4159471839999895
+          },
+          {
+            "step": 33,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "b7a3cb63e01b2024197fa2a0e705cb52ecacaa13aabccd4e29e00241fd34895a",
+            "action_receipt_sha256": "d354c34396dafc875d89d41d187eee5259a24521ca9c24659ae2aff990c8d234",
+            "elapsed_seconds": 4.5607526859999865
+          },
+          {
+            "step": 34,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "5e6282a9d420c7334c29cf5439e5be6cc76de3bbc02d07dbffcb99c52ac12a07",
+            "action_receipt_sha256": "bdf67a0a0646e00fb4d4243654fdf26197eaf99178c68dbf26d855d6750cb89b",
+            "elapsed_seconds": 4.7023383389999935
+          },
+          {
+            "step": 35,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "5b8fba79ec8a990391825ee357dac92240e97db98d6b7fb91f65fc714f3151a0",
+            "action_receipt_sha256": "55e78a49b8b6e508ac2b3d3ef170eff6dc5a23647014081fae5fc5c5e3519b2c",
+            "elapsed_seconds": 4.801452841
+          },
+          {
+            "step": 36,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "371b16351f165b6cec57d34ee552369a81a6446d42543916867a5351ab27c798",
+            "action_receipt_sha256": "6a309d1d28262d0bac96ee2999de6ada0475fb4605454d44e11ff484bfa464d6",
+            "elapsed_seconds": 4.951025455999996
+          },
+          {
+            "step": 37,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "249907672d41bb0299dda70fe29dfaba0089addc257f533a68daa5062290bbcc",
+            "action_receipt_sha256": "e86297422274697152a4175afe81c04c1397762cd2939f4a4a61f6f99c60b1f2",
+            "elapsed_seconds": 5.111511536999998
+          },
+          {
+            "step": 38,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "9919676b39900517518688c443a950b6233ca377cca58135cf01e365aab78cac",
+            "action_receipt_sha256": "628dd276b91ba227ffba786095af886e2eabf2fd6b49a1ce97050371d328914f",
+            "elapsed_seconds": 5.219299956
+          },
+          {
+            "step": 39,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "dbc0a6a07e8b18c6dd91db1c09b468b62c7d91dec021c923c0f5ee22f804fd9b",
+            "action_receipt_sha256": "98ff81d43a93c25ad13abfac19f3223bd2959f0cccd2b75e0a684af17bc4b5b2",
+            "elapsed_seconds": 5.3206716349999965
+          },
+          {
+            "step": 40,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "fb90d793614fff9ae167ecfb473254eeeb57fd46469e3313250824cd10178e53",
+            "action_receipt_sha256": "6f5c855617d08dfc4da78aec5a848fbb0c78ab99e20265f2b0f11574d757f2ae",
+            "elapsed_seconds": 5.4625780119999945
+          },
+          {
+            "step": 41,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "268743f42910187d05ea61844913ea67a5acb22650af5f3f5940a6fdb2d25df2",
+            "action_receipt_sha256": "e09e49049107c9936acb1679e229d332920ca814de64dbbb8b707461de87aefc",
+            "elapsed_seconds": 5.602774782999987
+          },
+          {
+            "step": 42,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "41619272d895c7a7646a94a74aa1ba6d52419b02dd764a4a2237ab4d1f74b738",
+            "action_receipt_sha256": "da12c9d52de7ba7975df85d394e1bb0a93144a317026ee6c69ce25b05db66b63",
+            "elapsed_seconds": 5.7877959199999935
+          },
+          {
+            "step": 43,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "5945b968598a3c59eeb38f0f4c78d788df761d2bfa12774fcc98b7653f83c6c9",
+            "action_receipt_sha256": "d7002e523dfc437eb8a4d63a098e45f8c4229aa4e084ae5bdd599d29369446c0",
+            "elapsed_seconds": 5.964350058999997
+          },
+          {
+            "step": 44,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "b78918eb347509e713075f55e6dd22985f016921cba4958b28e2788f3d18c244",
+            "action_receipt_sha256": "25c486cfb5a1238c8a77bc8fd11838636401bd6bfbd2c7cb9cccb4f56c3ba125",
+            "elapsed_seconds": 6.063865249999992
+          },
+          {
+            "step": 45,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "decbe3c12b4e59af9af2a022af62aa684bad18ac35f35343f69f99cefa154c74",
+            "action_receipt_sha256": "79d9ce244e3eff149792944a60915475f00f4aefa059469c076cbc3ea702763f",
+            "elapsed_seconds": 6.209558111999996
+          },
+          {
+            "step": 46,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "34b03479e983cd35dd9b38a7b684ca9071ae263aa905c71ba7579b829cf0b516",
+            "action_receipt_sha256": "67db2fddeb5ec41a607f343f4862c17988196dd1411d1aa780cd89c3a4ef6db6",
+            "elapsed_seconds": 6.307887909999991
+          },
+          {
+            "step": 47,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "0c1747a172f6bd047141e9fd3f210536de09b2a60569134276d7803ef1dab569",
+            "action_receipt_sha256": "a52b998ae63cfcbba35e6b584e9cc4957e0ce0f4ae730c7a45fb2b1ffae5f887",
+            "elapsed_seconds": 6.411631946
+          },
+          {
+            "step": 48,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "fd88e4a0d592cadb2027b4051cb2fdf080bd4f636a71dacee2febe240ec138fe",
+            "action_receipt_sha256": "0ae29554d62ff8449916fad8853c1d2abee549a5df9a17d1445ee4954138e381",
+            "elapsed_seconds": 6.5122250390000005
+          },
+          {
+            "step": 49,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "1a32d92428710a7bb2a84e3fc555a247c132d0c50a1d40b7f3efc2b53808c6a4",
+            "action_receipt_sha256": "6e8d7d8fd72d4063cde83bb4475b9710fbb9ec690475245ddc92061c9a215c87",
+            "elapsed_seconds": 6.612521199999989
+          },
+          {
+            "step": 50,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "286fc7d5ff9f30350cd3566d3b19b785d6fe03b2b33fba8f8d645a952a1a705a",
+            "action_receipt_sha256": "acd050bb8270437d016ad1be269637fc729f0e41d3496fdd05a2ca04e243b0a5",
+            "elapsed_seconds": 6.7169113569999865
+          },
+          {
+            "step": 51,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "2ce020a2b74e97fd4bc2091188750ab009a43437cb79792d9c75f08ba95936a9",
+            "action_receipt_sha256": "f0c7e00b93b86396c345b55fb758526f6d33fd65535d210f29f0f9ec026b6aef",
+            "elapsed_seconds": 6.817606368999989
+          },
+          {
+            "step": 52,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "e148399a66abeabebfa40a473a445d21d4414174fe6366a3ad593fd31924de5e",
+            "action_receipt_sha256": "be6ad3b3a34ef7a5e4d3a621148ee31d2365b3415cb2c5e578d7ba20b8596afc",
+            "elapsed_seconds": 6.919208596999994
+          },
+          {
+            "step": 53,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "3ebc566a9e4732b570f7c21760d2f4bb47e0d213e1dfc8d85b203450a5d8c1fb",
+            "action_receipt_sha256": "ff4d90edb5663f6271e67a3926128ab85cbe2e370f38fa86d0406df6f37bc794",
+            "elapsed_seconds": 7.02361454199999
+          },
+          {
+            "step": 54,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "59e1458f3ac1f607cc3342674d39fc02d59245308402ac59ae0ec30a9986b9ce",
+            "action_receipt_sha256": "db6fe07889b99d7af0c8858ccfc2aead30656f178520caa7a84f2f9200c8cb78",
+            "elapsed_seconds": 7.13120482299999
+          },
+          {
+            "step": 55,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "037d32f0c9d6b885a8048b6228486548bb0346216893bcae1b78c5217cb9445c",
+            "action_receipt_sha256": "125b765a771838974641c77ed9cc6310540866ce16557f297c55cffbd407f26d",
+            "elapsed_seconds": 7.233423154999997
+          },
+          {
+            "step": 56,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "076887d89383aa8304a0303d2f286ada35c83d95110d9ba3b94283f5948e7f37",
+            "action_receipt_sha256": "d3b2d658f08d2a0b5c032436ef58d717afcf950909adac23dfa1010b2216d633",
+            "elapsed_seconds": 7.3767705179999865
+          },
+          {
+            "step": 57,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "dc40ffe2e13679ff03ce6f856e8888b1ed04044522a191e0fe88ff2133917d9c",
+            "action_receipt_sha256": "55231e011a76dc23f9c805ef1901acc871cc1ea34d17e90c9f23a0a528732b4f",
+            "elapsed_seconds": 7.488097089999997
+          },
+          {
+            "step": 58,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "e9836a95648aa3554d265e2667e87408c8c6dcc5c8a21833f85ac4a7ee865061",
+            "action_receipt_sha256": "84852c45f309f180a8c0bacb5812c705ab3f3b8163d21d6d64cddd90a9ae4ab3",
+            "elapsed_seconds": 7.593144456999994
+          },
+          {
+            "step": 59,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "0b4930c6f67e1733e7abf64e8954a855ae6f09bfb310621226cbce79bacca575",
+            "action_receipt_sha256": "8bc81c8b64edf3fad58a83f662e732385b98042e54f141e91f027697c795d7f9",
+            "elapsed_seconds": 7.692876870999996
+          },
+          {
+            "step": 60,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "59d387db52ef785e87bc90d0a1aeac34a10ed96dd879b703e0e153361c2b196b",
+            "action_receipt_sha256": "ffea2e02dd7f562096e01f3cc86b7e23d0083d7da1019990a24c2308cde075db",
+            "elapsed_seconds": 7.814381419
+          },
+          {
+            "step": 61,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "5f8772f346bed737d9d55f0246e0d2e019873f70c148edea1c69754a55404c91",
+            "action_receipt_sha256": "c27948e5e0930afd6b70fcb9a87a96d1d5c21563931bdb62eeaa63914ff6e9d7",
+            "elapsed_seconds": 7.915636540999998
+          },
+          {
+            "step": 62,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "a7a85589ea9202ad4defc1027257e63e2c99fd36c087fa5356578026a785b815",
+            "action_receipt_sha256": "345eda35d9701a48b76c05dc0d5977caf171ab7546cabfef7d7fb9c5719c624b",
+            "elapsed_seconds": 8.01995880199999
+          },
+          {
+            "step": 63,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "b5c298f1e19e27f0eae81c50ac0f7c8930bdff8ba2124fa7ed3c0ba3cedb5a09",
+            "action_receipt_sha256": "e4415e1b7434b57a905110721777b0963756cbfcc4a90abb9d4fc2e72503e340",
+            "elapsed_seconds": 8.122842829999996
+          },
+          {
+            "step": 64,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "29e33e7662cd84e58b861e9d733711304bd96ce687dbd394d1390b78aff90d6b",
+            "action_receipt_sha256": "1e3d4a2bfbdcb339067ff25e37b9100dd53cabde65985dc715c8f3d006e0c9de",
+            "elapsed_seconds": 8.22307254799999
+          },
+          {
+            "step": 65,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "87284a9e54fbeea4dee75207cd6b1f5661f6b2d2f5eb179dcf2702340e16a693",
+            "action_receipt_sha256": "32d52836bd44275ba55e5105999d6770fa5b6f0fbf3a5faa70e05a2e7d0d31eb",
+            "elapsed_seconds": 8.327964826999988
+          },
+          {
+            "step": 66,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "e15ccd6fa37a97601f785c2ee4e52dec58868a523adc1895b2f2be876711e999",
+            "action_receipt_sha256": "874c0a467ad1b505e20f1a39abab0996fe0ad869d6d3fa1bc0a349be6e0f87f4",
+            "elapsed_seconds": 8.432571095
+          },
+          {
+            "step": 67,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "0d3061f4f2437cb2ad20ec53a884054dccc228594fa6cc7a6fff394025a810d6",
+            "action_receipt_sha256": "27fe2ef59cee894c0382baa2bfafa01099908f48727741133b0cef297824b44e",
+            "elapsed_seconds": 8.547956635999995
+          },
+          {
+            "step": 68,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "cb2388e5f7335966a35bf7fa16062d405ca14004bb411a31a953bbb74ceeca3d",
+            "action_receipt_sha256": "297b40e567344bcedb035f70091627616c3378c4aadb047eb8bc694c63036f1f",
+            "elapsed_seconds": 8.646580680999989
+          },
+          {
+            "step": 69,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "91e5eb860c906970a8d6fc7e1d89aa6783af9f9d4038dcdfbfb6d09c869f1f64",
+            "action_receipt_sha256": "8ced333008a19c017bce88786b13218c40affdceb94681e2d1ef717cb36894cf",
+            "elapsed_seconds": 8.750172674999988
+          },
+          {
+            "step": 70,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "e10ea298fbbf4c595bdad78aab133c9daa2b39736911f4a56716b926ee6118f0",
+            "action_receipt_sha256": "b838265841a8b5511415998bb07fdc85e10c286d77592fee323e4c17d63b52d1",
+            "elapsed_seconds": 8.851261517999987
+          },
+          {
+            "step": 71,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "3c40b8ad2cb003122754a89814751e2c224c9ce36c78d9f9f78022b0074210ef",
+            "action_receipt_sha256": "75e49bad8699d07c272a3da8591c42b30bce150d3d672b19e3285eaa61cffee8",
+            "elapsed_seconds": 8.955784558999994
+          },
+          {
+            "step": 72,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "ba58a86af603fd1af9f0ac38ff5abde2fe3d25dac002e3071ac6b6f349751ac4",
+            "action_receipt_sha256": "cf5eb1e3dca52ed9862a0b85b29d03cebada7048f9f277fd0c7af7b0b63af137",
+            "elapsed_seconds": 9.054121681999987
+          },
+          {
+            "step": 73,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "195c8f91baa0ed1ad11d344c391fa515bca3fd9ba6bfb72ac458de7ad7d3d851",
+            "action_receipt_sha256": "b2b4a179058a6264842a0ee6c71717cae4e15e551d2d483c022edbcf2e77efa6",
+            "elapsed_seconds": 9.157872679999997
+          },
+          {
+            "step": 74,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "2667c883a64c562da49dbb457bfa6b74cffe8fb439eedc37fdde7321304f52df",
+            "action_receipt_sha256": "542e4d4b2d6fd48c6cc9df7e0d14158d180d49c83bc26ab6f4a0d65480024a22",
+            "elapsed_seconds": 9.257168412999988
+          },
+          {
+            "step": 75,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "1fb55721c04ce5e7a8c683101241b1672c1e1f2e2e1c21485884ac53ed407f12",
+            "action_receipt_sha256": "99f2949a95357052f1e1c8f103c2c8137e6ece92f35d131552a8b504a8d5ad67",
+            "elapsed_seconds": 9.36766867899999
+          },
+          {
+            "step": 76,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "6811f0895a1559c954e6e2ccd7a8ddf872c1ae667eb6bcf588159e6b1fca45c9",
+            "action_receipt_sha256": "74b212e0e5d91f328a7bc0244838b53e5bbb4ff848b3c2bba0c439c9f89306c6",
+            "elapsed_seconds": 9.48240715899999
+          },
+          {
+            "step": 77,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "8e63f3a05f3b1717dadd7327c878e11854fb9c58e2680d23cf3e002968b29592",
+            "action_receipt_sha256": "daaaa54984fa71f5843e5b6bb5ab94932331b91c2dbd942e062fb42ba6e511cf",
+            "elapsed_seconds": 9.58113504699999
+          },
+          {
+            "step": 78,
+            "action": "ACTION1",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "fa451dcfb816a4012319e6aa5b94c163bdd77cec58d0c8875ab072c227bd40aa",
+            "action_receipt_sha256": "0e3df3a6f2973d88170a4326665ec61c0469abd534e74aa5be7e010c9dad0a2d",
+            "elapsed_seconds": 9.68587067499999
+          },
+          {
+            "step": 79,
+            "action": "ACTION2",
+            "coordinate_row_column": null,
+            "api_data": {},
+            "source": "probe",
+            "purpose": "effect-uncertainty;coordinate-repeat-penalty;coordinate-produced-evidence",
+            "plan_id": null,
+            "expected_delta": null,
+            "levels_before": 0,
+            "levels_after": 0,
+            "state_after": "NOT_FINISHED",
+            "observation_sha256": "3813e7e5c65a95c68399f62f3a5b8bd0f36d9fcfb6ad69f6dd4a6d154614be34",
+            "action_receipt_sha256": "625e1c48f15c97c8c5440c54c5e9cf5aa749a00a483425246f5fe7e329ca345f",
+            "elapsed_seconds": 9.78807892799999
+          }
+        ]
+      },
+      "error": null
+    }
+  ],
+  "completed_levels_total": 0,
+  "scorecard": {
+    "source_url": null,
+    "tags": [
+      "wrapper",
+      "agent"
+    ],
+    "opaque": null,
+    "card_id": "e95a6e7b-077d-4091-8205-47b400fb1503",
+    "api_key": null,
+    "score": 0.0,
+    "environments": [
+      {
+        "id": "ft09-0d8bbf25",
+        "runs": [
+          {
+            "id": null,
+            "guid": "36dc3fb7-82ec-48e4-93b3-c50af884fe1a",
+            "score": 0.0,
+            "levels_completed": 0,
+            "actions": 80,
+            "resets": 0,
+            "state": "NOT_FINISHED",
+            "completed": false,
+            "level_scores": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "level_actions": [
+              80,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "level_baseline_actions": [
+              43,
+              12,
+              23,
+              28,
+              65,
+              37
+            ],
+            "number_of_levels": null,
+            "number_of_environments": 0,
+            "message": null
+          }
+        ],
+        "score": 0.0,
+        "actions": 80,
+        "levels_completed": 0,
+        "completed": false,
+        "level_count": 6,
+        "resets": 0
+      },
+      {
+        "id": "ls20-9607627b",
+        "runs": [
+          {
+            "id": null,
+            "guid": "7cf4e746-02ca-47ce-b5ec-d899cb955cbf",
+            "score": 0.0,
+            "levels_completed": 0,
+            "actions": 80,
+            "resets": 0,
+            "state": "NOT_FINISHED",
+            "completed": false,
+            "level_scores": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "level_actions": [
+              80,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "level_baseline_actions": [
+              22,
+              123,
+              73,
+              84,
+              96,
+              192,
+              186
+            ],
+            "number_of_levels": null,
+            "number_of_environments": 0,
+            "message": null
+          }
+        ],
+        "score": 0.0,
+        "actions": 80,
+        "levels_completed": 0,
+        "completed": false,
+        "level_count": 7,
+        "resets": 0
+      }
+    ],
+    "tags_scores": [
+      {
+        "id": "keyboard",
+        "guid": null,
+        "score": 0.0,
+        "levels_completed": 0,
+        "actions": 80,
+        "resets": null,
+        "state": null,
+        "completed": null,
+        "level_scores": null,
+        "level_actions": null,
+        "level_baseline_actions": null,
+        "number_of_levels": 7,
+        "number_of_environments": 1,
+        "message": null
+      }
+    ],
+    "competition_mode": false,
+    "total_environments_completed": 0,
+    "total_environments": 2,
+    "total_levels_completed": 0,
+    "total_levels": 13,
+    "total_actions": 160
+  },
+  "scope": "Public development probe of deterministic evidence/navigation shell. No competition submission and no Instella model capability claim."
+}

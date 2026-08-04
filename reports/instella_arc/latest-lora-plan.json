@@ -1,0 +1,499 @@
+{
+  "schema": "instella_arc.lora_plan.v1",
+  "recorded_at_utc": "2026-08-03T04:52:05.435163+00:00",
+  "checkpoint": {
+    "key": "dpo",
+    "repository_id": "amd/Instella-MoE-16B-A3B-DPO",
+    "revision": "ef5a850b1e5638a98b2e28cf321a6c1b63ccde39",
+    "stage": "direct preference optimization",
+    "chat_tuned": true,
+    "preferred_use": "first ARC-specific parameter-efficient tuning substrate"
+  },
+  "total_linear_modules": 5209,
+  "linear_categories": {
+    "attention": 108,
+    "dense_mlp": 30,
+    "lm_head": 1,
+    "routed_expert_mlp": 4992,
+    "shared_expert_mlp": 78
+  },
+  "plans": [
+    {
+      "name": "attention_q_o",
+      "rank": 4,
+      "module_count": 54,
+      "trainable_parameters": 884736,
+      "adapter_mib_fp16": 1.6875,
+      "training_state_mib_estimate": 10.125,
+      "target_suffixes": [
+        "o_proj",
+        "q_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "Lowest-risk first QLoRA target; router and all experts stay frozen."
+    },
+    {
+      "name": "attention_all",
+      "rank": 4,
+      "module_count": 108,
+      "trainable_parameters": 1607040,
+      "adapter_mib_fp16": 3.065185546875,
+      "training_state_mib_estimate": 18.39111328125,
+      "target_suffixes": [
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "All Gated-MLA projection matrices; router and experts stay frozen."
+    },
+    {
+      "name": "attention_plus_dense_mlp",
+      "rank": 4,
+      "module_count": 138,
+      "trainable_parameters": 2205312,
+      "adapter_mib_fp16": 4.206298828125,
+      "training_state_mib_estimate": 25.23779296875,
+      "target_suffixes": [
+        "down_proj",
+        "gate_proj",
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "Adds only non-MoE dense MLP blocks to attention adaptation."
+    },
+    {
+      "name": "attention_plus_shared_experts",
+      "rank": 4,
+      "module_count": 186,
+      "trainable_parameters": 3124608,
+      "adapter_mib_fp16": 5.959716796875,
+      "training_state_mib_estimate": 35.75830078125,
+      "target_suffixes": [
+        "down_proj",
+        "gate_proj",
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "Adapts attention and shared experts while leaving routed experts and router frozen."
+    },
+    {
+      "name": "all_projection_matrices",
+      "rank": 4,
+      "module_count": 5208,
+      "trainable_parameters": 72732288,
+      "adapter_mib_fp16": 138.725830078125,
+      "training_state_mib_estimate": 832.35498046875,
+      "target_suffixes": [
+        "down_proj",
+        "gate_proj",
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj"
+      ],
+      "includes_routed_experts": true,
+      "note": "Upper-bound plan. Usually inappropriate for a free-GPU first experiment because thousands of routed-expert adapters are created."
+    },
+    {
+      "name": "attention_q_o",
+      "rank": 8,
+      "module_count": 54,
+      "trainable_parameters": 1769472,
+      "adapter_mib_fp16": 3.375,
+      "training_state_mib_estimate": 20.25,
+      "target_suffixes": [
+        "o_proj",
+        "q_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "Lowest-risk first QLoRA target; router and all experts stay frozen."
+    },
+    {
+      "name": "attention_all",
+      "rank": 8,
+      "module_count": 108,
+      "trainable_parameters": 3214080,
+      "adapter_mib_fp16": 6.13037109375,
+      "training_state_mib_estimate": 36.7822265625,
+      "target_suffixes": [
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "All Gated-MLA projection matrices; router and experts stay frozen."
+    },
+    {
+      "name": "attention_plus_dense_mlp",
+      "rank": 8,
+      "module_count": 138,
+      "trainable_parameters": 4410624,
+      "adapter_mib_fp16": 8.41259765625,
+      "training_state_mib_estimate": 50.4755859375,
+      "target_suffixes": [
+        "down_proj",
+        "gate_proj",
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "Adds only non-MoE dense MLP blocks to attention adaptation."
+    },
+    {
+      "name": "attention_plus_shared_experts",
+      "rank": 8,
+      "module_count": 186,
+      "trainable_parameters": 6249216,
+      "adapter_mib_fp16": 11.91943359375,
+      "training_state_mib_estimate": 71.5166015625,
+      "target_suffixes": [
+        "down_proj",
+        "gate_proj",
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "Adapts attention and shared experts while leaving routed experts and router frozen."
+    },
+    {
+      "name": "all_projection_matrices",
+      "rank": 8,
+      "module_count": 5208,
+      "trainable_parameters": 145464576,
+      "adapter_mib_fp16": 277.45166015625,
+      "training_state_mib_estimate": 1664.7099609375,
+      "target_suffixes": [
+        "down_proj",
+        "gate_proj",
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj"
+      ],
+      "includes_routed_experts": true,
+      "note": "Upper-bound plan. Usually inappropriate for a free-GPU first experiment because thousands of routed-expert adapters are created."
+    },
+    {
+      "name": "attention_q_o",
+      "rank": 16,
+      "module_count": 54,
+      "trainable_parameters": 3538944,
+      "adapter_mib_fp16": 6.75,
+      "training_state_mib_estimate": 40.5,
+      "target_suffixes": [
+        "o_proj",
+        "q_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "Lowest-risk first QLoRA target; router and all experts stay frozen."
+    },
+    {
+      "name": "attention_all",
+      "rank": 16,
+      "module_count": 108,
+      "trainable_parameters": 6428160,
+      "adapter_mib_fp16": 12.2607421875,
+      "training_state_mib_estimate": 73.564453125,
+      "target_suffixes": [
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "All Gated-MLA projection matrices; router and experts stay frozen."
+    },
+    {
+      "name": "attention_plus_dense_mlp",
+      "rank": 16,
+      "module_count": 138,
+      "trainable_parameters": 8821248,
+      "adapter_mib_fp16": 16.8251953125,
+      "training_state_mib_estimate": 100.951171875,
+      "target_suffixes": [
+        "down_proj",
+        "gate_proj",
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "Adds only non-MoE dense MLP blocks to attention adaptation."
+    },
+    {
+      "name": "attention_plus_shared_experts",
+      "rank": 16,
+      "module_count": 186,
+      "trainable_parameters": 12498432,
+      "adapter_mib_fp16": 23.8388671875,
+      "training_state_mib_estimate": 143.033203125,
+      "target_suffixes": [
+        "down_proj",
+        "gate_proj",
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj"
+      ],
+      "includes_routed_experts": false,
+      "note": "Adapts attention and shared experts while leaving routed experts and router frozen."
+    },
+    {
+      "name": "all_projection_matrices",
+      "rank": 16,
+      "module_count": 5208,
+      "trainable_parameters": 290929152,
+      "adapter_mib_fp16": 554.9033203125,
+      "training_state_mib_estimate": 3329.419921875,
+      "target_suffixes": [
+        "down_proj",
+        "gate_proj",
+        "kv_a_proj_with_mqa",
+        "kv_b_proj",
+        "o_proj",
+        "q_proj",
+        "up_proj"
+      ],
+      "includes_routed_experts": true,
+      "note": "Upper-bound plan. Usually inappropriate for a free-GPU first experiment because thousands of routed-expert adapters are created."
+    }
+  ],
+  "router_policy": {
+    "train_router": false,
+    "reason": "The initial ARC adaptation isolates representation learning. Router parameters and load-balancing behavior remain frozen until an attention-only adapter passes locked evidence controls."
+  },
+  "representative_modules": [
+    {
+      "name": "model.layers.0.self_attn.q_proj",
+      "suffix": "q_proj",
+      "in_features": 2048,
+      "out_features": 2048,
+      "category": "attention"
+    },
+    {
+      "name": "model.layers.0.self_attn.kv_a_proj_with_mqa",
+      "suffix": "kv_a_proj_with_mqa",
+      "in_features": 2048,
+      "out_features": 544,
+      "category": "attention"
+    },
+    {
+      "name": "model.layers.0.self_attn.kv_b_proj",
+      "suffix": "kv_b_proj",
+      "in_features": 512,
+      "out_features": 3584,
+      "category": "attention"
+    },
+    {
+      "name": "model.layers.0.self_attn.o_proj",
+      "suffix": "o_proj",
+      "in_features": 2048,
+      "out_features": 2048,
+      "category": "attention"
+    },
+    {
+      "name": "model.layers.0.self_attn.gate_proj",
+      "suffix": "gate_proj",
+      "in_features": 2048,
+      "out_features": 2048,
+      "category": "dense_mlp"
+    },
+    {
+      "name": "model.layers.0.mlp.gate_proj",
+      "suffix": "gate_proj",
+      "in_features": 2048,
+      "out_features": 10944,
+      "category": "dense_mlp"
+    },
+    {
+      "name": "model.layers.0.mlp.up_proj",
+      "suffix": "up_proj",
+      "in_features": 2048,
+      "out_features": 10944,
+      "category": "dense_mlp"
+    },
+    {
+      "name": "model.layers.0.mlp.down_proj",
+      "suffix": "down_proj",
+      "in_features": 10944,
+      "out_features": 2048,
+      "category": "dense_mlp"
+    },
+    {
+      "name": "model.layers.1.self_attn.q_proj",
+      "suffix": "q_proj",
+      "in_features": 2048,
+      "out_features": 2048,
+      "category": "attention"
+    },
+    {
+      "name": "model.layers.1.self_attn.kv_a_proj_with_mqa",
+      "suffix": "kv_a_proj_with_mqa",
+      "in_features": 2048,
+      "out_features": 544,
+      "category": "attention"
+    },
+    {
+      "name": "model.layers.1.self_attn.kv_b_proj",
+      "suffix": "kv_b_proj",
+      "in_features": 512,
+      "out_features": 3584,
+      "category": "attention"
+    },
+    {
+      "name": "model.layers.1.self_attn.o_proj",
+      "suffix": "o_proj",
+      "in_features": 2048,
+      "out_features": 2048,
+      "category": "attention"
+    },
+    {
+      "name": "model.layers.1.self_attn.gate_proj",
+      "suffix": "gate_proj",
+      "in_features": 2048,
+      "out_features": 2048,
+      "category": "dense_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.0.gate_proj",
+      "suffix": "gate_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.0.up_proj",
+      "suffix": "up_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.0.down_proj",
+      "suffix": "down_proj",
+      "in_features": 1408,
+      "out_features": 2048,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.1.gate_proj",
+      "suffix": "gate_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.1.up_proj",
+      "suffix": "up_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.1.down_proj",
+      "suffix": "down_proj",
+      "in_features": 1408,
+      "out_features": 2048,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.2.gate_proj",
+      "suffix": "gate_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.2.up_proj",
+      "suffix": "up_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.2.down_proj",
+      "suffix": "down_proj",
+      "in_features": 1408,
+      "out_features": 2048,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.3.gate_proj",
+      "suffix": "gate_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.3.up_proj",
+      "suffix": "up_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.3.down_proj",
+      "suffix": "down_proj",
+      "in_features": 1408,
+      "out_features": 2048,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.4.gate_proj",
+      "suffix": "gate_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.4.up_proj",
+      "suffix": "up_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.4.down_proj",
+      "suffix": "down_proj",
+      "in_features": 1408,
+      "out_features": 2048,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.5.gate_proj",
+      "suffix": "gate_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    },
+    {
+      "name": "model.layers.1.mlp.experts.5.up_proj",
+      "suffix": "up_proj",
+      "in_features": 2048,
+      "out_features": 1408,
+      "category": "routed_expert_mlp"
+    }
+  ]
+}

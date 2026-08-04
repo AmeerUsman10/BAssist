@@ -1,0 +1,8 @@
+{
+  "schema": "instella_arc.action_qlora_v2_recovery_request.v1",
+  "kernel_slug": "instella-arc-action-qlora-v1",
+  "required_log_marker": "instella_arc.action_qlora_entry",
+  "expected_request": "action-dpo-r8-v2-router-dtype.json",
+  "resubmit": false,
+  "read_only_kaggle": true
+}

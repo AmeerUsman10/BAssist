@@ -17,9 +17,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import hashlib
-from typing import Any, Iterable, Sequence
+import re
+from typing import Any
 
-from .codec import Grid, encode_delta, encode_grid, normalize_grid
+from .codec import Grid, normalize_grid
+from .codec_text import encode_delta_text, encode_grid
 
 
 class OfficialObservationError(ValueError):
@@ -31,6 +33,44 @@ def _enum_text(value: Any) -> str:
         return "UNKNOWN"
     name = getattr(value, "name", None)
     return str(name) if name is not None else str(value)
+
+
+def _action_text(value: Any) -> str:
+    """Canonicalize toolkit action IDs and enum values to ``ACTIONN``/``RESET``.
+
+    Depending on the serialization layer, ``available_actions`` may contain
+    ``GameAction`` enums, integer IDs, digit strings, or strings such as
+    ``GameAction.ACTION4``. The environment's executable action space uses enum
+    names, so the observation adapter must not leak the transport representation
+    into the controller.
+    """
+
+    name = getattr(value, "name", None)
+    if name is not None:
+        text = str(name).upper()
+    elif isinstance(value, bool):
+        raise OfficialObservationError("boolean is not a valid game action")
+    elif isinstance(value, int):
+        text = str(value)
+    else:
+        text = str(value).strip().upper()
+
+    if "." in text:
+        text = text.rsplit(".", 1)[-1]
+    if text == "RESET":
+        return "RESET"
+    if text.isdigit():
+        action_id = int(text)
+        if action_id == 0:
+            return "RESET"
+        if 1 <= action_id <= 7:
+            return f"ACTION{action_id}"
+        raise OfficialObservationError(f"action id must be in 0..7: {action_id}")
+    match = re.fullmatch(r"A(?:CTION)?([0-7])", text)
+    if match:
+        action_id = int(match.group(1))
+        return "RESET" if action_id == 0 else f"ACTION{action_id}"
+    raise OfficialObservationError(f"unrecognized game action: {value!r}")
 
 
 def _to_nested_lists(value: Any) -> Any:
@@ -89,7 +129,7 @@ def _available_actions(value: Any) -> tuple[str, ...]:
         items = value
     else:
         items = (value,)
-    return tuple(sorted({_enum_text(item) for item in items}))
+    return tuple(sorted({_action_text(item) for item in items}))
 
 
 @dataclass(frozen=True)
@@ -147,7 +187,7 @@ class OfficialFrameSequence:
     @property
     def animation_deltas(self) -> tuple[str, ...]:
         return tuple(
-            encode_delta(before, after)
+            encode_delta_text(before, after)
             for before, after in zip(
                 self.rendered_frames,
                 self.rendered_frames[1:],
@@ -160,7 +200,7 @@ class OfficialFrameSequence:
         return hashlib.sha256(self.canonical_text().encode("utf-8")).hexdigest()
 
     def canonical_text(self) -> str:
-        """Return a reversible, stable textual record for GPT-2 or evidence logs."""
+        """Return a reversible, stable textual record for model input or logs."""
 
         actions = ",".join(self.available_actions) or "-"
         metadata = (
@@ -175,7 +215,7 @@ class OfficialFrameSequence:
             if index > 0:
                 lines.append(
                     f"ANIMATION_DELTA {index - 1}->{index} "
-                    f"{encode_delta(self.rendered_frames[index - 1], grid)}"
+                    f"{encode_delta_text(self.rendered_frames[index - 1], grid)}"
                 )
         lines.append("END_OFFICIAL_FRAME_SEQUENCE")
         return "\n".join(lines)
@@ -195,7 +235,7 @@ class OfficialActionTransition:
     def persistent_delta(self) -> str | None:
         if self.before_final is None or self.after_final is None:
             return None
-        return encode_delta(self.before_final, self.after_final)
+        return encode_delta_text(self.before_final, self.after_final)
 
     def canonical_text(self) -> str:
         lines = [f"OFFICIAL_ACTION {self.action}"]
@@ -221,7 +261,7 @@ def action_transition(
 
     current = OfficialFrameSequence.from_frame_data(current_frame_data)
     return OfficialActionTransition(
-        action=_enum_text(action),
+        action=_action_text(action),
         before_final=previous.final_grid if previous is not None else None,
         observation=current,
     )

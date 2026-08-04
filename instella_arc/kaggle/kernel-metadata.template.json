@@ -1,0 +1,15 @@
+{
+  "id": "__KAGGLE_USERNAME__/instella-arc-frozen-probe",
+  "title": "Instella ARC Frozen Probe",
+  "code_file": "instella_arc_kaggle.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": "true",
+  "enable_gpu": "true",
+  "enable_internet": "true",
+  "machine_shape": "NvidiaTeslaT4",
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}

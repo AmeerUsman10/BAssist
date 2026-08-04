@@ -1,0 +1,11 @@
+{
+  "schema": "instella_arc.public_shell_probe_request.v1",
+  "games": ["ft09", "ls20"],
+  "seed": 0,
+  "max_actions_per_game": 80,
+  "competition_mode": false,
+  "external_submission": false,
+  "model_loaded": false,
+  "fix_basis": "Canonicalize numeric available_actions IDs to executable GameAction enum names.",
+  "previous_run_id": "30814362857"
+}

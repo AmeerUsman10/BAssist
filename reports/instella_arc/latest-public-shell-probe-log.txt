@@ -1,0 +1,31 @@
+INFO:arc_agi.scorecard:Initialized ScorecardManager with idle_for=0:15:00 and max_open_for=3 days, 0:00:00
+2026-08-03 12:59:37 | INFO | Got anonymous API key: 3efa5925-f8b1-4385-83a4-8056c32b7296
+2026-08-03 12:59:37 | INFO | You can register for an API key at https://three.arcprize.org
+2026-08-03 12:59:38 | INFO | Successfully fetched 25 environment(s) from API
+2026-08-03 12:59:38 | INFO | Created new scorecard: e95a6e7b-077d-4091-8205-47b400fb1503
+2026-08-03 12:59:38 | INFO | Successfully fetched metadata for game ft09
+2026-08-03 12:59:38 | INFO | Successfully reset game ft09-0d8bbf25, guid=36dc3fb7-82ec-48e4-93b3-c50af884fe1a, scorecard_id=e95a6e7b-077d-4091-8205-47b400fb1503
+2026-08-03 13:00:00 | INFO | Successfully fetched metadata for game ls20
+2026-08-03 13:00:01 | INFO | Successfully reset game ls20-9607627b, guid=7cf4e746-02ca-47ce-b5ec-d899cb955cbf, scorecard_id=e95a6e7b-077d-4091-8205-47b400fb1503
+2026-08-03 13:00:10 | INFO | Closed scorecard: e95a6e7b-077d-4091-8205-47b400fb1503
+{
+  "output": "outputs/instella_arc/public-shell-probe.json",
+  "sha256": "9afd5d17829a747f4e1eb73cb3be9554c93dd819a39e3e9d075f5b36badc867c",
+  "completed_levels_total": 0,
+  "games": [
+    {
+      "game_id": "ft09",
+      "status": "success",
+      "levels_completed": 0,
+      "actions": 80,
+      "error": null
+    },
+    {
+      "game_id": "ls20",
+      "status": "success",
+      "levels_completed": 0,
+      "actions": 80,
+      "error": null
+    }
+  ]
+}

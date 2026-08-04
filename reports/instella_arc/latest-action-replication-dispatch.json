@@ -1,0 +1,21 @@
+{
+  "schema": "instella_arc.action_replication_dispatch.v1",
+  "recorded_at_utc": "2026-08-03T11:59:56.670273+00:00",
+  "status": "failure",
+  "kernel_slug": "instella-arc-replication-64",
+  "kernel_ref_resolved": false,
+  "kernel_status": "unknown",
+  "output_files": [],
+  "output_sha256": {},
+  "runner_status": null,
+  "replication_summary": null,
+  "sanitized_log_tail": "",
+  "reason": "Could not resolve one owned replication kernel ref.",
+  "github_branch": "instella-arc",
+  "github_commit_sha": "778f482c54e352e619427d78a74bec3690b7aa9f",
+  "github_run_id": "30811718806",
+  "github_run_attempt": "1",
+  "prepare_outcome": "success",
+  "push_outcome": "success",
+  "poll_outcome": "success"
+}

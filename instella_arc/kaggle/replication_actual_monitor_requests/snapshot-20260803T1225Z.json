@@ -1,0 +1,6 @@
+{
+  "schema": "instella_arc.action_replication_actual_monitor_request.v1",
+  "requested_at_utc": "2026-08-03T12:25:00Z",
+  "kernel_slug": "instella-arc-action-replication-64",
+  "read_only": true
+}

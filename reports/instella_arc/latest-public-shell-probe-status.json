@@ -1,0 +1,30 @@
+{
+  "schema": "instella_arc.public_shell_probe_receipt.v1",
+  "status": "success",
+  "recorded_at_utc": "2026-08-03T13:00:11.105097+00:00",
+  "branch": "instella-arc",
+  "commit_sha": "1bab9ce6ed3d5f7dbfa5f65ebf7bfa29cb9de56c",
+  "run_id": "30815860755",
+  "run_attempt": "1",
+  "report_present": true,
+  "report_sha256": "9afd5d17829a747f4e1eb73cb3be9554c93dd819a39e3e9d075f5b36badc867c",
+  "competition_mode": false,
+  "external_submission": false,
+  "completed_levels_total": 0,
+  "game_summary": [
+    {
+      "game_id": "ft09",
+      "status": "success",
+      "levels_completed": 0,
+      "actions": 80,
+      "error": null
+    },
+    {
+      "game_id": "ls20",
+      "status": "success",
+      "levels_completed": 0,
+      "actions": 80,
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,230 @@
+name: Instella ARC Kaggle Discovery
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [instella-arc]
+    paths:
+      - ".github/workflows/instella-arc-kaggle-discovery.yml"
+      - "instella_arc/kaggle/discovery/**"
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: instella-arc-kaggle-discovery
+  cancel-in-progress: true
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+      KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+      KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+      GH_READ_TOKEN: ${{ github.token }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install official Kaggle CLI
+        run: python -m pip install --quiet --upgrade kaggle
+
+      - name: Resolve the actual private kernel ref and status
+        id: discover
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          python - <<'PY'
+          import json
+          import os
+          import re
+          import subprocess
+          from datetime import datetime, timezone
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+
+          slug = "instella-arc-frozen-probe"
+          report = {
+              "schema": "instella_arc.kaggle_discovery.v1",
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "list_exit_code": None,
+              "kernel_match_count": 0,
+              "kernel_ref_resolved": False,
+              "kernel_slug": slug,
+              "status": "unknown",
+              "status_exit_code": None,
+              "sanitized_status_output": "",
+              "reason": None,
+              "mutated_kaggle": False,
+              "github_dispatch": {"latest": None, "recent_runs": []},
+          }
+
+          listing = subprocess.run(
+              ["kaggle", "kernels", "list", "--mine", "--page-size", "100", "-v"],
+              text=True,
+              capture_output=True,
+              timeout=180,
+          )
+          combined_listing = (listing.stdout + "\n" + listing.stderr).strip()
+          report["list_exit_code"] = listing.returncode
+
+          # The CLI's CSV includes full owner/kernel refs. Resolve only the exact
+          # target slug, keep the owner in memory, and never write it to disk.
+          matches = sorted(set(re.findall(
+              rf"([A-Za-z0-9_-]+/{re.escape(slug)})",
+              combined_listing,
+              flags=re.IGNORECASE,
+          )))
+          report["kernel_match_count"] = len(matches)
+          report["kernel_ref_resolved"] = len(matches) == 1
+
+          if listing.returncode != 0:
+              report["status"] = "list_failure"
+              report["reason"] = "Kaggle CLI could not list the authenticated account's kernels."
+          elif not matches:
+              report["status"] = "not_found"
+              report["reason"] = "No owned kernel with the target slug is visible yet."
+          elif len(matches) > 1:
+              report["status"] = "ambiguous"
+              report["reason"] = "More than one owned kernel matched the target slug."
+          else:
+              actual_ref = matches[0]
+              owner = actual_ref.split("/", 1)[0]
+              status_process = subprocess.run(
+                  ["kaggle", "kernels", "status", actual_ref],
+                  text=True,
+                  capture_output=True,
+                  timeout=180,
+              )
+              raw_status = (status_process.stdout + "\n" + status_process.stderr).strip()
+              sanitized = raw_status.replace(actual_ref, f"<redacted>/{slug}")
+              sanitized = re.sub(
+                  rf"(?<![A-Za-z0-9_-]){re.escape(owner)}(?![A-Za-z0-9_-])",
+                  "<redacted>",
+                  sanitized,
+                  flags=re.IGNORECASE,
+              )
+              report["status_exit_code"] = status_process.returncode
+              report["sanitized_status_output"] = sanitized[-4000:]
+              lowered = raw_status.lower()
+              if status_process.returncode != 0:
+                  report["status"] = "status_query_failure"
+                  report["reason"] = "The resolved owned kernel could not be queried."
+              elif any(word in lowered for word in ("complete", "success")):
+                  report["status"] = "complete"
+              elif any(word in lowered for word in ("running", "queued", "pending")):
+                  report["status"] = "running"
+              elif any(word in lowered for word in ("error", "failed", "cancelled")):
+                  report["status"] = "failure"
+              else:
+                  report["status"] = "unknown"
+                  report["reason"] = "The resolved kernel returned an unrecognized status."
+
+          # Also capture the exact GitHub dispatch queue to identify duplicate runs.
+          repository = os.environ["GITHUB_REPOSITORY"]
+          url = (
+              f"https://api.github.com/repos/{repository}/actions/workflows/"
+              "instella-arc-kaggle-dispatch.yml/runs"
+              "?branch=instella-arc&per_page=10"
+          )
+          request = Request(
+              url,
+              headers={
+                  "Accept": "application/vnd.github+json",
+                  "Authorization": f"Bearer {os.environ['GH_READ_TOKEN']}",
+                  "X-GitHub-Api-Version": "2022-11-28",
+                  "User-Agent": "BAssist-Instella-Discovery",
+              },
+          )
+          with urlopen(request, timeout=60) as response:
+              actions_payload = json.load(response)
+          recent = []
+          for run in actions_payload.get("workflow_runs", []):
+              recent.append({
+                  "id": run.get("id"),
+                  "status": run.get("status"),
+                  "conclusion": run.get("conclusion"),
+                  "head_sha": run.get("head_sha"),
+                  "run_number": run.get("run_number"),
+                  "created_at": run.get("created_at"),
+                  "updated_at": run.get("updated_at"),
+                  "html_url": run.get("html_url"),
+              })
+          report["github_dispatch"] = {
+              "latest": recent[0] if recent else None,
+              "recent_runs": recent,
+          }
+
+          output = Path("outputs/instella_arc")
+          output.mkdir(parents=True, exist_ok=True)
+          (output / "kaggle-discovery-status.json").write_text(
+              json.dumps(report, indent=2), encoding="utf-8"
+          )
+          print(json.dumps({
+              "kernel_match_count": report["kernel_match_count"],
+              "kernel_ref_resolved": report["kernel_ref_resolved"],
+              "status": report["status"],
+              "reason": report["reason"],
+              "dispatch_latest": report["github_dispatch"]["latest"],
+          }, indent=2))
+          PY
+
+      - name: Publish redacted discovery receipt
+        if: always()
+        run: |
+          mkdir -p reports/instella_arc
+          if [[ -f outputs/instella_arc/kaggle-discovery-status.json ]]; then
+            cp outputs/instella_arc/kaggle-discovery-status.json \
+              reports/instella_arc/latest-kaggle-discovery-status.json
+          else
+            python - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+          Path("reports/instella_arc/latest-kaggle-discovery-status.json").write_text(
+              json.dumps({
+                  "schema": "instella_arc.kaggle_discovery.v1",
+                  "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+                  "status": "workflow_failure",
+                  "reason": "Discovery output was not produced.",
+                  "mutated_kaggle": False,
+              }, indent=2),
+              encoding="utf-8",
+          )
+          PY
+          fi
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          path = Path("reports/instella_arc/latest-kaggle-discovery-status.json")
+          payload = json.loads(path.read_text(encoding="utf-8"))
+          payload["github_branch"] = os.environ.get("GITHUB_REF_NAME")
+          payload["github_commit_sha"] = os.environ.get("GITHUB_SHA")
+          payload["github_run_id"] = os.environ.get("GITHUB_RUN_ID")
+          payload["github_run_attempt"] = os.environ.get("GITHUB_RUN_ATTEMPT")
+          path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/instella_arc/latest-kaggle-discovery-status.json
+          git commit -m "Record Instella ARC Kaggle discovery ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload discovery artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: instella-arc-kaggle-discovery
+          path: reports/instella_arc/latest-kaggle-discovery-status.json
+          if-no-files-found: warn
+          retention-days: 7

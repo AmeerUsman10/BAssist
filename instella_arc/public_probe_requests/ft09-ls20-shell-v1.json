@@ -1,0 +1,10 @@
+{
+  "schema": "instella_arc.public_shell_probe_request.v1",
+  "games": ["ft09", "ls20"],
+  "seed": 0,
+  "max_actions_per_game": 80,
+  "competition_mode": false,
+  "external_submission": false,
+  "model_loaded": false,
+  "purpose": "Measure the exact evidence/probe/navigation shell before adding Instella plan ranking."
+}
