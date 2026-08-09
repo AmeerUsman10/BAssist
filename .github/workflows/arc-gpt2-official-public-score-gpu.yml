@@ -36,7 +36,7 @@ concurrency:
 
 env:
   EXPECTED_BRANCH: arc-gpt2-official-score-v1
-  AUTHORIZED_PARENT_SHA: "__AUTHORIZED_PARENT_SHA__"
+  AUTHORIZED_PARENT_SHA: "ef23652e127298fd0a3c09949ec18b3ba01a8773"
   PUSH_LAUNCH_MARKER: "[run-kaggle-official-public-score-v1]"
 
 jobs:
