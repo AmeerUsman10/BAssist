@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 from dataclasses import dataclass
 from enum import Enum
 import json
@@ -24,6 +25,7 @@ from arcgpt2.official_public_score import (
     run_one_game,
     sanitize_scorecard,
     validate_environment_ids,
+    validate_scorecard_consistency,
     validate_sdk_version,
 )
 
@@ -41,8 +43,9 @@ class OperationMode(Enum):
 
 class GameState(Enum):
     IN_PROGRESS = 1
-    GAME_OVER = 2
-    WIN = 3
+    NOT_FINISHED = 2
+    GAME_OVER = 3
+    WIN = 4
 
 
 @dataclass(frozen=True)
@@ -101,6 +104,12 @@ class FakeEnvironment:
             raise RuntimeError(f"{REGISTERED_SECRET} {CARD_SECRET}")
         if self.behavior == "loop":
             return self.observation_space
+        if self.behavior == "sticky_game_over":
+            if self.reset_calls == 0:
+                self.observation_space = _frame(
+                    self.game_id, state=GameState.GAME_OVER
+                )
+            return self.observation_space
         if self.behavior == "reset_then_win" and len(self.step_calls) == 1:
             self.observation_space = _frame(
                 self.game_id, state=GameState.GAME_OVER
@@ -121,8 +130,13 @@ class FakeEnvironment:
 
     def reset(self):
         self.reset_calls += 1
-        if self.behavior == "reset_then_win":
-            self.observation_space = _frame(self.game_id)
+        if self.behavior in {"reset_then_win", "sticky_game_over"}:
+            state = (
+                GameState.NOT_FINISHED
+                if self.behavior == "sticky_game_over"
+                else GameState.IN_PROGRESS
+            )
+            self.observation_space = _frame(self.game_id, state=state)
         return self.observation_space
 
 
@@ -135,6 +149,14 @@ class RawScorecard:
         environments: list[dict[str, Any]] = []
         for game_id, environment in self.owner.environments.items():
             state = environment.observation_space.state.name
+            if (
+                environment.behavior == "sticky_game_over"
+                and environment.reset_calls > 0
+                and state == "NOT_FINISHED"
+            ):
+                # Exact arc-agi 0.9.9 Card regression: reset increments
+                # counters, but NOT_FINISHED does not clear GAME_OVER.
+                state = "GAME_OVER"
             completed = state == "WIN"
             actions = len(environment.step_calls) + environment.reset_calls
             resets = environment.reset_calls
@@ -800,6 +822,76 @@ def test_reset_counters_match_scorecard_and_action_identity() -> None:
     assert scorecard_run["resets"] == game["resets"]
     assert receipt["scorecard"]["validation"]["trace_scorecard_consistent"] is True
     assert receipt["aggregate"]["valid"] is True
+
+
+def test_sdk_099_sticky_game_over_after_level_reset_reconciles_exactly() -> None:
+    game_id = EXPECTED_GAME_IDS[0]
+    sdk, _holder = _fake_sdk(behaviors={game_id: "sticky_game_over"})
+
+    receipt = run_official_public_score(sdk_module=sdk)
+    trace = receipt["games"][0]["receipt"]
+    scorecard_run = receipt["scorecard"]["sanitized"]["environments"][0]["runs"][0]
+    validation = receipt["scorecard"]["validation"]
+
+    assert trace["final_observation"]["environment_state"] == "NOT_FINISHED"
+    assert scorecard_run["state"] == "GAME_OVER"
+    assert trace["status"] == "stopped"
+    assert trace["stop_reason"] == "action_budget_exhausted"
+    assert trace["actions_taken"] == scorecard_run["actions"] == 160
+    assert trace["step_actions"] + trace["resets"] == trace["actions_taken"]
+    assert trace["resets"] == scorecard_run["resets"] == 1
+    assert trace["final_observation"]["levels_completed"] == scorecard_run[
+        "levels_completed"
+    ] == 0
+    assert scorecard_run["completed"] is False
+    assert validation["trace_scorecard_consistent"] is True
+    assert validation["sticky_game_over_reset_state_accepted"] is True
+    assert validation["sticky_game_over_reset_state_accepted_count"] == 1
+    assert validation["sticky_game_over_reset_state_accepted_game_ids"] == [game_id]
+    assert validation["environment_totals_consistent"] is True
+    assert validation["level_arrays_valid"] is True
+    assert receipt["checks"]["provider_runtime_failure_free"] is True
+    assert receipt["aggregate"]["valid"] is True
+
+
+def test_sticky_game_over_exception_requires_adjacent_reset_trace_evidence() -> None:
+    game_id = EXPECTED_GAME_IDS[0]
+    sdk, _holder = _fake_sdk(behaviors={game_id: "sticky_game_over"})
+    receipt = run_official_public_score(sdk_module=sdk)
+    games = copy.deepcopy(receipt["games"])
+    scorecard = receipt["scorecard"]["sanitized"]
+    events = games[0]["receipt"]["actions"]
+    games[0]["receipt"]["actions"] = [
+        event for event in events if event["kind"] != "reset"
+    ]
+
+    validation = validate_scorecard_consistency(scorecard, games)
+
+    assert validation["sticky_game_over_reset_state_accepted"] is False
+    assert validation["trace_scorecard_consistent"] is False
+    assert validation["mismatched_game_ids"] == [game_id]
+
+
+@pytest.mark.parametrize("counter", ["actions", "resets", "levels_completed"])
+def test_sticky_game_over_exception_does_not_relax_counter_gates(counter: str) -> None:
+    game_id = EXPECTED_GAME_IDS[0]
+    sdk, _holder = _fake_sdk(behaviors={game_id: "sticky_game_over"})
+    receipt = run_official_public_score(sdk_module=sdk)
+    scorecard = copy.deepcopy(receipt["scorecard"]["sanitized"])
+    environment = scorecard["environments"][0]
+    run = environment["runs"][0]
+    run[counter] += 1
+    environment[counter] += 1
+    if counter == "actions":
+        run["level_actions"][0] += 1
+        scorecard["total_actions"] += 1
+    elif counter == "levels_completed":
+        scorecard["total_levels_completed"] += 1
+
+    validation = validate_scorecard_consistency(scorecard, receipt["games"])
+
+    assert validation["trace_scorecard_consistent"] is False
+    assert validation["mismatched_game_ids"] == [game_id]
 
 
 def test_reported_game_id_must_match_requested_scorecard_environment() -> None:

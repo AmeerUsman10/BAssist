@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "audit_kind": "postrun_offline_validator_correction",
+  "protocol": "official_public_score_v1",
+  "source_sha": "c43d9a3653c03266ae9fc3ee7a9069531629697c",
+  "evidence_commit_sha": "24c5cb7",
+  "github_run_id": 31328310439,
+  "github_run_attempt": 1,
+  "score_kind": "official_local_normal_public_development",
+  "scope": "Offline validation of the one-shot local NORMAL public-development scorecard; not online, leaderboard, locked-transfer, or competition evidence.",
+  "gameplay_rerun_performed": false,
+  "competition_submission_performed": false,
+  "online_mode_used": false,
+  "leaderboard_submission_performed": false,
+  "original_runner_status": "partial_not_promoted",
+  "original_runner_reasons": [
+    "scorecard_trace_mismatch",
+    "official_driver_partial"
+  ],
+  "observed_official_score": 0.0,
+  "official_score_reportability": "validated_observed_local_score",
+  "scorecard": {
+    "competition_mode": false,
+    "environments": 25,
+    "environments_completed": 0,
+    "levels": 183,
+    "levels_completed": 0,
+    "actions": 3942,
+    "resets": 36,
+    "runs": 25,
+    "nonzero_environment_scores": 0,
+    "environment_score_sum": 0.0,
+    "environment_action_sum": 3942
+  },
+  "provider": {
+    "score_calls": 12565,
+    "observations": 3942,
+    "exact_gradient_adaptations": 4,
+    "runtime_failures": 0,
+    "fallback_games": 0
+  },
+  "original_checks_preserved": {
+    "all_25_games_completed": true,
+    "exact_manifest": true,
+    "one_scorecard": true,
+    "one_run_per_game": true,
+    "scorecard_closed": true,
+    "scorecard_schema_valid": true,
+    "score_mean_and_totals_valid": true,
+    "provider_failure_free": true,
+    "runtime_deadline_clear": true
+  },
+  "validator_correction": {
+    "sdk_version": "arc-agi==0.9.9",
+    "diagnosis": "Card.state is updated on GAME_OVER or WIN, while a later level reset increments counters but a NOT_FINISHED frame does not clear the stored GAME_OVER value.",
+    "original_mismatch_count": 20,
+    "original_mismatch_shape": "trace final NOT_FINISHED versus scorecard GAME_OVER after an evidenced GAME_OVER-to-level-reset transition",
+    "accepted_exception": "Only an adjacent step GAME_OVER followed by reset to NOT_FINISHED, with nonzero reset count, matching actions/resets/levels, stopped non-completed receipt, and all other gates intact.",
+    "corrected_trace_scorecard_consistent": true,
+    "corrected_mismatch_count": 0,
+    "corrected_validator_valid": true,
+    "score_value_changed": false
+  },
+  "training_canary": {
+    "gate_passed": true,
+    "validation_accuracy": 0.91796875,
+    "validation_truth_probability": 0.8761123479343951,
+    "fresh_canary_accuracy": 0.9140625,
+    "fresh_canary_truth_probability": 0.8750226777046919,
+    "training_seconds": 632.9849911630001,
+    "canary_seconds": 26.47600351699998,
+    "projected_public_inference_seconds": 827.3751099062495
+  },
+  "evidence": {
+    "base_path": "reports/arcgpt2/kaggle-official-public-score/c43d9a3653c03266ae9fc3ee7a9069531629697c/31328310439-1",
+    "artifact_manifest_sha256": "299b9327dce07487e97366c99ab93b302b56c0a1f935e3d78dbadbfde6de528b",
+    "failure_receipt_sha256": "32fa0001cfc1389de10dbddffe398778190f61817e07a9a2790418a19a216e0e",
+    "official_driver_receipt_sha256": "2d2b8bc040e98933d227287aee89c165c1d0d50ae07cdc7e00ea9272f34cff9d",
+    "sanitized_scorecard_sha256": "12a93b4545b4ecdfa8cf332cd0e0d3fd9fbead89f84afd70939df2a03ee7d0a3",
+    "training_canary_sha256": "731d0c51f20e2849596f064c5ec788371e8e7c14a9bdb9318dd222f9465820d0",
+    "workflow_receipt_sha256": "d0dc12d7ca68b7fdef0769672e556a1529a219f80ee51819e7fc7f3e86edd2ab",
+    "workflow_evidence_hashes_verified": true,
+    "kernel_artifact_manifest_hashes_verified": true,
+    "credential_scan_clean": true,
+    "model_payload_scan_clean": true
+  },
+  "interpretation": {
+    "direct_result": "The one-shot system solved no public-development game or level and scored 0.0.",
+    "model_attribution_limit": "GPT-2 was a confidence-margin tie-break only; only four public transitions met the two-cell exact-gradient adaptation heuristic.",
+    "eggroll_used_for_score": false,
+    "eggroll_context": "The separate EGGROLL compatibility gate failed its frozen retention threshold and was not used for this score."
+  }
+}

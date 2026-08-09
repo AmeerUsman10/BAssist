@@ -642,6 +642,41 @@ def _trace_state(game: Mapping[str, Any]) -> str | None:
     return _mode_name(state) if isinstance(state, str) else None
 
 
+def _sticky_game_over_reset_evidence(receipt: Mapping[str, Any]) -> bool:
+    """Recognize the exact arc-agi 0.9.9 sticky-state regression.
+
+    ``Card.inc_reset_count`` updates reset/action counters but a subsequent
+    ``NOT_FINISHED`` frame does not overwrite a prior ``GAME_OVER`` Card.state.
+    Accept that one state disagreement only when the exact trace proves an
+    immediately adjacent GAME_OVER step followed by a successful level reset.
+    """
+
+    events = receipt.get("actions")
+    if not isinstance(events, list):
+        return False
+    for before_reset, reset in zip(events, events[1:]):
+        if not isinstance(before_reset, Mapping) or not isinstance(reset, Mapping):
+            continue
+        game_over_after = before_reset.get("after")
+        reset_before = reset.get("before")
+        reset_after = reset.get("after")
+        if not all(
+            isinstance(value, Mapping)
+            for value in (game_over_after, reset_before, reset_after)
+        ):
+            continue
+        if (
+            before_reset.get("kind") == "step"
+            and before_reset.get("terminal") == "game_over"
+            and _mode_name(game_over_after.get("environment_state")) == "GAME_OVER"
+            and reset.get("kind") == "reset"
+            and _mode_name(reset_before.get("environment_state")) == "GAME_OVER"
+            and _mode_name(reset_after.get("environment_state")) == "NOT_FINISHED"
+        ):
+            return True
+    return False
+
+
 def validate_scorecard_consistency(
     scorecard: Mapping[str, Any],
     games: Iterable[Mapping[str, Any]],
@@ -673,6 +708,7 @@ def validate_scorecard_consistency(
     level_arrays_valid = ids_exact
     run_scores_valid = ids_exact
     mismatched_ids: list[str] = []
+    sticky_game_over_reset_ids: list[str] = []
 
     for environment in environment_list:
         if not isinstance(environment, Mapping):
@@ -768,6 +804,18 @@ def validate_scorecard_consistency(
             and not isinstance(trace_resets, bool)
             and trace_actions == trace_steps + trace_resets
         )
+        trace_state = _trace_state(trace) if isinstance(trace, Mapping) else None
+        exact_state_match = trace_state == state
+        sticky_game_over_reset_match = bool(
+            isinstance(receipt, Mapping)
+            and state == "GAME_OVER"
+            and trace_state == "NOT_FINISHED"
+            and completed is False
+            and receipt.get("status") == "stopped"
+            and isinstance(trace_resets, int)
+            and trace_resets > 0
+            and _sticky_game_over_reset_evidence(receipt)
+        )
         current_trace_consistent = (
             isinstance(trace, Mapping)
             and trace.get("status") == "completed"
@@ -778,10 +826,12 @@ def validate_scorecard_consistency(
             and trace_actions == actions
             and trace_resets == resets
             and final.get("levels_completed") == levels_completed
-            and _trace_state(trace) == state
+            and (exact_state_match or sticky_game_over_reset_match)
             and (receipt.get("status") == "won") == completed
         )
         trace_consistent &= current_trace_consistent
+        if current_trace_consistent and sticky_game_over_reset_match:
+            sticky_game_over_reset_ids.append(game_id)
         if not current_trace_consistent and isinstance(game_id, str):
             mismatched_ids.append(game_id)
 
@@ -862,6 +912,13 @@ def validate_scorecard_consistency(
         "environment_totals_consistent": environment_totals_consistent,
         "scorecard_totals_consistent": totals_consistent,
         "trace_scorecard_consistent": trace_consistent,
+        "sticky_game_over_reset_state_accepted": bool(sticky_game_over_reset_ids),
+        "sticky_game_over_reset_state_accepted_count": len(
+            sticky_game_over_reset_ids
+        ),
+        "sticky_game_over_reset_state_accepted_game_ids": sorted(
+            sticky_game_over_reset_ids
+        ),
         "mismatched_game_ids": sorted(set(mismatched_ids)),
     }
 
