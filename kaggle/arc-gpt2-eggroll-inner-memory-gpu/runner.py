@@ -121,12 +121,20 @@ def artifact_manifest() -> dict[str, Any]:
     }
 
 
+def is_text_model_manifest(path: Path) -> bool:
+    """Return whether ``path`` is model metadata rather than a weight payload."""
+
+    name = path.name.lower()
+    return name.endswith("-manifest.json") or name.endswith(".index.json")
+
+
 def forbidden_model_artifacts() -> list[str]:
     forbidden_suffixes = {".bin", ".ckpt", ".pt", ".pth", ".safetensors"}
     return [
         str(path.relative_to(RUN_ROOT))
         for path in sorted(RUN_ROOT.rglob("*"))
         if path.is_file()
+        and not is_text_model_manifest(path)
         and (
             path.suffix.lower() in forbidden_suffixes
             or path.name.startswith(("pytorch_model", "model-", "checkpoint-"))

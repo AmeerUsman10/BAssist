@@ -31,7 +31,9 @@ def _frame_data(frames, *, state=State.IN_PROGRESS, actions=None):
         levels_completed=1,
         win_levels=3,
         full_reset=False,
-        available_actions=actions or [Action.RESET, Action.ACTION1],
+        available_actions=(
+            actions if actions is not None else [Action.RESET, Action.ACTION1]
+        ),
         frame=frames,
     )
 
@@ -74,9 +76,20 @@ def test_canonical_text_is_stable_and_reversible_at_each_grid_boundary() -> None
     assert len(frame_lines) == 2
     decoded = [decode_grid(line.split(" ", 2)[2]) for line in frame_lines]
     assert tuple(decoded) == sequence.rendered_frames
+    restored = OfficialFrameSequence.from_canonical_text(text)
+    assert restored == sequence
+    assert restored.canonical_text() == text
     assert sequence.sha256 == OfficialFrameSequence.from_frame_data(
         _frame_data([[[0, 2], [0, 0]], [[0, 0], [2, 0]]])
     ).sha256
+
+
+def test_integer_available_actions_use_official_action_names() -> None:
+    sequence = OfficialFrameSequence.from_frame_data(
+        _frame_data([[[0]]], actions=[6, 2, 1, 2])
+    )
+    assert sequence.available_actions == ("ACTION1", "ACTION2", "ACTION6")
+    assert "ACTIONS=ACTION1,ACTION2,ACTION6" in sequence.canonical_text()
 
 
 def test_action_transition_separates_animation_from_persistent_delta() -> None:
@@ -105,6 +118,7 @@ def test_empty_frame_sequence_is_metadata_only() -> None:
     assert sequence.shape is None
     assert sequence.animation_deltas == ()
     assert "FRAMES=0" in sequence.canonical_text()
+    assert OfficialFrameSequence.from_canonical_text(sequence.canonical_text()) == sequence
 
 
 def test_malformed_or_shape_varying_frames_fail_loudly() -> None:
@@ -112,3 +126,27 @@ def test_malformed_or_shape_varying_frames_fail_loudly() -> None:
         OfficialFrameSequence.from_frame_data(_frame_data([[[0, 0]], [[0], [0]]]))
     with pytest.raises(OfficialObservationError):
         OfficialFrameSequence.from_frame_data(_frame_data("not-a-frame"))
+
+
+def test_canonical_parser_rejects_corrupt_or_mismatched_streams() -> None:
+    sequence = OfficialFrameSequence.from_frame_data(
+        _frame_data([[[0, 2], [0, 0]], [[0, 0], [2, 0]]])
+    )
+    text = sequence.canonical_text()
+
+    malformed_frame = text.replace("<ENDGRID>", "<BROKEN>", 1)
+    with pytest.raises(OfficialObservationError):
+        OfficialFrameSequence.from_canonical_text(malformed_frame)
+
+    lines = text.splitlines()
+    delta_index = next(
+        index for index, line in enumerate(lines) if line.startswith("ANIMATION_DELTA ")
+    )
+    lines[delta_index] = "ANIMATION_DELTA 0->1 <NOCHANGE> <H_2> <W_2>"
+    with pytest.raises(OfficialObservationError, match="does not reconstruct"):
+        OfficialFrameSequence.from_canonical_text("\n".join(lines))
+
+    with pytest.raises(OfficialObservationError):
+        OfficialFrameSequence.from_canonical_text(
+            text.removesuffix("\nEND_OFFICIAL_FRAME_SEQUENCE")
+        )

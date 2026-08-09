@@ -1,0 +1,879 @@
+name: ARC-GPT2 Official Public Score GPU
+
+on:
+  push:
+    branches:
+      - arc-gpt2-official-score-v1
+    paths:
+      - .github/workflows/arc-gpt2-official-public-score-gpu.yml
+      - arcgpt2/OFFICIAL_PUBLIC_SCORE_V1.md
+      - arcgpt2/adaptive_mapping_scores.py
+      - arcgpt2/codec.py
+      - arcgpt2/completion_scorer.py
+      - arcgpt2/eggroll_inner_memory.py
+      - arcgpt2/meta_soft_binding.py
+      - arcgpt2/meta_soft_heldout_binding.py
+      - arcgpt2/meta_soft_single_binding.py
+      - arcgpt2/official_mapping_memory.py
+      - arcgpt2/official_observation.py
+      - arcgpt2/official_public_manifest.json
+      - arcgpt2/official_public_score.py
+      - arcgpt2/official_score_agent.py
+      - arcgpt2/official_score_training.py
+      - arcgpt2/phase0_hidden_action.py
+      - arcgpt2/requirements-arc3.in
+      - arcgpt2/requirements-arc3.lock
+      - arcgpt2/tests/**
+      - kaggle/arc-gpt2-official-public-score-gpu/kernel-metadata.json
+      - kaggle/arc-gpt2-official-public-score-gpu/runner.py
+
+permissions:
+  contents: read
+
+concurrency:
+  group: arc-gpt2-official-public-score-v1-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  EXPECTED_BRANCH: arc-gpt2-official-score-v1
+  AUTHORIZED_PARENT_SHA: "__AUTHORIZED_PARENT_SHA__"
+  PUSH_LAUNCH_MARKER: "[run-kaggle-official-public-score-v1]"
+
+jobs:
+  preflight:
+    if: >-
+      github.ref_type == 'branch' &&
+      github.ref_name == 'arc-gpt2-official-score-v1' &&
+      github.event_name == 'push' &&
+      contains(github.event.head_commit.message, '[run-kaggle-official-public-score-v1]')
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+
+      - name: Validate the authorized one-shot launch commit
+        id: authorization
+        continue-on-error: true
+        env:
+          EVENT_BEFORE_SHA: ${{ github.event.before }}
+          EVENT_AFTER_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          import re
+          import subprocess
+
+          before = os.environ["EVENT_BEFORE_SHA"]
+          after = os.environ["EVENT_AFTER_SHA"]
+          authorized = os.environ["AUTHORIZED_PARENT_SHA"]
+          placeholder = "__AUTHORIZED_" + "PARENT_SHA__"
+          workflow = ".github/workflows/arc-gpt2-official-public-score-gpu.yml"
+          if not re.fullmatch(r"[0-9a-f]{40}", authorized):
+              raise SystemExit("authorized parent SHA placeholder was not frozen")
+          if before != authorized:
+              raise SystemExit("push parent is not the authorized implementation commit")
+          if subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip() != after:
+              raise SystemExit("checked-out launch SHA mismatch")
+          changed = subprocess.check_output(
+              ["git", "diff", "--name-only", before, after], text=True
+          ).splitlines()
+          if changed != [workflow]:
+              raise SystemExit("launch commit must change only the official workflow")
+          parent = subprocess.check_output(
+              ["git", "show", f"{before}:{workflow}"], text=True
+          )
+          current = Path(workflow).read_text(encoding="utf-8")
+          if parent.count(placeholder) != 1 or current.count(authorized) != 1:
+              raise SystemExit("one-shot parent placeholder cardinality is invalid")
+          if current.replace(authorized, placeholder) != parent:
+              raise SystemExit("launch commit must only replace the authorized-parent placeholder")
+          PY
+
+      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
+        if: steps.authorization.outcome == 'success'
+        with:
+          python-version: "3.12"
+
+      - name: Install the hashed official SDK lock and CPU test runtime
+        id: dependencies
+        if: steps.authorization.outcome == 'success'
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          python -m pip install --quiet --disable-pip-version-check \
+            --index-url https://download.pytorch.org/whl/cpu "torch==2.10.0"
+          python -m pip install --quiet --disable-pip-version-check \
+            --only-binary=:all: --require-hashes \
+            -r arcgpt2/requirements-arc3.lock
+
+      - name: Run the broad and focused pre-GPU suites
+        id: tests
+        if: steps.authorization.outcome == 'success' && steps.dependencies.outcome == 'success'
+        continue-on-error: true
+        env:
+          ARC_API_KEY: ""
+          CUDA_VISIBLE_DEVICES: ""
+          OPERATION_MODE: normal
+          PYTHONHASHSEED: "0"
+        run: python -m pytest -q arcgpt2/tests
+
+      - name: Verify immutable runner, manifest, metadata, and mode boundaries
+        id: contract
+        if: steps.authorization.outcome == 'success' && steps.dependencies.outcome == 'success'
+        continue-on-error: true
+        env:
+          WORKFLOW_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import hashlib
+          import importlib.util
+          import json
+          import os
+          from pathlib import Path
+
+          runner = Path("kaggle/arc-gpt2-official-public-score-gpu/runner.py")
+          source = runner.read_text(encoding="utf-8")
+          needle = 'SOURCE_SHA = "__SOURCE_SHA__"'
+          assert source.count(needle) == 1
+          injected = source.replace(
+              needle,
+              f'SOURCE_SHA = "{os.environ["WORKFLOW_SHA"]}"',
+          )
+          target = Path("/tmp/official-public-score-runner-preflight.py")
+          target.write_text(injected, encoding="utf-8")
+          spec = importlib.util.spec_from_file_location("official_score_runner", target)
+          module = importlib.util.module_from_spec(spec)
+          assert spec.loader is not None
+          spec.loader.exec_module(module)
+          module.validate_source_sha(module.SOURCE_SHA)
+          assert module.PROTOCOL == "official_public_score_v1"
+          assert module.GPT2_REVISION == "607a30d783dfa663caf39e06633721c8d4cfcd7e"
+          assert module.ARC_AGI_VERSION == "0.9.9"
+          assert module.ARCENGINE_VERSION == "0.9.3"
+          assert module.PYTHON_VERSION == (3, 12)
+          assert module.TORCH_VERSION == "2.10.0+cu128"
+          assert module.CUDA_RUNTIME_VERSION == "12.8"
+          assert module.MAX_RUNTIME_SECONDS == 10_800.0
+
+          manifest_path = Path("arcgpt2/official_public_manifest.json")
+          lock_path = Path("arcgpt2/requirements-arc3.lock")
+          assert hashlib.sha256(manifest_path.read_bytes()).hexdigest() == module.PUBLIC_MANIFEST_SHA256
+          assert hashlib.sha256(lock_path.read_bytes()).hexdigest() == module.LOCK_SHA256
+          manifest = module.load_public_manifest(manifest_path)
+          first, second = module.score_shards(manifest["game_ids"])
+          assert len(first["game_ids"]) == 13
+          assert len(second["game_ids"]) == 12
+
+          metadata = json.loads(
+              Path("kaggle/arc-gpt2-official-public-score-gpu/kernel-metadata.json")
+              .read_text(encoding="utf-8")
+          )
+          assert metadata["is_private"] is True
+          assert metadata["enable_gpu"] is True
+          assert metadata["enable_internet"] is True
+          assert metadata["competition_sources"] == []
+          assert metadata["dataset_sources"] == []
+          assert metadata["model_sources"] == []
+          assert "kaggle " + "competitions" not in source.lower()
+          assert "OperationMode." + "ONLINE" not in source
+          assert "OperationMode." + "COMPETITION" not in source
+
+          # Once any GPU execution evidence is published, only an idempotent
+          # rerun of that exact source SHA is permitted. This prevents a later
+          # marker-bearing commit from becoming an unregistered retune.
+          evidence_root = Path("reports/arcgpt2/kaggle-official-public-score")
+          prior_shas = set()
+          current_source_statuses = []
+          if evidence_root.is_dir():
+              for receipt_path in evidence_root.rglob("workflow-receipt.json"):
+                  receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+                  prior_sha = receipt.get("workflow_sha")
+                  if isinstance(prior_sha, str) and prior_sha:
+                      prior_shas.add(prior_sha)
+                      if prior_sha == os.environ["WORKFLOW_SHA"]:
+                          current_source_statuses.append(receipt.get("status"))
+          if prior_shas and prior_shas != {os.environ["WORKFLOW_SHA"]}:
+              raise SystemExit(
+                  "one-shot official score branch already contains evidence for a different source SHA"
+              )
+          if any(status != "completed" for status in current_source_statuses):
+              raise SystemExit(
+                  "failed official score evidence already exists; V1 forbids rerunning that source"
+              )
+          PY
+
+      - name: Preserve preflight receipt
+        if: always()
+        env:
+          AUTHORIZATION_OUTCOME: ${{ steps.authorization.outcome }}
+          DEPENDENCY_OUTCOME: ${{ steps.dependencies.outcome }}
+          TEST_OUTCOME: ${{ steps.tests.outcome }}
+          CONTRACT_OUTCOME: ${{ steps.contract.outcome }}
+        run: |
+          mkdir -p preflight-evidence
+          python - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          outcomes = {
+              "authorization": os.environ.get("AUTHORIZATION_OUTCOME", "unknown"),
+              "dependencies": os.environ.get("DEPENDENCY_OUTCOME", "unknown"),
+              "tests": os.environ.get("TEST_OUTCOME", "unknown"),
+              "contract": os.environ.get("CONTRACT_OUTCOME", "unknown"),
+          }
+          receipt = {
+              "schema_version": 1,
+              "protocol": "official_public_score_v1",
+              "phase": "preflight",
+              "status": "passed" if all(value == "success" for value in outcomes.values()) else "failed",
+              "source_sha": os.environ.get("GITHUB_SHA"),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "github_run_id": os.environ.get("GITHUB_RUN_ID"),
+              "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "outcomes": outcomes,
+              "public_actions_taken": 0,
+              "scorecard_opened": False,
+              "competition_submission_performed": False,
+              "model_weights_persisted": False,
+          }
+          Path("preflight-evidence/preflight-receipt.json").write_text(
+              json.dumps(receipt, indent=2, sort_keys=True), encoding="utf-8"
+          )
+          PY
+
+      - name: Upload immutable preflight evidence
+        if: always()
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
+        with:
+          name: arc-gpt2-official-public-score-preflight-${{ github.run_id }}-${{ github.run_attempt }}
+          path: preflight-evidence/
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Propagate preflight failure after evidence upload
+        if: >-
+          steps.authorization.outcome != 'success' ||
+          steps.dependencies.outcome != 'success' ||
+          steps.tests.outcome != 'success' ||
+          steps.contract.outcome != 'success'
+        run: exit 1
+
+  dispatch:
+    needs: preflight
+    if: needs.preflight.result == 'success'
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 215
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned Kaggle CLI
+        run: python -m pip install --quiet --disable-pip-version-check "kaggle==2.2.2"
+
+      - name: Dispatch private dual-T4 run and retrieve outputs
+        id: kaggle
+        continue-on-error: true
+        env:
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p kaggle-output dispatch-evidence
+
+          write_state() {
+            ARC_STATE="$1" ARC_DETAIL="${2:-}" python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          path = Path("dispatch-evidence/workflow-state.json")
+          current = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+          current.update({
+              "state": os.environ["ARC_STATE"],
+              "detail": os.environ.get("ARC_DETAIL") or None,
+              "updated_at_utc": datetime.now(timezone.utc).isoformat(),
+              "source_sha": os.environ.get("GITHUB_SHA"),
+              "github_run_id": os.environ.get("GITHUB_RUN_ID"),
+              "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+              "kernel_slug": os.environ.get("KAGGLE_KERNEL_SLUG"),
+          })
+          private_ref = os.environ.get("PRIVATE_KERNEL_REF", "")
+          if private_ref:
+              current["kernel_ref_sha256"] = hashlib.sha256(private_ref.encode()).hexdigest()
+          path.write_text(json.dumps(current, indent=2, sort_keys=True), encoding="utf-8")
+          PY
+          }
+
+          redact_file() {
+            REDACT_SOURCE="$1" REDACT_TARGET="$2" REDACT_OWNER="${owner:-}" python - <<'PY'
+          import os
+          from pathlib import Path
+          import re
+
+          source = Path(os.environ["REDACT_SOURCE"])
+          target = Path(os.environ["REDACT_TARGET"])
+          text = source.read_text(encoding="utf-8", errors="replace") if source.exists() else ""
+          for secret in (os.environ.get("KAGGLE_API_TOKEN", ""), os.environ.get("REDACT_OWNER", "")):
+              if secret:
+                  text = text.replace(secret, "[REDACTED_SECRET]")
+          text = re.sub(r"KGAT_[A-Za-z0-9_-]+", "[REDACTED_SECRET]", text)
+          text = re.sub(
+              r"(?i)(?:bearer|x-api-key)\s*[:=]?\s*[A-Za-z0-9._~+/-]{12,}",
+              "[REDACTED_SECRET]",
+              text,
+          )
+          with target.open("a", encoding="utf-8") as handle:
+              handle.write(text)
+              if text and not text.endswith("\n"):
+                  handle.write("\n")
+          PY
+          }
+
+          fail() {
+            write_state failed "$1"
+            echo "Official public-score dispatch failed: $1"
+            exit 1
+          }
+
+          [[ -n "${KAGGLE_API_TOKEN:-}" ]] || fail "Kaggle API token is not configured"
+          write_state authenticating
+          if ! kaggle kernels list --mine --page-size 100 --csv > "${RUNNER_TEMP}/mine.csv" 2> "${RUNNER_TEMP}/auth.err"; then
+            redact_file "${RUNNER_TEMP}/auth.err" dispatch-evidence/dispatch-redacted.log
+            fail "Kaggle authentication or private kernel listing failed"
+          fi
+          owner="$({ python - "${RUNNER_TEMP}/mine.csv" <<'PY'
+          import csv
+          import re
+          import sys
+
+          with open(sys.argv[1], newline="", encoding="utf-8") as handle:
+              for row in csv.reader(handle):
+                  for value in row:
+                      if "/" not in value:
+                          continue
+                      candidate = value.split("/", 1)[0].strip()
+                      if re.fullmatch(r"[A-Za-z0-9_-]+", candidate) and candidate.lower() not in {"ref", "kernelref"}:
+                          print(candidate)
+                          raise SystemExit(0)
+          raise SystemExit("No owned private kernel reference was returned")
+          PY
+          } 2> "${RUNNER_TEMP}/owner.err")" || fail "Could not resolve authenticated Kaggle owner"
+          [[ "$owner" =~ ^[A-Za-z0-9_-]+$ ]] || fail "Resolved Kaggle owner has invalid shape"
+          export KAGGLE_KERNEL_SLUG="arc-gpt2-official-public-score-${GITHUB_SHA:0:12}"
+          export PRIVATE_KERNEL_REF="${owner}/${KAGGLE_KERNEL_SLUG}"
+          printf 'resolved_owner_sha256=%s\n' "$(printf '%s' "$owner" | sha256sum | cut -d' ' -f1)" > dispatch-evidence/dispatch-redacted.log
+
+          stage="${RUNNER_TEMP}/${KAGGLE_KERNEL_SLUG}"
+          mkdir -p "$stage"
+          RUNNER_SOURCE=kaggle/arc-gpt2-official-public-score-gpu/runner.py \
+          RUNNER_TARGET="${stage}/runner.py" python - <<'PY' || fail "Exact source SHA injection failed"
+          import os
+          from pathlib import Path
+
+          source = Path(os.environ["RUNNER_SOURCE"]).read_text(encoding="utf-8")
+          needle = 'SOURCE_SHA = "__SOURCE_SHA__"'
+          if source.count(needle) != 1:
+              raise SystemExit("expected exactly one source SHA placeholder")
+          injected = source.replace(needle, f'SOURCE_SHA = "{os.environ["GITHUB_SHA"]}"')
+          if "__SOURCE_SHA__" in injected:
+              raise SystemExit("unresolved source SHA placeholder remains")
+          Path(os.environ["RUNNER_TARGET"]).write_text(injected, encoding="utf-8")
+          PY
+
+          METADATA_SOURCE=kaggle/arc-gpt2-official-public-score-gpu/kernel-metadata.json \
+          METADATA_TARGET="${stage}/kernel-metadata.json" PRIVATE_OWNER="$owner" python - <<'PY' || fail "Private kernel metadata staging failed"
+          import json
+          import os
+          from pathlib import Path
+
+          metadata = json.loads(Path(os.environ["METADATA_SOURCE"]).read_text(encoding="utf-8"))
+          metadata["id"] = f"{os.environ['PRIVATE_OWNER']}/{os.environ['KAGGLE_KERNEL_SLUG']}"
+          metadata["title"] = f"ARC GPT2 Official Public Score {os.environ['GITHUB_SHA'][:12]}"
+          if not metadata.get("is_private") or not metadata.get("enable_gpu") or not metadata.get("enable_internet"):
+              raise SystemExit("private GPU/internet metadata contract failed")
+          for key in ("competition_sources", "dataset_sources", "kernel_sources", "model_sources"):
+              if metadata.get(key) != []:
+                  raise SystemExit(f"{key} must remain empty")
+          Path(os.environ["METADATA_TARGET"]).write_text(
+              json.dumps(metadata, indent=2, sort_keys=True), encoding="utf-8"
+          )
+          PY
+          staged_runner_sha="$(sha256sum "${stage}/runner.py" | cut -d' ' -f1)"
+          write_state staged
+
+          reuse_complete=false
+          resume_running=false
+          terminal_failure=false
+          if kaggle kernels status "$PRIVATE_KERNEL_REF" > "${RUNNER_TEMP}/existing-status.log" 2>&1; then
+            existing_text="$(tr '[:upper:]' '[:lower:]' < "${RUNNER_TEMP}/existing-status.log")"
+            existing_source="${RUNNER_TEMP}/existing-source"
+            mkdir -p "$existing_source"
+            existing_match=false
+            if kaggle kernels pull "$PRIVATE_KERNEL_REF" -p "$existing_source" --metadata > "${RUNNER_TEMP}/existing-pull.log" 2>&1; then
+              existing_runner="$(find "$existing_source" -name runner.py -type f -print -quit)"
+              if [[ -n "$existing_runner" && "$(sha256sum "$existing_runner" | cut -d' ' -f1)" == "$staged_runner_sha" ]]; then
+                existing_match=true
+              fi
+            fi
+            if grep -Eq 'running|queued' <<< "$existing_text"; then
+              [[ "$existing_match" == true ]] || fail "Different source is running under source-derived slug"
+              resume_running=true
+            elif grep -Eq 'complete|success' <<< "$existing_text"; then
+              [[ "$existing_match" == true ]] || fail "Completed source-derived slug contains a different runner"
+              reuse_complete=true
+            elif grep -Eq 'error|failed|cancel' <<< "$existing_text"; then
+              # A failed source-derived run is evidence, not permission to
+              # overwrite history. Retrieve it below and refuse a blind rerun.
+              terminal_failure=true
+              reuse_complete=true
+            fi
+          fi
+
+          if [[ "$reuse_complete" != true && "$resume_running" != true ]]; then
+            write_state pushing
+            if ! kaggle kernels push -p "$stage" --accelerator NvidiaTeslaT4 --timeout 10800 > "${RUNNER_TEMP}/push.log" 2>&1; then
+              redact_file "${RUNNER_TEMP}/push.log" dispatch-evidence/dispatch-redacted.log
+              fail "Kaggle private kernel push failed"
+            fi
+            redact_file "${RUNNER_TEMP}/push.log" dispatch-evidence/dispatch-redacted.log
+          fi
+
+          if [[ "$reuse_complete" != true ]]; then
+            write_state running
+            deadline=$((SECONDS + 10800))
+            terminal=false
+            status_failures=0
+            while (( SECONDS < deadline )); do
+              if ! kaggle kernels status "$PRIVATE_KERNEL_REF" > "${RUNNER_TEMP}/status.log" 2>&1; then
+                status_failures=$((status_failures + 1))
+                redact_file "${RUNNER_TEMP}/status.log" dispatch-evidence/dispatch-redacted.log
+                (( status_failures < 5 )) || fail "Kaggle status query failed five times"
+                sleep 20
+                continue
+              fi
+              status_failures=0
+              status_text="$(tr '[:upper:]' '[:lower:]' < "${RUNNER_TEMP}/status.log")"
+              if grep -Eq 'complete|success' <<< "$status_text"; then
+                terminal=true
+                break
+              fi
+              if grep -Eq 'error|failed|cancel' <<< "$status_text"; then
+                terminal=true
+                terminal_failure=true
+                break
+              fi
+              sleep 20
+            done
+            [[ "$terminal" == true ]] || fail "Kaggle kernel exceeded the three-hour deadline"
+          fi
+
+          write_state retrieving_outputs
+          output_retrieved=false
+          for output_attempt in 1 2 3 4 5; do
+            if kaggle kernels output "$PRIVATE_KERNEL_REF" -p kaggle-output --force --quiet > "${RUNNER_TEMP}/output.log" 2>&1; then
+              output_retrieved=true
+              break
+            fi
+            sleep 20
+          done
+          if [[ "$output_retrieved" != true ]]; then
+            redact_file "${RUNNER_TEMP}/output.log" dispatch-evidence/dispatch-redacted.log
+            fail "Kaggle output retrieval failed after five attempts"
+          fi
+
+          if [[ "$terminal_failure" == true ]]; then
+            write_state kernel_failed "Kaggle reported a terminal failure; retrieved outputs retained"
+            fail "Kaggle kernel terminated unsuccessfully after outputs were retrieved"
+          fi
+
+          STAGED_RUNNER_SHA="$staged_runner_sha" python - <<'PY' || fail "Downloaded evidence failed provenance or boundary validation"
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+          import re
+
+          def digest(path):
+              return hashlib.sha256(path.read_bytes()).hexdigest()
+
+          results = list(Path("kaggle-output").rglob("official-public-score-result.json"))
+          if len(results) != 1:
+              raise SystemExit(f"expected one official result, found {len(results)}")
+          root = results[0].parent
+          required = {
+              "receipt.json",
+              "artifact-manifest.json",
+              "official-driver-receipt.json",
+              "source-manifest.json",
+              "training-canary.json",
+              "sanitized-scorecard.json",
+              "summary.json",
+              "environment.json",
+              "model-manifest.json",
+          }
+          missing = sorted(name for name in required if not (root / name).is_file())
+          if missing:
+              raise SystemExit(f"co-rooted evidence is missing: {missing}")
+          if (root / "failure.json").exists():
+              raise SystemExit("success output also contains failure.json")
+          traces = sorted((root / "traces").glob("*.json"))
+          if len(traces) != 25:
+              raise SystemExit(f"expected 25 traces, found {len(traces)}")
+
+          result = json.loads(results[0].read_text(encoding="utf-8"))
+          receipt = json.loads((root / "receipt.json").read_text(encoding="utf-8"))
+          artifact = json.loads((root / "artifact-manifest.json").read_text(encoding="utf-8"))
+          source = json.loads((root / "source-manifest.json").read_text(encoding="utf-8"))
+          summary = json.loads((root / "summary.json").read_text(encoding="utf-8"))
+          expected_sha = os.environ["GITHUB_SHA"]
+          for value in (result, receipt, artifact, source, summary):
+              if value.get("source_sha") != expected_sha:
+                  raise SystemExit("source SHA chain mismatch")
+          if result.get("protocol") != "official_public_score_v1":
+              raise SystemExit("official score protocol mismatch")
+          if result.get("score_kind") != "official_local_normal_public_development":
+              raise SystemExit("official score-kind boundary mismatch")
+          if result.get("operation_mode") != "normal":
+              raise SystemExit("official operation-mode boundary mismatch")
+          if not isinstance(result.get("scope"), str) or "public-development" not in result["scope"]:
+              raise SystemExit("official score scope is missing")
+          for boundary in (
+              "locked_transfer_evaluated",
+              "online_mode_used",
+              "leaderboard_submission_performed",
+              "competition_submission_performed",
+              "model_weights_persisted",
+          ):
+              if result.get(boundary) is not False:
+                  raise SystemExit(f"forbidden score boundary changed: {boundary}")
+          if result.get("manifest_sha256") != "77b441ebbba044653c6abe64d17ab3023e54fd1ed6fec732bf0c525614e2e7dc":
+              raise SystemExit("public manifest hash mismatch")
+          if result.get("requirements_lock_sha256") != "0b6ba06bbb5104c49608dcfc25e54cdb54202844057b519c65395765ca0c3bec":
+              raise SystemExit("official dependency lock hash mismatch")
+          checks = result.get("execution_checks")
+          if not isinstance(checks, dict) or not checks or not all(checks.values()):
+              raise SystemExit("official execution contract failed")
+          if result.get("competition_submission_performed") is not False:
+              raise SystemExit("competition-submission boundary mismatch")
+          if result.get("model_weights_persisted") is not False:
+              raise SystemExit("model-persistence boundary mismatch")
+          if receipt.get("runner_source_sha256") != os.environ["STAGED_RUNNER_SHA"]:
+              raise SystemExit("runner receipt does not hash the staged runner")
+          if receipt.get("result_sha256") != digest(results[0]):
+              raise SystemExit("runner receipt does not hash the result")
+          if source.get("resolved_source_sha") != expected_sha:
+              raise SystemExit("cloned source receipt mismatch")
+
+          recorded = artifact.get("files")
+          if not isinstance(recorded, dict):
+              raise SystemExit("artifact manifest is malformed")
+          actual_files = {
+              str(path.relative_to(root)): path
+              for path in root.rglob("*")
+              if path.is_file() and path.name != "artifact-manifest.json"
+          }
+          if set(recorded) != set(actual_files):
+              raise SystemExit(
+                  "artifact manifest file set mismatch: "
+                  f"missing={sorted(set(actual_files) - set(recorded))}, "
+                  f"unexpected={sorted(set(recorded) - set(actual_files))}"
+              )
+          for key, path in actual_files.items():
+              metadata = recorded.get(key)
+              if (
+                  not isinstance(metadata, dict)
+                  or metadata.get("bytes") != path.stat().st_size
+                  or metadata.get("sha256") != digest(path)
+              ):
+                  raise SystemExit(f"artifact bytes/hash mismatch for {key}")
+          for path in [results[0], root / "receipt.json", root / "official-driver-receipt.json", root / "summary.json", root / "sanitized-scorecard.json", *traces]:
+              key = str(path.relative_to(root))
+              if recorded.get(key, {}).get("sha256") != digest(path):
+                  raise SystemExit(f"artifact hash mismatch for {key}")
+          for trace_name, trace_hash in result.get("trace_hashes", {}).items():
+              path = root / trace_name
+              if not path.is_file() or digest(path) != trace_hash:
+                  raise SystemExit(f"result trace hash mismatch for {trace_name}")
+
+          model_suffixes = {".bin", ".ckpt", ".h5", ".hdf5", ".joblib", ".npy", ".npz", ".onnx", ".pickle", ".pkl", ".pt", ".pth", ".safetensors"}
+          payloads = [str(path.relative_to(root)) for path in root.rglob("*") if path.is_file() and path.suffix.lower() in model_suffixes]
+          if payloads:
+              raise SystemExit(f"model/checkpoint payloads escaped: {payloads}")
+          secret_pattern = re.compile(r"KGAT_[A-Za-z0-9_-]+|(?i:(?:bearer|x-api-key)\s*[:=]?\s*[A-Za-z0-9._~+/-]{12,})")
+          leaks = []
+          for path in root.rglob("*"):
+              if path.is_file() and path.suffix.lower() in {".json", ".log", ".txt"}:
+                  if secret_pattern.search(path.read_text(encoding="utf-8", errors="replace")):
+                      leaks.append(str(path.relative_to(root)))
+          if leaks:
+              raise SystemExit(f"credential-shaped text escaped: {leaks}")
+          Path("dispatch-evidence/kernel-root-relative.txt").write_text(
+              str(root.relative_to("kaggle-output")), encoding="utf-8"
+          )
+          PY
+          write_state outputs_validated
+
+      - name: Build strict redacted evidence bundle
+        if: always()
+        env:
+          DISPATCH_OUTCOME: ${{ steps.kaggle.outcome }}
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+          import re
+          import shutil
+
+          upload = Path("evidence-bundle")
+          ready = Path(".evidence-bundle-ready")
+          quarantine = (
+              Path(os.environ["RUNNER_TEMP"])
+              / f"official-evidence-{os.environ['GITHUB_RUN_ID']}-{os.environ['GITHUB_RUN_ATTEMPT']}"
+          )
+          if upload.exists() or ready.exists():
+              raise SystemExit("evidence upload path existed before boundary validation")
+          if quarantine.exists():
+              shutil.rmtree(quarantine)
+          quarantine.mkdir()
+          target = quarantine
+          results = list(Path("kaggle-output").rglob("official-public-score-result.json"))
+          failures = list(Path("kaggle-output").rglob("failure.json"))
+          root = results[0].parent if len(results) == 1 else failures[0].parent if len(failures) == 1 else None
+          allowed_root = {
+              "artifact-manifest.json", "environment.json", "failure.json",
+              "model-manifest.json", "official-driver-receipt.json",
+              "official-public-score-result.json",
+              "receipt.json", "sanitized-scorecard.json", "source-manifest.json",
+              "summary.json", "training-canary.json",
+          }
+          copied = []
+          if root is not None:
+              for name in sorted(allowed_root):
+                  source = root / name
+                  if source.is_file():
+                      shutil.copy2(source, target / name)
+                      copied.append(name)
+              for directory, pattern in (("traces", "*.json"), ("logs", "*.log")):
+                  source_dir = root / directory
+                  if source_dir.is_dir():
+                      destination = target / directory
+                      destination.mkdir()
+                      for source in sorted(source_dir.glob(pattern)):
+                          shutil.copy2(source, destination / source.name)
+                          copied.append(str(Path(directory) / source.name))
+          for name in ("workflow-state.json", "dispatch-redacted.log"):
+              source = Path("dispatch-evidence") / name
+              if source.is_file():
+                  shutil.copy2(source, target / name)
+                  copied.append(name)
+
+          token_pattern = re.compile(r"KGAT_[A-Za-z0-9_-]+|(?i:(?:bearer|x-api-key)\s*[:=]?\s*[A-Za-z0-9._~+/-]{12,})")
+          leaks = []
+          model_suffixes = {".bin", ".ckpt", ".h5", ".hdf5", ".joblib", ".npy", ".npz", ".onnx", ".pickle", ".pkl", ".pt", ".pth", ".safetensors"}
+          model_payloads = []
+          for path in target.rglob("*"):
+              if not path.is_file():
+                  continue
+              if path.suffix.lower() in model_suffixes:
+                  model_payloads.append(str(path.relative_to(target)))
+              if path.suffix.lower() in {".json", ".log", ".txt"} and token_pattern.search(path.read_text(encoding="utf-8", errors="replace")):
+                  leaks.append(str(path.relative_to(target)))
+          if leaks or model_payloads:
+              # Never move quarantined bytes beneath the artifact upload path.
+              # Publish only a fixed, non-kernel failure receipt with unknown
+              # scientific boundary values.
+              shutil.rmtree(quarantine)
+              ready.mkdir()
+              minimal = {
+                  "schema_version": 1,
+                  "status": "evidence_boundary_failed",
+                  "dispatch_outcome": os.environ.get("DISPATCH_OUTCOME"),
+                  "scope": "Evidence quarantine rejected unsafe kernel output; no score claim.",
+                  "workflow_sha": os.environ.get("GITHUB_SHA"),
+                  "github_run_id": os.environ.get("GITHUB_RUN_ID"),
+                  "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+                  "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+                  "competition_submission_performed": None,
+                  "model_weights_persisted": None,
+                  "official_score": None,
+                  "unsafe_files_uploaded": False,
+                  "quarantine_removed": True,
+              }
+              receipt_path = ready / "workflow-receipt.json"
+              receipt_path.write_text(
+                  json.dumps(minimal, indent=2, sort_keys=True), encoding="utf-8"
+              )
+              (ready / "evidence-hashes.json").write_text(
+                  json.dumps(
+                      {
+                          "schema_version": 1,
+                          "files": {
+                              "workflow-receipt.json": {
+                                  "bytes": receipt_path.stat().st_size,
+                                  "sha256": hashlib.sha256(receipt_path.read_bytes()).hexdigest(),
+                              }
+                          },
+                      },
+                      indent=2,
+                      sort_keys=True,
+                  ),
+                  encoding="utf-8",
+              )
+              os.replace(ready, upload)
+              raise SystemExit("evidence boundary failed; only a minimal receipt is uploadable")
+
+          result_path = target / "official-public-score-result.json"
+          result = json.loads(result_path.read_text(encoding="utf-8")) if result_path.exists() else {}
+          failure_path = target / "failure.json"
+          failure = json.loads(failure_path.read_text(encoding="utf-8")) if failure_path.exists() else {}
+          kernel_receipt = result if result else failure
+          state_path = target / "workflow-state.json"
+          state = json.loads(state_path.read_text(encoding="utf-8")) if state_path.exists() else {}
+          workflow_receipt = {
+              "schema_version": 1,
+              "status": "completed" if os.environ.get("DISPATCH_OUTCOME") == "success" else "execution_failed",
+              "dispatch_outcome": os.environ.get("DISPATCH_OUTCOME"),
+              "scope": "Private NORMAL local official public score; no competition submission.",
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "workflow_sha": os.environ.get("GITHUB_SHA"),
+              "kernel_source_sha": result.get("source_sha"),
+              "protocol": result.get("protocol", "official_public_score_v1"),
+              "github_run_id": os.environ.get("GITHUB_RUN_ID"),
+              "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "kernel_slug": state.get("kernel_slug"),
+              "kernel_ref_sha256": state.get("kernel_ref_sha256"),
+              "final_dispatch_state": state.get("state"),
+              "dispatch_detail": state.get("detail"),
+              "accelerator_requested": "NvidiaTeslaT4",
+              "dual_t4_required_and_exercised": result.get("execution_checks", {}).get("deterministic_13_12_shards_exercised"),
+              "competition_submission_performed": kernel_receipt.get("competition_submission_performed") if kernel_receipt else None,
+              "model_weights_persisted": kernel_receipt.get("model_weights_persisted") if kernel_receipt else None,
+              "copied_files": copied,
+          }
+          (target / "workflow-receipt.json").write_text(
+              json.dumps(workflow_receipt, indent=2, sort_keys=True), encoding="utf-8"
+          )
+          hashes = {
+              str(path.relative_to(target)): {
+                  "bytes": path.stat().st_size,
+                  "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+              }
+              for path in sorted(target.rglob("*"))
+              if path.is_file() and path.name != "evidence-hashes.json"
+          }
+          (target / "evidence-hashes.json").write_text(
+              json.dumps({"schema_version": 1, "files": hashes}, indent=2, sort_keys=True),
+              encoding="utf-8",
+          )
+          # Copy only the already-validated quarantine to a same-filesystem
+          # ready directory, then atomically publish the artifact path.
+          shutil.copytree(quarantine, ready)
+          os.replace(ready, upload)
+          shutil.rmtree(quarantine)
+          PY
+
+      - name: Upload immutable execution evidence
+        if: always()
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
+        with:
+          name: arc-gpt2-official-public-score-${{ github.run_id }}-${{ github.run_attempt }}
+          path: evidence-bundle/
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Propagate dispatch failure after evidence upload
+        if: steps.kaggle.outcome != 'success'
+        run: exit 1
+
+  publish:
+    needs: dispatch
+    if: always() && needs.dispatch.result != 'skipped'
+    permissions:
+      actions: read
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+
+      - name: Download immutable execution evidence
+        uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
+        with:
+          name: arc-gpt2-official-public-score-${{ github.run_id }}-${{ github.run_attempt }}
+          path: downloaded-evidence
+
+      - name: Publish evidence from the current feature-branch tip
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "${GITHUB_REF_NAME}" == "${EXPECTED_BRANCH}" ]]
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin "${GITHUB_REF_NAME}"
+          publish_dir="$(mktemp -d)"
+          git worktree add --detach "$publish_dir" "origin/${GITHUB_REF_NAME}"
+          PUBLISH_DIR="$publish_dir" python - <<'PY'
+          import os
+          from pathlib import Path
+          import shutil
+
+          source = Path("downloaded-evidence")
+          if not (source / "workflow-receipt.json").is_file():
+              raise SystemExit("downloaded evidence is missing its workflow receipt")
+          target = (
+              Path(os.environ["PUBLISH_DIR"])
+              / "reports/arcgpt2/kaggle-official-public-score"
+              / os.environ["GITHUB_SHA"]
+              / f"{os.environ['GITHUB_RUN_ID']}-{os.environ['GITHUB_RUN_ATTEMPT']}"
+          )
+          target.parent.mkdir(parents=True, exist_ok=True)
+          if target.exists():
+              def hashes(root):
+                  return {
+                      str(path.relative_to(root)): __import__("hashlib").sha256(path.read_bytes()).hexdigest()
+                      for path in sorted(root.rglob("*")) if path.is_file()
+                  }
+              if hashes(source) != hashes(target):
+                  raise SystemExit("immutable evidence path already exists with different bytes")
+          else:
+              shutil.copytree(source, target)
+          PY
+          cd "$publish_dir"
+          git add -- "reports/arcgpt2/kaggle-official-public-score/${GITHUB_SHA}/${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "Record ARC-GPT2 official public score ${GITHUB_RUN_ID}"
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then
+              exit 0
+            fi
+            git fetch origin "${GITHUB_REF_NAME}"
+            git rebase "origin/${GITHUB_REF_NAME}"
+          done
+          exit 1
