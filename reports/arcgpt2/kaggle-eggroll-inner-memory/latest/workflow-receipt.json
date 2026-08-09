@@ -1,0 +1,60 @@
+{
+  "status": "execution_failed",
+  "dispatch_outcome": "failure",
+  "scope": "Private EGGROLL inner-memory compatibility gate; no competition submission.",
+  "branch": "arc-gpt2-eggroll-v1",
+  "workflow_sha": "9c57034368f75ace228f304796a42c1e197b37ad",
+  "kernel_source_sha": "9c57034368f75ace228f304796a42c1e197b37ad",
+  "protocol": "eggroll_inner_memory_v1",
+  "github_run_id": "31321836196",
+  "github_run_attempt": "1",
+  "recorded_at_utc": "2026-08-09T16:29:35.848773+00:00",
+  "kernel_slug": "arc-gpt2-eggroll-inner-memory-9c570343",
+  "kernel_ref_sha256": "ef748503a684b8da5440b48777506bcbb672431c111787fd70654df1e74cb491",
+  "final_dispatch_state": "failed",
+  "dispatch_detail": "Kaggle kernel terminated unsuccessfully",
+  "accelerator_requested": "NvidiaTeslaT4",
+  "dual_t4_required_by_runner": true,
+  "gate_passed": false,
+  "decision": "stop_do_not_apply_to_raw_goal",
+  "competition_submission_performed": false,
+  "model_weights_persisted": false,
+  "output_files": {
+    "arc-gpt2-eggroll-inner-memory-9c570343.log": {
+      "bytes": 1547480,
+      "sha256": "a35ed43e001d0954a56ab3fddca86ee852e317a22a3c0ed566cb9874650b05d2"
+    },
+    "arc_gpt2_eggroll_inner_memory_gpu/artifact-manifest.json": {
+      "bytes": 1072,
+      "sha256": "8fddf0585e063ce76c2f12fb9407af28e91c7dce8ae7844496f6092f0aa450cb"
+    },
+    "arc_gpt2_eggroll_inner_memory_gpu/environment.json": {
+      "bytes": 857,
+      "sha256": "0bed253265ee971da2aeedc7d9510cd77ee5fdfa96dd97f71d7f4de7aa93aa9c"
+    },
+    "arc_gpt2_eggroll_inner_memory_gpu/failure.json": {
+      "bytes": 290,
+      "sha256": "eda857918cb5f3a672f08e99fa6c6a0616cf9f577749fd30e72b894e1ae66b16"
+    },
+    "arc_gpt2_eggroll_inner_memory_gpu/logs/cpu-preflight-tests.log": {
+      "bytes": 100,
+      "sha256": "36b4a1a9965524fe404e748f0e5005598095be39bc0c53a6580f99f8f28a69b2"
+    },
+    "arc_gpt2_eggroll_inner_memory_gpu/logs/dependency-install.log": {
+      "bytes": 641,
+      "sha256": "4efe5d12661b026ab8275ef0a2ec0e40c2b378bac132a0403427719c86be2bcb"
+    },
+    "arc_gpt2_eggroll_inner_memory_gpu/logs/eggroll-inner-memory.log": {
+      "bytes": 627396,
+      "sha256": "d677c3f94a3dd258a655fe6b854958c2a78726c87a0145a207777551d448eed6"
+    },
+    "arc_gpt2_eggroll_inner_memory_gpu/model-manifest.json": {
+      "bytes": 1079,
+      "sha256": "7c21cd3849ad03da2f6e510a2b2ab6d42c750bf3c9b327121ce65134ab4b2663"
+    },
+    "arc_gpt2_eggroll_inner_memory_gpu/outputs/eggroll-result.json": {
+      "bytes": 609806,
+      "sha256": "f53cb748188df535a67d865cd22bdc90f39daacb04bb6ac6599e33b8ddbe29fc"
+    }
+  }
+}
