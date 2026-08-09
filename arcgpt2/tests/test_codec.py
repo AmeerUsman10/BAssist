@@ -8,16 +8,22 @@ from arcgpt2.codec import (
     CodecError,
     TransitionEncoding,
     apply_delta,
+    decode_delta,
     decode_frame,
+    decode_grid,
     decode_quadtree,
     decode_rle,
     decode_transition,
     encode_delta,
+    encode_delta_text,
     encode_frame,
+    encode_grid,
     encode_quadtree,
     encode_rle,
     encode_transition,
     normalize_grid,
+    text_to_tokens,
+    tokens_to_text,
 )
 
 
@@ -79,6 +85,43 @@ def test_delta_roundtrip_and_nochange() -> None:
     nochange = encode_delta(before, before)
     assert nochange[0] == "<NOCHANGE>"
     assert apply_delta(before, nochange) == normalize_grid(before)
+
+
+def test_canonical_text_apis_are_reversible() -> None:
+    before = [[0, 0, 0], [1, 1, 0]]
+    after = [[0, 2, 0], [1, 0, 0]]
+
+    grid_text = encode_grid(after)
+    assert tokens_to_text(text_to_tokens(grid_text)) == grid_text
+    assert decode_grid(grid_text) == normalize_grid(after)
+
+    delta_text = encode_delta_text(before, after)
+    assert tokens_to_text(text_to_tokens(delta_text)) == delta_text
+    assert decode_delta(before, delta_text) == normalize_grid(after)
+
+
+@pytest.mark.parametrize(
+    "malformed",
+    [
+        " <RLE>",
+        "<RLE> ",
+        "<RLE>  <H_1>",
+        "<RLE>\n<H_1>",
+        "<RLE>\t<H_1>",
+    ],
+)
+def test_text_parser_rejects_noncanonical_whitespace(malformed: str) -> None:
+    with pytest.raises(CodecError):
+        text_to_tokens(malformed)
+
+
+def test_text_decoders_reject_malformed_streams() -> None:
+    with pytest.raises(CodecError):
+        decode_grid("<RLE> <H_1> <W_1> <ROW> <C_0> <N_1> <ENDROW>")
+    with pytest.raises(CodecError):
+        decode_delta([[0]], "<DELTA> <H_1> <W_1> <RUN>")
+    with pytest.raises(CodecError):
+        tokens_to_text(["<RLE>", "<BAD TOKEN>"])
 
 
 def test_transition_selects_an_exact_representation() -> None:

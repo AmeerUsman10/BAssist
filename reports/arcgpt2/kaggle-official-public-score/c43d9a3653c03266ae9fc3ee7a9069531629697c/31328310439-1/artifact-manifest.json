@@ -1,0 +1,45 @@
+{
+  "boundary_at_failure": {
+    "model_payloads": [],
+    "secret_leaks": [],
+    "unexpected_files": []
+  },
+  "created_at_utc": "2026-08-09T18:28:59.142708+00:00",
+  "files": {
+    "failure.json": {
+      "bytes": 394,
+      "sha256": "32fa0001cfc1389de10dbddffe398778190f61817e07a9a2790418a19a216e0e"
+    },
+    "logs/cpu-preflight-tests.log": {
+      "bytes": 432,
+      "sha256": "dbe6325c9a5dc1277c301af10f98bd89d2be0c0fa595d7a00705b2b956593740"
+    },
+    "logs/dependency-install.log": {
+      "bytes": 5193,
+      "sha256": "56f86270cdb764fd155420f115d4268acb927f60e923295fcffe64e59ff93db6"
+    },
+    "model-manifest.json": {
+      "bytes": 1202,
+      "sha256": "f93c0ab8a954402b6279ec22ced9fe4e3cc3f58c9577a7fb88e6ac51f76d154e"
+    },
+    "official-driver-receipt.json": {
+      "bytes": 30343668,
+      "sha256": "2d2b8bc040e98933d227287aee89c165c1d0d50ae07cdc7e00ea9272f34cff9d"
+    },
+    "sanitized-scorecard.json": {
+      "bytes": 22260,
+      "sha256": "12a93b4545b4ecdfa8cf332cd0e0d3fd9fbead89f84afd70939df2a03ee7d0a3"
+    },
+    "source-manifest.json": {
+      "bytes": 20888,
+      "sha256": "b2e46d6d140a49e5a37bf3ebf526ea78d8e0f92c10e99419e16586d2d0b7c9b9"
+    },
+    "training-canary.json": {
+      "bytes": 398610,
+      "sha256": "731d0c51f20e2849596f064c5ec788371e8e7c14a9bdb9318dd222f9465820d0"
+    }
+  },
+  "protocol": "official_public_score_v1",
+  "schema_version": 1,
+  "source_sha": "c43d9a3653c03266ae9fc3ee7a9069531629697c"
+}

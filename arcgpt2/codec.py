@@ -385,4 +385,72 @@ def token_inventory(max_dimension: int = 64) -> list[str]:
 
 
 def tokens_to_text(tokens: Iterable[str]) -> str:
-    return " ".join(tokens)
+    """Serialize atomic codec tokens to one canonical text line.
+
+    Codec tokens are deliberately whitespace-free.  Validating that invariant
+    here prevents a token containing a space or newline from producing text
+    that cannot be decoded into the same token sequence.
+    """
+
+    materialized = tuple(tokens)
+    for token in materialized:
+        if not isinstance(token, str) or not token:
+            raise CodecError("codec tokens must be non-empty strings")
+        if any(character.isspace() for character in token):
+            raise CodecError(f"codec token may not contain whitespace: {token!r}")
+    return " ".join(materialized)
+
+
+def text_to_tokens(text: str) -> tuple[str, ...]:
+    """Parse one canonical codec text line into atomic tokens.
+
+    The parser is intentionally strict: leading, trailing, repeated, or
+    non-space whitespace is rejected instead of silently canonicalized.  This
+    keeps evidence hashes stable and makes malformed log records fail loudly.
+    """
+
+    if not isinstance(text, str):
+        raise CodecError("codec text must be a string")
+    if not text:
+        return ()
+    if text != text.strip() or any(
+        character.isspace() and character != " " for character in text
+    ):
+        raise CodecError("codec text must be a single canonical token line")
+    tokens = tuple(text.split(" "))
+    if any(not token for token in tokens):
+        raise CodecError("codec text may not contain repeated spaces")
+    return tokens
+
+
+def encode_grid(grid: Sequence[Sequence[int]]) -> str:
+    """Return the exact full-frame encoding as canonical text.
+
+    ``encode_frame`` remains the token-level API.  This compatibility wrapper
+    is for durable textual receipts and prompts.
+    """
+
+    return tokens_to_text(encode_frame(grid))
+
+
+def decode_grid(text: str) -> Grid:
+    """Decode canonical full-frame text produced by :func:`encode_grid`."""
+
+    return decode_frame(text_to_tokens(text))
+
+
+def encode_delta_text(
+    previous: Sequence[Sequence[int]], current: Sequence[Sequence[int]]
+) -> str:
+    """Return an exact delta encoding as canonical text.
+
+    ``encode_delta`` remains the token-level API.
+    """
+
+    return tokens_to_text(encode_delta(previous, current))
+
+
+def decode_delta(previous: Sequence[Sequence[int]], text: str) -> Grid:
+    """Apply canonical delta text produced by :func:`encode_delta_text`."""
+
+    return apply_delta(previous, text_to_tokens(text))

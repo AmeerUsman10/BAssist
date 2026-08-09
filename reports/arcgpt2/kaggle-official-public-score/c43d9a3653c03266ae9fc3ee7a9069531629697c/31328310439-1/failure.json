@@ -1,0 +1,11 @@
+{
+  "competition_submission_performed": false,
+  "error": "official scorecard driver returned partial or invalid evidence",
+  "error_type": "RuntimeError",
+  "failed_at_utc": "2026-08-09T18:28:58.126482+00:00",
+  "model_weights_persisted": false,
+  "protocol": "official_public_score_v1",
+  "schema_version": 1,
+  "source_sha": "c43d9a3653c03266ae9fc3ee7a9069531629697c",
+  "status": "failed"
+}

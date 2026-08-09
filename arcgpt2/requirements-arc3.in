@@ -1,0 +1,6 @@
+# Direct dependencies for the isolated Python 3.12 official-score environment.
+arc-agi==0.9.9
+arcengine==0.9.3
+pytest==8.4.2
+safetensors==0.6.2
+transformers==4.57.6
