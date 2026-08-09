@@ -1,0 +1,8 @@
+{
+  "error": "forbidden model artifacts were emitted: ['model-manifest.json']",
+  "error_type": "RuntimeError",
+  "failed_at_utc": "2026-08-09T16:29:06.567169+00:00",
+  "protocol": "eggroll_inner_memory_v1",
+  "source_sha": "9c57034368f75ace228f304796a42c1e197b37ad",
+  "status": "failed"
+}
