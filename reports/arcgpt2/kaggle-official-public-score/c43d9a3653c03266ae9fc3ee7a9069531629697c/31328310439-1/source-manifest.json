@@ -1,0 +1,532 @@
+{
+  "files": {
+    "arcgpt2/DECISION_LOG.md": {
+      "bytes": 4589,
+      "sha256": "a8d43b6343d4878c0eec748cc744963d3d49054992ece3a24fa048e595cb58f0"
+    },
+    "arcgpt2/DESIGN.md": {
+      "bytes": 18045,
+      "sha256": "0831efcb1ca8457f124fc36fa481c34d187b79e78b0067d37d2c986281ecf817"
+    },
+    "arcgpt2/EGGROLL_INNER_MEMORY_V1.md": {
+      "bytes": 2127,
+      "sha256": "6fe895bbc380f0007e4f28f8222f664256f28b10ec0f8adb00392aa510ce1e57"
+    },
+    "arcgpt2/EPISTEMIC_CORE.md": {
+      "bytes": 8735,
+      "sha256": "4a95c5ad22f9cf0abcd70ae168711b88990f416a8150f5dcdbdd1c512f46d642"
+    },
+    "arcgpt2/EXPERIMENT_MATRIX.md": {
+      "bytes": 6616,
+      "sha256": "44ab16bce8a2f8fc344c08c448e66019f243aa8e324d2f95b6b51bfb574e3bae"
+    },
+    "arcgpt2/GPT2_ONLY_SYSTEM_V2.md": {
+      "bytes": 10614,
+      "sha256": "b5770b77af6fac7989ecb3d07c47108fddb15c818b408a961e3692c3aa7265bf"
+    },
+    "arcgpt2/OFFICIAL_PUBLIC_SCORE_V1.md": {
+      "bytes": 5088,
+      "sha256": "a13570f6b400ff1f3d49fa94072bb7958ed96d8bf495814ecb07fc069ffb00e0"
+    },
+    "arcgpt2/PROGRAM_AGENT.md": {
+      "bytes": 13609,
+      "sha256": "4bcebb612ed1059a9a1fe2d78c86dd0b958f7e1024fee4ef1847cb5848c6b0ce"
+    },
+    "arcgpt2/RAW_GOAL_SIGNATURE_V1.md": {
+      "bytes": 11037,
+      "sha256": "42851482353ae576f41722e505254ceea552f6ca150ee5da4607030e8176ad00"
+    },
+    "arcgpt2/README.md": {
+      "bytes": 3462,
+      "sha256": "516bc5003d56d0a238fe8fa3e7c9764af180402425e15847b43035599b3752a6"
+    },
+    "arcgpt2/__init__.py": {
+      "bytes": 215,
+      "sha256": "ca7bbcb1a770595c2991280e452b6429e43419bf1a2451ee71393a27276c74b0"
+    },
+    "arcgpt2/adaptive_mapping_scores.py": {
+      "bytes": 5750,
+      "sha256": "05f7833f13b312083e4840b756878f3976097d18cacbc9608fa04d955d3d71f5"
+    },
+    "arcgpt2/belief_math.py": {
+      "bytes": 6222,
+      "sha256": "113983b1bd7ca26358dfec56bdf322a4e252e6470cbfd6726074355044006201"
+    },
+    "arcgpt2/benchmark_contact_world_agent.py": {
+      "bytes": 6725,
+      "sha256": "40fd03257c8c18b831fba6a65b256cb881da3a84c8b48abafec43dac76e623fc"
+    },
+    "arcgpt2/benchmark_phase0_world_agent.py": {
+      "bytes": 5554,
+      "sha256": "81d0f843afcc0a03c9cf878ba7a77d47b1b94588f19a274c752deffc6eab9881"
+    },
+    "arcgpt2/build_contact_version_dataset.py": {
+      "bytes": 9845,
+      "sha256": "e61d854d2e6cccd5416b9697ad266987530bef853aa3f02d291a371d7ca4da48"
+    },
+    "arcgpt2/build_epistemic_counterfactual_dataset.py": {
+      "bytes": 9557,
+      "sha256": "afe4d4326937d61265048cdab40f62069619de7ca23a3b1575e2e1a743a94585"
+    },
+    "arcgpt2/build_epistemic_dataset.py": {
+      "bytes": 9367,
+      "sha256": "200f0195ff94cb435a664f4ea57f4795e9f91c3d434d445be1cf2f91bd717562"
+    },
+    "arcgpt2/build_factorized_dataset.py": {
+      "bytes": 5531,
+      "sha256": "b260c8ea2598f0ed4088d5600472d06fce80b66520cbf88e650c8aa017c81be0"
+    },
+    "arcgpt2/build_goal_version_compact.py": {
+      "bytes": 1284,
+      "sha256": "b937232208dc6b05ababff4d5eee3300c93934042b33570dfbf8ac2d7e857c2c"
+    },
+    "arcgpt2/build_goal_version_dataset.py": {
+      "bytes": 8524,
+      "sha256": "734233022e57f68efdb59fa66b199253ed5b5d078982bf04eb10b54f106355d7"
+    },
+    "arcgpt2/build_joint_epistemic_dataset.py": {
+      "bytes": 12554,
+      "sha256": "2573ea2b50a9eb46070520305a93fd236bb0189d641eccba2bc6f420add93e11"
+    },
+    "arcgpt2/build_joint_epistemic_v2.py": {
+      "bytes": 9553,
+      "sha256": "d6ab1f648b84e490e91a3aab7b0add574211b7cb9b7c31010256e1b48bce34b1"
+    },
+    "arcgpt2/build_phase0_dataset.py": {
+      "bytes": 5232,
+      "sha256": "f2ac564749749b064e44f866e69ba8f5fdf0cc3da1f442c8625a6c9a6f9a09fb"
+    },
+    "arcgpt2/build_program_dataset.py": {
+      "bytes": 7510,
+      "sha256": "b039019efca913acaa77d52f52458057d6ee85b26dda811752534b3d18705982"
+    },
+    "arcgpt2/build_repair_dataset.py": {
+      "bytes": 8992,
+      "sha256": "d8bbfea700dc842fb5f48808059c74e8e8fd4c58c4c0cbbc8d86affad7e828f4"
+    },
+    "arcgpt2/codec.py": {
+      "bytes": 15911,
+      "sha256": "1df2797af0d950c1e0899adc42e9f30b6377e1923e79565ecd9a98bbdc8d9007"
+    },
+    "arcgpt2/compare_contact_version.py": {
+      "bytes": 4182,
+      "sha256": "d753f24fa80e92d851859b844e754e776169d93ab57c9c9e3a8af8d2d3769680"
+    },
+    "arcgpt2/compare_epistemic_binding.py": {
+      "bytes": 3668,
+      "sha256": "30933e0c753555e5f1347a626d25c720358ddaf59ae3ee1f1b1e4e43dd09442e"
+    },
+    "arcgpt2/compare_factorized.py": {
+      "bytes": 3714,
+      "sha256": "7d2e471d217fd7a63c4705e9fd5add4ede947882274c491eec92fefb88837d9c"
+    },
+    "arcgpt2/compare_goal_version.py": {
+      "bytes": 4661,
+      "sha256": "df5b250a80a02a130fe26377ebcc5df8b7352180f5028403a95ddf6749e416cc"
+    },
+    "arcgpt2/compare_joint_epistemic.py": {
+      "bytes": 4633,
+      "sha256": "9b7147028b840da5479fb008fb21e8fa34c392016e6f68272ce94136d617f767"
+    },
+    "arcgpt2/compare_joint_epistemic_v2.py": {
+      "bytes": 4573,
+      "sha256": "20318b2cf1c8531d8fb6890fc8bf161448250c1d050f675cba1b277e83737222"
+    },
+    "arcgpt2/compare_meta_soft.py": {
+      "bytes": 3732,
+      "sha256": "259c9e69c39f3f38ff3e83c585b3c56bf5e84a04dc0807ef935d0a4cad36204d"
+    },
+    "arcgpt2/compare_meta_soft_single.py": {
+      "bytes": 4237,
+      "sha256": "eb1fc8f81e57d8a7c75ed0156afc284ace0020c62b2de24ac10514b1f38f1c3e"
+    },
+    "arcgpt2/compare_phase0.py": {
+      "bytes": 2939,
+      "sha256": "50e1d5e76cc43e126268497becdd1356a48e6ae1a566c66d7b095637acff24a2"
+    },
+    "arcgpt2/compare_program_induction.py": {
+      "bytes": 3531,
+      "sha256": "b207373a1fc28dd04427477966c5c335bc3d8bc4cf16b67f54d10a8c66a2eda9"
+    },
+    "arcgpt2/completion_scorer.py": {
+      "bytes": 6175,
+      "sha256": "459fc8f180d7d0c4936dd0f425503e586a2ba0a5906020db478d35c0292c4882"
+    },
+    "arcgpt2/constraint_posterior.py": {
+      "bytes": 8483,
+      "sha256": "1c622c5adf12d62de2bc208082a6341c3fec9bc9b1c92401562e4790ddc033c9"
+    },
+    "arcgpt2/contact_protocol.py": {
+      "bytes": 2725,
+      "sha256": "6ffb3e8f90ce261fc547595d2c67c61cf353bf3dcc4db2c8c64af86d0620f39c"
+    },
+    "arcgpt2/contact_world_agent.py": {
+      "bytes": 16425,
+      "sha256": "308b931e7edc93ce93b4b344940a3c3a3bc47f68ac093178f27fe267a2616a6e"
+    },
+    "arcgpt2/dsl.py": {
+      "bytes": 14400,
+      "sha256": "c75aff68fb70588f296f8d7cefd765541fc83928d3ba2d0db7a8077126603089"
+    },
+    "arcgpt2/eggroll_inner_memory.py": {
+      "bytes": 41535,
+      "sha256": "0b5829c32491fc0e36c0bb9b99167b455b1f059a79e949c5b78ae149771a2f75"
+    },
+    "arcgpt2/goal_dsl.py": {
+      "bytes": 12284,
+      "sha256": "0acd7e0b6bc8ff9262209e8d9045e5cb218ec2c1bab7ed3fa5e8323583d2033b"
+    },
+    "arcgpt2/goal_protocol.py": {
+      "bytes": 5170,
+      "sha256": "3f9030341187944ed9c0c41f1b60c0ff8d52ef69282b7f59099f676df9bbcd38"
+    },
+    "arcgpt2/goal_version_runtime.py": {
+      "bytes": 3504,
+      "sha256": "39d466ea146ecf23624b4d17e72044e3c9bbdc722ede7db44a80b04603c2df24"
+    },
+    "arcgpt2/gpt2_contact_scores.py": {
+      "bytes": 4890,
+      "sha256": "8a13fb7f0863b6bdaf268449877d6dd8689ec321a189f1e9ad372c9d97d3fa65"
+    },
+    "arcgpt2/launches/raw-goal-signature/full-20260803-001.json": {
+      "bytes": 1052,
+      "sha256": "e9364b58038afda852c354e133c97e925e105a6f72160a4a18b7cfb11aa0c9d8"
+    },
+    "arcgpt2/launches/raw-goal-signature/timing-20260803-001.json": {
+      "bytes": 659,
+      "sha256": "9b6ad1cd2383d0d5da10c37c376e234552069c6453cc990fc984355cdb306f25"
+    },
+    "arcgpt2/mapping_target.py": {
+      "bytes": 4044,
+      "sha256": "c1ecb471130de0e64acea06ab4c380a479969720a5ebc861f98724a917a48751"
+    },
+    "arcgpt2/mechanics_v2.py": {
+      "bytes": 15228,
+      "sha256": "9c9196cc1cb2d36a757881bf127b9d876c2245fa1fbfd76013abcfd4e7a87649"
+    },
+    "arcgpt2/meta_soft_binding.py": {
+      "bytes": 29674,
+      "sha256": "b1506ae265219b007ca8e79bcbb72b946260902f0b1e03aac5a8d7ab22819e28"
+    },
+    "arcgpt2/meta_soft_contrastive.py": {
+      "bytes": 6303,
+      "sha256": "c81c6b43b3c5953e80b8599cbfe4d4649a89141f527684063b8e22a233ddef3e"
+    },
+    "arcgpt2/meta_soft_heldout_binding.py": {
+      "bytes": 52386,
+      "sha256": "a1e64902fdf48316dea5e61160e2a1535555751a871a91c6c6809b2f9eaf94ef"
+    },
+    "arcgpt2/meta_soft_raw_goal_signature.py": {
+      "bytes": 60663,
+      "sha256": "e1ea15e43ef888ce4f244de73487b0afd48c830ded289cd5533e3310575e4f9e"
+    },
+    "arcgpt2/meta_soft_raw_outcome_overfit.py": {
+      "bytes": 27434,
+      "sha256": "4114c613dd403331daba14ca157fd945de206edd7ab6c9fdb08b6af8ac88bafe"
+    },
+    "arcgpt2/meta_soft_runtime.py": {
+      "bytes": 1478,
+      "sha256": "f61e9b338b1b19a09d083453e18327c3a52155e78f8b50fd41c3ab3f9e57084a"
+    },
+    "arcgpt2/meta_soft_second_order.py": {
+      "bytes": 4373,
+      "sha256": "d4be18529f8b5ea9f025d0a46d2625507546b3dac0f4186468ea9e304e6613bb"
+    },
+    "arcgpt2/meta_soft_single_binding.py": {
+      "bytes": 24511,
+      "sha256": "307bf017c27efb01d82d3cb1a3f9462ee2e65a0cdb1c3f0995ddd2fbe46d4668"
+    },
+    "arcgpt2/meta_soft_twin_overfit.py": {
+      "bytes": 23888,
+      "sha256": "a82cd3ed889b7890afaa620d89e5737a914851192fca239ac8d43366ef9d1a1c"
+    },
+    "arcgpt2/natural_protocol.py": {
+      "bytes": 5042,
+      "sha256": "d128fa8d02a4c371929c131058f84618f5278b45fd07a7508d24f4b44e150f03"
+    },
+    "arcgpt2/official_mapping_memory.py": {
+      "bytes": 6768,
+      "sha256": "59fb3e36e4b51993668d387f014cfcccc1220b1f5e1545c05c14302ab5539634"
+    },
+    "arcgpt2/official_observation.py": {
+      "bytes": 13891,
+      "sha256": "7b30b1773d769f0a4cee9b0841a01d8c59ae04ee1662191087fe76b891c5ed1d"
+    },
+    "arcgpt2/official_public_manifest.json": {
+      "bytes": 1048,
+      "sha256": "77b441ebbba044653c6abe64d17ab3023e54fd1ed6fec732bf0c525614e2e7dc"
+    },
+    "arcgpt2/official_public_probe.py": {
+      "bytes": 7659,
+      "sha256": "de7562650a5c83e66f46e96448da2f46c31a25f3046e7866574b106873baa7b6"
+    },
+    "arcgpt2/official_public_score.py": {
+      "bytes": 55541,
+      "sha256": "9f8b4ef3a5c6786b8e6d16135db2c5d5b6818cb86731d63d60167ca5361694dd"
+    },
+    "arcgpt2/official_score_agent.py": {
+      "bytes": 36938,
+      "sha256": "125a8c542ed96c5bbe47721fdf64f9ee90ac9dfedfe95f1473d6a9844e0e1f39"
+    },
+    "arcgpt2/official_score_training.py": {
+      "bytes": 31488,
+      "sha256": "17400e285b1012239f47d95602f79e511bce25fbd146b4e7392ff9d9f4baa894"
+    },
+    "arcgpt2/phase0_hidden_action.py": {
+      "bytes": 14559,
+      "sha256": "4afd80185f46b8cb6e608ad6a6759afbd410fb594417b5f0b9d2cd061de8027c"
+    },
+    "arcgpt2/phase0_world_agent.py": {
+      "bytes": 9302,
+      "sha256": "23f547fe2ae59a97cf26fbb20bff2405ef35e26767ecdc6570604fbd0e304774"
+    },
+    "arcgpt2/posterior.py": {
+      "bytes": 10976,
+      "sha256": "588c1612302c96645a00f134dadb1374c35f1ba75c3ac41072ea8bc3216de93b"
+    },
+    "arcgpt2/primitive_contact_game.py": {
+      "bytes": 9263,
+      "sha256": "fee0afacc1dfdff298057c40911638c2363203dfb558b7af6eae43e7e7b5a4e5"
+    },
+    "arcgpt2/raw_goal_signature_data.py": {
+      "bytes": 28550,
+      "sha256": "27a97a10441623a8ce2ca1602480ec12cc0fef0781b57d8e9585c65a15df8cde"
+    },
+    "arcgpt2/requirements-arc3.in": {
+      "bytes": 165,
+      "sha256": "63b284c9f2a1a7eef6619bd6d94177e4a890440405cd24145d4884022bbe8aa5"
+    },
+    "arcgpt2/requirements-arc3.lock": {
+      "bytes": 91407,
+      "sha256": "0b6ba06bbb5104c49608dcfc25e54cdb54202844057b519c65395765ca0c3bec"
+    },
+    "arcgpt2/soft_belief.py": {
+      "bytes": 13976,
+      "sha256": "914c83011d929c67be4e57440da8369434cadb31dd3b5f278d996c9ef8622ea7"
+    },
+    "arcgpt2/tests/test_belief_math.py": {
+      "bytes": 2975,
+      "sha256": "94f6af6ec1db4b6c2a8805257fe66a722d8fa920c8f204e29f20dd01257f0cf0"
+    },
+    "arcgpt2/tests/test_codec.py": {
+      "bytes": 5137,
+      "sha256": "3976c6306db1132bd8eca22cb64b078c69567154abe502202867f72081b64796"
+    },
+    "arcgpt2/tests/test_completion_scorer.py": {
+      "bytes": 4330,
+      "sha256": "996f0db812abbd8cb23409b9846080347e96e6cd740547b944b3af67e65a0acd"
+    },
+    "arcgpt2/tests/test_constraint_posterior.py": {
+      "bytes": 3377,
+      "sha256": "2437d9e091624b339acc264b14cac78332a02536627963d5bdddd3a57ae43d54"
+    },
+    "arcgpt2/tests/test_contact_version_dataset.py": {
+      "bytes": 3989,
+      "sha256": "53bf75f013261c2c69416cd1eda03e41e7b470b9339b8935c960cd65b62ebbf1"
+    },
+    "arcgpt2/tests/test_contact_world_agent.py": {
+      "bytes": 3766,
+      "sha256": "1a3cac25d7be4d3f8454f9c289b8b6a7c25ab7e28aea7a213a5261ed49a8dcf6"
+    },
+    "arcgpt2/tests/test_dsl.py": {
+      "bytes": 3987,
+      "sha256": "958d69207d8562a7f2f13623a4c29af6afca8a27aa282c1055eb13bb0b872251"
+    },
+    "arcgpt2/tests/test_eggroll_inner_memory.py": {
+      "bytes": 12646,
+      "sha256": "651205eaa6665b00926eadb67ff5428dc6a084a70ce13d236e584188c27bb8af"
+    },
+    "arcgpt2/tests/test_epistemic_counterfactual_dataset.py": {
+      "bytes": 3123,
+      "sha256": "10459c81b20ab3f3541b17d546023d23f1f0a76638cabd2d5f4033beeb30f28a"
+    },
+    "arcgpt2/tests/test_epistemic_dataset.py": {
+      "bytes": 4188,
+      "sha256": "cb1074ef23dd2145a28be93b5dfee54089a97ee8ff55a32e9fd46d4ee62a9b2e"
+    },
+    "arcgpt2/tests/test_factorized_dataset.py": {
+      "bytes": 3398,
+      "sha256": "d170832a66cc14d836b855ec309bcd5588c7a28bc3249ae6515fb9c4b8991943"
+    },
+    "arcgpt2/tests/test_goal_dsl.py": {
+      "bytes": 4110,
+      "sha256": "5e6e1a1c0a24d071e38345435052f708ddbe86aab427eb44c56ea07c75b33db8"
+    },
+    "arcgpt2/tests/test_goal_version_compact.py": {
+      "bytes": 533,
+      "sha256": "f8a1550f21f035f9dfa5d74b590a18573e16e058f6d68e15d09ddf007e0c1412"
+    },
+    "arcgpt2/tests/test_goal_version_dataset.py": {
+      "bytes": 4281,
+      "sha256": "8cbce6025ee14a54ca9536d6851f5d2ba3ca69625ba39f88dd8ab0b7b26a5893"
+    },
+    "arcgpt2/tests/test_goal_version_runtime.py": {
+      "bytes": 799,
+      "sha256": "836de81fbc00ca0b745f668b636e39d8db609ce13579ff67e3ca753478e48b07"
+    },
+    "arcgpt2/tests/test_joint_epistemic_dataset.py": {
+      "bytes": 2947,
+      "sha256": "b41d7f90a726e5f0946ee0d80227c650f0d31df5bf8f32fb73222d67812a6d16"
+    },
+    "arcgpt2/tests/test_joint_epistemic_trainer.py": {
+      "bytes": 2228,
+      "sha256": "0e1fba21c90c96b091c2c4ccc25408f9828175448045acf26e71e4464276809f"
+    },
+    "arcgpt2/tests/test_joint_epistemic_v2.py": {
+      "bytes": 2908,
+      "sha256": "4381be273c6a53bf1e697fb820386405bd7d1a59fbf280a805ea715630c90345"
+    },
+    "arcgpt2/tests/test_mechanics_v2.py": {
+      "bytes": 5161,
+      "sha256": "277f59d9376e4e7519a4c643ab0bca1cf43f3e79f42e2f7a104cda46a1e0ec5d"
+    },
+    "arcgpt2/tests/test_meta_soft_contrastive.py": {
+      "bytes": 1515,
+      "sha256": "113ee91266dfbec4ba824bcc51036c472bf4bd90c740a61c4a797b45315d1f9a"
+    },
+    "arcgpt2/tests/test_meta_soft_heldout_binding.py": {
+      "bytes": 15226,
+      "sha256": "e582d641bfaf4382ea4257808b11d9147c22ad58db9685053c6eeaab105bfc8b"
+    },
+    "arcgpt2/tests/test_meta_soft_raw_goal_signature.py": {
+      "bytes": 17955,
+      "sha256": "f994f3bfc4f4a74bd0c2b54723f184ec9f16d1bc06440f6753e4c6377fe151c0"
+    },
+    "arcgpt2/tests/test_meta_soft_raw_outcome_overfit.py": {
+      "bytes": 5597,
+      "sha256": "181c5c251b426e898ab94d4a5b104f20d08598dc9390304cdcabde759a104a86"
+    },
+    "arcgpt2/tests/test_meta_soft_second_order.py": {
+      "bytes": 1228,
+      "sha256": "1dd25fde76ab2fa3d58978e1ad39369428f3171ab5f7a82cfe2be0314143dcf8"
+    },
+    "arcgpt2/tests/test_meta_soft_single_binding_gate.py": {
+      "bytes": 3283,
+      "sha256": "4bc1021b4515bb208de00929174c171b7ce67a95a32e9b474932a5df42804f43"
+    },
+    "arcgpt2/tests/test_meta_soft_twin_overfit_gate.py": {
+      "bytes": 4553,
+      "sha256": "abbc13b5c6ebcae5f7870209dcce3d8be563fcc80bddf485f9a0dec5e467c9df"
+    },
+    "arcgpt2/tests/test_official_mapping_memory.py": {
+      "bytes": 3463,
+      "sha256": "00fe3913c02902a6eb7aa45850d704725701e8cc14fac066bb228a1e695f32b3"
+    },
+    "arcgpt2/tests/test_official_observation.py": {
+      "bytes": 5619,
+      "sha256": "91f1b59dcaff848cb2e012b9d742a65dce22e3257fe556bc0b991dfca3d8f91b"
+    },
+    "arcgpt2/tests/test_official_public_score.py": {
+      "bytes": 34868,
+      "sha256": "1cec6f578968636e62e6ed3185c9898c105abd76cf0128d44714d3e89250bc21"
+    },
+    "arcgpt2/tests/test_official_public_score_workflow.py": {
+      "bytes": 8651,
+      "sha256": "f07474e0d9cc9f881d373f7bf22c6f5b75bfa2e47fbb13b6602660313e17c3fe"
+    },
+    "arcgpt2/tests/test_official_score_agent.py": {
+      "bytes": 12236,
+      "sha256": "559a3cecbaad2283429f459b0ec44ca07e9193f659727d97813118ecc51ee79b"
+    },
+    "arcgpt2/tests/test_official_score_training.py": {
+      "bytes": 13099,
+      "sha256": "dc68623f046be77b369a661369136e3b8e33e683aad1a310d4e5ac47886a317f"
+    },
+    "arcgpt2/tests/test_phase0_hidden_action.py": {
+      "bytes": 2281,
+      "sha256": "f73700d5ea84ff092a90b810c6624716b3bc51f6df60c3000c79bcf7cfc70310"
+    },
+    "arcgpt2/tests/test_phase0_world_agent.py": {
+      "bytes": 1806,
+      "sha256": "c78fc4814b02a758709b193cf962ae4b3b048a4bdb903e28de2f43e31514f5fd"
+    },
+    "arcgpt2/tests/test_posterior.py": {
+      "bytes": 3319,
+      "sha256": "ebdafadcf42895ec6edcf1848f75bbaf083244681b486517aa454c8865c0533c"
+    },
+    "arcgpt2/tests/test_primitive_contact_game.py": {
+      "bytes": 3751,
+      "sha256": "f40e7499c1d2a04337fbb0648ff503751ba17c6691a1405294cf7825118a14ee"
+    },
+    "arcgpt2/tests/test_program_dataset.py": {
+      "bytes": 3089,
+      "sha256": "8064d3fef00e309b0c432319ca8aa4703a73a87c49e9f6a95008fed2a79a63a9"
+    },
+    "arcgpt2/tests/test_python_syntax.py": {
+      "bytes": 448,
+      "sha256": "a3a2ee5d0f6565663bf887351462dffb4e50144413193c8ba04c8cb69102da86"
+    },
+    "arcgpt2/tests/test_raw_goal_signature_data.py": {
+      "bytes": 8486,
+      "sha256": "aa8a7279bd514a3eb94b230ce61d12b4883fc38cc79ace54bdebc0c7d611ddf3"
+    },
+    "arcgpt2/tests/test_raw_goal_signature_runner.py": {
+      "bytes": 4051,
+      "sha256": "18699d26c71e8eaf9cc15d3e009e537c4fd20599d404e0f1f07edf2699e0ee54"
+    },
+    "arcgpt2/tests/test_raw_goal_signature_statistics.py": {
+      "bytes": 5031,
+      "sha256": "8c9263839f6a856f74a6b2f685e5d5f8b56930f3675acdbcbb6dd50a05cce5f2"
+    },
+    "arcgpt2/tests/test_repair_dataset.py": {
+      "bytes": 3343,
+      "sha256": "196aab9ddc55bbba9753aaceeaf95ede1de9440847cb02826d7c7b9e05b4d031"
+    },
+    "arcgpt2/tests/test_world_posterior.py": {
+      "bytes": 3246,
+      "sha256": "63244b21f747d8ecb02216ce67a607c21599dfdd71b91228954cd9f427934c4c"
+    },
+    "arcgpt2/train_contact_version.py": {
+      "bytes": 19323,
+      "sha256": "99e96d966ed09200aa95bedea00588eac85243d28cfb21885a54490cf848c161"
+    },
+    "arcgpt2/train_epistemic_binding.py": {
+      "bytes": 25169,
+      "sha256": "50aff0e2c7be2977898245acb585c2630d533c1bea65d6e76626e323de2ffb3e"
+    },
+    "arcgpt2/train_factorized.py": {
+      "bytes": 21919,
+      "sha256": "4025953e4c091dfaa480434941fde2053a76569dd568764a7ec37a0d0bf6f919"
+    },
+    "arcgpt2/train_factorized_frozen.py": {
+      "bytes": 1088,
+      "sha256": "de276ca9bbf2701368cde8f3de414c11bc3a409322d1f9c58af6f74c6b8b985f"
+    },
+    "arcgpt2/train_goal_version.py": {
+      "bytes": 24316,
+      "sha256": "4ad50880ac89ce0a7ccfdfade636c4accc23490cafe275797b0b4a1e275f25db"
+    },
+    "arcgpt2/train_joint_epistemic.py": {
+      "bytes": 22818,
+      "sha256": "834941a5de82a90a610a684e5c67a92077978ab9c58cc57d9a77c13b7d08bc1f"
+    },
+    "arcgpt2/train_mapping_induction.py": {
+      "bytes": 1265,
+      "sha256": "ca2e5fc88fa29235d6604301710a6f161f85294850c7671ff55746f5d5e0fc76"
+    },
+    "arcgpt2/train_phase0.py": {
+      "bytes": 21190,
+      "sha256": "220bd5d332f4d59dd6ea004144a3ebc99761534cbe3f45be74d09811cea451f6"
+    },
+    "arcgpt2/train_program_induction.py": {
+      "bytes": 21660,
+      "sha256": "667516b24b8c8aced648aac0a034b2dfeab9f97dc6dcedfd72291b368d4e078a"
+    },
+    "arcgpt2/world_posterior.py": {
+      "bytes": 11218,
+      "sha256": "6f6fb1d314f303f4dd9daf7f472b996aa3c53b7783df27056198f0d2f88c97d0"
+    },
+    "kaggle/arc-gpt2-official-public-score-gpu/runner.py": {
+      "bytes": 41794,
+      "sha256": "233679375500b4bbf2e12345bba91646ee3d65076e239083eeb18b91d1a952f7"
+    }
+  },
+  "public_manifest_sha256": "77b441ebbba044653c6abe64d17ab3023e54fd1ed6fec732bf0c525614e2e7dc",
+  "requirements_lock_sha256": "0b6ba06bbb5104c49608dcfc25e54cdb54202844057b519c65395765ca0c3bec",
+  "resolved_source_sha": "c43d9a3653c03266ae9fc3ee7a9069531629697c",
+  "runner_source_sha256": "ab1ef1485f4f1b036453db75378e6459611458f2224791e162996a9642d5d7e4",
+  "schema_version": 1,
+  "source_repository": "https://github.com/AmeerUsman10/BAssist.git",
+  "source_sha": "c43d9a3653c03266ae9fc3ee7a9069531629697c",
+  "source_tree": "5ce12c5a51f5336618508b8d042e2722357f85c0"
+}
