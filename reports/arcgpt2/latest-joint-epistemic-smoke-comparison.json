@@ -1,0 +1,154 @@
+{
+  "status": "not_yet_passed",
+  "scope": "One-GPT-2 multi-query epistemic gate. A pass would show joint information use without catastrophic task loss, not ARC-AGI-3 completion.",
+  "gates": {
+    "action_binding:full_consistent_mass_at_least_0_50": false,
+    "action_binding:full_map_consistent_at_least_0_60": false,
+    "action_binding:pretrained_beats_random_consistent_mass": false,
+    "action_binding:full_beats_full_minus_amnesic_consistent_mass_by_at_least_0_10": false,
+    "action_binding:full_beats_full_minus_shuffled_evidence_consistent_mass_by_at_least_0_10": false,
+    "goal_inference:full_consistent_mass_at_least_0_50": false,
+    "goal_inference:full_map_consistent_at_least_0_60": false,
+    "goal_inference:pretrained_beats_random_consistent_mass": false,
+    "goal_inference:full_beats_full_minus_amnesic_consistent_mass_by_at_least_0_10": false,
+    "goal_inference:full_beats_full_minus_statusless_consistent_mass_by_at_least_0_10": false,
+    "goal_inference:full_beats_full_minus_shuffled_status_consistent_mass_by_at_least_0_10": false,
+    "both_tasks:validation_cross_entropy_improves": true
+  },
+  "tasks": {
+    "action_binding": {
+      "information_level": 3,
+      "pretrained_full": {
+        "consistent_mass": 0.2316962331533432,
+        "map_consistent": 0.0,
+        "truth_probability": 0.2316962331533432,
+        "truth_rank": 3.0,
+        "entropy_bits": 1.994964361190796,
+        "set_cross_entropy": 1.4623280763626099,
+        "brier": 0.7883564233779907,
+        "rows": 1.0
+      },
+      "pretrained_controls": {
+        "amnesic": {
+          "consistent_mass": 0.25,
+          "map_consistent": 1.0,
+          "truth_probability": 0.25,
+          "truth_rank": 1.0,
+          "entropy_bits": 2.0,
+          "set_cross_entropy": 1.3862943649291992,
+          "brier": 0.75,
+          "rows": 1.0
+        },
+        "shuffled_evidence": {
+          "consistent_mass": 0.22531090676784515,
+          "map_consistent": 0.0,
+          "truth_probability": 0.22531090676784515,
+          "truth_rank": 3.0,
+          "entropy_bits": 1.9925878047943115,
+          "set_cross_entropy": 1.4902740716934204,
+          "brier": 0.8019492030143738,
+          "rows": 1.0
+        }
+      },
+      "random_full": {
+        "consistent_mass": 0.24618420004844666,
+        "map_consistent": 0.0,
+        "truth_probability": 0.24618420004844666,
+        "truth_rank": 2.0,
+        "entropy_bits": 1.9471766948699951,
+        "set_cross_entropy": 1.4016752243041992,
+        "brier": 0.7766277194023132,
+        "rows": 1.0
+      },
+      "deltas": {
+        "full_minus_amnesic_consistent_mass": -0.0183037668466568,
+        "full_minus_shuffled_evidence_consistent_mass": 0.006385326385498047,
+        "pretrained_minus_random_consistent_mass": -0.014487966895103455
+      },
+      "gates": {
+        "full_consistent_mass_at_least_0_50": false,
+        "full_map_consistent_at_least_0_60": false,
+        "pretrained_beats_random_consistent_mass": false,
+        "full_beats_full_minus_amnesic_consistent_mass_by_at_least_0_10": false,
+        "full_beats_full_minus_shuffled_evidence_consistent_mass_by_at_least_0_10": false
+      }
+    },
+    "goal_inference": {
+      "information_level": 3,
+      "pretrained_full": {
+        "consistent_mass": 0.23532578349113464,
+        "map_consistent": 0.0,
+        "truth_probability": 0.12032570689916611,
+        "truth_rank": 5.0,
+        "entropy_bits": 2.9965033531188965,
+        "set_cross_entropy": 2.1401877403259277,
+        "brier": 0.39028200507164,
+        "rows": 1.0
+      },
+      "pretrained_controls": {
+        "amnesic": {
+          "consistent_mass": 0.25,
+          "map_consistent": 0.0,
+          "truth_probability": 0.125,
+          "truth_rank": 6.0,
+          "entropy_bits": 3.0,
+          "set_cross_entropy": 2.079441547393799,
+          "brier": 0.375,
+          "rows": 1.0
+        },
+        "statusless": {
+          "consistent_mass": 0.2350160777568817,
+          "map_consistent": 0.0,
+          "truth_probability": 0.11782565712928772,
+          "truth_rank": 5.0,
+          "entropy_bits": 2.996453046798706,
+          "set_cross_entropy": 2.141252279281616,
+          "brier": 0.39060112833976746,
+          "rows": 1.0
+        },
+        "shuffled_status": {
+          "consistent_mass": 0.23523956537246704,
+          "map_consistent": 0.0,
+          "truth_probability": 0.12032002210617065,
+          "truth_rank": 5.0,
+          "entropy_bits": 2.9964654445648193,
+          "set_cross_entropy": 2.140561580657959,
+          "brier": 0.390375018119812,
+          "rows": 1.0
+        }
+      },
+      "random_full": {
+        "consistent_mass": 0.24656617641448975,
+        "map_consistent": 0.0,
+        "truth_probability": 0.12851166725158691,
+        "truth_rank": 2.0,
+        "entropy_bits": 2.9993584156036377,
+        "set_cross_entropy": 2.094172239303589,
+        "brier": 0.37854474782943726,
+        "rows": 1.0
+      },
+      "deltas": {
+        "full_minus_amnesic_consistent_mass": -0.014674216508865356,
+        "full_minus_statusless_consistent_mass": 0.0003097057342529297,
+        "full_minus_shuffled_status_consistent_mass": 8.621811866760254e-05,
+        "pretrained_minus_random_consistent_mass": -0.011240392923355103
+      },
+      "gates": {
+        "full_consistent_mass_at_least_0_50": false,
+        "full_map_consistent_at_least_0_60": false,
+        "pretrained_beats_random_consistent_mass": false,
+        "full_beats_full_minus_amnesic_consistent_mass_by_at_least_0_10": false,
+        "full_beats_full_minus_statusless_consistent_mass_by_at_least_0_10": false,
+        "full_beats_full_minus_shuffled_status_consistent_mass_by_at_least_0_10": false
+      }
+    }
+  },
+  "pretrained_training_loss_by_task": {
+    "action_binding": 1.257559061050415,
+    "goal_inference": 2.219729781150818
+  },
+  "random_training_loss_by_task": {
+    "action_binding": 1.4358305931091309,
+    "goal_inference": 2.0453367233276367
+  }
+}

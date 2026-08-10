@@ -1,0 +1,39 @@
+{
+  "mapping_variants_per_group": 4,
+  "schema": "arcgpt2.epistemic_binding.counterfactual.v1",
+  "scope": "Set-valued hidden-action binding with counterfactual twins that hold geometry, palette, and goal fixed while changing only the action permutation. Controlled gate, not ARC-AGI-3 evaluation.",
+  "seed_base": 314159,
+  "shortcut_control": "Initial grids are identical within each group and therefore carry zero information about which mapping variant is active.",
+  "splits": {
+    "test": {
+      "counterfactual_groups": 1,
+      "examples": 80,
+      "examples_per_group": 80,
+      "file": "test.jsonl",
+      "mapping_variants_per_group": 4,
+      "seed_start": 314164,
+      "seed_stop_exclusive": 314165,
+      "sha256": "0f1c5f6a68ee2ca97b0a9a5c8899fa962e8901b412e320334715f87a35db8ba8"
+    },
+    "train": {
+      "counterfactual_groups": 4,
+      "examples": 320,
+      "examples_per_group": 80,
+      "file": "train.jsonl",
+      "mapping_variants_per_group": 4,
+      "seed_start": 314159,
+      "seed_stop_exclusive": 314163,
+      "sha256": "05d31f7b3adf08e9cb237b591c17fb7042b9b801b748c8471a49ddab344d767e"
+    },
+    "validation": {
+      "counterfactual_groups": 1,
+      "examples": 80,
+      "examples_per_group": 80,
+      "file": "validation.jsonl",
+      "mapping_variants_per_group": 4,
+      "seed_start": 314163,
+      "seed_stop_exclusive": 314164,
+      "sha256": "abc1360d51f37dcc2ee4d42e917a0284f136a2b2c26f6c4ef1eb8f2047f1df45"
+    }
+  }
+}

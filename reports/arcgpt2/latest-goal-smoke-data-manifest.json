@@ -1,0 +1,33 @@
+{
+  "representation": "Ordinary GPT-2 vocabulary, exact pre-action grids, exact changed cells, exact actions, and exact terminal reports.",
+  "schema": "arcgpt2.goal_version_space.v1",
+  "scope": "Set-valued inference over bounded atomic Goal-DSL candidates with known transition mechanics; controlled gate, not ARC-AGI-3 evaluation.",
+  "seed_base": 161803,
+  "splits": {
+    "test": {
+      "examples": 9,
+      "file": "test.jsonl",
+      "games": 1,
+      "seed_start": 161808,
+      "seed_stop_exclusive": 161809,
+      "sha256": "fe42efe726c852221f81de13086076bbd6dc76716270bc165144800cb534764c"
+    },
+    "train": {
+      "examples": 36,
+      "file": "train.jsonl",
+      "games": 4,
+      "seed_start": 161803,
+      "seed_stop_exclusive": 161807,
+      "sha256": "1fdf08c02a77bb47433c1932160cfc3dd5e87739b95115460236fd3fb88b1359"
+    },
+    "validation": {
+      "examples": 9,
+      "file": "validation.jsonl",
+      "games": 1,
+      "seed_start": 161807,
+      "seed_stop_exclusive": 161808,
+      "sha256": "9af9af130cc3d95e574d0a98a0e5b7923b48c01dd00585e06656ff527c6128cd"
+    }
+  },
+  "target": "Uniform distribution over every Goal-DSL candidate consistent with all observed terminal and non-terminal records."
+}

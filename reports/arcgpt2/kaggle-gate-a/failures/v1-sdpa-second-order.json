@@ -1,0 +1,29 @@
+{
+  "status": "execution_failed",
+  "scope": "Kaggle Gate A kernel version 1 engineering failure; not a scientific Gate A result.",
+  "source_sha": "2a30aeedb27c1ff9d78b7ca1d24d37b92b32827e",
+  "github_run_id": "30808474582",
+  "failed_at_utc": "2026-08-03T11:12:14.263619+00:00",
+  "gpu_verified": {
+    "device_name": "Tesla T4",
+    "device_count": 2,
+    "compute_capability": [7, 5],
+    "cuda_runtime": "12.8",
+    "cuda_compute_probe": 256.0
+  },
+  "preflight_tests": "9 passed",
+  "root_cause": {
+    "error_type": "RuntimeError",
+    "error_message": "derivative for aten::_scaled_dot_product_efficient_attention_backward is not implemented",
+    "location": "first second-order outer loss.backward()"
+  },
+  "repair": {
+    "description": "Force GPT-2 eager attention so higher-order attention derivatives are implemented.",
+    "commit_sha": "265a8676363e212aed0ea60cc1fd591483522351"
+  },
+  "evidence": {
+    "workflow_run": "https://github.com/AmeerUsman10/BAssist/actions/runs/30808474582",
+    "retrieval_run": "https://github.com/AmeerUsman10/BAssist/actions/runs/30808714266",
+    "retrieval_artifact_id": "8853850560"
+  }
+}

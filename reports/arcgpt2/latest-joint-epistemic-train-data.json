@@ -1,0 +1,43 @@
+{
+  "candidate_scoring": "Ordinary GPT-2 completion likelihood over variable candidate sets; no auxiliary learned heads.",
+  "schema": "arcgpt2.joint_epistemic.v1",
+  "scope": "One-checkpoint set-valued action-semantics and latent-goal curriculum; controlled gate, not ARC-AGI-3 evaluation.",
+  "splits": {
+    "test": {
+      "action_groups": 6,
+      "action_seed_start": 718061,
+      "action_seed_stop_exclusive": 718067,
+      "examples": 534,
+      "file": "test.jsonl",
+      "goal_games": 6,
+      "goal_seed_start": 241448,
+      "goal_seed_stop_exclusive": 241454,
+      "mapping_variants_per_action_group": 4,
+      "sha256": "1b0d9a5bfa7de35079aab1465c74adc98d61af98d78b779d72deeb22bc9b69bc"
+    },
+    "train": {
+      "action_groups": 24,
+      "action_seed_start": 718034,
+      "action_seed_stop_exclusive": 718058,
+      "examples": 2133,
+      "file": "train.jsonl",
+      "goal_games": 24,
+      "goal_seed_start": 241421,
+      "goal_seed_stop_exclusive": 241445,
+      "mapping_variants_per_action_group": 4,
+      "sha256": "59bcf777865c4dbdefd715a52c7402b7b3e61c6e0d4c4567890023b2b91fe69d"
+    },
+    "validation": {
+      "action_groups": 3,
+      "action_seed_start": 718058,
+      "action_seed_stop_exclusive": 718061,
+      "examples": 267,
+      "file": "validation.jsonl",
+      "goal_games": 3,
+      "goal_seed_start": 241445,
+      "goal_seed_stop_exclusive": 241448,
+      "mapping_variants_per_action_group": 4,
+      "sha256": "2c5a21e8603e694b953acee292eac3217aaab33463ec3444605db90e450414c6"
+    }
+  }
+}

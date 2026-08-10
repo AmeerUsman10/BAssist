@@ -1,0 +1,61 @@
+{
+  "status": "completed",
+  "dispatch_outcome": "success",
+  "scope": "Private Kaggle T4 one-seed raw outcome NLL gate; no competition submission.",
+  "branch": "arc-gpt2-programs",
+  "workflow_sha": "339f600dcc73d2ceadfdedb3c9b7b46f8687d2c1",
+  "kernel_source_sha": "339f600dcc73d2ceadfdedb3c9b7b46f8687d2c1",
+  "github_run_id": "30814446480",
+  "github_run_attempt": "1",
+  "recorded_at_utc": "2026-08-03T12:43:51.351787+00:00",
+  "kernel_slug": "arc-gpt2-raw-outcome-gradient-memory-gpu",
+  "kernel_ref_sha256": "c4442c2dc8b6879456e847ce0ae115c0e60059bd025c7c8a620b970e3aa47b7c",
+  "final_dispatch_state": "outputs_retrieved",
+  "dispatch_detail": null,
+  "accelerator_requested": "NvidiaTeslaT4",
+  "internet_enabled_only_for_pinned_source_and_checkpoint_fetch": true,
+  "competition_submission_performed": false,
+  "model_saved": false,
+  "output_files": {
+    "arc-gpt2-raw-outcome-gradient-memory-gpu.log": {
+      "bytes": 135118,
+      "sha256": "390ca3415a5fd51db386a91044356f1771d5461dd1219e496e9358ab49115938"
+    },
+    "arc_gpt2_raw_outcome_gpu/artifact-manifest.json": {
+      "bytes": 1080,
+      "sha256": "7b3687b1226bded090801615414abb50ff682cc44213084b9eff78591046cf86"
+    },
+    "arc_gpt2_raw_outcome_gpu/environment.json": {
+      "bytes": 651,
+      "sha256": "a5438e9683351997a731b599aba777f0a934db6082ee8d6a8b454c85f65bbb6c"
+    },
+    "arc_gpt2_raw_outcome_gpu/gpu-samples.json": {
+      "bytes": 12868,
+      "sha256": "e671b1767650c5052cb2ac8199f98b6cdcce4e4f342fb282b73c203cad19b150"
+    },
+    "arc_gpt2_raw_outcome_gpu/logs/dependency-install.log": {
+      "bytes": 641,
+      "sha256": "2b86d33a9329ca432d9fc1f8896db3cba7362cd3f8dc5e6efb6697902c4f9d7a"
+    },
+    "arc_gpt2_raw_outcome_gpu/logs/preflight-tests.log": {
+      "bytes": 100,
+      "sha256": "53ed655561867414bf20fa0a50235240f749aad1b9d4b6d2e013ead1fd4eb7c9"
+    },
+    "arc_gpt2_raw_outcome_gpu/logs/pretrained.log": {
+      "bytes": 42593,
+      "sha256": "2be5cfb1579f87f325d5e2011d3d9ea87c1afe379a9c516aa002940752fd8b8c"
+    },
+    "arc_gpt2_raw_outcome_gpu/model-manifest.json": {
+      "bytes": 907,
+      "sha256": "a348eaa644ec7c670c7f28a751762b38b5a2cca62f8ceb7a5fbaf7d9f746f69a"
+    },
+    "arc_gpt2_raw_outcome_gpu/outputs/pretrained/summary.json": {
+      "bytes": 35677,
+      "sha256": "db09afe39024600a1c5985f8bc97ac2a3a10570a7e7639b8ab55b255279732e0"
+    },
+    "arc_gpt2_raw_outcome_gpu/raw-outcome-result.json": {
+      "bytes": 2556,
+      "sha256": "b69d33113fe41cfb64e8f1ce2e6c9e6cfcd66a6eabfe92762000960632e41e03"
+    }
+  }
+}

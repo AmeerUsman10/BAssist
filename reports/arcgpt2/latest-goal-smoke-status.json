@@ -1,0 +1,9 @@
+{
+  "status": "success",
+  "branch": "arc-gpt2-programs",
+  "commit_sha": "f1511944112c2f1b8e45dde08f05c0ac32cd754b",
+  "run_id": "30725359864",
+  "run_attempt": "1",
+  "recorded_at_utc": "2026-08-02T00:46:56.920363+00:00",
+  "scope": "CPU runtime smoke for compact set-valued latent-goal scoring; not an ARC-AGI-3 capability result"
+}

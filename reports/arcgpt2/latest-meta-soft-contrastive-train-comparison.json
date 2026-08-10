@@ -1,0 +1,62 @@
+{
+  "status": "not_yet_passed",
+  "scope": "Soft-prefix hidden-action meta-learning control. A pass would show evidence-dependent temporary memory, not ARC-AGI-3 completion.",
+  "support_probe_count": 1,
+  "gates": {
+    "intact_consistent_mass_at_least_0_40": false,
+    "online_adaptation_gain_at_least_0_10": false,
+    "shuffled_outcome_drop_at_least_0_10": false,
+    "per_action_accuracy_at_least_0_50": false,
+    "pretrained_beats_random_consistent_mass": true,
+    "meta_query_loss_is_finite": true
+  },
+  "deltas": {
+    "intact_minus_no_adaptation_consistent_mass": -0.0008363891392946243,
+    "intact_minus_shuffled_consistent_mass": 0.0,
+    "pretrained_minus_random_consistent_mass": 0.008029069751501083
+  },
+  "pretrained": {
+    "intact": {
+      "episodes": 8.0,
+      "exact_mapping": 0.125,
+      "consistent_mass": 0.25332511588931084,
+      "truth_probability": 0.04190192185342312,
+      "truth_rank": 11.5,
+      "entropy_bits": 4.583457291126251,
+      "per_action_accuracy": 0.28125
+    },
+    "no_adaptation": {
+      "episodes": 8.0,
+      "exact_mapping": 0.125,
+      "consistent_mass": 0.25416150502860546,
+      "truth_probability": 0.04206865467131138,
+      "truth_rank": 11.375,
+      "entropy_bits": 4.583285331726074,
+      "per_action_accuracy": 0.25
+    },
+    "shuffled_outcome": {
+      "episodes": 8.0,
+      "exact_mapping": 0.125,
+      "consistent_mass": 0.25332511588931084,
+      "truth_probability": 0.04190192185342312,
+      "truth_rank": 11.5,
+      "entropy_bits": 4.583457291126251,
+      "per_action_accuracy": 0.28125
+    },
+    "mean_meta_query_loss": 1.5143548041582107,
+    "mean_support_nll": 1.4441117942333221
+  },
+  "random_initialization": {
+    "intact": {
+      "episodes": 8.0,
+      "exact_mapping": 0.0,
+      "consistent_mass": 0.24529604613780975,
+      "truth_probability": 0.040588931646198034,
+      "truth_rank": 15.5,
+      "entropy_bits": 4.582200467586517,
+      "per_action_accuracy": 0.25
+    },
+    "mean_meta_query_loss": 1.4240980640053749,
+    "mean_support_nll": 1.3888177171349525
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "arcgpt2.program_induction.phase0.v2",
+  "scope": "Four-probe induction over 24 hidden movement mappings with compact atomic targets and exact DSL expansion; controlled gate, not an ARC-AGI-3 score.",
+  "seed_base": 31337,
+  "special_tokens_file": "special_tokens.json",
+  "special_tokens_sha256": "4dff94a235babda0a4c31fd70a88c889e66b7b3bcfe02a75b06f36a2d8de444b",
+  "splits": {
+    "test": {
+      "file": "test.jsonl",
+      "games": 4,
+      "seed_start": 31357,
+      "seed_stop_exclusive": 31361,
+      "sha256": "58b5a520fdd35b17cdd47704b9c7459feab140aa956f4ff92654e856ab299388"
+    },
+    "train": {
+      "file": "train.jsonl",
+      "games": 16,
+      "seed_start": 31337,
+      "seed_stop_exclusive": 31353,
+      "sha256": "611e30c53331e86d7d65cce705890e3a04e0923599410a584a50396094b6fb5c"
+    },
+    "validation": {
+      "file": "validation.jsonl",
+      "games": 4,
+      "seed_start": 31353,
+      "seed_stop_exclusive": 31357,
+      "sha256": "dcff53fe27fbf98a56062108e7905d133ad0d78702395b0ad54a0bdfe41077d2"
+    }
+  },
+  "target": "<MAP> <A1> <DIRECTION> ... <A4> <DIRECTION> </MAP>"
+}

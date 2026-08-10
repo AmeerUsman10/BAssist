@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "protocol": "official_public_score_v1",
+  "source": {
+    "description": "Exact versioned public environments discovered by the official arc-agi toolkit probe on 2026-08-02.",
+    "probe_commit": "f1af468323e7653d36c98d9c151b0a99be78877e",
+    "probe_run_id": "30726399893"
+  },
+  "claim_boundary": "Public development benchmark only; not locked transfer, online leaderboard, or competition evidence.",
+  "seed": 0,
+  "max_actions_per_game": 160,
+  "max_resets_per_game": 3,
+  "game_ids": [
+    "bp35-0a0ad940",
+    "ar25-0c556536",
+    "sc25-635fd71a",
+    "sk48-d8078629",
+    "tu93-0768757b",
+    "su15-1944f8ab",
+    "ls20-9607627b",
+    "tr87-cd924810",
+    "m0r0-492f87ba",
+    "ft09-0d8bbf25",
+    "s5i5-18d95033",
+    "dc22-fdcac232",
+    "lf52-271a04aa",
+    "vc33-5430563c",
+    "lp85-305b61c3",
+    "sp80-589a99af",
+    "sb26-7fbdac44",
+    "cd82-fb555c5d",
+    "cn04-2fe56bfb",
+    "g50t-5849a774",
+    "re86-8af5384d",
+    "wa30-ee6fef47",
+    "ka59-38d34dbb",
+    "r11l-495a7899",
+    "tn36-ef4dde99"
+  ]
+}

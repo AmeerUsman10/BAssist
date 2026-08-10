@@ -1,0 +1,9 @@
+{
+  "status": "success",
+  "branch": "arc-gpt2-programs",
+  "commit_sha": "f3c12655ef2ae14ad3e24387099d1b376fd7eb0e",
+  "run_id": "30724692216",
+  "run_attempt": "1",
+  "recorded_at_utc": "2026-08-02T00:11:35.289810+00:00",
+  "scope": "One-support-step matched second-order soft-memory runtime experiment; not an ARC-AGI-3 capability result"
+}
