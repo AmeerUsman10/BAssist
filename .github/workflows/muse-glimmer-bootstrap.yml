@@ -33,7 +33,7 @@ jobs:
       - name: Create suppressed frozen launch commit
         id: launch
         env:
-          EXPECTED_PARENT_SHA: '4c37ee6d5096a059b663432a50cc9c59f051cb89'
+          EXPECTED_PARENT_SHA: 'b962284bc7815553f7f1b1a85a637ed507a9d4a7'
         run: |
           set -euo pipefail
           [[ "$(git rev-parse HEAD^)" == "$EXPECTED_PARENT_SHA" ]] || exit 1
