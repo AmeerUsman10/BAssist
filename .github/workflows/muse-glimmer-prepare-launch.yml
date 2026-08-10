@@ -30,11 +30,10 @@ jobs:
           fetch-depth: 2
           persist-credentials: true
 
-      - name: Validate implementation commit and prepare launch candidate
+      - name: Validate and create suppressed launch commit
         id: launch
         env:
-          EXPECTED_PARENT_SHA: '00f0fb26784d2446366d93910a864c494d60614a'
-          LAUNCH_BRANCH: 'muse-glimmer-arc-gate-v1-launch'
+          EXPECTED_PARENT_SHA: 'f43fb6ebbaa43041b8045d9a614a712e31e15d96'
         run: |
           set -euo pipefail
           actual_parent="$(git rev-parse HEAD^)"
@@ -55,7 +54,7 @@ jobs:
           PY
           changed="$(git diff --name-only)"
           [[ "$changed" == "$workflow" ]] || {
-            echo "launch candidate changed unexpected paths: $changed" >&2
+            echo "launch commit changed unexpected paths: $changed" >&2
             exit 1
           }
           git config user.name 'ChatGPT Muse Glimmer Orchestrator'
@@ -65,14 +64,14 @@ jobs:
           git commit -m '[run-kaggle-muse-glimmer-arc-gate-v1] frozen one-shot launch'
           launch_sha="$(git rev-parse HEAD)"
           [[ "$(git rev-parse HEAD^)" == "$GITHUB_SHA" ]] || exit 1
-          git push --force-with-lease origin "HEAD:refs/heads/${LAUNCH_BRANCH}"
+          git push origin HEAD:muse-glimmer-arc-gate-v1
           echo "launch_sha=${launch_sha}" >> "$GITHUB_OUTPUT"
 
-      - name: Record launch candidate
+      - name: Record suppressed launch commit
         env:
           GH_TOKEN: ${{ github.token }}
           LAUNCH_SHA: ${{ steps.launch.outputs.launch_sha }}
         run: |
           set -euo pipefail
           gh api "repos/${{ github.repository }}/issues/18/comments" \
-            -f body="Frozen launch candidate prepared: \`${LAUNCH_SHA}\`, parent \`${GITHUB_SHA}\`, temporary branch \`muse-glimmer-arc-gate-v1-launch\`. Only the final workflow differs. The connector may now fast-forward the canonical branch to this commit to generate the authorized one-shot push event." >/dev/null
+            -f body="Frozen launch commit created: \`${LAUNCH_SHA}\`, parent \`${GITHUB_SHA}\`. The GITHUB_TOKEN push is intentionally suppressed; the connector must replay the exact parent-to-launch ref transition to trigger the one-shot workflow." >/dev/null
