@@ -1,0 +1,67 @@
+name: Muse Glimmer Launch Commit Helper
+
+on:
+  push:
+    branches:
+      - muse-glimmer-arc-gate-v1
+    paths:
+      - .github/workflows/muse-glimmer-bootstrap.yml
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: muse-glimmer-launch-helper-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: >-
+      github.ref_type == 'branch' &&
+      github.ref_name == 'muse-glimmer-arc-gate-v1' &&
+      github.event_name == 'push' &&
+      contains(github.event.head_commit.message, '[prepare-muse-glimmer-launch]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 2
+          persist-credentials: true
+
+      - name: Create suppressed frozen launch commit
+        id: launch
+        env:
+          EXPECTED_PARENT_SHA: 'b962284bc7815553f7f1b1a85a637ed507a9d4a7'
+        run: |
+          set -euo pipefail
+          [[ "$(git rev-parse HEAD^)" == "$EXPECTED_PARENT_SHA" ]] || exit 1
+          workflow='.github/workflows/muse-glimmer-arc-gate-v1.yml'
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          path = Path('.github/workflows/muse-glimmer-arc-gate-v1.yml')
+          text = path.read_text(encoding='utf-8')
+          placeholder = '__AUTHORIZED_' + 'PARENT_SHA__'
+          if text.count(placeholder) != 1:
+              raise SystemExit('final workflow placeholder cardinality invalid')
+          path.write_text(text.replace(placeholder, os.environ['GITHUB_SHA']), encoding='utf-8')
+          PY
+          [[ "$(git diff --name-only)" == "$workflow" ]] || exit 1
+          git config user.name 'ChatGPT Muse Glimmer Orchestrator'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -- "$workflow"
+          git diff --cached --check
+          git commit -m '[run-kaggle-muse-glimmer-arc-gate-v1] frozen one-shot launch'
+          launch_sha="$(git rev-parse HEAD)"
+          git push origin HEAD:muse-glimmer-arc-gate-v1
+          echo "launch_sha=${launch_sha}" >> "$GITHUB_OUTPUT"
+
+      - name: Record launch commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          LAUNCH_SHA: ${{ steps.launch.outputs.launch_sha }}
+        run: |
+          gh api "repos/${{ github.repository }}/issues/18/comments" \
+            -f body="Frozen launch commit created: \`${LAUNCH_SHA}\`, parent \`${GITHUB_SHA}\`. The connector will replay the exact parent-to-launch ref transition to trigger the one-shot Kaggle workflow." >/dev/null

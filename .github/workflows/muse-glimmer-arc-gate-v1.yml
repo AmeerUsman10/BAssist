@@ -1,0 +1,411 @@
+name: Muse Glimmer ARC Gate V1 Direct One-Shot
+
+on:
+  push:
+    branches:
+      - muse-glimmer-arc-gate-v1
+    paths:
+      - .github/workflows/muse-glimmer-arc-gate-v1.yml
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: muse-glimmer-arc-gate-v1-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  AUTHORIZED_PARENT_SHA: '24950b0144dfe9b01b79769f21bb75cfc64f21ed'
+  EXPECTED_BRANCH: 'muse-glimmer-arc-gate-v1'
+  LAUNCH_MARKER: '[run-kaggle-muse-glimmer-arc-gate-v1]'
+
+jobs:
+  execute:
+    if: >-
+      github.ref_type == 'branch' &&
+      github.ref_name == 'muse-glimmer-arc-gate-v1' &&
+      github.event_name == 'push' &&
+      contains(github.event.head_commit.message, '[run-kaggle-muse-glimmer-arc-gate-v1]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 230
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 2
+          persist-credentials: true
+
+      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
+        with:
+          python-version: '3.12'
+
+      - name: Record one-shot start
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api "repos/${{ github.repository }}/issues/18/comments" \
+            -f body="Muse Glimmer one-shot execution started. GitHub run: https://github.com/${{ github.repository }}/actions/runs/${GITHUB_RUN_ID}; source commit: \`${GITHUB_SHA}\`. Frozen model, budgets, gates and no-competition boundary are unchanged." >/dev/null
+
+      - name: Validate launch commit and CPU gate
+        run: |
+          set -euo pipefail
+          [[ "$(git rev-parse HEAD^)" == "$AUTHORIZED_PARENT_SHA" ]] || {
+            echo 'authorized parent mismatch' >&2
+            exit 1
+          }
+          changed="$(git diff --name-only "$AUTHORIZED_PARENT_SHA" "$GITHUB_SHA")"
+          [[ "$changed" == '.github/workflows/muse-glimmer-arc-gate-v1.yml' ]] || {
+            echo "launch changed unexpected paths: $changed" >&2
+            exit 1
+          }
+          python -m pip install --quiet --disable-pip-version-check 'pytest==8.4.1'
+          python -m pytest -q glimmer_arc/tests
+          python -m compileall -q glimmer_arc kaggle/muse-glimmer-arc-gate-v1
+          python - <<'PY'
+          import importlib.util
+          import os
+          from pathlib import Path
+
+          source = Path('kaggle/muse-glimmer-arc-gate-v1/runner.py').read_text(encoding='utf-8')
+          needle = 'SOURCE_SHA = "__SOURCE_SHA__"'
+          if source.count(needle) != 1:
+              raise SystemExit('runner source placeholder invalid')
+          target = Path('/tmp/muse-glimmer-runner-preflight.py')
+          target.write_text(source.replace(needle, f'SOURCE_SHA = "{os.environ["GITHUB_SHA"]}"'), encoding='utf-8')
+          spec = importlib.util.spec_from_file_location('muse_glimmer_runner', target)
+          module = importlib.util.module_from_spec(spec)
+          assert spec.loader is not None
+          spec.loader.exec_module(module)
+          module.validate_source_sha(module.SOURCE_SHA)
+          assert module.PROTOCOL == 'muse_glimmer_arc_gate_v1'
+          assert module.MODEL_REPOSITORY == 'meta-models/Muse-Glimmer-30B-GGUF'
+          assert module.MODEL_REVISION == '93769bc7ab5ad1e9cd22d857e3138cf5d977ae81'
+          assert module.MODEL_FILENAME == 'muse-glimmer-30B-kquant-17gb.gguf'
+          assert module.MMPROJ_FILENAME == 'mmproj-kquant.gguf'
+          assert module.LLAMA_COMMIT == 'dd1ea524333b1e697489067d7a4c39c60d32beee'
+          assert module.DFLASH_ENABLED is False
+          assert module.MODEL_CALLS_PER_GAME == 8
+          assert module.ACTIONS_PER_GAME == 32
+          assert module.RESETS_PER_GAME == 2
+          assert module.OFFICIAL_GAME_COUNT == 25
+          PY
+
+      - name: Install pinned Kaggle CLI
+        run: python -m pip install --quiet --disable-pip-version-check 'kaggle==2.2.2'
+
+      - name: Execute private Kaggle worker
+        id: kaggle
+        continue-on-error: true
+        env:
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-evidence/result kaggle-output
+
+          write_state() {
+            GLIMMER_STATE="$1" GLIMMER_DETAIL="${2:-}" python - <<'PY'
+          import json, os
+          from datetime import datetime, timezone
+          from pathlib import Path
+          path = Path('workflow-evidence/workflow-state.json')
+          current = json.loads(path.read_text(encoding='utf-8')) if path.exists() else {}
+          current.update({
+              'state': os.environ['GLIMMER_STATE'],
+              'detail': os.environ.get('GLIMMER_DETAIL') or None,
+              'source_sha': os.environ.get('GITHUB_SHA'),
+              'github_run_id': os.environ.get('GITHUB_RUN_ID'),
+              'github_run_attempt': os.environ.get('GITHUB_RUN_ATTEMPT'),
+              'updated_at_utc': datetime.now(timezone.utc).isoformat(),
+          })
+          path.write_text(json.dumps(current, indent=2, sort_keys=True), encoding='utf-8')
+          PY
+          }
+
+          fail() {
+            write_state failed "$1"
+            echo "Muse Glimmer dispatch failed: $1" >&2
+            exit 1
+          }
+
+          [[ -n "${KAGGLE_API_TOKEN:-}" ]] || fail 'Kaggle API token is not configured'
+          write_state authenticating
+          if ! kaggle kernels list --mine --page-size 100 --csv > "${RUNNER_TEMP}/mine.csv" 2> "${RUNNER_TEMP}/auth.err"; then
+            fail 'Kaggle authentication or private kernel listing failed'
+          fi
+          owner="$(python - "${RUNNER_TEMP}/mine.csv" <<'PY'
+          import csv, re, sys
+          with open(sys.argv[1], newline='', encoding='utf-8') as handle:
+              for row in csv.reader(handle):
+                  for value in row:
+                      if '/' not in value:
+                          continue
+                      candidate = value.split('/', 1)[0].strip()
+                      if re.fullmatch(r'[A-Za-z0-9_-]+', candidate) and candidate.lower() not in {'ref', 'kernelref'}:
+                          print(candidate)
+                          raise SystemExit(0)
+          raise SystemExit('owned kernel reference unavailable')
+          PY
+          )" || fail 'Could not resolve authenticated Kaggle owner'
+          [[ "$owner" =~ ^[A-Za-z0-9_-]+$ ]] || fail 'Resolved Kaggle owner has invalid shape'
+
+          slug="muse-glimmer-arc-gate-${GITHUB_SHA:0:12}"
+          private_ref="${owner}/${slug}"
+          stage="${RUNNER_TEMP}/${slug}"
+          mkdir -p "$stage"
+
+          RUNNER_SOURCE='kaggle/muse-glimmer-arc-gate-v1/runner.py' \
+          RUNNER_TARGET="${stage}/runner.py" python - <<'PY'
+          import os
+          from pathlib import Path
+          source = Path(os.environ['RUNNER_SOURCE']).read_text(encoding='utf-8')
+          needle = 'SOURCE_SHA = "__SOURCE_SHA__"'
+          if source.count(needle) != 1:
+              raise SystemExit('runner source placeholder invalid')
+          Path(os.environ['RUNNER_TARGET']).write_text(
+              source.replace(needle, f'SOURCE_SHA = "{os.environ["GITHUB_SHA"]}"'),
+              encoding='utf-8',
+          )
+          PY
+
+          METADATA_SOURCE='kaggle/muse-glimmer-arc-gate-v1/kernel-metadata.json' \
+          METADATA_TARGET="${stage}/kernel-metadata.json" PRIVATE_OWNER="$owner" PRIVATE_SLUG="$slug" python - <<'PY'
+          import json, os
+          from pathlib import Path
+          value = json.loads(Path(os.environ['METADATA_SOURCE']).read_text(encoding='utf-8'))
+          value['id'] = f"{os.environ['PRIVATE_OWNER']}/{os.environ['PRIVATE_SLUG']}"
+          value['title'] = f"Muse Glimmer ARC Gate {os.environ['GITHUB_SHA'][:12]}"
+          if value.get('is_private') is not True or value.get('enable_gpu') is not True or value.get('enable_internet') is not True:
+              raise SystemExit('private GPU metadata boundary failed')
+          for key in ('competition_sources', 'dataset_sources', 'kernel_sources', 'model_sources'):
+              if value.get(key) != []:
+                  raise SystemExit(f'{key} must remain empty')
+          Path(os.environ['METADATA_TARGET']).write_text(json.dumps(value, indent=2, sort_keys=True), encoding='utf-8')
+          PY
+
+          printf '%s' "$owner" | sha256sum | cut -d' ' -f1 > workflow-evidence/kaggle-owner-sha256.txt
+          write_state staged
+
+          existing=false
+          terminal=false
+          terminal_failure=false
+          if kaggle kernels status "$private_ref" > "${RUNNER_TEMP}/existing-status.log" 2>&1; then
+            existing=true
+            status_text="$(tr '[:upper:]' '[:lower:]' < "${RUNNER_TEMP}/existing-status.log")"
+            if grep -Eq 'complete|success' <<< "$status_text"; then
+              terminal=true
+            elif grep -Eq 'error|failed|cancel' <<< "$status_text"; then
+              terminal=true
+              terminal_failure=true
+            fi
+          fi
+
+          if [[ "$existing" != true ]]; then
+            write_state pushing
+            kaggle kernels push -p "$stage" --accelerator NvidiaTeslaT4 --timeout 10800 > "${RUNNER_TEMP}/push.log" 2>&1 \
+              || fail 'Kaggle private kernel push failed'
+          fi
+
+          if [[ "$terminal" != true ]]; then
+            write_state running
+            deadline=$((SECONDS + 10800))
+            failures=0
+            while (( SECONDS < deadline )); do
+              if ! kaggle kernels status "$private_ref" > "${RUNNER_TEMP}/status.log" 2>&1; then
+                failures=$((failures + 1))
+                (( failures < 5 )) || fail 'Kaggle status query failed five times'
+                sleep 20
+                continue
+              fi
+              failures=0
+              status_text="$(tr '[:upper:]' '[:lower:]' < "${RUNNER_TEMP}/status.log")"
+              if grep -Eq 'complete|success' <<< "$status_text"; then
+                terminal=true
+                break
+              fi
+              if grep -Eq 'error|failed|cancel' <<< "$status_text"; then
+                terminal=true
+                terminal_failure=true
+                break
+              fi
+              sleep 20
+            done
+            [[ "$terminal" == true ]] || fail 'Kaggle worker exceeded the three-hour ceiling'
+          fi
+
+          write_state retrieving
+          retrieved=false
+          for attempt in 1 2 3 4 5; do
+            if kaggle kernels output "$private_ref" -p kaggle-output --force --quiet > "${RUNNER_TEMP}/output.log" 2>&1; then
+              retrieved=true
+              break
+            fi
+            sleep 20
+          done
+          [[ "$retrieved" == true ]] || fail 'Kaggle output retrieval failed'
+
+          mapfile -t decisions < <(find kaggle-output -type f -name final-decision.json -print)
+          [[ "${#decisions[@]}" -eq 1 ]] || fail "Expected one final-decision.json, found ${#decisions[@]}"
+          root="$(dirname "${decisions[0]}")"
+          [[ -f "$root/artifact-manifest.json" ]] || fail 'Runner artifact manifest missing'
+          cp -a "$root"/. workflow-evidence/result/
+
+          RESULT_ROOT='workflow-evidence/result' PRIVATE_REF="$private_ref" TERMINAL_FAILURE="$terminal_failure" python - <<'PY'
+          import hashlib, json, os
+          from datetime import datetime, timezone
+          from pathlib import Path
+          root = Path(os.environ['RESULT_ROOT'])
+          decision = json.loads((root / 'final-decision.json').read_text(encoding='utf-8'))
+          if decision.get('protocol') != 'muse_glimmer_arc_gate_v1':
+              raise SystemExit('decision protocol mismatch')
+          if decision.get('source_sha') != os.environ['GITHUB_SHA']:
+              raise SystemExit('decision source SHA mismatch')
+          if decision.get('disposition') not in {'ADOPT', 'SPECIALIZE', 'CONTINUE_EXPERIMENTALLY', 'KILL'}:
+              raise SystemExit('decision disposition invalid')
+          for key in ('competition_submission_performed', 'model_weights_persisted', 'hidden_reasoning_persisted'):
+              if decision.get(key) is not False:
+                  raise SystemExit(f'decision boundary invalid: {key}')
+          receipt = {
+              'schema_version': 1,
+              'protocol': 'muse_glimmer_arc_gate_v1',
+              'source_sha': os.environ['GITHUB_SHA'],
+              'github_run_id': os.environ['GITHUB_RUN_ID'],
+              'github_run_attempt': os.environ['GITHUB_RUN_ATTEMPT'],
+              'kernel_ref_sha256': hashlib.sha256(os.environ['PRIVATE_REF'].encode()).hexdigest(),
+              'kaggle_terminal_failure_reported': os.environ['TERMINAL_FAILURE'] == 'true',
+              'output_retrieved': True,
+              'validated_decision': True,
+              'recorded_at_utc': datetime.now(timezone.utc).isoformat(),
+              'competition_submission_performed': False,
+          }
+          (root / 'github-dispatch-receipt.json').write_text(json.dumps(receipt, indent=2, sort_keys=True), encoding='utf-8')
+          PY
+          write_state completed
+
+      - name: Prepare durable evidence
+        id: evidence
+        if: always()
+        env:
+          EXECUTE_OUTCOME: ${{ steps.kaggle.outcome }}
+        run: |
+          set -euo pipefail
+          dest="reports/glimmer_arc/runs/${GITHUB_SHA}/${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          mkdir -p "$dest"
+          if [[ -d workflow-evidence/result ]]; then
+            cp -a workflow-evidence/result/. "$dest/"
+          fi
+          [[ -f workflow-evidence/workflow-state.json ]] && cp workflow-evidence/workflow-state.json "$dest/github-workflow-state.json"
+          [[ -f workflow-evidence/kaggle-owner-sha256.txt ]] && cp workflow-evidence/kaggle-owner-sha256.txt "$dest/kaggle-owner-sha256.txt"
+
+          DEST="$dest" python - <<'PY'
+          import hashlib, json, os
+          from datetime import datetime, timezone
+          from pathlib import Path
+          root = Path(os.environ['DEST'])
+          decision_path = root / 'final-decision.json'
+          if not decision_path.exists():
+              decision = {
+                  'schema_version': 1,
+                  'protocol': 'muse_glimmer_arc_gate_v1',
+                  'source_sha': os.environ['GITHUB_SHA'],
+                  'disposition': 'KILL',
+                  'reason': 'Workflow infrastructure failed before a validated Muse Glimmer runner decision was recovered.',
+                  'next_action': 'Do not integrate this configuration; preserve the failure and repair only the dispatch infrastructure before any new scientific attempt.',
+                  'failure_code': 'workflow_infrastructure_failure',
+                  'competition_submission_performed': False,
+                  'leaderboard_action_performed': False,
+                  'model_weights_persisted': False,
+                  'hidden_reasoning_persisted': False,
+              }
+              decision_path.write_text(json.dumps(decision, indent=2, sort_keys=True), encoding='utf-8')
+              (root / 'workflow-infrastructure-failure.json').write_text(
+                  json.dumps({
+                      'schema_version': 1,
+                      'source_sha': os.environ['GITHUB_SHA'],
+                      'execute_outcome': os.environ.get('EXECUTE_OUTCOME'),
+                      'recorded_at_utc': datetime.now(timezone.utc).isoformat(),
+                  }, indent=2, sort_keys=True),
+                  encoding='utf-8',
+              )
+          decision = json.loads(decision_path.read_text(encoding='utf-8'))
+          receipt = {
+              'schema_version': 1,
+              'protocol': 'muse_glimmer_arc_gate_v1',
+              'source_sha': os.environ['GITHUB_SHA'],
+              'github_run_id': os.environ['GITHUB_RUN_ID'],
+              'github_run_attempt': os.environ['GITHUB_RUN_ATTEMPT'],
+              'execute_outcome': os.environ.get('EXECUTE_OUTCOME'),
+              'disposition': decision.get('disposition'),
+              'competition_submission_performed': False,
+              'recorded_at_utc': datetime.now(timezone.utc).isoformat(),
+          }
+          (root / 'github-workflow-receipt.json').write_text(json.dumps(receipt, indent=2, sort_keys=True), encoding='utf-8')
+
+          forbidden_suffixes = {'.gguf', '.bin', '.safetensors', '.pt', '.pth', '.ckpt', '.npy', '.npz', '.pkl', '.pickle'}
+          files = {}
+          for path in sorted(root.rglob('*')):
+              if not path.is_file():
+                  continue
+              if path.suffix.lower() in forbidden_suffixes:
+                  raise SystemExit(f'forbidden model payload in evidence: {path}')
+              data = path.read_bytes()
+              files[str(path.relative_to(root))] = {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
+              if path.suffix.lower() in {'.json', '.jsonl', '.log', '.txt'}:
+                  text = data.decode('utf-8', errors='replace')
+                  if 'KGAT_' in text or 'hf_' in text:
+                      raise SystemExit(f'credential-shaped text in evidence: {path}')
+          (root / 'workflow-artifact-manifest.json').write_text(
+              json.dumps({'schema_version': 1, 'source_sha': os.environ['GITHUB_SHA'], 'files': files}, indent=2, sort_keys=True),
+              encoding='utf-8',
+          )
+          output = Path(os.environ['GITHUB_OUTPUT'])
+          with output.open('a', encoding='utf-8') as handle:
+              handle.write(f"dest={root}\n")
+              handle.write(f"disposition={decision.get('disposition')}\n")
+              handle.write(f"reason={str(decision.get('reason', '')).replace(chr(10), ' ')}\n")
+              handle.write(f"next_action={str(decision.get('next_action', '')).replace(chr(10), ' ')}\n")
+              handle.write(f"infra_failed={'true' if (root / 'workflow-infrastructure-failure.json').exists() else 'false'}\n")
+          PY
+
+      - uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
+        if: always()
+        with:
+          name: muse-glimmer-one-shot-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ steps.evidence.outputs.dest }}
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Commit durable evidence
+        id: commit
+        if: always()
+        env:
+          DEST: ${{ steps.evidence.outputs.dest }}
+        run: |
+          set -euo pipefail
+          git config user.name 'ChatGPT Muse Glimmer Evidence Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -- "$DEST"
+          git diff --cached --check
+          git commit -m "Record Muse Glimmer one-shot result ${GITHUB_RUN_ID}"
+          evidence_sha="$(git rev-parse HEAD)"
+          git push origin HEAD:muse-glimmer-arc-gate-v1
+          echo "evidence_sha=${evidence_sha}" >> "$GITHUB_OUTPUT"
+
+      - name: Publish final decision to issue
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DISPOSITION: ${{ steps.evidence.outputs.disposition }}
+          REASON: ${{ steps.evidence.outputs.reason }}
+          NEXT_ACTION: ${{ steps.evidence.outputs.next_action }}
+          DEST: ${{ steps.evidence.outputs.dest }}
+          EVIDENCE_SHA: ${{ steps.commit.outputs.evidence_sha }}
+        run: |
+          set -euo pipefail
+          body="## Muse Glimmer V1 terminal result\n\n- **Disposition:** ${DISPOSITION}\n- **Reason:** ${REASON}\n- **Owned next action:** ${NEXT_ACTION}\n- **GitHub run:** https://github.com/${{ github.repository }}/actions/runs/${GITHUB_RUN_ID}\n- **Evidence commit:** \`${EVIDENCE_SHA}\`\n- **Evidence path:** \`${DEST}\`\n\nNo competition submission, leaderboard action, paid endpoint, model-weight persistence, or hidden-reasoning persistence occurred."
+          gh api "repos/${{ github.repository }}/issues/18/comments" -f body="$body" >/dev/null
+
+      - name: Mark infrastructure failure after preserving evidence
+        if: steps.evidence.outputs.infra_failed == 'true'
+        run: exit 1

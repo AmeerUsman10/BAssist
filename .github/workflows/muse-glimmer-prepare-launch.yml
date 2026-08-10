@@ -1,0 +1,77 @@
+name: Prepare Muse Glimmer Frozen Launch
+
+on:
+  push:
+    branches:
+      - muse-glimmer-arc-gate-v1
+    paths:
+      - .github/workflows/muse-glimmer-prepare-launch.yml
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: muse-glimmer-prepare-launch-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: >-
+      github.ref_type == 'branch' &&
+      github.ref_name == 'muse-glimmer-arc-gate-v1' &&
+      github.event_name == 'push' &&
+      contains(github.event.head_commit.message, '[prepare-muse-glimmer-launch]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 2
+          persist-credentials: true
+
+      - name: Validate and create suppressed launch commit
+        id: launch
+        env:
+          EXPECTED_PARENT_SHA: 'f43fb6ebbaa43041b8045d9a614a712e31e15d96'
+        run: |
+          set -euo pipefail
+          actual_parent="$(git rev-parse HEAD^)"
+          [[ "$actual_parent" == "$EXPECTED_PARENT_SHA" ]] || {
+            echo "implementation parent mismatch: $actual_parent" >&2
+            exit 1
+          }
+          workflow='.github/workflows/muse-glimmer-arc-gate-v1.yml'
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          path = Path('.github/workflows/muse-glimmer-arc-gate-v1.yml')
+          text = path.read_text(encoding='utf-8')
+          placeholder = '__AUTHORIZED_' + 'PARENT_SHA__'
+          if text.count(placeholder) != 1:
+              raise SystemExit('final workflow placeholder cardinality invalid')
+          path.write_text(text.replace(placeholder, os.environ['GITHUB_SHA']), encoding='utf-8')
+          PY
+          changed="$(git diff --name-only)"
+          [[ "$changed" == "$workflow" ]] || {
+            echo "launch commit changed unexpected paths: $changed" >&2
+            exit 1
+          }
+          git config user.name 'ChatGPT Muse Glimmer Orchestrator'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -- "$workflow"
+          git diff --cached --check
+          git commit -m '[run-kaggle-muse-glimmer-arc-gate-v1] frozen one-shot launch'
+          launch_sha="$(git rev-parse HEAD)"
+          [[ "$(git rev-parse HEAD^)" == "$GITHUB_SHA" ]] || exit 1
+          git push origin HEAD:muse-glimmer-arc-gate-v1
+          echo "launch_sha=${launch_sha}" >> "$GITHUB_OUTPUT"
+
+      - name: Record suppressed launch commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          LAUNCH_SHA: ${{ steps.launch.outputs.launch_sha }}
+        run: |
+          set -euo pipefail
+          gh api "repos/${{ github.repository }}/issues/18/comments" \
+            -f body="Frozen launch commit created: \`${LAUNCH_SHA}\`, parent \`${GITHUB_SHA}\`. The GITHUB_TOKEN push is intentionally suppressed; the connector must replay the exact parent-to-launch ref transition to trigger the one-shot workflow." >/dev/null
