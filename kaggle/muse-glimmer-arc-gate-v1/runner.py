@@ -150,6 +150,7 @@ def canonical_sha256(value: Any) -> str:
 
 
 def write_json(path: Path, value: Any) -> None:
+    value = sanitize(value)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
         json.dumps(value, indent=2, sort_keys=True, ensure_ascii=True, allow_nan=False),
@@ -161,6 +162,7 @@ def append_jsonl(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a", encoding="utf-8") as handle:
         for row in rows:
+            row = sanitize(row)
             handle.write(json.dumps(row, sort_keys=True, separators=(",", ":"), allow_nan=False))
             handle.write("\n")
 
