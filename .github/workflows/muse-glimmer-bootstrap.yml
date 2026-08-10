@@ -36,7 +36,7 @@ jobs:
 
       - name: Verify launch parent and reconstruct frozen archive
         env:
-          EXPECTED_PARENT_SHA: "2ea0313eacdcb88d831fe795116326a207bd8fb2"
+          EXPECTED_PARENT_SHA: "ec4a0c97cbb0f7670ffbc72f2af89991118cdd91"
           EXPECTED_ARCHIVE_SHA256: "6a6f3a0c456f48a07c842387496787b9af5f838c18ef9aeb62572f3b6aea6aa7"
         run: |
           set -euo pipefail
