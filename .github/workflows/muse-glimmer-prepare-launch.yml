@@ -33,7 +33,7 @@ jobs:
       - name: Validate implementation commit and prepare launch candidate
         id: launch
         env:
-          EXPECTED_PARENT_SHA: '1e897ccc0103d6a523915f60d4c3f5a3c43ff574'
+          EXPECTED_PARENT_SHA: '00f0fb26784d2446366d93910a864c494d60614a'
           LAUNCH_BRANCH: 'muse-glimmer-arc-gate-v1-launch'
         run: |
           set -euo pipefail
