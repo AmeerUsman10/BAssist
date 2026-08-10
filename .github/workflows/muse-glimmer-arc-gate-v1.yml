@@ -26,7 +26,7 @@ concurrency:
 
 env:
   EXPECTED_BRANCH: muse-glimmer-arc-gate-v1
-  AUTHORIZED_PARENT_SHA: "__AUTHORIZED_PARENT_SHA__"
+  AUTHORIZED_PARENT_SHA: "0425cc18ba15baa024f54362d68dd901b465ac46"
   PUSH_LAUNCH_MARKER: "[run-kaggle-muse-glimmer-arc-gate-v1]"
   TASK_ISSUE: "18"
 
