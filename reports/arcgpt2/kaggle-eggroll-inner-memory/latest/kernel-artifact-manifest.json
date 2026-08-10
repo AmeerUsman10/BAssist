@@ -1,0 +1,32 @@
+{
+  "created_at_utc": "2026-08-09T16:29:06.571496+00:00",
+  "files": {
+    "environment.json": {
+      "bytes": 857,
+      "sha256": "0bed253265ee971da2aeedc7d9510cd77ee5fdfa96dd97f71d7f4de7aa93aa9c"
+    },
+    "logs/cpu-preflight-tests.log": {
+      "bytes": 100,
+      "sha256": "36b4a1a9965524fe404e748f0e5005598095be39bc0c53a6580f99f8f28a69b2"
+    },
+    "logs/dependency-install.log": {
+      "bytes": 641,
+      "sha256": "4efe5d12661b026ab8275ef0a2ec0e40c2b378bac132a0403427719c86be2bcb"
+    },
+    "logs/eggroll-inner-memory.log": {
+      "bytes": 627396,
+      "sha256": "d677c3f94a3dd258a655fe6b854958c2a78726c87a0145a207777551d448eed6"
+    },
+    "model-manifest.json": {
+      "bytes": 1079,
+      "sha256": "7c21cd3849ad03da2f6e510a2b2ab6d42c750bf3c9b327121ce65134ab4b2663"
+    },
+    "outputs/eggroll-result.json": {
+      "bytes": 609806,
+      "sha256": "f53cb748188df535a67d865cd22bdc90f39daacb04bb6ac6599e33b8ddbe29fc"
+    }
+  },
+  "protocol": "eggroll_inner_memory_v1",
+  "schema_version": 1,
+  "source_sha": "9c57034368f75ace228f304796a42c1e197b37ad"
+}

@@ -1,0 +1,74 @@
+{
+  "environment.json": {
+    "bytes": 816,
+    "sha256": "b387388041db4466ff2057c4156f959753b3863242c38953741dc91990460cb2"
+  },
+  "gpu-samples.json": {
+    "bytes": 55541,
+    "sha256": "530670b484922a4c6c98ccfe33bc25086cf1af5767198f61b23328646ab707af"
+  },
+  "logs/cpu-preflight-tests.log": {
+    "bytes": 100,
+    "sha256": "dbf18cf258cd1d7dac03715c9a716082e559ceb75082228d68f001e4e12ea581"
+  },
+  "logs/dependency-install.log": {
+    "bytes": 640,
+    "sha256": "bb31b03c21a1d1c7a767937c45c7a7923a0fc0cec1c9ea47f50ed22dad51d320"
+  },
+  "logs/seed-141421-pretrained.log": {
+    "bytes": 57040,
+    "sha256": "42b15223a7d595979b473fa0105b106c9ea5519be0671443c7d9e22fba027cc3"
+  },
+  "logs/seed-141421-random.log": {
+    "bytes": 57269,
+    "sha256": "a1d69d599528ad6a7ff77d75b3ea5e3c01b5c9896dc55d85ce2e2706ed2e24ab"
+  },
+  "logs/seed-161803-pretrained.log": {
+    "bytes": 57031,
+    "sha256": "189ac1850ae6e9cf30db59a31f17b7a54482b6c8912e9b8091c89b4ddf024d1d"
+  },
+  "logs/seed-161803-random.log": {
+    "bytes": 56986,
+    "sha256": "54d302239ee2590a7f2f16a1a49cec0f0cbdc4dfaf6de8239925d767bfeb2a3c"
+  },
+  "logs/seed-173205-pretrained.log": {
+    "bytes": 57066,
+    "sha256": "ad0e0ba288ea52b2a494a8993026f2578cf77ced4eab92275d28c7c8e56ad80f"
+  },
+  "logs/seed-173205-random.log": {
+    "bytes": 57087,
+    "sha256": "5e08feaba351a4ba3de4aba2e4edba9343a8034d9b011dfae1f6df0e1dc0064f"
+  },
+  "model-manifest.json": {
+    "bytes": 907,
+    "sha256": "a348eaa644ec7c670c7f28a751762b38b5a2cca62f8ceb7a5fbaf7d9f746f69a"
+  },
+  "outputs/seed-141421/pretrained/summary.json": {
+    "bytes": 46636,
+    "sha256": "b588c2ea3fa775f140e3340f23d66f8dc06ae826301198986ceec710543da243"
+  },
+  "outputs/seed-141421/random/summary.json": {
+    "bytes": 46858,
+    "sha256": "d7e7a6df4c4ae54c569f808ee075a94fcb9fb119de9e0e739b964e3598cf2291"
+  },
+  "outputs/seed-161803/pretrained/summary.json": {
+    "bytes": 46640,
+    "sha256": "82415a4bff234244f9fbbd2d86cc11eab66a33348fee1ed4b417ca2efa7a6f67"
+  },
+  "outputs/seed-161803/random/summary.json": {
+    "bytes": 46640,
+    "sha256": "a1359c3c859cfa47d88807b6cd0ee5d387d15b53d2ac88efb44d2456244fbcae"
+  },
+  "outputs/seed-173205/pretrained/summary.json": {
+    "bytes": 46669,
+    "sha256": "db9495902317d97173555be5e0403c156803377b38f0eb9fbc94795e11824e3a"
+  },
+  "outputs/seed-173205/random/summary.json": {
+    "bytes": 46695,
+    "sha256": "d8c0744ccb430182126a5df1ed8fcd22326738eac2d2ac3e6392bf26c6059ba2"
+  },
+  "replication-result.json": {
+    "bytes": 18350,
+    "sha256": "bcc60f902d78075063ff5b84bbd7b327f62cf3be84f12e786676164bc6d4b1d5"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "detail": "Kaggle kernel terminated unsuccessfully after outputs were retrieved",
+  "github_run_attempt": "1",
+  "github_run_id": "31328310439",
+  "kernel_ref_sha256": "f436c28c6860141a42bf4937695e00c72695da30cc9a565f27e1e2dd883ae115",
+  "kernel_slug": "arc-gpt2-official-public-score-c43d9a3653c0",
+  "source_sha": "c43d9a3653c03266ae9fc3ee7a9069531629697c",
+  "state": "failed",
+  "updated_at_utc": "2026-08-09T18:29:21.425452+00:00"
+}

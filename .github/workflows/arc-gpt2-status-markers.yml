@@ -1,0 +1,122 @@
+name: ARC-GPT2 Status Markers
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [arc-gpt2-programs]
+    paths:
+      - ".github/workflows/arc-gpt2-status-markers.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build machine-readable dashboard and existence markers
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path("reports/arcgpt2")
+          markers = root / "markers"
+          markers.mkdir(parents=True, exist_ok=True)
+          for path in markers.iterdir():
+              if path.is_file():
+                  path.unlink()
+
+          def load(name):
+              path = root / name
+              if not path.exists():
+                  return None
+              try:
+                  return json.loads(path.read_text(encoding="utf-8"))
+              except Exception as exc:
+                  return {"parse_error": type(exc).__name__}
+
+          unit = load("latest-unit-tests.json")
+          kaggle_new = load("latest-kaggle-access.json")
+          kaggle_formats = load("latest-kaggle-credential-formats.json")
+          epistemic_status = load("latest-epistemic-status.json")
+          epistemic_comparison = load("latest-epistemic-comparison.json")
+          counter_status = load("latest-counterfactual-epistemic-status.json")
+          counter_comparison = load("latest-counterfactual-epistemic-comparison.json")
+
+          authenticated = bool(
+              (kaggle_new or {}).get("authenticated")
+              or (kaggle_formats or {}).get("authenticated")
+          )
+          unit_text = json.dumps(unit or {}).lower()
+          unit_success = unit is not None and "fail" not in unit_text and "error" not in unit_text
+
+          def outcome(document):
+              if not document:
+                  return "missing"
+              return str(
+                  document.get("status")
+                  or document.get("workflow_outcome")
+                  or document.get("outcome")
+                  or "unknown"
+              )
+
+          dashboard = {
+              "unit_tests": {
+                  "present": unit is not None,
+                  "success_inferred": unit_success,
+                  "raw": unit,
+              },
+              "kaggle": {
+                  "authenticated": authenticated,
+                  "new_token_probe": kaggle_new,
+                  "all_formats_probe": kaggle_formats,
+              },
+              "epistemic": {
+                  "workflow_outcome": outcome(epistemic_status),
+                  "comparison_status": outcome(epistemic_comparison),
+                  "status_present": epistemic_status is not None,
+                  "comparison_present": epistemic_comparison is not None,
+              },
+              "counterfactual_epistemic": {
+                  "workflow_outcome": outcome(counter_status),
+                  "comparison_status": outcome(counter_comparison),
+                  "status_present": counter_status is not None,
+                  "comparison_present": counter_comparison is not None,
+              },
+          }
+          (root / "latest-dashboard.json").write_text(
+              json.dumps(dashboard, indent=2), encoding="utf-8"
+          )
+
+          marker_names = [
+              "UNIT_TESTS_SUCCESS" if unit_success else "UNIT_TESTS_NOT_CONFIRMED",
+              "KAGGLE_AUTHENTICATED" if authenticated else "KAGGLE_NOT_AUTHENTICATED",
+              (
+                  "EPISTEMIC_REPORT_PRESENT"
+                  if epistemic_status is not None
+                  else "EPISTEMIC_REPORT_MISSING"
+              ),
+              (
+                  "COUNTERFACTUAL_REPORT_PRESENT"
+                  if counter_status is not None
+                  else "COUNTERFACTUAL_REPORT_MISSING"
+              ),
+          ]
+          for name in marker_names:
+              (markers / name).write_text(name + "\n", encoding="utf-8")
+          print(json.dumps(dashboard, indent=2))
+          PY
+
+      - name: Publish dashboard
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/arcgpt2/latest-dashboard.json reports/arcgpt2/markers/
+          git commit -m "Refresh ARC-GPT2 status dashboard ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

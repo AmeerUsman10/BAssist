@@ -1,0 +1,157 @@
+name: ARC-GPT2 Contrastive Soft Memory Train
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [arc-gpt2-programs]
+    paths:
+      - ".github/workflows/arc-gpt2-meta-soft-contrastive-train.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arc-gpt2-meta-soft-contrastive-train-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      TOKENIZERS_PARALLELISM: "false"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      ARC_GPT2_META_MAX_PROBES: "1"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install "transformers>=4.48,<6" "safetensors>=0.4"
+
+      - name: Train matched contrastive soft-memory models
+        id: experiment
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          {
+            python -m arcgpt2.meta_soft_contrastive \
+              --initialization pretrained \
+              --output-dir outputs/meta_soft_contrastive_train/pretrained \
+              --train-groups 64 \
+              --train-mapping-variants 6 \
+              --validation-groups 2 \
+              --validation-mapping-variants 4 \
+              --max-length 256 \
+              --prefix-length 8 \
+              --inner-learning-rate 0.2 \
+              --outer-learning-rate 0.0001 \
+              --episodes-per-outer-step 1 \
+              --max-outer-steps 80 \
+              --warmup-steps 8 \
+              --freeze-first-n-blocks 11 \
+              --evaluation-groups 2 \
+              --no-save-model
+            python -m arcgpt2.meta_soft_contrastive \
+              --initialization random \
+              --output-dir outputs/meta_soft_contrastive_train/random \
+              --train-groups 64 \
+              --train-mapping-variants 6 \
+              --validation-groups 2 \
+              --validation-mapping-variants 4 \
+              --max-length 256 \
+              --prefix-length 8 \
+              --inner-learning-rate 0.2 \
+              --outer-learning-rate 0.0001 \
+              --episodes-per-outer-step 1 \
+              --max-outer-steps 80 \
+              --warmup-steps 8 \
+              --freeze-first-n-blocks 11 \
+              --evaluation-groups 2 \
+              --no-save-model
+            python -m arcgpt2.compare_meta_soft \
+              --pretrained outputs/meta_soft_contrastive_train/pretrained/summary.json \
+              --random outputs/meta_soft_contrastive_train/random/summary.json \
+              --output outputs/meta_soft_contrastive_train/comparison.json
+          } 2>&1 | tee meta-soft-contrastive-train.log
+
+      - name: Write durable evidence
+        if: always()
+        env:
+          EXPERIMENT_OUTCOME: ${{ steps.experiment.outcome }}
+        run: |
+          mkdir -p reports/arcgpt2
+          python - <<'PY'
+          import json
+          import os
+          import shutil
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          reports = Path("reports/arcgpt2")
+          outputs = Path("outputs/meta_soft_contrastive_train")
+          receipt = {
+              "status": os.environ.get("EXPERIMENT_OUTCOME", "unknown"),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "commit_sha": os.environ.get("GITHUB_SHA"),
+              "run_id": os.environ.get("GITHUB_RUN_ID"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "scope": (
+                  "80-step matched contrastive second-order soft-memory gate; "
+                  "synthetic controlled curriculum, not ARC-AGI-3 evaluation"
+              ),
+          }
+          (reports / "latest-meta-soft-contrastive-train-status.json").write_text(
+              json.dumps(receipt, indent=2), encoding="utf-8"
+          )
+          copies = {
+              outputs / "pretrained" / "summary.json": reports / "latest-meta-soft-contrastive-train-pretrained.json",
+              outputs / "random" / "summary.json": reports / "latest-meta-soft-contrastive-train-random.json",
+              outputs / "comparison.json": reports / "latest-meta-soft-contrastive-train-comparison.json",
+          }
+          for source, target in copies.items():
+              if source.exists():
+                  shutil.copy2(source, target)
+          log = Path("meta-soft-contrastive-train.log")
+          if log.exists():
+              lines = log.read_text(encoding="utf-8", errors="replace").splitlines()
+              (reports / "latest-meta-soft-contrastive-train-log-tail.txt").write_text(
+                  "\n".join(lines[-2200:]) + "\n", encoding="utf-8"
+              )
+          PY
+
+      - name: Publish evidence
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/arcgpt2/
+          git commit -m "Record trained contrastive GPT-2 memory ${GITHUB_RUN_ID}" || true
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload evidence artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arc-gpt2-meta-soft-contrastive-train-evidence
+          path: |
+            reports/arcgpt2/
+            outputs/meta_soft_contrastive_train/pretrained/summary.json
+            outputs/meta_soft_contrastive_train/random/summary.json
+            outputs/meta_soft_contrastive_train/comparison.json
+            meta-soft-contrastive-train.log
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Propagate failure
+        if: steps.experiment.outcome != 'success'
+        run: exit 1

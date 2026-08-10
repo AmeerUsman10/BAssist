@@ -1,0 +1,16 @@
+
+==================================== ERRORS ====================================
+_________ ERROR collecting arcgpt2/tests/test_official_observation.py __________
+ImportError while importing test module '/home/runner/work/BAssist/BAssist/arcgpt2/tests/test_official_observation.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/opt/hostedtoolcache/Python/3.11.15/x64/lib/python3.11/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+arcgpt2/tests/test_official_observation.py:8: in <module>
+    from arcgpt2.codec import decode_delta, decode_grid
+E   ImportError: cannot import name 'decode_delta' from 'arcgpt2.codec' (/home/runner/work/BAssist/BAssist/arcgpt2/codec.py)
+=========================== short test summary info ============================
+ERROR arcgpt2/tests/test_official_observation.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 4.20s

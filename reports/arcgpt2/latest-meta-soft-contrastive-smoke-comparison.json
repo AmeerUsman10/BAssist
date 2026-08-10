@@ -1,0 +1,62 @@
+{
+  "status": "not_yet_passed",
+  "scope": "Soft-prefix hidden-action meta-learning control. A pass would show evidence-dependent temporary memory, not ARC-AGI-3 completion.",
+  "support_probe_count": 1,
+  "gates": {
+    "intact_consistent_mass_at_least_0_40": false,
+    "online_adaptation_gain_at_least_0_10": false,
+    "shuffled_outcome_drop_at_least_0_10": false,
+    "per_action_accuracy_at_least_0_50": false,
+    "pretrained_beats_random_consistent_mass": true,
+    "meta_query_loss_is_finite": true
+  },
+  "deltas": {
+    "intact_minus_no_adaptation_consistent_mass": 7.018446922302246e-05,
+    "intact_minus_shuffled_consistent_mass": 0.0,
+    "pretrained_minus_random_consistent_mass": 0.026513591408729553
+  },
+  "pretrained": {
+    "intact": {
+      "episodes": 2.0,
+      "exact_mapping": 0.0,
+      "consistent_mass": 0.2616223990917206,
+      "truth_probability": 0.04176449030637741,
+      "truth_rank": 11.5,
+      "entropy_bits": 4.581543922424316,
+      "per_action_accuracy": 0.25
+    },
+    "no_adaptation": {
+      "episodes": 2.0,
+      "exact_mapping": 0.0,
+      "consistent_mass": 0.26155221462249756,
+      "truth_probability": 0.04166768305003643,
+      "truth_rank": 12.0,
+      "entropy_bits": 4.5813307762146,
+      "per_action_accuracy": 0.25
+    },
+    "shuffled_outcome": {
+      "episodes": 2.0,
+      "exact_mapping": 0.0,
+      "consistent_mass": 0.2616223990917206,
+      "truth_probability": 0.04176449030637741,
+      "truth_rank": 11.5,
+      "entropy_bits": 4.581543922424316,
+      "per_action_accuracy": 0.25
+    },
+    "mean_meta_query_loss": 1.5447853803634644,
+    "mean_support_nll": 1.488531231880188
+  },
+  "random_initialization": {
+    "intact": {
+      "episodes": 2.0,
+      "exact_mapping": 0.0,
+      "consistent_mass": 0.23510880768299103,
+      "truth_probability": 0.03919919952750206,
+      "truth_rank": 18.0,
+      "entropy_bits": 4.5817179679870605,
+      "per_action_accuracy": 0.25
+    },
+    "mean_meta_query_loss": 1.407541036605835,
+    "mean_support_nll": 1.3234912157058716
+  }
+}

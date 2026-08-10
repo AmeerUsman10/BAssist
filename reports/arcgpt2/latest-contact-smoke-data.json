@@ -1,0 +1,37 @@
+{
+  "schema": "arcgpt2.contact_version_space.v1",
+  "scope": "Set-valued hidden contact-mechanics inference with identical-world counterfactual variants; controlled Gate C, not ARC-AGI-3 evaluation.",
+  "splits": {
+    "test": {
+      "counterfactual_groups": 1,
+      "examples": 20,
+      "examples_per_group": 20,
+      "file": "test.jsonl",
+      "mode_variants_per_group": 5,
+      "seed_start": 2718284,
+      "seed_stop_exclusive": 2718285,
+      "sha256": "1b68280b5c0e786151b3f95c8757638e9f63c7501b5629ae71517ecf7f64cd08"
+    },
+    "train": {
+      "counterfactual_groups": 2,
+      "examples": 40,
+      "examples_per_group": 20,
+      "file": "train.jsonl",
+      "mode_variants_per_group": 5,
+      "seed_start": 2718281,
+      "seed_stop_exclusive": 2718283,
+      "sha256": "0352d0ffc4e75c3489dafd4b5dd64b3db6b566c0db76be032eb356ba8c81f752"
+    },
+    "validation": {
+      "counterfactual_groups": 1,
+      "examples": 20,
+      "examples_per_group": 20,
+      "file": "validation.jsonl",
+      "mode_variants_per_group": 5,
+      "seed_start": 2718283,
+      "seed_stop_exclusive": 2718284,
+      "sha256": "94999b3391331a1e19072fa5854c6f0d392898e9cb9dd46a9c7ae6a96e09f914"
+    }
+  },
+  "target": "Uniform probability over every contact mode whose complete mechanics program exactly replays the partial history."
+}

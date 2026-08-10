@@ -1,0 +1,154 @@
+{
+  "status": "not_yet_passed",
+  "scope": "One-GPT-2 multi-query epistemic gate. A pass would show joint information use without catastrophic task loss, not ARC-AGI-3 completion.",
+  "gates": {
+    "action_binding:full_consistent_mass_at_least_0_50": false,
+    "action_binding:full_map_consistent_at_least_0_60": false,
+    "action_binding:pretrained_beats_random_consistent_mass": true,
+    "action_binding:full_beats_full_minus_amnesic_consistent_mass_by_at_least_0_10": false,
+    "action_binding:full_beats_full_minus_shuffled_evidence_consistent_mass_by_at_least_0_10": false,
+    "goal_inference:full_consistent_mass_at_least_0_50": false,
+    "goal_inference:full_map_consistent_at_least_0_60": false,
+    "goal_inference:pretrained_beats_random_consistent_mass": false,
+    "goal_inference:full_beats_full_minus_amnesic_consistent_mass_by_at_least_0_10": false,
+    "goal_inference:full_beats_full_minus_statusless_consistent_mass_by_at_least_0_10": false,
+    "goal_inference:full_beats_full_minus_shuffled_status_consistent_mass_by_at_least_0_10": false,
+    "both_tasks:validation_cross_entropy_improves": false
+  },
+  "tasks": {
+    "action_binding": {
+      "information_level": 4,
+      "pretrained_full": {
+        "consistent_mass": 0.257927546898524,
+        "map_consistent": 0.0,
+        "truth_probability": 0.257927546898524,
+        "truth_rank": 2.3333333333333335,
+        "entropy_bits": 1.9907208283742268,
+        "set_cross_entropy": 1.355088512102763,
+        "brier": 0.737273097038269,
+        "rows": 3.0
+      },
+      "pretrained_controls": {
+        "amnesic": {
+          "consistent_mass": 0.25,
+          "map_consistent": 0.0,
+          "truth_probability": 0.25,
+          "truth_rank": 2.6666666666666665,
+          "entropy_bits": 2.0,
+          "set_cross_entropy": 1.3862943649291992,
+          "brier": 0.75,
+          "rows": 3.0
+        },
+        "shuffled_evidence": {
+          "consistent_mass": 0.257439782222112,
+          "map_consistent": 0.0,
+          "truth_probability": 0.257439782222112,
+          "truth_rank": 2.3333333333333335,
+          "entropy_bits": 1.99143648147583,
+          "set_cross_entropy": 1.3570178747177124,
+          "brier": 0.7380143602689108,
+          "rows": 3.0
+        }
+      },
+      "random_full": {
+        "consistent_mass": 0.2532233993212382,
+        "map_consistent": 0.0,
+        "truth_probability": 0.2532233993212382,
+        "truth_rank": 2.3333333333333335,
+        "entropy_bits": 1.9839402039845784,
+        "set_cross_entropy": 1.375219742457072,
+        "brier": 0.7490733861923218,
+        "rows": 3.0
+      },
+      "deltas": {
+        "full_minus_amnesic_consistent_mass": 0.007927546898523985,
+        "full_minus_shuffled_evidence_consistent_mass": 0.0004877646764119836,
+        "pretrained_minus_random_consistent_mass": 0.004704147577285767
+      },
+      "gates": {
+        "full_consistent_mass_at_least_0_50": false,
+        "full_map_consistent_at_least_0_60": false,
+        "pretrained_beats_random_consistent_mass": true,
+        "full_beats_full_minus_amnesic_consistent_mass_by_at_least_0_10": false,
+        "full_beats_full_minus_shuffled_evidence_consistent_mass_by_at_least_0_10": false
+      }
+    },
+    "goal_inference": {
+      "information_level": 3,
+      "pretrained_full": {
+        "consistent_mass": 0.2458074763417244,
+        "map_consistent": 0.25,
+        "truth_probability": 0.12015737593173981,
+        "truth_rank": 5.25,
+        "entropy_bits": 2.9941603541374207,
+        "set_cross_entropy": 2.100968599319458,
+        "brier": 0.3802090436220169,
+        "rows": 4.0
+      },
+      "pretrained_controls": {
+        "amnesic": {
+          "consistent_mass": 0.25,
+          "map_consistent": 0.0,
+          "truth_probability": 0.125,
+          "truth_rank": 4.75,
+          "entropy_bits": 3.0,
+          "set_cross_entropy": 2.079441547393799,
+          "brier": 0.375,
+          "rows": 4.0
+        },
+        "statusless": {
+          "consistent_mass": 0.24647760018706322,
+          "map_consistent": 0.25,
+          "truth_probability": 0.11836274713277817,
+          "truth_rank": 5.75,
+          "entropy_bits": 2.9928181171417236,
+          "set_cross_entropy": 2.0991929173469543,
+          "brier": 0.3797742649912834,
+          "rows": 4.0
+        },
+        "shuffled_status": {
+          "consistent_mass": 0.24590496346354485,
+          "map_consistent": 0.25,
+          "truth_probability": 0.12004534713923931,
+          "truth_rank": 5.5,
+          "entropy_bits": 2.994094491004944,
+          "set_cross_entropy": 2.100613057613373,
+          "brier": 0.38012316077947617,
+          "rows": 4.0
+        }
+      },
+      "random_full": {
+        "consistent_mass": 0.2522374540567398,
+        "map_consistent": 0.25,
+        "truth_probability": 0.1279234029352665,
+        "truth_rank": 3.25,
+        "entropy_bits": 2.9992165565490723,
+        "set_cross_entropy": 2.0709065198898315,
+        "brier": 0.3728986755013466,
+        "rows": 4.0
+      },
+      "deltas": {
+        "full_minus_amnesic_consistent_mass": -0.004192523658275604,
+        "full_minus_statusless_consistent_mass": -0.0006701238453388214,
+        "full_minus_shuffled_status_consistent_mass": -9.748712182044983e-05,
+        "pretrained_minus_random_consistent_mass": -0.006429977715015411
+      },
+      "gates": {
+        "full_consistent_mass_at_least_0_50": false,
+        "full_map_consistent_at_least_0_60": false,
+        "pretrained_beats_random_consistent_mass": false,
+        "full_beats_full_minus_amnesic_consistent_mass_by_at_least_0_10": false,
+        "full_beats_full_minus_statusless_consistent_mass_by_at_least_0_10": false,
+        "full_beats_full_minus_shuffled_status_consistent_mass_by_at_least_0_10": false
+      }
+    }
+  },
+  "pretrained_training_loss_by_task": {
+    "action_binding": 1.5803049008051555,
+    "goal_inference": 2.132556849718094
+  },
+  "random_training_loss_by_task": {
+    "action_binding": 1.496809284389019,
+    "goal_inference": 2.0840620110432306
+  }
+}

@@ -1,0 +1,615 @@
+name: Muse Glimmer ARC Gate V1
+
+on:
+  push:
+    branches:
+      - muse-glimmer-arc-gate-v1
+    paths:
+      - .github/workflows/muse-glimmer-arc-gate-v1.yml
+      - glimmer_arc/**
+      - reports/glimmer_arc/**
+      - kaggle/muse-glimmer-arc-gate-v1/**
+      - arcgpt2/official_observation.py
+      - arcgpt2/official_score_agent.py
+      - arcgpt2/official_public_score.py
+      - arcgpt2/official_public_manifest.json
+      - arcgpt2/requirements-arc3.lock
+      - arcgpt2/tests/**
+
+permissions:
+  contents: read
+
+concurrency:
+  group: muse-glimmer-arc-gate-v1-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  EXPECTED_BRANCH: muse-glimmer-arc-gate-v1
+  AUTHORIZED_PARENT_SHA: "__AUTHORIZED_PARENT_SHA__"
+  PUSH_LAUNCH_MARKER: "[run-kaggle-muse-glimmer-arc-gate-v1]"
+  TASK_ISSUE: "18"
+
+jobs:
+  preflight:
+    if: >-
+      github.ref_type == 'branch' &&
+      github.ref_name == 'muse-glimmer-arc-gate-v1' &&
+      github.event_name == 'push' &&
+      contains(github.event.head_commit.message, '[run-kaggle-muse-glimmer-arc-gate-v1]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+
+      - name: Validate one-shot launch commit
+        id: authorization
+        continue-on-error: true
+        env:
+          EVENT_BEFORE_SHA: ${{ github.event.before }}
+          EVENT_AFTER_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          import re
+          import subprocess
+
+          before = os.environ["EVENT_BEFORE_SHA"]
+          after = os.environ["EVENT_AFTER_SHA"]
+          authorized = os.environ["AUTHORIZED_PARENT_SHA"]
+          placeholder = "__AUTHORIZED_" + "PARENT_SHA__"
+          workflow = ".github/workflows/muse-glimmer-arc-gate-v1.yml"
+          if not re.fullmatch(r"[0-9a-f]{40}", authorized):
+              raise SystemExit("authorized parent SHA was not frozen")
+          if before != authorized:
+              raise SystemExit("launch parent is not the authorized implementation commit")
+          if subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip() != after:
+              raise SystemExit("checked-out launch SHA mismatch")
+          changed = subprocess.check_output(
+              ["git", "diff", "--name-only", before, after], text=True
+          ).splitlines()
+          if changed != [workflow]:
+              raise SystemExit("launch commit must change only the workflow")
+          parent = subprocess.check_output(["git", "show", f"{before}:{workflow}"], text=True)
+          current = Path(workflow).read_text(encoding="utf-8")
+          if parent.count(placeholder) != 1 or current.count(authorized) != 1:
+              raise SystemExit("authorized-parent placeholder cardinality is invalid")
+          if current.replace(authorized, placeholder) != parent:
+              raise SystemExit("launch commit must only replace the parent placeholder")
+          PY
+
+      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
+        if: steps.authorization.outcome == 'success'
+        with:
+          python-version: "3.12"
+
+      - name: Install CPU test runtime
+        id: dependencies
+        if: steps.authorization.outcome == 'success'
+        continue-on-error: true
+        run: python -m pip install --quiet --disable-pip-version-check "pytest==8.4.1"
+
+      - name: Run Glimmer protocol and policy tests
+        id: tests
+        if: steps.authorization.outcome == 'success' && steps.dependencies.outcome == 'success'
+        continue-on-error: true
+        env:
+          ARC_API_KEY: ""
+          CUDA_VISIBLE_DEVICES: ""
+          OPERATION_MODE: normal
+          PYTHONHASHSEED: "0"
+        run: python -m pytest -q glimmer_arc/tests
+
+      - name: Validate frozen source and safety contract
+        id: contract
+        if: steps.authorization.outcome == 'success' && steps.dependencies.outcome == 'success'
+        continue-on-error: true
+        env:
+          WORKFLOW_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import hashlib
+          import importlib.util
+          import json
+          import os
+          from pathlib import Path
+
+          runner = Path("kaggle/muse-glimmer-arc-gate-v1/runner.py")
+          source = runner.read_text(encoding="utf-8")
+          needle = 'SOURCE_SHA = "__SOURCE_SHA__"'
+          assert source.count(needle) == 1
+          injected = source.replace(needle, f'SOURCE_SHA = "{os.environ["WORKFLOW_SHA"]}"')
+          target = Path("/tmp/muse-glimmer-runner-preflight.py")
+          target.write_text(injected, encoding="utf-8")
+          spec = importlib.util.spec_from_file_location("muse_glimmer_runner", target)
+          module = importlib.util.module_from_spec(spec)
+          assert spec.loader is not None
+          spec.loader.exec_module(module)
+          module.validate_source_sha(module.SOURCE_SHA)
+          assert module.PROTOCOL == "muse_glimmer_arc_gate_v1"
+          assert module.MODEL_REPOSITORY == "meta-models/Muse-Glimmer-30B-GGUF"
+          assert module.MODEL_REVISION == "93769bc7ab5ad1e9cd22d857e3138cf5d977ae81"
+          assert module.MODEL_FILENAME == "muse-glimmer-30B-kquant-17gb.gguf"
+          assert module.MMPROJ_FILENAME == "mmproj-kquant.gguf"
+          assert module.LLAMA_COMMIT == "dd1ea524333b1e697489067d7a4c39c60d32beee"
+          assert module.DFLASH_ENABLED is False
+          assert module.OFFICIAL_GAME_COUNT == 25
+          assert module.MODEL_CALLS_PER_GAME == 8
+          assert module.ACTIONS_PER_GAME == 32
+          assert module.RESETS_PER_GAME == 2
+          assert module.MAX_RUNTIME_SECONDS == 10800.0
+
+          manifest = Path("arcgpt2/official_public_manifest.json")
+          assert hashlib.sha256(manifest.read_bytes()).hexdigest() == module.EXPECTED_PUBLIC_MANIFEST_SHA256
+          prereg = json.loads(Path("reports/glimmer_arc/preregistration.json").read_text(encoding="utf-8"))
+          assert prereg["model"]["revision"] == module.MODEL_REVISION
+          assert prereg["official_budgets_per_game"] == {
+              "model_calls": 8,
+              "environment_actions": 32,
+              "resets": 2,
+              "candidate_shortlist": 16,
+              "cached_actions_per_decision": 4,
+              "representation": "exact_text_grid",
+              "context_tokens": 8192,
+          }
+
+          metadata = json.loads(
+              Path("kaggle/muse-glimmer-arc-gate-v1/kernel-metadata.json").read_text(encoding="utf-8")
+          )
+          assert metadata["is_private"] is True
+          assert metadata["enable_gpu"] is True
+          assert metadata["enable_internet"] is True
+          for key in ("competition_sources", "dataset_sources", "kernel_sources", "model_sources"):
+              assert metadata[key] == []
+          lower = source.lower()
+          assert "kaggle " + "competitions" not in lower
+          assert "operationmode." + "online" not in lower
+          assert "operationmode." + "competition" not in lower
+          assert "dflash-kquant.gguf" not in source
+          PY
+
+      - name: Preserve preflight receipt
+        if: always()
+        env:
+          AUTHORIZATION_OUTCOME: ${{ steps.authorization.outcome }}
+          DEPENDENCY_OUTCOME: ${{ steps.dependencies.outcome }}
+          TEST_OUTCOME: ${{ steps.tests.outcome }}
+          CONTRACT_OUTCOME: ${{ steps.contract.outcome }}
+        run: |
+          mkdir -p preflight-evidence
+          python - <<'PY'
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          outcomes = {
+              "authorization": os.environ.get("AUTHORIZATION_OUTCOME", "unknown"),
+              "dependencies": os.environ.get("DEPENDENCY_OUTCOME", "unknown"),
+              "tests": os.environ.get("TEST_OUTCOME", "unknown"),
+              "contract": os.environ.get("CONTRACT_OUTCOME", "unknown"),
+          }
+          value = {
+              "schema_version": 1,
+              "protocol": "muse_glimmer_arc_gate_v1",
+              "phase": "preflight",
+              "status": "passed" if all(item == "success" for item in outcomes.values()) else "failed",
+              "source_sha": os.environ.get("GITHUB_SHA"),
+              "branch": os.environ.get("GITHUB_REF_NAME"),
+              "github_run_id": os.environ.get("GITHUB_RUN_ID"),
+              "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
+              "outcomes": outcomes,
+              "competition_submission_performed": False,
+          }
+          Path("preflight-evidence/preflight-receipt.json").write_text(
+              json.dumps(value, indent=2, sort_keys=True), encoding="utf-8"
+          )
+          PY
+
+      - uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
+        if: always()
+        with:
+          name: muse-glimmer-preflight-${{ github.run_id }}-${{ github.run_attempt }}
+          path: preflight-evidence/
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Propagate preflight failure
+        if: >-
+          steps.authorization.outcome != 'success' ||
+          steps.dependencies.outcome != 'success' ||
+          steps.tests.outcome != 'success' ||
+          steps.contract.outcome != 'success'
+        run: exit 1
+
+  dispatch:
+    needs: preflight
+    if: needs.preflight.result == 'success'
+    permissions:
+      contents: read
+      issues: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 230
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned Kaggle CLI
+        run: python -m pip install --quiet --disable-pip-version-check "kaggle==2.2.2"
+
+      - name: Dispatch private Kaggle worker and retrieve evidence
+        id: kaggle
+        continue-on-error: true
+        env:
+          KAGGLE_API_TOKEN: ${{ secrets.KAGGLE_API_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p kaggle-output dispatch-evidence
+
+          write_state() {
+            GLIMMER_STATE="$1" GLIMMER_DETAIL="${2:-}" python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          path = Path("dispatch-evidence/workflow-state.json")
+          current = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+          current.update({
+              "state": os.environ["GLIMMER_STATE"],
+              "detail": os.environ.get("GLIMMER_DETAIL") or None,
+              "updated_at_utc": datetime.now(timezone.utc).isoformat(),
+              "source_sha": os.environ.get("GITHUB_SHA"),
+              "github_run_id": os.environ.get("GITHUB_RUN_ID"),
+              "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+              "kernel_slug": os.environ.get("KAGGLE_KERNEL_SLUG"),
+          })
+          private_ref = os.environ.get("PRIVATE_KERNEL_REF", "")
+          if private_ref:
+              current["kernel_ref_sha256"] = hashlib.sha256(private_ref.encode()).hexdigest()
+          path.write_text(json.dumps(current, indent=2, sort_keys=True), encoding="utf-8")
+          PY
+          }
+
+          redact_file() {
+            REDACT_SOURCE="$1" REDACT_TARGET="$2" REDACT_OWNER="${owner:-}" python - <<'PY'
+          import os
+          from pathlib import Path
+          import re
+
+          source = Path(os.environ["REDACT_SOURCE"])
+          target = Path(os.environ["REDACT_TARGET"])
+          text = source.read_text(encoding="utf-8", errors="replace") if source.exists() else ""
+          for secret in (os.environ.get("KAGGLE_API_TOKEN", ""), os.environ.get("REDACT_OWNER", "")):
+              if secret:
+                  text = text.replace(secret, "[REDACTED_SECRET]")
+          text = re.sub(r"KGAT_[A-Za-z0-9_-]+", "[REDACTED_SECRET]", text)
+          text = re.sub(r"hf_[A-Za-z0-9_-]{12,}", "[REDACTED_SECRET]", text)
+          with target.open("a", encoding="utf-8") as handle:
+              handle.write(text)
+              if text and not text.endswith("\n"):
+                  handle.write("\n")
+          PY
+          }
+
+          fail() {
+            write_state failed "$1"
+            echo "Muse Glimmer dispatch failed: $1"
+            exit 1
+          }
+
+          [[ -n "${KAGGLE_API_TOKEN:-}" ]] || fail "Kaggle API token is not configured"
+          write_state authenticating
+          if ! kaggle kernels list --mine --page-size 100 --csv > "${RUNNER_TEMP}/mine.csv" 2> "${RUNNER_TEMP}/auth.err"; then
+            redact_file "${RUNNER_TEMP}/auth.err" dispatch-evidence/dispatch-redacted.log
+            fail "Kaggle authentication or private kernel listing failed"
+          fi
+          if ! owner="$(python - "${RUNNER_TEMP}/mine.csv" 2> "${RUNNER_TEMP}/owner.err" <<'PY'
+          import csv
+          import re
+          import sys
+
+          with open(sys.argv[1], newline="", encoding="utf-8") as handle:
+              for row in csv.reader(handle):
+                  for value in row:
+                      if "/" not in value:
+                          continue
+                      candidate = value.split("/", 1)[0].strip()
+                      if re.fullmatch(r"[A-Za-z0-9_-]+", candidate) and candidate.lower() not in {"ref", "kernelref"}:
+                          print(candidate)
+                          raise SystemExit(0)
+          raise SystemExit("No owned private kernel reference was returned")
+          PY
+          )"; then
+            fail "Could not resolve authenticated Kaggle owner"
+          fi
+          [[ "$owner" =~ ^[A-Za-z0-9_-]+$ ]] || fail "Resolved Kaggle owner has invalid shape"
+          export KAGGLE_KERNEL_SLUG="muse-glimmer-arc-gate-${GITHUB_SHA:0:12}"
+          export PRIVATE_KERNEL_REF="${owner}/${KAGGLE_KERNEL_SLUG}"
+          printf 'resolved_owner_sha256=%s\n' "$(printf '%s' "$owner" | sha256sum | cut -d' ' -f1)" > dispatch-evidence/dispatch-redacted.log
+
+          stage="${RUNNER_TEMP}/${KAGGLE_KERNEL_SLUG}"
+          mkdir -p "$stage"
+          RUNNER_SOURCE=kaggle/muse-glimmer-arc-gate-v1/runner.py \
+          RUNNER_TARGET="${stage}/runner.py" python - <<'PY' || fail "Exact source SHA injection failed"
+          import os
+          from pathlib import Path
+
+          source = Path(os.environ["RUNNER_SOURCE"]).read_text(encoding="utf-8")
+          needle = 'SOURCE_SHA = "__SOURCE_SHA__"'
+          if source.count(needle) != 1:
+              raise SystemExit("expected exactly one source SHA placeholder")
+          injected = source.replace(needle, f'SOURCE_SHA = "{os.environ["GITHUB_SHA"]}"')
+          if "__SOURCE_SHA__" in injected:
+              raise SystemExit("unresolved source SHA remains")
+          Path(os.environ["RUNNER_TARGET"]).write_text(injected, encoding="utf-8")
+          PY
+
+          METADATA_SOURCE=kaggle/muse-glimmer-arc-gate-v1/kernel-metadata.json \
+          METADATA_TARGET="${stage}/kernel-metadata.json" PRIVATE_OWNER="$owner" python - <<'PY' || fail "Private kernel metadata staging failed"
+          import json
+          import os
+          from pathlib import Path
+
+          metadata = json.loads(Path(os.environ["METADATA_SOURCE"]).read_text(encoding="utf-8"))
+          metadata["id"] = f"{os.environ['PRIVATE_OWNER']}/{os.environ['KAGGLE_KERNEL_SLUG']}"
+          metadata["title"] = f"Muse Glimmer ARC Gate {os.environ['GITHUB_SHA'][:12]}"
+          if not metadata.get("is_private") or not metadata.get("enable_gpu") or not metadata.get("enable_internet"):
+              raise SystemExit("private GPU/internet metadata contract failed")
+          for key in ("competition_sources", "dataset_sources", "kernel_sources", "model_sources"):
+              if metadata.get(key) != []:
+                  raise SystemExit(f"{key} must remain empty")
+          Path(os.environ["METADATA_TARGET"]).write_text(
+              json.dumps(metadata, indent=2, sort_keys=True), encoding="utf-8"
+          )
+          PY
+          staged_runner_sha="$(sha256sum "${stage}/runner.py" | cut -d' ' -f1)"
+          write_state staged
+
+          reuse_complete=false
+          resume_running=false
+          terminal_failure=false
+          if kaggle kernels status "$PRIVATE_KERNEL_REF" > "${RUNNER_TEMP}/existing-status.log" 2>&1; then
+            existing_text="$(tr '[:upper:]' '[:lower:]' < "${RUNNER_TEMP}/existing-status.log")"
+            existing_source="${RUNNER_TEMP}/existing-source"
+            mkdir -p "$existing_source"
+            existing_match=false
+            if kaggle kernels pull "$PRIVATE_KERNEL_REF" -p "$existing_source" --metadata > "${RUNNER_TEMP}/existing-pull.log" 2>&1; then
+              existing_runner="$(find "$existing_source" -name runner.py -type f -print -quit)"
+              if [[ -n "$existing_runner" && "$(sha256sum "$existing_runner" | cut -d' ' -f1)" == "$staged_runner_sha" ]]; then
+                existing_match=true
+              fi
+            fi
+            if grep -Eq 'running|queued' <<< "$existing_text"; then
+              [[ "$existing_match" == true ]] || fail "Different source is running under source-derived slug"
+              resume_running=true
+            elif grep -Eq 'complete|success' <<< "$existing_text"; then
+              [[ "$existing_match" == true ]] || fail "Completed source-derived slug contains a different runner"
+              reuse_complete=true
+            elif grep -Eq 'error|failed|cancel' <<< "$existing_text"; then
+              [[ "$existing_match" == true ]] || fail "Failed source-derived slug contains a different runner"
+              terminal_failure=true
+              reuse_complete=true
+            fi
+          fi
+
+          if [[ "$reuse_complete" != true && "$resume_running" != true ]]; then
+            write_state pushing
+            if ! kaggle kernels push -p "$stage" --accelerator NvidiaTeslaT4 --timeout 10800 > "${RUNNER_TEMP}/push.log" 2>&1; then
+              redact_file "${RUNNER_TEMP}/push.log" dispatch-evidence/dispatch-redacted.log
+              fail "Kaggle private kernel push failed"
+            fi
+            redact_file "${RUNNER_TEMP}/push.log" dispatch-evidence/dispatch-redacted.log
+          fi
+
+          if [[ "$reuse_complete" != true ]]; then
+            write_state running
+            deadline=$((SECONDS + 11100))
+            terminal=false
+            status_failures=0
+            while (( SECONDS < deadline )); do
+              if ! kaggle kernels status "$PRIVATE_KERNEL_REF" > "${RUNNER_TEMP}/status.log" 2>&1; then
+                status_failures=$((status_failures + 1))
+                redact_file "${RUNNER_TEMP}/status.log" dispatch-evidence/dispatch-redacted.log
+                (( status_failures < 5 )) || fail "Kaggle status query failed five times"
+                sleep 20
+                continue
+              fi
+              status_failures=0
+              status_text="$(tr '[:upper:]' '[:lower:]' < "${RUNNER_TEMP}/status.log")"
+              if grep -Eq 'complete|success' <<< "$status_text"; then
+                terminal=true
+                break
+              fi
+              if grep -Eq 'error|failed|cancel' <<< "$status_text"; then
+                terminal=true
+                terminal_failure=true
+                break
+              fi
+              sleep 20
+            done
+            [[ "$terminal" == true ]] || fail "Kaggle kernel exceeded the bounded deadline"
+          fi
+
+          write_state retrieving_outputs
+          output_retrieved=false
+          for output_attempt in 1 2 3 4 5; do
+            if kaggle kernels output "$PRIVATE_KERNEL_REF" -p kaggle-output --force --quiet > "${RUNNER_TEMP}/output.log" 2>&1; then
+              output_retrieved=true
+              break
+            fi
+            sleep 20
+          done
+          if [[ "$output_retrieved" != true ]]; then
+            redact_file "${RUNNER_TEMP}/output.log" dispatch-evidence/dispatch-redacted.log
+            fail "Kaggle output retrieval failed after five attempts"
+          fi
+          if [[ "$terminal_failure" == true ]]; then
+            write_state kernel_failed "Kaggle reported a terminal failure; outputs retained"
+          fi
+
+          export TERMINAL_FAILURE="$terminal_failure"
+          python - <<'PY' || fail "Downloaded evidence failed provenance or boundary validation"
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+          import re
+
+          roots = list(Path("kaggle-output").rglob("final-decision.json"))
+          if len(roots) != 1:
+              raise SystemExit(f"expected one final-decision.json, found {len(roots)}")
+          root = roots[0].parent
+          core_required = {
+              "artifact-manifest.json",
+              "evidence-hashes.json",
+              "final-decision.json",
+              "preregistration.json",
+              "runtime-summary.json",
+          }
+          missing = sorted(name for name in core_required if not (root / name).is_file())
+          if missing:
+              raise SystemExit(f"core evidence missing: {missing}")
+          decision = json.loads((root / "final-decision.json").read_text(encoding="utf-8"))
+          artifacts = json.loads((root / "artifact-manifest.json").read_text(encoding="utf-8"))
+          if decision.get("source_sha") != os.environ["GITHUB_SHA"]:
+              raise SystemExit("decision source SHA mismatch")
+          if artifacts.get("source_sha") != os.environ["GITHUB_SHA"]:
+              raise SystemExit("artifact manifest SHA mismatch")
+          source_path = root / "source-manifest.json"
+          if source_path.exists():
+              source = json.loads(source_path.read_text(encoding="utf-8"))
+              if source.get("source_sha") != os.environ["GITHUB_SHA"]:
+                  raise SystemExit("source manifest SHA mismatch")
+          elif decision.get("disposition") != "KILL":
+              raise SystemExit("non-KILL result is missing source provenance")
+          if decision.get("disposition") != "KILL":
+              success_required = {
+                  "backend-manifest.json",
+                  "deployment.json",
+                  "hardware-receipt.json",
+                  "model-manifest.json",
+                  "source-manifest.json",
+                  "synthetic-summary.json",
+                  "transfer-summary.json",
+              }
+              success_missing = sorted(name for name in success_required if not (root / name).is_file())
+              if success_missing:
+                  raise SystemExit(f"promoted result evidence missing: {success_missing}")
+          if decision.get("disposition") not in {
+              "ADOPT", "SPECIALIZE", "CONTINUE_EXPERIMENTALLY", "KILL"
+          }:
+              raise SystemExit("invalid terminal disposition")
+          if decision.get("competition_submission_performed") is not False:
+              raise SystemExit("competition boundary missing")
+          if decision.get("model_weights_persisted") is not False:
+              raise SystemExit("model payload persistence boundary missing")
+          violations = json.loads((root / "evidence-hashes.json").read_text(encoding="utf-8"))
+          if any(violations.get("boundary_violations", {}).values()):
+              if decision.get("disposition") != "KILL":
+                  raise SystemExit("boundary violation did not force KILL")
+          for path in root.rglob("*"):
+              if not path.is_file() or path.suffix.lower() not in {".json", ".jsonl", ".log", ".txt"}:
+                  continue
+              text = path.read_text(encoding="utf-8", errors="replace")
+              if re.search(r"KGAT_[A-Za-z0-9_-]+", text) or re.search(r"hf_[A-Za-z0-9_-]{12,}", text):
+                  raise SystemExit(f"secret-shaped text found in {path.name}")
+          summary = {
+              "schema_version": 1,
+              "source_sha": os.environ["GITHUB_SHA"],
+              "decision": decision,
+              "evidence_root": str(root),
+              "kernel_terminal_failure": os.environ.get("TERMINAL_FAILURE") == "true",
+          }
+          Path("dispatch-evidence/result-summary.json").write_text(
+              json.dumps(summary, indent=2, sort_keys=True), encoding="utf-8"
+          )
+          PY
+
+          write_state completed
+
+      - name: Upload complete immutable evidence
+        id: upload
+        if: always()
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
+        with:
+          name: muse-glimmer-arc-gate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            kaggle-output/
+            dispatch-evidence/
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Report sanitized result to task issue
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_URL: ${{ steps.upload.outputs.artifact-url }}
+          KAGGLE_OUTCOME: ${{ steps.kaggle.outcome }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+
+          summary_path = Path("dispatch-evidence/result-summary.json")
+          if summary_path.exists():
+              summary = json.loads(summary_path.read_text(encoding="utf-8"))
+              decision = summary["decision"]
+              body = (
+                  "## Muse Glimmer V1 worker report\n\n"
+                  f"- Source: `{os.environ.get('GITHUB_SHA')}`\n"
+                  f"- Workflow outcome: `{os.environ.get('KAGGLE_OUTCOME')}`\n"
+                  f"- Disposition: **{decision.get('disposition')}**\n"
+                  f"- Reason: {decision.get('reason')}\n"
+                  f"- Next action: {decision.get('next_action')}\n"
+                  f"- Deployment passed: `{decision.get('deployment_passed')}`\n"
+                  f"- Synthetic passed: `{decision.get('synthetic_passed')}`\n"
+                  f"- Official native: `{json.dumps(decision.get('official_native'), sort_keys=True)}`\n"
+                  f"- Official CFS-Lite: `{json.dumps(decision.get('official_cfs_lite'), sort_keys=True)}`\n"
+                  f"- Artifact: {os.environ.get('ARTIFACT_URL')}\n\n"
+                  "No competition submission or leaderboard action was performed."
+              )
+          else:
+              body = (
+                  "## Muse Glimmer V1 worker report\n\n"
+                  f"The GitHub/Kaggle worker ended with workflow outcome `{os.environ.get('KAGGLE_OUTCOME')}` "
+                  "before a validated final decision was recovered. Inspect the uploaded dispatch evidence."
+              )
+          token = os.environ.get("GH_TOKEN", "")
+          url = (
+              f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/issues/"
+              f"{os.environ['TASK_ISSUE']}/comments"
+          )
+          request = Request(
+              url,
+              data=json.dumps({"body": body}).encode("utf-8"),
+              headers={
+                  "Authorization": f"Bearer {token}",
+                  "Accept": "application/vnd.github+json",
+                  "X-GitHub-Api-Version": "2022-11-28",
+                  "Content-Type": "application/json",
+              },
+              method="POST",
+          )
+          with urlopen(request, timeout=30) as response:
+              if response.status not in {200, 201}:
+                  raise SystemExit("issue report failed")
+          PY
+
+      - name: Propagate dispatch infrastructure failure after evidence upload
+        if: steps.kaggle.outcome != 'success'
+        run: exit 1

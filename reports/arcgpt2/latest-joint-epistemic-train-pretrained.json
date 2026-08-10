@@ -1,0 +1,3032 @@
+{
+  "status": "completed",
+  "scope": "One-checkpoint set-valued action-binding and latent-goal training; controlled gate, not ARC-AGI-3 evaluation.",
+  "config": {
+    "model_name": "openai-community/gpt2",
+    "initialization": "pretrained",
+    "data_dir": "outputs/joint_train/data",
+    "output_dir": "outputs/joint_train/pretrained",
+    "seed": 42,
+    "max_length": 512,
+    "prefix_keep": 96,
+    "gradient_accumulation_steps": 2,
+    "learning_rate": 8e-05,
+    "weight_decay": 0.01,
+    "max_optimizer_steps": 120,
+    "warmup_steps": 10,
+    "freeze_first_n_blocks": 10,
+    "train_embeddings": false,
+    "candidate_batch_size": 4,
+    "contextual_calibration": true,
+    "evaluation_rows_per_task": 16,
+    "save_model": false
+  },
+  "device": "cpu",
+  "tasks": [
+    "action_binding",
+    "goal_inference"
+  ],
+  "train_examples": 2133,
+  "validation_examples": 267,
+  "test_examples": 534,
+  "evaluation_examples": 32,
+  "trainable_parameters": 14177280,
+  "total_parameters": 124439808,
+  "mean_training_loss": 1.8564308752616248,
+  "mean_training_loss_by_task": {
+    "action_binding": 1.5803049008051555,
+    "goal_inference": 2.132556849718094
+  },
+  "initial_validation": {
+    "mode": "full",
+    "by_task": {
+      "action_binding": {
+        "rows": 16.0,
+        "by_information_level": {
+          "0": {
+            "consistent_mass": 0.9999999701976776,
+            "map_consistent": 1.0,
+            "truth_probability": 0.25244859606027603,
+            "truth_rank": 2.25,
+            "entropy_bits": 1.997936725616455,
+            "set_cross_entropy": 1.3877201974391937,
+            "brier": 0.000717660179361701,
+            "rows": 4.0
+          },
+          "1": {
+            "consistent_mass": 0.5828714370727539,
+            "map_consistent": 0.6666666666666666,
+            "truth_probability": 0.24889317154884338,
+            "truth_rank": 2.3333333333333335,
+            "entropy_bits": 1.99413267771403,
+            "set_cross_entropy": 1.3766026894251506,
+            "brier": 0.3006760726372401,
+            "rows": 3.0
+          },
+          "2": {
+            "consistent_mass": 0.33802806834379834,
+            "map_consistent": 0.6666666666666666,
+            "truth_probability": 0.24447221557299295,
+            "truth_rank": 2.6666666666666665,
+            "entropy_bits": 1.990870992342631,
+            "set_cross_entropy": 1.387345790863037,
+            "brier": 0.5825899690389633,
+            "rows": 3.0
+          },
+          "3": {
+            "consistent_mass": 0.2698013136784236,
+            "map_consistent": 0.6666666666666666,
+            "truth_probability": 0.2698013136784236,
+            "truth_rank": 1.6666666666666667,
+            "entropy_bits": 1.9922560453414917,
+            "set_cross_entropy": 1.313985784848531,
+            "brier": 0.7130991617838541,
+            "rows": 3.0
+          },
+          "4": {
+            "consistent_mass": 0.2496261696020762,
+            "map_consistent": 0.3333333333333333,
+            "truth_probability": 0.2496261696020762,
+            "truth_rank": 2.6666666666666665,
+            "entropy_bits": 1.993770678838094,
+            "set_cross_entropy": 1.393685777982076,
+            "brier": 0.7529333631197611,
+            "rows": 3.0
+          }
+        }
+      },
+      "goal_inference": {
+        "rows": 16.0,
+        "by_information_level": {
+          "0": {
+            "consistent_mass": 0.8407507538795471,
+            "map_consistent": 0.8,
+            "truth_probability": 0.11227209866046906,
+            "truth_rank": 7.6,
+            "entropy_bits": 2.99031400680542,
+            "set_cross_entropy": 2.0978529930114744,
+            "brier": 0.029801936447620393,
+            "rows": 5.0
+          },
+          "1": {
+            "consistent_mass": 0.21688834205269814,
+            "map_consistent": 0.0,
+            "truth_probability": 0.10762405395507812,
+            "truth_rank": 7.5,
+            "entropy_bits": 2.9908111095428467,
+            "set_cross_entropy": 2.2241515517234802,
+            "brier": 0.40970368683338165,
+            "rows": 4.0
+          },
+          "2": {
+            "consistent_mass": 0.21284723654389381,
+            "map_consistent": 0.0,
+            "truth_probability": 0.10474435798823833,
+            "truth_rank": 8.0,
+            "entropy_bits": 2.989661991596222,
+            "set_cross_entropy": 2.242352306842804,
+            "brier": 0.41394704580307007,
+            "rows": 4.0
+          },
+          "3": {
+            "consistent_mass": 0.2285484919945399,
+            "map_consistent": 0.0,
+            "truth_probability": 0.11600524187088013,
+            "truth_rank": 6.0,
+            "entropy_bits": 2.9940010706583657,
+            "set_cross_entropy": 2.172025680541992,
+            "brier": 0.39750053485234577,
+            "rows": 3.0
+          }
+        }
+      }
+    },
+    "traces": [
+      {
+        "task": "action_binding",
+        "source_id": "action:718058:variant:2:probe:0:query:A1",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 0.9999998807907104,
+        "map_consistent": true,
+        "truth_probability": 0.2681179940700531,
+        "truth_rank": 1,
+        "entropy_bits": 1.9976937770843506
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718058:variant:1:probe:1:query:A2",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.7427980899810791,
+        "map_consistent": true,
+        "truth_probability": 0.21303272247314453,
+        "truth_rank": 4,
+        "entropy_bits": 1.9944398403167725
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718059:variant:2:probe:2:query:A1",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.21204207837581635,
+        "map_consistent": false,
+        "truth_probability": 0.21204207837581635,
+        "truth_rank": 4,
+        "entropy_bits": 1.9918639659881592
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718058:variant:3:probe:3:query:A3",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.2368280440568924,
+        "map_consistent": false,
+        "truth_probability": 0.2368280440568924,
+        "truth_rank": 3,
+        "entropy_bits": 1.9940078258514404
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718060:variant:0:probe:4:query:A1",
+        "information_level": 4,
+        "mode": "full",
+        "consistent_mass": 0.23056499660015106,
+        "map_consistent": false,
+        "truth_probability": 0.23056499660015106,
+        "truth_rank": 3,
+        "entropy_bits": 1.9911599159240723
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718059:variant:0:probe:0:query:A2",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 1.0,
+        "map_consistent": true,
+        "truth_probability": 0.23636509478092194,
+        "truth_rank": 4,
+        "entropy_bits": 1.9980134963989258
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718058:variant:0:probe:1:query:A1",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.7397239208221436,
+        "map_consistent": true,
+        "truth_probability": 0.26755449175834656,
+        "truth_rank": 1,
+        "entropy_bits": 1.994680404663086
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718060:variant:2:probe:2:query:A1",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.28547555208206177,
+        "map_consistent": true,
+        "truth_probability": 0.28547555208206177,
+        "truth_rank": 1,
+        "entropy_bits": 1.9894859790802002
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718058:variant:2:probe:3:query:A1",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.28763294219970703,
+        "map_consistent": true,
+        "truth_probability": 0.28763294219970703,
+        "truth_rank": 1,
+        "entropy_bits": 1.9907722473144531
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718060:variant:2:probe:4:query:A2",
+        "information_level": 4,
+        "mode": "full",
+        "consistent_mass": 0.2294904738664627,
+        "map_consistent": false,
+        "truth_probability": 0.2294904738664627,
+        "truth_rank": 4,
+        "entropy_bits": 1.995819091796875
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718060:variant:1:probe:0:query:A1",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 1.0,
+        "map_consistent": true,
+        "truth_probability": 0.2667916715145111,
+        "truth_rank": 1,
+        "entropy_bits": 1.9979794025421143
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718059:variant:0:probe:1:query:A1",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.26609230041503906,
+        "map_consistent": false,
+        "truth_probability": 0.26609230041503906,
+        "truth_rank": 2,
+        "entropy_bits": 1.9932777881622314
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718059:variant:2:probe:2:query:A3",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.5165665745735168,
+        "map_consistent": true,
+        "truth_probability": 0.23589901626110077,
+        "truth_rank": 3,
+        "entropy_bits": 1.9912630319595337
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718060:variant:3:probe:3:query:A2",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.28494295477867126,
+        "map_consistent": true,
+        "truth_probability": 0.28494295477867126,
+        "truth_rank": 1,
+        "entropy_bits": 1.9919880628585815
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718060:variant:0:probe:4:query:A3",
+        "information_level": 4,
+        "mode": "full",
+        "consistent_mass": 0.28882303833961487,
+        "map_consistent": true,
+        "truth_probability": 0.28882303833961487,
+        "truth_rank": 1,
+        "entropy_bits": 1.994333028793335
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718059:variant:3:probe:0:query:A3",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 1.0,
+        "map_consistent": true,
+        "truth_probability": 0.23851962387561798,
+        "truth_rank": 3,
+        "entropy_bits": 1.9980602264404297
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241447:prefix:0",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 1.0,
+        "map_consistent": true,
+        "truth_probability": 0.125,
+        "truth_rank": 8,
+        "entropy_bits": 3.0
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241447:prefix:7",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.23483574390411377,
+        "map_consistent": false,
+        "truth_probability": 0.1199197843670845,
+        "truth_rank": 6,
+        "entropy_bits": 2.996591806411743
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241446:prefix:20",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.19620034098625183,
+        "map_consistent": false,
+        "truth_probability": 0.09507065266370773,
+        "truth_rank": 8,
+        "entropy_bits": 2.983691453933716
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241445:prefix:16",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.2431650012731552,
+        "map_consistent": false,
+        "truth_probability": 0.12437704205513,
+        "truth_rank": 5,
+        "entropy_bits": 2.99760365486145
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241445:prefix:1",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 0.7177379131317139,
+        "map_consistent": false,
+        "truth_probability": 0.1065489798784256,
+        "truth_rank": 7,
+        "entropy_bits": 2.975916624069214
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241447:prefix:13",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.22088958323001862,
+        "map_consistent": false,
+        "truth_probability": 0.1103300079703331,
+        "truth_rank": 8,
+        "entropy_bits": 2.9947712421417236
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241446:prefix:16",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.20613357424736023,
+        "map_consistent": false,
+        "truth_probability": 0.10078386217355728,
+        "truth_rank": 8,
+        "entropy_bits": 2.9848971366882324
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241447:prefix:23",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.23638802766799927,
+        "map_consistent": false,
+        "truth_probability": 0.12208063900470734,
+        "truth_rank": 5,
+        "entropy_bits": 2.9979827404022217
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241447:prefix:6",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 0.739406406879425,
+        "map_consistent": true,
+        "truth_probability": 0.10783057659864426,
+        "truth_rank": 8,
+        "entropy_bits": 2.992356777191162
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241445:prefix:13",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.2179524302482605,
+        "map_consistent": false,
+        "truth_probability": 0.10657979547977448,
+        "truth_rank": 8,
+        "entropy_bits": 2.9901938438415527
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241447:prefix:22",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.2187143713235855,
+        "map_consistent": false,
+        "truth_probability": 0.10813559591770172,
+        "truth_rank": 8,
+        "entropy_bits": 2.9947290420532227
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241446:prefix:21",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.2060924470424652,
+        "map_consistent": false,
+        "truth_probability": 0.10155804455280304,
+        "truth_rank": 8,
+        "entropy_bits": 2.986416816711426
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241446:prefix:4",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 0.7466094493865967,
+        "map_consistent": true,
+        "truth_probability": 0.09698093682527542,
+        "truth_rank": 8,
+        "entropy_bits": 2.9832966327667236
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241446:prefix:15",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.19387561082839966,
+        "map_consistent": false,
+        "truth_probability": 0.09366662800312042,
+        "truth_rank": 8,
+        "entropy_bits": 2.981687545776367
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241445:prefix:15",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.23034065961837769,
+        "map_consistent": false,
+        "truth_probability": 0.1149873211979866,
+        "truth_rank": 8,
+        "entropy_bits": 2.995330333709717
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241446:prefix:0",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 1.0,
+        "map_consistent": true,
+        "truth_probability": 0.125,
+        "truth_rank": 7,
+        "entropy_bits": 3.0
+      }
+    ]
+  },
+  "initial_test": {
+    "mode": "full",
+    "by_task": {
+      "action_binding": {
+        "rows": 16.0,
+        "by_information_level": {
+          "0": {
+            "consistent_mass": 1.0,
+            "map_consistent": 1.0,
+            "truth_probability": 0.24143579602241516,
+            "truth_rank": 2.75,
+            "entropy_bits": 1.9975266456604004,
+            "set_cross_entropy": 1.3880005180835724,
+            "brier": 0.0008619694999651983,
+            "rows": 4.0
+          },
+          "1": {
+            "consistent_mass": 0.579888254404068,
+            "map_consistent": 0.6666666666666666,
+            "truth_probability": 0.2429414987564087,
+            "truth_rank": 3.0,
+            "entropy_bits": 1.9940373102823894,
+            "set_cross_entropy": 1.3896844387054443,
+            "brier": 0.30725787828365964,
+            "rows": 3.0
+          },
+          "2": {
+            "consistent_mass": 0.47754014531771344,
+            "map_consistent": 0.0,
+            "truth_probability": 0.2090184191862742,
+            "truth_rank": 4.0,
+            "entropy_bits": 1.9897110064824421,
+            "set_cross_entropy": 1.4401533603668213,
+            "brier": 0.2759868601957957,
+            "rows": 3.0
+          },
+          "3": {
+            "consistent_mass": 0.252642755707105,
+            "map_consistent": 0.3333333333333333,
+            "truth_probability": 0.252642755707105,
+            "truth_rank": 2.3333333333333335,
+            "entropy_bits": 1.9932620525360107,
+            "set_cross_entropy": 1.381189227104187,
+            "brier": 0.7470510800679525,
+            "rows": 3.0
+          },
+          "4": {
+            "consistent_mass": 0.2594700704018275,
+            "map_consistent": 0.0,
+            "truth_probability": 0.2594700704018275,
+            "truth_rank": 2.3333333333333335,
+            "entropy_bits": 1.9915201266606648,
+            "set_cross_entropy": 1.3500066200892131,
+            "brier": 0.7339828610420227,
+            "rows": 3.0
+          }
+        }
+      },
+      "goal_inference": {
+        "rows": 16.0,
+        "by_information_level": {
+          "0": {
+            "consistent_mass": 0.8775673657655716,
+            "map_consistent": 0.75,
+            "truth_probability": 0.11780511401593685,
+            "truth_rank": 6.0,
+            "entropy_bits": 2.991372525691986,
+            "set_cross_entropy": 2.0827195048332214,
+            "brier": 0.021533746272325516,
+            "rows": 4.0
+          },
+          "1": {
+            "consistent_mass": 0.22971583530306816,
+            "map_consistent": 0.0,
+            "truth_probability": 0.11629119329154491,
+            "truth_rank": 6.0,
+            "entropy_bits": 2.9900243282318115,
+            "set_cross_entropy": 2.1670567393302917,
+            "brier": 0.39707178622484207,
+            "rows": 4.0
+          },
+          "2": {
+            "consistent_mass": 0.24064544588327408,
+            "map_consistent": 0.25,
+            "truth_probability": 0.12191366218030453,
+            "truth_rank": 4.5,
+            "entropy_bits": 2.9907535314559937,
+            "set_cross_entropy": 2.1249972581863403,
+            "brier": 0.3859785348176956,
+            "rows": 4.0
+          },
+          "3": {
+            "consistent_mass": 0.24263115599751472,
+            "map_consistent": 0.25,
+            "truth_probability": 0.12496695294976234,
+            "truth_rank": 4.0,
+            "entropy_bits": 2.9913336634635925,
+            "set_cross_entropy": 2.117115616798401,
+            "brier": 0.38389312475919724,
+            "rows": 4.0
+          }
+        }
+      }
+    },
+    "traces": [
+      {
+        "task": "action_binding",
+        "source_id": "action:718061:variant:0:probe:0:query:A4",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 1.0,
+        "map_consistent": true,
+        "truth_probability": 0.23666627705097198,
+        "truth_rank": 3,
+        "entropy_bits": 1.997711420059204
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718062:variant:0:probe:1:query:A3",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.7470581531524658,
+        "map_consistent": true,
+        "truth_probability": 0.2111039161682129,
+        "truth_rank": 4,
+        "entropy_bits": 1.9933807849884033
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718063:variant:0:probe:2:query:A2",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.4827985167503357,
+        "map_consistent": false,
+        "truth_probability": 0.21414418518543243,
+        "truth_rank": 4,
+        "entropy_bits": 1.9915443658828735
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718062:variant:3:probe:3:query:A2",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.2801107168197632,
+        "map_consistent": true,
+        "truth_probability": 0.2801107168197632,
+        "truth_rank": 1,
+        "entropy_bits": 1.9933698177337646
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718065:variant:2:probe:4:query:A1",
+        "information_level": 4,
+        "mode": "full",
+        "consistent_mass": 0.26888346672058105,
+        "map_consistent": false,
+        "truth_probability": 0.26888346672058105,
+        "truth_rank": 2,
+        "entropy_bits": 1.9888681173324585
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718062:variant:1:probe:0:query:A3",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 1.0,
+        "map_consistent": true,
+        "truth_probability": 0.23622849583625793,
+        "truth_rank": 3,
+        "entropy_bits": 1.9973368644714355
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718063:variant:2:probe:1:query:A4",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.25589272379875183,
+        "map_consistent": false,
+        "truth_probability": 0.25589272379875183,
+        "truth_rank": 2,
+        "entropy_bits": 1.994960069656372
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718065:variant:3:probe:2:query:A4",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.4749731719493866,
+        "map_consistent": false,
+        "truth_probability": 0.20616427063941956,
+        "truth_rank": 4,
+        "entropy_bits": 1.9886155128479004
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718061:variant:1:probe:3:query:A4",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.21805234253406525,
+        "map_consistent": false,
+        "truth_probability": 0.21805234253406525,
+        "truth_rank": 4,
+        "entropy_bits": 1.9950318336486816
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718065:variant:0:probe:4:query:A4",
+        "information_level": 4,
+        "mode": "full",
+        "consistent_mass": 0.2442561239004135,
+        "map_consistent": false,
+        "truth_probability": 0.2442561239004135,
+        "truth_rank": 3,
+        "entropy_bits": 1.994844675064087
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718061:variant:1:probe:0:query:A4",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 1.0,
+        "map_consistent": true,
+        "truth_probability": 0.23666627705097198,
+        "truth_rank": 3,
+        "entropy_bits": 1.997711420059204
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718061:variant:2:probe:1:query:A2",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.7367138862609863,
+        "map_consistent": true,
+        "truth_probability": 0.26182785630226135,
+        "truth_rank": 3,
+        "entropy_bits": 1.9937710762023926
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718065:variant:2:probe:2:query:A4",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.47484874725341797,
+        "map_consistent": false,
+        "truth_probability": 0.20674680173397064,
+        "truth_rank": 4,
+        "entropy_bits": 1.9889731407165527
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718064:variant:2:probe:3:query:A1",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.2597652077674866,
+        "map_consistent": false,
+        "truth_probability": 0.2597652077674866,
+        "truth_rank": 2,
+        "entropy_bits": 1.991384506225586
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718063:variant:3:probe:4:query:A1",
+        "information_level": 4,
+        "mode": "full",
+        "consistent_mass": 0.2652706205844879,
+        "map_consistent": false,
+        "truth_probability": 0.2652706205844879,
+        "truth_rank": 2,
+        "entropy_bits": 1.9908475875854492
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718063:variant:3:probe:0:query:A1",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 1.0,
+        "map_consistent": true,
+        "truth_probability": 0.25618213415145874,
+        "truth_rank": 2,
+        "entropy_bits": 1.9973468780517578
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241449:prefix:6",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 0.7633942365646362,
+        "map_consistent": true,
+        "truth_probability": 0.0957166776061058,
+        "truth_rank": 8,
+        "entropy_bits": 2.9708070755004883
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241452:prefix:7",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.2076125591993332,
+        "map_consistent": false,
+        "truth_probability": 0.1045495942234993,
+        "truth_rank": 7,
+        "entropy_bits": 2.976651906967163
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241450:prefix:13",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.2321505844593048,
+        "map_consistent": false,
+        "truth_probability": 0.11851847916841507,
+        "truth_rank": 7,
+        "entropy_bits": 2.9970896244049072
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241448:prefix:12",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.2553078532218933,
+        "map_consistent": false,
+        "truth_probability": 0.13256554305553436,
+        "truth_rank": 2,
+        "entropy_bits": 2.9978742599487305
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241452:prefix:0",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 1.0,
+        "map_consistent": true,
+        "truth_probability": 0.125,
+        "truth_rank": 6,
+        "entropy_bits": 3.0
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241451:prefix:9",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.2323078215122223,
+        "map_consistent": false,
+        "truth_probability": 0.11724019795656204,
+        "truth_rank": 7,
+        "entropy_bits": 2.997168779373169
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241448:prefix:11",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.26092976331710815,
+        "map_consistent": true,
+        "truth_probability": 0.13344626128673553,
+        "truth_rank": 1,
+        "entropy_bits": 2.9977669715881348
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241453:prefix:15",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.2810474634170532,
+        "map_consistent": true,
+        "truth_probability": 0.1432800143957138,
+        "truth_rank": 1,
+        "entropy_bits": 2.9939820766448975
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241451:prefix:0",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 1.0,
+        "map_consistent": true,
+        "truth_probability": 0.125,
+        "truth_rank": 6,
+        "entropy_bits": 3.0
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241453:prefix:12",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.25516024231910706,
+        "map_consistent": false,
+        "truth_probability": 0.1269049495458603,
+        "truth_rank": 4,
+        "entropy_bits": 2.994929075241089
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241453:prefix:13",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.27063244581222534,
+        "map_consistent": false,
+        "truth_probability": 0.13937388360500336,
+        "truth_rank": 2,
+        "entropy_bits": 2.992626428604126
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241450:prefix:14",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.23076170682907104,
+        "map_consistent": false,
+        "truth_probability": 0.1216759905219078,
+        "truth_rank": 6,
+        "entropy_bits": 2.995901584625244
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241448:prefix:1",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 0.7468752264976501,
+        "map_consistent": false,
+        "truth_probability": 0.1255037784576416,
+        "truth_rank": 4,
+        "entropy_bits": 2.994683027267456
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241450:prefix:9",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.2237827181816101,
+        "map_consistent": false,
+        "truth_probability": 0.11647003144025803,
+        "truth_rank": 6,
+        "entropy_bits": 2.991347551345825
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241449:prefix:14",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.198868989944458,
+        "map_consistent": false,
+        "truth_probability": 0.09631602466106415,
+        "truth_rank": 8,
+        "entropy_bits": 2.9755311012268066
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241449:prefix:15",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.20340760052204132,
+        "map_consistent": false,
+        "truth_probability": 0.1023462638258934,
+        "truth_rank": 7,
+        "entropy_bits": 2.977576732635498
+      }
+    ]
+  },
+  "final_validation": {
+    "mode": "full",
+    "by_task": {
+      "action_binding": {
+        "rows": 16.0,
+        "by_information_level": {
+          "0": {
+            "consistent_mass": 1.0,
+            "map_consistent": 1.0,
+            "truth_probability": 0.2523900680243969,
+            "truth_rank": 2.0,
+            "entropy_bits": 1.9995422959327698,
+            "set_cross_entropy": 1.3866108655929565,
+            "brier": 0.00015895971955615096,
+            "rows": 4.0
+          },
+          "1": {
+            "consistent_mass": 0.5753536721070608,
+            "map_consistent": 0.3333333333333333,
+            "truth_probability": 0.24131319423516592,
+            "truth_rank": 2.6666666666666665,
+            "entropy_bits": 1.9934746026992798,
+            "set_cross_entropy": 1.3981544574101765,
+            "brier": 0.31233781576156616,
+            "rows": 3.0
+          },
+          "2": {
+            "consistent_mass": 0.3388337592283885,
+            "map_consistent": 0.6666666666666666,
+            "truth_probability": 0.2504902382691701,
+            "truth_rank": 2.3333333333333335,
+            "entropy_bits": 1.9957472483317058,
+            "set_cross_entropy": 1.3883342742919922,
+            "brier": 0.5837496370077133,
+            "rows": 3.0
+          },
+          "3": {
+            "consistent_mass": 0.26031344135602313,
+            "map_consistent": 0.6666666666666666,
+            "truth_probability": 0.26031344135602313,
+            "truth_rank": 1.6666666666666667,
+            "entropy_bits": 1.9937554200490315,
+            "set_cross_entropy": 1.349988063176473,
+            "brier": 0.7315215269724528,
+            "rows": 3.0
+          },
+          "4": {
+            "consistent_mass": 0.2629576027393341,
+            "map_consistent": 0.3333333333333333,
+            "truth_probability": 0.2629576027393341,
+            "truth_rank": 2.3333333333333335,
+            "entropy_bits": 1.9930233160654705,
+            "set_cross_entropy": 1.338539679845174,
+            "brier": 0.7264988422393799,
+            "rows": 3.0
+          }
+        }
+      },
+      "goal_inference": {
+        "rows": 16.0,
+        "by_information_level": {
+          "0": {
+            "consistent_mass": 0.8450719118118286,
+            "map_consistent": 0.8,
+            "truth_probability": 0.1141557291150093,
+            "truth_rank": 7.6,
+            "entropy_bits": 2.9948577880859375,
+            "set_cross_entropy": 2.0900177478790285,
+            "brier": 0.02753540948033333,
+            "rows": 5.0
+          },
+          "1": {
+            "consistent_mass": 0.22926639392971992,
+            "map_consistent": 0.0,
+            "truth_probability": 0.10875151120126247,
+            "truth_rank": 7.75,
+            "entropy_bits": 2.993768632411957,
+            "set_cross_entropy": 2.169655680656433,
+            "brier": 0.39680586010217667,
+            "rows": 4.0
+          },
+          "2": {
+            "consistent_mass": 0.22440677881240845,
+            "map_consistent": 0.0,
+            "truth_probability": 0.10550788603723049,
+            "truth_rank": 7.75,
+            "entropy_bits": 2.9927828311920166,
+            "set_cross_entropy": 2.191245138645172,
+            "brier": 0.4018344059586525,
+            "rows": 4.0
+          },
+          "3": {
+            "consistent_mass": 0.23734013239542642,
+            "map_consistent": 0.0,
+            "truth_probability": 0.11460691442092259,
+            "truth_rank": 6.666666666666667,
+            "entropy_bits": 2.995518604914347,
+            "set_cross_entropy": 2.1344672044118247,
+            "brier": 0.38843634724617004,
+            "rows": 3.0
+          }
+        }
+      }
+    },
+    "traces": [
+      {
+        "task": "action_binding",
+        "source_id": "action:718058:variant:2:probe:0:query:A1",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 1.0000001192092896,
+        "map_consistent": true,
+        "truth_probability": 0.2580967843532562,
+        "truth_rank": 1,
+        "entropy_bits": 1.9995768070220947
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718058:variant:1:probe:1:query:A2",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.7560838460922241,
+        "map_consistent": true,
+        "truth_probability": 0.21947906911373138,
+        "truth_rank": 4,
+        "entropy_bits": 1.9936028718948364
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718059:variant:2:probe:2:query:A1",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.21925559639930725,
+        "map_consistent": false,
+        "truth_probability": 0.21925559639930725,
+        "truth_rank": 4,
+        "entropy_bits": 1.996006727218628
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718058:variant:3:probe:3:query:A3",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.2277044653892517,
+        "map_consistent": false,
+        "truth_probability": 0.2277044653892517,
+        "truth_rank": 3,
+        "entropy_bits": 1.9923083782196045
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718060:variant:0:probe:4:query:A1",
+        "information_level": 4,
+        "mode": "full",
+        "consistent_mass": 0.2513771653175354,
+        "map_consistent": false,
+        "truth_probability": 0.2513771653175354,
+        "truth_rank": 3,
+        "entropy_bits": 1.991959571838379
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718059:variant:0:probe:0:query:A2",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 0.9999998807907104,
+        "map_consistent": true,
+        "truth_probability": 0.24601444602012634,
+        "truth_rank": 3,
+        "entropy_bits": 1.9995250701904297
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718058:variant:0:probe:1:query:A1",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.7181581258773804,
+        "map_consistent": false,
+        "truth_probability": 0.2526414692401886,
+        "truth_rank": 2,
+        "entropy_bits": 1.994391679763794
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718060:variant:2:probe:2:query:A1",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.2673138976097107,
+        "map_consistent": true,
+        "truth_probability": 0.2673138976097107,
+        "truth_rank": 1,
+        "entropy_bits": 1.9954016208648682
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718058:variant:2:probe:3:query:A1",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.27790018916130066,
+        "map_consistent": true,
+        "truth_probability": 0.27790018916130066,
+        "truth_rank": 1,
+        "entropy_bits": 1.9936604499816895
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718060:variant:2:probe:4:query:A2",
+        "information_level": 4,
+        "mode": "full",
+        "consistent_mass": 0.24653568863868713,
+        "map_consistent": false,
+        "truth_probability": 0.24653568863868713,
+        "truth_rank": 3,
+        "entropy_bits": 1.9951980113983154
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718060:variant:1:probe:0:query:A1",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 1.0,
+        "map_consistent": true,
+        "truth_probability": 0.2578745186328888,
+        "truth_rank": 1,
+        "entropy_bits": 1.9995994567871094
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718059:variant:0:probe:1:query:A1",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.25181904435157776,
+        "map_consistent": false,
+        "truth_probability": 0.25181904435157776,
+        "truth_rank": 2,
+        "entropy_bits": 1.992429256439209
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718059:variant:2:probe:2:query:A3",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.5299317836761475,
+        "map_consistent": true,
+        "truth_probability": 0.26490122079849243,
+        "truth_rank": 2,
+        "entropy_bits": 1.995833396911621
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718060:variant:3:probe:3:query:A2",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.2753356695175171,
+        "map_consistent": true,
+        "truth_probability": 0.2753356695175171,
+        "truth_rank": 1,
+        "entropy_bits": 1.9952974319458008
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718060:variant:0:probe:4:query:A3",
+        "information_level": 4,
+        "mode": "full",
+        "consistent_mass": 0.2909599542617798,
+        "map_consistent": true,
+        "truth_probability": 0.2909599542617798,
+        "truth_rank": 1,
+        "entropy_bits": 1.9919123649597168
+      },
+      {
+        "task": "action_binding",
+        "source_id": "action:718059:variant:3:probe:0:query:A3",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 1.0,
+        "map_consistent": true,
+        "truth_probability": 0.24757452309131622,
+        "truth_rank": 3,
+        "entropy_bits": 1.9994678497314453
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241447:prefix:0",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 1.0,
+        "map_consistent": true,
+        "truth_probability": 0.125,
+        "truth_rank": 8,
+        "entropy_bits": 3.0
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241447:prefix:7",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.24459031224250793,
+        "map_consistent": false,
+        "truth_probability": 0.11890903860330582,
+        "truth_rank": 7,
+        "entropy_bits": 2.996901750564575
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241446:prefix:20",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.20773786306381226,
+        "map_consistent": false,
+        "truth_probability": 0.09642026573419571,
+        "truth_rank": 8,
+        "entropy_bits": 2.988084316253662
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241445:prefix:16",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.251030832529068,
+        "map_consistent": false,
+        "truth_probability": 0.12221329659223557,
+        "truth_rank": 6,
+        "entropy_bits": 2.9978511333465576
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241445:prefix:1",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 0.7313608527183533,
+        "map_consistent": false,
+        "truth_probability": 0.11273377388715744,
+        "truth_rank": 7,
+        "entropy_bits": 2.9921793937683105
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241447:prefix:13",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.23351231217384338,
+        "map_consistent": false,
+        "truth_probability": 0.11157739907503128,
+        "truth_rank": 8,
+        "entropy_bits": 2.9958553314208984
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241446:prefix:16",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.2147371768951416,
+        "map_consistent": false,
+        "truth_probability": 0.10014408826828003,
+        "truth_rank": 8,
+        "entropy_bits": 2.988335609436035
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241447:prefix:23",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.24570882320404053,
+        "map_consistent": false,
+        "truth_probability": 0.12046385556459427,
+        "truth_rank": 6,
+        "entropy_bits": 2.9983742237091064
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241447:prefix:6",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 0.7474336624145508,
+        "map_consistent": true,
+        "truth_probability": 0.1096196398139,
+        "truth_rank": 8,
+        "entropy_bits": 2.994905948638916
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241445:prefix:13",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.23376794159412384,
+        "map_consistent": false,
+        "truth_probability": 0.10960179567337036,
+        "truth_rank": 8,
+        "entropy_bits": 2.996209144592285
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241447:prefix:22",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.23186850547790527,
+        "map_consistent": false,
+        "truth_probability": 0.10972266644239426,
+        "truth_rank": 8,
+        "entropy_bits": 2.9970526695251465
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241446:prefix:21",
+        "information_level": 3,
+        "mode": "full",
+        "consistent_mass": 0.21528074145317078,
+        "map_consistent": false,
+        "truth_probability": 0.10114359110593796,
+        "truth_rank": 8,
+        "entropy_bits": 2.990330457687378
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241446:prefix:4",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 0.746565043926239,
+        "map_consistent": true,
+        "truth_probability": 0.0984252318739891,
+        "truth_rank": 8,
+        "entropy_bits": 2.987203598022461
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241446:prefix:15",
+        "information_level": 1,
+        "mode": "full",
+        "consistent_mass": 0.20519500970840454,
+        "map_consistent": false,
+        "truth_probability": 0.09491781145334244,
+        "truth_rank": 8,
+        "entropy_bits": 2.9861083030700684
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241445:prefix:15",
+        "information_level": 2,
+        "mode": "full",
+        "consistent_mass": 0.24328356981277466,
+        "map_consistent": false,
+        "truth_probability": 0.11574452370405197,
+        "truth_rank": 7,
+        "entropy_bits": 2.9976587295532227
+      },
+      {
+        "task": "goal_inference",
+        "source_id": "goal:241446:prefix:0",
+        "information_level": 0,
+        "mode": "full",
+        "consistent_mass": 1.0,
+        "map_consistent": true,
+        "truth_probability": 0.125,
+        "truth_rank": 7,
+        "entropy_bits": 3.0
+      }
+    ]
+  },
+  "final_controls": {
+    "amnesic": {
+      "mode": "amnesic",
+      "by_task": {
+        "action_binding": {
+          "rows": 16.0,
+          "by_information_level": {
+            "0": {
+              "consistent_mass": 1.0,
+              "map_consistent": 1.0,
+              "truth_probability": 0.25,
+              "truth_rank": 1.75,
+              "entropy_bits": 2.0,
+              "set_cross_entropy": 1.3862943649291992,
+              "brier": 0.0,
+              "rows": 4.0
+            },
+            "1": {
+              "consistent_mass": 0.5833333333333334,
+              "map_consistent": 0.6666666666666666,
+              "truth_probability": 0.25,
+              "truth_rank": 2.6666666666666665,
+              "entropy_bits": 2.0,
+              "set_cross_entropy": 1.3862943649291992,
+              "brier": 0.3055555621782939,
+              "rows": 3.0
+            },
+            "2": {
+              "consistent_mass": 0.5,
+              "map_consistent": 1.0,
+              "truth_probability": 0.25,
+              "truth_rank": 1.0,
+              "entropy_bits": 2.0,
+              "set_cross_entropy": 1.3862943649291992,
+              "brier": 0.25,
+              "rows": 3.0
+            },
+            "3": {
+              "consistent_mass": 0.25,
+              "map_consistent": 0.3333333333333333,
+              "truth_probability": 0.25,
+              "truth_rank": 2.6666666666666665,
+              "entropy_bits": 2.0,
+              "set_cross_entropy": 1.3862943649291992,
+              "brier": 0.75,
+              "rows": 3.0
+            },
+            "4": {
+              "consistent_mass": 0.25,
+              "map_consistent": 0.0,
+              "truth_probability": 0.25,
+              "truth_rank": 2.6666666666666665,
+              "entropy_bits": 2.0,
+              "set_cross_entropy": 1.3862943649291992,
+              "brier": 0.75,
+              "rows": 3.0
+            }
+          }
+        },
+        "goal_inference": {
+          "rows": 16.0,
+          "by_information_level": {
+            "0": {
+              "consistent_mass": 0.875,
+              "map_consistent": 0.75,
+              "truth_probability": 0.125,
+              "truth_rank": 5.75,
+              "entropy_bits": 3.0,
+              "set_cross_entropy": 2.0794414281845093,
+              "brier": 0.0208333358168602,
+              "rows": 4.0
+            },
+            "1": {
+              "consistent_mass": 0.25,
+              "map_consistent": 0.0,
+              "truth_probability": 0.125,
+              "truth_rank": 5.0,
+              "entropy_bits": 3.0,
+              "set_cross_entropy": 2.079441547393799,
+              "brier": 0.375,
+              "rows": 4.0
+            },
+            "2": {
+              "consistent_mass": 0.25,
+              "map_consistent": 0.0,
+              "truth_probability": 0.125,
+              "truth_rank": 4.75,
+              "entropy_bits": 3.0,
+              "set_cross_entropy": 2.079441547393799,
+              "brier": 0.375,
+              "rows": 4.0
+            },
+            "3": {
+              "consistent_mass": 0.25,
+              "map_consistent": 0.0,
+              "truth_probability": 0.125,
+              "truth_rank": 4.75,
+              "entropy_bits": 3.0,
+              "set_cross_entropy": 2.079441547393799,
+              "brier": 0.375,
+              "rows": 4.0
+            }
+          }
+        }
+      },
+      "traces": [
+        {
+          "task": "action_binding",
+          "source_id": "action:718061:variant:0:probe:0:query:A4",
+          "information_level": 0,
+          "mode": "amnesic",
+          "consistent_mass": 1.0,
+          "map_consistent": true,
+          "truth_probability": 0.25,
+          "truth_rank": 1,
+          "entropy_bits": 2.0
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718062:variant:0:probe:1:query:A3",
+          "information_level": 1,
+          "mode": "amnesic",
+          "consistent_mass": 0.75,
+          "map_consistent": true,
+          "truth_probability": 0.25,
+          "truth_rank": 1,
+          "entropy_bits": 2.0
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718063:variant:0:probe:2:query:A2",
+          "information_level": 2,
+          "mode": "amnesic",
+          "consistent_mass": 0.5,
+          "map_consistent": true,
+          "truth_probability": 0.25,
+          "truth_rank": 1,
+          "entropy_bits": 2.0
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718062:variant:3:probe:3:query:A2",
+          "information_level": 3,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": false,
+          "truth_probability": 0.25,
+          "truth_rank": 4,
+          "entropy_bits": 2.0
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718065:variant:2:probe:4:query:A1",
+          "information_level": 4,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": false,
+          "truth_probability": 0.25,
+          "truth_rank": 3,
+          "entropy_bits": 2.0
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718062:variant:1:probe:0:query:A3",
+          "information_level": 0,
+          "mode": "amnesic",
+          "consistent_mass": 1.0,
+          "map_consistent": true,
+          "truth_probability": 0.25,
+          "truth_rank": 2,
+          "entropy_bits": 2.0
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718063:variant:2:probe:1:query:A4",
+          "information_level": 1,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": false,
+          "truth_probability": 0.25,
+          "truth_rank": 3,
+          "entropy_bits": 2.0
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718065:variant:3:probe:2:query:A4",
+          "information_level": 2,
+          "mode": "amnesic",
+          "consistent_mass": 0.5,
+          "map_consistent": true,
+          "truth_probability": 0.25,
+          "truth_rank": 1,
+          "entropy_bits": 2.0
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718061:variant:1:probe:3:query:A4",
+          "information_level": 3,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": true,
+          "truth_probability": 0.25,
+          "truth_rank": 1,
+          "entropy_bits": 2.0
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718065:variant:0:probe:4:query:A4",
+          "information_level": 4,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": false,
+          "truth_probability": 0.25,
+          "truth_rank": 2,
+          "entropy_bits": 2.0
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718061:variant:1:probe:0:query:A4",
+          "information_level": 0,
+          "mode": "amnesic",
+          "consistent_mass": 1.0,
+          "map_consistent": true,
+          "truth_probability": 0.25,
+          "truth_rank": 1,
+          "entropy_bits": 2.0
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718061:variant:2:probe:1:query:A2",
+          "information_level": 1,
+          "mode": "amnesic",
+          "consistent_mass": 0.75,
+          "map_consistent": true,
+          "truth_probability": 0.25,
+          "truth_rank": 4,
+          "entropy_bits": 2.0
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718065:variant:2:probe:2:query:A4",
+          "information_level": 2,
+          "mode": "amnesic",
+          "consistent_mass": 0.5,
+          "map_consistent": true,
+          "truth_probability": 0.25,
+          "truth_rank": 1,
+          "entropy_bits": 2.0
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718064:variant:2:probe:3:query:A1",
+          "information_level": 3,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": false,
+          "truth_probability": 0.25,
+          "truth_rank": 3,
+          "entropy_bits": 2.0
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718063:variant:3:probe:4:query:A1",
+          "information_level": 4,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": false,
+          "truth_probability": 0.25,
+          "truth_rank": 3,
+          "entropy_bits": 2.0
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718063:variant:3:probe:0:query:A1",
+          "information_level": 0,
+          "mode": "amnesic",
+          "consistent_mass": 1.0,
+          "map_consistent": true,
+          "truth_probability": 0.25,
+          "truth_rank": 3,
+          "entropy_bits": 2.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241449:prefix:6",
+          "information_level": 0,
+          "mode": "amnesic",
+          "consistent_mass": 0.75,
+          "map_consistent": true,
+          "truth_probability": 0.125,
+          "truth_rank": 8,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241452:prefix:7",
+          "information_level": 1,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": false,
+          "truth_probability": 0.125,
+          "truth_rank": 6,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241450:prefix:13",
+          "information_level": 2,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": false,
+          "truth_probability": 0.125,
+          "truth_rank": 5,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241448:prefix:12",
+          "information_level": 3,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": false,
+          "truth_probability": 0.125,
+          "truth_rank": 3,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241452:prefix:0",
+          "information_level": 0,
+          "mode": "amnesic",
+          "consistent_mass": 1.0,
+          "map_consistent": true,
+          "truth_probability": 0.125,
+          "truth_rank": 6,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241451:prefix:9",
+          "information_level": 1,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": false,
+          "truth_probability": 0.125,
+          "truth_rank": 6,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241448:prefix:11",
+          "information_level": 2,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": false,
+          "truth_probability": 0.125,
+          "truth_rank": 3,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241453:prefix:15",
+          "information_level": 3,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": false,
+          "truth_probability": 0.125,
+          "truth_rank": 3,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241451:prefix:0",
+          "information_level": 0,
+          "mode": "amnesic",
+          "consistent_mass": 1.0,
+          "map_consistent": true,
+          "truth_probability": 0.125,
+          "truth_rank": 6,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241453:prefix:12",
+          "information_level": 1,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": false,
+          "truth_probability": 0.125,
+          "truth_rank": 3,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241453:prefix:13",
+          "information_level": 2,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": false,
+          "truth_probability": 0.125,
+          "truth_rank": 3,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241450:prefix:14",
+          "information_level": 3,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": false,
+          "truth_probability": 0.125,
+          "truth_rank": 5,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241448:prefix:1",
+          "information_level": 0,
+          "mode": "amnesic",
+          "consistent_mass": 0.75,
+          "map_consistent": false,
+          "truth_probability": 0.125,
+          "truth_rank": 3,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241450:prefix:9",
+          "information_level": 1,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": false,
+          "truth_probability": 0.125,
+          "truth_rank": 5,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241449:prefix:14",
+          "information_level": 2,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": false,
+          "truth_probability": 0.125,
+          "truth_rank": 8,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241449:prefix:15",
+          "information_level": 3,
+          "mode": "amnesic",
+          "consistent_mass": 0.25,
+          "map_consistent": false,
+          "truth_probability": 0.125,
+          "truth_rank": 8,
+          "entropy_bits": 3.0
+        }
+      ]
+    },
+    "full": {
+      "mode": "full",
+      "by_task": {
+        "action_binding": {
+          "rows": 16.0,
+          "by_information_level": {
+            "0": {
+              "consistent_mass": 0.9999999850988388,
+              "map_consistent": 1.0,
+              "truth_probability": 0.24486169964075089,
+              "truth_rank": 3.25,
+              "entropy_bits": 1.9994315803050995,
+              "set_cross_entropy": 1.3866863250732422,
+              "brier": 0.00019809455261565745,
+              "rows": 4.0
+            },
+            "1": {
+              "consistent_mass": 0.5739083141088486,
+              "map_consistent": 0.3333333333333333,
+              "truth_probability": 0.23769506812095642,
+              "truth_rank": 3.0,
+              "entropy_bits": 1.9927042325337727,
+              "set_cross_entropy": 1.4044477144877117,
+              "brier": 0.3155801023046176,
+              "rows": 3.0
+            },
+            "2": {
+              "consistent_mass": 0.46492953101793927,
+              "map_consistent": 0.0,
+              "truth_probability": 0.2153152326742808,
+              "truth_rank": 4.0,
+              "entropy_bits": 1.9945404132207234,
+              "set_cross_entropy": 1.461795727411906,
+              "brier": 0.28691641489664715,
+              "rows": 3.0
+            },
+            "3": {
+              "consistent_mass": 0.24521149694919586,
+              "map_consistent": 0.3333333333333333,
+              "truth_probability": 0.24521149694919586,
+              "truth_rank": 2.6666666666666665,
+              "entropy_bits": 1.9950368007024128,
+              "set_cross_entropy": 1.4106229146321614,
+              "brier": 0.7612685362497965,
+              "rows": 3.0
+            },
+            "4": {
+              "consistent_mass": 0.257927546898524,
+              "map_consistent": 0.0,
+              "truth_probability": 0.257927546898524,
+              "truth_rank": 2.3333333333333335,
+              "entropy_bits": 1.9907208283742268,
+              "set_cross_entropy": 1.355088512102763,
+              "brier": 0.737273097038269,
+              "rows": 3.0
+            }
+          }
+        },
+        "goal_inference": {
+          "rows": 16.0,
+          "by_information_level": {
+            "0": {
+              "consistent_mass": 0.8772174715995789,
+              "map_consistent": 0.75,
+              "truth_probability": 0.11821283586323261,
+              "truth_rank": 6.25,
+              "entropy_bits": 2.9950819611549377,
+              "set_cross_entropy": 2.080139935016632,
+              "brier": 0.020960601046681404,
+              "rows": 4.0
+            },
+            "1": {
+              "consistent_mass": 0.2361583299934864,
+              "map_consistent": 0.25,
+              "truth_probability": 0.11368902400135994,
+              "truth_rank": 7.5,
+              "entropy_bits": 2.9950133562088013,
+              "set_cross_entropy": 2.13861745595932,
+              "brier": 0.3897142633795738,
+              "rows": 4.0
+            },
+            "2": {
+              "consistent_mass": 0.24410945177078247,
+              "map_consistent": 0.5,
+              "truth_probability": 0.11761713586747646,
+              "truth_rank": 5.75,
+              "entropy_bits": 2.9940237402915955,
+              "set_cross_entropy": 2.10817688703537,
+              "brier": 0.3819262534379959,
+              "rows": 4.0
+            },
+            "3": {
+              "consistent_mass": 0.2458074763417244,
+              "map_consistent": 0.25,
+              "truth_probability": 0.12015737593173981,
+              "truth_rank": 5.25,
+              "entropy_bits": 2.9941603541374207,
+              "set_cross_entropy": 2.100968599319458,
+              "brier": 0.3802090436220169,
+              "rows": 4.0
+            }
+          }
+        }
+      },
+      "traces": [
+        {
+          "task": "action_binding",
+          "source_id": "action:718061:variant:0:probe:0:query:A4",
+          "information_level": 0,
+          "mode": "full",
+          "consistent_mass": 1.0,
+          "map_consistent": true,
+          "truth_probability": 0.2424161583185196,
+          "truth_rank": 4,
+          "entropy_bits": 1.9994981288909912
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718062:variant:0:probe:1:query:A3",
+          "information_level": 1,
+          "mode": "full",
+          "consistent_mass": 0.7582725882530212,
+          "map_consistent": true,
+          "truth_probability": 0.21695423126220703,
+          "truth_rank": 4,
+          "entropy_bits": 1.993181824684143
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718063:variant:0:probe:2:query:A2",
+          "information_level": 2,
+          "mode": "full",
+          "consistent_mass": 0.46943336725234985,
+          "map_consistent": false,
+          "truth_probability": 0.2196325808763504,
+          "truth_rank": 4,
+          "entropy_bits": 1.9958914518356323
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718062:variant:3:probe:3:query:A2",
+          "information_level": 3,
+          "mode": "full",
+          "consistent_mass": 0.2747454047203064,
+          "map_consistent": true,
+          "truth_probability": 0.2747454047203064,
+          "truth_rank": 1,
+          "entropy_bits": 1.9954091310501099
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718065:variant:2:probe:4:query:A1",
+          "information_level": 4,
+          "mode": "full",
+          "consistent_mass": 0.258868932723999,
+          "map_consistent": false,
+          "truth_probability": 0.258868932723999,
+          "truth_rank": 2,
+          "entropy_bits": 1.9892113208770752
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718062:variant:1:probe:0:query:A3",
+          "information_level": 0,
+          "mode": "full",
+          "consistent_mass": 1.0,
+          "map_consistent": true,
+          "truth_probability": 0.24599052965641022,
+          "truth_rank": 3,
+          "entropy_bits": 1.9992690086364746
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718063:variant:2:probe:1:query:A4",
+          "information_level": 1,
+          "mode": "full",
+          "consistent_mass": 0.24732787907123566,
+          "map_consistent": false,
+          "truth_probability": 0.24732787907123566,
+          "truth_rank": 2,
+          "entropy_bits": 1.9916412830352783
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718065:variant:3:probe:2:query:A4",
+          "information_level": 2,
+          "mode": "full",
+          "consistent_mass": 0.46274444460868835,
+          "map_consistent": false,
+          "truth_probability": 0.21291197836399078,
+          "truth_rank": 4,
+          "entropy_bits": 1.9938085079193115
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718061:variant:1:probe:3:query:A4",
+          "information_level": 3,
+          "mode": "full",
+          "consistent_mass": 0.21505773067474365,
+          "map_consistent": false,
+          "truth_probability": 0.21505773067474365,
+          "truth_rank": 4,
+          "entropy_bits": 1.9950740337371826
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718065:variant:0:probe:4:query:A4",
+          "information_level": 4,
+          "mode": "full",
+          "consistent_mass": 0.2587665915489197,
+          "map_consistent": false,
+          "truth_probability": 0.2587665915489197,
+          "truth_rank": 3,
+          "entropy_bits": 1.9921557903289795
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718061:variant:1:probe:0:query:A4",
+          "information_level": 0,
+          "mode": "full",
+          "consistent_mass": 1.0,
+          "map_consistent": true,
+          "truth_probability": 0.2424161583185196,
+          "truth_rank": 4,
+          "entropy_bits": 1.9994981288909912
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718061:variant:2:probe:1:query:A2",
+          "information_level": 1,
+          "mode": "full",
+          "consistent_mass": 0.7161244750022888,
+          "map_consistent": false,
+          "truth_probability": 0.24880309402942657,
+          "truth_rank": 3,
+          "entropy_bits": 1.993289589881897
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718065:variant:2:probe:2:query:A4",
+          "information_level": 2,
+          "mode": "full",
+          "consistent_mass": 0.46261078119277954,
+          "map_consistent": false,
+          "truth_probability": 0.21340113878250122,
+          "truth_rank": 4,
+          "entropy_bits": 1.9939212799072266
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718064:variant:2:probe:3:query:A1",
+          "information_level": 3,
+          "mode": "full",
+          "consistent_mass": 0.24583135545253754,
+          "map_consistent": false,
+          "truth_probability": 0.24583135545253754,
+          "truth_rank": 3,
+          "entropy_bits": 1.9946272373199463
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718063:variant:3:probe:4:query:A1",
+          "information_level": 4,
+          "mode": "full",
+          "consistent_mass": 0.2561471164226532,
+          "map_consistent": false,
+          "truth_probability": 0.2561471164226532,
+          "truth_rank": 2,
+          "entropy_bits": 1.990795373916626
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718063:variant:3:probe:0:query:A1",
+          "information_level": 0,
+          "mode": "full",
+          "consistent_mass": 0.9999999403953552,
+          "map_consistent": true,
+          "truth_probability": 0.24862395226955414,
+          "truth_rank": 2,
+          "entropy_bits": 1.999461054801941
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241449:prefix:6",
+          "information_level": 0,
+          "mode": "full",
+          "consistent_mass": 0.7587059140205383,
+          "map_consistent": true,
+          "truth_probability": 0.09916795045137405,
+          "truth_rank": 8,
+          "entropy_bits": 2.983093023300171
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241452:prefix:7",
+          "information_level": 1,
+          "mode": "full",
+          "consistent_mass": 0.22242538630962372,
+          "map_consistent": false,
+          "truth_probability": 0.10690031200647354,
+          "truth_rank": 8,
+          "entropy_bits": 2.99114990234375
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241450:prefix:13",
+          "information_level": 2,
+          "mode": "full",
+          "consistent_mass": 0.23498958349227905,
+          "map_consistent": false,
+          "truth_probability": 0.11436150223016739,
+          "truth_rank": 8,
+          "entropy_bits": 2.997307538986206
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241448:prefix:12",
+          "information_level": 3,
+          "mode": "full",
+          "consistent_mass": 0.255489319562912,
+          "map_consistent": false,
+          "truth_probability": 0.12572762370109558,
+          "truth_rank": 4,
+          "entropy_bits": 2.998154640197754
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241452:prefix:0",
+          "information_level": 0,
+          "mode": "full",
+          "consistent_mass": 1.0,
+          "map_consistent": true,
+          "truth_probability": 0.125,
+          "truth_rank": 6,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241451:prefix:9",
+          "information_level": 1,
+          "mode": "full",
+          "consistent_mass": 0.23703891038894653,
+          "map_consistent": false,
+          "truth_probability": 0.11384093016386032,
+          "truth_rank": 8,
+          "entropy_bits": 2.9976694583892822
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241448:prefix:11",
+          "information_level": 2,
+          "mode": "full",
+          "consistent_mass": 0.2601001262664795,
+          "map_consistent": true,
+          "truth_probability": 0.12631070613861084,
+          "truth_rank": 4,
+          "entropy_bits": 2.997927188873291
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241453:prefix:15",
+          "information_level": 3,
+          "mode": "full",
+          "consistent_mass": 0.2771211564540863,
+          "map_consistent": true,
+          "truth_probability": 0.13362453877925873,
+          "truth_rank": 2,
+          "entropy_bits": 2.9950783252716064
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241451:prefix:0",
+          "information_level": 0,
+          "mode": "full",
+          "consistent_mass": 1.0,
+          "map_consistent": true,
+          "truth_probability": 0.125,
+          "truth_rank": 6,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241453:prefix:12",
+          "information_level": 1,
+          "mode": "full",
+          "consistent_mass": 0.25618958473205566,
+          "map_consistent": true,
+          "truth_probability": 0.12077789008617401,
+          "truth_rank": 6,
+          "entropy_bits": 2.9976725578308105
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241453:prefix:13",
+          "information_level": 2,
+          "mode": "full",
+          "consistent_mass": 0.2681907117366791,
+          "map_consistent": true,
+          "truth_probability": 0.1304229199886322,
+          "truth_rank": 3,
+          "entropy_bits": 2.996464252471924
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241450:prefix:14",
+          "information_level": 3,
+          "mode": "full",
+          "consistent_mass": 0.2336753010749817,
+          "map_consistent": false,
+          "truth_probability": 0.11689910292625427,
+          "truth_rank": 7,
+          "entropy_bits": 2.997072696685791
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241448:prefix:1",
+          "information_level": 0,
+          "mode": "full",
+          "consistent_mass": 0.7501639723777771,
+          "map_consistent": false,
+          "truth_probability": 0.1236833930015564,
+          "truth_rank": 5,
+          "entropy_bits": 2.99723482131958
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241450:prefix:9",
+          "information_level": 1,
+          "mode": "full",
+          "consistent_mass": 0.2289794385433197,
+          "map_consistent": false,
+          "truth_probability": 0.11323696374893188,
+          "truth_rank": 8,
+          "entropy_bits": 2.9935615062713623
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241449:prefix:14",
+          "information_level": 2,
+          "mode": "full",
+          "consistent_mass": 0.21315738558769226,
+          "map_consistent": false,
+          "truth_probability": 0.09937341511249542,
+          "truth_rank": 8,
+          "entropy_bits": 2.984395980834961
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241449:prefix:15",
+          "information_level": 3,
+          "mode": "full",
+          "consistent_mass": 0.2169441282749176,
+          "map_consistent": false,
+          "truth_probability": 0.10437823832035065,
+          "truth_rank": 8,
+          "entropy_bits": 2.9863357543945312
+        }
+      ]
+    },
+    "shuffled_evidence": {
+      "mode": "shuffled_evidence",
+      "by_task": {
+        "action_binding": {
+          "rows": 16.0,
+          "by_information_level": {
+            "0": {
+              "consistent_mass": 0.9999999850988388,
+              "map_consistent": 1.0,
+              "truth_probability": 0.24486169964075089,
+              "truth_rank": 3.25,
+              "entropy_bits": 1.9994315803050995,
+              "set_cross_entropy": 1.3866863250732422,
+              "brier": 0.00019809455261565745,
+              "rows": 4.0
+            },
+            "1": {
+              "consistent_mass": 0.5730643719434738,
+              "map_consistent": 0.3333333333333333,
+              "truth_probability": 0.23768136898676553,
+              "truth_rank": 3.3333333333333335,
+              "entropy_bits": 1.992829958597819,
+              "set_cross_entropy": 1.4071987867355347,
+              "brier": 0.31674598654111225,
+              "rows": 3.0
+            },
+            "2": {
+              "consistent_mass": 0.47530389825503033,
+              "map_consistent": 0.0,
+              "truth_probability": 0.22144286831219992,
+              "truth_rank": 4.0,
+              "entropy_bits": 1.9962080319722493,
+              "set_cross_entropy": 1.439406156539917,
+              "brier": 0.2759860058625539,
+              "rows": 3.0
+            },
+            "3": {
+              "consistent_mass": 0.24881254633267721,
+              "map_consistent": 0.3333333333333333,
+              "truth_probability": 0.24881254633267721,
+              "truth_rank": 2.6666666666666665,
+              "entropy_bits": 1.9956446091334026,
+              "set_cross_entropy": 1.3940929174423218,
+              "brier": 0.7538686394691467,
+              "rows": 3.0
+            },
+            "4": {
+              "consistent_mass": 0.257439782222112,
+              "map_consistent": 0.0,
+              "truth_probability": 0.257439782222112,
+              "truth_rank": 2.3333333333333335,
+              "entropy_bits": 1.99143648147583,
+              "set_cross_entropy": 1.3570178747177124,
+              "brier": 0.7380143602689108,
+              "rows": 3.0
+            }
+          }
+        }
+      },
+      "traces": [
+        {
+          "task": "action_binding",
+          "source_id": "action:718061:variant:0:probe:0:query:A4",
+          "information_level": 0,
+          "mode": "shuffled_evidence",
+          "consistent_mass": 1.0,
+          "map_consistent": true,
+          "truth_probability": 0.2424161583185196,
+          "truth_rank": 4,
+          "entropy_bits": 1.9994981288909912
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718062:variant:0:probe:1:query:A3",
+          "information_level": 1,
+          "mode": "shuffled_evidence",
+          "consistent_mass": 0.7576539516448975,
+          "map_consistent": true,
+          "truth_probability": 0.21685506403446198,
+          "truth_rank": 4,
+          "entropy_bits": 1.992845892906189
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718063:variant:0:probe:2:query:A2",
+          "information_level": 2,
+          "mode": "shuffled_evidence",
+          "consistent_mass": 0.4804575443267822,
+          "map_consistent": false,
+          "truth_probability": 0.22834819555282593,
+          "truth_rank": 4,
+          "entropy_bits": 1.9980494976043701
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718062:variant:3:probe:3:query:A2",
+          "information_level": 3,
+          "mode": "shuffled_evidence",
+          "consistent_mass": 0.2737288475036621,
+          "map_consistent": true,
+          "truth_probability": 0.2737288475036621,
+          "truth_rank": 1,
+          "entropy_bits": 1.9961457252502441
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718065:variant:2:probe:4:query:A1",
+          "information_level": 4,
+          "mode": "shuffled_evidence",
+          "consistent_mass": 0.25891634821891785,
+          "map_consistent": false,
+          "truth_probability": 0.25891634821891785,
+          "truth_rank": 2,
+          "entropy_bits": 1.989384651184082
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718062:variant:1:probe:0:query:A3",
+          "information_level": 0,
+          "mode": "shuffled_evidence",
+          "consistent_mass": 1.0,
+          "map_consistent": true,
+          "truth_probability": 0.24599052965641022,
+          "truth_rank": 3,
+          "entropy_bits": 1.9992690086364746
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718063:variant:2:probe:1:query:A4",
+          "information_level": 1,
+          "mode": "shuffled_evidence",
+          "consistent_mass": 0.2458234578371048,
+          "map_consistent": false,
+          "truth_probability": 0.2458234578371048,
+          "truth_rank": 3,
+          "entropy_bits": 1.9928983449935913
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718065:variant:3:probe:2:query:A4",
+          "information_level": 2,
+          "mode": "shuffled_evidence",
+          "consistent_mass": 0.4728315770626068,
+          "map_consistent": false,
+          "truth_probability": 0.2177780568599701,
+          "truth_rank": 4,
+          "entropy_bits": 1.9952763319015503
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718061:variant:1:probe:3:query:A4",
+          "information_level": 3,
+          "mode": "shuffled_evidence",
+          "consistent_mass": 0.2262875884771347,
+          "map_consistent": false,
+          "truth_probability": 0.2262875884771347,
+          "truth_rank": 4,
+          "entropy_bits": 1.9973974227905273
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718065:variant:0:probe:4:query:A4",
+          "information_level": 4,
+          "mode": "shuffled_evidence",
+          "consistent_mass": 0.25952187180519104,
+          "map_consistent": false,
+          "truth_probability": 0.25952187180519104,
+          "truth_rank": 2,
+          "entropy_bits": 1.9929442405700684
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718061:variant:1:probe:0:query:A4",
+          "information_level": 0,
+          "mode": "shuffled_evidence",
+          "consistent_mass": 1.0,
+          "map_consistent": true,
+          "truth_probability": 0.2424161583185196,
+          "truth_rank": 4,
+          "entropy_bits": 1.9994981288909912
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718061:variant:2:probe:1:query:A2",
+          "information_level": 1,
+          "mode": "shuffled_evidence",
+          "consistent_mass": 0.7157157063484192,
+          "map_consistent": false,
+          "truth_probability": 0.25036558508872986,
+          "truth_rank": 3,
+          "entropy_bits": 1.9927456378936768
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718065:variant:2:probe:2:query:A4",
+          "information_level": 2,
+          "mode": "shuffled_evidence",
+          "consistent_mass": 0.4726225733757019,
+          "map_consistent": false,
+          "truth_probability": 0.2182023525238037,
+          "truth_rank": 4,
+          "entropy_bits": 1.9952982664108276
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718064:variant:2:probe:3:query:A1",
+          "information_level": 3,
+          "mode": "shuffled_evidence",
+          "consistent_mass": 0.2464212030172348,
+          "map_consistent": false,
+          "truth_probability": 0.2464212030172348,
+          "truth_rank": 3,
+          "entropy_bits": 1.993390679359436
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718063:variant:3:probe:4:query:A1",
+          "information_level": 4,
+          "mode": "shuffled_evidence",
+          "consistent_mass": 0.2538811266422272,
+          "map_consistent": false,
+          "truth_probability": 0.2538811266422272,
+          "truth_rank": 3,
+          "entropy_bits": 1.9919805526733398
+        },
+        {
+          "task": "action_binding",
+          "source_id": "action:718063:variant:3:probe:0:query:A1",
+          "information_level": 0,
+          "mode": "shuffled_evidence",
+          "consistent_mass": 0.9999999403953552,
+          "map_consistent": true,
+          "truth_probability": 0.24862395226955414,
+          "truth_rank": 2,
+          "entropy_bits": 1.999461054801941
+        }
+      ]
+    },
+    "shuffled_status": {
+      "mode": "shuffled_status",
+      "by_task": {
+        "goal_inference": {
+          "rows": 16.0,
+          "by_information_level": {
+            "0": {
+              "consistent_mass": 0.8771966844797134,
+              "map_consistent": 0.75,
+              "truth_probability": 0.11840679123997688,
+              "truth_rank": 6.25,
+              "entropy_bits": 2.995028555393219,
+              "set_cross_entropy": 2.0801621079444885,
+              "brier": 0.02097687404602766,
+              "rows": 4.0
+            },
+            "1": {
+              "consistent_mass": 0.23630719631910324,
+              "map_consistent": 0.25,
+              "truth_probability": 0.11357447691261768,
+              "truth_rank": 7.5,
+              "entropy_bits": 2.994951605796814,
+              "set_cross_entropy": 2.1380198001861572,
+              "brier": 0.38957629352808,
+              "rows": 4.0
+            },
+            "2": {
+              "consistent_mass": 0.24420814588665962,
+              "map_consistent": 0.5,
+              "truth_probability": 0.11761974543333054,
+              "truth_rank": 6.0,
+              "entropy_bits": 2.9940174221992493,
+              "set_cross_entropy": 2.107828736305237,
+              "brier": 0.3818286657333374,
+              "rows": 4.0
+            },
+            "3": {
+              "consistent_mass": 0.24590496346354485,
+              "map_consistent": 0.25,
+              "truth_probability": 0.12004534713923931,
+              "truth_rank": 5.5,
+              "entropy_bits": 2.994094491004944,
+              "set_cross_entropy": 2.100613057613373,
+              "brier": 0.38012316077947617,
+              "rows": 4.0
+            }
+          }
+        }
+      },
+      "traces": [
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241449:prefix:6",
+          "information_level": 0,
+          "mode": "shuffled_status",
+          "consistent_mass": 0.7587059140205383,
+          "map_consistent": true,
+          "truth_probability": 0.09916795045137405,
+          "truth_rank": 8,
+          "entropy_bits": 2.983093023300171
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241452:prefix:7",
+          "information_level": 1,
+          "mode": "shuffled_status",
+          "consistent_mass": 0.22256241738796234,
+          "map_consistent": false,
+          "truth_probability": 0.10669539868831635,
+          "truth_rank": 8,
+          "entropy_bits": 2.990993022918701
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241450:prefix:13",
+          "information_level": 2,
+          "mode": "shuffled_status",
+          "consistent_mass": 0.23493026196956635,
+          "map_consistent": false,
+          "truth_probability": 0.11481541395187378,
+          "truth_rank": 8,
+          "entropy_bits": 2.9975204467773438
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241448:prefix:12",
+          "information_level": 3,
+          "mode": "shuffled_status",
+          "consistent_mass": 0.2558367848396301,
+          "map_consistent": false,
+          "truth_probability": 0.1260072886943817,
+          "truth_rank": 4,
+          "entropy_bits": 2.998203992843628
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241452:prefix:0",
+          "information_level": 0,
+          "mode": "shuffled_status",
+          "consistent_mass": 1.0,
+          "map_consistent": true,
+          "truth_probability": 0.125,
+          "truth_rank": 6,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241451:prefix:9",
+          "information_level": 1,
+          "mode": "shuffled_status",
+          "consistent_mass": 0.23720717430114746,
+          "map_consistent": false,
+          "truth_probability": 0.11369465291500092,
+          "truth_rank": 8,
+          "entropy_bits": 2.9975972175598145
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241448:prefix:11",
+          "information_level": 2,
+          "mode": "shuffled_status",
+          "consistent_mass": 0.26009082794189453,
+          "map_consistent": true,
+          "truth_probability": 0.12603618204593658,
+          "truth_rank": 5,
+          "entropy_bits": 2.997891664505005
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241453:prefix:15",
+          "information_level": 3,
+          "mode": "shuffled_status",
+          "consistent_mass": 0.277084082365036,
+          "map_consistent": true,
+          "truth_probability": 0.1333850473165512,
+          "truth_rank": 2,
+          "entropy_bits": 2.995012044906616
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241451:prefix:0",
+          "information_level": 0,
+          "mode": "shuffled_status",
+          "consistent_mass": 1.0,
+          "map_consistent": true,
+          "truth_probability": 0.125,
+          "truth_rank": 6,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241453:prefix:12",
+          "information_level": 1,
+          "mode": "shuffled_status",
+          "consistent_mass": 0.25618958473205566,
+          "map_consistent": true,
+          "truth_probability": 0.12077789008617401,
+          "truth_rank": 6,
+          "entropy_bits": 2.9976725578308105
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241453:prefix:13",
+          "information_level": 2,
+          "mode": "shuffled_status",
+          "consistent_mass": 0.26865410804748535,
+          "map_consistent": true,
+          "truth_probability": 0.13025397062301636,
+          "truth_rank": 3,
+          "entropy_bits": 2.9962615966796875
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241450:prefix:14",
+          "information_level": 3,
+          "mode": "shuffled_status",
+          "consistent_mass": 0.2337276041507721,
+          "map_consistent": false,
+          "truth_probability": 0.11669261008501053,
+          "truth_rank": 8,
+          "entropy_bits": 2.996988296508789
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241448:prefix:1",
+          "information_level": 0,
+          "mode": "shuffled_status",
+          "consistent_mass": 0.7500808238983154,
+          "map_consistent": false,
+          "truth_probability": 0.12445921450853348,
+          "truth_rank": 5,
+          "entropy_bits": 2.997021198272705
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241450:prefix:9",
+          "information_level": 1,
+          "mode": "shuffled_status",
+          "consistent_mass": 0.2292696088552475,
+          "map_consistent": false,
+          "truth_probability": 0.11312996596097946,
+          "truth_rank": 8,
+          "entropy_bits": 2.9935436248779297
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241449:prefix:14",
+          "information_level": 2,
+          "mode": "shuffled_status",
+          "consistent_mass": 0.21315738558769226,
+          "map_consistent": false,
+          "truth_probability": 0.09937341511249542,
+          "truth_rank": 8,
+          "entropy_bits": 2.984395980834961
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241449:prefix:15",
+          "information_level": 3,
+          "mode": "shuffled_status",
+          "consistent_mass": 0.21697138249874115,
+          "map_consistent": false,
+          "truth_probability": 0.1040964424610138,
+          "truth_rank": 8,
+          "entropy_bits": 2.986173629760742
+        }
+      ]
+    },
+    "statusless": {
+      "mode": "statusless",
+      "by_task": {
+        "goal_inference": {
+          "rows": 16.0,
+          "by_information_level": {
+            "0": {
+              "consistent_mass": 0.8781298249959946,
+              "map_consistent": 1.0,
+              "truth_probability": 0.11852342821657658,
+              "truth_rank": 6.5,
+              "entropy_bits": 2.994998872280121,
+              "set_cross_entropy": 2.0793198347091675,
+              "brier": 0.020678289234638214,
+              "rows": 4.0
+            },
+            "1": {
+              "consistent_mass": 0.23606933280825615,
+              "map_consistent": 0.25,
+              "truth_probability": 0.11283971928060055,
+              "truth_rank": 7.5,
+              "entropy_bits": 2.9936985969543457,
+              "set_cross_entropy": 2.1397908329963684,
+              "brier": 0.390036404132843,
+              "rows": 4.0
+            },
+            "2": {
+              "consistent_mass": 0.2448669672012329,
+              "map_consistent": 0.5,
+              "truth_probability": 0.11574598029255867,
+              "truth_rank": 6.0,
+              "entropy_bits": 2.9924391508102417,
+              "set_cross_entropy": 2.1062391996383667,
+              "brier": 0.3814437612891197,
+              "rows": 4.0
+            },
+            "3": {
+              "consistent_mass": 0.24647760018706322,
+              "map_consistent": 0.25,
+              "truth_probability": 0.11836274713277817,
+              "truth_rank": 5.75,
+              "entropy_bits": 2.9928181171417236,
+              "set_cross_entropy": 2.0991929173469543,
+              "brier": 0.3797742649912834,
+              "rows": 4.0
+            }
+          }
+        }
+      },
+      "traces": [
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241449:prefix:6",
+          "information_level": 0,
+          "mode": "statusless",
+          "consistent_mass": 0.760732114315033,
+          "map_consistent": true,
+          "truth_probability": 0.10361218452453613,
+          "truth_rank": 8,
+          "entropy_bits": 2.9828898906707764
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241452:prefix:7",
+          "information_level": 1,
+          "mode": "statusless",
+          "consistent_mass": 0.22163771092891693,
+          "map_consistent": false,
+          "truth_probability": 0.11038919538259506,
+          "truth_rank": 8,
+          "entropy_bits": 2.9913716316223145
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241450:prefix:13",
+          "information_level": 2,
+          "mode": "statusless",
+          "consistent_mass": 0.2353772521018982,
+          "map_consistent": false,
+          "truth_probability": 0.11263572424650192,
+          "truth_rank": 8,
+          "entropy_bits": 2.996234178543091
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241448:prefix:12",
+          "information_level": 3,
+          "mode": "statusless",
+          "consistent_mass": 0.2562398314476013,
+          "map_consistent": false,
+          "truth_probability": 0.12413846701383591,
+          "truth_rank": 4,
+          "entropy_bits": 2.997180700302124
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241452:prefix:0",
+          "information_level": 0,
+          "mode": "statusless",
+          "consistent_mass": 1.0,
+          "map_consistent": true,
+          "truth_probability": 0.125,
+          "truth_rank": 6,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241451:prefix:9",
+          "information_level": 1,
+          "mode": "statusless",
+          "consistent_mass": 0.23469635844230652,
+          "map_consistent": false,
+          "truth_probability": 0.11058858036994934,
+          "truth_rank": 8,
+          "entropy_bits": 2.995577812194824
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241448:prefix:11",
+          "information_level": 2,
+          "mode": "statusless",
+          "consistent_mass": 0.2609788477420807,
+          "map_consistent": true,
+          "truth_probability": 0.12382500618696213,
+          "truth_rank": 5,
+          "entropy_bits": 2.9967148303985596
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241453:prefix:15",
+          "information_level": 3,
+          "mode": "statusless",
+          "consistent_mass": 0.2796666622161865,
+          "map_consistent": true,
+          "truth_probability": 0.13181613385677338,
+          "truth_rank": 3,
+          "entropy_bits": 2.9932749271392822
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241451:prefix:0",
+          "information_level": 0,
+          "mode": "statusless",
+          "consistent_mass": 1.0,
+          "map_consistent": true,
+          "truth_probability": 0.125,
+          "truth_rank": 6,
+          "entropy_bits": 3.0
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241453:prefix:12",
+          "information_level": 1,
+          "mode": "statusless",
+          "consistent_mass": 0.2592562437057495,
+          "map_consistent": true,
+          "truth_probability": 0.11990824341773987,
+          "truth_rank": 6,
+          "entropy_bits": 2.9957454204559326
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241453:prefix:13",
+          "information_level": 2,
+          "mode": "statusless",
+          "consistent_mass": 0.270608514547348,
+          "map_consistent": true,
+          "truth_probability": 0.12877313792705536,
+          "truth_rank": 3,
+          "entropy_bits": 2.9941306114196777
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241450:prefix:14",
+          "information_level": 3,
+          "mode": "statusless",
+          "consistent_mass": 0.23363986611366272,
+          "map_consistent": false,
+          "truth_probability": 0.11495345085859299,
+          "truth_rank": 8,
+          "entropy_bits": 2.996119260787964
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241448:prefix:1",
+          "information_level": 0,
+          "mode": "statusless",
+          "consistent_mass": 0.7517871856689453,
+          "map_consistent": true,
+          "truth_probability": 0.12048152834177017,
+          "truth_rank": 6,
+          "entropy_bits": 2.997105598449707
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241450:prefix:9",
+          "information_level": 1,
+          "mode": "statusless",
+          "consistent_mass": 0.22868701815605164,
+          "map_consistent": false,
+          "truth_probability": 0.11047285795211792,
+          "truth_rank": 8,
+          "entropy_bits": 2.9920995235443115
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241449:prefix:14",
+          "information_level": 2,
+          "mode": "statusless",
+          "consistent_mass": 0.21250325441360474,
+          "map_consistent": false,
+          "truth_probability": 0.09775005280971527,
+          "truth_rank": 8,
+          "entropy_bits": 2.9826769828796387
+        },
+        {
+          "task": "goal_inference",
+          "source_id": "goal:241449:prefix:15",
+          "information_level": 3,
+          "mode": "statusless",
+          "consistent_mass": 0.2163640409708023,
+          "map_consistent": false,
+          "truth_probability": 0.1025429368019104,
+          "truth_rank": 8,
+          "entropy_bits": 2.9846975803375244
+        }
+      ]
+    }
+  },
+  "elapsed_seconds": 2297.518662214279
+}

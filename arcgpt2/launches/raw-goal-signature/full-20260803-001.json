@@ -1,0 +1,29 @@
+{
+  "protocol": "raw_goal_signature_v1",
+  "event_id": "arc-gpt2-raw-goal-full-prereg-20260803-001",
+  "run_mode": "full",
+  "implementation_commit": "f1e4b609347d10cbcff13185742f3e50120eb6e5",
+  "dispatcher_fix_commit": "168f3db4178a668d419b3ce7fea108676b0f671f",
+  "timing_workflow_run": 30842726128,
+  "timing_source_sha": "47880d9c00bde09ce71ac5cbe563ad2bd04c2f6b",
+  "timing_runner_sha256": "e7f40b3b504817a18b05fd5d84b109a31088eccf53d7f3cde2e496abf076202f",
+  "projected_three_pair_kernel_seconds": 6627.522454650105,
+  "conservative_runtime_ceiling_seconds": 16200,
+  "issue_number": 12,
+  "issue_update_comment_id": 5170453219,
+  "manifest_digest": "02e59b60dab038e16f45fbfe03dc9dadece1c0d1fc8082210834965e7634ab04",
+  "matched_seeds": [
+    577215,
+    618033,
+    707106
+  ],
+  "optimizer_steps_per_lane": 240,
+  "devices": {
+    "pretrained": 0,
+    "random": 1
+  },
+  "full_runner_repeats_timing_guard_before_optimizer": true,
+  "locked_evaluation_count_per_lane": 1,
+  "competition_submission": false,
+  "model_weights_persisted": false
+}
