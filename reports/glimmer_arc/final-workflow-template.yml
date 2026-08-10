@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - muse-glimmer-arc-gate-v1
-      - copilot/muse-glimmer-quantized-deployment
     paths:
       - .github/workflows/muse-glimmer-arc-gate-v1.yml
       - glimmer_arc/**
@@ -34,7 +33,7 @@ jobs:
   preflight:
     if: >-
       github.ref_type == 'branch' &&
-      (github.ref_name == 'muse-glimmer-arc-gate-v1' || github.ref_name == 'copilot/muse-glimmer-quantized-deployment') &&
+      github.ref_name == 'muse-glimmer-arc-gate-v1' &&
       github.event_name == 'push' &&
       contains(github.event.head_commit.message, '[run-kaggle-muse-glimmer-arc-gate-v1]')
     runs-on: ubuntu-latest
