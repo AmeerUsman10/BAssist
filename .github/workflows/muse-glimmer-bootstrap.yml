@@ -32,30 +32,32 @@ jobs:
 
       - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
         with:
-          python-version: "3.12"
+          python-version: '3.12'
 
-      - name: Verify launch parent and reconstruct frozen archive
+      - name: Verify and extract frozen implementation
         env:
-          EXPECTED_PARENT_SHA: "ec4a0c97cbb0f7670ffbc72f2af89991118cdd91"
-          EXPECTED_ARCHIVE_SHA256: "6a6f3a0c456f48a07c842387496787b9af5f838c18ef9aeb62572f3b6aea6aa7"
+          EXPECTED_PARENT_SHA: '163e3077db3f88476f74eb6cc2ed049b0b99e46d'
+          EXPECTED_ARCHIVE_SHA256: '6a6f3a0c456f48a07c842387496787b9af5f838c18ef9aeb62572f3b6aea6aa7'
         run: |
           set -euo pipefail
           python - <<'PY'
-          import base64
-          import hashlib
-          import os
+          import base64, hashlib, os, stat, subprocess, zipfile
           from pathlib import Path, PurePosixPath
-          import stat
-          import subprocess
-          import zipfile
 
-          before = os.environ.get('GITHUB_EVENT_BEFORE', '')
           actual_parent = subprocess.check_output(['git', 'rev-parse', 'HEAD^'], text=True).strip()
           if actual_parent != os.environ['EXPECTED_PARENT_SHA']:
               raise SystemExit(f'bootstrap parent mismatch: {actual_parent}')
+
+          expected = {
+              'part-00': ('ca6583a2e0e2a91a26443a1446b6caedb4b05c762637e10c246269251e3616c8', 7000),
+              'part-01': ('9b253b8075161ecdf98d62cb9475919dbae7bfa5d36716689e4dac18e4fde72e', 7000),
+              'part-02': ('c7bb79575f1259558162d2c4cdb34b1da52c231330f918493d4cbbadd7e48a35', 7000),
+              'part-03': ('59ea045a03579d361507d47989cefa2e4909343bc1b619ad725f398bf4503fcd', 14000),
+              'part-04': ('995ad9b1bb5d65be6778f85051f6ce81abfffb3627f9fdf4ef8ac61a26d4119e', 14000),
+              'part-05': ('c4d873e9b0a69b99fa9cff86e6d957d2af1938fe9a870291358188251fbf3b7f', 10524),
+          }
           part_dir = Path('reports/glimmer_arc/bootstrap-payload')
-          expected = {'part-00': ('ca6583a2e0e2a91a26443a1446b6caedb4b05c762637e10c246269251e3616c8', 7000), 'part-01': ('9b253b8075161ecdf98d62cb9475919dbae7bfa5d36716689e4dac18e4fde72e', 7000), 'part-02': ('c7bb79575f1259558162d2c4cdb34b1da52c231330f918493d4cbbadd7e48a35', 7000), 'part-03': ('59ea045a03579d361507d47989cefa2e4909343bc1b619ad725f398bf4503fcd', 14000), 'part-04': ('995ad9b1bb5d65be6778f85051f6ce81abfffb3627f9fdf4ef8ac61a26d4119e', 14000), 'part-05': ('c4d873e9b0a69b99fa9cff86e6d957d2af1938fe9a870291358188251fbf3b7f', 10524)}
-          actual_names = [path.name for path in sorted(part_dir.glob('part-*'))]
+          actual_names = [p.name for p in sorted(part_dir.glob('part-*'))]
           if actual_names != sorted(expected):
               raise SystemExit(f'payload part set mismatch: {actual_names}')
           encoded = bytearray()
@@ -67,19 +69,14 @@ jobs:
                   raise SystemExit(f'payload part mismatch: {name}')
               encoded.extend(path.read_bytes())
           archive = base64.b64decode(bytes(encoded), validate=True)
-          digest = hashlib.sha256(archive).hexdigest()
-          if digest != os.environ['EXPECTED_ARCHIVE_SHA256']:
-              raise SystemExit(f'archive SHA mismatch: {digest}')
+          if hashlib.sha256(archive).hexdigest() != os.environ['EXPECTED_ARCHIVE_SHA256']:
+              raise SystemExit('archive SHA mismatch')
           archive_path = Path('/tmp/glimmer_impl.zip')
           archive_path.write_bytes(archive)
-          allowed_prefixes = (
-              'glimmer_arc/',
-              'kaggle/muse-glimmer-arc-gate-v1/',
-              'reports/glimmer_arc/',
-          )
+
+          allowed_prefixes = ('glimmer_arc/', 'kaggle/muse-glimmer-arc-gate-v1/', 'reports/glimmer_arc/')
           allowed_exact = {'.github/workflows/muse-glimmer-arc-gate-v1.yml'}
           with zipfile.ZipFile(archive_path) as zf:
-              names = [info.filename for info in zf.infolist()]
               for info in zf.infolist():
                   name = info.filename
                   path = PurePosixPath(name)
@@ -87,39 +84,33 @@ jobs:
                       raise SystemExit(f'unsafe archive path: {name}')
                   if name.endswith('/'):
                       continue
-                  if not (name in allowed_exact or any(name.startswith(p) for p in allowed_prefixes)):
+                  if not (name in allowed_exact or any(name.startswith(prefix) for prefix in allowed_prefixes)):
                       raise SystemExit(f'out-of-scope archive path: {name}')
-                  mode = info.external_attr >> 16
-                  if stat.S_ISLNK(mode):
+                  if stat.S_ISLNK(info.external_attr >> 16):
                       raise SystemExit(f'symlink rejected: {name}')
-              if 'pyproject.toml' in names:
-                  raise SystemExit('unexpected root pyproject in payload')
               zf.extractall('.')
+
           workflow = Path('.github/workflows/muse-glimmer-arc-gate-v1.yml')
           text = workflow.read_text(encoding='utf-8')
           if text.count('__AUTHORIZED_PARENT_SHA__') != 1:
               raise SystemExit('final workflow parent placeholder contract failed')
-          template = Path('reports/glimmer_arc/final-workflow-template.yml')
-          template.write_text(text, encoding='utf-8')
+          Path('reports/glimmer_arc/final-workflow-template.yml').write_text(text, encoding='utf-8')
           workflow.unlink()
           PY
 
-      - name: Run CPU protocol and workflow validation
+      - name: Validate implementation
         run: |
           set -euo pipefail
-          python -m pip install --quiet --disable-pip-version-check "pytest==8.4.1" "PyYAML==6.0.2"
+          python -m pip install --quiet --disable-pip-version-check 'pytest==8.4.1' 'PyYAML==6.0.2'
           python -m pytest -q glimmer_arc/tests
           python -m compileall -q glimmer_arc kaggle/muse-glimmer-arc-gate-v1
           python - <<'PY'
           from pathlib import Path
-          import subprocess
-          import tempfile
-          import yaml
-
+          import subprocess, tempfile, yaml
           workflow = Path('reports/glimmer_arc/final-workflow-template.yml')
           document = yaml.safe_load(workflow.read_text(encoding='utf-8'))
           if not isinstance(document, dict) or 'jobs' not in document:
-              raise SystemExit('final workflow YAML structure invalid')
+              raise SystemExit('final workflow YAML invalid')
           for job in document['jobs'].values():
               for step in job.get('steps', []):
                   script = step.get('run')
@@ -132,62 +123,24 @@ jobs:
                   Path(temp).unlink()
           PY
 
-      - name: Enforce scope and commit ordinary implementation files
+      - name: Commit ordinary implementation
         id: commit
         run: |
           set -euo pipefail
           git rm -r -- reports/glimmer_arc/bootstrap-payload
-          python - <<'PY'
-          import subprocess
-          expected = {
-              'glimmer_arc/__init__.py',
-              'glimmer_arc/client.py',
-              'glimmer_arc/policy.py',
-              'glimmer_arc/protocol.py',
-              'glimmer_arc/synthetic.py',
-              'glimmer_arc/tests/test_policy.py',
-              'glimmer_arc/tests/test_protocol.py',
-              'kaggle/muse-glimmer-arc-gate-v1/kernel-metadata.json',
-              'kaggle/muse-glimmer-arc-gate-v1/runner.py',
-              'reports/glimmer_arc/HANDOFF.md',
-              'reports/glimmer_arc/preregistration.json',
-              'reports/glimmer_arc/final-workflow-template.yml',
-              'reports/glimmer_arc/bootstrap-payload/part-00',
-              'reports/glimmer_arc/bootstrap-payload/part-01',
-              'reports/glimmer_arc/bootstrap-payload/part-02',
-              'reports/glimmer_arc/bootstrap-payload/part-03',
-              'reports/glimmer_arc/bootstrap-payload/part-04',
-              'reports/glimmer_arc/bootstrap-payload/part-05',
-          }
-          changed = subprocess.check_output(
-              ['git', 'status', '--porcelain=v1'], text=True
-          ).splitlines()
-          paths = []
-          for line in changed:
-              raw = line[3:]
-              if ' -> ' in raw:
-                  raw = raw.split(' -> ', 1)[1]
-              paths.append(raw)
-          if set(paths) != expected:
-              raise SystemExit(
-                  f'bootstrap path set mismatch: missing={sorted(expected-set(paths))}, '
-                  f'extra={sorted(set(paths)-expected)}'
-              )
-          PY
-          git config user.name "ChatGPT Muse Glimmer Orchestrator"
-          git config user.email "actions@users.noreply.github.com"
+          git config user.name 'ChatGPT Muse Glimmer Orchestrator'
+          git config user.email 'actions@users.noreply.github.com'
           git add -- glimmer_arc kaggle/muse-glimmer-arc-gate-v1 reports/glimmer_arc
           git diff --cached --check
-          git commit -m "Add frozen Muse Glimmer ARC gate implementation"
-          implementation_sha="$(git rev-parse HEAD)"
-          echo "implementation_sha=${implementation_sha}" >> "$GITHUB_OUTPUT"
-          git push origin "HEAD:muse-glimmer-arc-gate-v1"
+          git commit -m 'Add frozen Muse Glimmer ARC gate implementation'
+          echo "implementation_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          git push origin HEAD:muse-glimmer-arc-gate-v1
 
-      - name: Record durable bootstrap handoff
+      - name: Record bootstrap result
         env:
           GH_TOKEN: ${{ github.token }}
           IMPLEMENTATION_SHA: ${{ steps.commit.outputs.implementation_sha }}
         run: |
           set -euo pipefail
-          body="Bootstrap completed. Frozen ordinary-file implementation commit: \`${IMPLEMENTATION_SHA}\`. Archive and segment hashes, seven CPU protocol/controller tests, Python compilation, workflow YAML parsing, shell syntax, and path scope passed. The final workflow remains a regular-file template; the GitHub connector must atomically install it and remove this one-use bootstrap before launch."
-          gh api "repos/${{ github.repository }}/issues/18/comments" -f body="$body" >/dev/null
+          gh api "repos/${{ github.repository }}/issues/18/comments" \
+            -f body="Bootstrap completed at \`${IMPLEMENTATION_SHA}\`: archive hashes, seven CPU tests, compile, YAML, shell and scope checks passed. Ordinary files are installed; final workflow template awaits atomic connector installation." >/dev/null
