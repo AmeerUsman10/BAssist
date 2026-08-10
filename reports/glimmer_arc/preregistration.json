@@ -1,0 +1,72 @@
+{
+  "schema_version": "muse-glimmer-utility-gate/v1-frozen",
+  "frozen_at_utc": "2026-08-10T17:30:00Z",
+  "repository": "AmeerUsman10/BAssist",
+  "branch": "muse-glimmer-arc-gate-v1",
+  "base_sha": "f41c16fd7a3b0811063bd0deee008ab879b2c768",
+  "task_issue": 18,
+  "coordination_ledger_issue": 12,
+  "historical_control": {
+    "scope": "official local NORMAL public-development",
+    "score": 0.0,
+    "games_attempted": 25,
+    "levels_completed": 0,
+    "total_levels": 183,
+    "rerun": false
+  },
+  "model": {
+    "repository": "meta-models/Muse-Glimmer-30B-GGUF",
+    "revision": "93769bc7ab5ad1e9cd22d857e3138cf5d977ae81",
+    "quant": "muse-glimmer-30B-kquant-17gb.gguf",
+    "projector": "mmproj-kquant.gguf",
+    "dflash": false,
+    "backend_repository": "https://github.com/ggml-org/llama.cpp.git",
+    "backend_commit": "dd1ea524333b1e697489067d7a4c39c60d32beee"
+  },
+  "arms": {
+    "native": "strict bounded exact-candidate plans",
+    "cfs_lite": "declarative hypotheses plus deterministic fracture scoring"
+  },
+  "official_budgets_per_game": {
+    "model_calls": 8,
+    "environment_actions": 32,
+    "resets": 2,
+    "candidate_shortlist": 16,
+    "cached_actions_per_decision": 4,
+    "representation": "exact_text_grid",
+    "context_tokens": 8192
+  },
+  "gates": {
+    "structured_json_success_min": 0.95,
+    "structured_smoke_accuracy_min": 0.9,
+    "illegal_action_rate_max": 0.01,
+    "fallback_rate_max": 0.05,
+    "synthetic_task_accuracy_any_arm_min": 0.25,
+    "projected_official_runtime_max_seconds": 7200,
+    "model_positive": "at least one valid public-development level completed",
+    "controller_positive": "more levels, or tied nonzero with at least 20 percent fewer calls/actions and no fallback regression"
+  },
+  "network_boundary": {
+    "model_provider_during_scored_play": "loopback only",
+    "official_sdk_during_scorecard": "official ARC NORMAL endpoint only",
+    "downloads_before_scored_play": [
+      "GitHub exact source commit",
+      "Hugging Face exact model revision",
+      "PyPI dependencies"
+    ]
+  },
+  "terminal_decisions": [
+    "ADOPT",
+    "SPECIALIZE",
+    "CONTINUE_EXPERIMENTALLY",
+    "KILL"
+  ],
+  "claim_exclusions": [
+    "no private or locked-set generalization claim",
+    "no leaderboard or competition claim",
+    "no claim that synthetic performance is official ARC performance",
+    "no hidden reasoning persistence",
+    "no post-outcome V1 retuning",
+    "no silent model, quant, projector, backend, prompt, or budget substitution"
+  ]
+}

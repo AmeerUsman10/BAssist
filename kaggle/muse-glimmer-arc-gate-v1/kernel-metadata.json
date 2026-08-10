@@ -1,0 +1,14 @@
+{
+  "id": "__PRIVATE_OWNER__/muse-glimmer-arc-gate-__SOURCE_SHA_SHORT__",
+  "title": "Muse Glimmer ARC Gate __SOURCE_SHA_SHORT__",
+  "code_file": "runner.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}
